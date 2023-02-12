@@ -1,0 +1,49 @@
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: $background-variant;
+    color: $on-background-app;
+}
+
+body,
+button {
+    font-family: $base-font;
+    letter-spacing: -0.05rem;
+}
+
+a {
+    text-decoration: none;
+    color: $on-background-app;
+}
+
+ul,
+ol,
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.layout {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 200px;
+}
+
+.navitem {
+    padding: 3px 10px;
+}
+
+.navitem.is-active {
+    background-color: #eee;
+}
