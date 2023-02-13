@@ -26,7 +26,6 @@ async function render(pageContext: PageContextServer) {
     const { documentProps } = pageContext.exports;
     const title = (documentProps && documentProps.title) || 'Green Maps';
     const desc = (documentProps && documentProps.description) || '채식 식당 검색과 북마크는 그린 맵';
-
     const documentHtml = escapeInject`<!DOCTYPE html>
         <html lang="ko">
             <head>
@@ -37,6 +36,9 @@ async function render(pageContext: PageContextServer) {
                 <title>${title}</title>
             </head>
             <body>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${
+                    process.env.REACT_APP_MAP_KEY as any
+                }&libraries=services,clusterer,drawing"></script>
                 <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
             </body>
         </html>`;

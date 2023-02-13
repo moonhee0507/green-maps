@@ -15,6 +15,7 @@ body {
   margin: 0;
   font-family: sans-serif;
   background-color: #00784a;
+  color: #333333;
 }
 
 body,
@@ -25,10 +26,25 @@ button {
 
 a {
   text-decoration: none;
+  color: #333333;
 }
 
-ul {
+ul,
+ol,
+li {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.layout {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 200px;
 }
 
 .navitem {
@@ -68,5 +84,84 @@ ul {
   min-height: 100vh;
   background-color: #ffffff;
   width: 422px;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}
+
+.nav-bar {
+  position: fixed;
+  width: inherit;
+  bottom: 0;
+  border-top: 1px solid gray;
+}
+
+.nav-bar ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.nav-bar ul li {
+  width: calc(100vw / 4);
+  text-align: center;
+  font-size: 12px;
+}
+
+.link-nav {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.link-nav .img-nav-icon {
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.link-nav .img-nav-icon.home {
+  background-image: url("/icon-home.svg");
+}
+
+.link-nav .img-nav-icon.search {
+  background-image: url("/icon-search.svg");
+}
+
+.link-nav .img-nav-icon.bookmark {
+  background-image: url("/icon-bookmark.svg");
+}
+
+.link-nav .img-nav-icon.community {
+  background-image: url("/icon-community.svg");
+}
+
+.link-nav .img-nav-icon.user {
+  background-image: url("/icon-user.svg");
+}
+
+@media (max-width: 420px) {
+  .nav-bar {
+    width: 100vw;
+  }
 }
 /*# sourceMappingURL=index.css.map */

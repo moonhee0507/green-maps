@@ -1,9 +1,4 @@
 import React from 'react';
-import icon_home from '/icon-home.svg';
-import icon_search from '/icon-search.svg';
-import icon_bookmark from '/icon-bookmark.svg';
-import icon_community from '/icon-community.svg';
-import icon_user from '/icon-user.svg';
 
 export { NavBar };
 
