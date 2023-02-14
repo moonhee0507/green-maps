@@ -40,7 +40,11 @@ function Page() {
     }
 
     return (
-        <>
+        <div
+            style={{
+                flexGrow: '1',
+            }}
+        >
             <h1>로그인</h1>
             <form onSubmit={submit}>
                 <label htmlFor="userId">아이디</label>
@@ -51,6 +55,6 @@ function Page() {
 
                 <button type="submit">로그인</button>
             </form>
-        </>
+        </div>
     );
 }
