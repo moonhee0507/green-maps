@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavBar } from '../../components/nav-bar';
+import { HomeContent } from './homeContent';
 
 export { Page };
 
@@ -11,9 +11,7 @@ export const documentProps = {
 function Page() {
     return (
         <>
-            <h1>홈 화면</h1>
-            <p>인스타그램에서 검색되는 채식 식당</p>
-            <NavBar />
+            <HomeContent />
         </>
     );
 }

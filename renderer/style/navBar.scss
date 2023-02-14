@@ -1,7 +1,7 @@
 .nav-bar {
-    position: fixed;
-    width: inherit;
-    bottom: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%; /* 420px */
     border-top: 1px solid $border-color;
 
     ul {

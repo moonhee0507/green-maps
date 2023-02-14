@@ -62,5 +62,9 @@ function Page() {
         }
     }, []);
 
-    return <div id="map"></div>;
+    return (
+        <>
+            <div id="map"></div>
+        </>
+    );
 }

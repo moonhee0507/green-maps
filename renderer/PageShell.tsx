@@ -4,6 +4,8 @@ import { PageContextProvider } from './usePageContext';
 import type { PageContext } from './types';
 import 'normalize.css';
 import './style/index.scss';
+import { TopBar } from '../components/topBar';
+import { NavBar } from '../components/navBar';
 
 export { PageShell };
 
@@ -13,7 +15,11 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
             <PageContextProvider pageContext={pageContext}>
                 <Layout>
                     <LeftArea />
-                    <App>{children}</App>
+                    <App>
+                        <TopBar />
+                        {children}
+                        <NavBar />
+                    </App>
                 </Layout>
             </PageContextProvider>
         </React.StrictMode>

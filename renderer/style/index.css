@@ -81,9 +81,16 @@ li {
 }
 
 .app {
-  min-height: 100vh;
+  height: 100vh;
   background-color: #ffffff;
   width: 422px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
 #map {
@@ -91,9 +98,30 @@ li {
   height: 100%;
 }
 
+.top-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  /* 420px */
+  bottom: 0;
+  border-bottom: 1px solid gray;
+}
+
+.top-bar .icon-back {
+  width: 25px;
+}
+
+@media (max-width: 420px) {
+  .top-bar {
+    width: 100vw;
+  }
+}
+
 .nav-bar {
-  position: fixed;
-  width: inherit;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  /* 420px */
   bottom: 0;
   border-top: 1px solid gray;
 }
@@ -163,5 +191,16 @@ li {
   .nav-bar {
     width: 100vw;
   }
+}
+
+.home-content {
+  overflow: scroll;
+  scrollbar-width: none;
+  /* firefox */
+}
+
+/* edge, chrome */
+.home-content::-webkit-scrollbar {
+  display: none;
 }
 /*# sourceMappingURL=index.css.map */
