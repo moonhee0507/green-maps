@@ -4,22 +4,28 @@ import { PageShell } from './PageShell';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr';
 import icon from '/icon.png';
 import type { PageContextServer } from './types';
+import { getStore } from './store';
+import { Provider } from 'react-redux';
 
 export { render };
-export const passToClient = ['pageProps']; // 브라우저에서 pageContext를 사용하려면 passToClient를 사용해야
+export const passToClient = ['PRELOADED_STATE', 'pageProps']; // 브라우저에서 pageContext를 사용하려면 passToClient를 사용해야
 
 async function render(pageContext: PageContextServer) {
+    const store = getStore();
+    const { Page, pageProps } = pageContext;
     let pageHtml;
+
     if (!pageContext.Page) {
         // SPA
         pageHtml = '';
     } else {
         // SSR
-        const { Page, pageProps } = pageContext;
-        pageHtml = ReactDOMServer.renderToString(
-            <PageShell pageContext={pageContext}>
-                <Page {...pageProps} />
-            </PageShell>
+        pageHtml = await ReactDOMServer.renderToString(
+            <Provider store={store}>
+                <PageShell pageContext={pageContext}>
+                    <Page {...pageProps} />
+                </PageShell>
+            </Provider>
         );
     }
 
@@ -40,13 +46,23 @@ async function render(pageContext: PageContextServer) {
                     process.env.REACT_APP_MAP_KEY as any
                 }&libraries=services,clusterer,drawing"></script>
                 <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
+                <script>
+                    setTimeout(function(){
+                        var userselection = window.getSelection();
+                        var rangeObject = userselection.getRangeAt(0);
+                    },100)
+                </script>
             </body>
         </html>`;
+
+    const PRELOADED_STATE = store.getState();
 
     return {
         documentHtml,
         pageContext: {
             // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
+            PRELOADED_STATE,
+            pageProps,
         },
     };
 }

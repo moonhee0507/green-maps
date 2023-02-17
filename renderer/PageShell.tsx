@@ -4,24 +4,28 @@ import { PageContextProvider } from './usePageContext';
 import type { PageContext } from './types';
 import 'normalize.css';
 import './style/index.scss';
-import { TopBar } from '../components/topBar';
 import { NavBar } from '../components/navBar';
+import { getStore } from './store';
+import { Provider } from 'react-redux';
 
 export { PageShell };
 
 function PageShell({ children, pageContext }: { children: React.ReactNode; pageContext: PageContext }) {
+    const store = getStore();
+
     return (
         <React.StrictMode>
-            <PageContextProvider pageContext={pageContext}>
-                <Layout>
-                    <LeftArea />
-                    <App>
-                        <TopBar />
-                        {children}
-                        <NavBar />
-                    </App>
-                </Layout>
-            </PageContextProvider>
+            <Provider store={store}>
+                <PageContextProvider pageContext={pageContext}>
+                    <Layout>
+                        <LeftArea />
+                        <App>
+                            {children}
+                            <NavBar />
+                        </App>
+                    </Layout>
+                </PageContextProvider>
+            </Provider>
         </React.StrictMode>
     );
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { SearchBar } from './searchBar';
 
 const { kakao }: any = window;
 export { Page };
@@ -64,6 +65,7 @@ function Page() {
 
     return (
         <>
+            <SearchBar />
             <div id="map"></div>
         </>
     );

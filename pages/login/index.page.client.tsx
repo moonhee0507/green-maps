@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from 'react';
+import { TopBar } from '../../components/topBar/topBar';
 
 export { Page };
 
@@ -45,10 +46,11 @@ function Page() {
                 flexGrow: '1',
             }}
         >
+            <TopBar />
             <h1>로그인</h1>
             <form onSubmit={submit}>
                 <label htmlFor="userId">아이디</label>
-                <input id="userId" type="text" onChange={handleChange} />
+                <input id="userId" type="text" onChange={handleChange} autoFocus />
 
                 <label htmlFor="password">비밀번호</label>
                 <input id="password" type="password" onChange={handleChange} />

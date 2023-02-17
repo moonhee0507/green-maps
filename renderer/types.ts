@@ -20,6 +20,8 @@ export type PageContextCustom = {
             description?: string;
         };
     };
+    PRELOADED_STATE: any;
+    pageHtml?: any;
 };
 
 type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;
