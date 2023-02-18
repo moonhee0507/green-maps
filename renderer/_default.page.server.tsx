@@ -46,12 +46,6 @@ async function render(pageContext: PageContextServer) {
                     process.env.REACT_APP_MAP_KEY as any
                 }&libraries=services,clusterer,drawing"></script>
                 <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
-                <script>
-                    setTimeout(function(){
-                        var userselection = window.getSelection();
-                        var rangeObject = userselection.getRangeAt(0);
-                    },100)
-                </script>
             </body>
         </html>`;
 
