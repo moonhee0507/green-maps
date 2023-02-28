@@ -8,6 +8,7 @@ import { root } from './root.js';
 const isProduction = process.env.NODE_ENV === 'production';
 
 import User from './models/User.js';
+import Restaurant from './models/Restaurant.js';
 
 startServer();
 
@@ -33,6 +34,7 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
+    // next()는 다음 핸들러에 제어권을 넘긴다
     app.get('*', async (req, res, next) => {
         const pageContextInit = {
             urlOriginal: req.originalUrl,
@@ -78,6 +80,16 @@ async function startServer() {
                     }
                 });
             }
+        });
+    });
+
+    // 식당정보 저장
+    app.post('/api/scrappers/save', (req, res) => {
+        const restaurant = new Restaurant(req.body);
+
+        restaurant.save((err: any, restaurantInfo: any) => {
+            if (err) return res.json({ saveSuccess: false, errorMessage: err.message });
+            return res.status(200).json({ saveSuccess: true });
         });
     });
 }
