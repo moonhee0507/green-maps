@@ -34,7 +34,6 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
-    // next()는 다음 핸들러에 제어권을 넘긴다
     app.get('*', async (req, res, next) => {
         const pageContextInit = {
             urlOriginal: req.originalUrl,
@@ -47,7 +46,7 @@ async function startServer() {
         res.status(statusCode).type(contentType).send(body);
     });
 
-    const port = process.env.PORT || 3000;
+    const port = process.env.PORT || 5000;
     app.listen(port);
     console.log(`${port}번 포트에서 서버 실행 중...`);
 
@@ -87,9 +86,38 @@ async function startServer() {
     app.post('/api/scrappers/save', (req, res) => {
         const restaurant = new Restaurant(req.body);
 
-        restaurant.save((err: any, restaurantInfo: any) => {
-            if (err) return res.json({ saveSuccess: false, errorMessage: err.message });
+        restaurant.save(async (err, restaurantInfo) => {
+            if (err) {
+                if (err.message.includes('E11000')) {
+                    const filter = { address: req.body.address };
+                    const update = { ...req.body };
+
+                    await Restaurant.findOneAndUpdate(filter, update);
+                }
+            }
             return res.status(200).json({ saveSuccess: true });
         });
+    });
+
+    app.get('/api/restaurants/', async (req, res) => {
+        const page = Number(req.query.page || 1);
+        const limit = Number(req.query.limit || 20);
+
+        try {
+            const total = await Restaurant.countDocuments({});
+            const lists = await Restaurant.find({})
+                .sort({ updatedAt: -1 })
+                .skip(limit * (page - 1))
+                .limit(limit);
+
+            res.json({
+                total: total,
+                countLimit: limit,
+                currentPage: page,
+                lists,
+            });
+        } catch (err) {
+            console.error(err);
+        }
     });
 }
