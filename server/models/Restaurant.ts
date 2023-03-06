@@ -21,6 +21,9 @@ const restaurantSchema = new Schema({
     certification: {
         type: String,
     },
+    updatedAt: {
+        type: String,
+    },
 });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);

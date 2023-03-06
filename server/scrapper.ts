@@ -1,14 +1,13 @@
 import puppeteer, { ElementHandle } from 'puppeteer';
-import fs from 'fs';
-import { saveScrapped } from './api/saveScrapped.js';
 
-export type scrappedData = {
+export type Restaurant = {
     title: string;
     category: string | undefined;
     rating: string | undefined;
     address: string | undefined;
     certified: boolean;
     certification: string | null;
+    updatedAt: string;
 };
 
 const cities = [
@@ -41,7 +40,6 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
     await page.setViewport({ width: 1280, height: 1024 });
     await page.exposeFunction('saveScrapped', saveScrapped);
 
-    let dataInAllPage = new Array();
     for (let city of cities) {
         await page.goto(`https://map.kakao.com/?q=${city} 채식`);
 
@@ -67,6 +65,7 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
                                             ?.firstElementChild?.nextElementSibling?.firstElementChild?.innerHTML,
                                     certified: false,
                                     certification: null,
+                                    updatedAt: new Date().toLocaleDateString('ko-kr'),
                                 });
                             }
                         }
@@ -102,9 +101,32 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
             }
         }
     }
-    fs.writeFileSync('./kakaoMapCrawling.json', JSON.stringify(dataInAllPage));
 
     // new Promise(() => setTimeout((r) => r, 10 * 60 * 1000));
 
     await browser.close();
 })();
+
+import fetch from 'node-fetch';
+
+async function saveScrapped(restaurant: Restaurant) {
+    try {
+        const res = await fetch(`http://localhost:5000/api/scrappers/save`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(restaurant),
+        });
+
+        const data: any = await res.json();
+
+        if (data.saveSuccess) {
+            console.log('저장완료--');
+        } else {
+            console.log('❌❌❌', data.errorMessage);
+        }
+    } catch (err) {
+        console.error(err);
+    }
+}

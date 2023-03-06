@@ -2,8 +2,6 @@ import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const saltRounds = 10;
-
 const userSchema = new Schema({
     userId: {
         type: String,
@@ -41,6 +39,8 @@ const userSchema = new Schema({
         default: true,
     },
 });
+
+const saltRounds = 10;
 
 // 유저 모델에 저장하기 전에 콜백함수 처리
 userSchema.pre('save', function (next) {
