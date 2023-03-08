@@ -34,6 +34,4 @@ async function render(pageContext: PageContextClient) {
     } else {
         root = hydrateRoot(container, page);
     }
-
-    console.log(pageContext);
 }
