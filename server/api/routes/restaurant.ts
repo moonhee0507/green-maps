@@ -63,14 +63,14 @@ export default (app: Router) => {
         }
     });
 
-    // 인증식당정보 저장
+    // TODO: 인증식당정보 저장
     route.get('/save', async (req: Request, res: Response) => {
         let all: Array<FromSeoulOpenApi> = [];
         try {
             const resForTotal = await fetch(
                 `http://openapi.seoul.go.kr:8088/68524f7775736a6d37346a78686e74/json/CrtfcUpsoInfo/1/1`
             );
-            const data = await resForTotal.json();
+            const data: any = await resForTotal.json();
             const total = data.CrtfcUpsoInfo.list_total_count;
 
             for (let startIndex = 1; startIndex <= total; startIndex += 1000) {
@@ -79,19 +79,28 @@ export default (app: Router) => {
                         startIndex + 999
                     }`
                 );
-                const veganRestaurantInSeoul = await resForVeganRestaurantInSeoul.json();
+                const veganRestaurantInSeoul: any = await resForVeganRestaurantInSeoul.json();
 
+                // TODO: 여기서 db로 전송시키기
                 all.push(
                     ...veganRestaurantInSeoul.CrtfcUpsoInfo.row.filter(
                         (item: any) => item.CRTFC_GBN_NM === '채식가능음식점' || item.CRTFC_GBN_NM === '채식음식점'
                     )
                 );
 
-                if (startIndex === 1000 * Math.trunc(total / 1000) + 1) {
-                    res.json({
-                        all,
-                    });
-                }
+                // if (startIndex === 1000 * Math.trunc(total / 1000) + 1) {
+                //     for (let restaurant of all) {
+                //         saveScrapped({
+                //             title: restaurant.UPSO_NM,
+                //             category: restaurant.BIZCND_CODE_NM,
+                //             rating: undefined,
+                //             address: restaurant.RDN_CODE_NM,
+                //             certified: true,
+                //             certification: restaurant.CRTFC_GBN_NM,
+                //             updatedAt: restaurant.CRTFC_YMD,
+                //         });
+                //     }
+                // }
             }
         } catch (err) {
             console.error(err);
