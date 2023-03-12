@@ -3,6 +3,15 @@ import Restaurant from '../../models/Restaurant.js';
 import fetch from 'node-fetch';
 
 const route = Router();
+type Restaurant = {
+    title: string;
+    category: string | undefined;
+    rating: string | undefined;
+    address: string | undefined;
+    certified: boolean;
+    certification: string | null;
+    updatedAt: string;
+};
 
 type FromSeoulOpenApi = {
     CRTFC_UPSO_MGT_SNO: number;
@@ -63,8 +72,8 @@ export default (app: Router) => {
         }
     });
 
-    // TODO: 인증식당정보 저장
-    route.get('/save', async (req: Request, res: Response) => {
+    // 인증식당정보 가져오기
+    route.get('/certified', async (req: Request, res: Response) => {
         let all: Array<FromSeoulOpenApi> = [];
         try {
             const resForTotal = await fetch(
@@ -81,26 +90,24 @@ export default (app: Router) => {
                 );
                 const veganRestaurantInSeoul: any = await resForVeganRestaurantInSeoul.json();
 
-                // TODO: 여기서 db로 전송시키기
                 all.push(
                     ...veganRestaurantInSeoul.CrtfcUpsoInfo.row.filter(
                         (item: any) => item.CRTFC_GBN_NM === '채식가능음식점' || item.CRTFC_GBN_NM === '채식음식점'
                     )
                 );
+                // return res.json(all);
 
-                // if (startIndex === 1000 * Math.trunc(total / 1000) + 1) {
-                //     for (let restaurant of all) {
-                //         saveScrapped({
-                //             title: restaurant.UPSO_NM,
-                //             category: restaurant.BIZCND_CODE_NM,
-                //             rating: undefined,
-                //             address: restaurant.RDN_CODE_NM,
-                //             certified: true,
-                //             certification: restaurant.CRTFC_GBN_NM,
-                //             updatedAt: restaurant.CRTFC_YMD,
-                //         });
-                //     }
-                // }
+                all.forEach((rest: any) => {
+                    saveRestaurant({
+                        title: rest.UPSO_NM,
+                        category: rest.BIZCND_CODE_NM,
+                        rating: undefined,
+                        address: rest.RDN_CODE_NM,
+                        certified: true,
+                        certification: rest.CRTFC_GBN_NM,
+                        updatedAt: rest.CRTFC_YMD,
+                    });
+                });
             }
         } catch (err) {
             console.error(err);
@@ -108,4 +115,33 @@ export default (app: Router) => {
 
         // const restaurant = new Restaurant(req.body);
     });
+
+    // 인증식당 정보 저장
+    route.post('/save', async (req: Request, res: Response) => {
+        const restaurant = new Restaurant(req.body);
+
+        restaurant.save(async (err, restaurantInfo) => {
+            if (err) return res.json({ success: false, errorMessage: err.message });
+            return res.status(200).json({ success: true });
+        });
+    });
 };
+
+async function saveRestaurant(restaurant: Restaurant) {
+    try {
+        const res = await fetch(`http://localhost:5000/api/restaurants/save`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(restaurant),
+        });
+
+        const data: any = await res.json();
+
+        if (data.saveSuccess) console.log('인증업소 저장완료--');
+        else console.log('❌❌❌', data.errorMessage);
+    } catch (err) {
+        console.error(err);
+    }
+}
