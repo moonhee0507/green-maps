@@ -3,6 +3,9 @@ import mongoose, { Schema } from 'mongoose';
 const restaurantSchema = new Schema({
     title: {
         type: String,
+        index: {
+            unique: true,
+        },
     },
     category: {
         type: String,
@@ -12,7 +15,9 @@ const restaurantSchema = new Schema({
     },
     address: {
         type: String,
-        unique: 1,
+        index: {
+            unique: true,
+        },
     },
     certified: {
         type: Boolean,

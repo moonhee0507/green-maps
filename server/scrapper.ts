@@ -1,4 +1,5 @@
 import puppeteer, { ElementHandle } from 'puppeteer';
+import fetch from 'node-fetch';
 
 export type Restaurant = {
     title: string;
@@ -106,8 +107,6 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
 
     await browser.close();
 })();
-
-import fetch from 'node-fetch';
 
 async function saveScrapped(restaurant: Restaurant) {
     try {

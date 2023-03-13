@@ -72,8 +72,7 @@ export default (app: Router) => {
         }
     });
 
-    // 인증식당정보 가져오기
-    route.get('/certified', async (req: Request, res: Response) => {
+    route.post('/save', async (req: Request, res: Response) => {
         let all: Array<FromSeoulOpenApi> = [];
         try {
             const resForTotal = await fetch(
@@ -95,53 +94,25 @@ export default (app: Router) => {
                         (item: any) => item.CRTFC_GBN_NM === '채식가능음식점' || item.CRTFC_GBN_NM === '채식음식점'
                     )
                 );
-                // return res.json(all);
-
-                all.forEach((rest: any) => {
-                    saveRestaurant({
-                        title: rest.UPSO_NM,
-                        category: rest.BIZCND_CODE_NM,
-                        rating: undefined,
-                        address: rest.RDN_CODE_NM,
-                        certified: true,
-                        certification: rest.CRTFC_GBN_NM,
-                        updatedAt: rest.CRTFC_YMD,
-                    });
-                });
             }
-        } catch (err) {
-            console.error(err);
+
+            all.forEach(async (rest: any) => {
+                await Restaurant.create({
+                    title: rest.UPSO_NM,
+                    category: rest.BIZCND_CODE_NM,
+                    rating: undefined,
+                    address: rest.RDN_CODE_NM, // TODO: 지역코드가 들어가있는 경우 지역명으로 대체하기
+                    certified: true,
+                    certification: rest.CRTFC_GBN_NM,
+                    updatedAt: rest.CRTFC_YMD,
+                });
+
+                console.log('인증업소 저장완료--');
+            });
+
+            res.status(200).json({ success: true });
+        } catch (err: any) {
+            res.json({ success: false, errorMessage: err.message });
         }
-
-        // const restaurant = new Restaurant(req.body);
-    });
-
-    // 인증식당 정보 저장
-    route.post('/save', async (req: Request, res: Response) => {
-        const restaurant = new Restaurant(req.body);
-
-        restaurant.save(async (err, restaurantInfo) => {
-            if (err) return res.json({ success: false, errorMessage: err.message });
-            return res.status(200).json({ success: true });
-        });
     });
 };
-
-async function saveRestaurant(restaurant: Restaurant) {
-    try {
-        const res = await fetch(`http://localhost:5000/api/restaurants/save`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(restaurant),
-        });
-
-        const data: any = await res.json();
-
-        if (data.saveSuccess) console.log('인증업소 저장완료--');
-        else console.log('❌❌❌', data.errorMessage);
-    } catch (err) {
-        console.error(err);
-    }
-}
