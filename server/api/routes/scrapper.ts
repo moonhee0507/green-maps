@@ -12,7 +12,6 @@ export default (app: Router) => {
         restaurant.save(async (err, restaurantInfo) => {
             if (err) {
                 if (err.message.includes('E11000')) {
-                    // TODO: 확인하기
                     const filter = { title: req.body.title, address: req.body.address };
                     const update = { ...req.body };
 

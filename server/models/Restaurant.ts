@@ -3,9 +3,6 @@ import mongoose, { Schema } from 'mongoose';
 const restaurantSchema = new Schema({
     title: {
         type: String,
-        index: {
-            unique: true,
-        },
     },
     category: {
         type: String,
@@ -15,9 +12,6 @@ const restaurantSchema = new Schema({
     },
     address: {
         type: String,
-        index: {
-            unique: true,
-        },
     },
     certified: {
         type: Boolean,
@@ -30,6 +24,8 @@ const restaurantSchema = new Schema({
         type: String,
     },
 });
+
+restaurantSchema.index({ title: 1, address: 1 });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 

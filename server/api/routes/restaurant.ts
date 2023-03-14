@@ -3,6 +3,7 @@ import Restaurant from '../../models/Restaurant.js';
 import fetch from 'node-fetch';
 
 const route = Router();
+
 type Restaurant = {
     title: string;
     category: string | undefined;
@@ -94,21 +95,23 @@ export default (app: Router) => {
                         (item: any) => item.CRTFC_GBN_NM === '채식가능음식점' || item.CRTFC_GBN_NM === '채식음식점'
                     )
                 );
+
+                veganRestaurantInSeoul.CrtfcUpsoInfo.row
+                    .filter((item: any) => item.CRTFC_GBN_NM === '채식가능음식점' || item.CRTFC_GBN_NM === '채식음식점')
+                    .forEach(async (list: FromSeoulOpenApi) => {
+                        await Restaurant.create({
+                            title: list.UPSO_NM,
+                            category: list.BIZCND_CODE_NM,
+                            rating: (Math.random() * 2 + 3).toFixed(1),
+                            address: list.RDN_CODE_NM,
+                            certified: true,
+                            certification: list.CRTFC_GBN_NM,
+                            updatedAt: list.CRTFC_YMD,
+                        });
+
+                        console.log('인증업소 저장완료--');
+                    });
             }
-
-            all.forEach(async (rest: any) => {
-                await Restaurant.create({
-                    title: rest.UPSO_NM,
-                    category: rest.BIZCND_CODE_NM,
-                    rating: undefined,
-                    address: rest.RDN_CODE_NM, // TODO: 지역코드가 들어가있는 경우 지역명으로 대체하기
-                    certified: true,
-                    certification: rest.CRTFC_GBN_NM,
-                    updatedAt: rest.CRTFC_YMD,
-                });
-
-                console.log('인증업소 저장완료--');
-            });
 
             res.status(200).json({ success: true });
         } catch (err: any) {
