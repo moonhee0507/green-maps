@@ -1,5 +1,15 @@
 import mongoose, { Schema } from 'mongoose';
 
+export type Restaurant = {
+    title: string;
+    category: string;
+    rating: string;
+    address: string;
+    certified: boolean;
+    certification: string | null;
+    updatedAt: string;
+};
+
 const restaurantSchema = new Schema({
     title: {
         type: String,

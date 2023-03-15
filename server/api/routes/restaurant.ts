@@ -4,16 +4,6 @@ import fetch from 'node-fetch';
 
 const route = Router();
 
-type Restaurant = {
-    title: string;
-    category: string | undefined;
-    rating: string | undefined;
-    address: string | undefined;
-    certified: boolean;
-    certification: string | null;
-    updatedAt: string;
-};
-
 type FromSeoulOpenApi = {
     CRTFC_UPSO_MGT_SNO: number;
     UPSO_SNO: string;
