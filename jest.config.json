@@ -1,0 +1,8 @@
+{
+    "roots": ["<rootDir>/test/"],
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["<rootDir>/test/index.ts"],
+    "transform": {
+        "^.+\\.tsx?$": "ts-jest"
+    }
+}
