@@ -31,7 +31,7 @@ const cities = [
     '제주',
 ];
 
-const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생활용품점'];
+const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생활용품점', '요리학원', '교육단체'];
 
 (async () => {
     // const browser = await puppeteer.launch({ headless: false, slowMo: 300, devtools: true, timeout: 600000 });

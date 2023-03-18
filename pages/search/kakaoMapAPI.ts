@@ -29,21 +29,16 @@ export function init() {
     }
 }
 
-export function paintMarker(restaurant: Restaurant) {
-    // 마커 이미지 주소
-    const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
+// 마커 이미지 주소
+const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
+// 마커 이미지 크기
+const imageSize = new kakao.maps.Size(24, 35);
+// 마커 이미지를 생성
+const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-    // 마커 이미지 크기
-    const imageSize = new kakao.maps.Size(24, 35);
-
-    // 마커 이미지를 생성
-    const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
+export async function paintMarker(restaurant: Restaurant) {
     // 주소->좌표 변환 객체 생성
-    const geocoder = new kakao.maps.services.Geocoder();
-
-    // TODO: 주소에 있는 지역코드 변환하기
-    // const newAddress = codeToName(restaurant.address);
+    const geocoder = await new kakao.maps.services.Geocoder();
 
     try {
         geocoder.addressSearch(restaurant.address, function (result: any, status: any) {
@@ -66,6 +61,9 @@ export function paintMarker(restaurant: Restaurant) {
                     infowindow.setContent('<div style="padding:5px;font-size:12px;">' + restaurant.title + '</div>');
                     infowindow.open(map, marker);
                 });
+            } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                // 검색결과 없는 경우
+                console.log('😴검색결과 없음', restaurant.title, restaurant.address);
             }
         });
     } catch (err) {

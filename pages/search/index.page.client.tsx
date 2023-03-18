@@ -1,56 +1,40 @@
 import React, { useEffect } from 'react';
 import { SearchBar } from './searchBar';
-import { displayMarkerForVeganRestaurant } from './kakaoMapAPI';
+import { init, paintMarker } from './kakaoMapAPI.js';
+import type { Restaurant } from '../../server/models/Restaurant';
 
-const { kakao }: any = window;
 export { Page };
 
 function Page() {
     useEffect(() => {
-        // 서울시 채식인증 식당 가져오기
-        let all: Array<object> = [];
+        // TODO: 페이지 최초 진입 시 한번만 저장되게 하기
 
+        init();
         (async () => {
-            try {
-                const resForTotal = await fetch(
-                    `http://openapi.seoul.go.kr:8088/68524f7775736a6d37346a78686e74/json/CrtfcUpsoInfo/1/1`
-                );
-                const data = await resForTotal.json();
-                const total = data.CrtfcUpsoInfo.list_total_count;
+            const res = await fetch(`http://localhost:5000/api/restaurants`, {
+                method: 'GET',
+                headers: {
+                    'Cache-Control': 'public, max-age=31536000',
+                },
+            });
 
-                for (let startIndex = 1; startIndex <= total; startIndex += 1000) {
-                    const resForVeganRestaurantInSeoul = await fetch(
-                        `http://openapi.seoul.go.kr:8088/68524f7775736a6d37346a78686e74/json/CrtfcUpsoInfo/${startIndex}/${
-                            startIndex + 999
-                        }`
-                    );
-                    const veganRestaurantInSeoul = await resForVeganRestaurantInSeoul.json();
+            const data = await res.json();
+            const total = data.total;
+            const limit = 3;
 
-                    all.push(
-                        ...veganRestaurantInSeoul.CrtfcUpsoInfo.row.filter(
-                            (item: any) => item.CRTFC_GBN_NM === '채식가능음식점' || item.CRTFC_GBN_NM === '채식음식점'
-                        )
-                    );
+            for (let page = 1; page <= Math.ceil(total / limit); page++) {
+                const res = await fetch(`http://localhost:5000/api/restaurants/?page=${page}&limit=${limit}`, {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'max-age=31536000',
+                    },
+                });
 
-                    if (startIndex === 1000 * Math.trunc(total / 1000) + 1) {
-                        // 최종 데이터 확인용 콘솔
-                        // console.log(all);
-
-                        // 카카오와 연결할 데이터 형식 생성하기
-                        let positions: Array<{ title: string; latlng: object }> = [];
-
-                        all.forEach((rest: any) => {
-                            positions.push({
-                                title: rest.UPSO_NM,
-                                latlng: new kakao.maps.LatLng(Number(rest.Y_DNTS), Number(rest.X_CNTS)),
-                            });
-                        });
-
-                        displayMarkerForVeganRestaurant(positions);
-                    }
-                }
-            } catch (err) {
-                console.error(err);
+                const data = await res.json();
+                const lists = data.lists;
+                lists.forEach((list: Restaurant) => {
+                    paintMarker(list);
+                });
             }
         })();
     }, []);

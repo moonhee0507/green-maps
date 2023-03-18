@@ -20,7 +20,7 @@ function Page() {
             if (password !== password2) {
                 return alert('비밀번호가 일치하지 않습니다');
             } else {
-                const res = await fetch(`http://localhost:3000/api/users/signup`, {
+                const res = await fetch(`http://localhost:5000/api/users/signup`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

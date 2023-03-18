@@ -1,8 +1,10 @@
 import { Router, Request, Response } from 'express';
 import Restaurant from '../../models/Restaurant.js';
 import fetch from 'node-fetch';
+import { regionCode } from '../../REGION_CODE.js';
 
 const route = Router();
+const objSigungu = regionCode.서울특별시.시군구;
 
 type FromSeoulOpenApi = {
     CRTFC_UPSO_MGT_SNO: number;
@@ -63,6 +65,20 @@ export default (app: Router) => {
         }
     });
 
+    route.get('/all', async (req: Request, res: Response) => {
+        try {
+            const total = await Restaurant.countDocuments({});
+            const lists = await Restaurant.find({}).sort({ address: -1 });
+
+            res.json({
+                total: total,
+                lists,
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
     route.post('/save', async (req: Request, res: Response) => {
         let all: Array<FromSeoulOpenApi> = [];
         try {
@@ -88,12 +104,19 @@ export default (app: Router) => {
 
                 veganRestaurantInSeoul.CrtfcUpsoInfo.row
                     .filter((item: any) => item.CRTFC_GBN_NM === '채식가능음식점' || item.CRTFC_GBN_NM === '채식음식점')
-                    .forEach(async (list: FromSeoulOpenApi) => {
+                    .map(async (list: FromSeoulOpenApi) => {
+                        let newAddress = list.RDN_CODE_NM;
+                        Object.keys(regionCode.서울특별시.시군구).forEach((sigungu: string) => {
+                            newAddress = newAddress
+                                .replace(objSigungu[sigungu], sigungu)
+                                .replace('서울특별시특별시', '서울특별시');
+                        });
+
                         await Restaurant.create({
                             title: list.UPSO_NM,
                             category: list.BIZCND_CODE_NM,
                             rating: (Math.random() * 2 + 3).toFixed(1),
-                            address: list.RDN_CODE_NM,
+                            address: newAddress,
                             certified: true,
                             certification: list.CRTFC_GBN_NM,
                             updatedAt: list.CRTFC_YMD,
