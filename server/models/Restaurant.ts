@@ -33,6 +33,9 @@ const restaurantSchema = new Schema({
     updatedAt: {
         type: String,
     },
+    location: {
+        coordinates: [String, String],
+    },
 });
 
 restaurantSchema.index({ title: 1, address: 1 });

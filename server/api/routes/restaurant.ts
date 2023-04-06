@@ -83,7 +83,13 @@ export default (app: Router) => {
         let all: Array<FromSeoulOpenApi> = [];
         try {
             const resForTotal = await fetch(
-                `http://openapi.seoul.go.kr:8088/68524f7775736a6d37346a78686e74/json/CrtfcUpsoInfo/1/1`
+                `http://openapi.seoul.go.kr:8088/68524f7775736a6d37346a78686e74/json/CrtfcUpsoInfo/1/1`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'public, max-age=31536000',
+                    },
+                }
             );
             const data: any = await resForTotal.json();
             const total = data.CrtfcUpsoInfo.list_total_count;
@@ -112,7 +118,7 @@ export default (app: Router) => {
                                 .replace('서울특별시특별시', '서울특별시');
                         });
 
-                        await Restaurant.create({
+                        let inTheMiddle = {
                             title: list.UPSO_NM,
                             category: list.BIZCND_CODE_NM,
                             rating: (Math.random() * 2 + 3).toFixed(1),
@@ -120,9 +126,42 @@ export default (app: Router) => {
                             certified: true,
                             certification: list.CRTFC_GBN_NM,
                             updatedAt: list.CRTFC_YMD,
-                        });
+                            location: {
+                                coordinates: [Number, Number],
+                            },
+                        };
 
-                        console.log('인증업소 저장완료--');
+                        await fetch(
+                            `https://dapi.kakao.com/v2/local/search/address.json?query=${encodeURI(
+                                inTheMiddle.address
+                            )}`,
+                            {
+                                method: 'GET',
+                                headers: {
+                                    Authorization: `KakaoAK 9152694fdd918ff54fd3534779116e67`,
+                                },
+                            }
+                        )
+                            .then((res) => res.json())
+                            .then((data: any) => {
+                                if (data) {
+                                    if (data.documents) {
+                                        if (data.documents.length > 0) {
+                                            inTheMiddle = {
+                                                ...inTheMiddle,
+                                                location: {
+                                                    coordinates: [
+                                                        data.documents[0].address.x,
+                                                        data.documents[0].address.y,
+                                                    ],
+                                                },
+                                            };
+                                        }
+                                    }
+                                }
+                            });
+
+                        await Restaurant.create(inTheMiddle);
                     });
             }
 
