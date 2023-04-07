@@ -9,6 +9,10 @@ export type Restaurant = {
     certified: boolean;
     certification: string | null;
     updatedAt: string;
+    location: {
+        type: string;
+        coordinates: Array<number>;
+    };
 };
 
 const cities = [
@@ -50,13 +54,13 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
         for (let currentPage = 1; currentPage <= Math.trunc(totalNumForResult / 15) + 1; currentPage++) {
             await page.$$eval(
                 '.link_name',
-                (elements, excludeCategory) => {
+                async (elements, excludeCategory) => {
                     for (let element of elements) {
                         const category = element.parentElement?.nextElementSibling?.innerHTML;
 
                         if (typeof category === 'string') {
                             if (!excludeCategory.includes(category)) {
-                                saveScrapped({
+                                let inTheMiddle = {
                                     title: element.innerHTML.replace(/[<strong>|</strong>]/g, ''),
                                     category: category,
                                     rating: element.parentElement?.parentElement?.nextElementSibling?.firstElementChild
@@ -67,7 +71,49 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
                                     certified: false,
                                     certification: null,
                                     updatedAt: new Date().toLocaleDateString('ko-kr'),
-                                });
+                                    location: {
+                                        type: 'Point',
+                                        coordinates: [0, 0],
+                                    },
+                                };
+
+                                if (inTheMiddle.address) {
+                                    await fetch(
+                                        `https://dapi.kakao.com/v2/local/search/address.json?query=${encodeURI(
+                                            inTheMiddle.address
+                                        )}`,
+                                        {
+                                            method: 'GET',
+                                            headers: {
+                                                Authorization: `KakaoAK 9152694fdd918ff54fd3534779116e67`,
+                                            },
+                                        }
+                                    )
+                                        .then((res) => res.json())
+                                        .then((data: any) => {
+                                            if (data.documents) {
+                                                const longitude = Number(data?.documents[0]?.x);
+                                                const latitude = Number(data?.documents[0]?.y);
+
+                                                if (
+                                                    longitude >= -180 &&
+                                                    longitude <= 180 &&
+                                                    latitude >= -90 &&
+                                                    latitude <= 90
+                                                ) {
+                                                    inTheMiddle = {
+                                                        ...inTheMiddle,
+                                                        location: {
+                                                            type: 'Point',
+                                                            coordinates: [longitude, latitude],
+                                                        },
+                                                    };
+                                                }
+                                            }
+                                        });
+                                }
+
+                                saveScrapped(inTheMiddle);
                             }
                         }
                     }

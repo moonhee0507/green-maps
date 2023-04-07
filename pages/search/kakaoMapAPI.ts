@@ -3,10 +3,13 @@ import type { Restaurant } from '../../server/models/Restaurant';
 const { kakao }: any = window;
 
 let map: any;
-let neLat: string;
-let neLng: string;
-let swLat: string;
-let swLng: string;
+let neLat: number;
+let neLng: number;
+let swLat: number;
+let swLng: number;
+
+type Location = Array<number>;
+type Polygon = Array<Location>;
 
 export function init() {
     const mapContainer = document.getElementById('map'); // 지도를 표시할 div
@@ -32,13 +35,32 @@ export function init() {
         });
     } else console.log('❌ 현재 위치를 표시할 수 없습니다');
 
+    async function getLists(polygon: Polygon) {
+        const data = await fetch(`http://localhost:5000/api/maps/inner`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(polygon),
+        });
+
+        const res = await data.json();
+        paintMarker(res);
+    }
+
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
         neLat = map.getBounds().getNorthEast().getLat();
         neLng = map.getBounds().getNorthEast().getLng();
         swLat = map.getBounds().getSouthWest().getLat();
         swLng = map.getBounds().getSouthWest().getLng();
 
-        console.log('범위 변경', '북동위경도', neLat, neLng, '남서위경도', swLat, swLng);
+        getLists([
+            [neLng, neLat],
+            [swLng, neLat],
+            [swLng, swLat],
+            [neLng, swLat],
+            [neLng, neLat],
+        ]);
     });
 }
 
@@ -49,46 +71,25 @@ const imageSize = new kakao.maps.Size(24, 35);
 // 마커 이미지를 생성
 const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 
-export async function paintMarker(restaurant: Restaurant) {
-    // 주소->좌표 변환 객체 생성
-    const geocoder = await new kakao.maps.services.Geocoder();
-
-    try {
-        geocoder.addressSearch(restaurant.address, function (result: any, status: any) {
-            // 검색 완료
-            if (status === kakao.maps.services.Status.OK) {
-                const lat = result[0].y;
-                const lng = result[0].x;
-
-                if (lat >= swLat && lat <= neLat && lng >= swLng && lng <= neLng) {
-                    // 마커 생성
-                    const marker = new kakao.maps.Marker({
-                        map: map,
-                        position: new kakao.maps.LatLng(result[0].y, result[0].x), // 마커를 표시할 위치
-                        title: restaurant.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀 표시
-                        image: markerImage, // 마커 이미지
-                    });
-
-                    // 마커에 클릭이벤트를 등록
-                    kakao.maps.event.addListener(marker, 'click', function () {
-                        // 마커를 클릭하면 장소명을 표출할 인포윈도우
-                        const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-
-                        // 마커를 클릭하면 장소명이 인포윈도우에 표출
-                        infowindow.setContent(
-                            '<div style="padding:5px;font-size:12px;">' + restaurant.title + '</div>'
-                        );
-                        infowindow.open(map, marker);
-                    });
-                }
-            } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
-                // 검색결과 없는 경우
-                console.log('😴검색결과 없음', restaurant.title, restaurant.address);
-            }
+export async function paintMarker(restaurant: Array<Restaurant>) {
+    restaurant.forEach((list) => {
+        const marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(list.location.coordinates[1], list.location.coordinates[0]), // 마커를 표시할 위치
+            title: list.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀 표시
+            image: markerImage, // 마커 이미지
         });
-    } catch (err) {
-        console.error(err);
-    }
+
+        // 마커에 클릭이벤트를 등록
+        kakao.maps.event.addListener(marker, 'click', function () {
+            // 마커를 클릭하면 장소명을 표출할 인포윈도우
+            const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+
+            // 마커를 클릭하면 장소명이 인포윈도우에 표출
+            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + list.title + '</div>');
+            infowindow.open(map, marker);
+        });
+    });
 }
 
 export function displaySearchResult(keyword: string) {

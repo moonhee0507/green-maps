@@ -127,7 +127,8 @@ export default (app: Router) => {
                             certification: list.CRTFC_GBN_NM,
                             updatedAt: list.CRTFC_YMD,
                             location: {
-                                coordinates: [Number, Number],
+                                type: 'Point',
+                                coordinates: [0, 0],
                             },
                         };
 
@@ -144,19 +145,18 @@ export default (app: Router) => {
                         )
                             .then((res) => res.json())
                             .then((data: any) => {
-                                if (data) {
-                                    if (data.documents) {
-                                        if (data.documents.length > 0) {
-                                            inTheMiddle = {
-                                                ...inTheMiddle,
-                                                location: {
-                                                    coordinates: [
-                                                        data.documents[0].address.x,
-                                                        data.documents[0].address.y,
-                                                    ],
-                                                },
-                                            };
-                                        }
+                                if (data.documents) {
+                                    const longitude = Number(data?.documents[0]?.x);
+                                    const latitude = Number(data?.documents[0]?.y);
+
+                                    if (longitude >= -180 && longitude <= 180 && latitude >= -90 && latitude <= 90) {
+                                        inTheMiddle = {
+                                            ...inTheMiddle,
+                                            location: {
+                                                type: 'Point',
+                                                coordinates: [longitude, latitude],
+                                            },
+                                        };
                                     }
                                 }
                             });

@@ -8,6 +8,10 @@ export type Restaurant = {
     certified: boolean;
     certification: string | null;
     updatedAt: string;
+    location: {
+        type: string;
+        coordinates: [number, number];
+    };
 };
 
 const restaurantSchema = new Schema({
@@ -34,11 +38,19 @@ const restaurantSchema = new Schema({
         type: String,
     },
     location: {
-        coordinates: [String, String],
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true,
+        },
+        coordinates: {
+            type: [Number],
+            required: true,
+        },
     },
 });
 
-restaurantSchema.index({ title: 1, address: 1 });
+restaurantSchema.index({ title: 1, address: 1, location: '2dsphere' });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
