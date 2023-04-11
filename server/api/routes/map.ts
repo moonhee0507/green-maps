@@ -7,7 +7,6 @@ export default (app: Router) => {
     app.use('/maps', route);
 
     route.post('/inner', async (req: Request, res: Response) => {
-        console.log(req.body);
         try {
             const lists = await Restaurant.find({
                 location: {

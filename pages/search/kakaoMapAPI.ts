@@ -1,4 +1,6 @@
 import type { Restaurant } from '../../server/models/Restaurant';
+import iconLocation from '/icon-location.svg';
+import iconAuth from '/icon-auth.svg';
 
 const { kakao }: any = window;
 
@@ -7,6 +9,8 @@ let neLat: number;
 let neLng: number;
 let swLat: number;
 let swLng: number;
+
+export let count = 0;
 
 type Location = Array<number>;
 type Polygon = Array<Location>;
@@ -35,19 +39,6 @@ export function init() {
         });
     } else console.log('❌ 현재 위치를 표시할 수 없습니다');
 
-    async function getLists(polygon: Polygon) {
-        const data = await fetch(`http://localhost:5000/api/maps/inner`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(polygon),
-        });
-
-        const res = await data.json();
-        paintMarker(res);
-    }
-
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
         neLat = map.getBounds().getNorthEast().getLat();
         neLng = map.getBounds().getNorthEast().getLng();
@@ -60,16 +51,25 @@ export function init() {
             [swLng, swLat],
             [neLng, swLat],
             [neLng, neLat],
-        ]);
+        ]).then((res) => {
+            paintMarker(res);
+            count = res.length;
+        });
     });
 }
 
-// 마커 이미지 주소
-const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png';
-// 마커 이미지 크기
-const imageSize = new kakao.maps.Size(24, 35);
-// 마커 이미지를 생성
-const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+export async function getLists(polygon: Polygon) {
+    const data = await fetch(`http://localhost:5000/api/maps/inner`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(polygon),
+    });
+
+    const res = await data.json();
+    return res;
+}
 
 export async function paintMarker(restaurant: Array<Restaurant>) {
     restaurant.forEach((list) => {
@@ -77,7 +77,7 @@ export async function paintMarker(restaurant: Array<Restaurant>) {
             map: map,
             position: new kakao.maps.LatLng(list.location.coordinates[1], list.location.coordinates[0]), // 마커를 표시할 위치
             title: list.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀 표시
-            image: markerImage, // 마커 이미지
+            image: new kakao.maps.MarkerImage(list.certified ? iconAuth : iconLocation, new kakao.maps.Size(24, 35)), // 마커 이미지
         });
 
         // 마커에 클릭이벤트를 등록
