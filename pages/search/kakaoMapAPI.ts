@@ -1,6 +1,7 @@
 import type { Restaurant } from '../../server/models/Restaurant';
 import iconLocation from '/icon-location.svg';
 import iconAuth from '/icon-auth.svg';
+import store from '../../renderer/store.js';
 
 const { kakao }: any = window;
 
@@ -9,8 +10,6 @@ let neLat: number;
 let neLng: number;
 let swLat: number;
 let swLng: number;
-
-export let count = 0;
 
 type Location = Array<number>;
 type Polygon = Array<Location>;
@@ -53,7 +52,10 @@ export function init() {
             [neLng, neLat],
         ]).then((res) => {
             paintMarker(res);
-            count = res.length;
+            store.dispatch({
+                type: 'CHANGED_CENTER',
+                COUNT: res.length,
+            });
         });
     });
 }
