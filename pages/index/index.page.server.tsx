@@ -1,5 +1,7 @@
 import React from 'react';
 import { HomeContent } from './homeContent';
+import { useSelector } from 'react-redux';
+import { TopBar } from '../../components/topBar/topBar';
 
 export { Page };
 
@@ -9,8 +11,11 @@ export const documentProps = {
 };
 
 function Page() {
+    console.log(useSelector((state: any) => state));
+
     return (
         <>
+            <TopBar />
             <HomeContent />
         </>
     );

@@ -4,9 +4,9 @@ import Restaurant from '../../models/Restaurant.js';
 const route = Router();
 
 export default (app: Router) => {
-    app.use('/maps', route);
+    app.use('/map', route);
 
-    route.post('/inner', async (req: Request, res: Response) => {
+    route.post('/currentlist', async (req: Request, res: Response) => {
         try {
             const lists = await Restaurant.find({
                 location: {

@@ -12,7 +12,8 @@ export const hydrationCanBeAborted = true;
 let root: any;
 
 async function render(pageContext: PageContextClient) {
-    const { Page, pageProps } = pageContext;
+    const { Page, pageProps, routeParams } = pageContext;
+    console.log(routeParams);
     const store = getStore();
 
     const page = (

@@ -8,11 +8,11 @@ import { getStore } from './store';
 import { Provider } from 'react-redux';
 
 export { render };
-export const passToClient = ['PRELOADED_STATE', 'pageProps']; // 브라우저에서 pageContext를 사용하려면 passToClient를 사용해야
+export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams']; // 브라우저에서 pageContext를 사용하려면 passToClient를 사용해야
 
 async function render(pageContext: PageContextServer) {
     const store = getStore();
-    const { Page, pageProps } = pageContext;
+    const { Page, pageProps, routeParams } = pageContext;
     let pageHtml;
 
     if (!pageContext.Page) {
@@ -55,8 +55,9 @@ async function render(pageContext: PageContextServer) {
         documentHtml,
         pageContext: {
             // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
-            PRELOADED_STATE,
             pageProps,
+            PRELOADED_STATE,
+            routeParams,
         },
     };
 }

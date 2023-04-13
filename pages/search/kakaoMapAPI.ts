@@ -61,7 +61,7 @@ export function init() {
 }
 
 export async function getLists(polygon: Polygon) {
-    const data = await fetch(`http://localhost:5000/api/maps/inner`, {
+    const data = await fetch(`http://localhost:5000/api/map/currentlist`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -88,7 +88,11 @@ export async function paintMarker(restaurant: Array<Restaurant>) {
             const infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
             // 마커를 클릭하면 장소명이 인포윈도우에 표출
-            infowindow.setContent('<div style="padding:5px;font-size:12px;">' + list.title + '</div>');
+            infowindow.setContent(
+                '<div style="padding:5px;font-size:12px;">' +
+                    `<a href="/search/${list._id.replaceAll(/ObjectId\('|'\)/g, '')}">${list.title}</a>` +
+                    '</div>'
+            );
             infowindow.open(map, marker);
         });
     });

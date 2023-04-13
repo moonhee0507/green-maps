@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 export type Restaurant = {
+    _id: string;
     title: string;
     category: string;
     rating: string;
