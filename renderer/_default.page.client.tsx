@@ -13,13 +13,12 @@ let root: any;
 
 async function render(pageContext: PageContextClient) {
     const { Page, pageProps, routeParams } = pageContext;
-    console.log(routeParams);
     const store = getStore();
 
     const page = (
         <Provider store={store}>
             <PageShell pageContext={pageContext}>
-                <Page {...pageProps} />
+                <Page {...pageProps} routeParams={routeParams} />
             </PageShell>
         </Provider>
     );

@@ -170,4 +170,13 @@ export default (app: Router) => {
             res.json({ success: false, errorMessage: err.message });
         }
     });
+
+    route.get('/:id', async (req: Request, res: Response) => {
+        try {
+            const item = await Restaurant.findById(req.params.id).exec();
+            res.status(200).json(item);
+        } catch (err) {
+            console.error(err);
+        }
+    });
 };

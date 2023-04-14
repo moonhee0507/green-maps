@@ -3,7 +3,7 @@ import './database.js';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import { renderPage } from 'vite-plugin-ssr';
+import { renderPage } from 'vite-plugin-ssr/server';
 import { root } from './root.js';
 const isProduction = process.env.NODE_ENV === 'production';
 

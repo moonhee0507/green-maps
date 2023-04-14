@@ -1,7 +1,7 @@
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { PageShell } from './PageShell';
-import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr';
+import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
 import icon from '/icon.png';
 import type { PageContextServer } from './types';
 import { getStore } from './store';
@@ -23,7 +23,7 @@ async function render(pageContext: PageContextServer) {
         pageHtml = await ReactDOMServer.renderToString(
             <Provider store={store}>
                 <PageShell pageContext={pageContext}>
-                    <Page {...pageProps} />
+                    <Page {...pageProps} routeParams={routeParams} />
                 </PageShell>
             </Provider>
         );

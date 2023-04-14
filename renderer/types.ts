@@ -3,12 +3,15 @@ export type { PageContextClient };
 export type { PageContext };
 export type { PageProps };
 
-import type { PageContextBuiltIn } from 'vite-plugin-ssr';
-// import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client/router'; // When using Client Routing
-import type { PageContextBuiltInClient } from 'vite-plugin-ssr/client'; // When using Server Routing
+// Server-side pageContext built-in values
+import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
+
+// Client-side pageContext built-in values, when using Server Routing
+import type { PageContextBuiltInClientWithServerRouting as PageContextBuiltInClient } from 'vite-plugin-ssr/types';
 
 type Page = (pageProps: PageProps) => React.ReactElement;
-type PageProps = {};
+type PageProps = { routeParams?: RouteParams };
+type RouteParams = {};
 
 export type PageContextCustom = {
     Page: Page;
