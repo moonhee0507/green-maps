@@ -10,10 +10,15 @@ export default (app: Router) => {
     route.post('/signup', (req: Request, res: Response) => {
         const user = new User(req.body);
 
-        user.save((err: any, userInfo: any) => {
-            if (err) return res.json({ success: false, errorMessage: err.message });
-            return res.status(200).json({ success: true });
-        });
+        user.save()
+            .then(() => {
+                res.status(200).json({
+                    success: true,
+                });
+            })
+            .catch((err) => {
+                res.json({ success: false, errorMessage: err.message });
+            });
     });
 
     // login

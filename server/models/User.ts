@@ -7,15 +7,18 @@ const userSchema = new Schema({
         type: String,
         maxlength: 20,
         unique: 1,
+        required: true,
     },
     nickName: {
         type: String,
         maxlength: 20,
         unique: 1,
+        required: true,
     },
     password: {
         type: String,
         minlength: 10,
+        required: true,
     },
     host: {
         type: String,
@@ -32,12 +35,24 @@ const userSchema = new Schema({
     },
     role: {
         type: Number,
-        default: 1,
+        default: 4,
     },
     active: {
         type: Boolean,
         default: true,
     },
+    place: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Restaurant',
+            registeredAt: String,
+            groupName: {
+                type: String,
+                required: false,
+                default: null,
+            },
+        },
+    ],
 });
 
 const saltRounds = 10;
