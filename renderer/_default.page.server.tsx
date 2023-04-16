@@ -39,6 +39,9 @@ async function render(pageContext: PageContextServer) {
                 <link rel="icon" href="${icon}" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta name="description" content="${desc}" />
+                <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
+                <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
+                <link rel="manifest" href="/manifest.json">
                 <title>${title}</title>
             </head>
             <body>

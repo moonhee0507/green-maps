@@ -1,0 +1,14 @@
+{
+    "short_name": "그린맵",
+    "name": "그린맵 | 채식식당 검색과 북마크",
+    "icons": [
+        {
+            "src": "/icon.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "",
+    "display": "fullscreen",
+    "theme_color": "#00784a"
+}
