@@ -12,11 +12,10 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: Install npm
-              run: npm install
-
-            - name: Build vite-plugin-ssr
-              run: npm run build
+            - name: Install npm & Build vite-plugin-ssr
+              run: |
+                  npm ci
+                  npm run build
 
             - name: Deploy
               uses: JamesIves/github-pages-deploy-action@v4
