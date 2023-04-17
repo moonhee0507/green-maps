@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
 import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
-import { RenderErrorPage } from 'vite-plugin-ssr/RenderErrorPage';
 
 export { onBeforeRender };
 export { prerender };
@@ -22,7 +21,7 @@ async function onBeforeRender(pageContext: PageContextBuiltIn) {
             },
         };
     } catch (err) {
-        throw RenderErrorPage({ pageContext: { pageProps: { err } } });
+        console.error(err);
     }
 }
 

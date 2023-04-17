@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: 'Pretendard-Regular';
   src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
@@ -24,6 +25,11 @@ button {
   letter-spacing: -0.05rem;
 }
 
+button {
+  border: 1px solid gray;
+  background-color: #ffffff;
+}
+
 a {
   text-decoration: none;
   color: #333333;
@@ -47,12 +53,19 @@ li {
   gap: 200px;
 }
 
-.navitem {
-  padding: 3px 10px;
-}
-
-.navitem.is-active {
-  background-color: #eee;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  /* 구형 브라우저를 위해 사용 */
+  -webkit-clip-path: polygon(0 0, 0 0, 0 0);
+  clip-path: polygon(0 0, 0 0, 0 0);
+  /* inset(50%) 와 동일한 표현 */
+  border: 0;
 }
 
 .left-area {
@@ -98,17 +111,50 @@ li {
   height: 100%;
 }
 
+.button-count {
+  position: absolute;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  width: 200px;
+  bottom: 100px;
+  z-index: 9999;
+}
+
 .top-bar {
   position: -webkit-sticky;
   position: sticky;
   width: 100%;
   /* 420px */
-  bottom: 0;
   border-bottom: 1px solid gray;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
 }
 
-.top-bar .icon-back {
-  width: 25px;
+.top-bar .button-back {
+  width: 40px;
+  height: 40px;
+  border: none;
+  padding: 0;
+}
+
+.top-bar .search-bar {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.top-bar .search-bar.off {
+  display: none;
+}
+
+.top-bar #searchItem {
+  width: 100%;
+  height: 40px;
+  border: 1px solid gray;
 }
 
 @media (max-width: 420px) {
@@ -122,7 +168,6 @@ li {
   position: sticky;
   width: 100%;
   /* 420px */
-  bottom: 0;
   border-top: 1px solid gray;
 }
 
@@ -168,23 +213,23 @@ li {
 }
 
 .link-nav .img-nav-icon.home {
-  background-image: url("/icon-home.svg");
+  background-image: url("/images/icon-home.svg");
 }
 
 .link-nav .img-nav-icon.search {
-  background-image: url("/icon-search.svg");
+  background-image: url("/images/icon-search.svg");
 }
 
 .link-nav .img-nav-icon.bookmark {
-  background-image: url("/icon-bookmark.svg");
+  background-image: url("/images/icon-bookmark.svg");
 }
 
 .link-nav .img-nav-icon.community {
-  background-image: url("/icon-community.svg");
+  background-image: url("/images/icon-community.svg");
 }
 
 .link-nav .img-nav-icon.user {
-  background-image: url("/icon-user.svg");
+  background-image: url("/images/icon-user.svg");
 }
 
 @media (max-width: 420px) {
@@ -197,6 +242,10 @@ li {
   overflow: scroll;
   scrollbar-width: none;
   /* firefox */
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  /*긴 화면*/
 }
 
 /* edge, chrome */

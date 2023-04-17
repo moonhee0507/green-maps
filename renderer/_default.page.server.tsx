@@ -2,17 +2,18 @@ import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { PageShell } from './PageShell';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
-import icon from '/icon.png';
+import icon from '/images/icon.png';
 import type { PageContextServer } from './types';
 import { getStore } from './store';
 import { Provider } from 'react-redux';
 
 export { render };
-export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams']; // 브라우저에서 pageContext를 사용하려면 passToClient를 사용해야
+export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams'];
 
-async function render(pageContext: PageContextServer) {
+function render(pageContext: PageContextServer) {
     const store = getStore();
     const { Page, pageProps, routeParams } = pageContext;
+
     let pageHtml;
 
     if (!pageContext.Page) {
@@ -20,7 +21,7 @@ async function render(pageContext: PageContextServer) {
         pageHtml = '';
     } else {
         // SSR
-        pageHtml = await ReactDOMServer.renderToString(
+        pageHtml = ReactDOMServer.renderToString(
             <Provider store={store}>
                 <PageShell pageContext={pageContext}>
                     <Page {...pageProps} routeParams={routeParams} />
@@ -41,13 +42,12 @@ async function render(pageContext: PageContextServer) {
                 <meta name="description" content="${desc}" />
                 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
                 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
-                <link rel="manifest" href="/manifest.json">
+                <link rel="manifest" href="/manifest.json" />
+                <link rel="stylesheet" href="/scss/index.css" />
                 <title>${title}</title>
             </head>
             <body>
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${
-                    process.env.REACT_APP_MAP_KEY as any
-                }&libraries=services,clusterer,drawing"></script>
+                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
                 <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
             </body>
         </html>`;

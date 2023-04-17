@@ -1,7 +1,9 @@
 // import { createStore } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
 import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
 import rootReducer from './_reducers';
+
+const { configureStore } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
 
 const store = configureStore({
     reducer: rootReducer,

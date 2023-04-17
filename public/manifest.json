@@ -3,7 +3,7 @@
     "name": "그린맵 | 채식식당 검색과 북마크",
     "icons": [
         {
-            "src": "/icon.png",
+            "src": "/images/icon.png",
             "type": "image/png",
             "sizes": "512x512"
         }

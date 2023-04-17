@@ -1,7 +1,5 @@
 import React from 'react';
-import { PageProps } from '../../renderer/types';
 import { ButtonGoBack } from '../button/buttonGoBack';
-import icon from '/icon.png';
 
 export { TopBar };
 

@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from '/logo.svg';
+import logo from '/images/logo.svg';
 import { PageContextProvider } from './usePageContext';
 import type { PageContext } from './types';
 import 'normalize.css';
-import './style/index.scss';
 import { NavBar } from '../components/navBar';
 import { getStore } from './store';
 import { Provider } from 'react-redux';
