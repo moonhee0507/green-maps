@@ -26,7 +26,7 @@ jobs:
               run: npm run build
 
             - name: Deploy
-              uses: moonhee0507/green-maps/github-pages-deploy-action
+              uses: moonhee0507/github-pages-deploy-action@green-maps
               with:
                   branch: gh-pages
                   folder: dist/client
