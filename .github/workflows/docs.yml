@@ -22,7 +22,7 @@ jobs:
               uses: JamesIves/github-pages-deploy-action@v4
               with:
                   branch: gh-pages
-                  folder: dist/client
+                  folder: .
                   # Remove previous build files
                   clean: true
                   # `.nojekyll` 파일을 제거하면 안됨. `gh-pages` 분기의 루트에 빈 `.nojekyll` 파일을 수동으로 추가했고 각 빌드 후에 다시 생성하지 않아도 됨.
