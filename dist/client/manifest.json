@@ -2,20 +2,20 @@
   "_0e184ced.js": {
     "file": "assets/chunks/0e184ced.js"
   },
-  "_1aea29e6.js": {
-    "file": "assets/chunks/1aea29e6.js",
-    "imports": [
-      "_0e184ced.js"
-    ]
-  },
   "_2cfb98b7.js": {
     "file": "assets/chunks/2cfb98b7.js",
     "imports": [
       "_0e184ced.js"
     ]
   },
-  "_82de16ee.js": {
-    "file": "assets/chunks/82de16ee.js"
+  "_6a2b1785.js": {
+    "file": "assets/chunks/6a2b1785.js"
+  },
+  "_b9c07719.js": {
+    "file": "assets/chunks/b9c07719.js",
+    "imports": [
+      "_0e184ced.js"
+    ]
   },
   "node_modules/vite-plugin-ssr/dist/esm/client/entry.js": {
     "dynamicImports": [
@@ -28,9 +28,9 @@
       "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-server-routing.b5407208.js",
+    "file": "assets/entry-server-routing.93aad7da.js",
     "imports": [
-      "_82de16ee.js"
+      "_6a2b1785.js"
     ],
     "isEntry": true,
     "src": "node_modules/vite-plugin-ssr/dist/esm/client/entry.js"
@@ -46,9 +46,9 @@
       "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-client-routing.156d3d18.js",
+    "file": "assets/entry-client-routing.c379c4d5.js",
     "imports": [
-      "_82de16ee.js"
+      "_6a2b1785.js"
     ],
     "isEntry": true,
     "src": "node_modules/vite-plugin-ssr/dist/esm/client/router/entry.js"
@@ -72,20 +72,20 @@
     "src": "pages/community/index.page.client.tsx"
   },
   "pages/login/index.page.client.tsx": {
-    "file": "assets/pages/login/index.page.client.34b6f180.js",
+    "file": "assets/pages/login/index.page.client.d62eec6c.js",
     "imports": [
       "_0e184ced.js",
-      "_1aea29e6.js"
+      "_b9c07719.js"
     ],
     "isDynamicEntry": true,
     "isEntry": true,
     "src": "pages/login/index.page.client.tsx"
   },
   "pages/search/index.page.client.tsx": {
-    "file": "assets/pages/search/index.page.client.67f27cf2.js",
+    "file": "assets/pages/search/index.page.client.f8409571.js",
     "imports": [
       "_0e184ced.js",
-      "_1aea29e6.js",
+      "_b9c07719.js",
       "_2cfb98b7.js"
     ],
     "isDynamicEntry": true,
@@ -118,7 +118,7 @@
     "css": [
       "assets/static/default.page.client.9d9ae4af.css"
     ],
-    "file": "assets/renderer/default.page.client.379c9c76.js",
+    "file": "assets/renderer/default.page.client.e940f877.js",
     "imports": [
       "_0e184ced.js",
       "_2cfb98b7.js"

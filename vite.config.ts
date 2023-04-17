@@ -4,6 +4,7 @@ import { UserConfig } from 'vite';
 
 const config: UserConfig = {
     plugins: [react(), ssr({ prerender: true })],
+    base: '/green-maps/',
 };
 
 export default config;

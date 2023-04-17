@@ -1,0 +1,1 @@
+import{j as o}from"./0e184ced.js";const t="/green-maps/images/icon-arrow.svg";function r(){function n(){window.history.back()}return o("button",{className:"button-back",onClick:n,children:o("img",{src:t,alt:"뒤로가기"})})}export{r as B};

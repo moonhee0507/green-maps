@@ -5,7 +5,7 @@ permissions:
 
 on:
     push:
-        # `main`에 대한 새로운 커밋이 있을 때만 이 작업을 실행
+        # `main`에 변경사항이 있을 때만 이 작업을 실행
         branches:
             - main
 

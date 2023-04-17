@@ -1,6 +1,7 @@
 node_modules/
 dist/server
 .env
+.env.*
 kakaoMapCrawling.json
 *.css.map
 *.scss
