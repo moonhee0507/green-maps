@@ -1,5 +1,8 @@
 name: 🚀 Github Page 배포
 
+permissions:
+    contents: write
+
 on:
     push:
         # `main`에 대한 새로운 커밋이 있을 때만 이 작업을 실행
@@ -11,12 +14,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout main branch
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
               with:
                   ref: main
 
             - name: Build and Deploy to gh-pages
-              uses: JamesIves/github-pages-deploy-action@3.7.1
+              uses: JamesIves/github-pages-deploy-action@v4
               with:
                   branch: gh-pages
                   folder: ./dist/client
