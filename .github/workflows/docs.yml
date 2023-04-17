@@ -1,0 +1,41 @@
+name: Docs
+on:
+    push:
+        # `main`에 대한 새로운 커밋이 있을 때만 이 작업을 실행
+        branches:
+            - main
+        # `/` 디렉토리에 변경 사항이 있는 경우에만 이 작업을 실행
+        paths:
+            - /**
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: NPM Cache
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{runner.os}}--build-${{ hashFiles('**/package-lock.json') }}
+                  restore-key: |
+                      ${{ runner.os }}--build-${{hashFiles('**/package-lock.json')}}
+
+            - name: NPM Install
+              run: |
+                  npm install
+
+            - name: Build vite-plugin-ssr
+              run: npm run build
+
+            - name: Deploy
+              uses: moonhee0507/github-pages-deploy-action@v4
+              with:
+                  branch: gh-pages
+                  folder: dist/client
+                  # Remove previous build files
+                  clean: true
+                  # `.nojekyll` 파일을 제거하면 안됨. `gh-pages` 분기의 루트에 빈 `.nojekyll` 파일을 수동으로 추가했고 각 빌드 후에 다시 생성하지 않아도 됨.
+                  clean-exclude: |
+                      .nojekyll
