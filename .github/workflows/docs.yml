@@ -1,4 +1,5 @@
-name: 🚀 Github Deployment
+name: 🚀 Github Page 배포
+
 on:
     push:
         # `main`에 대한 새로운 커밋이 있을 때만 이 작업을 실행
@@ -6,22 +7,19 @@ on:
             - main
 
 jobs:
-    build-and-deploy:
+    deploy:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout
-              uses: actions/checkout@v3
+            - name: Checkout main branch
+              uses: actions/checkout@v2
+              with:
+                  ref: main
 
-            - name: Install npm & Build vite-plugin-ssr
-              run: |
-                  npm ci
-                  npm run build
-
-            - name: Deploy
-              uses: JamesIves/github-pages-deploy-action@v4
+            - name: Build and Deploy to gh-pages
+              uses: JamesIves/github-pages-deploy-action@3.7.1
               with:
                   branch: gh-pages
-                  folder: .
+                  folder: ./dist/client
                   # 이전 build 파일들 제거
                   clean: true
                   # `.nojekyll` 파일을 제거하면 안됨. `gh-pages` 분기의 루트에 빈 `.nojekyll` 파일을 수동으로 추가했고 각 빌드 후에 다시 생성하지 않아도 됨.
