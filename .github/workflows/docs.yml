@@ -4,9 +4,9 @@ on:
         # `main`에 대한 새로운 커밋이 있을 때만 이 작업을 실행
         branches:
             - main
-        # `/` 디렉토리에 변경 사항이 있는 경우에만 이 작업을 실행
+        # `dist/` 디렉토리에 변경 사항이 있는 경우에만 이 작업을 실행
         paths:
-            - /**
+            - dist/**
 jobs:
     build-and-deploy:
         runs-on: ubuntu-latest
@@ -14,17 +14,15 @@ jobs:
             - name: Checkout
               uses: actions/checkout@v3
 
-            - name: NPM Cache
+            - name: Cache npm
               uses: actions/cache@v3
               with:
                   path: ~/.npm
                   key: ${{runner.os}}--build-${{ hashFiles('**/package-lock.json') }}
-                  restore-key: |
-                      ${{ runner.os }}--build-${{hashFiles('**/package-lock.json')}}
+                  restore-key: ${{ runner.os }}--build-${{hashFiles('**/package-lock.json')}}
 
-            - name: NPM Install
-              run: |
-                  npm install
+            - name: Install npm
+              run: npm install
 
             - name: Build vite-plugin-ssr
               run: npm run build
