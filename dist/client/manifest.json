@@ -28,7 +28,7 @@
       "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-server-routing.93aad7da.js",
+    "file": "assets/entry-server-routing.876144b2.js",
     "imports": [
       "_6a2b1785.js"
     ],
@@ -46,7 +46,7 @@
       "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-client-routing.c379c4d5.js",
+    "file": "assets/entry-client-routing.d20061ff.js",
     "imports": [
       "_6a2b1785.js"
     ],
@@ -118,7 +118,7 @@
     "css": [
       "assets/static/default.page.client.9d9ae4af.css"
     ],
-    "file": "assets/renderer/default.page.client.e940f877.js",
+    "file": "assets/renderer/default.page.client.d9e26e8c.js",
     "imports": [
       "_0e184ced.js",
       "_2cfb98b7.js"

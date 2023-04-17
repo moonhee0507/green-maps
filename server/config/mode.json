@@ -1,0 +1,12 @@
+{
+    "development": {
+        "db_host": "localhost",
+        "db_user": "root",
+        "db_pass": "root"
+    },
+    "production": {
+        "db_host": "moonhee0507.github.io/green-maps",
+        "db_user": "moon",
+        "db_pass": "123123"
+    }
+}

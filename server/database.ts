@@ -14,7 +14,7 @@ class Database {
         mongoose.set('strictQuery', false);
         mongoose
             .connect(mongoURI)
-            .then(() => console.log('몽고DB 연결 성공...'))
+            .then(() => console.log('🟢 몽고DB 연결 성공...'))
             .catch((e) => console.error(e));
     }
 }

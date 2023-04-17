@@ -14,6 +14,7 @@ startServer();
 
 async function startServer() {
     const app = express();
+    const mode = require('./config/mode.json')[app.get('env')];
 
     app.use(compression());
     app.use(bodyParser.urlencoded({ extended: true }));
@@ -49,5 +50,8 @@ async function startServer() {
     });
 
     app.listen(config.port);
-    console.log(`${config.port}번 포트에서 서버 실행 중...`);
+    console.log(
+        `🚀 서버 실행 중... ${isProduction ? '{ 프로덕션 모드 }' : '{ 개발 모드 }' + ' 포트번호 ' + config.port}`
+    );
+    console.log(mode.db_host);
 }
