@@ -8,7 +8,7 @@ const config: UserConfig = {
     css: {
         preprocessorOptions: {
             scss: {
-                additionalData: `$base-url: ${process.env.NODE_ENV === 'production' ? '/green-maps/' : '/'}`,
+                additionalData: `$base-url: ${process.env.NODE_ENV === '"production"' ? '"/green-maps/";' : '"/";'}`,
             },
         },
     },
