@@ -1,0 +1,63 @@
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: $background-variant;
+    color: $on-background-app;
+}
+
+body,
+button {
+    font-family: $base-font;
+    letter-spacing: -0.05rem;
+}
+
+button {
+    border: 1px solid $border-color;
+    background-color: $button-color;
+}
+
+a {
+    text-decoration: none;
+    color: $on-background-app;
+
+    > img {
+        display: block;
+    }
+}
+
+ul,
+ol,
+li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.layout {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 200px;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0); /* 구형 브라우저를 위해 사용 */
+    -webkit-clip-path: polygon(0 0, 0 0, 0 0);
+    clip-path: polygon(0 0, 0 0, 0 0); /* inset(50%) 와 동일한 표현 */
+    border: 0;
+}
