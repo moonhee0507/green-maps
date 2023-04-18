@@ -6,6 +6,7 @@ import 'normalize.css';
 import { NavBar } from '../components/navBar';
 import { getStore } from './store';
 import { Provider } from 'react-redux';
+import { Link } from './Link';
 
 export { PageShell };
 
@@ -36,9 +37,9 @@ function Layout({ children }: { children: React.ReactNode }) {
 function LeftArea() {
     return (
         <div className="left-area">
-            <a href="/">
+            <Link href="/green-maps/">
                 <img src={logo} width={200} alt="로고" />
-            </a>
+            </Link>
             <div className="txt-intro">
                 <strong>채식 식당 검색과 북마크는</strong>
                 <h1>그린 맵</h1>

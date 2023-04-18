@@ -28,7 +28,7 @@
       "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-server-routing.876144b2.js",
+    "file": "assets/entry-server-routing.42446004.js",
     "imports": [
       "_6a2b1785.js"
     ],
@@ -46,7 +46,7 @@
       "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entry-client-routing.d20061ff.js",
+    "file": "assets/entry-client-routing.1b8b54db.js",
     "imports": [
       "_6a2b1785.js"
     ],
@@ -82,7 +82,7 @@
     "src": "pages/login/index.page.client.tsx"
   },
   "pages/search/index.page.client.tsx": {
-    "file": "assets/pages/search/index.page.client.f8409571.js",
+    "file": "assets/pages/search/index.page.client.4aad4657.js",
     "imports": [
       "_0e184ced.js",
       "_b9c07719.js",
@@ -118,7 +118,7 @@
     "css": [
       "assets/static/default.page.client.9d9ae4af.css"
     ],
-    "file": "assets/renderer/default.page.client.d9e26e8c.js",
+    "file": "assets/renderer/default.page.client.85aea267.js",
     "imports": [
       "_0e184ced.js",
       "_2cfb98b7.js"

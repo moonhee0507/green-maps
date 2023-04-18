@@ -1,0 +1,40 @@
+.top-bar {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%; /* 420px */
+    border-bottom: 1px solid $border-color;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+
+    .button-back {
+        width: 40px;
+        height: 40px;
+        border: none;
+        padding: 0;
+    }
+
+    .search-bar {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+    }
+
+    .search-bar.off {
+        display: none;
+    }
+
+    #searchItem {
+        width: 100%;
+        height: 40px;
+        border: 1px solid $border-color;
+    }
+}
+
+@media (max-width: 420px) {
+    .top-bar {
+        width: 100vw;
+    }
+}

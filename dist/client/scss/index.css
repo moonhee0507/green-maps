@@ -35,6 +35,10 @@ a {
   color: #333333;
 }
 
+a > img {
+  display: block;
+}
+
 ul,
 ol,
 li {
