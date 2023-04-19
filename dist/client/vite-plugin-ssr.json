@@ -1,8 +1,0 @@
-{
-  "version": "0.4.112",
-  "usesClientRouter": true,
-  "manifestKeyMap": {},
-  "baseServer": "/green-maps/",
-  "baseAssets": "/green-maps/",
-  "includeAssetsImportedByServer": false
-}

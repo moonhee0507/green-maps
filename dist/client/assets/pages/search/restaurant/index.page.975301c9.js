@@ -1,1 +1,0 @@
-import{a as t,F as f,j as h}from"../../../chunks/0e184ced.js";function u(n){var i,d,c;return t(f,{children:[h("h3",{children:(i=n==null?void 0:n.restaurantInfo)==null?void 0:i.title}),t("div",{children:["주소: ",(d=n==null?void 0:n.restaurantInfo)==null?void 0:d.address]}),t("div",{children:["업종: ",(c=n==null?void 0:n.restaurantInfo)==null?void 0:c.category]})]})}export{u as Page};
