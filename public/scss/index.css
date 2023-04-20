@@ -217,23 +217,23 @@ li {
 }
 
 .link-nav .img-nav-icon.home {
-  background-image: url("/green-maps/images/icon-home.svg");
+  background-image: url("/images/icon-home.svg");
 }
 
 .link-nav .img-nav-icon.search {
-  background-image: url("/green-maps/images/icon-search.svg");
+  background-image: url("/images/icon-search.svg");
 }
 
 .link-nav .img-nav-icon.bookmark {
-  background-image: url("/green-maps/images/icon-bookmark.svg");
+  background-image: url("/images/icon-bookmark.svg");
 }
 
 .link-nav .img-nav-icon.community {
-  background-image: url("/green-maps/images/icon-community.svg");
+  background-image: url("/images/icon-community.svg");
 }
 
 .link-nav .img-nav-icon.user {
-  background-image: url("/green-maps/images/icon-user.svg");
+  background-image: url("/images/icon-user.svg");
 }
 
 @media (max-width: 420px) {

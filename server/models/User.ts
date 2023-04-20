@@ -1,8 +1,33 @@
-import mongoose, { Schema } from 'mongoose';
+import { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-const userSchema = new Schema({
+interface UserInfo {
+    userId: string;
+    nickName: string;
+    password: string;
+    host: string;
+    snsId: string;
+    token: string;
+    tokenExp: number;
+    role: number;
+    active: boolean;
+    bookmarkList: any;
+}
+
+interface UserMethod {
+    comparePassword(plain: string, cb: (err: Error | null, same: boolean | null) => any): any;
+    generateToken(cb: (err?: Error | null, user?: any) => any): any;
+}
+
+interface UserModel extends Model<UserInfo, {}, UserMethod> {
+    findByToken(
+        token: string,
+        cb: (err: Error | null, user?: any) => any
+    ): Promise<HydratedDocument<UserInfo, {}, UserMethod>>;
+}
+
+const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     userId: {
         type: String,
         maxlength: 20,
@@ -12,7 +37,7 @@ const userSchema = new Schema({
     nickName: {
         type: String,
         maxlength: 20,
-        unique: 1,
+        unique: true,
         required: true,
     },
     password: {
@@ -35,21 +60,20 @@ const userSchema = new Schema({
     },
     role: {
         type: Number,
-        default: 4,
+        default: 1,
     },
     active: {
         type: Boolean,
         default: true,
     },
-    place: [
+    bookmarkList: [
         {
-            type: mongoose.Types.ObjectId,
-            ref: 'Restaurant',
+            _id: String,
             registeredAt: String,
             groupName: {
                 type: String,
                 required: false,
-                default: null,
+                default: '기본',
             },
         },
     ],
@@ -78,41 +102,41 @@ userSchema.pre('save', function (next) {
 });
 
 // comparePassword메서드 만들기
-userSchema.methods.comparePassword = function (
-    plain: string,
-    cb: (err: Error | null, same: boolean | null) => void
-): void {
-    bcrypt.compare(plain, this.password, (err, same) => {
-        if (err) return cb(err, null);
-        cb(null, same);
-    });
-};
+userSchema.method(
+    'comparePassword',
+    function comparePassword(plain: string, cb: (err: Error | null, same: boolean | null) => any): any {
+        bcrypt.compare(plain, this.password, function (err, same) {
+            if (err) return cb(err, null);
+            cb(null, same);
+        });
+    }
+);
 
 // generateToken메서드 만들기
-userSchema.methods.generateToken = function (cb: (err?: Error | null, user?: any) => void) {
+userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     var user = this;
     // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
     const token = jwt.sign(this._id.toHexString(), 'secretToken');
     user.token = token;
 
-    user.save(function (err: Error | null, user?: any) {
-        if (err) return cb(err);
-        cb(null, user);
-    });
-};
+    await user
+        .save()
+        .then((user: any) => cb(null, user))
+        .catch((err: any) => cb(err));
+});
 
 // findByToken메서드 만들기
-userSchema.statics.findByToken = function (token, cb) {
+userSchema.static('findByToken', function findByToken(token: string, cb: (err: Error | null, user?: any) => any) {
     var user = this;
 
-    jwt.verify(token, 'secretToken', (err: any, decoded: any) => {
-        user.findOne({ _id: decoded, token: token }, (err: any, user: any) => {
-            if (err) return cb(err);
+    jwt.verify(token, 'secretToken', async function (err: any, decoded: any) {
+        await user.findOne({ _id: decoded, token: token }).then((doc) => {
+            if (!doc) return cb(err);
             cb(null, user);
         });
     });
-};
+});
 
-const User = mongoose.model('User', userSchema);
+const User = model<UserInfo, UserModel>('User', userSchema);
 
 export default User;

@@ -16,6 +16,7 @@ export type Restaurant = {
 };
 
 const restaurantSchema = new Schema({
+    _id: mongoose.Types.ObjectId,
     title: {
         type: String,
     },

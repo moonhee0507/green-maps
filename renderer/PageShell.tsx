@@ -37,7 +37,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 function LeftArea() {
     return (
         <div className="left-area">
-            <Link href="/green-maps/">
+            <Link href="/">
                 <img src={logo} width={200} alt="로고" />
             </Link>
             <div className="txt-intro">

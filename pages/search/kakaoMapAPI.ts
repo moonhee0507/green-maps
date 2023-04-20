@@ -90,7 +90,7 @@ export async function paintMarker(restaurant: Array<Restaurant>) {
             // 마커를 클릭하면 장소명이 인포윈도우에 표출
             infowindow.setContent(
                 '<div style="padding:5px;font-size:12px;">' +
-                    `<a href="/green-maps/search/${list._id.replaceAll(/ObjectId\('|'\)/g, '')}">${list.title}</a>` +
+                    `<a href="/search/${list._id.replaceAll(/ObjectId\('|'\)/g, '')}">${list.title}</a>` +
                     '</div>'
             );
             infowindow.open(map, marker);

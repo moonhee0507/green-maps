@@ -173,7 +173,7 @@ export default (app: Router) => {
 
     route.get('/:id', async (req: Request, res: Response) => {
         try {
-            const item = await Restaurant.findById(req.params.id).exec();
+            const item = await Restaurant.findById(req.params._id).exec();
             res.status(200).json(item);
         } catch (err) {
             console.error(err);

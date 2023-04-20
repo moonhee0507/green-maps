@@ -29,7 +29,6 @@ function Page() {
                 alert('로그인에 성공했습니다');
             } else {
                 alert('로그인에 실패했습니다');
-                console.log(data.errorMessage);
             }
         } catch (err) {
             console.error(err);

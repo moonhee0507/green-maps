@@ -3,13 +3,13 @@
     "name": "그린맵",
     "icons": [
         {
-            "src": "/green-maps/images/icon.png",
+            "src": "/images/icon.png",
             "type": "image/png",
             "sizes": "512x512"
         }
     ],
-    "start_url": "/green-maps/manifest.json",
-    "id": "/green-maps/manifest.json",
+    "start_url": "/manifest.json",
+    "id": "/manifest.json",
     "display": "fullscreen",
     "theme_color": "#00784a"
 }
