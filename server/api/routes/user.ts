@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
+import auth from '../../middleware/auth.js';
 
 const route = Router();
 
@@ -39,5 +40,27 @@ export default (app: Router) => {
                 });
             }
         });
+    });
+
+    // bookmark 추가
+    route.post('/bookmark', auth, async (req: any, res: Response) => {
+        try {
+            const user = await User.findOneAndUpdate(
+                { token: req.token },
+                {
+                    $push: {
+                        bookmarkList: {
+                            _id: req.body._id,
+                            registeredAt: req.body.registeredAt,
+                        },
+                    },
+                },
+                { new: true }
+            );
+
+            res.status(200).json({ success: true, user: user });
+        } catch (err) {
+            console.error(err);
+        }
     });
 };
