@@ -15,7 +15,7 @@ function Page() {
 
     return (
         <>
-            <TopBar />
+            <TopBar title={'홈'} />
             <HomeContent />
         </>
     );

@@ -1,0 +1,12 @@
+@mixin extensive-content {
+    overflow: scroll;
+    scrollbar-width: none; /* firefox */
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1; /*긴 화면*/
+
+    /* edge, chrome */
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

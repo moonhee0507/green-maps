@@ -3,11 +3,10 @@
     position: sticky;
     width: 100%; /* 420px */
     border-bottom: 1px solid $border-color;
+    padding: 10px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    gap: 10px;
-    padding: 10px;
 
     .button-back {
         width: 40px;
@@ -15,6 +14,21 @@
         border: none;
         padding: 0;
     }
+
+    .top-title {
+        position: absolute;
+        margin: 0;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        font-size: 20px;
+    }
+}
+
+.top-bar.search {
+    gap: 10px;
 
     .search-bar {
         -webkit-box-flex: 1;

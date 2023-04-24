@@ -40,22 +40,19 @@ function Page() {
     }
 
     return (
-        <div
-            style={{
-                flexGrow: '1',
-            }}
-        >
-            <TopBar />
-            <h1>로그인</h1>
-            <form onSubmit={submit}>
-                <label htmlFor="userId">아이디</label>
-                <input id="userId" type="text" onChange={handleChange} autoFocus />
+        <>
+            <TopBar title={'로그인'} />
+            <main className="wrapper-login-content">
+                <form onSubmit={submit}>
+                    <label htmlFor="userId">아이디</label>
+                    <input id="userId" type="text" onChange={handleChange} autoFocus />
 
-                <label htmlFor="password">비밀번호</label>
-                <input id="password" type="password" onChange={handleChange} />
+                    <label htmlFor="password">비밀번호</label>
+                    <input id="password" type="password" onChange={handleChange} />
 
-                <button type="submit">로그인</button>
-            </form>
-        </div>
+                    <button type="submit">로그인</button>
+                </form>
+            </main>
+        </>
     );
 }

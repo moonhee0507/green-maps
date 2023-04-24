@@ -1,7 +1,6 @@
 import React from 'react';
-import { PrimarySection } from './PrimarySection';
-import { LocationSection } from './LocationSection';
-import { ReviewSection } from './ReviewSection';
+import { TopBar } from '../../../components/topBar/topBar';
+import { RestaurantDetail } from './RestaurantDetail/RestaurantDetail';
 
 export { Page };
 
@@ -11,9 +10,8 @@ function Page(pageProps) {
 
     return (
         <>
-            <PrimarySection restaurantInfo={restaurantInfo} />
-            <LocationSection />
-            <ReviewSection />
+            <TopBar title={'상세정보'} />
+            <RestaurantDetail restaurantInfo={restaurantInfo} />
         </>
     );
 }

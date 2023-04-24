@@ -1,11 +1,9 @@
 import React from 'react';
-import { Restaurant } from '../../../server/models/Restaurant';
+import imgBookmark from '/images/icon-bookmark.svg';
 
-export { PrimarySection };
+export { BookmarkButton };
 
-function PrimarySection(props: { restaurantInfo: Restaurant }) {
-    const { _id, title, address, category } = props.restaurantInfo;
-
+function BookmarkButton(props: { restaurantId: string }) {
     async function addBookmark(restaurantId: string) {
         const res = await fetch(`http://localhost:5000/api/users/bookmark`, {
             method: 'POST',
@@ -20,13 +18,9 @@ function PrimarySection(props: { restaurantInfo: Restaurant }) {
     }
 
     return (
-        <>
-            <button onClick={() => addBookmark(_id)} style={{ display: 'block' }} type="button">
-                북마크
-            </button>
-            <h3>{title}</h3>
-            <div>주소: {address}</div>
-            <div>업종: {category}</div>
-        </>
+        <button className="button-bookmark" onClick={() => addBookmark(props.restaurantId)} type="button">
+            <img src={imgBookmark} alt="북마크 이미지" className="img-bookmark" />
+            <span className="txt-bookmark">북마크</span>
+        </button>
     );
 }
