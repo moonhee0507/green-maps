@@ -7,13 +7,25 @@ import { Stars } from './component/Stars';
 export { PrimarySection };
 
 function PrimarySection(props: { restaurantInfo: Restaurant }) {
-    const { _id, title, address, category, rating } = props.restaurantInfo;
+    const { _id, title, address, category, rating, certification } = props.restaurantInfo;
+
+    const hasCert = typeof certification === 'string' ? true : false;
+
+    let titleAttr: any = {
+        title: title,
+        address: address,
+        category: category,
+    };
+
+    if (hasCert) {
+        titleAttr = { ...titleAttr, cert: certification };
+    }
 
     return (
-        <>
-            <Title title={title} address={address} category={category} />
+        <section className="section-primary">
+            <Title {...titleAttr} />
             <Stars rating={rating} />
             <ButtonContainer restaurantId={_id} />
-        </>
+        </section>
     );
 }

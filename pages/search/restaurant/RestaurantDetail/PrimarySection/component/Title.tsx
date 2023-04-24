@@ -1,14 +1,18 @@
 import React from 'react';
+import { CopyButton } from '../../../../../../components/button/CopyButton';
 
 export { Title };
 
-function Title(props: { title: string; address: string; category: string }) {
+function Title(props: { title: string; address: string; category: string; cert?: string }) {
     return (
         <>
-            <div>업종: {props.category}</div>
-            <h3>{props.title}</h3>
-            <div>주소: {props.address}</div>
-            <button>주소복사</button>
+            {props.cert ? <div className="restaurant-cert">{props.cert}</div> : null}
+            <div className="restaurant-category">{props.category}</div>
+            <h3 className="txt-restaurant-title">{props.title}</h3>
+            <div>
+                <span className="txt-restaurant-address">{props.address} </span>
+                <CopyButton />
+            </div>
         </>
     );
 }

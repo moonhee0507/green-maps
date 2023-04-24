@@ -7,7 +7,7 @@ export { ButtonContainer };
 
 function ButtonContainer(props: { restaurantId: string }) {
     return (
-        <div className="container-button">
+        <div className="container-bookmark-like-share">
             <BookmarkButton restaurantId={props.restaurantId} />
             <LikeButton restaurantId={props.restaurantId} />
             <ShareButton />

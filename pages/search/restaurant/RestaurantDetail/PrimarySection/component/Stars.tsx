@@ -19,10 +19,11 @@ function Stars(props: { rating: string }) {
     });
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div className="container-rating">
             {arrStar.map((percent: number, i: number) => {
                 return <Star key={i + 1} id={i + 1} percent={percent} />;
             })}
+            <span>({rating.toFixed(1)})</span>
         </div>
     );
 }
@@ -30,7 +31,7 @@ function Stars(props: { rating: string }) {
 function Star(props: { id: number; percent: number }) {
     return (
         <>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width={60}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width={30}>
                 <defs>
                     <linearGradient id={`starSegre${props.id}`} gradientTransform="rotate(0)">
                         <stop offset={`${props.percent}%`} stopColor="#fc0" />

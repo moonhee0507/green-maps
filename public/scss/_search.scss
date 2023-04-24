@@ -4,11 +4,34 @@
     flex-grow: 1;
 }
 
+#miniMap {
+    height: 300px;
+}
+
 .wrapper-restaurant-detail {
     @include extensive-content;
 }
 
-.container-button {
+.button-count {
+    position: absolute;
+    -ms-flex-item-align: center;
+    align-self: center;
+    width: 200px;
+    bottom: 100px;
+    z-index: 9999;
+}
+
+.section-primary {
+    padding: 20px;
+
+    .container-rating,
+    .container-bookmark-like-share {
+        margin: 15px 0 15px;
+    }
+}
+
+// 상세정보 페이지의 북마크-좋아요-공유 버튼
+.container-bookmark-like-share {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -64,11 +87,44 @@
     }
 }
 
-.button-count {
-    position: absolute;
-    -ms-flex-item-align: center;
-    align-self: center;
-    width: 200px;
-    bottom: 100px;
-    z-index: 9999;
+.restaurant-cert {
+    background-color: lightgreen;
+    margin-right: 10px;
+}
+
+.restaurant-category {
+    background-color: lightcoral;
+}
+
+.restaurant-cert,
+.restaurant-category {
+    padding: 5px;
+    display: inline-block;
+    font-size: 13px;
+}
+.txt-restaurant-title {
+    font-size: 35px;
+    margin: 0;
+}
+
+.txt-restaurant-address {
+    word-break: keep-all;
+    line-height: 1.5;
+}
+
+.img-copy {
+    width: 13px;
+}
+
+// 별점
+.container-rating {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
