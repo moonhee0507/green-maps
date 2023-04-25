@@ -28,6 +28,7 @@ button {
 button {
   border: 1px solid #d3d3d3;
   background-color: #ffffff;
+  cursor: pointer;
 }
 
 a {
@@ -179,7 +180,6 @@ li {
   width: 100px;
   padding: 10px;
   gap: 3px;
-  cursor: pointer;
 }
 
 .button-bookmark .img-bookmark,

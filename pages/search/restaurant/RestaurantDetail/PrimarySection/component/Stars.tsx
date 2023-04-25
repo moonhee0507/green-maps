@@ -6,16 +6,23 @@ function Stars(props: { rating: string }) {
     const [rating] = useState(Number(props.rating));
     const maxRating = 5.0;
 
-    const [arrStar, setArrStar] = useState(() => {
-        const temp = [];
-
-        for (let i = 1; i <= maxRating; i++) {
-            if (i < rating) temp.push(100);
-            else if (i - rating < 1) temp.push((i - rating) * 100);
-            else temp.push(0);
+    try {
+        if (maxRating < rating) {
+            throw new Error('해당 식당의 평점 데이터가 올바르지 않습니다.');
         }
+    } catch (e: any) {
+        console.error(e.message);
+    }
 
-        return temp;
+    const [arrStar] = useState(() => {
+        const maxInt = Math.floor(rating);
+        const rest = rating - maxInt;
+
+        return new Array(maxRating).fill(0).map((_, i) => {
+            if (i <= maxInt - 1) return 100;
+            else if (i === maxInt) return rest * 100;
+            else return 0;
+        });
     });
 
     return (

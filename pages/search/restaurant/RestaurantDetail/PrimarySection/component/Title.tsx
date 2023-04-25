@@ -11,7 +11,7 @@ function Title(props: { title: string; address: string; category: string; cert?:
             <h3 className="txt-restaurant-title">{props.title}</h3>
             <div>
                 <span className="txt-restaurant-address">{props.address} </span>
-                <CopyButton />
+                <CopyButton address={props.address} />
             </div>
         </>
     );

@@ -12,7 +12,8 @@ interface UserInfo {
     tokenExp: number;
     role: number;
     active: boolean;
-    bookmarkList: any;
+    bookmarkList: Array<{ _id: string; registeredAt: string; groupName: string }>;
+    likeList: Array<{ _id: string; registeredAt: string }>;
 }
 
 interface UserMethod {
@@ -77,6 +78,12 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
             },
         },
     ],
+    likeList: [
+        {
+            _id: String,
+            registeredAt: String,
+        },
+    ],
 });
 
 const saltRounds = 10;
@@ -112,11 +119,17 @@ userSchema.method(
     }
 );
 
+const privateKey: any = process.env.PRIVATE_KEY?.replace(/\\n/g, '');
+const publicKey: any = process.env.PUBLIC_KEY?.replace(/\\n/g, '');
+
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     var user = this;
     // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
-    const token = jwt.sign(this._id.toHexString(), 'secretToken');
+    const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, privateKey, {
+        algorithm: 'RS256',
+        expiresIn: 3000,
+    });
     user.token = token;
 
     await user
@@ -129,8 +142,8 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
 userSchema.static('findByToken', function findByToken(token: string, cb: (err: Error | null, user?: any) => any) {
     var user = this;
 
-    jwt.verify(token, 'secretToken', async function (err: any, decoded: any) {
-        await user.findOne({ _id: decoded, token: token }).then((doc) => {
+    jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
+        await user.findOne({ _id: decoded.id, token: token }).then((doc) => {
             if (!doc) return cb(err);
             cb(null, user);
         });

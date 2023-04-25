@@ -7,6 +7,12 @@ const route = Router();
 export default (app: Router) => {
     app.use('/users', route);
 
+    route.get('/', auth, async (req: any, res: Response) => {
+        const user = await User.findOne({ token: req.token }).exec();
+
+        res.status(200).json({ success: true, user: user });
+    });
+
     // signup
     route.post('/signup', (req: Request, res: Response) => {
         const user = new User(req.body);
@@ -35,7 +41,7 @@ export default (app: Router) => {
                 user.generateToken((err?: Error | null, user?: any) => {
                     if (err) return res.status(400).send(err);
                     else {
-                        res.cookie('x_auth', user.token).status(200).json({ success: true });
+                        res.cookie('auth', user.token).status(200).json({ success: true });
                     }
                 });
             }
@@ -54,6 +60,62 @@ export default (app: Router) => {
                             registeredAt: req.body.registeredAt,
                         },
                     },
+                },
+                { new: true }
+            );
+
+            res.status(200).json({ success: true, user: user });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    // bookmark 삭제
+    route.delete('/bookmark/:id', auth, async (req: any, res: Response) => {
+        try {
+            const user = await User.findOneAndUpdate(
+                { token: req.token },
+                {
+                    $pull: { bookmarkList: { _id: req.params.id } },
+                },
+                { new: true }
+            );
+
+            res.status(200).json({ success: true, user: user });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    // like 추가
+    route.post('/like', auth, async (req: any, res: Response) => {
+        try {
+            const user = await User.findOneAndUpdate(
+                { token: req.token },
+                {
+                    $push: {
+                        likeList: {
+                            _id: req.body._id,
+                            registeredAt: req.body.registeredAt,
+                        },
+                    },
+                },
+                { new: true }
+            );
+
+            res.status(200).json({ success: true, user: user });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    // like 삭제
+    route.delete('/like/:id', auth, async (req: any, res: Response) => {
+        try {
+            const user = await User.findOneAndUpdate(
+                { token: req.token },
+                {
+                    $pull: { likeList: { _id: req.params.id } },
                 },
                 { new: true }
             );
