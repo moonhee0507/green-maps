@@ -125,10 +125,13 @@ const publicKey: any = process.env.PUBLIC_KEY?.replace(/\\n/g, '');
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     var user = this;
+
+    if (!user._id) return cb(new Error('🚨 토큰을 생성하기 전에 사용자를 데이터베이스에 저장해야 합니다.'));
+
     // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
     const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, privateKey, {
         algorithm: 'RS256',
-        expiresIn: 3000,
+        expiresIn: 30, // 초 단위 주의
     });
     user.token = token;
 
@@ -143,6 +146,7 @@ userSchema.static('findByToken', function findByToken(token: string, cb: (err: E
     var user = this;
 
     jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
+        if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
         await user.findOne({ _id: decoded.id, token: token }).then((doc) => {
             if (!doc) return cb(err);
             cb(null, user);

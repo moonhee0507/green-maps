@@ -41,7 +41,14 @@ export default (app: Router) => {
                 user.generateToken((err?: Error | null, user?: any) => {
                     if (err) return res.status(400).send(err);
                     else {
-                        res.cookie('auth', user.token).status(200).json({ success: true });
+                        res.cookie('auth', user.token, {
+                            maxAge: 24 * 60 * 60 * 1000,
+                            httpOnly: true,
+                            secure: true,
+                            sameSite: 'strict',
+                        })
+                            .status(200)
+                            .json({ success: true });
                     }
                 });
             }

@@ -127,3 +127,51 @@
     -ms-flex-pack: center;
     justify-content: center;
 }
+
+// 리뷰
+.wrapper-review {
+    @include extensive-content;
+}
+
+.section-add-picture,
+.section-write-review {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+.container-picture {
+    display: grid;
+    grid-template-columns: 135px 135px;
+    grid-template-rows: 135px 135px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: 15px;
+
+    .button-add-picture,
+    .list-picture {
+        background-size: 30px;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+
+    .button-add-picture {
+        background-color: darkgrey;
+        background-image: url('/images/icon-plus.svg');
+        cursor: pointer;
+    }
+
+    .list-picture {
+        background-color: #d3d3d3;
+        background-image: url('/images/icon-image.svg');
+
+        img,
+        source {
+            width: 100%;
+            height: 100%;
+            -o-object-fit: cover;
+            object-fit: cover;
+        }
+    }
+}

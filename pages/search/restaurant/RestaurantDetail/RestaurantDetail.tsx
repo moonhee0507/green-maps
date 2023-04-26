@@ -13,7 +13,7 @@ function RestaurantDetail(props: { restaurantInfo: Restaurant }) {
         <main className="wrapper-restaurant-detail">
             <PrimarySection restaurantInfo={restaurantInfo} />
             <LocationSection restaurantInfo={restaurantInfo} />
-            <ReviewSection />
+            <ReviewSection restaurantInfo={restaurantInfo} />
         </main>
     );
 }

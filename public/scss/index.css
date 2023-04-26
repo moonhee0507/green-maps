@@ -266,6 +266,67 @@ li {
   justify-content: center;
 }
 
+.wrapper-review {
+  overflow: scroll;
+  scrollbar-width: none;
+  /* firefox */
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  /*긴 화면*/
+  /* edge, chrome */
+}
+
+.wrapper-review::-webkit-scrollbar {
+  display: none;
+}
+
+.section-add-picture,
+.section-write-review {
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.container-picture {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 135px 135px;
+      grid-template-columns: 135px 135px;
+  -ms-grid-rows: 135px 135px;
+      grid-template-rows: 135px 135px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.container-picture .button-add-picture,
+.container-picture .list-picture {
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.container-picture .button-add-picture {
+  background-color: darkgrey;
+  background-image: url("/images/icon-plus.svg");
+  cursor: pointer;
+}
+
+.container-picture .list-picture {
+  background-color: #d3d3d3;
+  background-image: url("/images/icon-image.svg");
+}
+
+.container-picture .list-picture img,
+.container-picture .list-picture source {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
 .top-bar {
   position: -webkit-sticky;
   position: sticky;
