@@ -1,39 +1,101 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import store from '../../../../../../renderer/store';
-import { PICTURE_STATE, WRITE_STATE } from '../../../../../../renderer/_actions';
+import { getImage } from '../../../../../../server/storage/command.js';
 
 export { SubmitButton };
 
-function SubmitButton(props: { _id: string }) {
-    // TODO: submit function
-    const [photo, setPhoto] = useState<FileList | null>(null);
+function SubmitButton(props: { restaurantId: string }) {
+    const photo = useSelector((state: any) => state.reviewForm.INFO);
     const content = useSelector((state: any) => state.reviewForm.CONTENT);
-    const id = useSelector((state: any) => state.reviewForm.ID);
-    const dispatch = useDispatch();
+    const userId = useSelector((state: any) => state.reviewForm.ID);
 
-    function submit() {
-        const formData = new FormData();
+    async function submit() {
+        const Bucket = import.meta.env.VITE_AWS_S3_BUCKET;
+        const Key = await uploadImageToStorage();
 
-        if (photo) {
-            for (let i = 0; i < photo.length; i++) {
-                formData.append('photo', photo[i]);
-            }
+        if (typeof Key === 'string') {
+            const params = {
+                Bucket: Bucket,
+                Key: Key,
+            };
+
+            let imageUrl = getImage(params);
+            console.log(imageUrl);
         }
 
-        formData.append('content', content);
-        formData.append('owner', id);
+        // const data = {
+        //     owner: userId,
+        //     restaurant: props.restaurantId,
+        //     photo: photo,
+        //     content: content,
+        //     registeredAt: new Date().toLocaleDateString(),
+        // };
 
-        fetch(`http://localhost:5000/api/reviews/`, {
-            method: 'POST',
-            body: formData,
-        })
-            .then((res) => res.json())
-            .then((data) => {
-                dispatch({ type: PICTURE_STATE, LIST: [] });
-                dispatch({ type: WRITE_STATE, CONTENT: '' });
-            })
-            .catch((err) => console.error(err));
+        // try {
+        //     fetch(`http://localhost:5000/api/reviews/`, {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //         },
+        //         body: JSON.stringify(data),
+        //     });
+        // } catch (e) {
+        //     console.error(e);
+        // }
+    }
+
+    // TODO:
+    async function uploadImageToStorage() {
+        /**
+         * 스토어에 저장되어 있는 ObjectURL을 File 객체로 변환
+         */
+        const file = await fetch(photo)
+            .then((res) => res.blob())
+            .then((blob) => new File([blob], 'abc.jpg', { type: 'image/jpg' }));
+
+        const body = {
+            name: `client/${Math.random().toString(36).substring(2, 11) + file.name}`,
+            type: file.type,
+        };
+
+        try {
+            // signed url 얻어오기
+            const resUrl = await fetch(`http://localhost:5000/api/images/client`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+            });
+
+            /**
+             * {success: true, signedUrl: 'https://버킷네임.s3.지역.amazon…c0be46ae2&X-Amz-SignedHeaders=host&x-id=PutObject'}
+             */
+            const data = await resUrl.json();
+            const signedUrl = data.signedUrl;
+
+            console.log('signedUrl', signedUrl);
+
+            // 가져온 url로 PUT 요청 보내기
+            const resUpload = await fetch(signedUrl, {
+                method: 'PUT',
+                body: file,
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': file.type,
+                },
+            });
+
+            /**
+             * @resUpload: Response 객체{ body: (...), bodyUser: boolean, headers: { ok: boolean, redirected: boolean, status: number, url: signedUrl } }
+             */
+            console.log('resUpload', resUpload);
+
+            return resUpload.url;
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     const userInfo = useCallback(async () => {
@@ -41,7 +103,7 @@ function SubmitButton(props: { _id: string }) {
         const data = await res.json();
 
         return data;
-    }, [props._id]);
+    }, [props.restaurantId]);
 
     useEffect(() => {
         userInfo().then((data) => store.dispatch({ type: 'OWNER_STATE', ID: data.user.userId }));

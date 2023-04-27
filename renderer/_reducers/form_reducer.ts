@@ -1,8 +1,8 @@
-import { OWNER_STATE, PICTURE_STATE, WRITE_STATE } from '../_actions';
+import { OWNER_STATE, PICTURE_STATE, TXT_REVIEW_STATE } from '../_actions';
 
 const initialState = {
     ID: '',
-    LIST: [],
+    INFO: [],
     CONTENT: '',
 };
 
@@ -11,8 +11,8 @@ export function reviewForm(state = initialState, action: any) {
         case OWNER_STATE:
             return { ...state, ID: action.ID };
         case PICTURE_STATE:
-            return { ...state, LIST: action.LIST };
-        case WRITE_STATE:
+            return { ...state, INFO: action.INFO };
+        case TXT_REVIEW_STATE:
             return { ...state, CONTENT: action.CONTENT };
         default:
             return state;

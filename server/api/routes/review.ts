@@ -6,6 +6,7 @@ const route = Router();
 
 export default (app: Router) => {
     app.use('/reviews', route);
+
     // 리뷰 추가
     route.post('/', auth, (req: any, res: Response) => {
         const review = new Review(req.body);
@@ -13,7 +14,7 @@ export default (app: Router) => {
         review
             .save()
             .then(() => {
-                res.status(200).json({ success: true });
+                return res.status(200).json({ success: true });
             })
             .catch((err) => res.json({ success: false, errorMessage: err.message }));
     });
@@ -23,4 +24,13 @@ export default (app: Router) => {
     // 리뷰 삭제
 
     // 리뷰 가져오기
+    route.get('/:restaurantId', async (req: Request, res: Response) => {
+        try {
+            const review = await Review.find({ restaurant: req.params.restaurantId }).exec();
+
+            return res.status(200).json({ review: review });
+        } catch (err) {
+            console.error(err);
+        }
+    });
 };

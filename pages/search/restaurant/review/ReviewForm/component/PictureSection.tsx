@@ -1,31 +1,31 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import store from '../../../../../../renderer/store';
+import { useDispatch } from 'react-redux';
 
 export { PictureSection };
 
 function PictureSection() {
-    const [selectedFiles, setSelectedFiles] = useState<Array<string>>([]);
-
-    useEffect(() => {
-        if (selectedFiles.length > 3) {
-            alert('더이상 첨부할 수 없습니다.');
-            selectedFiles.pop();
-        }
-
-        store.dispatch({
-            type: 'PICTURE_STATE',
-            LIST: selectedFiles,
-        });
-    }, [selectedFiles]);
+    // TODO: file 객체
+    const [image, setImage] = useState<any>(null);
 
     const clickInput = () => {
         document.getElementById('fileInput')?.click();
     };
 
     const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        setSelectedFiles(selectedFiles.concat(URL.createObjectURL(files![0])));
+        const files: any = event.target.files;
+
+        // TODO: image에 담기(1개)
+        if (event.target.files !== null) {
+            setImage(URL.createObjectURL(files[0]));
+        }
     };
+
+    /** 임의 작성: redux store에는 직렬화 불가능한 값인 file 객체가 저장되지 않기 때문에 ObjectURL로 저장 */
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch({ type: 'PICTURE_STATE', INFO: image });
+    }, [image]);
 
     return (
         <fieldset className="section-add-picture">
@@ -42,16 +42,17 @@ function PictureSection() {
                         accept="image/*"
                         onChange={handleFileInputChange}
                         style={{ display: 'none' }}
+                        multiple
                     />
                 </li>
                 <li className="list-picture" area-label="추가한 이미지 리스트">
-                    {selectedFiles[0] && <img src={selectedFiles[0]} alt="미리보기" />}
+                    <img src="" alt="" />
                 </li>
                 <li className="list-picture" area-label="추가한 이미지 리스트">
-                    {selectedFiles[1] && <img src={selectedFiles[1]} alt="미리보기" />}
+                    <img src="" alt="" />
                 </li>
                 <li className="list-picture" area-label="추가한 이미지 리스트">
-                    {selectedFiles[2] && <img src={selectedFiles[2]} alt="미리보기" />}
+                    <img src="" alt="" />
                 </li>
             </ul>
         </fieldset>

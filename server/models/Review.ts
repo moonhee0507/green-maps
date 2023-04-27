@@ -1,22 +1,30 @@
 import mongoose, { Schema } from 'mongoose';
 
 export type Review = {
-    _id: string;
     owner: string;
-    photo: Array<{ src: Buffer; type: string; pick: Boolean }>;
-    content: String;
-    like: Array<{ user: string }>;
-    registeredAt: String;
-    updatedAt: String;
+    restaurant: string;
+    photo?: Array<{ src: string; pick: boolean }>;
+    content: string;
+    like?: Array<{ user: string }>;
+    registeredAt?: string;
+    updatedAt?: string;
 };
 
 const reviewSchema = new Schema({
-    _id: mongoose.Types.ObjectId,
-    owner: String,
+    owner: {
+        type: String,
+        required: true,
+    },
+    restaurant: {
+        type: String,
+        required: true,
+    },
     photo: [
         {
-            src: Buffer,
-            type: String,
+            src: {
+                type: String,
+                required: false,
+            },
             pick: {
                 type: Boolean,
                 default: false,
@@ -26,10 +34,14 @@ const reviewSchema = new Schema({
     content: {
         type: String,
         maxlength: 100,
+        required: true,
     },
     like: [
         {
-            user: String,
+            user: {
+                type: String,
+                required: false,
+            },
         },
     ],
     registeredAt: String,

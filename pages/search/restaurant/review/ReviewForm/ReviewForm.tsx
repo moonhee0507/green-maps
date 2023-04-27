@@ -5,13 +5,13 @@ import { SubmitButton } from './component/SubmitButton';
 
 export { ReviewForm };
 
-function ReviewForm(props: { _id: string; title: string }) {
+function ReviewForm(props: { restaurantId: string; title: string }) {
     return (
         <main className="wrapper-review">
             <form>
                 <PictureSection />
                 <WriteSection title={props.title} />
-                <SubmitButton _id={props._id} />
+                <SubmitButton restaurantId={props.restaurantId} />
             </form>
         </main>
     );

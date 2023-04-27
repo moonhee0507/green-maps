@@ -8,9 +8,12 @@ export default (app: Router) => {
     app.use('/users', route);
 
     route.get('/', auth, async (req: any, res: Response) => {
-        const user = await User.findOne({ token: req.token }).exec();
-
-        res.status(200).json({ success: true, user: user });
+        try {
+            const user = await User.findOne({ token: req.token }).exec();
+            return res.status(200).json({ success: true, user: user });
+        } catch (err) {
+            console.error(err);
+        }
     });
 
     // signup

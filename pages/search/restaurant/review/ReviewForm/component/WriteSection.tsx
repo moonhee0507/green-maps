@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import store from '../../../../../../renderer/store';
 
 export { WriteSection };
@@ -6,7 +6,7 @@ export { WriteSection };
 function WriteSection(props: { title: string }) {
     function handleChange(event: ChangeEvent<{ value: string }>): string {
         store.dispatch({
-            type: 'WRITE_STATE',
+            type: 'TXT_REVIEW_STATE',
             CONTENT: event.currentTarget.value,
         });
 
@@ -29,7 +29,7 @@ function WriteSection(props: { title: string }) {
                 autoComplete="on"
                 autoFocus
                 maxLength={100}
-                minLength={50}
+                minLength={10}
                 required
                 style={{ resize: 'none', display: 'block', width: '100%', height: '100px' }}
                 onChange={handleChange}

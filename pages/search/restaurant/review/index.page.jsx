@@ -10,7 +10,7 @@ function Page(pageProps) {
     return (
         <>
             <TopBar title="리뷰 작성" />
-            <ReviewForm _id={_id} title={title} />
+            <ReviewForm restaurantId={_id} title={title} />
         </>
     );
 }
