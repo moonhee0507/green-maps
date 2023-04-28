@@ -1,9 +1,10 @@
-import { OWNER_STATE, PICTURE_STATE, TXT_REVIEW_STATE } from '../_actions';
+import { OWNER_STATE, PICTURE_STATE, TXT_REVIEW_STATE, FILE_STATE } from '../_actions';
 
 const initialState = {
     ID: '',
-    INFO: [],
+    INFO: { ObjectURL: '', Type: '' },
     CONTENT: '',
+    NAME: '',
 };
 
 export function reviewForm(state = initialState, action: any) {
@@ -14,6 +15,8 @@ export function reviewForm(state = initialState, action: any) {
             return { ...state, INFO: action.INFO };
         case TXT_REVIEW_STATE:
             return { ...state, CONTENT: action.CONTENT };
+        case FILE_STATE:
+            return { ...state, NAME: action.NAME };
         default:
             return state;
     }

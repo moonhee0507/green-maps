@@ -11,6 +11,7 @@ export default (app: Router) => {
     route.post('/', auth, (req: any, res: Response) => {
         const review = new Review(req.body);
 
+        console.log(review);
         review
             .save()
             .then(() => {

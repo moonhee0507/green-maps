@@ -6,3 +6,4 @@ export const HAS_LIKE_LIST = 'HAS_LIKE_LIST';
 export const OWNER_STATE = 'OWNER_STATE';
 export const PICTURE_STATE = 'PICTURE_STATE';
 export const TXT_REVIEW_STATE = 'TXT_REVIEW_STATE';
+export const FILE_STATE = 'FILE_STATE';

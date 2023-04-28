@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Review } from '../../../../../server/models/Review';
+import { getImage } from '../../../../../server/storage/command';
 
 export { ReviewItem };
 
 function ReviewItem(props: { item: Review }) {
     const { owner, registeredAt, photo, content, like } = props.item;
-    const pickedPhoto = photo?.filter((v, i) => v.pick === true)[0];
+    const [src, setSrc] = useState<any>(null);
 
-    // const pickedPhoto: {
-    //     src: blob:http://localhost:5000/ca7e7532-78c5-40a9-bf00-3aff6a9f41d5;
-    //     pick: true;
-    // } | undefined
+    async function getImageFromStorage() {
+        if (photo !== undefined) {
+            const credential = {
+                accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+                secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+                region: import.meta.env.VITE_AWS_DEFAULT_REGION,
+            };
+            const params = { Bucket: import.meta.env.VITE_AWS_S3_BUCKET, Key: photo[0].src };
+
+            await getImage(credential, params).then((data) => setSrc(data));
+        }
+    }
+
+    useEffect(() => {
+        getImageFromStorage();
+    }, [src]);
+
     return (
         <article>
             <h4 className="sr-only">리뷰</h4>
@@ -24,11 +38,7 @@ function ReviewItem(props: { item: Review }) {
                 <dt className="sr-only">사진</dt>
                 <dd>
                     <div>
-                        <img
-                            src={pickedPhoto?.src}
-                            alt=""
-                            style={{ width: '100px', height: '100px', marginRight: '10px' }}
-                        />
+                        <img src={src || ''} alt="" style={{ width: '100px', height: '100px', marginRight: '10px' }} />
                     </div>
                 </dd>
 
