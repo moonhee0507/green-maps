@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM, { hydrateRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { PageShell } from './PageShell';
 import type { PageContextClient } from './types';
-import { Provider } from 'react-redux';
-import { getStore } from './store';
+import { getStore } from './store.js';
 
 export { render };
 export const clientRouting = true;

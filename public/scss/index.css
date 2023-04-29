@@ -17,6 +17,7 @@ body {
   font-family: sans-serif;
   background-color: #00784a;
   color: #333333;
+  overflow: hidden;
 }
 
 body,

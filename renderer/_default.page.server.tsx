@@ -1,11 +1,11 @@
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
-import { PageShell } from './PageShell';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
+import { Provider } from 'react-redux';
+import { getStore } from './store.js';
+import { PageShell } from './PageShell';
 import icon from '/images/icon.png';
 import type { PageContextServer } from './types';
-import { getStore } from './store';
-import { Provider } from 'react-redux';
 
 export { render };
 export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams'];

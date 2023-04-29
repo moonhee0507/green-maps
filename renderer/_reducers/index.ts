@@ -1,8 +1,3 @@
-import { combineReducers } from 'redux';
-import map from './map_reducer.js';
-import { bookmark, like } from './button_reducer.js';
-import { reviewForm } from './form_reducer.js';
-
-const rootReducer = combineReducers({ map, bookmark, like, reviewForm });
-
-export default rootReducer;
+export { default as buttonSlice } from './_slices/buttonSlice.js';
+export { default as mapSlice } from './_slices/mapSlice.js';
+export { default as formSlice } from './_slices/formSlice.js';

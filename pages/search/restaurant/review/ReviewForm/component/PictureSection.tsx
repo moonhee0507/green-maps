@@ -1,7 +1,15 @@
-import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export { PictureSection };
+
+/**
+ * @SelectedImage
+ * [0]: ObjectURL
+ * [1]: file.type
+ */
+export type SelectedImage = [string, string];
+export type RandomFileName = string;
 
 function PictureSection() {
     const fileInput = useRef<HTMLInputElement>(null);
@@ -10,15 +18,17 @@ function PictureSection() {
         fileInput.current?.click();
     };
 
-    // TODO: file 객체
-    const [image, setImage] = useState<{ ObjectURL: string; Type: string } | null>(null);
+    const [images, setImages] = useState<Array<SelectedImage>>([]);
 
     const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const files: any = event.target.files;
 
-        // TODO: image에 담기(1개)
         if (event.target.files !== null) {
-            setImage({ ObjectURL: URL.createObjectURL(files[0]), Type: files[0].type });
+            const temp: Array<SelectedImage> = [];
+            for (let file of files) {
+                temp.push([URL.createObjectURL(file), file.type]);
+            }
+            setImages(temp);
         }
     };
 
@@ -28,29 +38,29 @@ function PictureSection() {
      */
     const dispatch = useDispatch();
 
-    /**
-     * image가 바뀔 때만 함수 실행하기 위해 useCallback에 함수 등록
-     */
-    const randomizeFileName = useCallback(() => {
-        const timestamp = new Date().getTime();
-        const randomNum = Math.floor(Math.random() * 1000000);
-
-        return `${timestamp}-${randomNum}`;
-    }, [image]);
-
     useEffect(() => {
-        const fileName = randomizeFileName() + '.' + image?.Type.replace('image/', '');
+        if (images) {
+            const temp: Array<RandomFileName> = [];
+            for (let image of images) {
+                const fileName = randomizeFileName() + '.' + image[1].replace('image/', '');
+                temp.push(fileName);
+            }
 
-        dispatch({ type: 'PICTURE_STATE', INFO: image });
-        dispatch({ type: 'FILE_STATE', NAME: fileName });
-    }, [image]);
+            dispatch({ type: 'formSlice/IMAGE_STATE', FILE_INFO: images, RANDOM_NAME: temp });
+        }
+
+        function randomizeFileName() {
+            const timestamp = new Date().getTime();
+            const randomNum = Math.floor(Math.random() * 1000000);
+
+            return `${timestamp}-${randomNum}`;
+        }
+    }, [images]);
 
     return (
         <fieldset className="section-add-picture">
             <legend>사진 첨부</legend>
-            <em>
-                음식 사진이나 메뉴판 사진을 <span style={{ fontWeight: 'bold' }}>한장씩</span> 첨부해주세요. (최대 3장)
-            </em>
+            <em>음식 사진이나 메뉴판 사진을 첨부해주세요. (최대 3장)</em>
             <ul className="container-picture">
                 <li className="button-add-picture" onClick={handleClick}>
                     <label className="sr-only" htmlFor="fileInput"></label>

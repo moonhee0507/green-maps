@@ -21,7 +21,7 @@ function SearchForm() {
                     <label htmlFor="searchItem" className="sr-only">
                         식당 검색하기
                     </label>
-                    <input type="text" id="searchItem" onChange={handleChange} autoFocus />
+                    <input type="text" id="searchItem" onChange={handleChange} />
                 </div>
             </div>
             <button type="button" onClick={searchRest}>

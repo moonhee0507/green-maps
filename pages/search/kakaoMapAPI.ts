@@ -52,8 +52,9 @@ export function init() {
             [neLng, neLat],
         ]).then((res) => {
             paintMarker(res);
+
             store.dispatch({
-                type: 'CHANGED_CENTER',
+                type: 'mapSlice/CHANGED_CENTER',
                 COUNT: res.length,
             });
         });

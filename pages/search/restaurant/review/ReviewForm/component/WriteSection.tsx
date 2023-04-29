@@ -1,12 +1,13 @@
-import React, { useState, ChangeEvent } from 'react';
-import store from '../../../../../../renderer/store';
+import React, { ChangeEvent } from 'react';
+import { useDispatch } from 'react-redux';
 
 export { WriteSection };
 
 function WriteSection(props: { title: string }) {
+    const dispatch = useDispatch();
     function handleChange(event: ChangeEvent<{ value: string }>): string {
-        store.dispatch({
-            type: 'TXT_REVIEW_STATE',
+        dispatch({
+            type: 'formSlice/TXT_REVIEW_STATE',
             CONTENT: event.currentTarget.value,
         });
 
@@ -27,7 +28,6 @@ function WriteSection(props: { title: string }) {
                 id="txtReview"
                 placeholder="채식에 대한 이야기를 자유롭게 공유해주세요."
                 autoComplete="on"
-                autoFocus
                 maxLength={100}
                 minLength={10}
                 required

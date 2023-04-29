@@ -2,6 +2,7 @@ import React from 'react';
 import { HomeContent } from './homeContent';
 import { useSelector } from 'react-redux';
 import { TopBar } from '../../components/topBar/topBar';
+import type { RootState } from '../../renderer/_reducers/rootReducer';
 
 export { Page };
 
@@ -11,7 +12,7 @@ export const documentProps = {
 };
 
 function Page() {
-    console.log(useSelector((state: any) => state));
+    console.log(useSelector((state: RootState) => state));
 
     return (
         <>

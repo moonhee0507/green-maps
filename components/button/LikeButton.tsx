@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
 import imgHeart from '/images/icon-heart.svg';
-import store from '../../renderer/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 export { LikeButton };
 
 function LikeButton(props: { restaurantId: string }) {
+    const dispatch = useDispatch();
     const hasLikeList = useCallback(async () => {
         const res = await fetch(`http://localhost:5000/api/users/`);
         const data = await res.json();
@@ -19,8 +19,8 @@ function LikeButton(props: { restaurantId: string }) {
         });
 
         if (res.ok) {
-            store.dispatch({
-                type: 'HAS_LIKE_LIST',
+            dispatch({
+                type: 'buttonSlice/HAS_LIKE_LIST',
                 ON: false,
             });
         } else throw new Error();
@@ -28,8 +28,8 @@ function LikeButton(props: { restaurantId: string }) {
 
     useEffect(() => {
         hasLikeList().then((bool) => {
-            store.dispatch({
-                type: 'HAS_LIKE_LIST',
+            dispatch({
+                type: 'buttonSlice/HAS_LIKE_LIST',
                 ON: bool,
             });
         });
@@ -52,8 +52,8 @@ function LikeButton(props: { restaurantId: string }) {
             });
 
             if (res.ok) {
-                store.dispatch({
-                    type: 'HAS_LIKE_LIST',
+                dispatch({
+                    type: 'buttonSlice/HAS_LIKE_LIST',
                     ON: true,
                 });
             } else throw new Error();
@@ -68,7 +68,7 @@ function LikeButton(props: { restaurantId: string }) {
                 src={imgHeart}
                 alt="좋아요 이미지"
                 className={useSelector((state: any) => {
-                    return state.like.ON ? 'img-like on' : 'img-like';
+                    return state.buttonSlice.like.ON ? 'img-like on' : 'img-like';
                 })}
             />
             <span className="txt-like">좋아요</span>

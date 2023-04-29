@@ -1,9 +1,9 @@
 import React from 'react';
-import store from '../../renderer/store';
 import { useSelector } from 'react-redux';
+import type { RootState } from '../../renderer/_reducers/rootReducer';
 
 export default function ListButton() {
-    const count = useSelector(() => store.getState().map.COUNT);
+    const count = useSelector((state: RootState) => state.mapSlice.COUNT);
 
     return (
         <button className="button-count" type="button">

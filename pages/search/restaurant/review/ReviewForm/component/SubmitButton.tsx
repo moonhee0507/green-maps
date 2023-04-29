@@ -1,23 +1,37 @@
 import React, { useEffect, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import store from '../../../../../../renderer/store';
+import { useSelector, useDispatch } from 'react-redux';
+import { RandomFileName, SelectedImage } from './PictureSection';
+import type { RootState } from '../../../../../../renderer/_reducers/rootReducer';
+
+type SelectedImages = Array<SelectedImage>;
+type RandomFileNames = Array<RandomFileName>;
 
 export { SubmitButton };
 
 function SubmitButton(props: { restaurantId: string }) {
-    const photo = useSelector((state: any) => state.reviewForm.INFO);
-    const content = useSelector((state: any) => state.reviewForm.CONTENT);
-    const userId = useSelector((state: any) => state.reviewForm.ID);
-
-    const fileName = useSelector((state: any) => state.reviewForm.NAME);
+    const dispatch = useDispatch();
 
     async function handleSubmit() {
-        await uploadImageToStorage();
+        const selectedImages: SelectedImages = useSelector((state: RootState) => state.formSlice.image.FILE_INFO);
+        const content = useSelector((state: RootState) => state.formSlice.CONTENT);
+        const userId = useSelector((state: RootState) => state.formSlice.ID);
+        const randomFileNames: RandomFileNames = useSelector((state: RootState) => state.formSlice.image.RANDOM_NAME);
 
+        let photo: Array<{ src: string; pick: boolean } | null> = [];
+        if (selectedImages) {
+            await uploadImageToStorage(selectedImages, randomFileNames);
+
+            const temp = [];
+            for (let i = 0; i < selectedImages.length; i++) {
+                temp.push({ src: `client/${randomFileNames[i]}`, pick: true });
+            }
+
+            photo = temp;
+        }
         const data = {
             owner: userId,
             restaurant: props.restaurantId,
-            photo: [{ src: `client/${fileName}`, pick: true }],
+            photo: photo,
             content: content,
             registeredAt: new Date().toLocaleDateString('ko-kr'),
         };
@@ -35,56 +49,54 @@ function SubmitButton(props: { restaurantId: string }) {
         }
     }
 
-    async function uploadImageToStorage() {
-        /**
-         * 스토어에 저장되어 있는 ObjectURL을 File 객체로 변환
-         */
-        const file = await fetch(photo.ObjectURL)
-            .then((res) => res.blob())
-            .then((blob) => new File([blob], `${fileName.NAME}`, { type: `${blob.type}` }));
+    async function uploadImageToStorage(selectedImages: Array<SelectedImage>, randomFileNames: Array<RandomFileName>) {
+        if (selectedImages.length === randomFileNames.length) {
+            for (let i = 0; i < selectedImages.length; i++) {
+                /**
+                 * 스토어에 저장되어 있는 ObjectURL을 File 객체로 변환
+                 */
+                const file = await fetch(selectedImages[i][0])
+                    .then((res) => res.blob())
+                    .then((blob) => new File([blob], `${randomFileNames[i]}`, { type: `${blob.type}` }));
 
-        const body = {
-            name: `client/${fileName}`,
-            type: file.type,
-        };
+                const body = {
+                    name: `client/${randomFileNames[i]}`,
+                    type: file.type,
+                };
 
-        try {
-            // signed url 얻어오기
-            const resUrl = await fetch(`http://localhost:5000/api/images/client`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-            });
+                try {
+                    // signed url 얻어오기
+                    const resUrl = await fetch(`http://localhost:5000/api/images/client`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(body),
+                    });
 
-            /**
-             * {success: true, signedUrl: 'https://버킷네임.s3.지역.amazon…c0be46ae2&X-Amz-SignedHeaders=host&x-id=PutObject'}
-             */
-            const data = await resUrl.json();
-            const signedUrl = data.signedUrl;
+                    /**
+                     * {success: true, signedUrl: 'https://버킷네임.s3.지역.amazon…c0be46ae2&X-Amz-SignedHeaders=host&x-id=PutObject'}
+                     */
+                    const data = await resUrl.json();
+                    const signedUrl = data.signedUrl;
 
-            console.log('signedUrl', signedUrl);
-
-            // 가져온 url로 PUT 요청 보내기
-            const resUpload = await fetch(signedUrl, {
-                method: 'PUT',
-                body: file,
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': file.type,
-                },
-            });
-
-            /**
-             * @resUpload: Response 객체{ body: (...), bodyUser: boolean, headers: { ok: boolean, redirected: boolean, status: number, url: signedUrl } }
-             */
-            console.log('resUpload', resUpload);
-
-            return resUpload.url;
-        } catch (err) {
-            console.error(err);
-        }
+                    // 가져온 url로 PUT 요청 보내기
+                    /**
+                     * Response 객체{ body: (...), bodyUser: boolean, headers: { ok: boolean, redirected: boolean, status: number, url: signedUrl } }
+                     */
+                    await fetch(signedUrl, {
+                        method: 'PUT',
+                        body: file,
+                        headers: {
+                            'Access-Control-Allow-Origin': '*',
+                            'Content-Type': file.type,
+                        },
+                    });
+                } catch (err) {
+                    console.error(err);
+                }
+            }
+        } else throw Error('이미지 네이밍 처리에 오류가 발생했습니다.');
     }
 
     const userInfo = useCallback(async () => {
@@ -95,7 +107,7 @@ function SubmitButton(props: { restaurantId: string }) {
     }, [props.restaurantId]);
 
     useEffect(() => {
-        userInfo().then((data) => store.dispatch({ type: 'OWNER_STATE', ID: data.user.userId }));
+        userInfo().then((data) => dispatch({ type: 'formSlice/OWNER_STATE', ID: data.user.userId }));
     }, [userInfo]);
 
     return (

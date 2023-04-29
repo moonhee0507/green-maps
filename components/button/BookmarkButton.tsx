@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect } from 'react';
 import imgBookmark from '/images/icon-bookmark.svg';
-import store from '../../renderer/store';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import type { RootState } from '../../renderer/_reducers/rootReducer';
 
 export { BookmarkButton };
 
 function BookmarkButton(props: { restaurantId: string }) {
+    const dispatch = useDispatch();
     const hasBookmarkList = useCallback(async () => {
         const res = await fetch(`http://localhost:5000/api/users/`);
         const data = await res.json();
@@ -19,8 +20,8 @@ function BookmarkButton(props: { restaurantId: string }) {
         });
 
         if (res.ok) {
-            store.dispatch({
-                type: 'HAS_BOOKMARK_LIST',
+            dispatch({
+                type: 'buttonSlice/HAS_BOOKMARK_LIST',
                 ON: false,
             });
         } else throw new Error();
@@ -28,8 +29,8 @@ function BookmarkButton(props: { restaurantId: string }) {
 
     useEffect(() => {
         hasBookmarkList().then((bool) => {
-            store.dispatch({
-                type: 'HAS_BOOKMARK_LIST',
+            dispatch({
+                type: 'buttonSlice/HAS_BOOKMARK_LIST',
                 ON: bool,
             });
         });
@@ -52,8 +53,8 @@ function BookmarkButton(props: { restaurantId: string }) {
             });
 
             if (res.ok) {
-                store.dispatch({
-                    type: 'HAS_BOOKMARK_LIST',
+                dispatch({
+                    type: 'buttonSlice/HAS_BOOKMARK_LIST',
                     ON: true,
                 });
             } else throw new Error();
@@ -67,8 +68,8 @@ function BookmarkButton(props: { restaurantId: string }) {
             <img
                 src={imgBookmark}
                 alt="북마크 이미지"
-                className={useSelector((state: any) => {
-                    return state.bookmark.ON ? 'img-bookmark on' : 'img-bookmark';
+                className={useSelector((state: RootState) => {
+                    return state.buttonSlice.bookmark.ON ? 'img-bookmark on' : 'img-bookmark';
                 })}
             />
             <span className="txt-bookmark">북마크</span>
