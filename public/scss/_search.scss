@@ -165,17 +165,45 @@
             padding: 0 20px 0;
         }
 
-        .container-review-img {
-            overflow: hidden;
-            background-color: #d3d3d3;
-            width: 422px;
-            height: 422px;
+        .wrapper-review-img {
+            position: relative;
 
-            img {
-                width: inherit;
-                height: inherit;
-                -o-object-fit: cover;
-                object-fit: cover;
+            .container-review-img {
+                overflow: hidden;
+                background-color: #d3d3d3;
+                width: calc(422px * 3);
+                height: 422px;
+
+                .txt-count-img {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    padding: 5px;
+                    margin: 0;
+                    background-color: #d3d3d3;
+                }
+
+                .button-move-img {
+                    position: absolute;
+                }
+
+                .button-move-img.prev {
+                    left: 0;
+                    top: 50%;
+                }
+
+                .button-move-img.next {
+                    right: 0;
+                    top: 50%;
+                }
+
+                img {
+                    float: left;
+                    width: 422px;
+                    height: inherit;
+                    -o-object-fit: cover;
+                    object-fit: cover;
+                }
             }
         }
 

@@ -24,6 +24,10 @@ button {
     cursor: pointer;
 }
 
+button:disabled {
+    cursor: default;
+}
+
 a {
     text-decoration: none;
     color: $on-background-app;

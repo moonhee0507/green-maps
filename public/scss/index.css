@@ -32,6 +32,10 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: default;
+}
+
 a {
   text-decoration: none;
   color: #333333;
@@ -290,15 +294,43 @@ dd {
   padding: 0 20px 0;
 }
 
-.section-review .wrapper-review .container-review-img {
+.section-review .wrapper-review .wrapper-review-img {
+  position: relative;
+}
+
+.section-review .wrapper-review .wrapper-review-img .container-review-img {
   overflow: hidden;
   background-color: #d3d3d3;
-  width: 422px;
+  width: calc(422px * 3);
   height: 422px;
 }
 
-.section-review .wrapper-review .container-review-img img {
-  width: inherit;
+.section-review .wrapper-review .wrapper-review-img .container-review-img .txt-count-img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 5px;
+  margin: 0;
+  background-color: #d3d3d3;
+}
+
+.section-review .wrapper-review .wrapper-review-img .container-review-img .button-move-img {
+  position: absolute;
+}
+
+.section-review .wrapper-review .wrapper-review-img .container-review-img .button-move-img.prev {
+  left: 0;
+  top: 50%;
+}
+
+.section-review .wrapper-review .wrapper-review-img .container-review-img .button-move-img.next {
+  right: 0;
+  top: 50%;
+}
+
+.section-review .wrapper-review .wrapper-review-img .container-review-img img {
+  float: left;
+  width: 422px;
   height: inherit;
   -o-object-fit: cover;
   object-fit: cover;
