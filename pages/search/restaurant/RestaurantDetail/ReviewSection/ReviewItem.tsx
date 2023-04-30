@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Review } from '../../../../../server/models/Review';
+import type { Review } from '../../../../../server/models/Review';
+import imgHeart from '/images/icon-heart.svg';
 
 export { ReviewItem };
 
@@ -18,35 +19,68 @@ function ReviewItem(props: { item: Review }) {
                 );
             }
         }
-    }, [src]);
+    }, [props.item]);
 
     return (
-        <article>
-            <h4 className="sr-only">리뷰</h4>
+        <article className="container-review">
+            <h5 className="sr-only">개별 리뷰</h5>
             <dl>
-                <dt className="sr-only">작성자</dt>
-                <dd>{owner}</dd>
-
-                <dt className="sr-only">작성일자</dt>
-                <dd>{registeredAt}</dd>
-
-                <dt className="sr-only">사진</dt>
-                <dd>
-                    <div>
-                        <img
-                            src={src || ''}
-                            alt="리뷰 사진"
-                            style={{ width: '100px', height: '100px', marginRight: '10px', objectFit: 'cover' }}
-                        />
-                    </div>
-                </dd>
-
-                <dt className="sr-only">내용</dt>
-                <dd>{content}</dd>
-
-                <dt>좋아요</dt>
-                <dd>{like?.length || 0}</dd>
+                <Owner owner={owner} />
+                <Date registeredAt={registeredAt} />
+                <Image src={src} />
+                <ReviewLikeButton like={like} />
+                <Content content={content} />
             </dl>
         </article>
+    );
+}
+
+function Owner(props: { owner: string }) {
+    return (
+        <>
+            <dt className="sr-only">작성자</dt>
+            <dd className="txt-review-owner">{props.owner}</dd>
+        </>
+    );
+}
+
+function Date(props: { registeredAt: string }) {
+    return (
+        <>
+            <dt className="sr-only">작성일자</dt>
+            <dd className="txt-review-date">{props.registeredAt}</dd>
+        </>
+    );
+}
+
+function Image(props: { src: string }) {
+    return (
+        <>
+            <dt className="sr-only">사진</dt>
+            <dd className="container-review-img">{props.src && <img src={props.src} alt="리뷰 사진" />}</dd>
+        </>
+    );
+}
+
+function ReviewLikeButton(props: { like: Array<{ user: string }> | undefined }) {
+    return (
+        <>
+            <dt className="sr-only">좋아요</dt>
+            <dd className="num-like-count">
+                <button className="button-review-like" type="button" onClick={() => console.log('좋아요')}>
+                    <img src={imgHeart} alt="아이콘" className="img-like review" />
+                </button>
+                <span area-label="좋아요 개수">{props.like?.length || 0}</span>
+            </dd>
+        </>
+    );
+}
+
+function Content(props: { content: string }) {
+    return (
+        <>
+            <dt className="sr-only">내용</dt>
+            <dd className="txt-review-content">{props.content}</dd>
+        </>
     );
 }

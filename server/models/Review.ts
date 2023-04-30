@@ -6,7 +6,7 @@ export type Review = {
     photo?: Array<{ src: string; pick: boolean }>;
     content: string;
     like?: Array<{ user: string }>;
-    registeredAt?: string;
+    registeredAt: string;
     updatedAt?: string;
 };
 

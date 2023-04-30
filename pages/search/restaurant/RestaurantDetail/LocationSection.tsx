@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import type { Restaurant } from '../../../../server/models/Restaurant';
+import { CopyButton } from '../../../../components/button/CopyButton';
 
 export { LocationSection };
 
@@ -23,5 +24,12 @@ function LocationSection(props: { restaurantInfo: Restaurant }) {
         marker.setMap(map);
     }, []);
 
-    return <div id="miniMap" />;
+    return (
+        <section className="section-location">
+            <h4>위치</h4>
+            <span>{props.restaurantInfo.address}</span>
+            <CopyButton address={props.restaurantInfo.address} />
+            <div id="miniMap" />
+        </section>
+    );
 }

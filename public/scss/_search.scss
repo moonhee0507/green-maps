@@ -56,34 +56,34 @@
     width: 100px;
     padding: 10px;
     gap: 3px;
+}
 
-    .img-bookmark,
-    .img-like {
-        -webkit-filter: invert(81%) sepia(0%) saturate(0%) hue-rotate(71deg) brightness(102%) contrast(100%);
-        filter: invert(81%) sepia(0%) saturate(0%) hue-rotate(71deg) brightness(102%) contrast(100%);
-    }
+.img-bookmark,
+.img-like {
+    -webkit-filter: invert(81%) sepia(0%) saturate(0%) hue-rotate(71deg) brightness(102%) contrast(100%);
+    filter: invert(81%) sepia(0%) saturate(0%) hue-rotate(71deg) brightness(102%) contrast(100%);
+}
 
-    .img-bookmark {
-        width: 18px;
-    }
+.img-bookmark {
+    width: 18px;
+}
 
-    .img-like {
-        width: 22px;
-    }
+.img-like {
+    width: 22px;
+}
 
-    .img-share {
-        width: 22px;
-    }
+.img-share {
+    width: 22px;
+}
 
-    .img-bookmark.on {
-        -webkit-filter: invert(65%) sepia(60%) saturate(6205%) hue-rotate(130deg) brightness(94%) contrast(104%);
-        filter: invert(65%) sepia(60%) saturate(6205%) hue-rotate(130deg) brightness(94%) contrast(104%);
-    }
+.img-bookmark.on {
+    -webkit-filter: invert(65%) sepia(60%) saturate(6205%) hue-rotate(130deg) brightness(94%) contrast(104%);
+    filter: invert(65%) sepia(60%) saturate(6205%) hue-rotate(130deg) brightness(94%) contrast(104%);
+}
 
-    .img-like.on {
-        -webkit-filter: invert(69%) sepia(75%) saturate(7109%) hue-rotate(339deg) brightness(113%) contrast(103%);
-        filter: invert(69%) sepia(75%) saturate(7109%) hue-rotate(339deg) brightness(113%) contrast(103%);
-    }
+.img-like.on {
+    -webkit-filter: invert(69%) sepia(75%) saturate(7109%) hue-rotate(339deg) brightness(113%) contrast(103%);
+    filter: invert(69%) sepia(75%) saturate(7109%) hue-rotate(339deg) brightness(113%) contrast(103%);
 }
 
 .restaurant-cert {
@@ -128,7 +128,92 @@
     justify-content: center;
 }
 
-// 리뷰
+// 위치 섹션
+.section-location {
+    margin: 25px 0 25px;
+    h4 {
+        margin: 0;
+    }
+}
+
+// 리뷰 섹션
+.section-review {
+    h4 {
+        margin: 0;
+    }
+
+    .wrapper-review {
+        .container-review {
+            &:nth-child(2) {
+                margin: 50px 0 50px;
+            }
+        }
+
+        .txt-review-owner {
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .txt-review-date {
+            font-size: 13px;
+        }
+
+        .txt-review-owner,
+        .txt-review-date,
+        .txt-review-content,
+        .num-like-count {
+            padding: 0 20px 0;
+        }
+
+        .container-review-img {
+            overflow: hidden;
+            background-color: #d3d3d3;
+            width: 422px;
+            height: 422px;
+
+            img {
+                width: inherit;
+                height: inherit;
+                -o-object-fit: cover;
+                object-fit: cover;
+            }
+        }
+
+        .button-review-like {
+            padding: 0;
+            border: none;
+        }
+
+        .num-like-count {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 5px;
+        }
+    }
+}
+
+.wrapper-pagination {
+    > ul {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+
+        .container-pagination {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+        }
+    }
+}
+
+// 리뷰 작성 페이지
 .wrapper-review {
     @include extensive-content;
 }
