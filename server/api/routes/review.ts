@@ -34,4 +34,40 @@ export default (app: Router) => {
             console.error(err);
         }
     });
+
+    // 리뷰 좋아요 추가
+    route.post('/:reviewId/like', auth, async (req: Request, res: Response) => {
+        try {
+            await Review.findOneAndUpdate(
+                { _id: req.params.reviewId },
+                {
+                    $push: {
+                        like: {
+                            user: req.body.user,
+                        },
+                    },
+                }
+            );
+
+            return res.status(200).json({ success: true });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    // 리뷰 좋아요 삭제
+    route.delete('/:reviewId/like', auth, async (req: Request, res: Response) => {
+        try {
+            await Review.findOneAndUpdate(
+                { _id: req.params.reviewId },
+                {
+                    $pull: { like: { user: req.body.user } },
+                }
+            );
+
+            return res.status(200).json({ success: true });
+        } catch (err) {
+            console.error(err);
+        }
+    });
 };

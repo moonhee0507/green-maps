@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 export type Review = {
+    _id: string;
     owner: string;
     restaurant: string;
     photo?: Array<{ src: string; pick: boolean }>;
@@ -11,6 +12,7 @@ export type Review = {
 };
 
 const reviewSchema = new Schema({
+    _id: mongoose.Types.ObjectId,
     owner: {
         type: String,
         required: true,
