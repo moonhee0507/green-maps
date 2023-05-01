@@ -557,6 +557,91 @@ dd {
   }
 }
 
+.main-community {
+  overflow: scroll;
+  scrollbar-width: none;
+  /* firefox */
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  /*긴 화면*/
+  /* edge, chrome */
+}
+
+.main-community::-webkit-scrollbar {
+  display: none;
+}
+
+.container-newpost-selectbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container-newpost-selectbox .txt-postinfo {
+  margin: 0;
+}
+
+.container-button-create-refresh {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.container-button-create-refresh .link-create,
+.container-button-create-refresh .button-refresh {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.container-button-create-refresh .link-create {
+  border: 1px solid #d3d3d3;
+  text-align: center;
+}
+
+.wrapper-posts > li {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #d3d3d3;
+}
+
+.wrapper-posts .txt-postitem-title,
+.wrapper-posts .txt-postitem-content {
+  width: 100%;
+  /* 부모 요소에 크기 고정시켜야 됨 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wrapper-posts .txt-postitem-title {
+  font-weight: bold;
+}
+
+.main-create-post {
+  overflow: scroll;
+  scrollbar-width: none;
+  /* firefox */
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  /*긴 화면*/
+  /* edge, chrome */
+}
+
+.main-create-post::-webkit-scrollbar {
+  display: none;
+}
+
 .home-content {
   overflow: scroll;
   scrollbar-width: none;

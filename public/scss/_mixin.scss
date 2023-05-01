@@ -10,3 +10,11 @@
         display: none;
     }
 }
+
+@mixin one-line-ellipsis {
+    width: 100%; /* 부모 요소에 크기 고정시켜야 됨 */
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}

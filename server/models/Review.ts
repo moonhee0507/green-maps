@@ -46,8 +46,14 @@ const reviewSchema = new Schema({
             },
         },
     ],
-    registeredAt: String,
-    updatedAt: String,
+    requiredAt: {
+        type: String,
+        required: true,
+    },
+    updatedAt: {
+        type: String,
+        required: false,
+    },
 });
 
 const Review = mongoose.model('Review', reviewSchema);

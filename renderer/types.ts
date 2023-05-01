@@ -10,7 +10,7 @@ import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
 import type { PageContextBuiltInClientWithServerRouting as PageContextBuiltInClient } from 'vite-plugin-ssr/types';
 
 type Page = (pageProps: PageProps) => React.ReactElement;
-type PageProps = { routeParams?: RouteParams };
+type PageProps = { routeParams?: RouteParams; restaurantInfo?: any; reviews?: any };
 type RouteParams = {};
 
 export type PageContextCustom = {

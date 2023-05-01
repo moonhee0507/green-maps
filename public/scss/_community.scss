@@ -1,0 +1,58 @@
+.main-community {
+    @include extensive-content;
+}
+
+.container-newpost-selectbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: $padding;
+
+    .txt-postinfo {
+        margin: 0;
+    }
+}
+
+.container-button-create-refresh {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    .link-create,
+    .button-refresh {
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        padding: 10px;
+    }
+
+    .link-create {
+        border: 1px solid $border-color;
+        text-align: center;
+    }
+}
+.wrapper-posts {
+    > li {
+        padding: $padding;
+        margin-bottom: 20px;
+        border: 1px solid $border-color;
+    }
+    .txt-postitem-title,
+    .txt-postitem-content {
+        @include one-line-ellipsis;
+    }
+    .txt-postitem-title {
+        font-weight: bold;
+    }
+}
+
+// 글쓰기 페이지
+.main-create-post {
+    @include extensive-content;
+}

@@ -53,6 +53,9 @@ function render(pageContext: PageContextServer) {
             <body>
                 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
                 <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
+                <script>
+                    var global = global || window;
+                </script>
             </body>
         </html>`;
 

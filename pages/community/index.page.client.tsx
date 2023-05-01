@@ -1,7 +1,14 @@
 import React from 'react';
+import { SearchBar } from './SearchBar';
+import { Community } from './Community';
 
 export { Page };
 
 function Page() {
-    return <h1>커뮤니티</h1>;
+    return (
+        <>
+            <SearchBar />
+            <Community />
+        </>
+    );
 }
