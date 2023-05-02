@@ -10,13 +10,12 @@ export { SubmitButton };
 
 function SubmitButton(props: { restaurantId: string }) {
     const dispatch = useDispatch();
+    const selectedImages: SelectedImages = useSelector((state: RootState) => state.reviewSlice.image.FILE_INFO);
+    const content = useSelector((state: RootState) => state.reviewSlice.CONTENT);
+    const userId = useSelector((state: RootState) => state.reviewSlice.ID);
+    const randomFileNames: RandomFileNames = useSelector((state: RootState) => state.reviewSlice.image.RANDOM_NAME);
 
     async function handleSubmit() {
-        const selectedImages: SelectedImages = useSelector((state: RootState) => state.formSlice.image.FILE_INFO);
-        const content = useSelector((state: RootState) => state.formSlice.CONTENT);
-        const userId = useSelector((state: RootState) => state.formSlice.ID);
-        const randomFileNames: RandomFileNames = useSelector((state: RootState) => state.formSlice.image.RANDOM_NAME);
-
         let photo: Array<{ src: string; pick: boolean } | null> = [];
         if (selectedImages) {
             await uploadImageToStorage(selectedImages, randomFileNames);
@@ -107,7 +106,7 @@ function SubmitButton(props: { restaurantId: string }) {
     }, [props.restaurantId]);
 
     useEffect(() => {
-        userInfo().then((data) => dispatch({ type: 'formSlice/OWNER_STATE', ID: data.user.userId }));
+        userInfo().then((data) => dispatch({ type: 'reviewSlice/OWNER_STATE', ID: data.user.userId }));
     }, [userInfo]);
 
     return (

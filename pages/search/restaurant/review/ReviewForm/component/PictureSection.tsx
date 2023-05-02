@@ -46,7 +46,7 @@ function PictureSection() {
                 temp.push(fileName);
             }
 
-            dispatch({ type: 'formSlice/IMAGE_STATE', FILE_INFO: images, RANDOM_NAME: temp });
+            dispatch({ type: 'reviewSlice/IMAGE_STATE', FILE_INFO: images, RANDOM_NAME: temp });
         }
 
         function randomizeFileName() {

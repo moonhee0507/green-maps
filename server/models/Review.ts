@@ -12,7 +12,6 @@ export type Review = {
 };
 
 const reviewSchema = new Schema({
-    _id: mongoose.Types.ObjectId,
     owner: {
         type: String,
         required: true,
@@ -46,7 +45,7 @@ const reviewSchema = new Schema({
             },
         },
     ],
-    requiredAt: {
+    registeredAt: {
         type: String,
         required: true,
     },

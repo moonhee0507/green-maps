@@ -70,7 +70,7 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
                 <button className="button-review-like" type="button" onClick={handleClick}>
                     <img src={imgHeart} alt="아이콘" className={`img-like review ${buttonOn ? 'on' : ''}`} />
                 </button>
-                <span area-label="좋아요 개수">{likeCount}</span>
+                <span aria-label="좋아요 개수">{likeCount}</span>
             </dd>
         </>
     );

@@ -37,11 +37,15 @@
         text-align: center;
     }
 }
+
 .wrapper-posts {
     > li {
         padding: $padding;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
         border: 1px solid $border-color;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
     }
     .txt-postitem-title,
     .txt-postitem-content {
@@ -50,9 +54,67 @@
     .txt-postitem-title {
         font-weight: bold;
     }
+    .txt-postitem-content {
+        margin: 5px 0 5px;
+    }
+
+    .container-post-subinfo {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 12px;
+        font-size: 13px;
+
+        .container-count-like,
+        .container-count-comment {
+            padding-left: 17px;
+            background-repeat: no-repeat;
+            background-size: 13px 13px;
+            background-position: left 0px;
+        }
+        .container-count-like,
+        .container-count-comment {
+            background-image: url(/images/icon-heart.svg);
+        }
+
+        .container-count-comment {
+            background-image: url(/images/icon-comment.svg);
+        }
+    }
 }
 
 // 글쓰기 페이지
 .main-create-post {
     @include extensive-content;
+
+    .form-create-post {
+        .label-create-post-title {
+            height: 50px;
+
+            input {
+                width: 100%;
+                border: 1px solid $border-color;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                padding: $padding;
+            }
+        }
+
+        .label-create-post-content {
+            display: block;
+            height: 400px;
+        }
+    }
+}
+
+// wysiwyg
+.rdw-editor-main {
+    border: 1px solid $border-color;
+    height: 400px !important;
+    cursor: text;
+}
+
+.DraftEditor-root {
+    height: auto !important;
 }

@@ -7,7 +7,7 @@ function WriteSection(props: { title: string }) {
     const dispatch = useDispatch();
     function handleChange(event: ChangeEvent<{ value: string }>): string {
         dispatch({
-            type: 'formSlice/TXT_REVIEW_STATE',
+            type: 'reviewSlice/TXT_REVIEW_STATE',
             CONTENT: event.currentTarget.value,
         });
 

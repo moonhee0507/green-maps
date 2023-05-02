@@ -6,24 +6,15 @@ export { Create };
 function Create() {
     return (
         <main className="main-create-post">
-            <form>
-                <label htmlFor="postTitle" className="sr-only">
-                    제목
+            <form className="form-create-post">
+                <label className="label-create-post-title">
+                    <span className="sr-only">제목</span>
+                    <input type="text" placeholder="제목" maxLength={30}></input>
                 </label>
-                <input id="postTitle" type="text" placeholder="제목"></input>
-                <label htmlFor="postContent" className="sr-only">
-                    내용
+                <label className="label-create-post-content">
+                    <span className="sr-only">내용</span>
+                    <TextArea />
                 </label>
-                {/* <textarea
-                    id="postContent"
-                    placeholder="내용을 입력하세요."
-                    autoComplete="on"
-                    maxLength={100}
-                    minLength={10}
-                    required
-                    style={{ resize: 'none', display: 'block', width: '100%', height: '100px' }}
-                /> */}
-                <TextArea />
             </form>
         </main>
     );

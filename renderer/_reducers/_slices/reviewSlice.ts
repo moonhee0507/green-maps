@@ -4,7 +4,7 @@ import type {
     SelectedImage,
 } from '../../../pages/search/restaurant/review/ReviewForm/component/PictureSection';
 
-export interface FormSlice {
+export interface ReviewSlice {
     ID: string;
     image: {
         FILE_INFO: Array<SelectedImage>;
@@ -13,8 +13,8 @@ export interface FormSlice {
     CONTENT: string;
 }
 
-const formSlice = createSlice({
-    name: 'formSlice',
+const reviewSlice = createSlice({
+    name: 'reviewSlice',
     initialState: {
         ID: '',
         image: {
@@ -37,4 +37,4 @@ const formSlice = createSlice({
     },
 });
 
-export default formSlice.reducer;
+export default reviewSlice.reducer;

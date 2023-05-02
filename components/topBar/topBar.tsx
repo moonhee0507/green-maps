@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ButtonGoBack } from '../button/buttonGoBack';
+import { SubmitButton } from '../../pages/community/create/SubmitButton';
 
 export { TopBar };
 
@@ -18,6 +19,7 @@ function TopBar(props: { title: string }) {
                     <h2 className="top-title">{title}</h2>
                 </>
             )}
+            {title === '글 쓰기' ? <SubmitButton /> : null}
         </div>
     );
 }

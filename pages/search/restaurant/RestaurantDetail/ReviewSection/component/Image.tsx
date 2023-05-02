@@ -29,7 +29,7 @@ function Image(props: { photoList: Array<{ src: string; pick: boolean }> }) {
             <dt className="sr-only">사진</dt>
             <dd className="wrapper-review-img">
                 <div className="container-review-img">
-                    <p className="txt-count-img" area-label="사진 개수 정보">
+                    <p className="txt-count-img" aria-label="사진 개수 정보">
                         {`${currentIndex + 1} / ${arrSort.length}`}
                     </p>
                     <button type="button" className="button-move-img prev" onClick={handlePrevButton}>

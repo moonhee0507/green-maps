@@ -5,24 +5,28 @@ type ReviewInPost = {
     owner: string;
     content: string;
     like?: Array<{ user: string }>;
-    requiredAt: string;
+    registeredAt: string;
     updatedAt?: string;
 };
 
 export type Post = {
     _id: string;
+    subject: string;
     owner: string;
     title: string;
     content: string;
     photo?: Array<{ src: string; pick: boolean }>;
     like?: Array<{ user: string }>;
-    requiredAt: string;
+    registeredAt: string;
     updatedAt?: string;
     reviews?: Array<ReviewInPost>;
 };
 
 const postSchema = new Schema({
-    _id: mongoose.Types.ObjectId,
+    subject: {
+        type: String,
+        required: true,
+    },
     owner: {
         type: String,
         required: true,
@@ -56,7 +60,7 @@ const postSchema = new Schema({
             },
         },
     ],
-    requiredAt: {
+    registeredAt: {
         type: String,
         required: true,
     },
@@ -84,7 +88,7 @@ const postSchema = new Schema({
                     },
                 },
             ],
-            requiredAt: {
+            registeredAt: {
                 type: String,
                 required: true,
             },
