@@ -1,7 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
 type ReviewInPost = {
-    _id: string;
     owner: string;
     content: string;
     like?: Array<{ user: string }>;
@@ -10,7 +9,6 @@ type ReviewInPost = {
 };
 
 export type Post = {
-    _id: string;
     subject: string;
     owner: string;
     title: string;

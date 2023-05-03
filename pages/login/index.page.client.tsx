@@ -45,7 +45,7 @@ function Page() {
             <main className="wrapper-login-content">
                 <form onSubmit={submit}>
                     <label htmlFor="userId">아이디</label>
-                    <input id="userId" type="text" onChange={handleChange} autoFocus />
+                    <input id="userId" type="text" onChange={handleChange} />
 
                     <label htmlFor="password">비밀번호</label>
                     <input id="password" type="password" onChange={handleChange} />

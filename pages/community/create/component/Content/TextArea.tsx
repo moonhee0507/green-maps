@@ -1,11 +1,15 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
-import { EditorState } from 'draft-js';
+import React, { useEffect, useState, Suspense } from 'react';
+import { EditorState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import draftToHtml from 'draftjs-to-html';
 import toolbar from './toolbar';
+import { useDispatch } from 'react-redux';
 
 export { TextArea };
 
 function TextArea() {
+    const dispatch = useDispatch();
+
     const [isMounted, setIsMounted] = useState<boolean>(false);
     const [Component, setComponent] = useState<React.ComponentType<any> | null>(null);
     const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
@@ -23,6 +27,10 @@ function TextArea() {
     const handleChange = (newEditorState: EditorState) => {
         if (isMounted) {
             setEditorState(newEditorState);
+            dispatch({
+                type: 'postSlice/CONTENT_STATE',
+                CONTENT: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+            });
         }
     };
 
@@ -30,7 +38,6 @@ function TextArea() {
         return <Loading />;
     }
 
-    // 글 적는 곳이 편집기(editor), 도구 있는 곳은 toolbar
     return (
         <Suspense fallback={<Loading />}>
             <Component editorState={editorState} onEditorStateChange={handleChange} toolbar={toolbar} />

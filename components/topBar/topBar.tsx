@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ButtonGoBack } from '../button/buttonGoBack';
-import { SubmitButton } from '../../pages/community/create/SubmitButton';
+import { SubmitButton } from '../../pages/community/create/component/SubmitButton';
 
 export { TopBar };
 

@@ -5,6 +5,7 @@ import scrapper from './routes/scrapper.js';
 import map from './routes/map.js';
 import review from './routes/review.js';
 import image from './routes/image.js';
+import post from './routes/post.js';
 
 export default () => {
     const app = Router();
@@ -14,6 +15,7 @@ export default () => {
     map(app);
     review(app);
     image(app);
+    post(app);
 
     return app;
 };
