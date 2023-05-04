@@ -40,7 +40,6 @@
 
 .wrapper-posts {
     > li {
-        padding: $padding;
         margin-bottom: 10px;
         border: 1px solid $border-color;
         display: -webkit-box;
@@ -83,6 +82,11 @@
     }
 }
 
+// 게시글 읽는 페이지
+.main-read-post {
+    @include extensive-content;
+}
+
 // 글쓰기 페이지
 .main-create-post {
     @include extensive-content;
@@ -117,4 +121,8 @@
 
 .DraftEditor-root {
     height: auto !important;
+}
+
+.wysiwyg-readonly {
+    cursor: default;
 }

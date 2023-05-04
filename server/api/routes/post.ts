@@ -23,11 +23,32 @@ export default (app: Router) => {
     // 게시글 삭제
 
     // 게시글 가져오기
+    route.get('/', async (req: Request, res: Response) => {
+        const page = Number(req.params.page || 1);
+        const limit = Number(req.query.limit || 20);
+
+        try {
+            const total = await Post.countDocuments({});
+            const lists = await Post.find({})
+                .sort({ registeredAt: -1 })
+                .skip(limit * (page - 1))
+                .limit(limit);
+
+            res.json({
+                total: total,
+                countLimit: limit,
+                currentPage: page,
+                lists,
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
-            const post = await Post.find({ _id: req.params.postId }).exec();
-
-            return res.status(200).json({ post: post });
+            const item = await Post.findById(req.params.postId).exec();
+            res.status(200).json(item);
         } catch (err) {
             console.error(err);
         }
