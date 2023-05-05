@@ -14,7 +14,6 @@ export type PostProps = {
 };
 
 function Community(props: { posts: PostProps }) {
-    console.log(props.posts);
     return (
         <main className="main-community">
             <CommunityDetail />
