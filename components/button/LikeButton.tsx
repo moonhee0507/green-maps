@@ -48,7 +48,7 @@ function LikeButton(props: { restaurantId: string }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ _id: props.restaurantId, registeredAt: new Date().toLocaleDateString('ko-kr') }),
+                body: JSON.stringify({ _id: props.restaurantId }),
             });
 
             if (res.ok) {

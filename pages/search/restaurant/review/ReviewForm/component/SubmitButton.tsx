@@ -27,12 +27,12 @@ function SubmitButton(props: { restaurantId: string }) {
 
             photo = temp;
         }
+
         const data = {
             owner: userId,
             restaurant: props.restaurantId,
             photo: photo,
             content: content,
-            registeredAt: new Date().toLocaleDateString('ko-kr'),
         };
 
         try {

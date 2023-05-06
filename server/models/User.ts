@@ -70,7 +70,18 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     bookmarkList: [
         {
             _id: String,
-            registeredAt: String,
+            registeredAt: {
+                type: String,
+                required: true,
+                default: new Date().toLocaleString('ko-KR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                }),
+            },
             groupName: {
                 type: String,
                 required: false,
@@ -81,7 +92,18 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     likeList: [
         {
             _id: String,
-            registeredAt: String,
+            registeredAt: {
+                type: String,
+                required: true,
+                default: new Date().toLocaleString('ko-KR', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                }),
+            },
         },
     ],
 });

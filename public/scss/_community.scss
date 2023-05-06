@@ -56,35 +56,87 @@
     .txt-postitem-content {
         margin: 5px 0 5px;
     }
+}
 
-    .container-post-subinfo {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        gap: 12px;
-        font-size: 13px;
+// 좋아요 수 - 댓글 수 - 날짜
+.container-post-subinfo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
 
-        .container-count-like,
-        .container-count-comment {
-            padding-left: 17px;
-            background-repeat: no-repeat;
-            background-size: 13px 13px;
-            background-position: left 0px;
-        }
-        .container-count-like,
-        .container-count-comment {
-            background-image: url(/images/icon-heart.svg);
-        }
+    .container-count-like,
+    .container-count-comment {
+        padding-left: 17px;
+        background-repeat: no-repeat;
+        background-size: 13px 13px;
+        background-position: left 0px;
+    }
+    .container-count-like,
+    .container-count-comment {
+        background-image: url(/images/icon-heart.svg);
+    }
 
-        .container-count-comment {
-            background-image: url(/images/icon-comment.svg);
-        }
+    .container-count-comment {
+        background-image: url(/images/icon-comment.svg);
     }
 }
 
 // 게시글 읽는 페이지
 .main-read-post {
     @include extensive-content;
+
+    .section-post-content {
+        padding: $padding;
+
+        .txt-post-title {
+            margin: 0;
+        }
+
+        .txt-post-owner {
+            margin: 5px 0 5px;
+        }
+    }
+
+    .section-post-comment {
+        padding: $padding;
+
+        h3 {
+            margin: 0;
+        }
+
+        .form-create-comment {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+
+            #comment {
+                -webkit-box-flex: 1;
+                -ms-flex-positive: 1;
+                flex-grow: 1;
+                padding: 10px;
+                resize: none;
+            }
+        }
+    }
+}
+
+.container-circle-count {
+    position: relative;
+    border-radius: 50%;
+    border: 1px solid $border-color;
+    width: 45px;
+    height: 45px;
+
+    .num-circle-count {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
 }
 
 // 글쓰기 페이지

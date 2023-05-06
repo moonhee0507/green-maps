@@ -67,7 +67,6 @@ export default (app: Router) => {
                     $push: {
                         bookmarkList: {
                             _id: req.body._id,
-                            registeredAt: req.body.registeredAt,
                         },
                     },
                 },
@@ -106,7 +105,6 @@ export default (app: Router) => {
                     $push: {
                         likeList: {
                             _id: req.body._id,
-                            registeredAt: req.body.registeredAt,
                         },
                     },
                 },

@@ -89,4 +89,25 @@ export default (app: Router) => {
             console.error(err);
         }
     });
+
+    // 게시글 댓글 작성
+    route.post('/:postId/comment', auth, async (req: Request, res: Response) => {
+        try {
+            await Post.findOneAndUpdate(
+                { _id: req.params.postId },
+                {
+                    $push: {
+                        reviews: {
+                            owner: req.body.owner,
+                            content: req.body.content,
+                        },
+                    },
+                }
+            );
+
+            return res.status(200).json({ success: true });
+        } catch (err) {
+            console.error(err);
+        }
+    });
 };

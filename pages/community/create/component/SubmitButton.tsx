@@ -36,7 +36,6 @@ function SubmitButton() {
                 owner: owner,
                 title: title,
                 content: content,
-                registeredAt: new Date().toLocaleDateString('ko-kr'),
             };
 
             const res = await fetch(`http://localhost:5000/api/posts/`, {

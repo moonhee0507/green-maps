@@ -70,7 +70,7 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
                                             ?.firstElementChild?.nextElementSibling?.firstElementChild?.innerHTML,
                                     certified: false,
                                     certification: null,
-                                    updatedAt: new Date().toLocaleDateString('ko-kr'),
+                                    updatedAt: new Date().toLocaleDateString('ko-KR'),
                                     location: {
                                         type: 'Point',
                                         coordinates: [0, 0],

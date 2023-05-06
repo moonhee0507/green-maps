@@ -9,6 +9,9 @@ export interface PostSlice {
         FILE_INFO: [];
         RANDOM_NAME: [];
     };
+    comment: {
+        COMMENT_CONTENT: string;
+    };
 }
 
 const postSlice = createSlice({
@@ -21,6 +24,9 @@ const postSlice = createSlice({
         image: {
             FILE_INFO: [],
             RANDOM_NAME: [],
+        },
+        comment: {
+            COMMENT_CONTENT: '',
         },
     },
     reducers: {
@@ -39,6 +45,9 @@ const postSlice = createSlice({
         IMAGE_STATE: (state, action: any) => {
             state.image.FILE_INFO = action.FILE_INFO;
             state.image.RANDOM_NAME = action.RANDOM_NAME;
+        },
+        COMMENT_STATE: (state, action: any) => {
+            state.comment.COMMENT_CONTENT = action.COMMENT_CONTENT;
         },
     },
 });
