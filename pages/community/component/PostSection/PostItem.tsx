@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Post } from '../../../../server/models/Post';
 import { Title } from './component/Title';
 import { Content } from './component/Content';

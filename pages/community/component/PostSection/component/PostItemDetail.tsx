@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReviewInPost } from '../../../../../server/models/Post';
+import { isSameDay } from '../../../../../components/Date';
 
 export { PostItemDetail };
 
@@ -49,11 +50,15 @@ function CommentCount(props: { reviews?: Array<ReviewInPost> }) {
 }
 
 function Time(props: { registeredAt: string }) {
+    const { registeredAt } = props;
+
+    const date = isSameDay(registeredAt) ? registeredAt.split('. ').at(-1) : registeredAt.slice(0, 11);
+
     return (
         <>
             <dt className="sr-only">작성 시간</dt>
             <dd className="container-post-time">
-                <time dateTime="">{props.registeredAt}</time>
+                <time dateTime="">{date}</time>
             </dd>
         </>
     );

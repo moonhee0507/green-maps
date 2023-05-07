@@ -24,22 +24,38 @@ export default (app: Router) => {
 
     // 게시글 가져오기
     route.get('/', async (req: Request, res: Response) => {
-        const page = Number(req.params.page || 1);
-        const limit = Number(req.query.limit || 20);
-
         try {
             const total = await Post.countDocuments({});
-            const lists = await Post.find({})
-                .sort({ registeredAt: -1 })
-                .skip(limit * (page - 1))
-                .limit(limit);
+            const all = await Post.find({});
+
+            const lists = all.sort((a, b) => {
+                const dateA = new Date(a.registeredAt.replace(/\./g, '-'));
+                const dateB = new Date(b.registeredAt.replace(/\./g, '-'));
+
+                if (dateA > dateB) return -1;
+                if (dateA < dateB) return 1;
+
+                return 0;
+            });
 
             res.json({
                 total: total,
-                countLimit: limit,
-                currentPage: page,
                 lists,
             });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    route.get('/today', async (req: Request, res: Response) => {
+        try {
+            const today = new Intl.DateTimeFormat('ko-KR', {
+                dateStyle: 'medium',
+            }).format(Date.now());
+
+            const todayPost = await Post.find({ registeredAt: { $regex: today } });
+
+            return res.json({ todayCount: todayPost.length });
         } catch (err) {
             console.error(err);
         }

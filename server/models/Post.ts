@@ -62,14 +62,11 @@ const postSchema = new Schema({
     registeredAt: {
         type: String,
         required: true,
-        default: new Date().toLocaleString('ko-KR', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-        }),
+        default: new Intl.DateTimeFormat('ko-KR', {
+            dateStyle: 'medium',
+            timeStyle: 'short',
+            hour12: false,
+        }).format(Date.now()),
     },
     updatedAt: {
         type: String,
@@ -98,14 +95,11 @@ const postSchema = new Schema({
             registeredAt: {
                 type: String,
                 required: true,
-                default: new Date().toLocaleString('ko-KR', {
-                    year: 'numeric',
-                    month: '2-digit',
-                    day: '2-digit',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                    second: '2-digit',
-                }),
+                default: new Intl.DateTimeFormat('ko-KR', {
+                    dateStyle: 'medium',
+                    timeStyle: 'short',
+                    hour12: false,
+                }).format(Date.now()),
             },
             updatedAt: {
                 type: String,
