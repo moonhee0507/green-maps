@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import PostListItem from './PostListItem';
 import useIntersectionObserver from './useIntersectionObserver';
 import type { Post } from '../../../../server/models/Post';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../renderer/_reducers/rootReducer';
 
 export { PostList };
 
@@ -41,6 +43,18 @@ function PostList(props: { total: number; postInfo: Array<Post> }) {
             }
         }
     }, [page]);
+
+    const subject = useSelector((state: RootState) => state.postSlice.SUBJECT);
+
+    useEffect(() => {
+        getSameSubjectPost();
+
+        async function getSameSubjectPost() {
+            const res = await fetch(`http://localhost:5000/api/posts/subjects/${'abc'}`);
+            const sameSubject = await res.json();
+            console.log(sameSubject);
+        }
+    }, [subject]);
 
     return (
         <ul className="wrapper-posts">

@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import auth from '../../middleware/auth.js';
 import Post from '../../models/Post.js';
+import { getPostsAggregate, getSubjectPostsAggregate } from '../../middleware/postSort.js';
 
 const route = Router();
 
@@ -23,51 +24,15 @@ export default (app: Router) => {
     // 게시글 삭제
 
     // 게시글 가져오기
-    route.get('/', async (req: Request, res: Response) => {
-        try {
-            const page = Number(req.query.page || 1);
-            const limit = Number(req.query.limit || 20);
+    route.get('/', getPostsAggregate, async (req: Request, res: Response) => {
+        res.json(res.locals.postAggregate);
+    });
 
-            const aggregate = Post.aggregate([
-                {
-                    $addFields: {
-                        newRegisteredAt: {
-                            $dateFromString: {
-                                dateString: {
-                                    $replaceAll: {
-                                        input: '$registeredAt',
-                                        find: '. ',
-                                        replacement: '-',
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-                {
-                    $sort: {
-                        newRegisteredAt: -1,
-                    },
-                },
-                {
-                    $skip: limit * (page - 1),
-                },
-                {
-                    $limit: limit,
-                },
-            ]);
-
-            const [lists, total] = await Promise.all([aggregate.exec(), Post.countDocuments({})]);
-
-            return res.json({
-                total: total,
-                countLimit: limit,
-                currentPage: page,
-                lists,
-            });
-        } catch (err) {
-            console.error(err);
-        }
+    /**
+     * TODO: subject로 이모지 빼기 or post로 처리하기
+     */
+    route.get('/subjects/:subjectName', getSubjectPostsAggregate, async (req: Request, res: Response) => {
+        res.json(res.locals.postAggregate);
     });
 
     route.get('/today', async (req: Request, res: Response) => {
@@ -86,7 +51,7 @@ export default (app: Router) => {
 
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
-            const item = await Post.findById(req.params.postId).exec();
+            const item = await Post.findOne({ _id: req.params.postId }).exec();
             res.status(200).json(item);
         } catch (err) {
             console.error(err);

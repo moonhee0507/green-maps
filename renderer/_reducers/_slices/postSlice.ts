@@ -1,9 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { Post } from '../../../server/models/Post';
-
-export type PostPagination = {
-    [key: number]: Post[];
-};
 
 export interface PostSlice {
     SUBJECT: string;
@@ -14,7 +9,6 @@ export interface PostSlice {
         FILE_INFO: [];
         RANDOM_NAME: [];
     };
-    PAGINATE: PostPagination;
 }
 
 const postSlice = createSlice({
@@ -28,7 +22,6 @@ const postSlice = createSlice({
             FILE_INFO: [],
             RANDOM_NAME: [],
         },
-        PAGINATE: {},
     },
     reducers: {
         SUBJECT_STATE: (state, action: any) => {
@@ -46,9 +39,6 @@ const postSlice = createSlice({
         IMAGE_STATE: (state, action: any) => {
             state.image.FILE_INFO = action.FILE_INFO;
             state.image.RANDOM_NAME = action.RANDOM_NAME;
-        },
-        PAGINATE: (state, action: any) => {
-            state.PAGINATE = action.PAGINATE;
         },
     },
 });
