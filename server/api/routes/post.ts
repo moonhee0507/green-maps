@@ -25,21 +25,44 @@ export default (app: Router) => {
     // 게시글 가져오기
     route.get('/', async (req: Request, res: Response) => {
         try {
-            const total = await Post.countDocuments({});
-            const all = await Post.find({});
+            const page = Number(req.query.page || 1);
+            const limit = Number(req.query.limit || 20);
 
-            const lists = all.sort((a, b) => {
-                const dateA = new Date(a.registeredAt.replace(/\./g, '-'));
-                const dateB = new Date(b.registeredAt.replace(/\./g, '-'));
+            const aggregate = Post.aggregate([
+                {
+                    $addFields: {
+                        newRegisteredAt: {
+                            $dateFromString: {
+                                dateString: {
+                                    $replaceAll: {
+                                        input: '$registeredAt',
+                                        find: '. ',
+                                        replacement: '-',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
+                {
+                    $sort: {
+                        newRegisteredAt: -1,
+                    },
+                },
+                {
+                    $skip: limit * (page - 1),
+                },
+                {
+                    $limit: limit,
+                },
+            ]);
 
-                if (dateA > dateB) return -1;
-                if (dateA < dateB) return 1;
+            const [lists, total] = await Promise.all([aggregate.exec(), Post.countDocuments({})]);
 
-                return 0;
-            });
-
-            res.json({
+            return res.json({
                 total: total,
+                countLimit: limit,
+                currentPage: page,
                 lists,
             });
         } catch (err) {

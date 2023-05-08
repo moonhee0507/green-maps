@@ -5,7 +5,7 @@ import { Community } from './Community';
 export { Page };
 
 function Page() {
-    const [posts, setPosts] = useState(null);
+    const [posts, setPosts] = useState<any>(null);
 
     const getPosts = useCallback(async () => {
         try {

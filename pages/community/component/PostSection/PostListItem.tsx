@@ -1,18 +1,18 @@
-import React, { forwardRef } from 'react';
-import { Post } from '../../../../server/models/Post';
+import React, { ForwardedRef, MutableRefObject, forwardRef } from 'react';
 import { Title } from './component/Title';
 import { Content } from './component/Content';
 import { PostItemDetail } from './component/PostItemDetail';
 import { Subject } from './component/Subject';
+import type { Post } from '../../../../server/models/Post';
 
-export { PostItem };
+export default forwardRef(PostListItem);
 
-function PostItem(props: { postInfo: Post }) {
+function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement>) {
     const { _id, subject, owner, title, content, photo, like, registeredAt, reviews } = props.postInfo;
     const imageSize = '80px';
 
     return (
-        <li>
+        <li ref={ref}>
             <a
                 href={`/community/${_id}`}
                 style={{
