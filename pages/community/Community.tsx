@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CommunityDetail } from './component/CommunityDetail/CommunityDetail.js';
 import { ButtonGroup } from './component/ButtonGroup/ButtonGroup.js';
 import { PostSection } from './component/PostSection/PostSection.js';
 import type { Post } from '../../server/models/Post.js';
-import { UIEvent } from 'react';
-import { MouseEvent } from 'react';
 
 export { Community };
 
@@ -15,8 +13,8 @@ export type PostProps = {
     lists: Array<Post>;
 };
 
-function Community(props: { posts: PostProps }) {
-    const { total, lists } = props.posts;
+function Community(props: { posts: Array<Post> }) {
+    const { posts } = props;
 
     const mainElement = useRef<HTMLElement>(null);
     const [scroll, setScroll] = useState(false);
@@ -33,9 +31,9 @@ function Community(props: { posts: PostProps }) {
     return (
         <>
             <main className="main-community" ref={mainElement} onScroll={handleScroll}>
-                <CommunityDetail total={total} posts={lists} />
+                <CommunityDetail posts={posts} />
                 <ButtonGroup />
-                <PostSection total={total} posts={lists} />
+                <PostSection posts={posts} />
             </main>
             {scroll && (
                 <button id="buttonGoUp" onClick={clickGoUpButton} type="button">

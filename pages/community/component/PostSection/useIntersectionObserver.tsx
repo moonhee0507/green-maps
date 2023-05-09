@@ -4,9 +4,7 @@ export default function useIntersectionObserver(callback: () => void) {
     const observer = useRef(
         new IntersectionObserver(
             (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) callback();
-                });
+                if (entries.at(-1)?.isIntersecting) callback();
             },
             { rootMargin: '0px', threshold: 1.0 }
         )

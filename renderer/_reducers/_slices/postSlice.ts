@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { Post } from '../../../server/models/Post';
 
 export interface PostSlice {
@@ -13,6 +13,7 @@ export interface PostSlice {
     post: {
         LIST: Array<Post>;
         TOTAL: number;
+        CURRENT_PAGE: number;
     };
 }
 
@@ -30,6 +31,7 @@ const postSlice = createSlice({
         post: {
             LIST: [],
             TOTAL: 0,
+            CURRENT_PAGE: 1,
         },
     },
     reducers: {
@@ -50,8 +52,9 @@ const postSlice = createSlice({
             state.image.RANDOM_NAME = action.RANDOM_NAME;
         },
         POST_IN_PAGE: (state, action: any) => {
-            state.post.LIST = action.LIST;
+            // state.post.LIST = action.LIST;
             state.post.TOTAL = action.TOTAL;
+            state.post.CURRENT_PAGE = action.CURRENT_PAGE;
         },
     },
 });

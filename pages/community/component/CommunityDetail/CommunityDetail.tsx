@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { SubjectBox } from './SubjectBox';
+import { useSelector } from 'react-redux';
 import type { Post } from '../../../../server/models/Post';
+import type { RootState } from '../../../../renderer/store';
 
 export { CommunityDetail };
 
-function CommunityDetail(props: { total: number; posts: Array<Post> }) {
-    const { total, posts } = props;
+function CommunityDetail(props: { posts: Array<Post> }) {
+    const total = useSelector((state: RootState) => state.postSlice.post.TOTAL);
     const [todayCount, setTodayCount] = useState<number>(0);
 
     useEffect(() => {
@@ -20,7 +22,7 @@ function CommunityDetail(props: { total: number; posts: Array<Post> }) {
             const count = await res.json();
             return count;
         }
-    }, [posts]);
+    }, [props.posts]);
 
     return (
         <div className="container-newpost-selectbox">

@@ -1,21 +1,34 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { Community } from './Community';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from '../../renderer/store';
+import type { Post } from '../../server/models/Post';
 
 export { Page };
 
 function Page() {
-    const [posts, setPosts] = useState<any>(null);
-    const dispatch = useDispatch();
+    // 전역에서 관리해야 하는 것: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
+    const subject = useSelector((state: RootState) => state.postSlice.SUBJECT);
+    const currentPage = useSelector((state: RootState) => state.postSlice.post.CURRENT_PAGE);
+    const limit = 20;
+
+    // 내려보내는 데이터는 여기서 정해짐
+    const [posts, setPosts] = useState<Array<Post>>([]);
 
     const getPosts = useCallback(async () => {
         try {
-            const res = await fetch(`http://localhost:5000/api/posts/`, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
+            // 말머리에 내용이 있으면 subjects/:name, 아니면 posts
+            const res = await fetch(
+                `http://localhost:5000/api/${
+                    subject !== '' ? 'subjects/' + subject : 'posts'
+                }?page=${currentPage}&limit=${limit}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
 
             const data = await res.json();
 
@@ -23,12 +36,19 @@ function Page() {
         } catch (err) {
             console.log(err);
         }
-    }, []);
+    }, [currentPage]); // 현재 페이지 바뀌면 새 게시물 가져오기
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         getPosts().then((data) => {
-            setPosts(data);
-            dispatch({ type: 'postSlice/POST_IN_PAGE', LIST: data.lists });
+            setPosts([...posts, ...data.lists]); // 게시물들은 내려보냄
+            // 현재 페이지
+            dispatch({
+                type: 'postSlice/POST_IN_PAGE',
+                TOTAL: data.total,
+                CURRENT_PAGE: data.currentPage,
+            });
         });
     }, [getPosts]);
 
