@@ -2,7 +2,7 @@ import React from 'react';
 import { HomeContent } from './homeContent';
 import { useSelector } from 'react-redux';
 import { TopBar } from '../../components/topBar/topBar';
-import type { RootState } from '../../renderer/_reducers/rootReducer';
+import { RootState } from '../../renderer/store';
 
 export { Page };
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import imgBookmark from '/images/icon-bookmark.svg';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '../../renderer/_reducers/rootReducer';
+import type { RootState } from '../../renderer/store.js';
 
 export { BookmarkButton };
 

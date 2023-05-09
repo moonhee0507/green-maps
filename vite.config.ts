@@ -4,6 +4,11 @@ import { UserConfig } from 'vite';
 
 const config: UserConfig = {
     plugins: [react(), ssr()],
+    build: {
+        modulePreload: {
+            polyfill: true,
+        },
+    },
 };
 
 export default config;

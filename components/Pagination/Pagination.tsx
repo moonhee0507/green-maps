@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../renderer/_reducers/rootReducer';
+import type { RootState } from '../../renderer/store.js';
 
 export { Pagination };
 

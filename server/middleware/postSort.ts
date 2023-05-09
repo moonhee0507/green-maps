@@ -101,6 +101,12 @@ export async function getSubjectPostsAggregate(req: any, res: Response, next: Ne
             lists,
         };
 
+        const pageCount = Math.ceil(total / limit);
+
+        if (pageCount < page) {
+            throw new Error('없는 페이지입니다.');
+        }
+
         next();
     } catch (err) {
         next(err);

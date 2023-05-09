@@ -1,8 +1,8 @@
 import React from 'react';
 
-export { Content };
+export { PreviewText };
 
-function Content(props: { content: string }) {
+function PreviewText(props: { content: string }) {
     const content = removeUnnecessaryString(props.content);
 
     return (
@@ -13,7 +13,9 @@ function Content(props: { content: string }) {
     );
 }
 
-// Tag와 &nbsp;같은 특수문자 제거 함수
+/**
+ * Tag와 &nbsp;같은 특수문자 제거 함수
+ */
 function removeUnnecessaryString(html: string): string {
     return html.replaceAll(/<[^>]*>/g, '').replaceAll(/&[a-zA-Z0-9]*;/g, '');
 }

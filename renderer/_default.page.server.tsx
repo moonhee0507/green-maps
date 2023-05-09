@@ -48,6 +48,9 @@ function render(pageContext: PageContextServer) {
                 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
                 <link rel="manifest" href="${manifestUrl}" />
                 <link rel="stylesheet" href="${styleUrl}" type="text/css" />
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
                 <title>${title}</title>
             </head>
             <body>

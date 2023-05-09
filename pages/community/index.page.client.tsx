@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { Community } from './Community';
+import { useDispatch } from 'react-redux';
 
 export { Page };
 
 function Page() {
     const [posts, setPosts] = useState<any>(null);
+    const dispatch = useDispatch();
 
     const getPosts = useCallback(async () => {
         try {
@@ -24,7 +26,10 @@ function Page() {
     }, []);
 
     useEffect(() => {
-        getPosts().then((data) => setPosts(data));
+        getPosts().then((data) => {
+            setPosts(data);
+            dispatch({ type: 'postSlice/POST_IN_PAGE', LIST: data.lists });
+        });
     }, [getPosts]);
 
     return (

@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
-import auth from '../../middleware/auth.js';
-import Post from '../../models/Post.js';
-import { getPostsAggregate, getSubjectPostsAggregate } from '../../middleware/postSort.js';
+import auth from '../../../middleware/auth.js';
+import Post from '../../../models/Post.js';
+import { getPostsAggregate, getSubjectPostsAggregate } from '../../../middleware/postSort.js';
 
 const route = Router();
 
@@ -28,13 +28,6 @@ export default (app: Router) => {
         res.json(res.locals.postAggregate);
     });
 
-    /**
-     * TODO: subject로 이모지 빼기 or post로 처리하기
-     */
-    route.get('/subjects/:subjectName', getSubjectPostsAggregate, async (req: Request, res: Response) => {
-        res.json(res.locals.postAggregate);
-    });
-
     route.get('/today', async (req: Request, res: Response) => {
         try {
             const today = new Intl.DateTimeFormat('ko-KR', {
@@ -51,7 +44,7 @@ export default (app: Router) => {
 
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
-            const item = await Post.findOne({ _id: req.params.postId }).exec();
+            const item = await Post.findById(req.params.postId).exec();
             res.status(200).json(item);
         } catch (err) {
             console.error(err);

@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RandomFileName, SelectedImage } from './PictureSection';
-import type { RootState } from '../../../../../../renderer/_reducers/rootReducer';
+import type { RootState } from '../../../../../../renderer/store.js';
 
 type SelectedImages = Array<SelectedImage>;
 type RandomFileNames = Array<RandomFileName>;

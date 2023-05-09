@@ -1,10 +1,4 @@
 @charset "UTF-8";
-@font-face {
-  font-family: "Pretendard-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-}
 * {
   box-sizing: border-box;
 }
@@ -20,7 +14,7 @@ body {
 
 body,
 button {
-  font-family: "Pretendard-Regular", Sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   letter-spacing: -0.05rem;
 }
 
@@ -101,6 +95,7 @@ dd {
   width: 422px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 #map {
@@ -622,4 +617,12 @@ dd {
 }
 .wrapper-signup-content::-webkit-scrollbar {
   display: none;
+}
+
+#buttonGoUp {
+  position: absolute;
+  bottom: 70px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
 }/*# sourceMappingURL=index.css.map */

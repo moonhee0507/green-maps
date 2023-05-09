@@ -1,6 +1,6 @@
 import React, { ForwardedRef, MutableRefObject, forwardRef } from 'react';
 import { Title } from './component/Title';
-import { Content } from './component/Content';
+import { PreviewText } from './component/PreviewText';
 import { PostItemDetail } from './component/PostItemDetail';
 import { Subject } from './component/Subject';
 import type { Post } from '../../../../server/models/Post';
@@ -28,7 +28,7 @@ function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement
                 >
                     <Subject subject={subject} />
                     <Title title={title} />
-                    <Content content={content} />
+                    <PreviewText content={content} />
                     <PostItemDetail owner={owner} like={like} registeredAt={registeredAt} reviews={reviews} />
                 </dl>
                 {photo && photo.length > 0 ? (

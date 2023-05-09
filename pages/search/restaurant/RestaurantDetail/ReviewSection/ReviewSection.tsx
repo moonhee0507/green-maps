@@ -6,7 +6,7 @@ import { Pagination } from '../../../../../components/Pagination/Pagination';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
 import type { Review } from '../../../../../server/models/Review';
 import type { ReviewPagination } from '../../../../../renderer/_reducers/_slices/paginationSlice';
-import { RootState } from '../../../../../renderer/_reducers/rootReducer';
+import type { RootState } from '../../../../../renderer/store.js';
 
 export { ReviewSection };
 
