@@ -36,13 +36,13 @@ function Page() {
         } catch (err) {
             console.log(err);
         }
-    }, [currentPage]); // 현재 페이지 바뀌면 새 게시물 가져오기
+    }, [currentPage, subject]); // 현재 페이지 바뀌면 새 게시물 가져오기 + 말머리 바뀌면 새 게시물 가져오기
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         getPosts().then((data) => {
-            setPosts([...posts, ...data.lists]); // 게시물들은 내려보냄
+            setPosts(data.currentPage === 1 ? data.lists : [...posts, ...data.lists]); // 게시물들은 내려보냄
             // 현재 페이지
             dispatch({
                 type: 'postSlice/POST_IN_PAGE',
@@ -55,7 +55,7 @@ function Page() {
     return (
         <>
             <SearchBar />
-            {posts ? <Community posts={posts} /> : <div>게시물이 없습니다.</div>}
+            {posts ? <Community posts={posts} limit={limit} /> : <div>게시물이 없습니다.</div>}
         </>
     );
 }

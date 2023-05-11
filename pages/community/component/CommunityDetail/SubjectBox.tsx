@@ -9,6 +9,13 @@ function SubjectBox(props: { from: string }) {
 
     function handleChange(event: ChangeEvent<HTMLSelectElement>) {
         dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: event.target.value });
+
+        // 말머리 변경 시 현재 페이지 초기화
+        dispatch({
+            type: 'postSlice/POST_IN_PAGE',
+            TOTAL: 0, // 최상단에서 최종 결정됨
+            CURRENT_PAGE: 1,
+        });
     }
 
     return (

@@ -8,13 +8,16 @@ export { CommunityDetail };
 
 function CommunityDetail(props: { posts: Array<Post> }) {
     const total = useSelector((state: RootState) => state.postSlice.post.TOTAL);
+    const subject = useSelector((state: RootState) => state.postSlice.SUBJECT);
+
     const [todayCount, setTodayCount] = useState<number>(0);
 
     useEffect(() => {
-        getTodayCount().then((res: { todayCount: number }) => setTodayCount(res.todayCount));
+        getTodayCount(subject).then((res: { todayCount: number }) => setTodayCount(res.todayCount));
 
-        async function getTodayCount() {
-            const res = await fetch(`http://localhost:5000/api/posts/today`, {
+        async function getTodayCount(subjectName: string) {
+            const encodeSubjectName = encodeURIComponent(subjectName);
+            const res = await fetch(`http://localhost:5000/api/today/${encodeSubjectName}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

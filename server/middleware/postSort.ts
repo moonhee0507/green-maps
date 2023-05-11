@@ -1,6 +1,12 @@
 import { Response, NextFunction } from 'express';
 import Post from '../models/Post.js';
 
+/**
+ * keyword까지 확장하기(왜냐하면 api/posts가 위치상 맞고 page와 limit 까지 재사용해야됨 for 스크롤)
+ * const keyword = req.query.keyword;
+    const boundary = req.query.boundary || 'tc';
+    const orderBy = req.query.orderBy || 'latest';
+ */
 export async function getPostsAggregate(req: any, res: Response, next: NextFunction) {
     try {
         const page = Number(req.query.page || 1);

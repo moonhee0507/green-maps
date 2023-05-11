@@ -7,6 +7,7 @@ import review from './routes/review.js';
 import image from './routes/image.js';
 import post from './routes/post/post.js';
 import subject from './routes/post/subject.js';
+import today from './routes/post/today.js';
 
 export default () => {
     const app = Router();
@@ -17,8 +18,10 @@ export default () => {
     map(app);
     review(app);
     image(app);
+
     post(app);
     subject(app);
+    today(app);
 
     return app;
 };

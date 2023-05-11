@@ -28,20 +28,6 @@ export default (app: Router) => {
         res.json(res.locals.postAggregate);
     });
 
-    route.get('/today', async (req: Request, res: Response) => {
-        try {
-            const today = new Intl.DateTimeFormat('ko-KR', {
-                dateStyle: 'medium',
-            }).format(Date.now());
-
-            const todayPost = await Post.find({ registeredAt: { $regex: today } });
-
-            return res.json({ todayCount: todayPost.length });
-        } catch (err) {
-            console.error(err);
-        }
-    });
-
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
             const item = await Post.findById(req.params.postId).exec();

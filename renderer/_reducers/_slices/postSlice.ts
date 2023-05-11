@@ -15,6 +15,7 @@ export interface PostSlice {
         TOTAL: number;
         CURRENT_PAGE: number;
     };
+    KEYWORD: string;
 }
 
 const postSlice = createSlice({
@@ -33,6 +34,7 @@ const postSlice = createSlice({
             TOTAL: 0,
             CURRENT_PAGE: 1,
         },
+        KEYWORD: '',
     },
     reducers: {
         SUBJECT_STATE: (state, action: any) => {
@@ -52,9 +54,11 @@ const postSlice = createSlice({
             state.image.RANDOM_NAME = action.RANDOM_NAME;
         },
         POST_IN_PAGE: (state, action: any) => {
-            // state.post.LIST = action.LIST;
             state.post.TOTAL = action.TOTAL;
             state.post.CURRENT_PAGE = action.CURRENT_PAGE;
+        },
+        SEARCH: (state, action: any) => {
+            state.KEYWORD = action.KEYWORD;
         },
     },
 });
