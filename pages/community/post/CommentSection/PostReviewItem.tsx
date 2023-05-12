@@ -1,10 +1,10 @@
 import React from 'react';
-import type { ReviewInPost } from '../../../../server/models/Post';
+import type { CommentInPost } from '../../../../server/models/Post';
 import { isSameDay } from '../../../../components/Date';
 
 export { PostReviewItem };
 
-function PostReviewItem(props: { review: ReviewInPost }) {
+function PostReviewItem(props: { review: CommentInPost }) {
     const { owner, content, like, registeredAt, updatedAt } = props.review;
 
     const date = isSameDay(registeredAt) ? registeredAt.split('. ').at(-1) : registeredAt.slice(0, 11);

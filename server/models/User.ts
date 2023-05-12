@@ -73,11 +73,13 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
             registeredAt: {
                 type: String,
                 required: true,
-                default: new Intl.DateTimeFormat('ko-KR', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short',
-                    hour12: false,
-                }).format(Date.now()),
+                default: () => {
+                    return new Intl.DateTimeFormat('ko-KR', {
+                        dateStyle: 'medium',
+                        timeStyle: 'medium',
+                        hour12: false,
+                    }).format(new Date());
+                },
             },
             groupName: {
                 type: String,
@@ -92,11 +94,13 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
             registeredAt: {
                 type: String,
                 required: true,
-                default: new Intl.DateTimeFormat('ko-KR', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short',
-                    hour12: false,
-                }).format(Date.now()),
+                default: () => {
+                    return new Intl.DateTimeFormat('ko-KR', {
+                        dateStyle: 'medium',
+                        timeStyle: 'medium',
+                        hour12: false,
+                    }).format(new Date());
+                },
             },
         },
     ],

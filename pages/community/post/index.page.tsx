@@ -8,14 +8,14 @@ export { Page };
 
 function Page(pageProps: PageProps) {
     const postInfo = pageProps.postInfo;
-    const { subject, content, like, owner, photo, registeredAt, reviews, title, _id } = postInfo;
+    const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
 
     return (
         <>
             <TopBar title={subject} />
             <main className="main-read-post">
                 <ContentSection postInfo={postInfo} />
-                <CommentSection postId={_id} reviews={reviews} />
+                <CommentSection postId={_id} comments={comments} />
             </main>
         </>
     );

@@ -80,7 +80,7 @@ export default (app: Router) => {
                 { _id: req.params.postId },
                 {
                     $push: {
-                        reviews: {
+                        comments: {
                             owner: req.body.owner,
                             content: req.body.content,
                         },

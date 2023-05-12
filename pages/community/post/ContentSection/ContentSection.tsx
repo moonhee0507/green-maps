@@ -1,13 +1,13 @@
 import React from 'react';
 import { TextArea } from './TextArea/TextArea';
-import type { Post, ReviewInPost } from '../../../../server/models/Post';
+import type { Post, CommentInPost } from '../../../../server/models/Post';
 import { PostLikeButton } from './PostLikeButton';
 import { isSameDay } from '../../../../components/Date';
 
 export { ContentSection };
 
 function ContentSection(props: { postInfo: Post }) {
-    const { subject, content, like, owner, photo, registeredAt, reviews, title, _id } = props.postInfo;
+    const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = props.postInfo;
 
     return (
         <section className="section-post-content">
@@ -20,7 +20,7 @@ function ContentSection(props: { postInfo: Post }) {
                 </p>
                 <div className="container-post-subinfo">
                     <LikeCount like={like} />
-                    <CommentCount reviews={reviews} />
+                    <CommentCount comments={comments} />
                     <Time registeredAt={registeredAt} />
                 </div>
             </div>
@@ -41,12 +41,12 @@ function LikeCount(props: { like?: Array<{ user: string }> }) {
     );
 }
 
-function CommentCount(props: { reviews?: Array<ReviewInPost> }) {
+function CommentCount(props: { comments?: Array<CommentInPost> }) {
     return (
         <>
             <dt className="sr-only">댓글 개수</dt>
             <dd className="container-count-comment">
-                <span>{props.reviews?.length || 0}</span>
+                <span>{props.comments?.length || 0}</span>
             </dd>
         </>
     );
@@ -55,7 +55,9 @@ function CommentCount(props: { reviews?: Array<ReviewInPost> }) {
 function Time(props: { registeredAt: string }) {
     const { registeredAt } = props;
 
-    const date = isSameDay(registeredAt) ? registeredAt.split('. ').at(-1) : registeredAt.slice(0, 11);
+    const date = isSameDay(registeredAt)
+        ? `${registeredAt.split('. ').at(-1)?.split(':')[0]}:${registeredAt.split('. ').at(-1)?.split(':')[1]}`
+        : registeredAt.slice(0, 11);
 
     return (
         <>

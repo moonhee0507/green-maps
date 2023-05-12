@@ -8,7 +8,7 @@ import type { Post } from '../../../../server/models/Post';
 export default forwardRef(PostListItem);
 
 function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement>) {
-    const { _id, subject, owner, title, content, photo, like, registeredAt, reviews } = props.postInfo;
+    const { _id, subject, owner, title, content, photo, like, registeredAt, comments } = props.postInfo;
     const imageSize = '80px';
 
     return (
@@ -29,7 +29,7 @@ function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement
                     <Subject subject={subject} />
                     <Title title={title} />
                     <PreviewText content={content} />
-                    <PostItemDetail owner={owner} like={like} registeredAt={registeredAt} reviews={reviews} />
+                    <PostItemDetail owner={owner} like={like} registeredAt={registeredAt} comments={comments} />
                 </dl>
                 {photo && photo.length > 0 ? (
                     <dd>

@@ -12,7 +12,49 @@ export async function getPostsAggregate(req: any, res: Response, next: NextFunct
         const page = Number(req.query.page || 1);
         const limit = Number(req.query.limit || 20);
 
+        const keyword = req.query.keyword;
+        const boundary = req.query.boundary || 'tc';
+        const orderBy = req.query.orderBy || 'latest';
+
+        let matchStage = { $match: {} };
+
+        if (keyword) {
+            if (boundary === 'tc') {
+                matchStage = {
+                    $match: {
+                        $or: [
+                            { title: { $regex: keyword, $options: 'i' } },
+                            { content: { $regex: keyword, $options: 'i' } },
+                        ],
+                    },
+                };
+            } else if (boundary === 't') {
+                matchStage = {
+                    $match: { title: { $regex: keyword, $options: 'i' } },
+                };
+            } else if (boundary === 'c') {
+                matchStage = {
+                    $match: { content: { $regex: keyword, $options: 'i' } },
+                };
+            } else if (boundary === 'n') {
+                matchStage = {
+                    $match: { owner: { $regex: keyword, $options: 'i' } },
+                };
+            }
+        }
+
+        let sortStage = { $sort: {} };
+        if (orderBy === 'accuracy') {
+            // 그 글자가 많이 포함되어 있으면 accuracy가 높다
+        } else if (orderBy === 'comment') {
+            // 댓글이 많은 순.
+            // sortStage = { $addField: {
+            //     countComment:
+            // } }
+        }
+
         const aggregate = Post.aggregate([
+            matchStage,
             {
                 $addFields: {
                     newRegisteredAt: {
@@ -41,10 +83,19 @@ export async function getPostsAggregate(req: any, res: Response, next: NextFunct
             },
         ]);
 
-        const [lists, total] = await Promise.all([aggregate.exec(), Post.countDocuments({})]);
+        const lists = await aggregate.exec();
+
+        const totalAggregate = Post.aggregate([
+            matchStage,
+            {
+                $count: 'count',
+            },
+        ]);
+
+        const total = await totalAggregate;
 
         res.locals.postAggregate = {
-            total: total,
+            total: total[0]?.count || 0,
             countLimit: limit,
             currentPage: page,
             lists,

@@ -2,6 +2,10 @@
     @include extensive-content;
 }
 
+.txt-community-nopost {
+    @include absolute-center;
+}
+
 .container-newpost-selectbox {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -164,17 +168,17 @@
     }
 }
 
-// wysiwyg
-.rdw-editor-main {
-    border: 1px solid $border-color;
-    height: 400px !important;
-    cursor: text;
-}
+// // wysiwyg
+// .rdw-editor-main {
+//     border: 1px solid $border-color;
+//     height: 400px !important;
+//     cursor: text;
+// }
 
-.DraftEditor-root {
-    height: auto !important;
-}
+// .DraftEditor-root {
+//     height: auto !important;
+// }
 
-.wysiwyg-readonly {
-    cursor: default;
-}
+// .wysiwyg-readonly {
+//     cursor: default;
+// }

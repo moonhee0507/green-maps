@@ -5,9 +5,9 @@ import draftToHtml from 'draftjs-to-html';
 import toolbar from './toolbar';
 import { useDispatch } from 'react-redux';
 
-export { TextArea };
+export { TextEditor };
 
-function TextArea() {
+function TextEditor() {
     const dispatch = useDispatch();
 
     const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -29,7 +29,7 @@ function TextArea() {
             setEditorState(newEditorState);
             dispatch({
                 type: 'postSlice/CONTENT_STATE',
-                CONTENT: draftToHtml(convertToRaw(editorState.getCurrentContent())),
+                CONTENT: draftToHtml(convertToRaw(newEditorState.getCurrentContent())),
             });
         }
     };

@@ -32,7 +32,7 @@ function CommunityDetail(props: { posts: Array<Post> }) {
             <p className="txt-postinfo">
                 새글 <span>{todayCount}</span>/{total}
             </p>
-            <SubjectBox from="글 쓰기" />
+            <SubjectBox />
         </div>
     );
 }

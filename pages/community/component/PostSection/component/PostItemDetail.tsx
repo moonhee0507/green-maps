@@ -1,16 +1,16 @@
 import React from 'react';
-import { ReviewInPost } from '../../../../../server/models/Post';
+import { CommentInPost } from '../../../../../server/models/Post';
 import { isSameDay } from '../../../../../components/Date';
 
 export { PostItemDetail };
 
 function PostItemDetail(props: {
     like?: Array<{ user: string }>;
-    reviews?: Array<ReviewInPost>;
+    comments?: Array<CommentInPost>;
     registeredAt: string;
     owner: string;
 }) {
-    const { like, reviews, registeredAt, owner } = props;
+    const { like, comments, registeredAt, owner } = props;
 
     return (
         <>
@@ -18,7 +18,7 @@ function PostItemDetail(props: {
             <dd>
                 <dl className="container-post-subinfo">
                     <LikeCount like={like} />
-                    <CommentCount reviews={reviews} />
+                    <CommentCount comments={comments} />
                     <Time registeredAt={registeredAt} />
                     <Owner owner={owner} />
                 </dl>
@@ -38,12 +38,12 @@ function LikeCount(props: { like?: Array<{ user: string }> }) {
     );
 }
 
-function CommentCount(props: { reviews?: Array<ReviewInPost> }) {
+function CommentCount(props: { comments?: Array<CommentInPost> }) {
     return (
         <>
             <dt className="sr-only">댓글 개수</dt>
             <dd className="container-count-comment">
-                <span>{props.reviews?.length || 0}</span>
+                <span>{props.comments?.length || 0}</span>
             </dd>
         </>
     );
@@ -52,7 +52,9 @@ function CommentCount(props: { reviews?: Array<ReviewInPost> }) {
 function Time(props: { registeredAt: string }) {
     const { registeredAt } = props;
 
-    const date = isSameDay(registeredAt) ? registeredAt.split('. ').at(-1) : registeredAt.slice(0, 11);
+    const date = isSameDay(registeredAt)
+        ? `${registeredAt.split('. ').at(-1)?.split(':')[0]}:${registeredAt.split('. ').at(-1)?.split(':')[1]}`
+        : registeredAt.slice(0, 11);
 
     return (
         <>

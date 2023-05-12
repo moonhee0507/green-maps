@@ -1,10 +1,13 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export { SubjectBox };
 
-function SubjectBox(props: { from: string }) {
-    const { from } = props;
+function SubjectBox() {
+    const [currentLoc, setCurrentLoc] = useState<string>('');
+    useEffect(() => {
+        setCurrentLoc(window.location.pathname);
+    }, []);
     const dispatch = useDispatch();
 
     function handleChange(event: ChangeEvent<HTMLSelectElement>) {
@@ -20,11 +23,12 @@ function SubjectBox(props: { from: string }) {
 
     return (
         <div className="wrapper-subject">
-            <label htmlFor="select-subject" className={from === '글 쓰기' ? 'sr-only' : ''}>
+            <label htmlFor="select-subject" className={currentLoc === '/community' ? '' : 'sr-only'}>
                 말머리 선택
             </label>
             <select name="subjects" id="select-subject" onChange={handleChange}>
-                <option value="">{from === '글 쓰기' ? '말머리 선택' : '-- 전체 --'}</option>
+                {/* <option value="">{from === '글 쓰기' ? '말머리 선택' : '-- 전체 --'}</option> */}
+                <option value="">{currentLoc === '/community' ? '-- 전체 --' : '말머리 선택'}</option>
                 <option value="🥑채식얘기">🥑채식얘기</option>
                 <option value="⚽운동얘기">⚽운동얘기</option>
             </select>

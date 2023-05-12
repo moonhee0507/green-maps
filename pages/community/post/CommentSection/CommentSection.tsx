@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useState } from 'react';
-import type { ReviewInPost } from '../../../../server/models/Post';
+import type { CommentInPost } from '../../../../server/models/Post';
 import { PostReviewItem } from './PostReviewItem';
 import { SubmitButton } from './SubmitButton';
 
 export { CommentSection };
 
-function CommentSection(props: { postId: string; reviews?: Array<ReviewInPost> }) {
-    const { postId, reviews } = props;
+function CommentSection(props: { postId: string; comments?: Array<CommentInPost> }) {
+    const { postId, comments } = props;
     const [content, setContent] = useState<string | null>(null);
 
     function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -25,8 +25,8 @@ function CommentSection(props: { postId: string; reviews?: Array<ReviewInPost> }
                 <SubmitButton postId={postId} content={content} />
             </form>
 
-            {reviews && reviews.length > 0 ? (
-                reviews.map((review, i) => {
+            {comments && comments.length > 0 ? (
+                comments.map((review, i) => {
                     return <PostReviewItem key={i} review={review} />;
                 })
             ) : (

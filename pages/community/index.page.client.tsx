@@ -55,7 +55,7 @@ function Page() {
     return (
         <>
             <SearchBar />
-            {posts ? <Community posts={posts} limit={limit} /> : <div>게시물이 없습니다.</div>}
+            <Community posts={posts} limit={limit} />
         </>
     );
 }

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export type ReviewInPost = {
+export type CommentInPost = {
     owner: string;
     content: string;
     like?: Array<{ user: string }>;
@@ -18,7 +18,7 @@ export type Post = {
     like?: Array<{ user: string }>;
     registeredAt: string;
     updatedAt?: string;
-    reviews?: Array<ReviewInPost>;
+    comments?: Array<CommentInPost>;
 };
 
 const postSchema = new Schema({
@@ -62,17 +62,19 @@ const postSchema = new Schema({
     registeredAt: {
         type: String,
         required: true,
-        default: new Intl.DateTimeFormat('ko-KR', {
-            dateStyle: 'medium',
-            timeStyle: 'short',
-            hour12: false,
-        }).format(Date.now()),
+        default: () => {
+            return new Intl.DateTimeFormat('ko-KR', {
+                dateStyle: 'medium',
+                timeStyle: 'medium',
+                hour12: false,
+            }).format(new Date());
+        },
     },
     updatedAt: {
         type: String,
         required: false,
     },
-    reviews: [
+    comments: [
         {
             _id: mongoose.Types.ObjectId,
             owner: {
@@ -95,11 +97,13 @@ const postSchema = new Schema({
             registeredAt: {
                 type: String,
                 required: true,
-                default: new Intl.DateTimeFormat('ko-KR', {
-                    dateStyle: 'medium',
-                    timeStyle: 'short',
-                    hour12: false,
-                }).format(Date.now()),
+                default: () => {
+                    return new Intl.DateTimeFormat('ko-KR', {
+                        dateStyle: 'medium',
+                        timeStyle: 'medium',
+                        hour12: false,
+                    }).format(new Date());
+                },
             },
             updatedAt: {
                 type: String,

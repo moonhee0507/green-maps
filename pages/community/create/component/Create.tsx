@@ -9,7 +9,7 @@ function Create() {
     return (
         <main className="main-create-post">
             <form className="form-create-post">
-                <SubjectBox from="글 쓰기" />
+                <SubjectBox />
                 <Title />
                 <Content />
             </form>

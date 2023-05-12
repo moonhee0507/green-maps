@@ -48,11 +48,13 @@ const reviewSchema = new Schema({
     registeredAt: {
         type: String,
         required: true,
-        default: new Intl.DateTimeFormat('ko-KR', {
-            dateStyle: 'medium',
-            timeStyle: 'short',
-            hour12: false,
-        }).format(Date.now()),
+        default: () => {
+            return new Intl.DateTimeFormat('ko-KR', {
+                dateStyle: 'medium',
+                timeStyle: 'medium',
+                hour12: false,
+            }).format(new Date());
+        },
     },
     updatedAt: {
         type: String,

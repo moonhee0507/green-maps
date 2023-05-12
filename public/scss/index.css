@@ -441,6 +441,13 @@ dd {
   display: none;
 }
 
+.txt-community-nopost {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .container-newpost-selectbox {
   display: flex;
   justify-content: space-between;
@@ -573,20 +580,6 @@ dd {
 .main-create-post .form-create-post .label-create-post-content {
   display: block;
   height: 400px;
-}
-
-.rdw-editor-main {
-  border: 1px solid #d3d3d3;
-  height: 400px !important;
-  cursor: text;
-}
-
-.DraftEditor-root {
-  height: auto !important;
-}
-
-.wysiwyg-readonly {
-  cursor: default;
 }
 
 .home-content {
