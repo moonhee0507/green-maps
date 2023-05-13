@@ -29,7 +29,7 @@ function PostListItem(props: { keyword?: string; list: Post }, ref: ForwardedRef
                 >
                     <Subject subject={subject} />
                     <Title title={title} keyword={keyword} />
-                    <PreviewText content={content} />
+                    <PreviewText content={content} keyword={keyword} />
                     <PostItemDetail owner={owner} like={like} registeredAt={registeredAt} comments={comments} />
                 </dl>
                 {photo && photo.length > 0 ? (
