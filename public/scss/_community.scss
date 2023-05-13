@@ -168,17 +168,62 @@
     }
 }
 
-// // wysiwyg
-// .rdw-editor-main {
-//     border: 1px solid $border-color;
-//     height: 400px !important;
-//     cursor: text;
-// }
+// wysiwyg
+.rdw-editor-main {
+    border: 1px solid $border-color;
+    height: 400px !important;
+    cursor: text;
+}
 
-// .DraftEditor-root {
-//     height: auto !important;
-// }
+.DraftEditor-root {
+    height: auto !important;
+}
 
-// .wysiwyg-readonly {
-//     cursor: default;
-// }
+.wysiwyg-readonly {
+    cursor: default;
+}
+
+// 게시글 검색
+$inputHeight: 45px;
+
+.community-search-main {
+    @include extensive-content;
+
+    .container-search-input {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        #communitySearchResult {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            height: $inputHeight;
+            padding: 0 10px 0;
+            border: 1px solid $border-color;
+        }
+    }
+
+    .container-search-select {
+        width: 100%;
+
+        #communitySearchSelect {
+            width: inherit;
+            height: $inputHeight;
+        }
+    }
+
+    .result-community-detail {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: $padding;
+
+        .txt-total-search {
+            margin: 0;
+        }
+    }
+}

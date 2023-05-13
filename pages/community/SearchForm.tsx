@@ -48,7 +48,7 @@ function SearchForm() {
                             <label htmlFor="searchItem" className="sr-only">
                                 게시글 검색하기
                             </label>
-                            <input type="text" id="searchItem" onChange={handleChange} />
+                            <input type="search" id="searchItem" onChange={handleChange} />
                         </div>
                     ) : (
                         <h2 className="top-title">게시판</h2>

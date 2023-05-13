@@ -582,6 +582,54 @@ dd {
   height: 400px;
 }
 
+.rdw-editor-main {
+  border: 1px solid #d3d3d3;
+  height: 400px !important;
+  cursor: text;
+}
+
+.DraftEditor-root {
+  height: auto !important;
+}
+
+.wysiwyg-readonly {
+  cursor: default;
+}
+
+.community-search-main {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+}
+.community-search-main::-webkit-scrollbar {
+  display: none;
+}
+.community-search-main .container-search-input {
+  display: flex;
+}
+.community-search-main .container-search-input #communitySearchResult {
+  flex-grow: 1;
+  height: 45px;
+  padding: 0 10px 0;
+  border: 1px solid #d3d3d3;
+}
+.community-search-main .container-search-select {
+  width: 100%;
+}
+.community-search-main .container-search-select #communitySearchSelect {
+  width: inherit;
+  height: 45px;
+}
+.community-search-main .result-community-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.community-search-main .result-community-detail .txt-total-search {
+  margin: 0;
+}
+
 .home-content {
   overflow: scroll;
   scrollbar-width: none; /* firefox */

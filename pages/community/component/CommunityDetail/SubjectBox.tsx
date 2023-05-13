@@ -27,7 +27,6 @@ function SubjectBox() {
                 말머리 선택
             </label>
             <select name="subjects" id="select-subject" onChange={handleChange}>
-                {/* <option value="">{from === '글 쓰기' ? '말머리 선택' : '-- 전체 --'}</option> */}
                 <option value="">{currentLoc === '/community' ? '-- 전체 --' : '말머리 선택'}</option>
                 <option value="🥑채식얘기">🥑채식얘기</option>
                 <option value="⚽운동얘기">⚽운동얘기</option>

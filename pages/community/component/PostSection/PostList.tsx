@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PostListItem from './PostListItem';
 import useIntersectionObserver from './useIntersectionObserver';
 import { useDispatch, useStore } from 'react-redux';

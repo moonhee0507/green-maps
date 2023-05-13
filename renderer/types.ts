@@ -11,7 +11,7 @@ import type { PageContextBuiltInClientWithServerRouting as PageContextBuiltInCli
 
 type Page = (pageProps: PageProps) => React.ReactElement;
 type PageProps = { routeParams?: RouteParams; restaurantInfo?: any; reviews?: any; postInfo?: any };
-type RouteParams = {};
+type RouteParams = { keyword?: string };
 
 export type PageContextCustom = {
     Page: Page;
