@@ -1,6 +1,6 @@
 import React from 'react';
-import type { PostProps } from '../../../Community';
 import { SelectBoxGroup } from './SelectBoxGroup/SelectBoxGroup';
+import type { PostProps } from '../../../Community';
 
 export { CommunityDetail };
 

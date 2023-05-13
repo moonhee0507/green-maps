@@ -210,6 +210,9 @@ $inputHeight: 45px;
         #communitySearchSelect {
             width: inherit;
             height: $inputHeight;
+            border-radius: 0;
+            border: 1px solid $border-color;
+            padding: 0 6px 0;
         }
     }
 
@@ -221,6 +224,8 @@ $inputHeight: 45px;
         -ms-flex-pack: justify;
         justify-content: space-between;
         padding: $padding;
+        border-bottom: 1px solid $border-color;
+        background-color: white; // 흰색 안하면 투명
 
         .txt-total-search {
             margin: 0;

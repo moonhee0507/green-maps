@@ -8,9 +8,9 @@ function InputGroup(props: { keyword: string }) {
     const { keyword } = props;
 
     return (
-        <>
+        <div>
             <SearchInput keyword={keyword} />
             <SelectBox />
-        </>
+        </div>
     );
 }

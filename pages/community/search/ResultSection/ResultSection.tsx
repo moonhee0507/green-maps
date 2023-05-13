@@ -1,18 +1,16 @@
 import React from 'react';
-import { CommunityDetail } from './CommunityDetail/CommunityDetail';
 import { PostList } from './PostList/PostList';
 import type { PostProps } from '../../Community';
 
 export { ResultSection };
 
-function ResultSection(props: { postInfo: PostProps }) {
-    const postInfo = props.postInfo;
+function ResultSection(props: { keyword: string; postInfo: PostProps }) {
+    const { keyword, postInfo } = props;
 
     return (
         <section>
             <h3 className="sr-only">검색결과</h3>
-            <CommunityDetail postInfo={postInfo} />
-            <PostList postInfo={postInfo} />
+            <PostList keyword={keyword} postInfo={postInfo} />
         </section>
     );
 }

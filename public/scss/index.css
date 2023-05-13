@@ -620,11 +620,16 @@ dd {
 .community-search-main .container-search-select #communitySearchSelect {
   width: inherit;
   height: 45px;
+  border-radius: 0;
+  border: 1px solid #d3d3d3;
+  padding: 0 6px 0;
 }
 .community-search-main .result-community-detail {
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  border-bottom: 1px solid #d3d3d3;
+  background-color: white;
 }
 .community-search-main .result-community-detail .txt-total-search {
   margin: 0;

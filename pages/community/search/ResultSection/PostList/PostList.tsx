@@ -4,13 +4,14 @@ import type { PostProps } from '../../../Community';
 
 export { PostList };
 
-function PostList(props: { postInfo: PostProps }) {
-    const { lists } = props.postInfo;
+function PostList(props: { keyword: string; postInfo: PostProps }) {
+    const { keyword, postInfo } = props;
+    const { lists } = postInfo;
 
     return (
-        <ul>
-            {lists.map((list) => {
-                return <PostListItem list={list} />;
+        <ul className="wrapper-posts">
+            {lists.map((list, i) => {
+                return <PostListItem key={i} keyword={keyword} list={list} />;
             })}
         </ul>
     );

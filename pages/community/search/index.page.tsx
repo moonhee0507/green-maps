@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../../components/topBar/topBar';
-import { InputGroup } from './InputGroup/InputGroup';
+import { StickyComponent } from './StickyComponent/StickyComponent';
 import { ResultSection } from './ResultSection/ResultSection';
 import type { PageProps } from '../../../renderer/types';
 import type { PostProps } from '../Community';
@@ -35,8 +35,8 @@ function SearchMain(props: { keyword: string; postInfo: PostProps }) {
 
     return (
         <main className="community-search-main">
-            <InputGroup keyword={keyword} />
-            <ResultSection postInfo={postInfo} />
+            <StickyComponent keyword={keyword} postInfo={postInfo} />
+            <ResultSection keyword={keyword} postInfo={postInfo} />
         </main>
     );
 }
