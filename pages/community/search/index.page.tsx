@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../../components/topBar/topBar';
-import { Create } from './component/Create';
+import { PageContext, PageProps } from '../../../renderer/types';
+// import { Create } from './component/Create';
 
 export { Page };
 
-function Page() {
+function Page(pageProps: PageProps) {
+    const postInfo = pageProps.postInfo;
     const [window, setWindow] = useState(false);
 
     useEffect(() => {
@@ -14,8 +16,9 @@ function Page() {
     }, []);
     return (
         <>
-            <TopBar title="글 쓰기" />
-            {window && <Create />}
+            <TopBar title="검색 결과" />
+            {/* {window && <Create />} */}
+            {window && <div>검색결과 페이지</div>}
         </>
     );
 }

@@ -18,17 +18,11 @@ function SearchForm() {
     async function searchPost() {
         if (keyword !== '') {
             try {
-                /**
-                 * !기존 라우터에서 수정하기
-                 */
-                const res = await fetch(
-                    `http://localhost:5000/api/posts?keyword=${keyword}&boundary=${boundary}&orderby=${orderBy}`,
-                    {
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    }
-                );
+                const res = await fetch(`http://localhost:5000/api/posts?keyword=${keyword}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
 
                 const data = res.json();
 
@@ -39,6 +33,10 @@ function SearchForm() {
         } else {
             alert('검색어를 입력해주세요.');
         }
+    }
+
+    function moveToPage(): void {
+        window.location.href = `/community/search/${keyword}`;
     }
 
     return (
@@ -57,7 +55,7 @@ function SearchForm() {
                     )}
                 </div>
             </div>
-            <button type="button" onClick={() => (showInput ? searchPost() : setShowInput(true))}>
+            <button type="button" onClick={() => (showInput ? moveToPage() : setShowInput(true))}>
                 검색
             </button>
         </>

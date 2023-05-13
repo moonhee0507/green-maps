@@ -1,12 +1,12 @@
 import { Router, Request, Response } from 'express';
-import { getSubjectPostsAggregate } from '../../../middleware/postSort.js';
+import getSubjectAggregate from '../../../middleware/getSubjectAggregate.js';
 
 const route = Router();
 
 export default (app: Router) => {
     app.use('/subjects', route);
 
-    route.get('/:subjectName', getSubjectPostsAggregate, async (req: Request, res: Response) => {
+    route.get('/:subjectName', getSubjectAggregate, async (req: Request, res: Response) => {
         res.json(res.locals.postAggregate);
     });
 };

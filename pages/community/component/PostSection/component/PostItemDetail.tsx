@@ -54,7 +54,7 @@ function Time(props: { registeredAt: string }) {
 
     const date = isSameDay(registeredAt)
         ? `${registeredAt.split('. ').at(-1)?.split(':')[0]}:${registeredAt.split('. ').at(-1)?.split(':')[1]}`
-        : registeredAt.slice(0, 11);
+        : registeredAt.slice(0, 13);
 
     return (
         <>

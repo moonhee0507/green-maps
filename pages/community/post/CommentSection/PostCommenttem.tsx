@@ -2,12 +2,14 @@ import React from 'react';
 import type { CommentInPost } from '../../../../server/models/Post';
 import { isSameDay } from '../../../../components/Date';
 
-export { PostReviewItem };
+export { PostCommentItem };
 
-function PostReviewItem(props: { review: CommentInPost }) {
+function PostCommentItem(props: { review: CommentInPost }) {
     const { owner, content, like, registeredAt, updatedAt } = props.review;
 
-    const date = isSameDay(registeredAt) ? registeredAt.split('. ').at(-1) : registeredAt.slice(0, 11);
+    const date = isSameDay(registeredAt)
+        ? `${registeredAt.split('. ').at(-1)?.split(':')[0]}:${registeredAt.split('. ').at(-1)?.split(':')[1]}`
+        : registeredAt.slice(0, 13);
 
     return (
         <li>

@@ -64,8 +64,12 @@ const postSchema = new Schema({
         required: true,
         default: () => {
             return new Intl.DateTimeFormat('ko-KR', {
-                dateStyle: 'medium',
-                timeStyle: 'medium',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
                 hour12: false,
             }).format(new Date());
         },
@@ -99,8 +103,12 @@ const postSchema = new Schema({
                 required: true,
                 default: () => {
                     return new Intl.DateTimeFormat('ko-KR', {
-                        dateStyle: 'medium',
-                        timeStyle: 'medium',
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
                         hour12: false,
                     }).format(new Date());
                 },

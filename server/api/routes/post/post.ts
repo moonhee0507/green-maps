@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import auth from '../../../middleware/auth.js';
 import Post from '../../../models/Post.js';
-import { getPostsAggregate, getSubjectPostsAggregate } from '../../../middleware/postSort.js';
+import getPostsAggregate from '../../../middleware/getPostsAggregate.js';
 
 const route = Router();
 

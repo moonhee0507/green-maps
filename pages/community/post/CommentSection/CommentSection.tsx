@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react';
 import type { CommentInPost } from '../../../../server/models/Post';
-import { PostReviewItem } from './PostReviewItem';
+import { PostCommentItem } from './PostCommenttem';
 import { SubmitButton } from './SubmitButton';
 
 export { CommentSection };
@@ -27,7 +27,7 @@ function CommentSection(props: { postId: string; comments?: Array<CommentInPost>
 
             {comments && comments.length > 0 ? (
                 comments.map((review, i) => {
-                    return <PostReviewItem key={i} review={review} />;
+                    return <PostCommentItem key={i} review={review} />;
                 })
             ) : (
                 <p style={{ textAlign: 'center' }}>댓글이 없습니다.</p>
