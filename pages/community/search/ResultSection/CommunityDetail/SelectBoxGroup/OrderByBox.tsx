@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import { useDispatch } from 'react-redux';
 
 export { OrderByBox };
 
 function OrderByBox() {
+    const dispatch = useDispatch();
+
+    function handleChange(event: ChangeEvent<HTMLSelectElement>) {
+        dispatch({
+            type: 'postSlice/SEARCH_ORDER',
+            ORDERBY: event.target.value,
+        });
+    }
     return (
-        <select name="" id="">
-            <option value="latest">최신순</option>
-            <option value="accuracy">정확도</option>
-            <option value="comment">댓글</option>
-        </select>
+        <>
+            <label htmlFor="orderBySelect">정렬</label>
+            <select id="orderBySelect" onChange={handleChange}>
+                <option value="latest">최신순</option>
+                <option value="accuracy">정확도</option>
+                <option value="comment">댓글</option>
+            </select>
+        </>
     );
 }

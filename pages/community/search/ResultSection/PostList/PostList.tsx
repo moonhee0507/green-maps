@@ -1,17 +1,16 @@
 import React from 'react';
 import PostListItem from './PostListItem';
-import type { PostProps } from '../../../Community';
+import type { Post } from '../../../../../server/models/Post';
 
 export { PostList };
 
-function PostList(props: { keyword: string; postInfo: PostProps }) {
-    const { keyword, postInfo } = props;
-    const { lists } = postInfo;
+function PostList(props: { posts: Post[] }) {
+    const { posts } = props;
 
     return (
         <ul className="wrapper-posts">
-            {lists.map((list, i) => {
-                return <PostListItem key={i} keyword={keyword} list={list} />;
+            {posts.map((post, i) => {
+                return <PostListItem key={i} postInfo={post} />;
             })}
         </ul>
     );

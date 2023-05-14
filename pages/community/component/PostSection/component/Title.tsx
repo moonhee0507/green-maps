@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import DOMPurify from 'isomorphic-dompurify';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../renderer/store';
 
 export { Title };
 
-function Title(props: { title: string; keyword?: string }) {
-    const { title, keyword } = props;
+function Title(props: { title: string }) {
+    const { title } = props;
+    const keyword = useSelector((state: RootState) => state.postSlice.KEYWORD);
 
-    const [same, setSame] = useState<string>('');
+    const [decoTitle, setDecoTitle] = useState<string>(title);
 
-    // title에 keyword와 일치하는 단어가 있으면 그 단어에 파란색 표시
     useEffect(() => {
         if (keyword && keyword !== '') {
+            // 키워드에 문자가 있으면
             if (title.includes(keyword)) {
+                // 제목에 키워드가 있으면
                 const regex = new RegExp(keyword, 'gi');
                 const replaceWord = title.replace(regex, `<span style="color: blue;">${keyword}</span>`);
 
-                setSame(replaceWord);
+                setDecoTitle(replaceWord);
+            } else {
+                setDecoTitle(title);
             }
+        } else {
+            setDecoTitle(title);
         }
     }, [title, keyword]);
 
@@ -24,7 +32,10 @@ function Title(props: { title: string; keyword?: string }) {
         <>
             <dt className="sr-only">제목</dt>
             {keyword && keyword !== '' ? (
-                <dd className="txt-postitem-title" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(same) }} />
+                <dd
+                    className="txt-postitem-title"
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(decoTitle) }}
+                />
             ) : (
                 <dd className="txt-postitem-title">{title}</dd>
             )}

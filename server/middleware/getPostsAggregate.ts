@@ -6,16 +6,26 @@ export default async function getPostsAggregate(req: any, res: Response, next: N
         const page = Number(req.query.page || 1);
         const limit = Number(req.query.limit || 20);
 
+        const subject = req.query.subject;
         const keyword = req.query.keyword;
         const boundary = req.query.boundary || 'tc';
         const orderBy = req.query.orderby || 'latest';
 
-        let matchStage = { $match: {} };
+        let boundaryMatchStage = { $match: {} };
+        let subjectMatchState = { $match: {} };
+
+        if (subject) {
+            subjectMatchState = {
+                $match: {
+                    subject: subject,
+                },
+            };
+        }
 
         if (keyword) {
             switch (boundary) {
                 case 'tc':
-                    matchStage = {
+                    boundaryMatchStage = {
                         $match: {
                             $or: [
                                 { title: { $regex: keyword, $options: 'i' } },
@@ -26,19 +36,19 @@ export default async function getPostsAggregate(req: any, res: Response, next: N
                     break;
 
                 case 't':
-                    matchStage = {
+                    boundaryMatchStage = {
                         $match: { title: { $regex: keyword, $options: 'i' } },
                     };
                     break;
 
                 case 'c':
-                    matchStage = {
+                    boundaryMatchStage = {
                         $match: { content: { $regex: keyword, $options: 'i' } },
                     };
                     break;
 
                 case 'n':
-                    matchStage = {
+                    boundaryMatchStage = {
                         $match: { owner: { $regex: keyword, $options: 'i' } },
                     };
                     break;
@@ -139,7 +149,8 @@ export default async function getPostsAggregate(req: any, res: Response, next: N
         }
 
         const aggregate = Post.aggregate([
-            matchStage,
+            boundaryMatchStage,
+            subjectMatchState,
             {
                 $addFields: {
                     newRegisteredAt: {
@@ -170,7 +181,8 @@ export default async function getPostsAggregate(req: any, res: Response, next: N
         const lists = await aggregate.exec();
 
         const totalAggregate = Post.aggregate([
-            matchStage,
+            boundaryMatchStage,
+            subjectMatchState,
             {
                 $count: 'count',
             },

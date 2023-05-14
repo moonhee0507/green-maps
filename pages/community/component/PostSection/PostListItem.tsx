@@ -9,6 +9,7 @@ export default forwardRef(PostListItem);
 
 function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement>) {
     const { _id, subject, owner, title, content, photo, like, registeredAt, comments } = props.postInfo;
+    const removeTagContent = removeUnnecessaryString(content);
     const imageSize = '80px';
 
     return (
@@ -28,7 +29,7 @@ function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement
                 >
                     <Subject subject={subject} />
                     <Title title={title} />
-                    <PreviewText content={content} />
+                    <PreviewText content={removeTagContent} />
                     <PostItemDetail owner={owner} like={like} registeredAt={registeredAt} comments={comments} />
                 </dl>
                 {photo && photo.length > 0 ? (
@@ -47,4 +48,11 @@ function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement
             </a>
         </li>
     );
+}
+
+/**
+ * Tag와 &nbsp;같은 특수문자 제거 함수
+ */
+function removeUnnecessaryString(html: string): string {
+    return html.replaceAll(/<[^>]*>/g, '').replaceAll(/&[a-zA-Z0-9]*;/g, '');
 }

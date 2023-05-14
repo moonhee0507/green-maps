@@ -11,7 +11,6 @@ export interface PostSlice {
         RANDOM_NAME: [];
     };
     post: {
-        LIST: Array<Post>;
         TOTAL: number;
         CURRENT_PAGE: number;
     };
@@ -30,11 +29,12 @@ const postSlice = createSlice({
             RANDOM_NAME: [],
         },
         post: {
-            LIST: [],
             TOTAL: 0,
             CURRENT_PAGE: 1,
         },
         KEYWORD: '',
+        BOUNDARY: 'tc',
+        ORDERBY: 'latest',
     },
     reducers: {
         SUBJECT_STATE: (state, action: any) => {
@@ -59,6 +59,12 @@ const postSlice = createSlice({
         },
         SEARCH: (state, action: any) => {
             state.KEYWORD = action.KEYWORD;
+        },
+        SEARCH_POOL: (state, action: any) => {
+            state.BOUNDARY = action.BOUNDARY;
+        },
+        SEARCH_ORDER: (state, action: any) => {
+            state.ORDERBY = action.ORDERBY;
         },
     },
 });

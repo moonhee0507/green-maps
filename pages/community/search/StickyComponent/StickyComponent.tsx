@@ -1,12 +1,10 @@
 import React from 'react';
 import { InputGroup } from '../InputGroup/InputGroup';
 import { CommunityDetail } from '../ResultSection/CommunityDetail/CommunityDetail';
-import type { PostProps } from '../../Community';
 
 export { StickyComponent };
 
-function StickyComponent(props: { keyword: string; postInfo: PostProps }) {
-    const { keyword, postInfo } = props;
+function StickyComponent() {
     return (
         <div
             style={{
@@ -14,8 +12,8 @@ function StickyComponent(props: { keyword: string; postInfo: PostProps }) {
                 top: 0,
             }}
         >
-            <InputGroup keyword={keyword} />
-            <CommunityDetail postInfo={postInfo} />
+            <InputGroup />
+            <CommunityDetail />
         </div>
     );
 }

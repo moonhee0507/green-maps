@@ -1,11 +1,12 @@
 import React from 'react';
 import { SelectBoxGroup } from './SelectBoxGroup/SelectBoxGroup';
-import type { PostProps } from '../../../Community';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../renderer/store';
 
 export { CommunityDetail };
 
-function CommunityDetail(props: { postInfo: PostProps }) {
-    const { total } = props.postInfo;
+function CommunityDetail() {
+    const total = useSelector((state: RootState) => state.postSlice.post.TOTAL);
 
     return (
         <div className="result-community-detail">

@@ -4,12 +4,10 @@ import { SelectBox } from './SelectBox/SelectBox';
 
 export { InputGroup };
 
-function InputGroup(props: { keyword: string }) {
-    const { keyword } = props;
-
+function InputGroup() {
     return (
         <div>
-            <SearchInput keyword={keyword} />
+            <SearchInput />
             <SelectBox />
         </div>
     );

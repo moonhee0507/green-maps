@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+import { useDispatch } from 'react-redux';
 
 export { SelectBox };
 
 function SelectBox() {
-    function handleChange() {
-        console.log('셀렉트박스 내용 변경');
+    const dispatch = useDispatch();
+
+    function handleChange(event: ChangeEvent<HTMLSelectElement>) {
+        dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: event?.target.value });
     }
 
     return (

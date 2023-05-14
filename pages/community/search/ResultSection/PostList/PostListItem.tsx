@@ -1,19 +1,25 @@
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef, useCallback, useEffect } from 'react';
 import { Title } from '../../../component/PostSection/component/Title';
 import { PreviewText } from '../../../component/PostSection/component/PreviewText';
 import { PostItemDetail } from '../../../component/PostSection/component/PostItemDetail';
 import { Subject } from '../../../component/PostSection/component/Subject';
 import type { Post } from '../../../../../server/models/Post';
 
-export default forwardRef(PostListItem);
+// export default forwardRef(PostListItem);
+export default PostListItem;
 
-function PostListItem(props: { keyword?: string; list: Post }, ref: ForwardedRef<HTMLLIElement>) {
-    const { keyword, list } = props;
-    const { _id, subject, owner, title, content, photo, like, registeredAt, comments } = list;
+// function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement>) {
+function PostListItem(props: { postInfo: Post }) {
+    const { postInfo } = props;
+    const { _id, subject, owner, title, content, photo, like, registeredAt, comments } = postInfo;
+
+    const removeTagContent = removeUnnecessaryString(content);
+
     const imageSize = '80px';
 
     return (
-        <li ref={ref}>
+        // <li ref={ref}>
+        <li>
             <a
                 href={`/community/${_id}`}
                 style={{
@@ -28,8 +34,8 @@ function PostListItem(props: { keyword?: string; list: Post }, ref: ForwardedRef
                     }}
                 >
                     <Subject subject={subject} />
-                    <Title title={title} keyword={keyword} />
-                    <PreviewText content={content} keyword={keyword} />
+                    <Title title={title} />
+                    <PreviewText content={removeTagContent} />
                     <PostItemDetail owner={owner} like={like} registeredAt={registeredAt} comments={comments} />
                 </dl>
                 {photo && photo.length > 0 ? (
@@ -48,4 +54,11 @@ function PostListItem(props: { keyword?: string; list: Post }, ref: ForwardedRef
             </a>
         </li>
     );
+}
+
+/**
+ * Tag와 &nbsp;같은 특수문자 제거 함수
+ */
+function removeUnnecessaryString(html: string): string {
+    return html.replaceAll(/<[^>]*>/g, '').replaceAll(/&[a-zA-Z0-9]*;/g, '');
 }

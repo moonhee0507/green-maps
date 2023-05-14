@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { navigate } from 'vite-plugin-ssr/client/router';
+import { RootState } from '../../../../../renderer/store';
 
 export { SearchInput };
 
-function SearchInput(props: { keyword: string }) {
-    const { keyword } = props;
+function SearchInput() {
+    const keyword = useSelector((state: RootState) => state.postSlice.KEYWORD);
+    const inputElement = useRef<HTMLInputElement>(null);
 
-    function handleChange() {
-        console.log('검색인풋 내용 변경');
+    function handleSubmit() {
+        const url = `/community/search/${inputElement.current?.value}`;
+        navigate(url, { keepScrollPosition: true });
     }
 
     return (
@@ -14,8 +19,8 @@ function SearchInput(props: { keyword: string }) {
             <label htmlFor="communitySearchResult" className="sr-only">
                 게시글 검색하기
             </label>
-            <input type="search" id="communitySearchResult" onChange={handleChange} defaultValue={keyword} />
-            <button className="">검색</button>
+            <input type="search" id="communitySearchResult" ref={inputElement} defaultValue={keyword} />
+            <button onClick={handleSubmit}>검색</button>
         </div>
     );
 }
