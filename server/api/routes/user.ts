@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
 import auth from '../../middleware/auth.js';
+import cookieParser from 'cookie-parser';
 
 const route = Router();
 
@@ -11,6 +12,21 @@ export default (app: Router) => {
         try {
             const user = await User.findOne({ token: req.token }).exec();
             return res.status(200).json({ success: true, user: user });
+        } catch (err) {
+            console.error(err);
+        }
+    });
+
+    /**
+     * 홈화면에서 토큰 검증
+     */
+    route.post('/check-token', async (req: any, res: Response) => {
+        try {
+            const user = await User.findOne({ token: req.body.token }).exec();
+
+            if (user) res.json({ auth: true, message: '검증된 토큰입니다.', user: user });
+            else if (req.body.token === undefined) res.json({ auth: false, message: '쿠키에 토큰이 없습니다.' });
+            else if (!user) res.json({ auth: false, message: '유효하지 않은 토큰입니다.' });
         } catch (err) {
             console.error(err);
         }
@@ -46,15 +62,23 @@ export default (app: Router) => {
                     else {
                         res.cookie('auth', user.token, {
                             maxAge: 24 * 60 * 60 * 1000,
-                            httpOnly: true,
-                            secure: true,
-                            sameSite: 'strict',
+                            // httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
+                            // secure: true, // https에서만 사용
+                            // sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
                         })
                             .status(200)
-                            .json({ success: true });
+                            .json({ success: true, keepLogin: req.body.keepLogin, user: user });
                     }
                 });
             }
+        });
+    });
+
+    // logout
+    route.post('/logout', (req: Request, res: Response) => {
+        // expires, maxAge를 제외하고 res.cookie로 제공한 옵션과 동일해야 함
+        res.clearCookie('auth', { httpOnly: true, secure: true, sameSite: 'strict' }).json({
+            message: '로그아웃 되었습니다.',
         });
     });
 

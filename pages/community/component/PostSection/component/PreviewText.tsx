@@ -19,7 +19,7 @@ function PreviewText(props: { content: string }) {
 
                 setDecoContent(replaceWord);
             } else {
-                setDecoContent(content);
+                setDecoContent(content); // 검색 할때마다 새롭게 그려야 하기 때문에 초기화 해줘야 함
             }
         } else {
             setDecoContent(content);

@@ -1,15 +1,13 @@
-import React, { ForwardedRef, forwardRef, useCallback, useEffect } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import { Title } from '../../../component/PostSection/component/Title';
 import { PreviewText } from '../../../component/PostSection/component/PreviewText';
 import { PostItemDetail } from '../../../component/PostSection/component/PostItemDetail';
 import { Subject } from '../../../component/PostSection/component/Subject';
 import type { Post } from '../../../../../server/models/Post';
 
-// export default forwardRef(PostListItem);
-export default PostListItem;
+export default forwardRef(PostListItem);
 
-// function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement>) {
-function PostListItem(props: { postInfo: Post }) {
+function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement>) {
     const { postInfo } = props;
     const { _id, subject, owner, title, content, photo, like, registeredAt, comments } = postInfo;
 
@@ -18,8 +16,7 @@ function PostListItem(props: { postInfo: Post }) {
     const imageSize = '80px';
 
     return (
-        // <li ref={ref}>
-        <li>
+        <li ref={ref}>
             <a
                 href={`/community/${_id}`}
                 style={{

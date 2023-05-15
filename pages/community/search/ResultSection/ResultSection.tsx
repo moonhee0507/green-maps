@@ -10,7 +10,7 @@ function ResultSection(props: { posts: Post[]; limit: number }) {
     return (
         <section>
             <h3 className="sr-only">검색결과</h3>
-            <PostList posts={posts} />
+            <PostList posts={posts} limit={limit} />
         </section>
     );
 }

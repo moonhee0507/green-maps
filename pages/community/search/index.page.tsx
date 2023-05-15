@@ -56,7 +56,6 @@ function Page(pageProps: PageProps) {
 
     useEffect(() => {
         getPosts().then((data) => {
-            console.log(data);
             setPosts(data.currentPage === 1 ? data.lists : [...posts, ...data.lists]);
 
             dispatch({

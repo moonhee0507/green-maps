@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { Post } from '../../../server/models/Post';
 
 export interface PostSlice {
     SUBJECT: string;
