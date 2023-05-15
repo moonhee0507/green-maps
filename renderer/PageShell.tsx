@@ -3,7 +3,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PageContextProvider } from './usePageContext';
 import { getStore } from './store.js';
-import { NavBar } from '../components/navBar';
 import { Link } from './Link';
 import type { PageContext } from './types';
 import logo from '/images/logo.svg';
@@ -18,11 +17,8 @@ function PageShell({ children, pageContext }: { children: React.ReactNode; pageC
             <Provider store={store}>
                 <PageContextProvider pageContext={pageContext}>
                     <Layout>
-                        <LeftArea />
-                        <App>
-                            {children}
-                            <NavBar />
-                        </App>
+                        <BackgroundArea />
+                        <App>{children}</App>
                     </Layout>
                 </PageContextProvider>
             </Provider>
@@ -34,7 +30,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     return <div className="layout">{children}</div>;
 }
 
-function LeftArea() {
+function BackgroundArea() {
     return (
         <div className="left-area">
             <Link href="/">

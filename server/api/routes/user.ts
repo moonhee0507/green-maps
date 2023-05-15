@@ -62,9 +62,9 @@ export default (app: Router) => {
                     else {
                         res.cookie('auth', user.token, {
                             maxAge: 24 * 60 * 60 * 1000,
-                            // httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
-                            // secure: true, // https에서만 사용
-                            // sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                            httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
+                            secure: true, // https에서만 사용
+                            sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
                         })
                             .status(200)
                             .json({ success: true, keepLogin: req.body.keepLogin, user: user });

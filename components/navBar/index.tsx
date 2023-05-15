@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from '../../renderer/Link';
+import { PageContext } from '../../renderer/types';
 
 export { NavBar };
 
-function NavBar() {
+function NavBar({ user }: { user: any }) {
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(user ? true : false);
+
+    useEffect(() => {
+        console.log('내비게이션 바에 전달된 user 객체: ', user);
+        setIsLoggedIn(user ? true : false);
+    }, [user]);
+
     return (
         <nav className="nav-bar">
             <ul>
@@ -34,7 +42,7 @@ function NavBar() {
                 <li>
                     <Link href="/login" className="link-nav">
                         <i className="img-nav-icon user" />
-                        <span>로그인</span>
+                        <span>{isLoggedIn ? '내 정보' : '로그인'}</span>
                     </Link>
                 </li>
             </ul>
