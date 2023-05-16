@@ -10,7 +10,7 @@ function PostSection(props: { posts: Array<Post>; limit: number }) {
     return (
         <section>
             <h3 className="sr-only">게시글 목록</h3>
-            {posts ? <PostList posts={posts} limit={limit} /> : <p>불러오는 중...</p>}
+            <PostList posts={posts} limit={limit} />
         </section>
     );
 }

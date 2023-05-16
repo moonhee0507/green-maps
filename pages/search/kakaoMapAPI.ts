@@ -1,7 +1,7 @@
 import type { Restaurant } from '../../server/models/Restaurant';
 import iconLocation from '/images/icon-location.svg';
 import iconAuth from '/images/icon-auth.svg';
-import store from '../../renderer/store.js';
+import store from '../../renderer/store/index.js';
 
 const { kakao }: any = window;
 

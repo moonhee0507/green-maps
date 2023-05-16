@@ -2,7 +2,7 @@ import 'normalize.css';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { PageContextProvider } from './usePageContext';
-import { getStore } from './store.js';
+import { getStore } from './store/index.js';
 import { Link } from './Link';
 import type { PageContext } from './types';
 import logo from '/images/logo.svg';

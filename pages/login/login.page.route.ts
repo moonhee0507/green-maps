@@ -1,4 +1,4 @@
-import { PageContext } from '../../renderer/types';
+import type { PageContext } from '../../renderer/types';
 
 export default (pageContext: PageContext) => {
     // 인증되지 않은 사용자에게만 로그인 페이지가 렌더링
@@ -11,5 +11,7 @@ export default (pageContext: PageContext) => {
 };
 
 function userIsLoggedIn(pageContext: PageContext) {
-    return pageContext.user !== null;
+    console.log('userIsLoggedIn', pageContext.user);
+
+    return pageContext.user !== null || pageContext.user !== undefined;
 }

@@ -33,13 +33,7 @@ function Community(props: { posts: Array<Post>; limit: number }) {
             <main className="main-community" ref={mainElement} onScroll={handleScroll}>
                 <CommunityDetail posts={posts} />
                 <ButtonGroup />
-                {posts.length > 0 ? (
-                    <PostSection posts={posts} limit={limit} />
-                ) : (
-                    <div style={{ flexGrow: 1 }}>
-                        <em className="txt-community-nopost">게시물이 없습니다.</em>
-                    </div>
-                )}
+                <PostSection posts={posts} limit={limit} />
             </main>
             {scroll && (
                 <button id="buttonGoUp" onClick={clickGoUpButton} type="button">

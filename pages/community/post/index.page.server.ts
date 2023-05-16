@@ -4,6 +4,7 @@ import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
 export { onBeforeRender };
 export { prerender };
 
+// /community에서 넘어오면 CSR이고, 새로고침되면 SSR
 async function onBeforeRender(pageContext: PageContextBuiltIn) {
     const { postId } = pageContext.routeParams;
     try {

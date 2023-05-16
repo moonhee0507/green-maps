@@ -2,7 +2,7 @@ import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
 import { Provider } from 'react-redux';
-import { getStore } from './store.js';
+import { getStore } from './store/index.js';
 import { PageShell } from './PageShell';
 import icon from '/images/icon.png';
 import type { PageContextServer } from './types';
@@ -14,7 +14,10 @@ function render(pageContext: PageContextServer) {
     const store = getStore();
     const { Page, pageProps, routeParams, token } = pageContext;
 
+    console.log('🚀🚀 서버사이드 렌더링');
+
     let pageHtml;
+    const PRELOADED_STATE = JSON.stringify(store.getState());
 
     if (!pageContext.Page) {
         // SPA
@@ -58,11 +61,9 @@ function render(pageContext: PageContextServer) {
                 <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
                 <script>
                     var global = global || window;
+                    window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)}
                 </script>
-            </body>
         </html>`;
-
-    const PRELOADED_STATE = store.getState();
 
     return {
         documentHtml,

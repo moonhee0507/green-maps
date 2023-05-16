@@ -2,7 +2,7 @@ import { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-interface UserInfo {
+export interface UserInfo {
     userId: string;
     nickName: string;
     password: string;

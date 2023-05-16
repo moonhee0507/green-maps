@@ -5,13 +5,11 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { renderPage } from 'vite-plugin-ssr/server';
 import { root } from './root.js';
-import User from './models/User.js';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
 import config from './config/index.js';
 import routes from './api/index.js';
-import fetch from 'node-fetch';
 
 startServer();
 
