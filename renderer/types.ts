@@ -42,7 +42,6 @@ export type PageContextCustom = {
         isLoggedIn: boolean;
         info: UserInfo | null;
     };
-    redirectTo?: string;
 };
 
 type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;

@@ -49,7 +49,7 @@ function Page() {
 
     return (
         <>
-            <TopBar title={'회원가입'} />
+            <TopBar title="회원가입" />
             <main className="wrapper-signup-content">
                 <form onSubmit={submit}>
                     <label htmlFor="userId">아이디</label>

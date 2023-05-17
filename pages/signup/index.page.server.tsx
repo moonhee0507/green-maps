@@ -1,5 +1,5 @@
 import type { PageContext } from '../../renderer/types';
-import { checkToken } from '../API_URL/api';
+import { checkToken } from '../API_URL/api.js';
 
 export async function onBeforeRender(pageContext: PageContext) {
     /**

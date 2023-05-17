@@ -65,8 +65,6 @@ async function render(pageContext: PageContextServer) {
                 </script>
         </html>`;
 
-    const redirect = '/';
-
     return {
         documentHtml,
         pageContext: {
@@ -75,7 +73,6 @@ async function render(pageContext: PageContextServer) {
             routeParams,
             token,
             user,
-            redirect,
         },
     };
 }

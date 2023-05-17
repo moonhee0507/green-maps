@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useState } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
-import { PageContext } from '../../renderer/types';
 
 export { Page };
 
-function Page(pageContext: PageContext) {
+function Page() {
     const [checked, setChecked] = useState<boolean>(false);
 
     async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -75,6 +74,9 @@ function Page(pageContext: PageContext) {
 
                     <button type="submit">로그인</button>
                 </form>
+                <a href="/signup" rel="external">
+                    회원가입
+                </a>
             </main>
         </>
     );

@@ -1,4 +1,6 @@
-import { PageContext } from './types';
+import type { PageContext } from './types';
+
+export const CONDITIONAL_ACCESSIBLE_PAGE = ['/login', '/signup'];
 
 export async function onBeforeRoute(pageContext: PageContext) {
     const { token } = pageContext;
@@ -24,7 +26,7 @@ export async function onBeforeRoute(pageContext: PageContext) {
             });
 
             const authInfo: any = await res.json();
-            console.log('+++클라이언트 authInfo+++', authInfo);
+            console.log('<<< 👀 서버 authInfo >>>', authInfo);
 
             return {
                 pageContext: {
@@ -39,7 +41,7 @@ export async function onBeforeRoute(pageContext: PageContext) {
             const res = await fetch(`http://localhost:5000/api/users/`);
 
             const authInfo: any = await res.json();
-            console.log('+++서버 authInfo+++', authInfo);
+            console.log('<<< 🕶️ 클라이언트 authInfo >>>', authInfo);
 
             return {
                 pageContext: {
