@@ -431,6 +431,36 @@ dd {
     width: 100vw;
   }
 }
+.home-content {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+}
+.home-content::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper-login-content {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+}
+.wrapper-login-content::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper-signup-content {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+}
+.wrapper-signup-content::-webkit-scrollbar {
+  display: none;
+}
+
 .main-community {
   overflow: scroll;
   scrollbar-width: none; /* firefox */
@@ -635,34 +665,30 @@ dd {
   margin: 0;
 }
 
-.home-content {
-  overflow: scroll;
-  scrollbar-width: none; /* firefox */
-  flex-grow: 1; /*긴 화면*/
-  /* edge, chrome */
+.section-404,
+.section-500 {
+  flex-grow: 1;
+  padding-top: 200px;
 }
-.home-content::-webkit-scrollbar {
-  display: none;
+.section-404 h2,
+.section-500 h2 {
+  font-size: 65px;
+  text-align: center;
 }
-
-.wrapper-login-content {
-  overflow: scroll;
-  scrollbar-width: none; /* firefox */
-  flex-grow: 1; /*긴 화면*/
-  /* edge, chrome */
+.section-404 h2 > span,
+.section-500 h2 > span {
+  display: block;
+  font-size: 30px;
+  margin-top: 25px;
 }
-.wrapper-login-content::-webkit-scrollbar {
-  display: none;
-}
-
-.wrapper-signup-content {
-  overflow: scroll;
-  scrollbar-width: none; /* firefox */
-  flex-grow: 1; /*긴 화면*/
-  /* edge, chrome */
-}
-.wrapper-signup-content::-webkit-scrollbar {
-  display: none;
+.section-404 .link-go-home,
+.section-500 .link-go-home {
+  display: block;
+  width: 230px;
+  border: 1px solid #d3d3d3;
+  text-align: center;
+  margin: 0 auto;
+  padding: 20px 0 20px;
 }
 
 #buttonGoUp {

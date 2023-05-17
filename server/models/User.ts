@@ -175,10 +175,16 @@ userSchema.static('findByToken', function findByToken(token: string, cb: (err: E
 
     jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
         if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
-        await user.findOne({ _id: decoded.id, token: token }).then((doc) => {
-            if (!doc) return cb(err);
-            cb(null, user);
-        });
+        else {
+            try {
+                const doc = await user.findOne({ _id: decoded.id, token: token }).exec();
+
+                if (!doc) cb(new Error('🚨 해당 유저가 없습니다.'));
+                else cb(null, user);
+            } catch (err) {
+                if (err instanceof Error) cb(err);
+            }
+        }
     });
 });
 

@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
+import { PageContext } from '../../renderer/types';
 
 export { Page };
 
-function Page() {
+function Page(pageContext: PageContext) {
     const [checked, setChecked] = useState<boolean>(false);
 
     async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -33,15 +34,8 @@ function Page() {
             if (data.success) {
                 alert('로그인에 성공했습니다');
 
-                const userObj = {
-                    host: data.user.host,
-                    nickName: data.user.nickName,
-                    role: data.user.role,
-                    userId: data.user.userId,
-                };
-
-                window.localStorage.setItem('gu', JSON.stringify(userObj));
-                window.history.go(-1); // 뒤로 가기
+                // 뒤로가기 + 새로고침
+                window.location.href = document.referrer;
             } else {
                 alert('로그인에 실패했습니다');
             }

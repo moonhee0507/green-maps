@@ -12,7 +12,7 @@ export const hydrationCanBeAborted = true;
 let root: any;
 
 async function render(pageContext: PageContextClient) {
-    const { Page, pageProps, routeParams } = pageContext;
+    const { Page, pageProps, routeParams, user } = pageContext;
     const store = getStore();
 
     console.log('😶‍🌫️😶‍🌫️ 클라이언트사이드 렌더링');
@@ -20,7 +20,7 @@ async function render(pageContext: PageContextClient) {
     const page = (
         <Provider store={store}>
             <PageShell pageContext={pageContext}>
-                <Page {...pageProps} routeParams={routeParams} />
+                <Page {...pageProps} routeParams={routeParams} user={user} />
             </PageShell>
         </Provider>
     );

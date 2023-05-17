@@ -1,7 +1,6 @@
 import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
 import auth from '../../middleware/auth.js';
-import cookieParser from 'cookie-parser';
 
 const route = Router();
 
@@ -11,9 +10,10 @@ export default (app: Router) => {
     route.get('/', auth, async (req: any, res: Response) => {
         try {
             const user = await User.findOne({ token: req.token }).exec();
-            return res.status(200).json({ success: true, user: user });
-        } catch (err) {
+            res.status(200).json({ success: true, user: user });
+        } catch (err: unknown) {
             console.error(err);
+            if (err instanceof Error) res.status(500).json({ success: false, errorMessage: err.message });
         }
     });
 

@@ -9,7 +9,12 @@ import type { PageContext } from '../../renderer/types';
 export { onBeforeRender };
 
 async function onBeforeRender(pageContext: PageContext) {
-    const { token } = pageContext;
+    /**
+     * @token {string}
+     * @user { isLoggedIn: boolean } (default: false)
+     */
+    const { token, user } = pageContext;
+
     try {
         const res = await fetch(`http://localhost:5000/api/users/check-token`, {
             method: 'POST',
@@ -20,12 +25,14 @@ async function onBeforeRender(pageContext: PageContext) {
         });
 
         const authInfo: any = await res.json();
-        const user = authInfo.user;
-
-        const pageProps = { user };
 
         return {
-            pageContext: { pageProps },
+            pageContext: {
+                user: {
+                    isLoggedIn: authInfo.auth || false,
+                    info: authInfo.auth ? authInfo.user : null,
+                },
+            },
         };
     } catch (err) {
         console.error(err);
@@ -44,13 +51,13 @@ export const documentProps = {
 
 function Page(pageContext: PageContext) {
     // console.log(useSelector((state: RootState) => state));
-    const { token, user } = pageContext;
+    const { isLoggedIn, info } = pageContext.user;
 
     return (
         <>
             <TopBar title={'홈'} />
             <HomeContent />
-            <NavBar user={user} />
+            <NavBar isLoggedIn={isLoggedIn} />
         </>
     );
 }

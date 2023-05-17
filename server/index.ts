@@ -41,6 +41,10 @@ async function startServer() {
         const pageContextInit = {
             urlOriginal: req.originalUrl,
             token: req.cookies.auth,
+            user: {
+                isLoggedIn: false,
+                info: null,
+            },
         };
         const pageContext = await renderPage(pageContextInit);
         const { httpResponse } = pageContext;

@@ -3,9 +3,7 @@ import { Link } from '../../renderer/Link';
 
 export { NavBar };
 
-function NavBar({ user }: { user: any }) {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(user ? true : false);
-
+function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (
         <nav className="nav-bar">
             <ul>

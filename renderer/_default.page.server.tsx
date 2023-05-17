@@ -8,11 +8,11 @@ import icon from '/images/icon.png';
 import type { PageContextServer } from './types';
 
 export { render };
-export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams', 'token'];
+export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams', 'token', 'user'];
 
-function render(pageContext: PageContextServer) {
+async function render(pageContext: PageContextServer) {
     const store = getStore();
-    const { Page, pageProps, routeParams, token } = pageContext;
+    const { Page, pageProps, routeParams, token, user } = pageContext;
 
     console.log('🚀🚀 서버사이드 렌더링');
 
@@ -27,7 +27,7 @@ function render(pageContext: PageContextServer) {
         pageHtml = ReactDOMServer.renderToString(
             <Provider store={store}>
                 <PageShell pageContext={pageContext}>
-                    <Page {...pageProps} routeParams={routeParams} token={token} />
+                    <Page {...pageProps} routeParams={routeParams} token={token} user={user} />
                 </PageShell>
             </Provider>
         );
@@ -65,14 +65,17 @@ function render(pageContext: PageContextServer) {
                 </script>
         </html>`;
 
+    const redirect = '/';
+
     return {
         documentHtml,
         pageContext: {
-            // We can add some `pageContext` here, which is useful if we want to do page redirection https://vite-plugin-ssr.com/page-redirection
             pageProps,
             PRELOADED_STATE,
             routeParams,
             token,
+            user,
+            redirect,
         },
     };
 }
