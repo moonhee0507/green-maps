@@ -5,11 +5,11 @@ import { ShareButton } from '../../../../../../components/button/ShareButton';
 
 export { ButtonContainer };
 
-function ButtonContainer(props: { restaurantId: string }) {
+function ButtonContainer({ restaurantId, isLoggedIn }: { restaurantId: string; isLoggedIn: boolean }) {
     return (
         <div className="container-bookmark-like-share">
-            <BookmarkButton restaurantId={props.restaurantId} />
-            <LikeButton restaurantId={props.restaurantId} />
+            <BookmarkButton restaurantId={restaurantId} isLoggedIn={isLoggedIn} />
+            <LikeButton restaurantId={restaurantId} isLoggedIn={isLoggedIn} />
             <ShareButton />
         </div>
     );

@@ -1,20 +1,28 @@
 import React, { useCallback, useEffect } from 'react';
 import imgHeart from '/images/icon-heart.svg';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { API_URL } from '../../pages/API_URL/api';
+import { navigate } from 'vite-plugin-ssr/client/router';
+import { useAppSelector } from '../../renderer/store/hooks';
 
 export { LikeButton };
 
-function LikeButton(props: { restaurantId: string }) {
+function LikeButton({ restaurantId, isLoggedIn }: { restaurantId: string; isLoggedIn: boolean }) {
     const dispatch = useDispatch();
-    const hasLikeList = useCallback(async () => {
-        const res = await fetch(`http://localhost:5000/api/users/`);
-        const data = await res.json();
 
-        return data.user.likeList.some((v: { _id: string; registeredAt: string }) => props.restaurantId === v._id);
-    }, [props.restaurantId]);
+    const hasLikeList = useCallback(async () => {
+        if (isLoggedIn) {
+            const res = await fetch(`${API_URL}/users/`);
+            const data = await res.json();
+
+            return data.user.likeList.some((v: { _id: string; registeredAt: string }) => {
+                return restaurantId === v._id;
+            });
+        }
+    }, [restaurantId, isLoggedIn]);
 
     const delLike = useCallback(async () => {
-        const res = await fetch(`http://localhost:5000/api/users/like/${props.restaurantId}`, {
+        const res = await fetch(`${API_URL}/users/like/${restaurantId}`, {
             method: 'DELETE',
         });
 
@@ -23,8 +31,8 @@ function LikeButton(props: { restaurantId: string }) {
                 type: 'buttonSlice/HAS_LIKE_LIST',
                 ON: false,
             });
-        } else throw new Error();
-    }, [props.restaurantId]);
+        } else console.error('좋아요 취소에 실패했습니다.');
+    }, [restaurantId, isLoggedIn]);
 
     useEffect(() => {
         hasLikeList().then((bool) => {
@@ -33,22 +41,28 @@ function LikeButton(props: { restaurantId: string }) {
                 ON: bool,
             });
         });
-    }, [hasLikeList]);
+    }, [hasLikeList, isLoggedIn]);
 
     function handleClick() {
-        hasLikeList().then((bool) => {
-            return bool ? delLike() : addLike();
-        });
+        if (isLoggedIn) {
+            hasLikeList().then((bool) => {
+                return bool ? delLike() : addLike();
+            });
+        } else {
+            if (confirm('로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?')) {
+                navigate('/login');
+            }
+        }
     }
 
     async function addLike() {
         try {
-            const res = await fetch(`http://localhost:5000/api/users/like`, {
+            const res = await fetch(`${API_URL}/users/like`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ _id: props.restaurantId }),
+                body: JSON.stringify({ _id: restaurantId }),
             });
 
             if (res.ok) {
@@ -67,7 +81,7 @@ function LikeButton(props: { restaurantId: string }) {
             <img
                 src={imgHeart}
                 alt="좋아요 이미지"
-                className={useSelector((state: any) => {
+                className={useAppSelector((state) => {
                     return state.buttonSlice.like.ON ? 'img-like on' : 'img-like';
                 })}
             />

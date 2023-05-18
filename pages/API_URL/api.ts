@@ -1,4 +1,4 @@
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 
 export const API_URL = 'http://localhost:5000/api';
 

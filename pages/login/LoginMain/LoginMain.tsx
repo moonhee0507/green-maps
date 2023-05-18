@@ -1,9 +1,8 @@
 import React, { ChangeEvent, useState } from 'react';
-import { TopBar } from '../../components/topBar/topBar';
 
-export { Page };
+export { LoginMain };
 
-function Page() {
+function LoginMain() {
     const [checked, setChecked] = useState<boolean>(false);
 
     async function submit(event: React.FormEvent<HTMLFormElement>) {
@@ -46,38 +45,34 @@ function Page() {
     function handleChange(event: ChangeEvent<{ value: string }>): string {
         return event.currentTarget.value;
     }
-
     return (
-        <>
-            <TopBar title={'로그인'} />
-            <main className="wrapper-login-content">
-                <form onSubmit={submit}>
-                    <label htmlFor="userId">아이디</label>
-                    <input id="userId" type="text" onChange={handleChange} />
+        <main className="wrapper-login-content">
+            <form onSubmit={submit}>
+                <label htmlFor="userId">아이디</label>
+                <input id="userId" type="text" onChange={handleChange} />
 
-                    <br />
+                <br />
 
-                    <label htmlFor="password">비밀번호</label>
-                    <input id="password" type="password" onChange={handleChange} />
+                <label htmlFor="password">비밀번호</label>
+                <input id="password" type="password" onChange={handleChange} />
 
-                    <br />
+                <br />
 
-                    <label htmlFor="keepLogin">로그인 유지하기</label>
-                    <input
-                        type="checkbox"
-                        id="keepLogin"
-                        value="keepLogin"
-                        onClick={() => (checked ? setChecked(false) : setChecked(true))}
-                    />
+                <label htmlFor="keepLogin">로그인 유지하기</label>
+                <input
+                    type="checkbox"
+                    id="keepLogin"
+                    value="keepLogin"
+                    onClick={() => (checked ? setChecked(false) : setChecked(true))}
+                />
 
-                    <br />
+                <br />
 
-                    <button type="submit">로그인</button>
-                </form>
-                <a href="/signup" rel="external">
-                    회원가입
-                </a>
-            </main>
-        </>
+                <button type="submit">로그인</button>
+            </form>
+            <a href="/signup" rel="external">
+                회원가입
+            </a>
+        </main>
     );
 }

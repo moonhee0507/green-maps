@@ -1,12 +1,7 @@
-import React, { ChangeEvent } from 'react';
-import { TopBar } from '../../components/topBar/topBar';
+import React from 'react';
 
-export { Page };
-
-function Page() {
-    async function submit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-
+export function SubmitButton() {
+    async function submit() {
         const userId = (document.getElementById('userId') as HTMLInputElement).value;
         const password = (document.getElementById('password') as HTMLInputElement).value;
         const password2 = (document.getElementById('password2') as HTMLInputElement).value;
@@ -42,31 +37,9 @@ function Page() {
             console.error(err);
         }
     }
-
-    function handleChange(event: ChangeEvent<{ value: string }>): string {
-        return event.currentTarget.value;
-    }
-
     return (
-        <>
-            <TopBar title="회원가입" />
-            <main className="wrapper-signup-content">
-                <form onSubmit={submit}>
-                    <label htmlFor="userId">아이디</label>
-                    <input id="userId" type="text" onChange={handleChange} />
-
-                    <label htmlFor="password">비밀번호</label>
-                    <input id="password" type="password" onChange={handleChange} />
-
-                    <label htmlFor="password2">비밀번호 확인</label>
-                    <input id="password2" type="password" onChange={handleChange} />
-
-                    <label htmlFor="nickName">닉네임</label>
-                    <input id="nickName" type="text" onChange={handleChange} />
-
-                    <button type="submit">가입하기</button>
-                </form>
-            </main>
-        </>
+        <button type="button" onClick={submit}>
+            가입하기
+        </button>
     );
 }

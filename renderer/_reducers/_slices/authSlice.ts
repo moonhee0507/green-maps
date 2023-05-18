@@ -3,12 +3,16 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 const authSlice = createSlice({
     name: 'authSlice',
     initialState: {
+        isLoggedIn: false,
         userId: '',
         nickName: '',
         host: '',
         role: '',
     },
     reducers: {
+        LOGIN(state, action: PayloadAction<boolean>) {
+            state.isLoggedIn = action.payload;
+        },
         SET_USERID(state, action: PayloadAction<string>) {
             state.userId = action.payload;
         },
@@ -24,6 +28,6 @@ const authSlice = createSlice({
     },
 });
 
-export const { SET_USERID, SET_NICKNAME, SET_HOST, SET_ROLE } = authSlice.actions;
+export const { LOGIN, SET_USERID, SET_NICKNAME, SET_HOST, SET_ROLE } = authSlice.actions;
 
 export default authSlice.reducer;

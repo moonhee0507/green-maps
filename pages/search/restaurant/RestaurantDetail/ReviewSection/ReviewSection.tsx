@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { ReviewButton } from './ReviewButton';
 import { ReviewItem } from './ReviewItem';
 import { Pagination } from '../../../../../components/Pagination/Pagination';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
 import type { Review } from '../../../../../server/models/Review';
 import type { ReviewPagination } from '../../../../../renderer/_reducers/_slices/paginationSlice';
-import type { RootState } from '../../../../../renderer/store.js';
+import { useAppSelector } from '../../../../../renderer/store/hooks';
 
 export { ReviewSection };
 
-function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Review> }) {
-    const { restaurantInfo, reviews } = props;
+function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Review>; isLoggedIn: boolean }) {
+    const { restaurantInfo, reviews, isLoggedIn } = props;
+
     const [objReview] = useState(() => {
         const reverseArr = [...props.reviews].reverse();
         const perPage = 3;
@@ -25,7 +26,7 @@ function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Revie
         return reviewPagination;
     });
 
-    const currentPage = useSelector((state: RootState) => state.paginationSlice.currentPage);
+    const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
 
     const dispatch = useDispatch();
 
@@ -50,7 +51,7 @@ function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Revie
     return (
         <section className="section-review">
             <h4>리뷰</h4>
-            <ReviewButton restaurantId={restaurantInfo._id} />
+            <ReviewButton restaurantId={restaurantInfo._id} isLoggedIn={isLoggedIn} />
             <div className="wrapper-review">
                 {reviews.length > 0 ? (
                     objReview[currentPage - 1].map((review, i) => {

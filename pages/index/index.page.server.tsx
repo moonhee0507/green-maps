@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import fetch from 'node-fetch';
 import { TopBar } from '../../components/topBar/topBar';
 import { HomeContent } from './homeContent';
-import { NavBar } from '../../components/navBar';
 import type { PageContext } from '../../renderer/types';
 
 export { onBeforeRender };
@@ -41,6 +40,7 @@ async function onBeforeRender(pageContext: PageContext) {
 
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../renderer/store';
+import { NavBar } from '../../components/navBar';
 
 export { Page };
 

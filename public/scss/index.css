@@ -136,6 +136,7 @@ dd {
   display: flex;
   justify-content: center;
   gap: 10px;
+  font-size: 14px;
 }
 
 .button-bookmark,

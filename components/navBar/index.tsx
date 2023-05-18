@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from '../../renderer/Link';
+import { API_URL } from '../../pages/API_URL/api';
+import { PageContext } from '../../renderer/types';
 
-export { NavBar };
-
-function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
+export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (
         <nav className="nav-bar">
             <ul>
