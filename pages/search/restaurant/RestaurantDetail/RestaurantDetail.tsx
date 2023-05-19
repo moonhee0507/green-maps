@@ -3,7 +3,7 @@ import { PrimarySection } from './PrimarySection/PrimarySection.js';
 import { LocationSection } from './LocationSection';
 import { ReviewSection } from './ReviewSection/ReviewSection.js';
 import type { Restaurant } from '../../../../server/models/Restaurant';
-import { Review } from '../../../../server/models/Review.js';
+import type { Review } from '../../../../server/models/Review.js';
 
 export { RestaurantDetail };
 

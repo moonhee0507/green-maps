@@ -93,7 +93,7 @@
 }
 
 .restaurant-category {
-    background-color: lightcoral;
+    background-color: lightgoldenrodyellow;
 }
 
 .restaurant-cert,
@@ -105,6 +105,7 @@
 .txt-restaurant-title {
     font-size: 35px;
     margin: 0;
+    margin: 5px 0 10px;
 }
 
 .txt-restaurant-address {
@@ -131,39 +132,60 @@
 
 // 위치 섹션
 .section-location {
-    margin: 25px 0 25px;
-    h4 {
-        margin: 0;
+    .style-wrapper-location-address {
+        padding: $padding;
     }
 }
 
 // 리뷰 섹션
 .section-review {
-    h4 {
-        margin: 0;
-    }
-
     .wrapper-review {
+        padding: $padding;
+
         .container-review {
-            &:nth-child(2) {
-                margin: 50px 0 50px;
+            border: 1px solid gray;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            .style-wrapper-reviewitem {
+                padding: $padding;
+
+                &:first-child {
+                    position: relative;
+
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        background-image: url(/images/icon-3dot.svg);
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        background-size: 20px 20px;
+                        top: 50%;
+                        right: 10px;
+                        width: 20px;
+                        height: 20px;
+                        -webkit-transform: translate(0, -50%) rotate(90deg);
+                        -ms-transform: translate(0, -50%) rotate(90deg);
+                        transform: translate(0, -50%) rotate(90deg);
+                        cursor: pointer;
+                    }
+                }
             }
         }
 
         .txt-review-owner {
             font-weight: bold;
             font-size: 16px;
+            margin-bottom: 5px;
         }
 
         .txt-review-date {
             font-size: 13px;
-        }
-
-        .txt-review-owner,
-        .txt-review-date,
-        .txt-review-content,
-        .num-like-count {
-            padding: 0 20px 0;
         }
 
         .wrapper-review-img {
@@ -172,8 +194,8 @@
             .container-review-img {
                 overflow: hidden;
                 background-color: #d3d3d3;
-                width: calc(422px * 3);
-                height: 422px;
+                width: calc((422px - #{$padding * 2}) * 3);
+                height: calc(422px - #{$padding * 2});
 
                 .txt-count-img {
                     position: absolute;
@@ -200,7 +222,7 @@
 
                 img {
                     float: left;
-                    width: 422px;
+                    width: calc(422px - #{$padding * 2});
                     height: inherit;
                     -o-object-fit: cover;
                     object-fit: cover;
@@ -221,11 +243,31 @@
             -ms-flex-align: center;
             align-items: center;
             gap: 5px;
+            margin-bottom: 5px;
         }
     }
 }
 
+.style-wrapper-no-review {
+    text-align: center;
+    background-color: lavender;
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 45px;
+
+    .txt-no-review {
+        font-size: 50px;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+
 .wrapper-pagination {
+    padding: $padding;
+
     > ul {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -243,10 +285,6 @@
 }
 
 // 리뷰 작성 페이지
-.wrapper-review {
-    @include extensive-content;
-}
-
 .section-add-picture,
 .section-write-review {
     padding: 0;

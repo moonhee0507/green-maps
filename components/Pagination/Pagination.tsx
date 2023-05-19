@@ -1,13 +1,12 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../renderer/store.js';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../renderer/store/hooks';
 
 export { Pagination };
 
-function Pagination(props: { count: number; perPage: number }) {
+function Pagination({ count, perPage }: { count: number; perPage: number }) {
     const dispatch = useDispatch();
 
-    const { count, perPage } = props;
     const pageCount = Math.ceil(count / perPage);
 
     const pageNumbers = [];
@@ -16,7 +15,7 @@ function Pagination(props: { count: number; perPage: number }) {
         pageNumbers.push(i);
     }
 
-    const currentPage = useSelector((state: RootState) => state.paginationSlice.currentPage);
+    const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
 
     function handlePrev() {
         dispatch({ type: 'paginationSlice/CURRENT_PAGE', currentPage: currentPage - 1 });

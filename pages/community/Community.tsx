@@ -13,9 +13,7 @@ export type PostProps = {
     lists: Array<Post>;
 };
 
-function Community(props: { posts: Array<Post>; limit: number }) {
-    const { posts, limit } = props;
-
+function Community({ posts, limit, isLoggedIn }: { posts: Array<Post>; limit: number; isLoggedIn: boolean }) {
     const mainElement = useRef<HTMLElement>(null);
     const [scroll, setScroll] = useState(false);
 
@@ -32,7 +30,7 @@ function Community(props: { posts: Array<Post>; limit: number }) {
         <>
             <main className="main-community" ref={mainElement} onScroll={handleScroll}>
                 <CommunityDetail posts={posts} />
-                <ButtonGroup />
+                <ButtonGroup isLoggedIn={isLoggedIn} />
                 <PostSection posts={posts} limit={limit} />
             </main>
             {scroll && (

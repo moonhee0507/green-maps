@@ -26,7 +26,7 @@ function WriteSection(props: { title: string }) {
             </label>
             <textarea
                 id="txtReview"
-                placeholder="채식에 대한 이야기를 자유롭게 공유해주세요."
+                placeholder={'채식에 대한 이야기를 자유롭게 공유해주세요.\n(10자이상 100자 이내)'}
                 autoComplete="on"
                 maxLength={100}
                 minLength={10}

@@ -1,18 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { Community } from './Community';
-import { useDispatch, useSelector } from 'react-redux';
-import type { RootState } from '../../renderer/store/index.js';
+import { NavBar } from '../../components/navBar';
+import { useDispatch } from 'react-redux';
 import type { Post } from '../../server/models/Post';
 import { PageProps } from '../../renderer/types';
+import { useAppSelector } from '../../renderer/store/hooks';
+import { API_URL } from '../API_URL/api';
 
 export { Page };
 
 function Page(pageProps: PageProps) {
-    // 전역에서 관리해야 하는 것: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
-    const subject = useSelector((state: RootState) => state.postSlice.SUBJECT);
+    // 전역에서 관리하는 변수: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
+    const subject = useAppSelector((state) => state.postSlice.SUBJECT);
+    const currentPage = useAppSelector((state) => state.postSlice.post.CURRENT_PAGE);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
-    const currentPage = useSelector((state: RootState) => state.postSlice.post.CURRENT_PAGE);
     const limit = 20;
 
     // 내려보내는 데이터는 여기서 정해짐
@@ -22,9 +25,7 @@ function Page(pageProps: PageProps) {
         try {
             // 말머리에 내용이 있으면 subjects/:name, 아니면 posts
             const res = await fetch(
-                `http://localhost:5000/api/${
-                    subject !== '' ? 'subjects/' + subject : 'posts'
-                }?page=${currentPage}&limit=${limit}`,
+                `${API_URL}/${subject !== '' ? 'subjects/' + subject : 'posts'}?page=${currentPage}&limit=${limit}`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -52,12 +53,21 @@ function Page(pageProps: PageProps) {
                 CURRENT_PAGE: data.currentPage,
             });
         });
+
+        (async () => {
+            const res = await fetch(`${API_URL}/users/`);
+            const data = await res.json();
+
+            if (data.success === true) setIsLoggedIn(true);
+            else setIsLoggedIn(false);
+        })();
     }, [getPosts]);
 
     return (
         <>
             <SearchBar />
-            <Community posts={posts} limit={limit} />
+            <Community posts={posts} limit={limit} isLoggedIn={isLoggedIn} />
+            <NavBar isLoggedIn={isLoggedIn} />
         </>
     );
 }

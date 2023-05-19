@@ -4,11 +4,11 @@ import { CopyButton } from '../../../../components/button/CopyButton';
 
 export { LocationSection };
 
-function LocationSection(props: { restaurantInfo: Restaurant }) {
+function LocationSection({ restaurantInfo }: { restaurantInfo: Restaurant }) {
     useEffect(() => {
         const { kakao }: any = window;
 
-        const [lng, lat] = props.restaurantInfo.location.coordinates;
+        const [lng, lat] = restaurantInfo.location.coordinates;
         const mapContainer = document.getElementById('miniMap');
         const mapOption = {
             center: new kakao.maps.LatLng(lat, lng),
@@ -26,9 +26,11 @@ function LocationSection(props: { restaurantInfo: Restaurant }) {
 
     return (
         <section className="section-location">
-            <h4>위치</h4>
-            <span>{props.restaurantInfo.address}</span>
-            <CopyButton address={props.restaurantInfo.address} />
+            <h4 className="sr-only">위치</h4>
+            <div className="style-wrapper-location-address">
+                <span>{restaurantInfo.address} </span>
+                <CopyButton address={restaurantInfo.address} />
+            </div>
             <div id="miniMap" />
         </section>
     );

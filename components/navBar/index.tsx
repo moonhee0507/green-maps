@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from '../../renderer/Link';
-import { API_URL } from '../../pages/API_URL/api';
-import { PageContext } from '../../renderer/types';
 
 export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (

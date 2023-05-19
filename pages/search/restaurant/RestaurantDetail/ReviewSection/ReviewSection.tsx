@@ -50,7 +50,7 @@ function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Revie
 
     return (
         <section className="section-review">
-            <h4>리뷰</h4>
+            <h4 className="sr-only">리뷰</h4>
             <ReviewButton restaurantId={restaurantInfo._id} isLoggedIn={isLoggedIn} />
             <div className="wrapper-review">
                 {reviews.length > 0 ? (
@@ -58,10 +58,13 @@ function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Revie
                         return <ReviewItem key={i} item={review} />;
                     })
                 ) : (
-                    <div>리뷰가 없습니다</div>
+                    <div className="style-wrapper-no-review">
+                        <div className="txt-no-review">😭</div>
+                        <p>리뷰가 아직 없어요.</p>
+                    </div>
                 )}
             </div>
-            <Pagination count={reviews.length} perPage={3} />
+            {reviews.length > 0 && <Pagination count={reviews.length} perPage={3} />}
         </section>
     );
 }

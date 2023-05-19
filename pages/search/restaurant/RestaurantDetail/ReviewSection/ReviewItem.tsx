@@ -4,18 +4,25 @@ import { Owner, Date, Image, ReviewLikeButton, Content } from './component/index
 
 export { ReviewItem };
 
-function ReviewItem(props: { item: Review }) {
-    const { _id, owner, registeredAt, photo, content, like } = props.item;
+function ReviewItem({ item }: { item: Review }) {
+    const { _id, owner, registeredAt, photo, content, like } = item;
 
     return (
         <article className="container-review">
             <h5 className="sr-only">개별 리뷰</h5>
             <dl>
-                <Owner owner={owner} />
-                <Date registeredAt={registeredAt} />
-                {photo && <Image photoList={photo} />}
-                <ReviewLikeButton reviewId={_id} like={like} />
-                <Content content={content} />
+                <div className="style-wrapper-reviewitem">
+                    <Owner owner={owner} />
+                    <Date registeredAt={registeredAt} />
+                </div>
+                {photo && photo.length > 0 ? <Image photoList={photo} /> : null}
+                <div
+                    className="style-wrapper-reviewitem"
+                    style={photo && photo.length === 0 ? { paddingTop: '0' } : {}}
+                >
+                    <ReviewLikeButton reviewId={_id} like={like} />
+                    <Content content={content} />
+                </div>
             </dl>
         </article>
     );

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../../components/topBar/topBar';
 import { RestaurantDetail } from './RestaurantDetail/RestaurantDetail';
-import { API_URL } from '../../API_URL/api';
 import { NavBar } from '../../../components/navBar';
+import { API_URL } from '../../API_URL/api';
 import type { PageProps } from '../../../renderer/types';
 
 export { Page };

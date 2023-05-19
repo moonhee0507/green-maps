@@ -1,8 +1,8 @@
 import React from 'react';
-import type { Restaurant } from '../../../../../server/models/Restaurant';
 import { ButtonContainer } from './component/ButtonContainer';
 import { Title } from './component/Title';
 import { Stars } from './component/Stars';
+import type { Restaurant } from '../../../../../server/models/Restaurant';
 
 export { PrimarySection };
 

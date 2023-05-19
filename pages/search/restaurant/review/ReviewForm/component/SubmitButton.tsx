@@ -1,7 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { RandomFileName, SelectedImage } from './PictureSection';
-import type { RootState } from '../../../../../../renderer/store.js';
+import { API_URL } from '../../../../../API_URL/api';
+import { useAppSelector } from '../../../../../../renderer/store/hooks';
 
 type SelectedImages = Array<SelectedImage>;
 type RandomFileNames = Array<RandomFileName>;
@@ -10,10 +11,10 @@ export { SubmitButton };
 
 function SubmitButton(props: { restaurantId: string }) {
     const dispatch = useDispatch();
-    const selectedImages: SelectedImages = useSelector((state: RootState) => state.reviewSlice.image.FILE_INFO);
-    const content = useSelector((state: RootState) => state.reviewSlice.CONTENT);
-    const userId = useSelector((state: RootState) => state.reviewSlice.ID);
-    const randomFileNames: RandomFileNames = useSelector((state: RootState) => state.reviewSlice.image.RANDOM_NAME);
+    const selectedImages: SelectedImages = useAppSelector((state) => state.reviewSlice.image.FILE_INFO);
+    const content = useAppSelector((state) => state.reviewSlice.CONTENT);
+    const userId = useAppSelector((state) => state.reviewSlice.ID);
+    const randomFileNames: RandomFileNames = useAppSelector((state) => state.reviewSlice.image.RANDOM_NAME);
 
     async function handleSubmit() {
         let photo: Array<{ src: string; pick: boolean } | null> = [];
@@ -28,7 +29,7 @@ function SubmitButton(props: { restaurantId: string }) {
             photo = temp;
         }
 
-        const data = {
+        const body = {
             owner: userId,
             restaurant: props.restaurantId,
             photo: photo,
@@ -36,13 +37,22 @@ function SubmitButton(props: { restaurantId: string }) {
         };
 
         try {
-            await fetch(`http://localhost:5000/api/reviews/`, {
+            const res = await fetch(`${API_URL}/reviews/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify(body),
             });
+
+            const data = await res.json();
+
+            if (data.success === true) {
+                alert('리뷰가 등록되었습니다.');
+                window.history.back();
+            } else {
+                alert('리뷰 등록에 실패했습니다.\n다시 시도해주세요.');
+            }
         } catch (e) {
             console.error(e);
         }
@@ -114,7 +124,7 @@ function SubmitButton(props: { restaurantId: string }) {
             <button
                 type="button"
                 onClick={handleSubmit}
-                style={{ width: '100%', marginTop: '10px', backgroundColor: 'lightgreen' }}
+                style={{ width: '100%', marginTop: '10px', backgroundColor: 'lightgreen', padding: '20px' }}
             >
                 작성 완료
             </button>

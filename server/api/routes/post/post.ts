@@ -28,6 +28,20 @@ export default (app: Router) => {
         res.json(res.locals.postAggregate);
     });
 
+    route.get('/my', async (req: Request, res: Response) => {
+        try {
+            const post = await Post.find({ owner: req.query.owner }).exec();
+
+            if (post) res.status(200).json({ success: true, posts: post });
+            else if (!post) res.status(404).json({ success: true, message: '게시글이 없습니다.' });
+        } catch (err) {
+            if (err instanceof Error) {
+                console.error(err);
+                res.status(500).json({ success: false, message: err.message });
+            }
+        }
+    });
+
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
             const item = await Post.findById(req.params.postId).exec();
