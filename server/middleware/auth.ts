@@ -6,7 +6,9 @@ const auth = (req: any, res: Response, next: NextFunction) => {
 
     User.findByToken(token, (err: Error | null, user?: any) => {
         if (err) {
-            console.log(err.message);
+            // console.log(err.message);
+            console.log('token', token);
+
             return res.json({ isAuthenticated: false, errorMessage: err.message });
         } else if (!user) return res.json({ isAuthenticated: false, errorMessage: '🚨 2해당 유저가 없습니다.' });
 

@@ -1,38 +1,28 @@
 import React, { MouseEvent, useEffect, useState } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { NavBar } from '../../components/navBar';
-import { API_URL } from '../API_URL/api';
-import { UserInfo } from '../../server/models/User';
 import { ProfileSection } from './ProfileSection';
 import { Page as ErrorPage } from '../../renderer/_error.page';
 import { MyReviewSection } from './MyReviewSection/MyReviewSection';
 import { MyCommunitySection } from './MyCommunitySection/MyCommunitySection';
+import type { PageContext } from '../../renderer/types';
+import type { UserInfo } from '../../server/models/User';
 
-export function Page() {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-    const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+export function Page(pageContext: PageContext) {
+    const { isLoggedIn, info } = pageContext.user;
 
     useEffect(() => {
-        (async () => {
-            const res = await fetch(`${API_URL}/users/`);
-            const data = await res.json();
-
-            if (data.success === true) {
-                setIsLoggedIn(true);
-                setUserInfo(data.user);
-            } else {
-                setIsLoggedIn(false);
-                setUserInfo(null);
-                // 로그인 안하면 경고창
-            }
-        })();
+        if (isLoggedIn === false) {
+            alert('로그인 페이지로 이동합니다.');
+            window.location.href = '/login';
+        }
     }, []);
 
     return (
-        userInfo && (
+        isLoggedIn && (
             <>
                 <TopBar title="내 정보" />
-                <MyMain userInfo={userInfo} />
+                <MyMain userInfo={info} />
                 <NavBar isLoggedIn={isLoggedIn} />
             </>
         )
@@ -51,6 +41,8 @@ function MyMain({ userInfo }: { userInfo: UserInfo }) {
         if ($1) {
             lists[arrTitle.indexOf($1)].classList.add('on');
             setShowSection($1);
+        } else {
+            lists[0].classList.add('on');
         }
     }, []);
 

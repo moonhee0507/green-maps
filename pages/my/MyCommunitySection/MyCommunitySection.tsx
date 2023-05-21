@@ -7,7 +7,7 @@ import { Post } from '../../../server/models/Post';
 export { MyCommunitySection };
 
 function MyCommunitySection({ userInfo }: { userInfo: UserInfo }) {
-    const [showSection, setShowSection] = useState<string>('게시글');
+    const [showSection, setShowSection] = useState<string>('post');
     const [posts, setPosts] = useState<Post[] | null>(null);
     const [numPost, setNumPost] = useState<number>(0);
     const [numComment, setNumComment] = useState<number>(0);
@@ -24,6 +24,8 @@ function MyCommunitySection({ userInfo }: { userInfo: UserInfo }) {
         if ($1 === '커뮤니티 활동' && $2) {
             lists[arrSummary.indexOf($2)].classList.add('on');
             setShowSection($2);
+        } else {
+            lists[0].classList.add('on');
         }
 
         getMyPost(nickName).then((data) => {
@@ -34,10 +36,26 @@ function MyCommunitySection({ userInfo }: { userInfo: UserInfo }) {
                 } else setPosts(null);
             } else setPosts(null);
         });
+
+        getMyComment(nickName).then((data) => {
+            if (data.success === true) {
+                if (data.posts) {
+                    setPosts(data.posts);
+                    setNumComment(data.posts.length);
+                } else setPosts(null);
+            } else setPosts(null);
+        });
     }, []);
 
     async function getMyPost(nickName: string): Promise<{ success: boolean; posts?: Post[]; message?: string }> {
-        const res = await fetch(`${API_URL}/posts/my?owner=${nickName}`);
+        const res = await fetch(`${API_URL}/posts/my?boundary=post&owner=${nickName}`);
+        const data = await res.json();
+
+        return data;
+    }
+
+    async function getMyComment(nickName: string): Promise<{ success: boolean; posts?: Post[]; message?: string }> {
+        const res = await fetch(`${API_URL}/posts/my?boundary=comment&owner=${nickName}`);
         const data = await res.json();
 
         return data;
@@ -74,10 +92,10 @@ function MyCommunitySection({ userInfo }: { userInfo: UserInfo }) {
             {posts && posts.length > 0 ? (
                 (() => {
                     switch (showSection) {
-                        case '게시글':
+                        case 'post':
                             return <PostList posts={posts} limit={20} />;
-                        // case '댓글':
-                        //     return <PostList />;
+                        case 'comment':
+                            return <PostList posts={posts} limit={20} />;
                         default:
                             return <PostList posts={posts} limit={20} />;
                     }

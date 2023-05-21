@@ -11,10 +11,11 @@ import { API_URL } from '../API_URL/api';
 export { Page };
 
 function Page(pageProps: PageProps) {
+    const { isLoggedIn } = pageProps.user;
+
     // 전역에서 관리하는 변수: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
     const subject = useAppSelector((state) => state.postSlice.SUBJECT);
     const currentPage = useAppSelector((state) => state.postSlice.post.CURRENT_PAGE);
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     const limit = 20;
 
@@ -53,14 +54,6 @@ function Page(pageProps: PageProps) {
                 CURRENT_PAGE: data.currentPage,
             });
         });
-
-        (async () => {
-            const res = await fetch(`${API_URL}/users/`);
-            const data = await res.json();
-
-            if (data.success === true) setIsLoggedIn(true);
-            else setIsLoggedIn(false);
-        })();
     }, [getPosts]);
 
     return (

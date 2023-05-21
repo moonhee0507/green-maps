@@ -30,10 +30,15 @@ export default (app: Router) => {
 
     route.get('/my', async (req: Request, res: Response) => {
         try {
-            const post = await Post.find({ owner: req.query.owner }).exec();
+            let post;
+            if (req.query.boundary === 'post') {
+                post = await Post.find({ owner: req.query.owner }).exec();
+            } else if (req.query.boundary === 'comment') {
+                post = await Post.find({ comments: { $elemMatch: { owner: req.query.owner } } }).exec();
+            }
 
             if (post) res.status(200).json({ success: true, posts: post });
-            else if (!post) res.status(404).json({ success: true, message: '게시글이 없습니다.' });
+            else if (!post) res.status(404).json({ success: true, message: '쿼리 결과가 없습니다.' });
         } catch (err) {
             if (err instanceof Error) {
                 console.error(err);

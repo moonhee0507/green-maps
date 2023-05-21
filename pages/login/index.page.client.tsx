@@ -1,31 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { LoginMain } from './LoginMain/LoginMain';
-import { API_URL } from '../API_URL/api';
-import { NavBar } from '../../components/navBar';
+import type { PageContext } from '../../renderer/types';
 
 export { Page };
 
-function Page() {
-    // 로그인 유저는 홈화면으로 리디렉션
-    useEffect(() => {
-        checkTokenInBrowser().then((data) => {
-            if (data.success === true) {
-                alert('로그인 사용자는 접근할 수 없습니다. \n홈 화면으로 돌아갑니다.');
-                window.location.href = '/';
-            }
-        });
-    }, []);
+function Page(pageContext: PageContext) {
+    const { isLoggedIn } = pageContext.user;
 
-    async function checkTokenInBrowser() {
-        try {
-            const res = await fetch(`${API_URL}/users`);
-            const data = await res.json();
-            return data; // { success: boolean, user: UserInfo }
-        } catch (err) {
-            console.error(err);
+    useEffect(() => {
+        if (isLoggedIn === true) {
+            alert('홈 화면으로 이동합니다.');
+            window.location.href = '/';
         }
-    }
+    }, []);
 
     return (
         <>
