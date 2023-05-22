@@ -1010,7 +1010,12 @@ dd {
   background-color: lightgreen;
 }
 
-.style-wrapper-bookmarkgroup {
+.style-wrapper-groupname {
+  display: flex;
+  justify-content: space-between;
+}
+
+.style-wrapper-groupname-info {
   display: flex;
   gap: 10px;
 }
@@ -1021,11 +1026,6 @@ dd {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 5px;
-}
-
-.container-bookmarkgroup-right {
-  display: flex;
-  flex-direction: column;
 }
 
 .txt-groupname,
@@ -1041,6 +1041,11 @@ dd {
 
 .txt-restaurant-count {
   font-size: 13px;
+}
+
+.txt-group-date {
+  font-size: 13px;
+  align-self: end;
 }
 
 .main-bookmarklist {
