@@ -309,6 +309,7 @@ dd {
   margin: 0 auto;
   padding: 20px;
   border-radius: 45px;
+  margin-top: 50px;
 }
 .style-wrapper-no-review .txt-no-review {
   font-size: 50px;
@@ -699,7 +700,13 @@ dd {
 }
 
 .main-my {
-  flex-grow: 1;
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+}
+.main-my::-webkit-scrollbar {
+  display: none;
 }
 
 .ul-title-bar {
@@ -874,8 +881,166 @@ dd {
   background-image: url(/images/icon-FAQ.svg);
 }
 
+.style-wrapper-logout {
+  padding: 20px;
+}
+.style-wrapper-logout > button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
 .wrapper-summary-community {
   display: flex;
+}
+
+.main-bookmark {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+}
+.main-bookmark::-webkit-scrollbar {
+  display: none;
+}
+
+.section-mylists {
+  padding: 20px;
+}
+
+.ul-summary-bookmark {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  border-bottom: 2px solid #d3d3d3;
+  padding: 15px 0 15px;
+}
+.ul-summary-bookmark > li {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+.ul-summary-bookmark > li > p {
+  margin: 0;
+}
+.ul-summary-bookmark > .list-summary-bookmark.on {
+  position: relative;
+  font-weight: bold;
+}
+.ul-summary-bookmark > .list-summary-bookmark.on::after {
+  position: absolute;
+  content: "";
+  width: calc(100% - 25px);
+  bottom: -18px;
+  left: 50%;
+  border: 2px solid black;
+  transform: translate(-50%, 0);
+}
+
+.style-wrapper-bookmark-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.wrapper-groupcount-orderbox {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.txt-bookmarkgroup {
+  margin: 0;
+  font-weight: bold;
+}
+
+.button-order-bookmarkgroup {
+  position: relative;
+  padding: 10px 30px 10px 10px;
+}
+.button-order-bookmarkgroup::before {
+  position: absolute;
+  content: "";
+  background-image: url(/images/icon-arrow.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  width: 15px;
+  height: 15px;
+  top: 50%;
+  right: 10px;
+  transform: translate(0, -50%) rotate(-90deg);
+}
+
+.button-edit-bookmarkgroup {
+  position: relative;
+  padding: 10px 10px 10px 30px;
+}
+.button-edit-bookmarkgroup::before {
+  position: absolute;
+  content: "";
+  background-image: url(/images/icon-edit.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  width: 15px;
+  height: 15px;
+  top: 50%;
+  left: 10px;
+  transform: translate(0, -50%);
+}
+
+.ul-groupname {
+  margin-bottom: 20px;
+}
+.ul-groupname .li-bookmarkgroup > a {
+  display: block;
+  padding: 10px 0 10px;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.button-new-group {
+  position: sticky;
+  width: 100%;
+  padding: 20px;
+  bottom: 15px;
+  border: 0;
+  background-color: lightgreen;
+}
+
+.style-wrapper-bookmarkgroup {
+  display: flex;
+  gap: 10px;
+}
+
+.container-groupicon {
+  width: 50px;
+  height: 50px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.container-bookmarkgroup-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.txt-groupname,
+.txt-restaurant-count {
+  margin: 0;
+}
+
+.txt-groupname {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.txt-restaurant-count {
+  font-size: 13px;
 }
 
 .section-404,

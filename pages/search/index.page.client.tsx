@@ -1,25 +1,41 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SearchBar } from './searchBar';
-import { init } from './kakaoMapAPI.js';
 import ListButton from './listButton';
 import { NavBar } from '../../components/navBar';
-import type { PageContext } from '../../renderer/types';
+import { init } from './kakaoMapAPI.js';
+import { API_URL } from '../API_URL/api';
 
 export { Page };
 
-function Page(pageContext: PageContext) {
-    const { isLoggedIn } = pageContext.user;
+function Page() {
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     useEffect(() => {
         init();
+
+        (async () => {
+            const res = await fetch(`${API_URL}/users/`);
+            const data = await res.json();
+
+            if (data.success === true) setIsLoggedIn(true);
+            else setIsLoggedIn(false);
+        })();
     }, []);
 
     return (
         <>
             <SearchBar />
-            <div id="map"></div>
+            <KakaoMap />
             <ListButton />
             <NavBar isLoggedIn={isLoggedIn} />
         </>
     );
+}
+
+function KakaoMap() {
+    useEffect(() => {
+        init();
+    }, []);
+
+    return <div id="map" />;
 }

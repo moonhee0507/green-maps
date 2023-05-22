@@ -1,0 +1,178 @@
+.main-bookmark {
+    @include extensive-content;
+}
+
+.section-mylists {
+    padding: $padding;
+}
+
+.ul-summary-bookmark {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    border-bottom: 2px solid $border-color;
+    padding: 15px 0 15px;
+
+    > li {
+        width: 100%;
+        text-align: center;
+        font-size: 16px;
+        cursor: pointer;
+
+        > p {
+            margin: 0;
+        }
+    }
+
+    > .list-summary-bookmark.on {
+        position: relative;
+        font-weight: bold;
+
+        &::after {
+            position: absolute;
+            content: '';
+            width: calc(100% - 25px);
+            bottom: -18px;
+            left: 50%;
+            border: 2px solid black;
+            -webkit-transform: translate(-50%, 0);
+            -ms-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);
+        }
+    }
+}
+
+// 북마크 디테일
+.style-wrapper-bookmark-detail {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.wrapper-groupcount-orderbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.txt-bookmarkgroup {
+    margin: 0;
+    font-weight: bold;
+}
+
+// 정렬 버튼
+.button-order-bookmarkgroup {
+    position: relative;
+    padding: 10px 30px 10px 10px;
+
+    &::before {
+        position: absolute;
+        content: '';
+        background-image: url(/images/icon-arrow.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 15px 15px;
+        width: 15px;
+        height: 15px;
+        top: 50%;
+        right: 10px;
+        -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%) rotate(-90deg);
+    }
+}
+
+// 편집하기 버튼
+.button-edit-bookmarkgroup {
+    position: relative;
+    padding: 10px 10px 10px 30px;
+
+    &::before {
+        position: absolute;
+        content: '';
+        background-image: url(/images/icon-edit.svg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 15px 15px;
+        width: 15px;
+        height: 15px;
+        top: 50%;
+        left: 10px;
+        -webkit-transform: translate(0, -50%);
+        -ms-transform: translate(0, -50%);
+        transform: translate(0, -50%);
+    }
+}
+
+.ul-groupname {
+    margin-bottom: 20px; // `새 그룹 추가` 버튼과 간격
+
+    .li-bookmarkgroup {
+        > a {
+            display: block;
+            padding: 10px 0 10px;
+            border-bottom: 1px solid $border-color;
+        }
+    }
+}
+
+.button-new-group {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%;
+    padding: $padding;
+    bottom: 15px;
+    border: 0;
+    background-color: lightgreen;
+}
+
+// 그룹 리스트
+.style-wrapper-bookmarkgroup {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 10px;
+}
+
+.container-groupicon {
+    width: 50px;
+    height: 50px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.container-bookmarkgroup-right {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.txt-groupname,
+.txt-restaurant-count {
+    margin: 0;
+}
+
+.txt-groupname {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.txt-restaurant-count {
+    font-size: 13px;
+}

@@ -19,7 +19,8 @@ export function Page(pageContext: PageContext) {
     }, []);
 
     return (
-        isLoggedIn && (
+        isLoggedIn &&
+        info && (
             <>
                 <TopBar title="내 정보" />
                 <MyMain userInfo={info} />

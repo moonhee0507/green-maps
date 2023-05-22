@@ -2,6 +2,18 @@ import { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+export type Bookmark = {
+    _id: string;
+    registeredAt: string;
+    groupName: string;
+    groupIcon: string;
+};
+
+export type Like = {
+    _id: string;
+    registeredAt: string;
+};
+
 export interface UserInfo {
     userId: string;
     nickName: string;
@@ -12,8 +24,8 @@ export interface UserInfo {
     tokenExp: number;
     role: number;
     active: boolean;
-    bookmarkList: Array<{ _id: string; registeredAt: string; groupName: string }>;
-    likeList: Array<{ _id: string; registeredAt: string }>;
+    bookmarkList: Array<Bookmark>;
+    likeList: Array<Like>;
 }
 
 interface UserMethod {
@@ -88,7 +100,12 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
             groupName: {
                 type: String,
                 required: false,
-                default: '기본',
+                default: '기본 그룹',
+            },
+            groupIcon: {
+                type: String,
+                required: false,
+                default: '/images/icon-star.svg',
             },
         },
     ],

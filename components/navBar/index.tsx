@@ -18,7 +18,7 @@ export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/bookmark" className="link-nav">
+                    <Link href="/my-lists" className="link-nav">
                         <i className="img-nav-icon bookmark" />
                         <span>북마크</span>
                     </Link>

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { buttonSlice, mapSlice, reviewSlice, paginationSlice, postSlice, authSlice } from './index.js';
+import { buttonSlice, mapSlice, reviewSlice, paginationSlice, postSlice, authSlice, myListSlice } from './index.js';
 
 const rootReducer = combineReducers({
     buttonSlice: buttonSlice,
@@ -8,6 +8,7 @@ const rootReducer = combineReducers({
     paginationSlice: paginationSlice,
     postSlice: postSlice,
     authSlice: authSlice,
+    myListSlice: myListSlice,
 });
 
 export default rootReducer;

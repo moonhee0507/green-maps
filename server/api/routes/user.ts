@@ -77,9 +77,17 @@ export default (app: Router) => {
     // logout
     route.post('/logout', (req: Request, res: Response) => {
         // expires, maxAge를 제외하고 res.cookie로 제공한 옵션과 동일해야 함
-        res.clearCookie('auth', { httpOnly: true, secure: true, sameSite: 'strict' }).json({
-            message: '로그아웃 되었습니다.',
-        });
+        try {
+            res.clearCookie('auth', { httpOnly: true, secure: true, sameSite: 'strict' }).json({
+                success: true,
+                message: '로그아웃 되었습니다.',
+            });
+        } catch (err) {
+            if (err instanceof Error) {
+                console.error(err);
+                if (err) res.json({ success: false, errorMessage: '로그아웃에 실패했습니다.' });
+            }
+        }
     });
 
     // bookmark 추가

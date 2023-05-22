@@ -1,10 +1,26 @@
 import React from 'react';
 import type { UserInfo } from '../../server/models/User';
 import { MyProfile } from './MyProfile/MyProfile';
+import { API_URL } from '../API_URL/api';
 
 export { ProfileSection };
 
 function ProfileSection({ userInfo }: { userInfo: UserInfo }) {
+    async function handleLogout() {
+        const res = await fetch(`${API_URL}/users/logout`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (res.ok === true) {
+            window.localStorage.removeItem('#1');
+            window.localStorage.removeItem('#2');
+            window.location.href = '/';
+        }
+    }
+
     return (
         <section>
             <h3 className="sr-only">프로필</h3>
@@ -20,6 +36,11 @@ function ProfileSection({ userInfo }: { userInfo: UserInfo }) {
                     <a href="">자주 찾는 질문</a>
                 </li>
             </ul>
+            <div className="style-wrapper-logout">
+                <button type="button" onClick={handleLogout}>
+                    로그아웃
+                </button>
+            </div>
         </section>
     );
 }

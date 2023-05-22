@@ -1,7 +1,5 @@
 .main-my {
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
+    @include extensive-content;
 }
 
 .ul-title-bar {
@@ -222,6 +220,17 @@
         &::before {
             background-image: url(/images/icon-FAQ.svg);
         }
+    }
+}
+
+// 로그아웃
+.style-wrapper-logout {
+    padding: $padding;
+
+    > button {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
     }
 }
 
