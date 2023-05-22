@@ -1043,6 +1043,68 @@ dd {
   font-size: 13px;
 }
 
+.main-bookmarklist {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+  padding: 20px;
+}
+.main-bookmarklist::-webkit-scrollbar {
+  display: none;
+}
+
+.list-restaurant-inbookmark {
+  border-bottom: 1px solid #d3d3d3;
+}
+.list-restaurant-inbookmark > a {
+  display: block;
+  padding: 10px 0 10px;
+}
+
+.style-wrapper-restaurantinfo-inbookmark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container-restaurant-title-detail {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 20px);
+}
+.container-restaurant-title-detail > p {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0 0 10px 0;
+}
+.container-restaurant-title-detail > div {
+  width: 100%; /* 부모 요소에 크기 고정시켜야 됨 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.container-restaurant-title-detail .txt-distance,
+.container-restaurant-title-detail .txt-address {
+  font-size: 13px;
+}
+.container-restaurant-title-detail .txt-distance {
+  margin-right: 10px;
+}
+
+.button-more {
+  background-image: url(/images/icon-3dot.svg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+  top: 50%;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  transform: translate(0, -50%) rotate(90deg);
+  border: 0;
+}
+
 .section-404,
 .section-500 {
   flex-grow: 1;

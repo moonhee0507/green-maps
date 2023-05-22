@@ -18,6 +18,7 @@ async function render(pageContext: PageContextServer) {
 
     let pageHtml;
     const PRELOADED_STATE = JSON.stringify(store.getState());
+    const LOGIN_MESSAGE = JSON.stringify('로그인이 필요한 서비스입니다.\n로그인하시겠습니까?');
 
     if (!pageContext.Page) {
         // SPA
@@ -61,7 +62,18 @@ async function render(pageContext: PageContextServer) {
                 <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
                 <script>
                     var global = global || window;
-                    window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)}
+                    window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)};
+                    
+                    const navBookmark = document.querySelector('.link-nav.no-login');
+                    if (navBookmark) {
+                        navBookmark.addEventListener('click', () => {
+                            const message = ${dangerouslySkipEscape(LOGIN_MESSAGE)};
+    
+                            if (confirm(message)) {
+                                window.location.href = '/login';
+                            }
+                        });
+                    }
                 </script>
         </html>`;
 

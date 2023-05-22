@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from '../../renderer/Link';
 
 export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
+    const checkLogin = () => {
+        if (!isLoggedIn) {
+            const message = '로그인이 필요한 서비스입니다.\n로그인하시겠습니까?';
+
+            if (typeof window !== 'undefined' && window.confirm(message)) {
+                window.location.href = '/login';
+            }
+        }
+    };
+
     return (
         <nav className="nav-bar">
             <ul>
@@ -18,10 +28,22 @@ export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/my-lists" className="link-nav">
-                        <i className="img-nav-icon bookmark" />
-                        <span>북마크</span>
-                    </Link>
+                    {isLoggedIn ? (
+                        <Link href="/my-lists" className="link-nav">
+                            <i className="img-nav-icon bookmark" />
+                            <span>북마크</span>
+                        </Link>
+                    ) : (
+                        <button
+                            type="button"
+                            className="link-nav no-login"
+                            style={{ width: '100%', border: '0' }}
+                            onClick={checkLogin}
+                        >
+                            <i className="img-nav-icon bookmark" />
+                            <span>북마크</span>
+                        </button>
+                    )}
                 </li>
                 <li>
                     <Link href="/community" className="link-nav">

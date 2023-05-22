@@ -176,3 +176,76 @@
 .txt-restaurant-count {
     font-size: 13px;
 }
+
+// /mt-lists/bookmark/:bookmarkGroupName
+.main-bookmarklist {
+    @include extensive-content;
+    padding: $padding;
+}
+
+.list-restaurant-inbookmark {
+    border-bottom: 1px solid $border-color;
+
+    > a {
+        display: block;
+        padding: 10px 0 10px;
+    }
+}
+
+.style-wrapper-restaurantinfo-inbookmark {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+$more-button: 20px;
+.container-restaurant-title-detail {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: calc(100% - $more-button);
+
+    > p {
+        font-weight: bold;
+        font-size: 16px;
+        margin: 0 0 10px 0;
+    }
+
+    > div {
+        @include one-line-ellipsis;
+    }
+
+    .txt-distance,
+    .txt-address {
+        font-size: 13px;
+    }
+
+    .txt-distance {
+        margin-right: 10px;
+    }
+}
+
+.button-more {
+    background-image: url(/images/icon-3dot.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    top: 50%;
+    right: 10px;
+    width: $more-button;
+    height: $more-button;
+    -webkit-transform: translate(0, -50%) rotate(90deg);
+    -ms-transform: translate(0, -50%) rotate(90deg);
+    transform: translate(0, -50%) rotate(90deg);
+    border: 0;
+}

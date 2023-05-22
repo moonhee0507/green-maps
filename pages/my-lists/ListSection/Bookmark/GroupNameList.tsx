@@ -4,7 +4,6 @@ import type { Bookmark } from '../../../../server/models/User';
 export { GroupNameList };
 
 function GroupNameList({ groupName, lists }: { groupName: string; lists: Bookmark[] }) {
-    console.log(lists);
     return (
         <li className="li-bookmarkgroup">
             <a href={`/my-lists/bookmark/${groupName}`}>

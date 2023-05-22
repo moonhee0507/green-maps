@@ -30,7 +30,7 @@ function LoginMain() {
             const data = await res.json();
 
             if (data.success) {
-                alert('로그인에 성공했습니다');
+                alert('🎉🎉로그인에 성공했습니다🎉🎉');
 
                 // 뒤로가기 + 새로고침
                 window.location.href = document.referrer;
