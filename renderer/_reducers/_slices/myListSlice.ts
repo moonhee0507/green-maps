@@ -1,16 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { Bookmark, Like } from '../../../server/models/User';
 
-interface ListState {
-    clicked: string;
-    bookmarkList: Bookmark[];
-    likeList: Like[];
-}
-
-const initialState: ListState = {
+const initialState = {
     clicked: '북마크',
-    bookmarkList: [],
-    likeList: [],
+    orderModalOn: false,
+    groupNameOrder: '등록순',
 };
 
 const myListSlice = createSlice({
@@ -20,15 +13,15 @@ const myListSlice = createSlice({
         SHOW(state, action: PayloadAction<string>) {
             state.clicked = action.payload;
         },
-        SET_MY_BOOKMARK(state, action: PayloadAction<Bookmark[]>) {
-            state.bookmarkList = action.payload;
+        ORDER_MODAL(state, action: PayloadAction<boolean>) {
+            state.orderModalOn = action.payload;
         },
-        SET_MY_LIKE(state, action: PayloadAction<Like[]>) {
-            state.likeList = action.payload;
+        ORDER_STANDARD(state, action: PayloadAction<string>) {
+            state.groupNameOrder = action.payload;
         },
     },
 });
 
-export const { SHOW, SET_MY_BOOKMARK, SET_MY_LIKE } = myListSlice.actions;
+export const { SHOW, ORDER_MODAL, ORDER_STANDARD } = myListSlice.actions;
 
 export default myListSlice.reducer;

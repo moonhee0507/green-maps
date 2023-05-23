@@ -5,6 +5,7 @@ import { Menu } from './Menu/Menu';
 import { ListSection } from './ListSection/ListSection';
 import type { PageContext } from '../../renderer/types';
 import type { UserInfo } from '../../server/models/User';
+import { ModalGroup } from './ModalGroup/ModalGroup';
 
 export { Page };
 
@@ -14,13 +15,14 @@ function Page(pageContext: PageContext) {
     return (
         <>
             <TopBar title="내 식당 목록" />
-            <BookmarkMain userInfo={info} />
+            <MyListMain userInfo={info} />
             <NavBar isLoggedIn={isLoggedIn} />
+            <ModalGroup />
         </>
     );
 }
 
-function BookmarkMain({ userInfo }: { userInfo: UserInfo | null }) {
+function MyListMain({ userInfo }: { userInfo: UserInfo | null }) {
     return (
         <main className="main-bookmark">
             <Menu userInfo={userInfo} />

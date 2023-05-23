@@ -1,15 +1,14 @@
 import React from 'react';
-import { LikeListItem } from './LikeListItem';
+import { ListItem } from '../../bookmark/BookmarkListMain/BookmarkList/BookmarkList';
 import type { Like } from '../../../../server/models/User';
 
 export { LikeList };
 
 function LikeList({ lists }: { lists: Like[] }) {
-    console.log(lists);
     return lists && lists.length > 0 ? (
         <ul>
             {lists.map((list) => {
-                return <LikeListItem key={Math.random()} list={list} />;
+                return <ListItem key={Math.random()} list={list} />;
             })}
         </ul>
     ) : (

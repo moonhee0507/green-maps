@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { Bookmark } from '../../../../server/models/User';
 
 export { GroupNameList };
 
 function GroupNameList({ groupName, lists }: { groupName: string; lists: Bookmark[] }) {
+    const [date] = useState(() => {
+        let registeredAt = lists.map((list) => list.registeredAt)[0];
+
+        return registeredAt.slice(0, 13);
+    });
     return (
         <li className="li-bookmarkgroup">
             <a href={`/my-lists/bookmark/${groupName}`}>
@@ -19,7 +24,7 @@ function GroupNameList({ groupName, lists }: { groupName: string; lists: Bookmar
                             </p>
                         </div>
                     </div>
-                    <div className="txt-group-date">2023.05.23.</div>
+                    <div className="txt-group-date">{date}</div>
                 </div>
             </a>
         </li>

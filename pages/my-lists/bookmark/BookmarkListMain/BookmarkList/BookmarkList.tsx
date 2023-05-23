@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_URL } from '../../../../API_URL/api';
-import type { Bookmark } from '../../../../../server/models/User';
+import type { Bookmark, Like } from '../../../../../server/models/User';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
 import formatDistance from './formatDistance';
 
@@ -10,7 +10,7 @@ function BookmarkList({ lists }: { lists: Bookmark[] }) {
     return lists && lists.length > 0 ? (
         <ul className="ul-groupname">
             {lists.map((list) => {
-                return <BookmarkListItem key={Math.random()} list={list} />;
+                return <ListItem key={Math.random()} list={list} />;
             })}
         </ul>
     ) : (
@@ -21,7 +21,7 @@ function BookmarkList({ lists }: { lists: Bookmark[] }) {
     );
 }
 
-function BookmarkListItem({ list }: { list: Bookmark }) {
+export function ListItem({ list }: { list: Bookmark | Like }) {
     const { _id } = list;
     const [restaurantInfo, setRestaurantInfo] = useState<Restaurant | null>(null);
 

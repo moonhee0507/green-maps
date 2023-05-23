@@ -98,6 +98,16 @@ dd {
   position: relative;
 }
 
+.app.modal-mode::after {
+  position: absolute;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.5;
+  background-size: contain;
+  width: 100%;
+  height: 100vh;
+}
+
 #map {
   flex-grow: 1;
 }
@@ -1108,6 +1118,100 @@ dd {
   height: 20px;
   transform: translate(0, -50%) rotate(90deg);
   border: 0;
+}
+
+.mylist-modal-group {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border: 1px solid #d3d3d3;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 20px;
+  background-color: white;
+  z-index: 9999;
+}
+
+.modal-group-order {
+  position: relative;
+}
+.modal-group-order > p {
+  margin: 0;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+.modal-group-order .container-button {
+  display: flex;
+  gap: 5px;
+}
+.modal-group-order .container-button > button {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #d3d3d3;
+}
+.modal-group-order .container-button .button-groupname-order.on {
+  border: 1px solid #0073e6;
+  color: #0073e6;
+}
+
+.button-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  border: 0;
+}
+.button-close .img-close {
+  filter: brightness(0);
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+}
+
+.main-group-list {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+  padding: 20px;
+}
+.main-group-list::-webkit-scrollbar {
+  display: none;
+}
+
+.container-notice {
+  color: #0073e6;
+  border: 1px solid #0073e6;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.container-notice > p {
+  margin: 10px;
+}
+
+.li-bookmarkgroup.reuse {
+  padding: 10px 0 10px;
+  border-bottom: 1px solid #d3d3d3;
+}
+
+.button-edit-group,
+.button-delete-group {
+  padding: 0;
+  border: 0;
+}
+.button-edit-group > img,
+.button-delete-group > img {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0);
+}
+
+.button-delete-group {
+  margin-left: 10px;
+}
+.button-delete-group > img {
+  transform: rotate(45deg);
 }
 
 .section-404,

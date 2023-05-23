@@ -255,3 +255,110 @@ $more-button: 20px;
     transform: translate(0, -50%) rotate(90deg);
     border: 0;
 }
+
+// 모달
+.mylist-modal-group {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border: 1px solid $border-color;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    padding: 20px;
+    background-color: white;
+    z-index: 9999;
+}
+
+.modal-group-order {
+    position: relative;
+
+    > p {
+        margin: 0;
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .container-button {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 5px;
+
+        > button {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid $border-color;
+        }
+
+        .button-groupname-order.on {
+            border: 1px solid $active-color;
+            color: $active-color;
+        }
+    }
+}
+
+// 닫기 버튼
+.button-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    border: 0;
+
+    .img-close {
+        -webkit-filter: brightness(0);
+        filter: brightness(0);
+        width: 20px;
+        height: 20px;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
+
+// /my-lists/bookmark/edit
+.main-group-list {
+    @include extensive-content;
+    padding: $padding;
+}
+
+.container-notice {
+    color: $active-color;
+    border: 1px solid $active-color;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    > p {
+        margin: 10px;
+    }
+}
+
+.li-bookmarkgroup.reuse {
+    padding: 10px 0 10px;
+    border-bottom: 1px solid $border-color;
+}
+
+.button-edit-group,
+.button-delete-group {
+    padding: 0;
+    border: 0;
+
+    > img {
+        width: 20px;
+        height: 20px;
+        -webkit-filter: brightness(0);
+        filter: brightness(0);
+    }
+}
+
+.button-delete-group {
+    margin-left: 10px;
+    > img {
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
