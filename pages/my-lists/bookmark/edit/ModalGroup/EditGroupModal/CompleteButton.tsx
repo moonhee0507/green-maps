@@ -25,7 +25,7 @@ function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; gr
     }, [groupIcon]);
 
     useEffect(() => {
-        if ((groupName !== null && groupName !== targetGroupName) || compareIcon === false) {
+        if ((groupName !== null && groupName !== '' && groupName !== targetGroupName) || compareIcon === false) {
             setAttr({ disabled: false });
         } else {
             setAttr({ disabled: true });
@@ -34,29 +34,35 @@ function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; gr
 
     async function handleClick() {
         if (userInfo !== null && groupList !== null) {
-            const { userId } = userInfo;
-            const groupId = groupList.filter((list) => list.name === targetGroupName)[0]._id;
+            const arrGroupName = groupList.map((group) => group.name);
 
-            const res = await fetch(`${API_URL}/bookmark/update`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    userId: userId,
-                    groupId: groupId,
-                    name: groupName || targetGroupName,
-                    groupIcon: groupIcon,
-                }),
-            });
-
-            const data = await res.json();
-            console.log(data);
-
-            if (data.success === true) {
-                window.location.reload();
+            if (arrGroupName.includes(groupName || targetGroupName)) {
+                alert('중복된 그룹명은 사용할 수 없습니다.');
             } else {
-                alert('다시 시도해주세요.');
+                const { userId } = userInfo;
+                const groupId = groupList.filter((list) => list.name === targetGroupName)[0]._id;
+
+                const res = await fetch(`${API_URL}/bookmark/update`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: userId,
+                        groupId: groupId,
+                        name: groupName || targetGroupName,
+                        groupIcon: groupIcon,
+                    }),
+                });
+
+                const data = await res.json();
+                console.log(data);
+
+                if (data.success === true) {
+                    window.location.reload();
+                } else {
+                    alert('다시 시도해주세요.');
+                }
             }
         } else {
             alert('로그아웃 되었습니다.\n다시 로그인해주세요.');

@@ -50,6 +50,18 @@ function ButtonGroup({ groupInfo, userInfo }: { groupInfo: GroupList; userInfo: 
         }
     }
 
+    // async function checkSameGroupName(currentName: string) {
+    //     const res = await fetch(`${API_URL}/bookmark/${userInfo?.userId}`);
+    //     const data = await res.json();
+
+    //     if (data.success) {
+    //         const groupNameList = data.groupList.map((list: GroupList) => list.name);
+    //         if (groupNameList.includes(currentName)) return true;
+    //     }
+
+    //     return false;
+    // }
+
     return (
         <div>
             <button className="button-edit-group" type="button" aria-label="그룹 수정 버튼" onClick={handleEdit}>
