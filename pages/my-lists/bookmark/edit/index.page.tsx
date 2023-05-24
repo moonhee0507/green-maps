@@ -46,7 +46,7 @@ function GroupListMain({ userInfo, groupList }: { userInfo: UserInfo | null; gro
             <section>
                 <h3 className="sr-only">내 북마크 그룹 목록</h3>
                 <Notice />
-                <GroupNameList bookmarkList={bookmarkList} groupList={groupList} />
+                <GroupNameList userInfo={userInfo} bookmarkList={bookmarkList} groupList={groupList} />
             </section>
         </main>
     );

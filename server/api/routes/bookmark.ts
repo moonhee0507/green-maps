@@ -86,4 +86,25 @@ export default (app: Router) => {
             }
         }
     });
+
+    route.delete('/:groupId', async (req: Request, res: Response) => {
+        try {
+            await Bookmark.findOneAndUpdate(
+                { userId: req.body.userId },
+                {
+                    $pull: {
+                        groupList: {
+                            _id: req.params.groupId,
+                        },
+                    },
+                }
+            );
+
+            res.status(200).json({ success: true, message: '북마크 그룹이 삭제되었습니다.' });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
 };
