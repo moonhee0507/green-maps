@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
 import { ORDER_MODAL, ORDER_STANDARD } from '../../../renderer/_reducers/_slices/myListSlice';
 import closeImg from '/images/icon-plus.svg';
@@ -8,6 +8,13 @@ export { GroupOrderModal };
 function GroupOrderModal() {
     const dispatch = useAppDispatch();
     const orderStandard = useAppSelector((state) => state.myListSlice.groupNameOrder);
+    const orderModalOn = useAppSelector((state) => state.myListSlice.orderModalOn);
+    const [attr, setAttr] = useState({ hidden: true });
+
+    useEffect(() => {
+        if (orderModalOn === true) setAttr({ hidden: false });
+        else setAttr({ hidden: true });
+    }, [orderModalOn]);
 
     function handleOrder(event: MouseEvent<HTMLButtonElement>) {
         dispatch(ORDER_STANDARD(event.currentTarget.innerText));
@@ -22,8 +29,8 @@ function GroupOrderModal() {
     }
 
     return (
-        <article className="modal-group-order">
-            <p>정렬기준</p>
+        <article className="modal-group-order" {...attr}>
+            <h4>정렬기준</h4>
             <div className="container-button">
                 <button
                     type="button"

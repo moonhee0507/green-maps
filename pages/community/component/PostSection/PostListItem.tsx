@@ -1,4 +1,4 @@
-import React, { ForwardedRef, MutableRefObject, forwardRef } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import { Title } from './component/Title';
 import { PreviewText } from './component/PreviewText';
 import { PostItemDetail } from './component/PostItemDetail';

@@ -42,6 +42,7 @@ export type PageContextCustom = {
         isLoggedIn: boolean;
         info: UserInfo | null;
     };
+    groupName?: string[];
 };
 
 type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;

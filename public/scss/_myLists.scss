@@ -269,10 +269,11 @@ $more-button: 20px;
     z-index: 9999;
 }
 
-.modal-group-order {
+.modal-group-order,
+.modal-group-add {
     position: relative;
 
-    > p {
+    > h4 {
         margin: 0;
         font-weight: bold;
         font-size: 16px;
@@ -317,6 +318,57 @@ $more-button: 20px;
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
     }
+}
+
+// 새 그룹 추가 모달
+#groupName,
+#groupNameForEdit {
+    width: 100%;
+    padding: $padding;
+    border: 1px solid $border-color;
+}
+
+.txt-icon-selection {
+    font-weight: bold;
+}
+
+.wrapper-icon-group {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 60px);
+}
+
+.container-icon {
+    position: relative;
+    cursor: pointer;
+
+    .style-icon {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        padding: 10px;
+
+        > img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .style-icon.on {
+        outline: 2px solid $active-color;
+    }
+}
+
+.button-groupname-complete {
+    width: 100%;
+    padding: 20px;
+    margin: 20px 0 20px;
 }
 
 // /my-lists/bookmark/edit

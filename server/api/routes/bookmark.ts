@@ -1,22 +1,89 @@
 import { Router, Request, Response } from 'express';
-import fetch from 'node-fetch';
-import Restaurant from '../../models/Restaurant';
+import Bookmark from '../../models/Bookmark.js';
 
 const route = Router();
 
 export default (app: Router) => {
     app.use('/bookmark', route);
 
-    route.post('/add', async (req: Request, res: Response) => {
+    route.get('/:userId', async (req: Request, res: Response) => {
         try {
-            // TODO: 북마크 추가기능(참고하기: https://stackoverflow.com/questions/30491468/how-to-insert-a-document-with-a-referenced-document-in-mongodb)
-            // const find = {}
-            // let populate = { path: 'Restaurant' };
-            // let query = Restaurant.find(find).populate(populate);
+            const bookmark = await Bookmark.findOne({ userId: req.params.userId });
 
-            res.status(200).json({ success: true });
-        } catch (err: any) {
-            res.json({ success: false, errorMessage: err.message });
+            res.status(200).json({ success: true, groupList: bookmark?.groupList });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
+    route.post('/create', async (req: Request, res: Response) => {
+        try {
+            const userId = req.body.userId;
+            const name = req.body.name;
+            const groupIcon = req.body.groupIcon;
+
+            const bookmark = await Bookmark.findOneAndUpdate(
+                {
+                    userId: userId,
+                },
+                {
+                    $push: {
+                        groupList: {
+                            name: name,
+                            groupIcon: groupIcon,
+                        },
+                    },
+                }
+            ).exec();
+
+            res.status(200).json({ success: true, bookmarkGroup: bookmark });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
+    route.patch('/update', async (req: Request, res: Response) => {
+        try {
+            const { userId, groupId, name, groupIcon } = req.body;
+            const updatedAt = new Intl.DateTimeFormat('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false,
+            }).format(new Date());
+
+            const updatedBookmark = await Bookmark.findOneAndUpdate(
+                {
+                    userId: userId,
+                    'groupList._id': groupId,
+                },
+                {
+                    // $는 groupList 배열에서 위 조건에 일치하는 인덱스를 의미
+                    $set: {
+                        'groupList.$.name': name,
+                        'groupList.$.groupIcon': groupIcon,
+                        'groupList.$.updatedAt': updatedAt,
+                    },
+                },
+                { new: true }
+            );
+
+            if (!updatedBookmark) {
+                return res.json({ success: false, errorMessage: '해당 그룹을 찾을 수 없습니다.' });
+            }
+
+            res.json({ success: true, updatedBookmark });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
         }
     });
 };

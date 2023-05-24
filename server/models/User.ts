@@ -81,7 +81,7 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     },
     bookmarkList: [
         {
-            _id: String,
+            _id: String, // RestaurantId
             registeredAt: {
                 type: String,
                 required: true,
@@ -103,6 +103,7 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
                 default: '기본 그룹',
             },
             groupIcon: {
+                // x
                 type: String,
                 required: false,
                 default: '/images/icon-star.svg',

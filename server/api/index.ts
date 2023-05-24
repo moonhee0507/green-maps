@@ -8,6 +8,7 @@ import image from './routes/image.js';
 import post from './routes/post/post.js';
 import subject from './routes/post/subject.js';
 import today from './routes/post/today.js';
+import bookmark from './routes/bookmark.js';
 
 export default () => {
     const app = Router();
@@ -22,6 +23,8 @@ export default () => {
     post(app);
     subject(app);
     today(app);
+
+    bookmark(app);
 
     return app;
 };

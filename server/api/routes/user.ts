@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
 import auth from '../../middleware/auth.js';
+import Bookmark from '../../models/Bookmark.js';
 
 const route = Router();
 
@@ -38,6 +39,9 @@ export default (app: Router) => {
 
         user.save()
             .then(() => {
+                const bookmark = new Bookmark({ userId: req.body.userId, groupList: { name: '기본 그룹' } });
+                bookmark.save();
+
                 res.status(200).json({
                     success: true,
                 });

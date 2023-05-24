@@ -1,0 +1,43 @@
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
+import { ADD_GROUP_MODAL, SET_GROUP_NAME, ICON_STANDARD } from '../../../../renderer/_reducers/_slices/myListSlice';
+import { GroupNameInput } from './GroupNameInput';
+import { IconSelection } from './IconSelection';
+import { CompleteButton } from './CompleteButton';
+import closeImg from '/images/icon-plus.svg';
+import type { UserInfo } from '../../../../server/models/User';
+
+export function AddGroupModal({ userInfo }: { userInfo: UserInfo | null }) {
+    const dispatch = useAppDispatch();
+    const addGroupModalOn = useAppSelector((state) => state.myListSlice.addGroupModalOn);
+
+    const [attr, setAttr] = useState({ hidden: true });
+
+    useEffect(() => {
+        if (addGroupModalOn === true) setAttr({ hidden: false });
+        else setAttr({ hidden: true });
+    }, [addGroupModalOn]);
+
+    function handleClose() {
+        const app = document.querySelector('.app');
+        app?.classList.remove('modal-mode');
+
+        dispatch(ADD_GROUP_MODAL(false));
+        dispatch(SET_GROUP_NAME('')); // 새그룹추가 모달 인풋창 초기화
+        dispatch(ICON_STANDARD('/images/icon-star.svg'));
+    }
+
+    return (
+        <article className="modal-group-add" {...attr}>
+            <h4>새 그룹 추가</h4>
+            <form action="">
+                <GroupNameInput />
+                <IconSelection />
+                <CompleteButton userInfo={userInfo} />
+            </form>
+            <button type="button" className="button-close" onClick={handleClose}>
+                <img src={closeImg} alt="X 아이콘" className="img-close" />
+            </button>
+        </article>
+    );
+}

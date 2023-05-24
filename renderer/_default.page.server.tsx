@@ -8,11 +8,11 @@ import icon from '/images/icon.png';
 import type { PageContextServer } from './types';
 
 export { render };
-export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams', 'token', 'user'];
+export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams', 'token', 'user', 'groupName'];
 
 async function render(pageContext: PageContextServer) {
     const store = getStore();
-    const { Page, pageProps, routeParams, token, user } = pageContext;
+    const { Page, pageProps, routeParams, token, user, groupName } = pageContext;
 
     console.log('🚀🚀 서버사이드 렌더링');
 
@@ -28,7 +28,7 @@ async function render(pageContext: PageContextServer) {
         pageHtml = ReactDOMServer.renderToString(
             <Provider store={store}>
                 <PageShell pageContext={pageContext}>
-                    <Page {...pageProps} routeParams={routeParams} token={token} user={user} />
+                    <Page {...pageProps} routeParams={routeParams} token={token} user={user} groupName={groupName} />
                 </PageShell>
             </Provider>
         );
@@ -85,6 +85,7 @@ async function render(pageContext: PageContextServer) {
             routeParams,
             token,
             user,
+            groupName,
         },
     };
 }
