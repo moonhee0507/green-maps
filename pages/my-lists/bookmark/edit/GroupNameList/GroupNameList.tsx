@@ -16,17 +16,12 @@ function GroupNameList({
     groupList: GroupList[] | null;
 }) {
     const [arrGroupName, setArrGroupName] = useState<GroupList[] | null>(null);
-    const [user, setUser] = useState<UserInfo | null>(null);
 
     useEffect(() => {
         if (groupList !== null) {
             setArrGroupName(groupList);
         }
-
-        if (userInfo !== null) {
-            setUser(userInfo);
-        }
-    }, [groupList, userInfo]);
+    }, [groupList]);
 
     return (
         <ul>

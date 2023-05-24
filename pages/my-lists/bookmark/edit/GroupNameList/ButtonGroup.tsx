@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import imgEdit from '/images/icon-edit.svg';
 import imgDelete from '/images/icon-plus.svg';
 import { useAppDispatch } from '../../../../../renderer/store/hooks';
@@ -49,18 +49,6 @@ function ButtonGroup({ groupInfo, userInfo }: { groupInfo: GroupList; userInfo: 
                 });
         }
     }
-
-    // async function checkSameGroupName(currentName: string) {
-    //     const res = await fetch(`${API_URL}/bookmark/${userInfo?.userId}`);
-    //     const data = await res.json();
-
-    //     if (data.success) {
-    //         const groupNameList = data.groupList.map((list: GroupList) => list.name);
-    //         if (groupNameList.includes(currentName)) return true;
-    //     }
-
-    //     return false;
-    // }
 
     return (
         <div>
