@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../../../renderer/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../../../../renderer/store/hooks';
 import { API_URL } from '../../../../../API_URL/api';
 import { navigate } from 'vite-plugin-ssr/client/router';
 import type { UserInfo } from '../../../../../../server/models/User';
 import type { GroupList } from '../../../../../../server/models/Bookmark';
+import { COMPARE_ICON } from '../../../../../../renderer/_reducers/_slices/myListSlice';
 
 export { CompleteButton };
 
@@ -12,15 +13,24 @@ function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; gr
     const groupName = useAppSelector((state) => state.myListSlice.groupName);
     const groupIcon = useAppSelector((state) => state.myListSlice.selectedIcon);
     const targetGroupName = useAppSelector((state) => state.myListSlice.targetGroup);
+    const compareIcon = useAppSelector((state) => state.myListSlice.sameIcon);
+
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (groupName !== null) {
-            if (groupName.length !== 0) setAttr({ disabled: false });
-            else setAttr({ disabled: true });
+        if (groupList !== null) {
+            const originIcon = groupList.filter((list) => list.name === targetGroupName)[0].groupIcon;
+            dispatch(COMPARE_ICON(originIcon === groupIcon));
+        }
+    }, [groupIcon]);
+
+    useEffect(() => {
+        if ((groupName !== null && groupName !== targetGroupName) || compareIcon === false) {
+            setAttr({ disabled: false });
         } else {
             setAttr({ disabled: true });
         }
-    }, [groupName]);
+    }, [groupName, compareIcon, targetGroupName, compareIcon]);
 
     async function handleClick() {
         if (userInfo !== null && groupList !== null) {
@@ -32,7 +42,12 @@ function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; gr
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userId: userId, groupId: groupId, name: groupName, groupIcon: groupIcon }),
+                body: JSON.stringify({
+                    userId: userId,
+                    groupId: groupId,
+                    name: groupName || targetGroupName,
+                    groupIcon: groupIcon,
+                }),
             });
 
             const data = await res.json();

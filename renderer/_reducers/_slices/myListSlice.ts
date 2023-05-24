@@ -9,6 +9,7 @@ type InitialState = {
     selectedIcon: string;
     editGroupModalOn: boolean;
     targetGroup: string;
+    sameIcon: boolean;
 };
 
 const initialState: InitialState = {
@@ -20,6 +21,7 @@ const initialState: InitialState = {
     selectedIcon: '/images/icon-star.svg',
     editGroupModalOn: false,
     targetGroup: '',
+    sameIcon: true,
 };
 
 const myListSlice = createSlice({
@@ -50,6 +52,9 @@ const myListSlice = createSlice({
         SET_TARGET_GROUP(state, action: PayloadAction<string>) {
             state.targetGroup = action.payload;
         },
+        COMPARE_ICON(state, action: PayloadAction<boolean>) {
+            state.sameIcon = action.payload;
+        },
     },
 });
 
@@ -62,6 +67,7 @@ export const {
     ICON_STANDARD,
     EDIT_GROUP_MODAL,
     SET_TARGET_GROUP,
+    COMPARE_ICON,
 } = myListSlice.actions;
 
 export default myListSlice.reducer;

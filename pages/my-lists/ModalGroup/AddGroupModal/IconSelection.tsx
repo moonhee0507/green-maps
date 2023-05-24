@@ -30,7 +30,7 @@ export function IconSelection() {
         <>
             <p className="txt-icon-selection">아이콘 선택</p>
             <div className="wrapper-icon-group">
-                {arrIcon.map((icon) => (
+                {arrIcon.map((icon, i) => (
                     <IconContainer key={Math.random()} icon={icon} />
                 ))}
             </div>

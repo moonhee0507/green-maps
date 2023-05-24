@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { GroupList } from '../../../../../server/models/Bookmark';
-import { Bookmark } from '../../../../../server/models/User';
+import type { GroupList } from '../../../../../server/models/Bookmark';
+import type { Bookmark } from '../../../../../server/models/User';
 
 export { GroupInfo };
 

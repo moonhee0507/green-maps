@@ -2,11 +2,16 @@ import React from 'react';
 import imgEdit from '/images/icon-edit.svg';
 import imgDelete from '/images/icon-plus.svg';
 import { useAppDispatch } from '../../../../../renderer/store/hooks';
-import { EDIT_GROUP_MODAL, SET_TARGET_GROUP } from '../../../../../renderer/_reducers/_slices/myListSlice';
+import {
+    EDIT_GROUP_MODAL,
+    ICON_STANDARD,
+    SET_TARGET_GROUP,
+} from '../../../../../renderer/_reducers/_slices/myListSlice';
+import type { GroupList } from '../../../../../server/models/Bookmark';
 
 export { ButtonGroup };
 
-function ButtonGroup({ groupName }: { groupName: string }) {
+function ButtonGroup({ groupInfo }: { groupInfo: GroupList }) {
     const dispatch = useAppDispatch();
 
     function handleEdit() {
@@ -14,7 +19,9 @@ function ButtonGroup({ groupName }: { groupName: string }) {
         app?.classList.add('modal-mode');
 
         dispatch(EDIT_GROUP_MODAL(true));
-        dispatch(SET_TARGET_GROUP(groupName));
+        dispatch(SET_TARGET_GROUP(groupInfo.name));
+
+        dispatch(ICON_STANDARD(groupInfo.groupIcon));
     }
 
     return (

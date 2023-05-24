@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import { EditGroupModal } from './EditGroupModal/EditGroupModal';
-import type { UserInfo } from '../../../../../server/models/User';
 import { EDIT_GROUP_MODAL, SET_GROUP_NAME, ICON_STANDARD } from '../../../../../renderer/_reducers/_slices/myListSlice';
-import { GroupList } from '../../../../../server/models/Bookmark';
+import type { UserInfo } from '../../../../../server/models/User';
+import type { GroupList } from '../../../../../server/models/Bookmark';
 
 export { ModalGroup };
 

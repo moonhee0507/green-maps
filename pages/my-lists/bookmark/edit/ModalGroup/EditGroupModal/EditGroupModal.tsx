@@ -10,7 +10,7 @@ import {
 } from '../../../../../../renderer/_reducers/_slices/myListSlice';
 import closeImg from '/images/icon-plus.svg';
 import type { UserInfo } from '../../../../../../server/models/User';
-import { GroupList } from '../../../../../../server/models/Bookmark';
+import type { GroupList } from '../../../../../../server/models/Bookmark';
 
 export function EditGroupModal({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
     const dispatch = useAppDispatch();

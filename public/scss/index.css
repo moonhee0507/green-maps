@@ -1177,7 +1177,7 @@ dd {
 #groupName,
 #groupNameForEdit {
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   border: 1px solid #d3d3d3;
 }
 
@@ -1215,7 +1215,7 @@ dd {
 
 .button-groupname-complete {
   width: 100%;
-  padding: 20px;
+  padding: 10px;
   margin: 20px 0 20px;
 }
 

@@ -26,13 +26,11 @@ function GroupNameList({ bookmarkList, groupList }: { bookmarkList: Bookmark[]; 
 }
 
 function GroupNameListItem({ groupInfo, bookmarkList }: { groupInfo: GroupList; bookmarkList: Bookmark[] }) {
-    const { name } = groupInfo;
-
     return (
         <li className="li-bookmarkgroup reuse">
             <div className="style-wrapper-groupname">
                 <GroupInfo groupInfo={groupInfo} bookmarkList={bookmarkList} />
-                {name !== '기본 그룹' && <ButtonGroup groupName={name} />}
+                {groupInfo.name !== '기본 그룹' && <ButtonGroup groupInfo={groupInfo} />}
             </div>
         </li>
     );
