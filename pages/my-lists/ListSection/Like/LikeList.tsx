@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { ListItem } from '../../bookmark/BookmarkListMain/BookmarkList/BookmarkList';
 import { API_URL } from '../../../API_URL/api';
-import type { Bookmark, Like } from '../../../../server/models/User';
-import type { Restaurant } from '../../../../server/models/Restaurant';
-
-type RestaurantData = (Bookmark & Restaurant) | (Like & Restaurant);
+import type { Like } from '../../../../server/models/User';
 
 export function LikeList({ lists }: { lists: Like[] }) {
-    const [restaurantData, setRestaurantData] = useState<RestaurantData[]>([]);
+    const [restaurantData, setRestaurantData] = useState<Like[]>([]);
 
     useEffect(() => {
         const setData = async () => {
-            const arr: RestaurantData[] = [];
+            const arr: Like[] = [];
 
             for (const list of lists) {
                 try {

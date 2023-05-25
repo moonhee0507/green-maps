@@ -9,7 +9,7 @@ import {
 } from '../../../renderer/_reducers/_slices/myListSlice';
 import { GroupOrderModal } from './GroupOrderModal';
 import { AddGroupModal } from './AddGroupModal/AddGroupModal';
-import closeImg from '/images/icon-plus.svg';
+import { MoveListModal } from './MoveListModal/MoveListModal';
 import type { UserInfo } from '../../../server/models/User';
 
 export { ModalGroup };
@@ -58,46 +58,7 @@ function ModalGroup({ userInfo }: { userInfo: UserInfo | null }) {
         <div className="mylist-modal-group" {...attr}>
             <GroupOrderModal />
             <AddGroupModal userInfo={userInfo} />
-            <MoveListModal />
+            <MoveListModal userInfo={userInfo} />
         </div>
-    );
-}
-
-function MoveListModal() {
-    const dispatch = useAppDispatch();
-    const [attr, setAttr] = useState({ hidden: true });
-
-    const moveListModalOn = useAppSelector((state) => state.myListSlice.moveListModalOn);
-
-    useEffect(() => {
-        if (moveListModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
-    }, [moveListModalOn]);
-
-    function handleClose() {
-        const app = document.querySelector('.app');
-        app?.classList.remove('modal-mode');
-
-        dispatch(MOVE_LIST_MODAL(false));
-    }
-
-    return (
-        <article className="modal-group-move" {...attr}>
-            <h4>목록 편집</h4>
-            <form>
-                <label>
-                    <input type="checkbox" />
-                    목록(리스트 그대로!?)
-                </label>
-                <div className="container-button-move">
-                    <button type="button">선택 해제</button>
-                    <button type="button">복사</button>
-                    <button type="button">삭제</button>
-                </div>
-            </form>
-            <button type="button" className="button-close" onClick={handleClose}>
-                <img src={closeImg} alt="X 아이콘" className="img-close" />
-            </button>
-        </article>
     );
 }

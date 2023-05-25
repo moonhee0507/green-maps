@@ -5,10 +5,10 @@ import type { Bookmark, UserInfo } from '../../../../server/models/User';
 
 export { BookmarkListMain };
 
-function BookmarkListMain({ info, lists }: { info: UserInfo | null; lists: Bookmark[] }) {
+function BookmarkListMain({ info, lists, groupName }: { info: UserInfo | null; lists: Bookmark[]; groupName: string }) {
     return (
         <main className="main-bookmarklist">
-            <GroupDetail count={lists.length} />
+            <GroupDetail lists={lists} groupName={groupName} />
             <BookmarkList lists={lists} />
         </main>
     );

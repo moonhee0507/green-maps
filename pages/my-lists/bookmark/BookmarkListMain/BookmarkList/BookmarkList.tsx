@@ -4,19 +4,16 @@ import { MoreButton } from '../../../../../components/button/MoreButton';
 import { API_URL } from '../../../../API_URL/api';
 import { useAppSelector } from '../../../../../renderer/store/hooks';
 import type { Bookmark, Like } from '../../../../../server/models/User';
-import type { Restaurant } from '../../../../../server/models/Restaurant';
-
-type RestaurantData = (Bookmark & Restaurant) | (Like & Restaurant);
 
 export function BookmarkList({ lists }: { lists: Bookmark[] }) {
-    const [restaurantData, setRestaurantData] = useState<RestaurantData[]>([]);
+    const [restaurantData, setRestaurantData] = useState<Bookmark[]>([]);
 
-    const [registerOrder, setRegisterOrder] = useState<RestaurantData[]>([]);
-    const [nameOrder, setNameOrder] = useState<RestaurantData[]>([]);
+    const [registerOrder, setRegisterOrder] = useState<Bookmark[]>([]);
+    const [nameOrder, setNameOrder] = useState<Bookmark[]>([]);
 
     useEffect(() => {
         const setData = async () => {
-            const arr: RestaurantData[] = [];
+            const arr: Bookmark[] = [];
 
             for (const list of lists) {
                 try {
@@ -67,7 +64,7 @@ export function BookmarkList({ lists }: { lists: Bookmark[] }) {
     );
 }
 
-export function ListItem({ list }: { list: RestaurantData }) {
+export function ListItem({ list }: { list: Bookmark | Like }) {
     return (
         <li className="list-restaurant-inbookmark">
             <a href={`/search/${list._id}`}>

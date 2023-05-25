@@ -1,17 +1,18 @@
 import mongoose, { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import type { Restaurant } from './Restaurant';
 
 export type Bookmark = {
     _id: string;
     registeredAt: string;
     groupName: string;
-};
+} & Restaurant;
 
 export type Like = {
     _id: string;
     registeredAt: string;
-};
+} & Restaurant;
 
 export interface UserInfo {
     userId: string;

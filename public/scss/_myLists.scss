@@ -392,6 +392,86 @@
     margin: 20px 0 20px;
 }
 
+// 목록 편집 모달
+.label-bookmarklist {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.checkbox-bookmarklist {
+    width: 20px;
+    height: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 1px solid $active-color;
+    border-radius: 50%;
+    cursor: pointer;
+
+    $color: ffffff;
+
+    &:checked {
+        background-color: $active-color;
+        background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23#{$color}' d='M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+    }
+}
+
+.wrapper-bookmarklist-edit {
+    width: calc(100% - 20px);
+
+    .container-title-category {
+        margin-bottom: 10px;
+
+        .txt-title {
+            margin-right: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .txt-title,
+        .txt-category {
+            display: inline;
+        }
+    }
+    .txt-category,
+    .txt-address {
+        font-size: 13px;
+    }
+}
+
+.container-button-move {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 10px;
+
+    > button {
+        width: calc(100% / 3);
+        padding: 10px;
+        background-color: $active-color;
+        color: $on-active;
+        border-radius: 5px;
+
+        .txt-copy-del {
+            margin-right: 5px;
+        }
+    }
+
+    > button:first-child {
+        background-color: $on-active;
+        border: 1px solid $active-color;
+        color: $active-color;
+    }
+}
+
 // /my-lists/bookmark/edit
 .main-group-list {
     @include extensive-content;

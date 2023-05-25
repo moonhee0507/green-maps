@@ -11,6 +11,7 @@ type InitialState = {
     targetGroup: string;
     sameIcon: boolean;
     moveListModalOn: boolean;
+    countChecked: number;
 };
 
 const initialState: InitialState = {
@@ -24,6 +25,7 @@ const initialState: InitialState = {
     targetGroup: '',
     sameIcon: true,
     moveListModalOn: false,
+    countChecked: 0,
 };
 
 const myListSlice = createSlice({
@@ -60,6 +62,15 @@ const myListSlice = createSlice({
         MOVE_LIST_MODAL(state, action: PayloadAction<boolean>) {
             state.moveListModalOn = action.payload;
         },
+        INCREASE_CHECKED(state, action: PayloadAction<number>) {
+            state.countChecked += action.payload;
+        },
+        DECREASE_CHECKED(state, action: PayloadAction<number>) {
+            state.countChecked -= action.payload;
+        },
+        RESET_CHECKED(state) {
+            state.countChecked = 0;
+        },
     },
 });
 
@@ -74,6 +85,9 @@ export const {
     SET_TARGET_GROUP,
     COMPARE_ICON,
     MOVE_LIST_MODAL,
+    INCREASE_CHECKED,
+    DECREASE_CHECKED,
+    RESET_CHECKED,
 } = myListSlice.actions;
 
 export default myListSlice.reducer;

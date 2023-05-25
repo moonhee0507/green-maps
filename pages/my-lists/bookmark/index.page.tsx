@@ -17,7 +17,11 @@ function Page(pageContext: PageContext) {
     return (
         <>
             <TopBar title={routeParams?.bookmarkGroupName || ''} />
-            <BookmarkListMain info={info} lists={listHasGroupName || []} />
+            <BookmarkListMain
+                info={info}
+                groupName={routeParams?.bookmarkGroupName || ''}
+                lists={listHasGroupName || []}
+            />
             <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup userInfo={info} />
         </>
