@@ -1,4 +1,4 @@
-import { Model, Schema, HydratedDocument, model } from 'mongoose';
+import mongoose, { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -6,7 +6,6 @@ export type Bookmark = {
     _id: string;
     registeredAt: string;
     groupName: string;
-    groupIcon: string;
 };
 
 export type Like = {
@@ -81,7 +80,10 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     },
     bookmarkList: [
         {
-            _id: String, // RestaurantId
+            _id: {
+                type: mongoose.Types.ObjectId,
+                ref: 'Restaurant',
+            },
             registeredAt: {
                 type: String,
                 required: true,
@@ -102,17 +104,14 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
                 required: false,
                 default: '기본 그룹',
             },
-            groupIcon: {
-                // x
-                type: String,
-                required: false,
-                default: '/images/icon-star.svg',
-            },
         },
     ],
     likeList: [
         {
-            _id: String,
+            _id: {
+                type: mongoose.Types.ObjectId,
+                ref: 'Restaurant',
+            },
             registeredAt: {
                 type: String,
                 required: true,

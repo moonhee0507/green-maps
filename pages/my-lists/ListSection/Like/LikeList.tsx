@@ -1,14 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListItem } from '../../bookmark/BookmarkListMain/BookmarkList/BookmarkList';
-import type { Like } from '../../../../server/models/User';
+import { API_URL } from '../../../API_URL/api';
+import type { Bookmark, Like } from '../../../../server/models/User';
+import type { Restaurant } from '../../../../server/models/Restaurant';
 
-export { LikeList };
+type RestaurantData = (Bookmark & Restaurant) | (Like & Restaurant);
 
-function LikeList({ lists }: { lists: Like[] }) {
-    return lists && lists.length > 0 ? (
+export function LikeList({ lists }: { lists: Like[] }) {
+    const [restaurantData, setRestaurantData] = useState<RestaurantData[]>([]);
+
+    useEffect(() => {
+        const setData = async () => {
+            const arr: RestaurantData[] = [];
+
+            for (const list of lists) {
+                try {
+                    const data = await getRestaurant(list._id);
+                    arr.push(Object.assign(list, data));
+                } catch (err) {
+                    console.error(`좋아요 데이터에 저장된 식당 _id에 대한 정보를 가져오는 데 실패했습니다.`);
+                }
+            }
+
+            setRestaurantData(arr);
+        };
+
+        setData();
+    }, []);
+
+    async function getRestaurant(_id: string) {
+        const res = await fetch(`${API_URL}/restaurants/${_id}`);
+        const data = await res.json();
+
+        return data;
+    }
+
+    return restaurantData && restaurantData.length > 0 ? (
         <ul>
-            {lists.map((list) => {
-                return <ListItem key={Math.random()} list={list} />;
+            {restaurantData.map((restaurant) => {
+                return <ListItem key={Math.random()} list={restaurant} />;
             })}
         </ul>
     ) : (

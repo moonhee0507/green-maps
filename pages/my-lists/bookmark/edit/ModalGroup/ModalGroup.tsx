@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import { EditGroupModal } from './EditGroupModal/EditGroupModal';
-import { EDIT_GROUP_MODAL, SET_GROUP_NAME, ICON_STANDARD } from '../../../../../renderer/_reducers/_slices/myListSlice';
+import {
+    EDIT_GROUP_MODAL,
+    SET_GROUP_NAME,
+    ICON_STANDARD,
+    ORDER_MODAL,
+} from '../../../../../renderer/_reducers/_slices/myListSlice';
 import type { UserInfo } from '../../../../../server/models/User';
 import type { GroupList } from '../../../../../server/models/Bookmark';
+import { GroupOrderModal } from './GroupOrderModal';
 
 export { ModalGroup };
 
@@ -33,6 +39,7 @@ function ModalGroup({ userInfo, groupList }: { userInfo: UserInfo | null; groupL
             const app = document.querySelector('.app');
             app?.classList.remove('modal-mode');
 
+            dispatch(ORDER_MODAL(false));
             dispatch(EDIT_GROUP_MODAL(false));
 
             // 새그룹추가 모달 인풋창 초기화
@@ -43,6 +50,7 @@ function ModalGroup({ userInfo, groupList }: { userInfo: UserInfo | null; groupL
     }
     return (
         <div className="mylist-modal-group" {...attr}>
+            <GroupOrderModal />
             <EditGroupModal userInfo={userInfo} groupList={groupList} />
         </div>
     );

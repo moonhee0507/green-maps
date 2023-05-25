@@ -1,9 +1,9 @@
 import React from 'react';
 import { navigate } from 'vite-plugin-ssr/client/router';
-import type { Bookmark } from '../../../../server/models/User';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import { ORDER_MODAL } from '../../../../renderer/_reducers/_slices/myListSlice';
-import { GroupList } from '../../../../server/models/Bookmark';
+import type { Bookmark } from '../../../../server/models/User';
+import type { GroupList } from '../../../../server/models/Bookmark';
 
 export { BookmarkDetail };
 

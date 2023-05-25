@@ -190,45 +190,37 @@
 }
 
 .list-restaurant-inbookmark {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: relative;
     border-bottom: 1px solid $border-color;
 
     > a {
         display: block;
-        padding: 10px 0 10px;
+        padding: 20px 0 20px;
+        width: calc(100% - 40px);
     }
 }
 
-.style-wrapper-restaurantinfo-inbookmark {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-}
-
-$more-button: 20px;
 .container-restaurant-title-detail {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    width: calc(100% - $more-button);
-
-    > p {
-        font-weight: bold;
-        font-size: 16px;
-        margin: 0 0 10px 0;
-    }
-
     > div {
         @include one-line-ellipsis;
+    }
+
+    .style-container-title-date {
+        margin-bottom: 5px;
+    }
+
+    .txt-title {
+        display: inline;
+        margin-right: 10px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .txt-date {
+        font-size: 13px;
     }
 
     .txt-distance,
@@ -242,18 +234,46 @@ $more-button: 20px;
 }
 
 .button-more {
+    position: absolute;
     background-image: url(/images/icon-3dot.svg);
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: 20px 20px;
-    top: 50%;
-    right: 10px;
-    width: $more-button;
-    height: $more-button;
-    -webkit-transform: translate(0, -50%) rotate(90deg);
-    -ms-transform: translate(0, -50%) rotate(90deg);
-    transform: translate(0, -50%) rotate(90deg);
+    background-size: 15px 15px;
+    top: 20px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
     border: 0;
+    padding: 0;
+}
+
+.container-more-option {
+    position: absolute;
+    top: 30px;
+    right: 5px;
+    width: 60px;
+    border-radius: 5px;
+    border: 1px solid $border-color;
+    -webkit-box-shadow: 1px 1px 1px black;
+    box-shadow: 1px 1px 1px black;
+    background-color: white; // 안하면 투명
+
+    .list-option {
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $hover-color;
+        }
+
+        .txt-delete {
+            font-size: 13px;
+            margin: 0;
+        }
+    }
 }
 
 // 모달
@@ -270,7 +290,8 @@ $more-button: 20px;
 }
 
 .modal-group-order,
-.modal-group-add {
+.modal-group-add,
+.modal-group-move {
     position: relative;
 
     > h4 {

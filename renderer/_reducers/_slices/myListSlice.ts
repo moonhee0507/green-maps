@@ -10,6 +10,7 @@ type InitialState = {
     editGroupModalOn: boolean;
     targetGroup: string;
     sameIcon: boolean;
+    moveListModalOn: boolean;
 };
 
 const initialState: InitialState = {
@@ -22,6 +23,7 @@ const initialState: InitialState = {
     editGroupModalOn: false,
     targetGroup: '',
     sameIcon: true,
+    moveListModalOn: false,
 };
 
 const myListSlice = createSlice({
@@ -55,6 +57,9 @@ const myListSlice = createSlice({
         COMPARE_ICON(state, action: PayloadAction<boolean>) {
             state.sameIcon = action.payload;
         },
+        MOVE_LIST_MODAL(state, action: PayloadAction<boolean>) {
+            state.moveListModalOn = action.payload;
+        },
     },
 });
 
@@ -68,6 +73,7 @@ export const {
     EDIT_GROUP_MODAL,
     SET_TARGET_GROUP,
     COMPARE_ICON,
+    MOVE_LIST_MODAL,
 } = myListSlice.actions;
 
 export default myListSlice.reducer;

@@ -38,7 +38,8 @@ export default (app: Router) => {
                 }
             ).exec();
 
-            res.status(200).json({ success: true, bookmarkGroup: bookmark });
+            if (!bookmark) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
+            else res.status(200).json({ success: true, bookmarkGroup: bookmark });
         } catch (err) {
             if (err instanceof Error) {
                 res.json({ success: false, errorMessage: err.message });
@@ -77,9 +78,9 @@ export default (app: Router) => {
 
             if (!updatedBookmark) {
                 return res.json({ success: false, errorMessage: '해당 그룹을 찾을 수 없습니다.' });
+            } else {
+                res.json({ success: true, updatedBookmark });
             }
-
-            res.json({ success: true, updatedBookmark });
         } catch (err) {
             if (err instanceof Error) {
                 res.json({ success: false, errorMessage: err.message });
@@ -89,7 +90,7 @@ export default (app: Router) => {
 
     route.delete('/:groupId', async (req: Request, res: Response) => {
         try {
-            await Bookmark.findOneAndUpdate(
+            const bookmarkGroup = await Bookmark.findOneAndUpdate(
                 { userId: req.body.userId },
                 {
                     $pull: {
@@ -100,7 +101,11 @@ export default (app: Router) => {
                 }
             );
 
-            res.status(200).json({ success: true, message: '북마크 그룹이 삭제되었습니다.' });
+            if (!bookmarkGroup) {
+                res.json({ success: false, message: '해당 그룹이 존재하지 않습니다.' });
+            } else {
+                res.status(200).json({ success: true, message: '북마크 그룹이 삭제되었습니다.' });
+            }
         } catch (err) {
             if (err instanceof Error) {
                 res.json({ success: false, errorMessage: err.message });

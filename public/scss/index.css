@@ -1070,34 +1070,33 @@ dd {
 }
 
 .list-restaurant-inbookmark {
+  display: flex;
+  position: relative;
   border-bottom: 1px solid #d3d3d3;
 }
 .list-restaurant-inbookmark > a {
   display: block;
-  padding: 10px 0 10px;
+  padding: 20px 0 20px;
+  width: calc(100% - 40px);
 }
 
-.style-wrapper-restaurantinfo-inbookmark {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.container-restaurant-title-detail {
-  display: flex;
-  flex-direction: column;
-  width: calc(100% - 20px);
-}
-.container-restaurant-title-detail > p {
-  font-weight: bold;
-  font-size: 16px;
-  margin: 0 0 10px 0;
-}
 .container-restaurant-title-detail > div {
   width: 100%; /* 부모 요소에 크기 고정시켜야 됨 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.container-restaurant-title-detail .style-container-title-date {
+  margin-bottom: 5px;
+}
+.container-restaurant-title-detail .txt-title {
+  display: inline;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.container-restaurant-title-detail .txt-date {
+  font-size: 13px;
 }
 .container-restaurant-title-detail .txt-distance,
 .container-restaurant-title-detail .txt-address {
@@ -1108,16 +1107,40 @@ dd {
 }
 
 .button-more {
+  position: absolute;
   background-image: url(/images/icon-3dot.svg);
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: 20px 20px;
-  top: 50%;
-  right: 10px;
-  width: 20px;
-  height: 20px;
-  transform: translate(0, -50%) rotate(90deg);
+  background-size: 15px 15px;
+  top: 20px;
+  right: 0;
+  width: 15px;
+  height: 15px;
+  transform: rotate(90deg);
   border: 0;
+  padding: 0;
+}
+
+.container-more-option {
+  position: absolute;
+  top: 30px;
+  right: 5px;
+  width: 60px;
+  border-radius: 5px;
+  border: 1px solid #d3d3d3;
+  box-shadow: 1px 1px 1px black;
+  background-color: white;
+}
+.container-more-option .list-option {
+  padding: 5px;
+  cursor: pointer;
+}
+.container-more-option .list-option:hover {
+  background-color: #e2e2e2;
+}
+.container-more-option .list-option .txt-delete {
+  font-size: 13px;
+  margin: 0;
 }
 
 .mylist-modal-group {
@@ -1133,29 +1156,34 @@ dd {
 }
 
 .modal-group-order,
-.modal-group-add {
+.modal-group-add,
+.modal-group-move {
   position: relative;
 }
 .modal-group-order > h4,
-.modal-group-add > h4 {
+.modal-group-add > h4,
+.modal-group-move > h4 {
   margin: 0;
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 20px;
 }
 .modal-group-order .container-button,
-.modal-group-add .container-button {
+.modal-group-add .container-button,
+.modal-group-move .container-button {
   display: flex;
   gap: 5px;
 }
 .modal-group-order .container-button > button,
-.modal-group-add .container-button > button {
+.modal-group-add .container-button > button,
+.modal-group-move .container-button > button {
   flex-grow: 1;
   padding: 10px;
   border: 1px solid #d3d3d3;
 }
 .modal-group-order .container-button .button-groupname-order.on,
-.modal-group-add .container-button .button-groupname-order.on {
+.modal-group-add .container-button .button-groupname-order.on,
+.modal-group-move .container-button .button-groupname-order.on {
   border: 1px solid #0073e6;
   color: #0073e6;
 }
