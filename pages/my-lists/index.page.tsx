@@ -16,17 +16,19 @@ function Page(pageContext: PageContext) {
     const [groupList, setGroupList] = useState<GroupList[] | null>(null);
 
     useEffect(() => {
-        try {
-            (async () => {
-                const res = await fetch(`${API_URL}/bookmark/${info?.userId}`);
-                const data = await res.json();
+        if (info) {
+            try {
+                (async () => {
+                    const res = await fetch(`${API_URL}/bookmark/${info?.userId}`);
+                    const data = await res.json();
 
-                setGroupList(data.groupList);
-            })();
-        } catch (err) {
-            console.error(err);
+                    setGroupList(data.groupList);
+                })();
+            } catch (err) {
+                console.error(err);
+            }
         }
-    }, []);
+    }, [info]);
 
     return (
         <>

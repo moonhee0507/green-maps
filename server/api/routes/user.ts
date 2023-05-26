@@ -115,6 +115,30 @@ export default (app: Router) => {
         }
     });
 
+    route.patch('/update/bookmark', async (req: any, res: Response) => {
+        try {
+            const { userId, newGroupName, selectedRestaurant } = req.body;
+
+            const user = await User.findOne({ userId: userId });
+
+            if (!user) res.json({ success: false, message: '해당 사용자가 없습니다.' });
+            else {
+                user.bookmarkList.forEach((bookmark) => {
+                    if (selectedRestaurant.includes(bookmark._id.toString())) {
+                        bookmark.groupName = newGroupName;
+                    }
+                });
+
+                await user.save();
+                res.status(200).json({ success: true, message: '지정한 그룹으로 이동했습니다.' });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
     // bookmark 삭제
     route.delete('/bookmark/:id', auth, async (req: any, res: Response) => {
         try {
@@ -126,7 +150,10 @@ export default (app: Router) => {
                 { new: true }
             );
 
-            res.status(200).json({ success: true, user: user });
+            if (!user) res.json({ success: false, message: '해당 사용자가 없습니다.' });
+            else {
+                res.status(200).json({ success: true, user: user });
+            }
         } catch (err) {
             console.error(err);
         }

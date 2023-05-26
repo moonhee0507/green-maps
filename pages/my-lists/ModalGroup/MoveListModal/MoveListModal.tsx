@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
-import { MOVE_LIST_MODAL } from '../../../../renderer/_reducers/_slices/myListSlice';
+import {
+    MOVE_LIST_MODAL,
+    RESET_CHECKED,
+    RESET_RESTAURANT_LIST,
+} from '../../../../renderer/_reducers/_slices/myListSlice';
 import closeImg from '/images/icon-plus.svg';
 import { List } from './Form/List';
 import { ButtonGroup } from './Form/ButtonGroup';
-import { Bookmark, UserInfo } from '../../../../server/models/User';
+import type { Bookmark, UserInfo } from '../../../../server/models/User';
 
 export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
     const [attr, setAttr] = useState({ hidden: true });
@@ -17,7 +21,6 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
         else setAttr({ hidden: true });
     }, [moveListModalOn]);
 
-    // 스토어의 targetGroup에 해당하는 북마크 리스트 불러오기
     const groupName = useAppSelector((state) => state.myListSlice.targetGroup);
 
     useEffect(() => {
@@ -53,6 +56,8 @@ function CloseButton() {
         app?.classList.remove('modal-mode');
 
         dispatch(MOVE_LIST_MODAL(false));
+        dispatch(RESET_CHECKED());
+        dispatch(RESET_RESTAURANT_LIST([]));
     }
 
     return (

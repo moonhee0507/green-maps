@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import type { Bookmark } from '../../../../../server/models/User';
-import { useAppDispatch } from '../../../../../renderer/store/hooks';
-import { INCREASE_CHECKED, DECREASE_CHECKED } from '../../../../../renderer/_reducers/_slices/myListSlice';
+import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
+import {
+    INCREASE_CHECKED,
+    DECREASE_CHECKED,
+    PUSH_RESTAURANT_LIST,
+    DELETE_RESTAURANT_LIST,
+} from '../../../../../renderer/_reducers/_slices/myListSlice';
 
 export { List };
 
@@ -25,15 +30,21 @@ function List({ bookmarkList }: { bookmarkList: Bookmark[] }) {
 function ListItem({ list }: { list: Bookmark }) {
     const dispatch = useAppDispatch();
 
-    const { title, address, category } = list;
+    const { _id, title, address, category } = list;
     const [isChecked, setIsChecked] = useState(false);
+    const restaurantToMove = useAppSelector((state) => state.myListSlice.restaurantToMove);
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
         if (event.target.checked) {
             dispatch(INCREASE_CHECKED(1));
+            dispatch(PUSH_RESTAURANT_LIST([...restaurantToMove, _id]));
         } else {
             dispatch(DECREASE_CHECKED(1));
+            const newArray = [...restaurantToMove];
+            const index = newArray.indexOf(_id);
+            newArray.splice(index, 1);
+            dispatch(DELETE_RESTAURANT_LIST(newArray));
         }
     };
 

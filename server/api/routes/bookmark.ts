@@ -10,7 +10,8 @@ export default (app: Router) => {
         try {
             const bookmark = await Bookmark.findOne({ userId: req.params.userId });
 
-            res.status(200).json({ success: true, groupList: bookmark?.groupList });
+            if (!bookmark) res.json({ success: false, message: '사용자 정보가 없습니다.' });
+            else res.json({ success: true, groupList: bookmark?.groupList });
         } catch (err) {
             if (err instanceof Error) {
                 res.json({ success: false, errorMessage: err.message });

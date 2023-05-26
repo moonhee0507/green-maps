@@ -12,7 +12,7 @@ function BookmarkList({ lists, groupList }: { lists: Bookmark[]; groupList: Grou
     const [nameOrder, setNameOrder] = useState<GroupList[] | null>(null);
 
     useEffect(() => {
-        if (groupList !== null) {
+        if (groupList) {
             setRegisterOrder(groupList);
             setNameOrder([...groupList].sort((a, b) => a.name.localeCompare(b.name, 'en')));
         }

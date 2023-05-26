@@ -125,6 +125,21 @@
             border-bottom: 1px solid $border-color;
         }
     }
+
+    .li-bookmarkgroup.copy {
+        margin-bottom: 10px;
+
+        > button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid $border-color;
+
+            &:hover {
+                background-color: $hover-color;
+            }
+        }
+    }
 }
 
 .button-new-group {
@@ -160,6 +175,11 @@
     border: 1px solid gray;
     border-radius: 10px;
     padding: 5px;
+
+    > img {
+        width: 100%;
+        height: 100%;
+    }
 }
 
 .txt-groupname,
@@ -174,6 +194,7 @@
 }
 
 .txt-restaurant-count {
+    text-align: left;
     font-size: 13px;
 }
 
@@ -281,17 +302,25 @@
     position: absolute;
     bottom: 0;
     width: 100%;
+    max-height: 100vh;
     border: 1px solid $border-color;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     padding: 20px;
-    background-color: white;
+    background-color: $background-modal;
     z-index: 9999;
+    overflow: scroll;
+    scrollbar-width: none; /* firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .modal-group-order,
 .modal-group-add,
-.modal-group-move {
+.modal-group-move,
+.modal-copy {
     position: relative;
 
     > h4 {
@@ -463,6 +492,10 @@
         .txt-copy-del {
             margin-right: 5px;
         }
+
+        // &:disabled {
+
+        // }
     }
 
     > button:first-child {

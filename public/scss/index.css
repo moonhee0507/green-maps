@@ -1010,6 +1010,18 @@ dd {
   padding: 10px 0 10px;
   border-bottom: 1px solid #d3d3d3;
 }
+.ul-groupname .li-bookmarkgroup.copy {
+  margin-bottom: 10px;
+}
+.ul-groupname .li-bookmarkgroup.copy > button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #d3d3d3;
+}
+.ul-groupname .li-bookmarkgroup.copy > button:hover {
+  background-color: #e2e2e2;
+}
 
 .button-new-group {
   position: sticky;
@@ -1037,6 +1049,10 @@ dd {
   border-radius: 10px;
   padding: 5px;
 }
+.container-groupicon > img {
+  width: 100%;
+  height: 100%;
+}
 
 .txt-groupname,
 .txt-restaurant-count {
@@ -1050,6 +1066,7 @@ dd {
 }
 
 .txt-restaurant-count {
+  text-align: left;
   font-size: 13px;
 }
 
@@ -1147,22 +1164,30 @@ dd {
   position: absolute;
   bottom: 0;
   width: 100%;
+  max-height: 100vh;
   border: 1px solid #d3d3d3;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
   padding: 20px;
-  background-color: white;
+  background-color: #ffffff;
   z-index: 9999;
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+}
+.mylist-modal-group::-webkit-scrollbar {
+  display: none;
 }
 
 .modal-group-order,
 .modal-group-add,
-.modal-group-move {
+.modal-group-move,
+.modal-copy {
   position: relative;
 }
 .modal-group-order > h4,
 .modal-group-add > h4,
-.modal-group-move > h4 {
+.modal-group-move > h4,
+.modal-copy > h4 {
   margin: 0;
   font-weight: bold;
   font-size: 16px;
@@ -1170,20 +1195,23 @@ dd {
 }
 .modal-group-order .container-button,
 .modal-group-add .container-button,
-.modal-group-move .container-button {
+.modal-group-move .container-button,
+.modal-copy .container-button {
   display: flex;
   gap: 5px;
 }
 .modal-group-order .container-button > button,
 .modal-group-add .container-button > button,
-.modal-group-move .container-button > button {
+.modal-group-move .container-button > button,
+.modal-copy .container-button > button {
   flex-grow: 1;
   padding: 10px;
   border: 1px solid #d3d3d3;
 }
 .modal-group-order .container-button .button-groupname-order.on,
 .modal-group-add .container-button .button-groupname-order.on,
-.modal-group-move .container-button .button-groupname-order.on {
+.modal-group-move .container-button .button-groupname-order.on,
+.modal-copy .container-button .button-groupname-order.on {
   border: 1px solid #0073e6;
   color: #0073e6;
 }
