@@ -20,31 +20,34 @@ function SubmitButton(props: { postId: string; content: string | null }) {
     }, []);
 
     async function handleClick() {
-        const body = {
-            owner: userId,
-            content: content,
-        };
+        try {
+            if (content !== null && content.length > 0) {
+                const body = {
+                    owner: userId,
+                    content: content,
+                };
 
-        const res = await fetch(`http://localhost:5000/api/posts/${postId}/comment`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
-        });
+                const res = await fetch(`http://localhost:5000/api/posts/${postId}/comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                });
 
-        const data = await res.json();
+                const data = await res.json();
 
-        if (data.success === true) {
-            alert('댓글이 등록되었습니다.');
-            window.location.reload();
-        } else {
-            alert('에러가 발생했습니다.');
+                if (data.success === true) {
+                    window.location.reload();
+                }
+            }
+        } catch (err) {
+            console.log(err);
         }
     }
 
     return (
-        <button type="button" onClick={handleClick}>
+        <button type="button" onClick={handleClick} disabled={content !== null && content.length > 0 ? false : true}>
             등록
         </button>
     );
