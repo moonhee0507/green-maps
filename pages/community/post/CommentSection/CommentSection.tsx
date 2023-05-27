@@ -21,7 +21,7 @@ function CommentSection(props: { postId: string; comments?: Array<CommentInPost>
                 <label htmlFor="comment" className="sr-only">
                     댓글 작성하기
                 </label>
-                <textarea id="comment" onChange={handleChange} />
+                <textarea id="comment" onChange={handleChange} minLength={1} maxLength={100} />
                 <SubmitButton postId={postId} content={content} />
             </form>
 

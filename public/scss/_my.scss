@@ -26,7 +26,7 @@
             width: calc(100% - 25px);
             bottom: -18px;
             left: 50%;
-            border: 2px solid black;
+            border: 2px solid $active-color;
             -webkit-transform: translate(-50%, 0);
             -ms-transform: translate(-50%, 0);
             transform: translate(-50%, 0);
@@ -62,7 +62,7 @@
             width: calc(100% - 25px);
             bottom: -18px;
             left: 50%;
-            border: 2px solid lightseagreen;
+            border: 2px solid $active-color;
             -webkit-transform: translate(-50%, 0);
             -ms-transform: translate(-50%, 0);
             transform: translate(-50%, 0);
@@ -139,6 +139,10 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+
+        .num-profile-bookmark {
+            margin-right: 5px;
+        }
     }
 }
 
@@ -147,7 +151,9 @@
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: aqua;
+    border: 1px solid $active-color;
+    border-radius: 5px;
+    color: $active-color;
     padding: 5px;
     font-size: 13px;
     line-height: 13px;

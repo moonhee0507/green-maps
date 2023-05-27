@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { API_URL } from '../../pages/API_URL/api';
+import { useAppSelector } from '../../renderer/store/hooks';
 
 export { MoreButton };
 
 function MoreButton({ restaurantId, restaurantTitle }: { restaurantId: string; restaurantTitle: string }) {
     const [show, setShow] = useState(false);
+    const clicked = useAppSelector((state) => state.myListSlice.clicked);
 
     function handleMoreButton() {
         setShow((prev) => !prev);
@@ -30,8 +32,10 @@ function MoreButton({ restaurantId, restaurantTitle }: { restaurantId: string; r
 
     async function handleDelete() {
         try {
+            const list = clicked === '북마크' ? 'bookmark' : 'like';
+
             if (confirm('해당 식당을 삭제하시겠습니까?')) {
-                const res = await fetch(`${API_URL}/users/bookmark/${restaurantId}`, {
+                const res = await fetch(`${API_URL}/users/${list}/${restaurantId}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

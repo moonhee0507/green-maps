@@ -14,6 +14,7 @@ type InitialState = {
     countChecked: number;
     copyModalOn: boolean;
     restaurantToMove: Array<string>;
+    deleteLikeListModalOn: boolean;
 };
 
 const initialState: InitialState = {
@@ -30,6 +31,7 @@ const initialState: InitialState = {
     countChecked: 0,
     copyModalOn: false,
     restaurantToMove: [],
+    deleteLikeListModalOn: false,
 };
 
 const myListSlice = createSlice({
@@ -87,6 +89,9 @@ const myListSlice = createSlice({
         RESET_RESTAURANT_LIST(state, action: PayloadAction<[]>) {
             state.restaurantToMove = action.payload;
         },
+        DELETE_LIKELIST_MODAL(state, action: PayloadAction<boolean>) {
+            state.deleteLikeListModalOn = action.payload;
+        },
     },
 });
 
@@ -108,6 +113,7 @@ export const {
     PUSH_RESTAURANT_LIST,
     DELETE_RESTAURANT_LIST,
     RESET_RESTAURANT_LIST,
+    DELETE_LIKELIST_MODAL,
 } = myListSlice.actions;
 
 export default myListSlice.reducer;

@@ -1,6 +1,11 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
-import { COPY_MODAL, MOVE_LIST_MODAL, RESET_CHECKED } from '../../../../../renderer/_reducers/_slices/myListSlice';
+import {
+    COPY_MODAL,
+    MOVE_LIST_MODAL,
+    RESET_CHECKED,
+    RESET_RESTAURANT_LIST,
+} from '../../../../../renderer/_reducers/_slices/myListSlice';
 import { API_URL } from '../../../../API_URL/api';
 
 export { ButtonGroup };
@@ -45,9 +50,14 @@ function ButtonGroup() {
         return data;
     }
 
+    function clearCheckbox() {
+        dispatch(RESET_CHECKED()); // 체크박스 해제
+        dispatch(RESET_RESTAURANT_LIST([])); // 리스트 비우기
+    }
+
     return (
         <div className="container-button-move">
-            <button type="reset" onClick={() => dispatch(RESET_CHECKED())}>
+            <button type="reset" onClick={clearCheckbox}>
                 선택 해제
             </button>
             <button type="button" onClick={handleCopy} disabled={countChecked ? false : true}>

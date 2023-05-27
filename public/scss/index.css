@@ -742,7 +742,7 @@ dd {
   width: calc(100% - 25px);
   bottom: -18px;
   left: 50%;
-  border: 2px solid black;
+  border: 2px solid #0073e6;
   transform: translate(-50%, 0);
 }
 
@@ -772,7 +772,7 @@ dd {
   width: calc(100% - 25px);
   bottom: -18px;
   left: 50%;
-  border: 2px solid lightseagreen;
+  border: 2px solid #0073e6;
   transform: translate(-50%, 0);
 }
 
@@ -822,12 +822,17 @@ dd {
 .wrapper-id-bookmark .container-profile-bookmark-like {
   display: flex;
 }
+.wrapper-id-bookmark .container-profile-bookmark-like .num-profile-bookmark {
+  margin-right: 5px;
+}
 
 .txt-host {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: aqua;
+  border: 1px solid #0073e6;
+  border-radius: 5px;
+  color: #0073e6;
   padding: 5px;
   font-size: 13px;
   line-height: 13px;
@@ -944,7 +949,7 @@ dd {
   width: calc(100% - 25px);
   bottom: -18px;
   left: 50%;
-  border: 2px solid black;
+  border: 2px solid #0073e6;
   transform: translate(-50%, 0);
 }
 
@@ -1181,13 +1186,15 @@ dd {
 .modal-group-order,
 .modal-group-add,
 .modal-group-move,
-.modal-copy {
+.modal-copy,
+.modal-likelist-delete {
   position: relative;
 }
 .modal-group-order > h4,
 .modal-group-add > h4,
 .modal-group-move > h4,
-.modal-copy > h4 {
+.modal-copy > h4,
+.modal-likelist-delete > h4 {
   margin: 0;
   font-weight: bold;
   font-size: 16px;
@@ -1196,14 +1203,16 @@ dd {
 .modal-group-order .container-button,
 .modal-group-add .container-button,
 .modal-group-move .container-button,
-.modal-copy .container-button {
+.modal-copy .container-button,
+.modal-likelist-delete .container-button {
   display: flex;
   gap: 5px;
 }
 .modal-group-order .container-button > button,
 .modal-group-add .container-button > button,
 .modal-group-move .container-button > button,
-.modal-copy .container-button > button {
+.modal-copy .container-button > button,
+.modal-likelist-delete .container-button > button {
   flex-grow: 1;
   padding: 10px;
   border: 1px solid #d3d3d3;
@@ -1211,7 +1220,8 @@ dd {
 .modal-group-order .container-button .button-groupname-order.on,
 .modal-group-add .container-button .button-groupname-order.on,
 .modal-group-move .container-button .button-groupname-order.on,
-.modal-copy .container-button .button-groupname-order.on {
+.modal-copy .container-button .button-groupname-order.on,
+.modal-likelist-delete .container-button .button-groupname-order.on {
   border: 1px solid #0073e6;
   color: #0073e6;
 }
@@ -1337,6 +1347,10 @@ dd {
   background-color: #ffffff;
   border: 1px solid #0073e6;
   color: #0073e6;
+}
+
+.container-button-move.like > button {
+  width: 50%;
 }
 
 .main-group-list {

@@ -34,7 +34,7 @@
             width: calc(100% - 25px);
             bottom: -18px;
             left: 50%;
-            border: 2px solid black;
+            border: 2px solid $active-color;
             -webkit-transform: translate(-50%, 0);
             -ms-transform: translate(-50%, 0);
             transform: translate(-50%, 0);
@@ -320,7 +320,8 @@
 .modal-group-order,
 .modal-group-add,
 .modal-group-move,
-.modal-copy {
+.modal-copy,
+.modal-likelist-delete {
     position: relative;
 
     > h4 {
@@ -492,16 +493,18 @@
         .txt-copy-del {
             margin-right: 5px;
         }
-
-        // &:disabled {
-
-        // }
     }
 
     > button:first-child {
         background-color: $on-active;
         border: 1px solid $active-color;
         color: $active-color;
+    }
+}
+
+.container-button-move.like {
+    > button {
+        width: calc(100% / 2);
     }
 }
 
