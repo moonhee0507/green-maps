@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
+import { useAppDispatch } from '../../../renderer/store/hooks';
 import { CommentPagination, SET_COMMENT } from '../../../renderer/_reducers/_slices/paginationSlice';
 import { TopBar } from '../../../components/topBar/topBar';
 import { ContentSection } from './ContentSection/ContentSection';

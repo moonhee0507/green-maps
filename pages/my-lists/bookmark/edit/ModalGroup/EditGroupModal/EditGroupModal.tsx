@@ -8,7 +8,7 @@ import {
     SET_GROUP_NAME,
     ICON_STANDARD,
 } from '../../../../../../renderer/_reducers/_slices/myListSlice';
-import closeImg from '/images/icon-plus.svg';
+import imgClose from '/images/icon-plus.svg';
 import type { UserInfo } from '../../../../../../server/models/User';
 import type { GroupList } from '../../../../../../server/models/Bookmark';
 
@@ -41,7 +41,7 @@ export function EditGroupModal({ userInfo, groupList }: { userInfo: UserInfo | n
                 <CompleteButton userInfo={userInfo} groupList={groupList} />
             </form>
             <button type="button" className="button-close" onClick={handleClose}>
-                <img src={closeImg} alt="X 아이콘" className="img-close" />
+                <img src={imgClose} alt="X 아이콘" className="img-close" />
             </button>
         </article>
     );

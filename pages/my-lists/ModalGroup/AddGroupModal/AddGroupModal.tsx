@@ -4,7 +4,7 @@ import { ADD_GROUP_MODAL, SET_GROUP_NAME, ICON_STANDARD } from '../../../../rend
 import { GroupNameInput } from './GroupNameInput';
 import { IconSelection } from './IconSelection';
 import { CompleteButton } from './CompleteButton';
-import closeImg from '/images/icon-plus.svg';
+import imgClose from '/images/icon-plus.svg';
 import type { UserInfo } from '../../../../server/models/User';
 
 export function AddGroupModal({ userInfo }: { userInfo: UserInfo | null }) {
@@ -36,7 +36,7 @@ export function AddGroupModal({ userInfo }: { userInfo: UserInfo | null }) {
                 <CompleteButton userInfo={userInfo} />
             </form>
             <button type="button" className="button-close" onClick={handleClose}>
-                <img src={closeImg} alt="X 아이콘" className="img-close" />
+                <img src={imgClose} alt="X 아이콘" className="img-close" />
             </button>
         </article>
     );

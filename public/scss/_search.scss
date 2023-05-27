@@ -351,14 +351,12 @@
     }
 
     .button-add-picture {
-        background-color: darkgrey;
-        background-image: url('/images/icon-plus.svg');
+        background-image: icon(plus);
         cursor: pointer;
     }
 
     .list-picture {
-        background-color: #d3d3d3;
-        background-image: url('/images/icon-image.svg');
+        background-image: icon(image);
 
         img,
         source {

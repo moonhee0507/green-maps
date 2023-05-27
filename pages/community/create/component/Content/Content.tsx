@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextEditor } from './TextEditor';
-import { Post } from '../../../../../server/models/Post';
+import type { Post } from '../../../../../server/models/Post';
 
 export { Content };
 

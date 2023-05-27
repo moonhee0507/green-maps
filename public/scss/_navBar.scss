@@ -45,19 +45,19 @@
     }
 
     .img-nav-icon.home {
-        background-image: url('/images/icon-home.svg');
+        background-image: icon(home);
     }
     .img-nav-icon.search {
-        background-image: url('/images/icon-search.svg');
+        background-image: icon(search);
     }
     .img-nav-icon.bookmark {
-        background-image: url('/images/icon-bookmark.svg');
+        background-image: icon(bookmark);
     }
     .img-nav-icon.community {
-        background-image: url('/images/icon-community.svg');
+        background-image: icon(community);
     }
     .img-nav-icon.user {
-        background-image: url('/images/icon-user.svg');
+        background-image: icon(user);
     }
 }
 

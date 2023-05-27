@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Post } from '../../../../server/models/Post';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
+import type { Post } from '../../../../server/models/Post';
 
 export { SubjectBox };
 

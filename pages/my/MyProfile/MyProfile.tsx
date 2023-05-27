@@ -1,6 +1,6 @@
 import React from 'react';
 import defaultProfile from '/images/default-profile.png';
-import camera from '/images/camera.png';
+import imgCamera from '/images/camera.png';
 import type { UserInfo } from '../../../server/models/User';
 
 export function MyProfile({ userInfo }: { userInfo: UserInfo }) {
@@ -28,7 +28,7 @@ function ProfileImage() {
                             height: '70px',
                         }}
                     />
-                    <img className="button-add-profile-image" src={camera} alt="프로필 사진 추가 버튼" />
+                    <img className="button-add-profile-image" src={imgCamera} alt="프로필 사진 추가 버튼" />
                 </div>
             </dd>
         </dl>

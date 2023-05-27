@@ -117,7 +117,7 @@ function Form({ likeList }: { likeList: Like[] }) {
     );
 }
 
-import closeImg from '/images/icon-plus.svg';
+import imgClose from '/images/icon-plus.svg';
 import { API_URL } from '../../API_URL/api';
 
 function CloseButton() {
@@ -134,7 +134,7 @@ function CloseButton() {
 
     return (
         <button type="button" className="button-close" onClick={handleClose}>
-            <img src={closeImg} alt="X 아이콘" className="img-close" />
+            <img src={imgClose} alt="X 아이콘" className="img-close" />
         </button>
     );
 }

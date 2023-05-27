@@ -2,7 +2,7 @@ import React from 'react';
 import { SubjectBox } from '../../component/CommunityDetail/SubjectBox';
 import { Title } from './Title';
 import { Content } from './Content/Content';
-import { Post } from '../../../../server/models/Post';
+import type { Post } from '../../../../server/models/Post';
 
 export { Create };
 
