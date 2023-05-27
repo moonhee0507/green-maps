@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface PostSlice {
     SUBJECT: string;
@@ -34,6 +34,10 @@ const postSlice = createSlice({
         KEYWORD: '',
         BOUNDARY: 'tc',
         ORDERBY: 'latest',
+        editDeleteNotifyModalOn: false,
+        sameUserOwner: false,
+        postId: '',
+        editMode: false,
     },
     reducers: {
         SUBJECT_STATE: (state, action: any) => {
@@ -65,7 +69,21 @@ const postSlice = createSlice({
         SEARCH_ORDER: (state, action: any) => {
             state.ORDERBY = action.ORDERBY;
         },
+        EDIT_DELETE_NOTIFY_MODAL: (state, action: PayloadAction<boolean>) => {
+            state.editDeleteNotifyModalOn = action.payload;
+        },
+        SAME_USER_OWNER: (state, action: PayloadAction<boolean>) => {
+            state.sameUserOwner = action.payload;
+        },
+        SET_POST_ID: (state, action: PayloadAction<string>) => {
+            state.postId = action.payload;
+        },
+        EDIT_MODE: (state, action: PayloadAction<boolean>) => {
+            state.editMode = action.payload;
+        },
     },
 });
+
+export const { EDIT_DELETE_NOTIFY_MODAL, SAME_USER_OWNER, SET_POST_ID, EDIT_MODE } = postSlice.actions;
 
 export default postSlice.reducer;

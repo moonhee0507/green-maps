@@ -1,14 +1,24 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { Post } from '../../../../server/models/Post';
+import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 
 export { SubjectBox };
 
-function SubjectBox() {
+function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
+    const dispatch = useAppDispatch();
+
     const [currentLoc, setCurrentLoc] = useState<string>('');
+    const editMode = useAppSelector((state) => state.postSlice.editMode);
+    const subject = useAppSelector((state) => state.postSlice.SUBJECT);
+
     useEffect(() => {
         setCurrentLoc(window.location.pathname);
-    }, []);
-    const dispatch = useDispatch();
+        if (postInfo !== null && postInfo !== undefined) {
+            dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: postInfo.subject });
+        } else {
+            dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: '' });
+        }
+    }, [postInfo]);
 
     function handleChange(event: ChangeEvent<HTMLSelectElement>) {
         dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: event.target.value });
@@ -19,6 +29,8 @@ function SubjectBox() {
             TOTAL: 0, // 최상단에서 최종 결정됨
             CURRENT_PAGE: 1,
         });
+
+        return event.target.value;
     }
 
     return (
@@ -26,7 +38,7 @@ function SubjectBox() {
             <label htmlFor="select-subject" className={currentLoc === '/community' ? '' : 'sr-only'}>
                 말머리 선택
             </label>
-            <select name="subjects" id="select-subject" onChange={handleChange}>
+            <select name="subjects" id="select-subject" onChange={handleChange} value={subject}>
                 <option value="">{currentLoc === '/community' ? '-- 전체 --' : '말머리 선택'}</option>
                 <option value="🥑채식얘기">🥑채식얘기</option>
                 <option value="⚽운동얘기">⚽운동얘기</option>

@@ -29,9 +29,13 @@ function Pagination({ count, perPage }: { count: number; perPage: number }) {
         <nav className="wrapper-pagination">
             <ul>
                 <li>
-                    <button type="button" disabled={currentPage === 1 ? true : false} onClick={handlePrev}>
-                        이전 페이지
-                    </button>
+                    <button
+                        type="button"
+                        aria-label="이전 페이지 버튼"
+                        className="button-prev-page"
+                        disabled={currentPage === 1 ? true : false}
+                        onClick={handlePrev}
+                    />
                 </li>
                 <li>
                     <ol className="container-pagination">
@@ -43,28 +47,39 @@ function Pagination({ count, perPage }: { count: number; perPage: number }) {
                 <li>
                     <button
                         type="button"
+                        aria-label="다음 페이지 버튼"
+                        className="button-next-page"
                         disabled={currentPage === pageNumbers.pop() ? true : false}
                         onClick={handleNext}
-                    >
-                        다음 페이지
-                    </button>
+                    />
                 </li>
             </ul>
         </nav>
     );
 }
 
-function PageNumber(props: { number: number }) {
+function PageNumber({ number }: { number: number }) {
     const dispatch = useDispatch();
+
+    const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
 
     function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
         dispatch({ type: 'paginationSlice/CURRENT_PAGE', currentPage: Number(event.currentTarget.value) });
     }
 
     return (
-        <li className="button-page">
-            <button type="button" onClick={handleClick} value={props.number}>
-                {props.number}
+        <li
+            hidden={
+                number <= Math.ceil(currentPage / 5) * 5 && number >= Math.ceil(currentPage / 5) * 5 - 4 ? false : true
+            }
+        >
+            <button
+                className={`button-page ${number === currentPage ? 'on' : ''}`}
+                type="button"
+                onClick={handleClick}
+                value={number}
+            >
+                {number}
             </button>
         </li>
     );

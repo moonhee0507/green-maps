@@ -1,37 +1,52 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
+import { WriteComment } from './WriteComment/WriteComment';
+import { CommentList } from './CommentList/CommentList';
+import { Pagination } from '../../../../components/Pagination/Pagination';
+import { CommentPagination } from '../../../../renderer/_reducers/_slices/paginationSlice';
 import type { CommentInPost } from '../../../../server/models/Post';
-import { PostCommentItem } from './PostCommenttem';
-import { SubmitButton } from './SubmitButton';
+import { UserInfo } from '../../../../server/models/User';
 
 export { CommentSection };
 
-function CommentSection(props: { postId: string; comments?: Array<CommentInPost> }) {
-    const { postId, comments } = props;
-    const [content, setContent] = useState<string | null>(null);
+const perPage = 10;
 
-    function handleChange(event: ChangeEvent<HTMLTextAreaElement>) {
-        setContent(event.target.value);
-    }
+function CommentSection({
+    postId,
+    comments,
+    userInfo,
+}: {
+    postId: string;
+    comments?: Array<CommentInPost>;
+    userInfo: UserInfo | null;
+}) {
+    const dispatch = useAppDispatch();
+
+    const paginatedComment = useAppSelector((state) => state.paginationSlice.comment) as CommentPagination;
+
+    const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
+    const [commentInPage, setCommentInPage] = useState(paginatedComment[currentPage - 1]);
+
+    useEffect(() => {
+        dispatch({ type: 'paginationSlice/CURRENT_PAGE', currentPage: Object.keys(paginatedComment).length });
+    }, [paginatedComment]);
+
+    useEffect(() => {
+        setCommentInPage(paginatedComment[currentPage - 1]);
+    }, [paginatedComment, currentPage]);
 
     return (
-        <section style={{ border: '1px solid blue' }} className="section-post-comment">
-            <h3>댓글</h3>
-
-            <form className="form-create-comment">
-                <label htmlFor="comment" className="sr-only">
-                    댓글 작성하기
-                </label>
-                <textarea id="comment" onChange={handleChange} minLength={1} maxLength={100} />
-                <SubmitButton postId={postId} content={content} />
-            </form>
-
+        <section className="section-post-comment">
             {comments && comments.length > 0 ? (
-                comments.map((review, i) => {
-                    return <PostCommentItem key={i} review={review} />;
-                })
+                <h3>
+                    댓글 <span>({comments.length})</span>
+                </h3>
             ) : (
-                <p style={{ textAlign: 'center' }}>댓글이 없습니다.</p>
+                <h3 className="sr-only">댓글</h3>
             )}
+            <WriteComment postId={postId} />
+            <CommentList comments={commentInPage} userInfo={userInfo} />
+            {comments && comments.length > perPage ? <Pagination count={comments.length} perPage={perPage} /> : null}
         </section>
     );
 }

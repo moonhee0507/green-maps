@@ -10,11 +10,17 @@ import { useAppSelector } from '../../../../../renderer/store/hooks';
 
 export { ReviewSection };
 
-function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Review>; isLoggedIn: boolean }) {
-    const { restaurantInfo, reviews, isLoggedIn } = props;
-
+function ReviewSection({
+    restaurantInfo,
+    reviews,
+    isLoggedIn,
+}: {
+    restaurantInfo: Restaurant;
+    reviews: Array<Review>;
+    isLoggedIn: boolean;
+}) {
     const [objReview] = useState(() => {
-        const reverseArr = [...props.reviews].reverse();
+        const reverseArr = [...reviews].reverse();
         const perPage = 3;
 
         const reviewPagination: ReviewPagination = {};
@@ -33,7 +39,7 @@ function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Revie
     useEffect(() => {
         paginate();
         function paginate() {
-            const reverseArr = [...props.reviews].reverse();
+            const reverseArr = [...reviews].reverse();
             const perPage = 3;
 
             const reviewPagination: ReviewPagination = {};
@@ -54,7 +60,7 @@ function ReviewSection(props: { restaurantInfo: Restaurant; reviews: Array<Revie
             <ReviewButton restaurantId={restaurantInfo._id} isLoggedIn={isLoggedIn} />
             <div className="wrapper-review">
                 {reviews.length > 0 ? (
-                    objReview[currentPage - 1].map((review, i) => {
+                    objReview[currentPage - 1]?.map((review, i) => {
                         return <ReviewItem key={i} item={review} />;
                     })
                 ) : (

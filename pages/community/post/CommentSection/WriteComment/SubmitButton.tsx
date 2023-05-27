@@ -47,8 +47,11 @@ function SubmitButton(props: { postId: string; content: string | null }) {
     }
 
     return (
-        <button type="button" onClick={handleClick} disabled={content !== null && content.length > 0 ? false : true}>
-            등록
-        </button>
+        <button
+            type="button"
+            onClick={handleClick}
+            disabled={content !== null && content.length > 0 ? false : true}
+            aria-label="댓글 등록 버튼"
+        />
     );
 }

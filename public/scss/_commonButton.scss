@@ -5,3 +5,65 @@
     width: 60px;
     height: 60px;
 }
+
+.button-more {
+    position: absolute;
+    background-image: url(/images/icon-3dot.svg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    top: 20px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    border: 0;
+    padding: 0;
+}
+
+.button-more.commentitem {
+    top: 15px;
+    right: 10px;
+}
+
+.button-more.postitem {
+    top: 22px;
+    right: 10px;
+}
+
+.container-more-option {
+    position: absolute;
+    // top: 30px;
+    // right: 5px;
+    // width: 60px;
+    // border-radius: 5px;
+    // border: 1px solid $border-color;
+    // -webkit-box-shadow: 1px 1px 1px black;
+    // box-shadow: 1px 1px 1px black;
+    background-color: $edit-delete-notify-color;
+    z-index: 9999;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: $padding;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+
+    .list-option {
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $hover-color;
+        }
+
+        .txt-delete {
+            // font-size: 13px;
+            font-size: 20px;
+            margin: 0;
+        }
+    }
+}

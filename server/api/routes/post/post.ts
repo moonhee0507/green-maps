@@ -22,6 +22,23 @@ export default (app: Router) => {
     // 게시글 수정
 
     // 게시글 삭제
+    route.delete('/:postId', auth, async (req: Request, res: Response) => {
+        try {
+            await Post.deleteOne({ _id: req.params.postId }).then(
+                (result: { acknowledged: boolean; deletedCount: number }) => {
+                    if (result.acknowledged === true) {
+                        return res.json({ success: true, message: '해당 게시물이 삭제되었습니다.' });
+                    } else {
+                        return res.status(404).json({ success: false, message: '해당 게시물이 존재하지 않습니다.' });
+                    }
+                }
+            );
+        } catch (err) {
+            if (err instanceof Error) {
+                return res.status(500).json({ success: false, message: err.message });
+            }
+        }
+    });
 
     // 게시글 가져오기
     route.get('/', getPostsAggregate, async (req: Request, res: Response) => {
@@ -50,9 +67,13 @@ export default (app: Router) => {
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
             const item = await Post.findById(req.params.postId).exec();
-            res.status(200).json(item);
+
+            if (!item) res.json({ success: false, message: '해당 게시물이 존재하지 않습니다.' });
+            else res.status(200).json(item);
         } catch (err) {
-            console.error(err);
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
         }
     });
 

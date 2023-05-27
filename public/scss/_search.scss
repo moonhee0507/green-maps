@@ -193,7 +193,7 @@
 
             .container-review-img {
                 overflow: hidden;
-                background-color: #d3d3d3;
+                background-color: $preview-color;
                 width: calc((422px - #{$padding * 2}) * 3);
                 height: calc(422px - #{$padding * 2});
 
@@ -203,21 +203,32 @@
                     right: 0;
                     padding: 5px;
                     margin: 0;
-                    background-color: #d3d3d3;
+                    background-color: rgba(1, 1, 1, 0.5);
+                    color: $on-opacity;
                 }
 
                 .button-move-img {
                     position: absolute;
+                    top: 50%;
+                    background-image: icon(arrow, $svg-img-arrow);
+                    width: 30px;
+                    height: 30px;
+                    background-color: rgba(1, 1, 1, 0.5);
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    border-radius: 50%;
+                    border: 0;
                 }
 
                 .button-move-img.prev {
-                    left: 0;
-                    top: 50%;
+                    left: 15px;
                 }
 
                 .button-move-img.next {
-                    right: 0;
-                    top: 50%;
+                    right: 15px;
+                    -webkit-transform: rotate(180deg);
+                    -ms-transform: rotate(180deg);
+                    transform: rotate(180deg);
                 }
 
                 img {
@@ -277,10 +288,40 @@
         -ms-flex-pack: center;
         justify-content: center;
 
+        .button-prev-page,
+        .button-next-page {
+            background-image: icon(arrow);
+            background-size: 20px 20px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            width: 20px;
+            height: 20px;
+            border: 0;
+        }
+
+        .button-next-page {
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+
+        .button-prev-page:disabled,
+        .button-next-page:disabled {
+            background-image: icon(arrow, $svg-disabled);
+        }
+
         .container-pagination {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+
+            .button-page {
+                border: 0;
+            }
+
+            .button-page.on {
+                font-weight: bold;
+            }
         }
     }
 }

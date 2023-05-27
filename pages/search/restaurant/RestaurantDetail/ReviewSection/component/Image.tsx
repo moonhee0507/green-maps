@@ -32,9 +32,7 @@ function Image(props: { photoList: Array<{ src: string; pick: boolean }> }) {
                     <p className="txt-count-img" aria-label="사진 개수 정보">
                         {`${currentIndex + 1} / ${arrSort.length}`}
                     </p>
-                    <button type="button" className="button-move-img prev" onClick={handlePrevButton}>
-                        이전 사진
-                    </button>
+                    <button type="button" className="button-move-img prev" onClick={handlePrevButton} />
                     {arrSort.map((item, i) => {
                         return (
                             <img
@@ -46,9 +44,7 @@ function Image(props: { photoList: Array<{ src: string; pick: boolean }> }) {
                             />
                         );
                     })}
-                    <button type="button" className="button-move-img next" onClick={handleNextButton}>
-                        다음 사진
-                    </button>
+                    <button type="button" className="button-move-img next" onClick={handleNextButton} />
                 </div>
             </dd>
         </>

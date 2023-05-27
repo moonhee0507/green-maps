@@ -11,7 +11,8 @@ export default (app: Router) => {
     route.get('/', auth, async (req: any, res: Response) => {
         try {
             const user = await User.findOne({ token: req.token }).exec();
-            res.status(200).json({ success: true, user: user });
+            if (!user) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
+            else res.status(200).json({ success: true, user: user });
         } catch (err: unknown) {
             console.error(err);
             if (err instanceof Error) res.status(500).json({ success: false, errorMessage: err.message });

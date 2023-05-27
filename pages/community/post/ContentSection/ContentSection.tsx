@@ -3,11 +3,13 @@ import { TextArea } from './TextArea/TextArea';
 import type { Post, CommentInPost } from '../../../../server/models/Post';
 import { PostLikeButton } from './PostLikeButton';
 import { isSameDay } from '../../../../components/Date';
+import { MoreButton } from './MoreButton';
+import { UserInfo } from '../../../../server/models/User';
 
 export { ContentSection };
 
-function ContentSection(props: { postInfo: Post }) {
-    const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = props.postInfo;
+function ContentSection({ userInfo, postInfo }: { userInfo: UserInfo | null; postInfo: Post }) {
+    const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
 
     return (
         <section className="section-post-content">
@@ -26,6 +28,7 @@ function ContentSection(props: { postInfo: Post }) {
             </div>
             <TextArea content={content} />
             <PostLikeButton postId={_id} like={like} />
+            <MoreButton userInfo={userInfo} owner={owner} postId={_id} />
         </section>
     );
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { API_URL } from '../../pages/API_URL/api';
 import { useAppSelector } from '../../renderer/store/hooks';
 
@@ -6,6 +6,8 @@ export { MoreButton };
 
 function MoreButton({ restaurantId, restaurantTitle }: { restaurantId: string; restaurantTitle: string }) {
     const [show, setShow] = useState(false);
+    const moreButtonRef = useRef<HTMLButtonElement>(null);
+
     const clicked = useAppSelector((state) => state.myListSlice.clicked);
 
     function handleMoreButton() {
@@ -25,7 +27,7 @@ function MoreButton({ restaurantId, restaurantTitle }: { restaurantId: string; r
     function clickOutside(event: MouseEvent) {
         const target = event.target as HTMLElement;
 
-        if (target.className !== 'button-more' && target.className !== 'txt-delete') {
+        if (moreButtonRef.current && !moreButtonRef.current.contains(target)) {
             setShow(false);
         }
     }
@@ -60,7 +62,13 @@ function MoreButton({ restaurantId, restaurantTitle }: { restaurantId: string; r
 
     return (
         <>
-            <button type="button" aria-label="더보기 버튼" className="button-more" onClick={handleMoreButton} />
+            <button
+                type="button"
+                aria-label="더보기 버튼"
+                className="button-more"
+                onClick={handleMoreButton}
+                ref={moreButtonRef}
+            />
             {show && (
                 <div className="container-more-option">
                     <ul>
