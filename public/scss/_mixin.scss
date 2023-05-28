@@ -24,6 +24,26 @@
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+@mixin styled-input {
+    border: 0;
+    background-color: $input-color;
+    border-radius: $default-border-radius;
+    height: 50px;
+}
+
+@mixin styled-notice {
+    color: $active-color;
+    border: 1px solid $active-color;
+    border-radius: $notice-border-radius;
+    margin-bottom: 20px;
+
+    > em {
+        display: block;
+        margin: 10px;
+        font-style: normal;
+    }
 }

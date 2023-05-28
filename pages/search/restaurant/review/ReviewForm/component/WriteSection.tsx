@@ -18,8 +18,10 @@ function WriteSection(props: { title: string }) {
         <fieldset className="section-write-review">
             <legend className="sr-only">글 작성</legend>
 
-            <label className="sr-only">식당이름</label>
-            <input type="text" value={props.title} readOnly />
+            <label className="sr-only" htmlFor="restaurantInput">
+                식당이름
+            </label>
+            <input type="text" value={props.title} id="restaurantInput" readOnly />
 
             <label htmlFor="txtReview" className="sr-only">
                 리뷰 작성란
@@ -31,7 +33,6 @@ function WriteSection(props: { title: string }) {
                 maxLength={100}
                 minLength={10}
                 required
-                style={{ resize: 'none', display: 'block', width: '100%', height: '100px' }}
                 onChange={handleChange}
             />
         </fieldset>

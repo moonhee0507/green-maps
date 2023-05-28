@@ -3,10 +3,11 @@ import { SearchBar } from './SearchBar';
 import { Community } from './Community';
 import { NavBar } from '../../components/navBar';
 import { useDispatch } from 'react-redux';
-import type { Post } from '../../server/models/Post';
-import { PageProps } from '../../renderer/types';
 import { useAppSelector } from '../../renderer/store/hooks';
 import { API_URL } from '../API_URL/api';
+import type { PageProps } from '../../renderer/types';
+import type { Post } from '../../server/models/Post';
+import { ButtonGroup } from './component/ButtonGroup/ButtonGroup';
 
 export { Page };
 
@@ -59,6 +60,7 @@ function Page(pageProps: PageProps) {
     return (
         <>
             <SearchBar />
+            <ButtonGroup isLoggedIn={isLoggedIn} />
             <Community posts={posts} limit={limit} isLoggedIn={isLoggedIn} />
             <NavBar isLoggedIn={isLoggedIn} />
         </>

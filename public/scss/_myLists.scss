@@ -116,8 +116,6 @@
 }
 
 .ul-groupname {
-    margin-bottom: 20px; // `새 그룹 추가` 버튼과 간격
-
     .li-bookmarkgroup {
         > a {
             display: block;
@@ -132,8 +130,8 @@
         > button {
             width: 100%;
             padding: 10px;
-            border-radius: 20px;
-            border: 1px solid $border-color;
+            border-radius: $bookmarkgroup-copy-border-radius;
+            border: 0;
 
             &:hover {
                 background-color: $hover-color;
@@ -149,7 +147,10 @@
     padding: $padding;
     bottom: 15px;
     border: 0;
-    background-color: lightgreen;
+    border-radius: $default-border-radius;
+    background-color: $active-button-color;
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 // 그룹 리스트
@@ -173,7 +174,7 @@
     width: 50px;
     height: 50px;
     border: 1px solid gray;
-    border-radius: 10px;
+    border-radius: $default-border-radius;
     padding: 5px;
 
     > img {
@@ -201,7 +202,7 @@
 .txt-group-date {
     font-size: 13px;
     -ms-flex-item-align: end;
-    align-self: end;
+    align-self: flex-end;
 }
 
 // /mt-lists/bookmark/:bookmarkGroupName
@@ -264,7 +265,7 @@
     border: 1px solid $border-color;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
-    padding: $padding;
+    padding: 30px;
     background-color: $background-modal;
     z-index: 9999;
     overflow: scroll;
@@ -273,6 +274,10 @@
     &::-webkit-scrollbar {
         display: none;
     }
+}
+
+.post-modal-group {
+    padding: $padding;
 }
 
 .modal-group-order,
@@ -285,7 +290,7 @@
     > h4 {
         margin: 0;
         font-weight: bold;
-        font-size: 16px;
+        font-size: 20px;
         margin-bottom: 20px;
     }
 
@@ -334,7 +339,8 @@
 #groupNameForEdit {
     width: 100%;
     padding: 10px;
-    border: 1px solid $border-color;
+
+    @include styled-input;
 }
 
 .txt-icon-selection {
@@ -376,8 +382,16 @@
 
 .button-groupname-complete {
     width: 100%;
-    padding: 10px;
-    margin: 20px 0 20px;
+    height: 50px;
+    background-color: $active-button-color;
+    border: 0;
+    border-radius: $default-border-radius;
+    margin-top: 20px;
+    font-weight: bold;
+
+    &:disabled {
+        background-color: $disabled-button-color;
+    }
 }
 
 // 목록 편집 모달
@@ -438,13 +452,14 @@
     display: -ms-flexbox;
     display: flex;
     gap: 10px;
+    margin-top: 20px;
 
     > button {
         width: calc(100% / 3);
         padding: 10px;
         background-color: $active-color;
         color: $on-active;
-        border-radius: 5px;
+        border-radius: $multiple-button-border-radius;
 
         .txt-copy-del {
             margin-right: 5px;
@@ -471,14 +486,12 @@
 }
 
 .container-notice {
-    color: $active-color;
-    border: 1px solid $active-color;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    @include styled-notice;
+}
 
-    > p {
-        margin: 10px;
-    }
+.container-notice.comment {
+    font-size: 13px;
+    line-height: 20px;
 }
 
 .li-bookmarkgroup.reuse {

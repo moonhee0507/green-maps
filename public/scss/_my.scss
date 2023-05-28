@@ -122,7 +122,7 @@
         display: flex;
         -webkit-box-align: end;
         -ms-flex-align: end;
-        align-items: end;
+        align-items: flex-end;
         gap: 10px;
 
         .txt-profile-userId {
@@ -152,7 +152,7 @@
     top: 10px;
     right: 10px;
     border: 1px solid $active-color;
-    border-radius: 5px;
+    border-radius: $host-tag-border-radius;
     color: $active-color;
     padding: 5px;
     font-size: 13px;
@@ -235,8 +235,12 @@
 
     > button {
         width: 100%;
-        padding: 10px;
+        background-color: $active-button-color;
+        border: 0;
+        border-radius: $default-border-radius;
+        padding: 20px;
         font-size: 16px;
+        font-weight: bold;
     }
 }
 

@@ -121,11 +121,7 @@ function SubmitButton(props: { restaurantId: string }) {
 
     return (
         <>
-            <button
-                type="button"
-                onClick={handleSubmit}
-                style={{ width: '100%', marginTop: '10px', backgroundColor: 'lightgreen', padding: '20px' }}
-            >
+            <button type="button" onClick={handleSubmit} className="button-submit-review">
                 작성 완료
             </button>
         </>

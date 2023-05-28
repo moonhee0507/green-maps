@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { CommunityDetail } from './component/CommunityDetail/CommunityDetail.js';
-import { ButtonGroup } from './component/ButtonGroup/ButtonGroup.js';
 import { PostSection } from './component/PostSection/PostSection.js';
 import type { Post } from '../../server/models/Post.js';
 
@@ -30,7 +29,6 @@ function Community({ posts, limit, isLoggedIn }: { posts: Array<Post>; limit: nu
         <>
             <main className="main-community" ref={mainElement} onScroll={handleScroll}>
                 <CommunityDetail posts={posts} />
-                <ButtonGroup isLoggedIn={isLoggedIn} />
                 <PostSection posts={posts} limit={limit} />
             </main>
             {scroll && (

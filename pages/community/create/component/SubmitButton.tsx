@@ -1,21 +1,24 @@
-import React, { useCallback, useEffect, FormEvent } from 'react';
-import { useDispatch, useSelector, useStore } from 'react-redux';
-import type { RootState } from '../../../../renderer/store.js';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useStore } from 'react-redux';
+import { useAppSelector } from '../../../../renderer/store/hooks';
+import { API_URL } from '../../../API_URL/api';
+import { EDIT_MODE } from '../../../../renderer/_reducers/_slices/postSlice';
 
 export { SubmitButton };
 
 function SubmitButton() {
     const dispatch = useDispatch();
 
-    const subject = useSelector((state: RootState) => state.postSlice.SUBJECT);
-    const owner = useSelector((state: RootState) => state.postSlice.NICKNAME);
-    const title = useSelector((state: RootState) => state.postSlice.TITLE);
-    // const content = useSelector((state: RootState) => state.postSlice.CONTENT);
+    const editMode = useAppSelector((state) => state.postSlice.editMode);
 
-    const store = useStore<any>();
+    const postId = useAppSelector((state) => state.postSlice.postId);
+    const subject = useAppSelector((state) => state.postSlice.SUBJECT);
+    const owner = useAppSelector((state) => state.postSlice.NICKNAME);
+    const title = useAppSelector((state) => state.postSlice.TITLE);
+    const content = useAppSelector((state) => state.postSlice.CONTENT);
 
     const getUserInfo = useCallback(async () => {
-        const res = await fetch(`http://localhost:5000/api/users/`);
+        const res = await fetch(`${API_URL}/users/`);
         const data = await res.json();
 
         return data.user;
@@ -37,11 +40,11 @@ function SubmitButton() {
                 subject: subject,
                 owner: owner,
                 title: title,
-                content: store.getState().postSlice.CONTENT,
+                content: content,
             };
 
-            const res = await fetch(`http://localhost:5000/api/posts/`, {
-                method: 'POST',
+            const res = await fetch(`${API_URL}/posts/${editMode ? postId : ''}`, {
+                method: editMode ? 'PATCH' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -51,18 +54,17 @@ function SubmitButton() {
 
             console.log(data);
 
-            switch (data.success) {
-                case true:
-                    dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: '' });
-                    alert('게시글이 등록되었습니다.');
-                    history.back();
-                    break;
-                case false:
-                    alert('글쓰기 등록에 실패했습니다.');
-                    break;
+            if (data.success) {
+                alert('게시글이 등록되었습니다.');
+            } else {
+                alert('다시 시도해주세요.');
             }
         } catch (err) {
             console.error(err);
+        } finally {
+            dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: '' });
+            dispatch(EDIT_MODE(false));
+            history.back();
         }
     }
 

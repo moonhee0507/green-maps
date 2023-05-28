@@ -34,6 +34,7 @@ function TextEditor({ postInfo }: { postInfo?: Post | null }) {
              * @convertFromHTML HTML 문자열을 객체(2개의 키)로 반환. 하나는 ContentBlock 객체의 배열을 가지고, 다른 하나는 entityMap에 대한 참조를 갖는다
              * @createFromBlockArray ContentBlock 객체의 배열에서 ContentState 생성.
              */
+            dispatch({ type: 'postSlice/CONTENT_STATE', CONTENT: postInfo.content });
             const blocksFromHTML = convertFromHTML(postInfo.content); // HTML을 배열로 만들고
             const state = ContentState.createFromBlockArray(blocksFromHTML.contentBlocks, blocksFromHTML.entityMap); // 그 배열로 ContentState를 생성한다.
             setEditorState(EditorState.createWithContent(state));

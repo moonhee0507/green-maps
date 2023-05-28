@@ -4,8 +4,6 @@ import { SubmitButton } from '../../pages/community/create/component/SubmitButto
 
 export { TopBar };
 
-const hasWindow = typeof window !== 'undefined';
-
 function TopBar(props: { title: string }) {
     const [title] = useState(props.title);
 
@@ -19,7 +17,7 @@ function TopBar(props: { title: string }) {
                     <h2 className="top-title">{title}</h2>
                 </>
             )}
-            {title === '글 쓰기' ? <SubmitButton /> : null}
+            {title === '글 쓰기' || title === '글 수정' ? <SubmitButton /> : null}
         </div>
     );
 }

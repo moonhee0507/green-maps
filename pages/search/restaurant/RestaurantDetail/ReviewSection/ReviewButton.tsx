@@ -15,18 +15,10 @@ function ReviewButton({ restaurantId, isLoggedIn }: { restaurantId: string; isLo
     }
 
     return (
-        <button
-            style={{
-                display: 'block',
-                textAlign: 'center',
-                padding: '20px',
-                backgroundColor: 'lightgreen',
-                width: '100%',
-            }}
-            type="button"
-            onClick={handleClick}
-        >
-            리뷰 작성하기
-        </button>
+        <div className="style-container-write-review">
+            <button type="button" onClick={handleClick} className="button-submit-review write">
+                리뷰 작성하기
+            </button>
+        </div>
     );
 }

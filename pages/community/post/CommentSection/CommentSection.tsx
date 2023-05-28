@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import { WriteComment } from './WriteComment/WriteComment';
+import { Notice } from './Notice';
 import { CommentList } from './CommentList/CommentList';
 import { Pagination } from '../../../../components/Pagination/Pagination';
 import { CommentPagination } from '../../../../renderer/_reducers/_slices/paginationSlice';
 import type { CommentInPost } from '../../../../server/models/Post';
-import { UserInfo } from '../../../../server/models/User';
+import type { UserInfo } from '../../../../server/models/User';
 
 export { CommentSection };
 
@@ -44,6 +45,7 @@ function CommentSection({
             ) : (
                 <h3 className="sr-only">댓글</h3>
             )}
+            <Notice />
             <WriteComment postId={postId} />
             <CommentList comments={commentInPage} userInfo={userInfo} />
             {comments && comments.length > perPage ? <Pagination count={comments.length} perPage={perPage} /> : null}

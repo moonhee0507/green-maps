@@ -43,11 +43,13 @@ function PostList(props: { posts: Array<Post>; limit: number }) {
 
     return (
         <ul className="wrapper-posts">
-            {posts.map((post, i) => {
-                if (i === posts.length - 1) {
-                    return <PostListItem key={i} postInfo={post} ref={target} />;
-                } else return <PostListItem key={i} postInfo={post} />;
-            })}
+            {posts
+                .filter((post) => post.subject !== '공지사항')
+                .map((post, i) => {
+                    if (i === posts.length - 1) {
+                        return <PostListItem key={i} postInfo={post} ref={target} />;
+                    } else return <PostListItem key={i} postInfo={post} />;
+                })}
         </ul>
     );
 }

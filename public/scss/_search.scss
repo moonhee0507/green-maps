@@ -138,124 +138,142 @@
 }
 
 // 리뷰 섹션
-.section-review {
-    .wrapper-review {
-        padding: $padding;
 
-        .container-review {
-            border: 1px solid gray;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 20px;
+.wrapper-review {
+    padding: $padding;
 
-            &:last-child {
-                margin-bottom: 0;
-            }
+    .container-review {
+        border: 1px solid gray;
+        border-radius: $default-border-radius;
+        overflow: hidden;
+        margin-bottom: 20px;
 
-            .style-wrapper-reviewitem {
-                padding: $padding;
-
-                &:first-child {
-                    position: relative;
-
-                    &::after {
-                        position: absolute;
-                        content: '';
-                        background-image: url(/images/icon-3dot.svg);
-                        background-position: center center;
-                        background-repeat: no-repeat;
-                        background-size: 20px 20px;
-                        top: 50%;
-                        right: 10px;
-                        width: 20px;
-                        height: 20px;
-                        -webkit-transform: translate(0, -50%) rotate(90deg);
-                        -ms-transform: translate(0, -50%) rotate(90deg);
-                        transform: translate(0, -50%) rotate(90deg);
-                        cursor: pointer;
-                    }
-                }
-            }
+        &:last-child {
+            margin-bottom: 0;
         }
 
-        .txt-review-owner {
-            font-weight: bold;
-            font-size: 16px;
-            margin-bottom: 5px;
-        }
+        .style-wrapper-reviewitem {
+            padding: $padding;
 
-        .txt-review-date {
-            font-size: 13px;
-        }
+            &:first-child {
+                position: relative;
 
-        .wrapper-review-img {
-            position: relative;
-
-            .container-review-img {
-                overflow: hidden;
-                background-color: $preview-color;
-                width: calc((422px - #{$padding * 2}) * 3);
-                height: calc(422px - #{$padding * 2});
-
-                .txt-count-img {
+                &::after {
                     position: absolute;
-                    bottom: 0;
-                    right: 0;
-                    padding: 5px;
-                    margin: 0;
-                    background-color: rgba(1, 1, 1, 0.5);
-                    color: $on-opacity;
-                }
-
-                .button-move-img {
-                    position: absolute;
-                    top: 50%;
-                    background-image: icon(arrow, $svg-img-arrow);
-                    width: 30px;
-                    height: 30px;
-                    background-color: rgba(1, 1, 1, 0.5);
+                    content: '';
+                    background-image: url(/images/icon-3dot.svg);
                     background-position: center center;
                     background-repeat: no-repeat;
-                    border-radius: 50%;
-                    border: 0;
-                }
-
-                .button-move-img.prev {
-                    left: 15px;
-                }
-
-                .button-move-img.next {
-                    right: 15px;
-                    -webkit-transform: rotate(180deg);
-                    -ms-transform: rotate(180deg);
-                    transform: rotate(180deg);
-                }
-
-                img {
-                    float: left;
-                    width: calc(422px - #{$padding * 2});
-                    height: inherit;
-                    -o-object-fit: cover;
-                    object-fit: cover;
+                    background-size: 20px 20px;
+                    top: 50%;
+                    right: 10px;
+                    width: 20px;
+                    height: 20px;
+                    -webkit-transform: translate(0, -50%) rotate(90deg);
+                    -ms-transform: translate(0, -50%) rotate(90deg);
+                    transform: translate(0, -50%) rotate(90deg);
+                    cursor: pointer;
                 }
             }
         }
+    }
 
-        .button-review-like {
-            padding: 0;
-            border: none;
-        }
+    .txt-review-owner {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
 
-        .num-like-count {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            gap: 5px;
-            margin-bottom: 5px;
+    .txt-review-date {
+        font-size: 13px;
+    }
+
+    .wrapper-review-img {
+        position: relative;
+
+        .container-review-img {
+            overflow: hidden;
+            background-color: $preview-color;
+            width: calc((422px - #{$padding * 2}) * 3);
+            height: calc(422px - #{$padding * 2});
+
+            .txt-count-img {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                padding: 5px;
+                margin: 0;
+                background-color: rgba(1, 1, 1, 0.5);
+                color: $on-opacity;
+            }
+
+            .button-move-img {
+                position: absolute;
+                top: 50%;
+                background-image: icon(arrow, $svg-img-arrow);
+                background-size: 20px 20px;
+                width: 30px;
+                height: 30px;
+                background-color: rgba(1, 1, 1, 0.5);
+                background-position: center center;
+                background-repeat: no-repeat;
+                border-radius: 50%;
+                border: 0;
+            }
+
+            .button-move-img.prev {
+                left: 15px;
+            }
+
+            .button-move-img.next {
+                right: 15px;
+                -webkit-transform: rotate(180deg);
+                -ms-transform: rotate(180deg);
+                transform: rotate(180deg);
+            }
+
+            img {
+                float: left;
+                width: calc(422px - #{$padding * 2});
+                height: inherit;
+                -o-object-fit: cover;
+                object-fit: cover;
+            }
         }
+    }
+
+    .button-review-like {
+        padding: 0;
+        border: none;
+    }
+
+    .num-like-count {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.button-submit-review {
+    width: 100%;
+    border: 0;
+    border-radius: $default-border-radius;
+    background-color: $active-button-color;
+    padding: $padding;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.style-container-write-review {
+    padding: $padding;
+
+    .button-submit-review.write {
+        margin: 0;
     }
 }
 
@@ -334,6 +352,28 @@
     border: none;
 }
 
+#restaurantInput {
+    height: 50px;
+    border: 0;
+    margin: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#txtReview {
+    display: block;
+    resize: none;
+    width: 100%;
+    height: 100px;
+}
+
+#restaurantInput,
+#txtReview {
+    border-radius: $default-border-radius;
+    background-color: $input-color;
+    padding: 10px;
+}
+
 .container-picture {
     display: grid;
     grid-template-columns: 135px 135px;
@@ -342,6 +382,10 @@
     -ms-flex-pack: center;
     justify-content: center;
     gap: 15px;
+
+    > li {
+        border: 1px solid $border-color;
+    }
 
     .button-add-picture,
     .list-picture {
@@ -356,7 +400,7 @@
     }
 
     .list-picture {
-        background-image: icon(image);
+        background-image: icon(image, $svg-img-picture);
 
         img,
         source {

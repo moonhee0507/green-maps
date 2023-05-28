@@ -20,6 +20,40 @@ export default (app: Router) => {
     });
 
     // 게시글 수정
+    route.patch('/:postId', auth, async (req: Request, res: Response) => {
+        try {
+            const { subject, title, content } = req.body;
+            const updatedAt = new Intl.DateTimeFormat('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false,
+            }).format(new Date());
+
+            const post = await Post.findOneAndUpdate(
+                {
+                    _id: req.params.postId,
+                },
+                {
+                    subject: subject,
+                    title: title,
+                    content: content,
+                    updatedAt: updatedAt,
+                },
+                { new: true }
+            );
+
+            if (!post) res.status(404).json({ success: false, message: '해당 게시물을 찾을 수 없습니다.' });
+            else res.status(200).json({ success: true, post: post, message: '게시물 수정이 완료되었습니다.' });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
 
     // 게시글 삭제
     route.delete('/:postId', auth, async (req: Request, res: Response) => {

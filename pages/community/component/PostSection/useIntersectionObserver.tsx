@@ -5,10 +5,12 @@ export default function useIntersectionObserver(callback: () => void) {
 
     useEffect(() => {
         const handleIntersect: IntersectionObserverCallback = (entries) => {
-            if (entries.at(-1)?.isIntersecting) callback();
+            if (entries.at(-1)?.isIntersecting) {
+                callback();
+            }
         };
 
-        observer.current = new IntersectionObserver(handleIntersect, { rootMargin: '0px', threshold: 1 });
+        observer.current = new IntersectionObserver(handleIntersect, { rootMargin: '0px', threshold: 0.7 });
 
         return () => {
             observer.current?.disconnect();

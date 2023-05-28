@@ -17,6 +17,7 @@ function SelectBox() {
             </label>
             <select name="subjects" id="communitySearchSelect" onChange={handleChange}>
                 <option value="">전체 게시판</option>
+                <option value="공지사항">공지사항</option>
                 <option value="🥑채식얘기">🥑채식얘기</option>
                 <option value="⚽운동얘기">⚽운동얘기</option>
             </select>
