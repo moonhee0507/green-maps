@@ -1,35 +1,35 @@
 import React from 'react';
 import defaultProfile from '/images/default-profile.png';
-import imgCamera from '/images/camera.png';
 import type { UserInfo } from '../../../server/models/User';
 
 export function MyProfile({ userInfo }: { userInfo: UserInfo }) {
     const { host } = userInfo;
     return (
         <li className="style-wrapper-profile">
-            <ProfileImage />
+            <ProfileImage userInfo={userInfo} />
             <ProfileDetail userInfo={userInfo} />
-            <HostBox host={host} />
-            <EditProfileButton />
         </li>
     );
 }
 
-function ProfileImage() {
+function ProfileImage({ userInfo }: { userInfo: UserInfo }) {
+    const { profileImage } = userInfo;
+
     return (
         <dl>
             <dt className="sr-only">프로필 사진</dt>
             <dd>
-                <div className="wrapper-profile-image">
-                    <div
-                        style={{
-                            backgroundImage: `url(${defaultProfile})`,
-                            backgroundSize: '70px 70px',
-                            width: '70px',
-                            height: '70px',
-                        }}
+                <div className="container-profile-img">
+                    <img
+                        src={
+                            profileImage
+                                ? `https://${import.meta.env.VITE_AWS_S3_BUCKET}.s3.${
+                                      import.meta.env.VITE_AWS_DEFAULT_REGION
+                                  }.amazonaws.com/${profileImage}`
+                                : defaultProfile
+                        }
+                        alt="프로필 사진"
                     />
-                    <img className="button-add-profile-image" src={imgCamera} alt="프로필 사진 추가 버튼" />
                 </div>
             </dd>
         </dl>
@@ -54,34 +54,5 @@ function ProfileDetail({ userInfo }: { userInfo: UserInfo }) {
                 <dd className="num-profile-like">{likeList.length}</dd>
             </dl>
         </dl>
-    );
-}
-
-function HostBox({ host }: { host: string }) {
-    return (
-        <div className="txt-host">
-            {(() => {
-                switch (host) {
-                    case 'local':
-                        return '자체 계정';
-                    case 'daum':
-                        return '다음카카오';
-                    case 'naver':
-                        return '네이버';
-                    default:
-                        return '자체 계정';
-                }
-            })()}
-        </div>
-    );
-}
-
-import imgEdit from '/images/icon-edit.svg';
-
-function EditProfileButton() {
-    return (
-        <button type="button" className="button-edit-profile">
-            <img src={imgEdit} alt="프로필 수정 이미지" />
-        </button>
     );
 }

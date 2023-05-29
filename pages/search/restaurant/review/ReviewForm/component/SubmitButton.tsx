@@ -95,11 +95,10 @@ function SubmitButton(props: { restaurantId: string }) {
                      */
                     await fetch(signedUrl, {
                         method: 'PUT',
-                        body: file,
                         headers: {
-                            'Access-Control-Allow-Origin': '*',
                             'Content-Type': file.type,
                         },
+                        body: file,
                     });
                 } catch (err) {
                     console.error(err);

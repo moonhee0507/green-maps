@@ -72,7 +72,7 @@ export function ModalGroup({ userInfo }: { userInfo: UserInfo | null }) {
     }
 
     return (
-        <div className="mylist-modal-group" {...attr}>
+        <div className="modal-group" {...attr}>
             <GroupOrderModal />
             <AddGroupModal userInfo={userInfo} />
             <MoveListModal userInfo={userInfo} />
@@ -100,7 +100,7 @@ function DeleteMultiLike({ userInfo }: { userInfo: UserInfo | null }) {
     }, [userInfo]);
 
     return (
-        <article className="modal-likelist-delete" {...attr}>
+        <article className="modal-group-item" {...attr}>
             <h4>목록 삭제</h4>
             <Form likeList={likeList} />
             <CloseButton />

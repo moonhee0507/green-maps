@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
-import { EDIT_DELETE_NOTIFY_MODAL, SET_POST_ID } from '../../../../renderer/_reducers/_slices/postSlice';
-import { EditDeleteNotifyModal } from './EditDeleteNotifyModal/EditDeleteNotifyModal';
+import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
+import { PROFILE_IMAGE_MODAL } from '../../../renderer/_reducers/_slices/profileSlice';
+import { EditProfileImageModal } from './EditProfileImageModal/EditProfileImageModal';
+import { EditNickNameModal } from './EditNickNameModal/EditNickNameModal';
 
 export { ModalGroup };
 
 function ModalGroup() {
-    const on = useAppSelector((state) => state.postSlice.editDeleteNotifyModalOn);
+    const on = useAppSelector(
+        (state) => state.profileSlice.profileImageModalOn || state.profileSlice.profileNickNameModalOn
+    );
     const [attr, setAttr] = useState({ hidden: true });
 
     const dispatch = useAppDispatch();
@@ -31,14 +34,14 @@ function ModalGroup() {
             const app = document.querySelector('.app');
             app?.classList.remove('modal-mode');
 
-            dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
-            dispatch(SET_POST_ID(''));
+            dispatch(PROFILE_IMAGE_MODAL(false));
         }
     }
 
     return (
         <div className="modal-group" {...attr}>
-            <EditDeleteNotifyModal />
+            <EditProfileImageModal />
+            <EditNickNameModal />
         </div>
     );
 }

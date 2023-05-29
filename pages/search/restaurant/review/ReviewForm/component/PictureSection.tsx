@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import randomizeFileName from '../../../../../../components/file/randomizeFileName';
 
 export { PictureSection };
 
@@ -40,8 +41,6 @@ function PictureSection() {
 
     useEffect(() => {
         if (images) {
-            console.log('images', images);
-
             const temp: Array<RandomFileName> = [];
             for (let image of images) {
                 const fileName = randomizeFileName() + '.' + image[1].replace('image/', '');
@@ -49,13 +48,6 @@ function PictureSection() {
             }
 
             dispatch({ type: 'reviewSlice/IMAGE_STATE', FILE_INFO: images, RANDOM_NAME: temp });
-        }
-
-        function randomizeFileName() {
-            const timestamp = new Date().getTime();
-            const randomNum = Math.floor(Math.random() * 1000000);
-
-            return `${timestamp}-${randomNum}`;
         }
     }, [images]);
 
@@ -82,10 +74,10 @@ function PictureSection() {
                     {images.length > 0 ? <img src={images[0][0]} alt="첫번째 이미지" /> : null}
                 </li>
                 <li className="list-picture" area-label="추가한 이미지 리스트">
-                    {images.length > 0 ? <img src={images[1][0]} alt="두번째 이미지" /> : null}
+                    {images.length > 1 ? <img src={images[1][0]} alt="두번째 이미지" /> : null}
                 </li>
                 <li className="list-picture" area-label="추가한 이미지 리스트">
-                    {images.length > 0 ? <img src={images[2][0]} alt="세번째 이미지" /> : null}
+                    {images.length > 2 ? <img src={images[2][0]} alt="세번째 이미지" /> : null}
                 </li>
             </ul>
         </fieldset>

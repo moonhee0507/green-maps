@@ -56,7 +56,7 @@ export default (app: Router) => {
     route.post('/login', async (req: Request, res: Response) => {
         const user = await User.findOne({ userId: req.body.userId });
 
-        if (!user) return res.json({ success: false, errMessage: '해당 유저가 존재하지 않습니다' });
+        if (!user) return res.json({ success: false, errMessage: '사용자가 존재하지 않습니다.' });
 
         user.comparePassword(req.body.password, (err: Error | null, same: any) => {
             if (!same) {
@@ -122,7 +122,7 @@ export default (app: Router) => {
 
             const user = await User.findOne({ userId: userId });
 
-            if (!user) res.json({ success: false, message: '해당 사용자가 없습니다.' });
+            if (!user) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
             else {
                 user.bookmarkList.forEach((bookmark) => {
                     if (selectedRestaurant.includes(bookmark._id.toString())) {
@@ -151,7 +151,7 @@ export default (app: Router) => {
                 { new: true }
             );
 
-            if (!user) res.json({ success: false, message: '해당 사용자가 없습니다.' });
+            if (!user) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
             else {
                 res.status(200).json({ success: true, user: user });
             }
@@ -195,6 +195,30 @@ export default (app: Router) => {
             res.status(200).json({ success: true, user: user });
         } catch (err) {
             console.error(err);
+        }
+    });
+
+    // 프로필 사진 수정
+    route.patch('/edit/profile', auth, async (req: Request, res: Response) => {
+        try {
+            const { profileImage } = req.body;
+            const user = await User.findOne({ token: req.cookies.auth });
+
+            if (user) {
+                if (typeof profileImage === 'string') {
+                    user.profileImage = profileImage;
+                }
+
+                await user.save();
+
+                res.json({ success: true, message: '프로필 수정이 완료되었습니다.' });
+            } else {
+                res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
         }
     });
 };

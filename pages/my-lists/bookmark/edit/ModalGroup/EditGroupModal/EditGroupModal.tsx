@@ -33,7 +33,7 @@ export function EditGroupModal({ userInfo, groupList }: { userInfo: UserInfo | n
     }
 
     return (
-        <article className="modal-group-add" {...attr}>
+        <article className="modal-group-item" {...attr}>
             <h4>그룹 수정</h4>
             <form action="">
                 <GroupNameInput />

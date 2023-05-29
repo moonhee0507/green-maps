@@ -256,8 +256,7 @@
 }
 
 // 모달
-.mylist-modal-group,
-.post-modal-group {
+.modal-group {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -276,15 +275,11 @@
     }
 }
 
-.post-modal-group {
+.modal-group.post {
     padding: $padding;
 }
 
-.modal-group-order,
-.modal-group-add,
-.modal-group-move,
-.modal-copy,
-.modal-likelist-delete {
+.modal-group-item {
     position: relative;
 
     > h4 {

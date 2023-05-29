@@ -49,7 +49,7 @@ function ModalGroup({ userInfo, groupList }: { userInfo: UserInfo | null; groupL
         }
     }
     return (
-        <div className="mylist-modal-group" {...attr}>
+        <div className="modal-group" {...attr}>
             <GroupOrderModal />
             <EditGroupModal userInfo={userInfo} groupList={groupList} />
         </div>

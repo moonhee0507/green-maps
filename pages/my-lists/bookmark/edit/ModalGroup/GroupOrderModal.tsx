@@ -29,7 +29,7 @@ function GroupOrderModal() {
     }
 
     return (
-        <article className="modal-group-order" {...attr}>
+        <article className="modal-group-item" {...attr}>
             <h4>정렬기준</h4>
             <div className="container-button">
                 <button

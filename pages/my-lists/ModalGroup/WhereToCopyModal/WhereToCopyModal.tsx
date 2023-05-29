@@ -41,7 +41,7 @@ function WhereToCopyModal({ userInfo }: { userInfo: UserInfo | null }) {
     }
 
     return (
-        <article className="modal-copy" {...attr}>
+        <article className="modal-group-item" {...attr}>
             <h4>복사할 그룹 선택</h4>
             <ul className="ul-groupname">
                 {groupList

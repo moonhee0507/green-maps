@@ -2,9 +2,9 @@ import React, { MouseEvent, useEffect, useState } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { NavBar } from '../../components/navBar';
 import { ProfileSection } from './ProfileSection';
-import { Page as ErrorPage } from '../../renderer/_error.page';
 import { MyReviewSection } from './MyReviewSection/MyReviewSection';
 import { MyCommunitySection } from './MyCommunitySection/MyCommunitySection';
+import { ModalGroup } from './ModalGroup/ModalGroup';
 import type { PageContext } from '../../renderer/types';
 import type { UserInfo } from '../../server/models/User';
 
@@ -25,6 +25,7 @@ export function Page(pageContext: PageContext) {
                 <TopBar title="내 정보" />
                 <MyMain userInfo={info} />
                 <NavBar isLoggedIn={isLoggedIn} />
+                <ModalGroup />
             </>
         )
     );

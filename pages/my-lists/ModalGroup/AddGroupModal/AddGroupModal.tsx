@@ -28,7 +28,7 @@ export function AddGroupModal({ userInfo }: { userInfo: UserInfo | null }) {
     }
 
     return (
-        <article className="modal-group-add" {...attr}>
+        <article className="modal-group-item" {...attr}>
             <h4>새 그룹 추가</h4>
             <form action="">
                 <GroupNameInput />

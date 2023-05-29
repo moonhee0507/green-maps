@@ -18,6 +18,7 @@ export interface UserInfo {
     userId: string;
     nickName: string;
     password: string;
+    profileImage: string;
     host: string;
     snsId: string;
     token: string;
@@ -57,6 +58,10 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
         type: String,
         minlength: 10,
         required: true,
+    },
+    profileImage: {
+        type: String,
+        required: false,
     },
     host: {
         type: String,

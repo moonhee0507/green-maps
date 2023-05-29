@@ -91,15 +91,6 @@
     position: relative;
     width: 70px;
     height: 70px;
-
-    .button-add-profile-image {
-        position: absolute;
-        width: 24px;
-        height: 24px;
-        bottom: 0;
-        right: 0;
-        cursor: pointer;
-    }
 }
 
 // 프로필 사진 우측
@@ -146,74 +137,67 @@
     }
 }
 
-// 호스트
-.txt-host {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: 1px solid $active-color;
-    border-radius: $host-tag-border-radius;
-    color: $active-color;
-    padding: 5px;
+.container-notice.profile {
     font-size: 13px;
-    line-height: 13px;
+    margin: 20px 20px 0;
 }
 
-// 프로필 수정 버튼
-.button-edit-profile {
-    width: 0px;
-    height: 0px;
+.container-profile-img {
+    width: 70px;
+    height: 70px;
 
     > img {
         width: 100%;
         height: 100%;
+        border-radius: 50%;
+        border: 1px solid $border-color;
     }
 }
 
 .wrapper-profile-notice,
 .wrapper-profile-inquiry,
 .wrapper-profile-FAQ {
-    position: relative;
+    // position: relative;
 
-    > a {
-        width: 100%;
-        display: block;
-        padding: 20px 20px 20px 60px;
-        font-size: 20px;
-        &::before,
-        &::after {
-            position: absolute;
-            content: '';
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            top: 50%;
-            -webkit-transform: translate(0, -50%);
-            -ms-transform: translate(0, -50%);
-            transform: translate(0, -50%);
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-size: 20px 20px;
-            width: 20px;
-            height: 20px;
-            top: 50%;
-        }
+    // > a {
+    //     width: 100%;
+    //     display: block;
+    //     padding: 20px 20px 20px 60px;
+    //     font-size: 20px;
+    //     &::before,
+    //     &::after {
+    //         position: absolute;
+    //         content: '';
+    //         background-position: center center;
+    //         background-repeat: no-repeat;
+    //         background-size: 20px 20px;
+    //         top: 50%;
+    //         -webkit-transform: translate(0, -50%);
+    //         -ms-transform: translate(0, -50%);
+    //         transform: translate(0, -50%);
+    //         background-position: center center;
+    //         background-repeat: no-repeat;
+    //         background-size: 20px 20px;
+    //         width: 20px;
+    //         height: 20px;
+    //         top: 50%;
+    //     }
 
-        &::before {
-            left: 22px;
-            -webkit-transform: translate(0, -50%);
-            -ms-transform: translate(0, -50%);
-            transform: translate(0, -50%);
-        }
+    //     &::before {
+    //         left: 22px;
+    //         -webkit-transform: translate(0, -50%);
+    //         -ms-transform: translate(0, -50%);
+    //         transform: translate(0, -50%);
+    //     }
 
-        &::after {
-            background-image: url(/images/icon-arrow.svg);
-            right: 22px;
-            -webkit-transform: rotate(180deg);
-            -ms-transform: rotate(180deg);
-            transform: translate(0, -50%) rotate(180deg);
-        }
-    }
+    //     &::after {
+    //         background-image: url(/images/icon-arrow.svg);
+    //         right: 22px;
+    //         -webkit-transform: rotate(180deg);
+    //         -ms-transform: rotate(180deg);
+    //         transform: translate(0, -50%) rotate(180deg);
+    //     }
+    // }
 }
 
 .wrapper-profile-notice {

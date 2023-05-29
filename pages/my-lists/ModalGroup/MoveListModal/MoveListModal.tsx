@@ -31,7 +31,7 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
     }, [groupName]);
 
     return (
-        <article className="modal-group-move" {...attr}>
+        <article className="modal-group-item" {...attr}>
             <h4>목록 편집</h4>
             <Form bookmarkList={bookmarkListInSameGroup} />
             <CloseButton />
