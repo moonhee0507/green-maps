@@ -1,11 +1,12 @@
 import 'normalize.css';
-import React from 'react';
+import './scss/index.css';
+import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { PageContextProvider } from './usePageContext';
 import { getStore } from './store/index.js';
 import { Link } from './Link';
 import type { PageContext } from './types';
-import logo from '/images/logo.svg';
+import logo from '/images/logo.png';
 
 export { PageShell };
 
@@ -34,7 +35,9 @@ function BackgroundArea() {
     return (
         <div className="left-area">
             <Link href="/">
-                <img src={logo} width={200} alt="로고" />
+                <div className="style-container-logo">
+                    <img className="img-logo" src={logo} width={200} alt="로고" />
+                </div>
             </Link>
             <div className="txt-intro">
                 <strong>채식 식당 검색과 북마크는</strong>

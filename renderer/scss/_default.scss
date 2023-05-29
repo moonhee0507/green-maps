@@ -7,7 +7,8 @@ html,
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: $background-variant;
+    background: -o-radial-gradient(circle, rgba(0, 188, 212, 1) 0%, rgba(156, 233, 148, 1) 100%);
+    background: radial-gradient(circle, rgba(0, 188, 212, 1) 0%, rgba(156, 233, 148, 1) 100%);
     color: $on-background-app;
     overflow: hidden;
 }

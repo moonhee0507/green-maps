@@ -28,7 +28,7 @@ async function render(pageContext: PageContextServer) {
         pageHtml = ReactDOMServer.renderToString(
             <Provider store={store}>
                 <PageShell pageContext={pageContext}>
-                    <Page {...pageProps} routeParams={routeParams} token={token} user={user} groupName={groupName} />
+                    <Page {...pageProps} routeParams={routeParams} token={token} user={user} />
                 </PageShell>
             </Provider>
         );
@@ -39,7 +39,7 @@ async function render(pageContext: PageContextServer) {
     const desc = (documentProps && documentProps.description) || '채식 식당 검색과 북마크는 그린 맵';
 
     const manifestUrl = import.meta.env.BASE_URL + 'manifest.json';
-    const styleUrl = import.meta.env.BASE_URL + 'scss/index.css';
+    const styleUrl = import.meta.env.BASE_URL + 'scss/index.css?v=2';
 
     const documentHtml = escapeInject`<!DOCTYPE html>
         <html lang="ko">
@@ -51,7 +51,7 @@ async function render(pageContext: PageContextServer) {
                 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
                 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
                 <link rel="manifest" href="${manifestUrl}" />
-                <link rel="stylesheet" href="${styleUrl}" type="text/css" />
+
                 <link rel="preconnect" href="https://fonts.googleapis.com">
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">

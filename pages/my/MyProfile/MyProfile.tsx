@@ -10,6 +10,7 @@ export function MyProfile({ userInfo }: { userInfo: UserInfo }) {
             <ProfileImage />
             <ProfileDetail userInfo={userInfo} />
             <HostBox host={host} />
+            <EditProfileButton />
         </li>
     );
 }
@@ -72,5 +73,15 @@ function HostBox({ host }: { host: string }) {
                 }
             })()}
         </div>
+    );
+}
+
+import imgEdit from '/images/icon-edit.svg';
+
+function EditProfileButton() {
+    return (
+        <button type="button" className="button-edit-profile">
+            <img src={imgEdit} alt="프로필 수정 이미지" />
+        </button>
     );
 }
