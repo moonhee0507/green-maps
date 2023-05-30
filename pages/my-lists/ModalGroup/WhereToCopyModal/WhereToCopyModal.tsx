@@ -12,13 +12,13 @@ function WhereToCopyModal({ userInfo }: { userInfo: UserInfo | null }) {
     const copyModalOn = useAppSelector((state) => state.myListSlice.copyModalOn);
     const targetGroup = useAppSelector((state) => state.myListSlice.targetGroup);
 
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
     const [groupList, setGroupList] = useState<GroupList[]>([]);
     const [bookmarkList, setBookmarkList] = useState<Bookmark[]>([]);
 
     useEffect(() => {
-        if (copyModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (copyModalOn === true) setShow(true);
+        else setShow(false);
     }, [copyModalOn]);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ function WhereToCopyModal({ userInfo }: { userInfo: UserInfo | null }) {
     }
 
     return (
-        <article className="modal-group-item" {...attr}>
+        <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>복사할 그룹 선택</h4>
             <ul className="ul-groupname">
                 {groupList

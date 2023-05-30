@@ -47,3 +47,12 @@
         font-style: normal;
     }
 }
+
+@mixin styled-button {
+    width: 100%;
+    background-color: $active-button-color;
+    border: 0;
+    border-radius: $default-border-radius;
+    padding: $padding;
+    font-weight: bold;
+}

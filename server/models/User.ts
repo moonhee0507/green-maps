@@ -50,7 +50,7 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     },
     nickName: {
         type: String,
-        maxlength: 20,
+        maxlength: 17,
         unique: true,
         required: true,
     },

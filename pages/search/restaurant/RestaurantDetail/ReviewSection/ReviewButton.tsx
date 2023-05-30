@@ -16,7 +16,7 @@ function ReviewButton({ restaurantId, isLoggedIn }: { restaurantId: string; isLo
 
     return (
         <div className="style-container-write-review">
-            <button type="button" onClick={handleClick} className="button-submit-review write">
+            <button type="button" onClick={handleClick} className="styled-button">
                 리뷰 작성하기
             </button>
         </div>

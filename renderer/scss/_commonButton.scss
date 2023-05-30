@@ -54,9 +54,24 @@
         }
 
         .txt-delete {
-            // font-size: 13px;
             font-size: 20px;
             margin: 0;
         }
     }
+}
+
+.styled-button {
+    @include styled-button;
+
+    &:disabled {
+        background-color: $disabled-button-color;
+    }
+}
+
+.styled-button.review {
+    margin-top: 20px;
+}
+
+.styled-button.nickName {
+    padding: 10px;
 }

@@ -30,24 +30,24 @@ export function ModalGroup({ userInfo }: { userInfo: UserInfo | null }) {
             state.myListSlice.copyModalOn ||
             state.myListSlice.deleteLikeListModalOn
     );
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (on === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (on === true) setShow(true);
+        else setShow(false);
     }, [on]);
 
     useEffect(() => {
-        if (attr.hidden === false) {
+        if (show) {
             document.addEventListener('click', handleClose);
         }
 
         return () => {
             document.removeEventListener('click', handleClose);
         };
-    }, [attr]);
+    }, [show]);
 
     function handleClose(event: any) {
         if (event.target.className === 'app modal-mode') {
@@ -72,7 +72,7 @@ export function ModalGroup({ userInfo }: { userInfo: UserInfo | null }) {
     }
 
     return (
-        <div className="modal-group" {...attr}>
+        <div className={`modal-group ${show ? 'on' : ''}`}>
             <GroupOrderModal />
             <AddGroupModal userInfo={userInfo} />
             <MoveListModal userInfo={userInfo} />
@@ -83,14 +83,14 @@ export function ModalGroup({ userInfo }: { userInfo: UserInfo | null }) {
 }
 
 function DeleteMultiLike({ userInfo }: { userInfo: UserInfo | null }) {
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
     const [likeList, setLikeList] = useState<Like[]>([]);
 
     const deleteLikeListModelOn = useAppSelector((state) => state.myListSlice.deleteLikeListModalOn);
 
     useEffect(() => {
-        if (deleteLikeListModelOn) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (deleteLikeListModelOn) setShow(true);
+        else setShow(false);
     }, [deleteLikeListModelOn]);
 
     useEffect(() => {
@@ -100,7 +100,7 @@ function DeleteMultiLike({ userInfo }: { userInfo: UserInfo | null }) {
     }, [userInfo]);
 
     return (
-        <article className="modal-group-item" {...attr}>
+        <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>목록 삭제</h4>
             <Form likeList={likeList} />
             <CloseButton />

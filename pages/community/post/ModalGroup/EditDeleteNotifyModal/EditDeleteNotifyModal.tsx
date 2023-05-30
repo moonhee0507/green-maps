@@ -7,31 +7,17 @@ import { navigate } from 'vite-plugin-ssr/client/router';
 export { EditDeleteNotifyModal };
 
 function EditDeleteNotifyModal() {
-    const dispatch = useAppDispatch();
-
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
     const editDeleteNotifyModalOn = useAppSelector((state) => state.postSlice.editDeleteNotifyModalOn);
     const sameUserOwner = useAppSelector((state) => state.postSlice.sameUserOwner);
 
     useEffect(() => {
-        if (editDeleteNotifyModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (editDeleteNotifyModalOn === true) setShow(true);
+        else setShow(false);
     }, [editDeleteNotifyModalOn]);
 
-    function handleClick() {
-        // 각 처리
-        close();
-    }
-
-    function close() {
-        const app = document.querySelector('.app');
-        app?.classList.remove('modal-mode');
-
-        dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
-    }
-
     return (
-        <article className="modal-edit-delete-notify" {...attr}>
+        <article className={`modal-edit-delete-notify ${show ? 'on' : ''}`}>
             <h4 className="sr-only">수정, 삭제, 신고용 모달</h4>
             <ul>
                 {sameUserOwner ? (
@@ -40,7 +26,7 @@ function EditDeleteNotifyModal() {
                         <DELETE />
                     </>
                 ) : (
-                    <li onClick={handleClick}> 🚨 신고하기</li>
+                    <li> 🚨 신고하기</li>
                 )}
             </ul>
         </article>

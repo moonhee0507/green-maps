@@ -120,7 +120,7 @@ function SubmitButton(props: { restaurantId: string }) {
 
     return (
         <>
-            <button type="button" onClick={handleSubmit} className="button-submit-review">
+            <button type="button" onClick={handleSubmit} className="styled-button review">
                 작성 완료
             </button>
         </>

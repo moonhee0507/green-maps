@@ -9,7 +9,7 @@ import { COMPARE_ICON } from '../../../../../../renderer/_reducers/_slices/myLis
 export { CompleteButton };
 
 function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
-    const [attr, setAttr] = useState({ disabled: true });
+    const [show, setShow] = useState({ disabled: true });
     const groupName = useAppSelector((state) => state.myListSlice.groupName);
     const groupIcon = useAppSelector((state) => state.myListSlice.selectedIcon);
     const targetGroupName = useAppSelector((state) => state.myListSlice.targetGroup);
@@ -26,9 +26,9 @@ function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; gr
 
     useEffect(() => {
         if ((groupName !== null && groupName !== '' && groupName !== targetGroupName) || compareIcon === false) {
-            setAttr({ disabled: false });
+            setShow({ disabled: false });
         } else {
-            setAttr({ disabled: true });
+            setShow({ disabled: true });
         }
     }, [groupName, compareIcon, targetGroupName, compareIcon]);
 
@@ -70,7 +70,7 @@ function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; gr
         }
     }
     return (
-        <button type="button" className="button-groupname-complete" {...attr} onClick={handleClick}>
+        <button type="button" className={`button-groupname-complete ${show ? 'on' : ''}`} onClick={handleClick}>
             완료
         </button>
     );

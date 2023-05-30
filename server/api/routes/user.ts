@@ -198,15 +198,19 @@ export default (app: Router) => {
         }
     });
 
-    // 프로필 사진 수정
+    // 프로필 사진, 닉네임 수정
     route.patch('/edit/profile', auth, async (req: Request, res: Response) => {
         try {
-            const { profileImage } = req.body;
+            const { profileImage, nickname } = req.body;
             const user = await User.findOne({ token: req.cookies.auth });
 
             if (user) {
                 if (typeof profileImage === 'string') {
                     user.profileImage = profileImage;
+                }
+
+                if (typeof nickname === 'string') {
+                    user.nickName = nickname;
                 }
 
                 await user.save();
@@ -218,6 +222,25 @@ export default (app: Router) => {
         } catch (err) {
             if (err instanceof Error) {
                 res.json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
+    // 닉네임 중복 검사
+    route.get('/check-nickname', async (req: Request, res: Response) => {
+        try {
+            const { nickname } = req.query;
+
+            const existingUser = await User.findOne({ nickName: nickname });
+
+            if (existingUser) {
+                res.json({ duplicated: true });
+            } else {
+                res.json({ duplicated: false });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ errorMessage: err.message });
             }
         }
     });

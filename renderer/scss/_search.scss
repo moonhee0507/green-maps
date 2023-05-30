@@ -259,22 +259,8 @@
     }
 }
 
-.button-submit-review {
-    width: 100%;
-    border: 0;
-    border-radius: $default-border-radius;
-    background-color: $active-button-color;
-    padding: $padding;
-    margin-top: 20px;
-    font-weight: bold;
-}
-
 .style-container-write-review {
     padding: $padding;
-
-    .button-submit-review.write {
-        margin: 0;
-    }
 }
 
 .style-wrapper-no-review {

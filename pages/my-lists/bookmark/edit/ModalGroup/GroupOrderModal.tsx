@@ -9,11 +9,11 @@ function GroupOrderModal() {
     const dispatch = useAppDispatch();
     const orderStandard = useAppSelector((state) => state.myListSlice.groupNameOrder);
     const orderModalOn = useAppSelector((state) => state.myListSlice.orderModalOn);
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
-        if (orderModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (orderModalOn === true) setShow(true);
+        else setShow(false);
     }, [orderModalOn]);
 
     function handleOrder(event: React.MouseEvent<HTMLButtonElement>) {
@@ -29,7 +29,7 @@ function GroupOrderModal() {
     }
 
     return (
-        <article className="modal-group-item" {...attr}>
+        <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>정렬기준</h4>
             <div className="container-button">
                 <button

@@ -15,24 +15,24 @@ export { ModalGroup };
 
 function ModalGroup({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
     const on = useAppSelector((state) => state.myListSlice.editGroupModalOn);
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (on === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (on === true) setShow(true);
+        else setShow(false);
     }, [on]);
 
     useEffect(() => {
-        if (attr.hidden === false) {
+        if (show) {
             document.addEventListener('click', handleClose);
         }
 
         return () => {
             document.removeEventListener('click', handleClose);
         };
-    }, [attr]);
+    }, [show]);
 
     function handleClose(event: MouseEvent) {
         if ((event.target as HTMLElement).className === 'app modal-mode') {
@@ -49,7 +49,7 @@ function ModalGroup({ userInfo, groupList }: { userInfo: UserInfo | null; groupL
         }
     }
     return (
-        <div className="modal-group" {...attr}>
+        <div className={`modal-group ${show ? 'on' : ''}`}>
             <GroupOrderModal />
             <EditGroupModal userInfo={userInfo} groupList={groupList} />
         </div>

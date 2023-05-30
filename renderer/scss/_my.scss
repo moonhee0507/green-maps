@@ -154,6 +154,40 @@
     }
 }
 
+.form-edit-nickName {
+    position: relative;
+}
+
+.num-count-nickName {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    right: 7px;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    font-size: 13px;
+    text-align: right;
+}
+
+#editNickNameInput {
+    @include styled-input;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+.container-notice.edit-nickName {
+    border: 0;
+    padding: 0;
+    margin: 10px 0;
+
+    > em {
+        margin: 0;
+        font-size: 13px;
+    }
+}
+
 .wrapper-profile-notice,
 .wrapper-profile-inquiry,
 .wrapper-profile-FAQ {
@@ -227,16 +261,6 @@
 // 로그아웃
 .style-wrapper-logout {
     padding: $padding;
-
-    > button {
-        width: 100%;
-        background-color: $active-button-color;
-        border: 0;
-        border-radius: $default-border-radius;
-        padding: 20px;
-        font-size: 16px;
-        font-weight: bold;
-    }
 }
 
 // 커뮤니티 활동

@@ -257,6 +257,7 @@
 
 // 모달
 .modal-group {
+    display: none;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -275,11 +276,16 @@
     }
 }
 
+.modal-group.on {
+    display: block;
+}
+
 .modal-group.post {
     padding: $padding;
 }
 
 .modal-group-item {
+    display: none;
     position: relative;
 
     > h4 {
@@ -308,6 +314,10 @@
             color: $active-color;
         }
     }
+}
+
+.modal-group-item.on {
+    display: block;
 }
 
 // 닫기 버튼
@@ -376,6 +386,7 @@
 }
 
 .button-groupname-complete {
+    display: none;
     width: 100%;
     height: 50px;
     background-color: $active-button-color;
@@ -387,6 +398,10 @@
     &:disabled {
         background-color: $disabled-button-color;
     }
+}
+
+.button-groupname-complete.on {
+    display: block;
 }
 
 // 목록 편집 모달

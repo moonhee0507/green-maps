@@ -334,6 +334,8 @@ $inputHeight: 45px;
 
 // 수정-삭제-신고 모달
 .modal-edit-delete-notify {
+    display: none;
+
     > ul {
         text-align: center;
 
@@ -349,6 +351,10 @@ $inputHeight: 45px;
             }
         }
     }
+}
+
+.modal-edit-delete-notify.on {
+    display: block;
 }
 
 // 공지사항 article

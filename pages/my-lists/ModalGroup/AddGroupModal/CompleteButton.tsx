@@ -7,16 +7,16 @@ import type { UserInfo } from '../../../../server/models/User';
 export { CompleteButton };
 
 function CompleteButton({ userInfo }: { userInfo: UserInfo | null }) {
-    const [attr, setAttr] = useState({ disabled: true });
+    const [show, setShow] = useState({ disabled: true });
     const groupName = useAppSelector((state) => state.myListSlice.groupName);
     const groupIcon = useAppSelector((state) => state.myListSlice.selectedIcon);
 
     useEffect(() => {
         if (groupName !== null) {
-            if (groupName.length !== 0) setAttr({ disabled: false });
-            else setAttr({ disabled: true });
+            if (groupName.length !== 0) setShow({ disabled: false });
+            else setShow({ disabled: true });
         } else {
-            setAttr({ disabled: true });
+            setShow({ disabled: true });
         }
     }, [groupName]);
 
@@ -46,7 +46,7 @@ function CompleteButton({ userInfo }: { userInfo: UserInfo | null }) {
         }
     }
     return (
-        <button type="button" className="button-groupname-complete" {...attr} onClick={handleClick}>
+        <button type="button" className={`button-groupname-complete ${show ? 'on' : ''}`} onClick={handleClick}>
             완료
         </button>
     );

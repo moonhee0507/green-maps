@@ -11,14 +11,14 @@ import { ButtonGroup } from './Form/ButtonGroup';
 import type { Bookmark, UserInfo } from '../../../../server/models/User';
 
 export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
     const [bookmarkListInSameGroup, setBookmarkListInSameGroup] = useState<Bookmark[]>([]);
 
     const moveListModalOn = useAppSelector((state) => state.myListSlice.moveListModalOn);
 
     useEffect(() => {
-        if (moveListModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (moveListModalOn === true) setShow(true);
+        else setShow(false);
     }, [moveListModalOn]);
 
     const groupName = useAppSelector((state) => state.myListSlice.targetGroup);
@@ -31,7 +31,7 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
     }, [groupName]);
 
     return (
-        <article className="modal-group-item" {...attr}>
+        <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>목록 편집</h4>
             <Form bookmarkList={bookmarkListInSameGroup} />
             <CloseButton />

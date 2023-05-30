@@ -30,11 +30,11 @@ function ProfileSection({ userInfo }: { userInfo: UserInfo }) {
             <Notice host={userInfo.host} />
             <ul className="ul-profile">
                 <MyProfile userInfo={userInfo} />
-                <ProfileEdit />
+                <ProfileEdit userInfo={userInfo} />
                 <CustomerService />
             </ul>
             <div className="style-wrapper-logout">
-                <button type="button" onClick={handleLogout}>
+                <button type="button" onClick={handleLogout} className="styled-button">
                     로그아웃
                 </button>
             </div>

@@ -11,11 +11,11 @@ export function AddGroupModal({ userInfo }: { userInfo: UserInfo | null }) {
     const dispatch = useAppDispatch();
     const addGroupModalOn = useAppSelector((state) => state.myListSlice.addGroupModalOn);
 
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
-        if (addGroupModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (addGroupModalOn === true) setShow(true);
+        else setShow(false);
     }, [addGroupModalOn]);
 
     function handleClose() {
@@ -28,9 +28,9 @@ export function AddGroupModal({ userInfo }: { userInfo: UserInfo | null }) {
     }
 
     return (
-        <article className="modal-group-item" {...attr}>
+        <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>새 그룹 추가</h4>
-            <form action="">
+            <form>
                 <GroupNameInput />
                 <IconSelection />
                 <CompleteButton userInfo={userInfo} />

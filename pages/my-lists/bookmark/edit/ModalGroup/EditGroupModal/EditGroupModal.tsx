@@ -16,11 +16,11 @@ export function EditGroupModal({ userInfo, groupList }: { userInfo: UserInfo | n
     const dispatch = useAppDispatch();
     const editGroupModalOn = useAppSelector((state) => state.myListSlice.editGroupModalOn);
 
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
-        if (editGroupModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (editGroupModalOn === true) setShow(true);
+        else setShow(false);
     }, [editGroupModalOn]);
 
     function handleClose() {
@@ -33,7 +33,7 @@ export function EditGroupModal({ userInfo, groupList }: { userInfo: UserInfo | n
     }
 
     return (
-        <article className="modal-group-item" {...attr}>
+        <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>그룹 수정</h4>
             <form action="">
                 <GroupNameInput />

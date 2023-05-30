@@ -9,13 +9,13 @@ export { EditProfileImageModal };
 
 function EditProfileImageModal() {
     const profileImageModalOn = useAppSelector((state) => state.profileSlice.profileImageModalOn);
-    const [attr, setAttr] = useState({ hidden: true });
+    const [show, setShow] = useState(false);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        if (profileImageModalOn === true) setAttr({ hidden: false });
-        else setAttr({ hidden: true });
+        if (profileImageModalOn === true) setShow(true);
+        else setShow(false);
     }, [profileImageModalOn]);
 
     function handleClose() {
@@ -26,7 +26,7 @@ function EditProfileImageModal() {
     }
 
     return (
-        <article className="modal-group-item" {...attr}>
+        <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>프로필 사진</h4>
             <div className="container-button">
                 <EditImageButton />
