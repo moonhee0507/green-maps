@@ -6,6 +6,8 @@ import {
     SET_NICKNAME,
     EDIT_NICKNAME,
     PROFILE_PASSWORD_MODAL,
+    PASS_CURRENT_PASSWORD,
+    SET_USERID,
 } from '../../../renderer/_reducers/_slices/profileSlice';
 import { EditProfileImageModal } from './EditProfileImageModal/EditProfileImageModal';
 import { EditNickNameModal } from './EditNickNameModal/EditNickNameModal';
@@ -51,6 +53,8 @@ function ModalGroup() {
             dispatch(EDIT_NICKNAME(''));
 
             dispatch(PROFILE_PASSWORD_MODAL(false));
+            dispatch(PASS_CURRENT_PASSWORD(false));
+            dispatch(SET_USERID(''));
         }
     }
 

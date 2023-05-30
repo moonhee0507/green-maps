@@ -58,7 +58,7 @@ export default (app: Router) => {
 
         if (!user) return res.json({ success: false, errMessage: '사용자가 존재하지 않습니다.' });
 
-        user.comparePassword(req.body.password, (err: Error | null, same: any) => {
+        user.comparePassword(req.body.password, (err: Error | null, same: boolean | null) => {
             if (!same) {
                 return res.json({ success: false, errorMessage: '비밀번호가 일치하지 않습니다' });
             } else {
@@ -77,6 +77,51 @@ export default (app: Router) => {
                 });
             }
         });
+    });
+
+    // 프로필 수정 -> 현재 비밀번호 확인
+    route.post('/check-password', auth, async (req: Request, res: Response) => {
+        try {
+            const { password } = req.body;
+            const user = await User.findOne({ token: req.cookies.auth });
+
+            if (!user) {
+                res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
+            } else {
+                user.comparePassword(password, (err: Error | null, same: boolean | null) => {
+                    if (!same) {
+                        res.json({ success: false, message: '비밀번호가 일치하지 않습니다.' });
+                    } else {
+                        res.json({ success: true, message: '비밀번호가 일치합니다.' });
+                    }
+                });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
+    // TODO: 프로필 수정 -> 비밀번호 수정
+    route.post('/edit/password', auth, async (req: Request, res: Response) => {
+        try {
+            const { password } = req.body;
+            const user = await User.findOne({ token: req.cookies.auth });
+
+            if (!user) {
+                res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
+            } else {
+                user.password = password;
+
+                await user.save();
+                res.status(200).json({ success: true, message: '비밀번호가 변경되었습니다.' });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
+        }
     });
 
     // logout

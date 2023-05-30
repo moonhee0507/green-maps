@@ -5,13 +5,14 @@ import {
     PROFILE_NICKNAME_MODAL,
     PROFILE_PASSWORD_MODAL,
     SET_NICKNAME,
+    SET_USERID,
 } from '../../../renderer/_reducers/_slices/profileSlice';
 import { UserInfo } from '../../../server/models/User';
 
 export { ProfileEdit };
 
 function ProfileEdit({ userInfo }: { userInfo: UserInfo }) {
-    const { nickName } = userInfo;
+    const { nickName, userId } = userInfo;
     const dispatch = useAppDispatch();
 
     const handleEditProfileImg = () => {
@@ -28,7 +29,9 @@ function ProfileEdit({ userInfo }: { userInfo: UserInfo }) {
     const handleEditPassword = () => {
         modalModeOn();
         dispatch(PROFILE_PASSWORD_MODAL(true));
+        dispatch(SET_USERID(userId));
     };
+
     function modalModeOn() {
         const app = document.querySelector('.app');
         app?.classList.add('modal-mode');

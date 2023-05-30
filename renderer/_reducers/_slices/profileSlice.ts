@@ -6,6 +6,8 @@ const initialState = {
     prevNickName: '',
     nextNickName: '',
     profilePasswordModalOn: false,
+    passCurrentPassword: false,
+    userId: '',
 };
 
 const profileSlice = createSlice({
@@ -27,10 +29,23 @@ const profileSlice = createSlice({
         PROFILE_PASSWORD_MODAL(state, action: PayloadAction<boolean>) {
             state.profilePasswordModalOn = action.payload;
         },
+        PASS_CURRENT_PASSWORD(state, action: PayloadAction<boolean>) {
+            state.passCurrentPassword = action.payload;
+        },
+        SET_USERID(state, action: PayloadAction<string>) {
+            state.userId = action.payload;
+        },
     },
 });
 
-export const { PROFILE_IMAGE_MODAL, PROFILE_NICKNAME_MODAL, SET_NICKNAME, EDIT_NICKNAME, PROFILE_PASSWORD_MODAL } =
-    profileSlice.actions;
+export const {
+    PROFILE_IMAGE_MODAL,
+    PROFILE_NICKNAME_MODAL,
+    SET_NICKNAME,
+    EDIT_NICKNAME,
+    PROFILE_PASSWORD_MODAL,
+    PASS_CURRENT_PASSWORD,
+    SET_USERID,
+} = profileSlice.actions;
 
 export default profileSlice.reducer;
