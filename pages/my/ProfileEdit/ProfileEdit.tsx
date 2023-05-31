@@ -7,7 +7,7 @@ import {
     SET_NICKNAME,
     SET_USERID,
 } from '../../../renderer/_reducers/_slices/profileSlice';
-import { UserInfo } from '../../../server/models/User';
+import type { UserInfo } from '../../../server/models/User';
 
 export { ProfileEdit };
 

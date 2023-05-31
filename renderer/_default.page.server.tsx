@@ -1,26 +1,76 @@
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
+import store from './store';
 import { Provider } from 'react-redux';
-import { getStore } from './store/index.js';
 import { PageShell } from './PageShell';
 import icon from '/images/icon.png';
 import type { PageContextServer } from './types';
 
-export { render };
-export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams', 'token', 'user', 'groupName'];
+export { onBeforeRender, render };
+
+export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams', 'token', 'user', 'groupName', 'pageHtml'];
 
 async function render(pageContext: PageContextServer) {
-    const store = getStore();
-    const { Page, pageProps, routeParams, token, user, groupName } = pageContext;
+    const { pageHtml } = pageContext;
 
-    console.log('🚀🚀 서버사이드 렌더링');
+    /**
+     * SSR -> CSR로 전환시 hydrate error 해결
+     * hydrate되는 html은 꼭 문자열이어야 함
+     */
+    const __PAGE_HTML__ = typeof pageHtml !== 'undefined' ? pageHtml : '';
 
-    let pageHtml;
-    const PRELOADED_STATE = JSON.stringify(store.getState());
+    const { documentProps } = pageContext.exports;
+    const title = (documentProps && documentProps.title) || 'Green Maps';
+    const desc = (documentProps && documentProps.description) || '채식 식당 검색과 북마크는 그린 맵';
+
+    const manifestUrl = import.meta.env.BASE_URL + 'manifest.json';
+
+    const PRELOADED_STATE = JSON.stringify(store);
     const LOGIN_MESSAGE = JSON.stringify('로그인이 필요한 서비스입니다.\n로그인하시겠습니까?');
 
-    if (!pageContext.Page) {
+    return escapeInject`<!DOCTYPE html>
+    <html lang="ko">
+        <head>
+            <meta charset="UTF-8" />
+            <link rel="icon" href=${icon} />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta name="description" content="${desc}" />
+            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
+            <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
+            <link rel="manifest" href="${manifestUrl}" />
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+            <title>${title}</title>
+        </head>
+        <body>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
+            <div id="page-view">${dangerouslySkipEscape(__PAGE_HTML__)}</div>
+            <script>
+                var global = global || window;
+                window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)};
+                
+                const navBookmark = document.querySelector('.link-nav.no-login');
+                if (navBookmark) {
+                    navBookmark.addEventListener('click', () => {
+                        const message = ${dangerouslySkipEscape(LOGIN_MESSAGE)};
+
+                        if (confirm(message)) {
+                            window.location.href = '/login';
+                        }
+                    });
+                }
+            </script>
+    </html>`;
+}
+
+async function onBeforeRender(pageContext: PageContextServer) {
+    const { Page, pageProps, routeParams, token, user, groupName } = pageContext;
+
+    let pageHtml;
+
+    if (!Page) {
         // SPA
         pageHtml = '';
     } else {
@@ -34,49 +84,9 @@ async function render(pageContext: PageContextServer) {
         );
     }
 
-    const { documentProps } = pageContext.exports;
-    const title = (documentProps && documentProps.title) || 'Green Maps';
-    const desc = (documentProps && documentProps.description) || '채식 식당 검색과 북마크는 그린 맵';
-
-    const manifestUrl = import.meta.env.BASE_URL + 'manifest.json';
-
-    const documentHtml = escapeInject`<!DOCTYPE html>
-        <html lang="ko">
-            <head>
-                <meta charset="UTF-8" />
-                <link rel="icon" href=${icon} />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <meta name="description" content="${desc}" />
-                <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
-                <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
-                <link rel="manifest" href="${manifestUrl}" />
-                <link rel="preconnect" href="https://fonts.googleapis.com">
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-                <title>${title}</title>
-            </head>
-            <body>
-                <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
-                <div id="page-view">${dangerouslySkipEscape(pageHtml)}</div>
-                <script>
-                    var global = global || window;
-                    window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)};
-                    
-                    const navBookmark = document.querySelector('.link-nav.no-login');
-                    if (navBookmark) {
-                        navBookmark.addEventListener('click', () => {
-                            const message = ${dangerouslySkipEscape(LOGIN_MESSAGE)};
-    
-                            if (confirm(message)) {
-                                window.location.href = '/login';
-                            }
-                        });
-                    }
-                </script>
-        </html>`;
+    const PRELOADED_STATE = store.getState();
 
     return {
-        documentHtml,
         pageContext: {
             pageProps,
             PRELOADED_STATE,
@@ -84,6 +94,7 @@ async function render(pageContext: PageContextServer) {
             token,
             user,
             groupName,
+            pageHtml,
         },
     };
 }

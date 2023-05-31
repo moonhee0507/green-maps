@@ -2,28 +2,24 @@ import 'normalize.css';
 import './scss/index.css';
 import logo from '/images/logo.png';
 import React from 'react';
+import store from './store';
 import { Provider } from 'react-redux';
 import { PageContextProvider } from './usePageContext';
-import { getStore } from './store/index.js';
 import { Link } from './Link';
 import type { PageContext } from './types';
 
 export { PageShell };
 
 function PageShell({ children, pageContext }: { children: React.ReactNode; pageContext: PageContext }) {
-    const store = getStore();
-
     return (
-        <React.StrictMode>
-            <Provider store={store}>
-                <PageContextProvider pageContext={pageContext}>
-                    <Layout>
-                        <BackgroundArea />
-                        <App>{children}</App>
-                    </Layout>
-                </PageContextProvider>
-            </Provider>
-        </React.StrictMode>
+        <Provider store={store}>
+            <PageContextProvider pageContext={pageContext}>
+                <Layout>
+                    <BackgroundArea />
+                    <App>{children}</App>
+                </Layout>
+            </PageContextProvider>
+        </Provider>
     );
 }
 

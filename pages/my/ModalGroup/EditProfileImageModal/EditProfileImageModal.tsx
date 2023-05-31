@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import { EditImageButton } from './EditImageButton';
 import { DeleteImageButton } from './DeleteImageButton';
-import imgClose from '/images/icon-plus.svg';
 import { PROFILE_IMAGE_MODAL } from '../../../../renderer/_reducers/_slices/profileSlice';
+import imgClose from '/images/icon-plus.svg';
 
 export { EditProfileImageModal };
 

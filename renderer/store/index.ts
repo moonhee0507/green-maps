@@ -7,17 +7,13 @@ declare global {
     }
 }
 
-const preloadedState = typeof window !== 'undefined' ? window.__PRELOADED_STATE__ : undefined;
+const PRELOADED_STATE = typeof window !== 'undefined' ? window.__PRELOADED_STATE__ : undefined;
 
 const store = configureStore({
     reducer: rootReducer,
     devTools: process.env.NODE_ENV !== 'production',
-    preloadedState: preloadedState,
+    preloadedState: PRELOADED_STATE,
 });
-
-export function getStore() {
-    return store;
-}
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

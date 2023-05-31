@@ -43,6 +43,7 @@ export type PageContextCustom = {
         info: UserInfo | null;
     };
     groupName?: string[];
+    token: string;
 };
 
 type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;

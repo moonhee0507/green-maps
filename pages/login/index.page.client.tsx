@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { LoginMain } from './LoginMain/LoginMain';
-import type { PageContext } from '../../renderer/types';
 import { API_URL } from '../API_URL/api';
 
 export { Page };

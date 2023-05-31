@@ -103,7 +103,7 @@ export default (app: Router) => {
         }
     });
 
-    // TODO: 프로필 수정 -> 비밀번호 수정
+    // 프로필 수정 -> 비밀번호 수정
     route.post('/edit/password', auth, async (req: Request, res: Response) => {
         try {
             const { password } = req.body;
