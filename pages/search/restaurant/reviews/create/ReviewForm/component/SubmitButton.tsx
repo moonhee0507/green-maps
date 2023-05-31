@@ -1,8 +1,8 @@
 import React, { useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../../../../../../renderer/store/hooks';
 import { RandomFileName, SelectedImage } from './PictureSection';
-import { API_URL } from '../../../../../API_URL/api';
-import { useAppSelector } from '../../../../../../renderer/store/hooks';
+import { API_URL } from '../../../../../../API_URL/api';
 
 type SelectedImages = Array<SelectedImage>;
 type RandomFileNames = Array<RandomFileName>;

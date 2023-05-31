@@ -11,20 +11,20 @@ export type CommentPagination = {
 };
 
 export interface PaginationSlice {
-    reviews: ReviewPagination;
+    review: ReviewPagination;
     currentPage: number;
 }
 
 const paginationSlice = createSlice({
     name: 'paginationSlice',
     initialState: {
-        reviews: {},
+        review: {},
         currentPage: 1,
         comment: {},
     },
     reducers: {
-        REVIEWS: (state, action: any) => {
-            state.reviews = action.reviews;
+        SET_REVIEW: (state, action: PayloadAction<ReviewPagination>) => {
+            state.review = action.payload;
         },
         CURRENT_PAGE: (state, action: any) => {
             // 댓글에서 사용
@@ -36,6 +36,6 @@ const paginationSlice = createSlice({
     },
 });
 
-export const { SET_COMMENT } = paginationSlice.actions;
+export const { SET_REVIEW, SET_COMMENT } = paginationSlice.actions;
 
 export default paginationSlice.reducer;

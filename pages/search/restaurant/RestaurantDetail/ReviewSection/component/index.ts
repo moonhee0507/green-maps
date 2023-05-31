@@ -3,3 +3,4 @@ export { Date } from './Date';
 export { Image } from './Image';
 export { ReviewLikeButton } from './ReviewLikeButton';
 export { Content } from './Content';
+export { MoreButton } from './MoreButton';

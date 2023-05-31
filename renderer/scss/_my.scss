@@ -72,8 +72,16 @@
 
 // 프로필
 .ul-profile {
+    padding: $padding;
+
     > li {
-        border-bottom: 1px solid $border-color;
+        border: 1px solid $border-color;
+        border-radius: $default-border-radius;
+        margin-bottom: 10px;
+    }
+
+    > li:last-child {
+        margin-bottom: 0;
     }
 }
 
@@ -82,7 +90,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    padding: $padding;
+    padding: 10px;
     gap: 15px;
 }
 
@@ -117,12 +125,12 @@
         gap: 10px;
 
         .txt-profile-userId {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
         }
 
         .txt-profile-nickName {
-            font-size: 16px;
+            font-size: 13px;
         }
     }
 
@@ -130,6 +138,7 @@
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        font-size: 13px;
 
         .num-profile-bookmark {
             margin-right: 5px;
@@ -151,6 +160,22 @@
         height: 100%;
         border-radius: 50%;
         border: 1px solid $border-color;
+    }
+}
+
+.list-account {
+    padding: 10px;
+
+    > p {
+        margin: 10px 0 15px 0;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .list-edit {
+        font-size: 16px;
+        margin-bottom: 15px;
+        cursor: pointer;
     }
 }
 
@@ -188,52 +213,6 @@
     }
 }
 
-.wrapper-profile-notice,
-.wrapper-profile-inquiry,
-.wrapper-profile-FAQ {
-    // position: relative;
-
-    // > a {
-    //     width: 100%;
-    //     display: block;
-    //     padding: 20px 20px 20px 60px;
-    //     font-size: 20px;
-    //     &::before,
-    //     &::after {
-    //         position: absolute;
-    //         content: '';
-    //         background-position: center center;
-    //         background-repeat: no-repeat;
-    //         background-size: 20px 20px;
-    //         top: 50%;
-    //         -webkit-transform: translate(0, -50%);
-    //         -ms-transform: translate(0, -50%);
-    //         transform: translate(0, -50%);
-    //         background-position: center center;
-    //         background-repeat: no-repeat;
-    //         background-size: 20px 20px;
-    //         width: 20px;
-    //         height: 20px;
-    //         top: 50%;
-    //     }
-
-    //     &::before {
-    //         left: 22px;
-    //         -webkit-transform: translate(0, -50%);
-    //         -ms-transform: translate(0, -50%);
-    //         transform: translate(0, -50%);
-    //     }
-
-    //     &::after {
-    //         background-image: url(/images/icon-arrow.svg);
-    //         right: 22px;
-    //         -webkit-transform: rotate(180deg);
-    //         -ms-transform: rotate(180deg);
-    //         transform: translate(0, -50%) rotate(180deg);
-    //     }
-    // }
-}
-
 .wrapper-profile-notice {
     > a {
         &::before {
@@ -268,4 +247,44 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+}
+
+// 비밀번호 변경 모달
+.form-current-password,
+.form-new-password {
+    margin-bottom: 20px;
+
+    .txt-notice {
+        font-weight: bold;
+    }
+
+    .container-notice.password {
+        border: 0;
+
+        > em {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+
+    input {
+        margin-bottom: 10px;
+    }
+
+    input:last-child {
+        margin-bottom: 0;
+    }
+}
+
+#readOnlyUserId,
+#prevPassword,
+#nextPassword,
+#confirmNextPassword {
+    @include styled-input;
+    padding: 10px;
+    width: 100%;
+}
+
+#readOnlyUserId:focus {
+    outline: 0;
 }

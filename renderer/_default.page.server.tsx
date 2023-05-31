@@ -9,7 +9,17 @@ import type { PageContextServer } from './types';
 
 export { onBeforeRender, render };
 
-export const passToClient = ['pageProps', 'PRELOADED_STATE', 'routeParams', 'token', 'user', 'groupName', 'pageHtml'];
+export const passToClient = [
+    'pageProps',
+    'PRELOADED_STATE',
+    'routeParams',
+    'token',
+    'user',
+    'groupName',
+    'pageHtml',
+    'review',
+    'restaurantInfo',
+];
 
 async function render(pageContext: PageContextServer) {
     const { pageHtml } = pageContext;
@@ -66,7 +76,7 @@ async function render(pageContext: PageContextServer) {
 }
 
 async function onBeforeRender(pageContext: PageContextServer) {
-    const { Page, pageProps, routeParams, token, user, groupName } = pageContext;
+    const { Page, pageProps, routeParams, token, user, groupName, review, restaurantInfo } = pageContext;
 
     let pageHtml;
 
@@ -95,6 +105,8 @@ async function onBeforeRender(pageContext: PageContextServer) {
             user,
             groupName,
             pageHtml,
+            review,
+            restaurantInfo,
         },
     };
 }

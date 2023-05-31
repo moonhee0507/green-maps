@@ -6,6 +6,7 @@
 
 #miniMap {
     height: 300px;
+    z-index: 1111;
 }
 
 .wrapper-restaurant-detail {
@@ -143,7 +144,7 @@
     padding: $padding;
 
     .container-review {
-        border: 1px solid gray;
+        border: 1px solid $border-color;
         border-radius: $default-border-radius;
         overflow: hidden;
         margin-bottom: 20px;
@@ -153,28 +154,8 @@
         }
 
         .style-wrapper-reviewitem {
+            position: relative;
             padding: $padding;
-
-            &:first-child {
-                position: relative;
-
-                &::after {
-                    position: absolute;
-                    content: '';
-                    background-image: url(/images/icon-3dot.svg);
-                    background-position: center center;
-                    background-repeat: no-repeat;
-                    background-size: 20px 20px;
-                    top: 50%;
-                    right: 10px;
-                    width: 20px;
-                    height: 20px;
-                    -webkit-transform: translate(0, -50%) rotate(90deg);
-                    -ms-transform: translate(0, -50%) rotate(90deg);
-                    transform: translate(0, -50%) rotate(90deg);
-                    cursor: pointer;
-                }
-            }
         }
     }
 
@@ -256,6 +237,7 @@
         align-items: center;
         gap: 5px;
         margin-bottom: 5px;
+        font-size: 13px;
     }
 }
 

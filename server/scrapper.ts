@@ -1,7 +1,7 @@
 import puppeteer, { ElementHandle } from 'puppeteer';
 import fetch from 'node-fetch';
 
-export type Restaurant = {
+type Restaurant = {
     title: string;
     category: string | undefined;
     rating: string | undefined;

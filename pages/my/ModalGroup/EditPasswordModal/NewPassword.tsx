@@ -73,6 +73,7 @@ function NewPassword() {
                 const data = await res.json();
 
                 if (data.success) {
+                    alert('비밀번호가 변경되었습니다.\n로그인 페이지로 이동합니다.');
                     navigate('/login');
                 } else {
                     alert('다시 시도해주세요.');
@@ -95,15 +96,28 @@ function NewPassword() {
 
     return (
         <>
-            <form onSubmit={(event: React.FormEvent) => event.preventDefault()}>
-                <p>새로운 비밀번호를 입력해주세요.</p>
-                <em>영문, 숫자, 특수문자(!@#$%^&*-+_=?)를 모두 사용하여 최소 8자리 이상 필수</em>
-                <label htmlFor="nextPassword">비밀번호</label>
-                <input type="password" id="nextPassword" onChange={handleChangePW1} />
-                <label htmlFor="confirmNextPassword">비밀번호 재입력</label>
-                <input type="password" id="confirmNextPassword" onChange={handleChangePW2} />
+            <form onSubmit={(event: React.FormEvent) => event.preventDefault()} className="form-new-password">
+                <p className="txt-notice">새로운 비밀번호를 입력해주세요.</p>
+                <div className="container-notice password">
+                    <em>영문, 숫자, 특수문자(!@#$%^&*-+_=?) 모두 조합(8자리 이상)</em>
+                </div>
+                <label htmlFor="nextPassword" className="sr-only">
+                    비밀번호
+                </label>
+                <input type="password" id="nextPassword" onChange={handleChangePW1} placeholder="비밀번호" />
+                <label htmlFor="confirmNextPassword" className="sr-only">
+                    비밀번호 재입력
+                </label>
+                <input
+                    type="password"
+                    id="confirmNextPassword"
+                    onChange={handleChangePW2}
+                    placeholder="비밀번호 재입력"
+                    minLength={8}
+                    maxLength={32}
+                />
             </form>
-            <button type="button" onClick={handleClick} disabled={disabled}>
+            <button type="button" onClick={handleClick} disabled={disabled} className="styled-button thin">
                 {(() => {
                     if (!isSame) {
                         return '두 비밀번호가 일치하지 않습니다.';

@@ -128,6 +128,7 @@ dd {
   background-size: contain;
   width: 100%;
   height: 100vh;
+  z-index: 2222;
 }
 
 #map {
@@ -136,6 +137,7 @@ dd {
 
 #miniMap {
   height: 300px;
+  z-index: 1111;
 }
 
 .wrapper-restaurant-detail {
@@ -252,7 +254,7 @@ dd {
   padding: 20px;
 }
 .wrapper-review .container-review {
-  border: 1px solid gray;
+  border: 1px solid #d3d3d3;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -261,24 +263,8 @@ dd {
   margin-bottom: 0;
 }
 .wrapper-review .container-review .style-wrapper-reviewitem {
-  padding: 20px;
-}
-.wrapper-review .container-review .style-wrapper-reviewitem:first-child {
   position: relative;
-}
-.wrapper-review .container-review .style-wrapper-reviewitem:first-child::after {
-  position: absolute;
-  content: "";
-  background-image: url(/images/icon-3dot.svg);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 20px 20px;
-  top: 50%;
-  right: 10px;
-  width: 20px;
-  height: 20px;
-  transform: translate(0, -50%) rotate(90deg);
-  cursor: pointer;
+  padding: 20px;
 }
 .wrapper-review .txt-review-owner {
   font-weight: bold;
@@ -342,6 +328,7 @@ dd {
   align-items: center;
   gap: 5px;
   margin-bottom: 5px;
+  font-size: 13px;
 }
 
 .style-container-write-review {
@@ -1004,14 +991,22 @@ dd {
   transform: translate(-50%, 0);
 }
 
+.ul-profile {
+  padding: 20px;
+}
 .ul-profile > li {
-  border-bottom: 1px solid #d3d3d3;
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.ul-profile > li:last-child {
+  margin-bottom: 0;
 }
 
 .style-wrapper-profile {
   position: relative;
   display: flex;
-  padding: 20px;
+  padding: 10px;
   gap: 15px;
 }
 
@@ -1033,14 +1028,15 @@ dd {
   gap: 10px;
 }
 .wrapper-id-bookmark .container-id-nick .txt-profile-userId {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 .wrapper-id-bookmark .container-id-nick .txt-profile-nickName {
-  font-size: 16px;
+  font-size: 13px;
 }
 .wrapper-id-bookmark .container-profile-bookmark-like {
   display: flex;
+  font-size: 13px;
 }
 .wrapper-id-bookmark .container-profile-bookmark-like .num-profile-bookmark {
   margin-right: 5px;
@@ -1060,6 +1056,20 @@ dd {
   height: 100%;
   border-radius: 50%;
   border: 1px solid #d3d3d3;
+}
+
+.list-account {
+  padding: 10px;
+}
+.list-account > p {
+  margin: 10px 0 15px 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+.list-account .list-edit {
+  font-size: 16px;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .form-edit-nickName {
@@ -1114,6 +1124,48 @@ dd {
 
 .wrapper-summary-community {
   display: flex;
+}
+
+.form-current-password,
+.form-new-password {
+  margin-bottom: 20px;
+}
+.form-current-password .txt-notice,
+.form-new-password .txt-notice {
+  font-weight: bold;
+}
+.form-current-password .container-notice.password,
+.form-new-password .container-notice.password {
+  border: 0;
+}
+.form-current-password .container-notice.password > em,
+.form-new-password .container-notice.password > em {
+  margin: 0;
+  font-size: 13px;
+}
+.form-current-password input,
+.form-new-password input {
+  margin-bottom: 10px;
+}
+.form-current-password input:last-child,
+.form-new-password input:last-child {
+  margin-bottom: 0;
+}
+
+#readOnlyUserId,
+#prevPassword,
+#nextPassword,
+#confirmNextPassword {
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  padding: 10px;
+  width: 100%;
+}
+
+#readOnlyUserId:focus {
+  outline: 0;
 }
 
 .main-bookmark {
@@ -1621,7 +1673,7 @@ dd {
 
 .button-more {
   position: absolute;
-  background-image: url(/images/icon-3dot.svg);
+  background-image: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23000000' d='M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z'/%3E%3C/svg%3E");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 15px 15px;
@@ -1641,6 +1693,10 @@ dd {
 
 .button-more.postitem {
   top: 22px;
+  right: 10px;
+}
+
+.button-more.reviewitem {
   right: 10px;
 }
 
@@ -1677,6 +1733,18 @@ dd {
   font-weight: bold;
 }
 .styled-button:disabled {
+  background-color: #8dd2dd;
+}
+
+.styled-button.thin {
+  width: 100%;
+  background-color: #009eb0;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+}
+.styled-button.thin:disabled {
   background-color: #8dd2dd;
 }
 

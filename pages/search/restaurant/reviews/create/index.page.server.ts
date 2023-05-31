@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
-import { API_URL } from '../../API_URL/api';
-import type { PageContext } from '../../../renderer/types';
-import type { Restaurant } from '../../../server/models/Restaurant';
+import { API_URL } from '../../../../API_URL/api';
+import type { PageContext } from '../../../../../renderer/types';
+import type { Restaurant } from '../../../../../server/models/Restaurant';
 
 type Params = {
     restaurantId: string;
@@ -18,6 +18,7 @@ async function onBeforeRender(pageContext: PageContext) {
             'Cache-Control': 'max-age=31536000',
         },
     });
+
     const data = (await res.json()) as { success: boolean; restaurantInfo: Restaurant };
 
     if (data.success) {
@@ -36,5 +37,5 @@ async function onBeforeRender(pageContext: PageContext) {
 }
 
 function prerender() {
-    return [{ url: '/search/@restaurantId' }];
+    return [{ url: '/search/@restaurantId/reviews/create' }];
 }

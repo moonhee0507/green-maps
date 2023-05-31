@@ -38,12 +38,18 @@ function ProfileEdit({ userInfo }: { userInfo: UserInfo }) {
     }
 
     return (
-        <li>
+        <li className="list-account">
             <p>계정</p>
             <ul>
-                <li onClick={handleEditProfileImg}>프로필 사진 변경</li>
-                <li onClick={handleEditNickName}>닉네임 변경</li>
-                <li onClick={handleEditPassword}>비밀번호 변경</li>
+                <li onClick={handleEditProfileImg} className="list-edit">
+                    프로필 사진 변경
+                </li>
+                <li onClick={handleEditNickName} className="list-edit">
+                    닉네임 변경
+                </li>
+                <li onClick={handleEditPassword} className="list-edit">
+                    비밀번호 변경
+                </li>
             </ul>
         </li>
     );

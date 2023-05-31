@@ -48,11 +48,21 @@
     }
 }
 
-@mixin styled-button {
+@function get-padding($value) {
+    @if $value {
+        @return $value;
+    } @else {
+        @return 20px;
+    }
+}
+
+@mixin styled-button($custom-padding) {
+    $padding: get-padding($custom-padding);
+
     width: 100%;
     background-color: $active-button-color;
     border: 0;
     border-radius: $default-border-radius;
-    padding: $padding;
+    padding: $custom-padding;
     font-weight: bold;
 }

@@ -40,15 +40,23 @@ function CurrentPassword() {
     return (
         <>
             <form onSubmit={(event: React.FormEvent) => event.preventDefault()} className="form-current-password">
-                <p>그린맵 계정의 현재 비밀번호를 확인해주세요.</p>
-                <label htmlFor="userId" className="sr-only">
+                <p className="txt-notice">그린맵 계정의 현재 비밀번호를 확인해주세요.</p>
+                <label htmlFor="readOnlyUserId" className="sr-only">
                     아이디
                 </label>
-                <input type="text" id="userId" readOnly={true} defaultValue={userId} />
-                <label htmlFor="prevPassword">현재 비밀번호</label>
+                <input
+                    type="text"
+                    id="readOnlyUserId"
+                    readOnly={true}
+                    defaultValue={userId}
+                    className="input-userid-in-profile"
+                />
+                <label htmlFor="prevPassword" className="sr-only">
+                    현재 비밀번호
+                </label>
                 <input type="password" id="prevPassword" onChange={handleChange} ref={inputElement} value={value} />
             </form>
-            <button type="button" onClick={handleClick}>
+            <button type="button" onClick={handleClick} className="styled-button thin">
                 완료
             </button>
         </>

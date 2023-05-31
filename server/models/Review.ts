@@ -1,9 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
+import { Restaurant } from './Restaurant';
 
 export type Review = {
     _id: string;
     owner: string;
-    restaurant: string;
+    restaurant: string | Restaurant;
     photo?: Array<{ src: string; pick: boolean }>;
     content: string;
     like?: Array<{ user: string }>;
@@ -17,7 +18,8 @@ const reviewSchema = new Schema({
         required: true,
     },
     restaurant: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'Restaurant',
         required: true,
     },
     photo: [

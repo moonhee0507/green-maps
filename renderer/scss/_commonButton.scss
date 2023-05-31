@@ -8,7 +8,7 @@
 
 .button-more {
     position: absolute;
-    background-image: url(/images/icon-3dot.svg);
+    background-image: icon(dot3);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 15px 15px;
@@ -30,6 +30,10 @@
 
 .button-more.postitem {
     top: 22px;
+    right: 10px;
+}
+
+.button-more.reviewitem {
     right: 10px;
 }
 
@@ -61,7 +65,15 @@
 }
 
 .styled-button {
-    @include styled-button;
+    @include styled-button(20px);
+
+    &:disabled {
+        background-color: $disabled-button-color;
+    }
+}
+
+.styled-button.thin {
+    @include styled-button(10px);
 
     &:disabled {
         background-color: $disabled-button-color;

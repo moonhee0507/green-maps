@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import { Review } from './Review';
 
 export type Restaurant = {
     _id: string;
@@ -13,10 +14,11 @@ export type Restaurant = {
         type: string;
         coordinates: [number, number];
     };
+    reviews: Review[];
 };
 
 const restaurantSchema = new Schema({
-    _id: mongoose.Types.ObjectId,
+    _id: Schema.Types.ObjectId,
     title: {
         type: String,
     },
@@ -50,6 +52,12 @@ const restaurantSchema = new Schema({
             required: true,
         },
     },
+    reviews: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Review',
+        },
+    ],
 });
 
 restaurantSchema.index({ title: 1, address: 1, location: '2dsphere' });

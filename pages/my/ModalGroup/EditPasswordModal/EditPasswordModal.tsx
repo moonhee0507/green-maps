@@ -11,7 +11,6 @@ import imgClose from '/images/icon-plus.svg';
 
 export { EditPasswordModal };
 
-// TODO: 렌더링 문제 해결하기
 function EditPasswordModal() {
     const dispatch = useAppDispatch();
 

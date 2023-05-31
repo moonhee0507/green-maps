@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import randomizeFileName from '../../../../../../components/file/randomizeFileName';
+import randomizeFileName from '../../../../../../../components/file/randomizeFileName';
 
 export { PictureSection };
 

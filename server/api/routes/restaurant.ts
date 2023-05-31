@@ -171,12 +171,19 @@ export default (app: Router) => {
         }
     });
 
-    route.get('/:id', async (req: Request, res: Response) => {
+    route.get('/:restaurantId', async (req: Request, res: Response) => {
         try {
-            const item = await Restaurant.findById(req.params.id).exec();
-            res.status(200).json(item);
+            const restaurant = await Restaurant.findById(req.params.restaurantId).populate('reviews');
+
+            if (!restaurant) {
+                res.json({ success: false, message: '식당이 존재하지 않습니다.' });
+            } else {
+                res.json({ success: true, restaurantInfo: restaurant });
+            }
         } catch (err) {
-            console.error(err);
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
+            }
         }
     });
 };

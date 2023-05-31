@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import auth from '../../middleware/auth.js';
 import Review from '../../models/Review.js';
+import Restaurant from '../../models/Restaurant.js';
 
 const route = Router();
 
@@ -21,16 +22,51 @@ export default (app: Router) => {
         }
     });
 
-    // 리뷰 추가
-    route.post('/', auth, (req: any, res: Response) => {
-        const review = new Review(req.body);
+    route.get('/:reviewId', async (req: Request, res: Response) => {
+        try {
+            const review = await Review.findById(req.params.reviewId).populate('restaurant');
 
-        review
-            .save()
-            .then(() => {
-                return res.status(200).json({ success: true });
-            })
-            .catch((err) => res.json({ success: false, errorMessage: err.message }));
+            if (!review) {
+                res.status(404).json({ success: false, message: '리뷰가 존재하지 않습니다.' });
+            } else {
+                res.status(200).json({ success: true, review: review });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
+    // 리뷰 추가
+    route.post('/', auth, async (req: any, res: Response) => {
+        try {
+            const review = new Review(req.body);
+            await review.save();
+
+            const restaurant = await Restaurant.findOneAndUpdate(
+                {
+                    _id: req.body.restaurant,
+                },
+                {
+                    $push: {
+                        reviews: {
+                            _id: review._id,
+                        },
+                    },
+                }
+            ).exec();
+
+            if (!restaurant) {
+                res.status(404).json({ success: false, message: '식당이 존재하지 않습니다.' });
+            } else {
+                res.status(200).json({ success: true, message: '리뷰가 저장되었습니다.' });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
+            }
+        }
     });
 
     // 리뷰 수정

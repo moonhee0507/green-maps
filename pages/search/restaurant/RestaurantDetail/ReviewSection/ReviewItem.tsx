@@ -1,10 +1,19 @@
 import React from 'react';
 import type { Review } from '../../../../../server/models/Review';
-import { Owner, Date, Image, ReviewLikeButton, Content } from './component/index.js';
+import { Owner, Date, MoreButton, Image, ReviewLikeButton, Content } from './component/index.js';
+import { UserInfo } from '../../../../../server/models/User';
 
 export { ReviewItem };
 
-function ReviewItem({ item }: { item: Review }) {
+function ReviewItem({
+    item,
+    userInfo,
+    restaurantId,
+}: {
+    item: Review;
+    userInfo: UserInfo | null;
+    restaurantId: string;
+}) {
     const { _id, owner, registeredAt, photo, content, like } = item;
 
     return (
@@ -14,6 +23,7 @@ function ReviewItem({ item }: { item: Review }) {
                 <div className="style-wrapper-reviewitem">
                     <Owner owner={owner} />
                     <Date registeredAt={registeredAt} />
+                    <MoreButton userInfo={userInfo} owner={owner} reviewId={_id} restaurantId={restaurantId} />
                 </div>
                 {photo && photo.length > 0 ? <Image photoList={photo} /> : null}
                 <div
