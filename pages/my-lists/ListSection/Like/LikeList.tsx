@@ -3,16 +3,21 @@ import { useAppSelector } from '../../../../renderer/store/hooks';
 import { ListItem } from '../../bookmark/BookmarkListMain/BookmarkList/BookmarkList';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import type { Like } from '../../../../server/models/User';
+import type { Restaurant } from '../../../../server/models/Restaurant';
+
+export type AssignedLike = Like & {
+    restaurantInfo: Restaurant;
+};
 
 export function LikeList({ lists }: { lists: Like[] }) {
-    const [restaurantData, setRestaurantData] = useState<Like[]>([]);
+    const [restaurantData, setRestaurantData] = useState<AssignedLike[]>([]);
 
-    const [registerOrder, setRegisterOrder] = useState<Like[]>([]);
-    const [nameOrder, setNameOrder] = useState<Like[]>([]);
+    const [registerOrder, setRegisterOrder] = useState<AssignedLike[]>([]);
+    const [nameOrder, setNameOrder] = useState<AssignedLike[]>([]);
 
     useEffect(() => {
         const setData = async () => {
-            const arr: Like[] = [];
+            const arr: AssignedLike[] = [];
 
             for (const list of lists) {
                 try {
@@ -34,7 +39,9 @@ export function LikeList({ lists }: { lists: Like[] }) {
     useEffect(() => {
         if (restaurantData.length !== 0) {
             setRegisterOrder(restaurantData);
-            setNameOrder([...restaurantData].sort((a, b) => a.title.localeCompare(b.title, 'en')));
+            setNameOrder(
+                [...restaurantData].sort((a, b) => a.restaurantInfo.title.localeCompare(b.restaurantInfo.title, 'en'))
+            );
         }
     }, [restaurantData]);
 

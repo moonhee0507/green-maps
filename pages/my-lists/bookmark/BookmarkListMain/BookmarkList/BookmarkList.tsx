@@ -4,16 +4,22 @@ import { MoreButton } from '../../../../../components/button/MoreButton';
 import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 import { useAppSelector } from '../../../../../renderer/store/hooks';
 import type { Bookmark, Like } from '../../../../../server/models/User';
+import type { Restaurant } from '../../../../../server/models/Restaurant';
+import { AssignedLike } from '../../../ListSection/Like/LikeList';
+
+type AssignedBookmark = Bookmark & {
+    restaurantInfo: Restaurant;
+};
 
 export function BookmarkList({ lists }: { lists: Bookmark[] }) {
-    const [restaurantData, setRestaurantData] = useState<Bookmark[]>([]);
+    const [restaurantData, setRestaurantData] = useState<AssignedBookmark[]>([]);
 
-    const [registerOrder, setRegisterOrder] = useState<Bookmark[]>([]);
-    const [nameOrder, setNameOrder] = useState<Bookmark[]>([]);
+    const [registerOrder, setRegisterOrder] = useState<AssignedBookmark[]>([]);
+    const [nameOrder, setNameOrder] = useState<AssignedBookmark[]>([]);
 
     useEffect(() => {
         const setData = async () => {
-            const arr: Bookmark[] = [];
+            const arr: AssignedBookmark[] = [];
 
             for (const list of lists) {
                 try {
@@ -35,7 +41,9 @@ export function BookmarkList({ lists }: { lists: Bookmark[] }) {
     useEffect(() => {
         if (restaurantData.length !== 0) {
             setRegisterOrder(restaurantData);
-            setNameOrder([...restaurantData].sort((a, b) => a.title.localeCompare(b.title, 'en')));
+            setNameOrder(
+                [...restaurantData].sort((a, b) => a.restaurantInfo.title.localeCompare(b.restaurantInfo.title, 'en'))
+            );
         }
     }, [restaurantData]);
 
@@ -64,22 +72,23 @@ export function BookmarkList({ lists }: { lists: Bookmark[] }) {
     );
 }
 
-export function ListItem({ list }: { list: Bookmark | Like }) {
+export function ListItem({ list }: { list: AssignedBookmark | AssignedLike }) {
+    const { _id, title, location, address } = list.restaurantInfo;
     return (
         <li className="list-restaurant-inbookmark">
-            <a href={`/search/${list._id}`}>
+            <a href={`/search/${_id}`}>
                 <div className="container-restaurant-title-detail">
                     <div className="style-container-title-date">
-                        <p className="txt-title">{list.title}</p>
+                        <p className="txt-title">{title}</p>
                         <span className="txt-date">{list.registeredAt.slice(0, 13)}</span>
                     </div>
                     <div>
-                        <Distance location={list.location.coordinates || [0, 0]} />
-                        <span className="txt-address">{list.address}</span>
+                        <Distance location={location.coordinates || [0, 0]} />
+                        <span className="txt-address">{address}</span>
                     </div>
                 </div>
             </a>
-            <MoreButton restaurantId={list._id} restaurantTitle={list.title} />
+            <MoreButton restaurantId={_id} restaurantTitle={title} />
         </li>
     );
 }

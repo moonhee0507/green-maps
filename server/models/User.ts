@@ -7,12 +7,12 @@ export type Bookmark = {
     _id: string;
     registeredAt: string;
     groupName: string;
-} & Restaurant;
+};
 
 export type Like = {
     _id: string;
     registeredAt: string;
-} & Restaurant;
+};
 
 export interface UserInfo {
     userId: string;
