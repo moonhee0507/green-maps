@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import { navigate } from 'vite-plugin-ssr/client/router';
+import { EDIT_DELETE_NOTIFY_MODAL } from '../../../../../renderer/_reducers/_slices/reviewSlice';
+import { API_URL } from '../../../../CONSTANT_URL';
 
 export { EditDeleteNotifyModal };
 
@@ -38,9 +40,9 @@ function EDIT() {
 
     function handleClick() {
         navigate(`/search/${restaurantId}/reviews/${reviewId}/edit`);
-        // const app = document.querySelector('.app');
-        // app?.classList.remove('modal-mode');
-        // dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+        const app = document.querySelector('.app');
+        app?.classList.remove('modal-mode');
+        dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
     }
 
     return <li onClick={handleClick}>🩹 수정하기</li>;
@@ -48,26 +50,31 @@ function EDIT() {
 
 function DELETE() {
     const dispatch = useAppDispatch();
-    // const postId = useAppSelector((state) => state.postSlice.postId);
+    const reviewId = useAppSelector((state) => state.reviewSlice.reviewId);
+    const restaurantId = useAppSelector((state) => state.reviewSlice.restaurantId);
 
     async function handleClick() {
-        // try {
-        //     const res = await fetch(`${API_URL}/posts/${postId}`, {
-        //         method: 'DELETE',
-        //     });
-        //     const data = await res.json();
-        //     if (data.success) {
-        //         navigate('/community');
-        //     } else {
-        //         alert('다시 시도해주세요.');
-        //     }
-        // } catch (err) {
-        //     console.error(err);
-        // } finally {
-        //     const app = document.querySelector('.app');
-        //     app?.classList.remove('modal-mode');
-        //     dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
-        // }
+        try {
+            const res = await fetch(`${API_URL}/reviews/${reviewId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ restaurantId: restaurantId }),
+            });
+            const data = await res.json();
+            if (data.success) {
+                navigate(`/search/${restaurantId}`);
+            } else {
+                alert('다시 시도해주세요.');
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            const app = document.querySelector('.app');
+            app?.classList.remove('modal-mode');
+            dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+        }
     }
     return <li onClick={handleClick}>🗑️ 삭제하기</li>;
 }

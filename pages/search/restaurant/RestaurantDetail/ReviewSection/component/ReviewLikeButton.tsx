@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_URL } from '../../../../../CONSTANT_URL';
 import imgHeart from '/images/icon-heart.svg';
 
 export { ReviewLikeButton };
@@ -17,7 +18,7 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
             .catch((err) => console.error(err));
 
         async function getUserId() {
-            const res = await fetch(`http://localhost:5000/api/users/`);
+            const res = await fetch(`${API_URL}/users/`);
             const data = await res.json();
 
             return data.user.userId;
@@ -36,7 +37,7 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
     }
 
     async function addLike() {
-        const res = await fetch(`http://localhost:5000/api/reviews/${reviewId}/like`, {
+        const res = await fetch(`${API_URL}/reviews/${reviewId}/like`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +51,7 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
     }
 
     async function delLike() {
-        const res = await fetch(`http://localhost:5000/api/reviews/${reviewId}/like`, {
+        const res = await fetch(`${API_URL}/reviews/${reviewId}/like`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
     return (
         <>
             <dt className="sr-only">좋아요</dt>
-            <dd className="num-like-count">
+            <dd className="container-button-txt">
                 <button className="button-review-like" type="button" onClick={handleClick}>
                     <img src={imgHeart} alt="좋아요 이미지" className={`img-like review ${buttonOn ? 'on' : ''}`} />
                 </button>

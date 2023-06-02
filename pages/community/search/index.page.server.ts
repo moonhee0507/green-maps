@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
+import { API_URL } from '../../CONSTANT_URL';
 
 export { onBeforeRender };
 export { prerender };
@@ -7,7 +8,7 @@ export { prerender };
 async function onBeforeRender(pageContext: PageContextBuiltIn) {
     const { keyword } = pageContext.routeParams;
     try {
-        const resPosts = await fetch(`http://localhost:5000/api/posts?keyword=${keyword}`, {
+        const resPosts = await fetch(`${API_URL}/posts?keyword=${keyword}`, {
             headers: {
                 'Cache-Control': 'max-age=31536000',
             },

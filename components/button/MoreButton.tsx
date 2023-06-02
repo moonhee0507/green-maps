@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { API_URL } from '../../pages/API_URL/api';
+import { API_URL } from '../../pages/CONSTANT_URL';
 import { useAppSelector } from '../../renderer/store/hooks';
 
 export { MoreButton };

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_URL } from '../../../CONSTANT_URL';
 import imgHeart from '/images/icon-heart.svg';
 
 export { PostLikeButton };
@@ -17,7 +18,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
             .catch((err) => console.error(err));
 
         async function getUserId() {
-            const res = await fetch(`http://localhost:5000/api/users`);
+            const res = await fetch(`${API_URL}/users`);
             const data = await res.json();
 
             return data.user.userId;
@@ -36,7 +37,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
     }
 
     async function addLike() {
-        const res = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
+        const res = await fetch(`${API_URL}/posts/${postId}/like`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,7 +50,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
     }
 
     async function delLike() {
-        const res = await fetch(`http://localhost:5000/api/posts/${postId}/like`, {
+        const res = await fetch(`${API_URL}/posts/${postId}/like`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

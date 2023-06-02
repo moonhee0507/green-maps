@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../renderer/store/hooks';
-import { API_URL } from '../../../API_URL/api';
+import { API_URL } from '../../../CONSTANT_URL';
 import isEmptyString from '../../../../components/validate/isEmptyString';
 
 export { SubmitButton };

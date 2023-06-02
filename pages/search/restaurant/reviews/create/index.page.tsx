@@ -8,11 +8,12 @@ export { Page };
 
 function Page(pageContext: PageContext) {
     const { _id, title } = pageContext.restaurantInfo as Restaurant;
+    const { user } = pageContext;
 
     return (
         <>
             <TopBar title="리뷰 작성" />
-            <ReviewForm restaurantId={_id} title={title} />
+            <ReviewForm restaurantId={_id} title={title} userInfo={user.info} />
         </>
     );
 }

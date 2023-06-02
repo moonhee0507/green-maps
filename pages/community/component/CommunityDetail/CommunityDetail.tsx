@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SubjectBox } from './SubjectBox';
 import { useSelector } from 'react-redux';
+import { API_URL } from '../../../CONSTANT_URL';
 import type { Post } from '../../../../server/models/Post';
 import type { RootState } from '../../../../renderer/store';
 
@@ -17,7 +18,7 @@ function CommunityDetail(props: { posts: Array<Post> }) {
 
         async function getTodayCount(subjectName: string) {
             const encodeSubjectName = encodeURIComponent(subjectName);
-            const res = await fetch(`http://localhost:5000/api/today/${encodeSubjectName}`, {
+            const res = await fetch(`${API_URL}/today/${encodeSubjectName}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

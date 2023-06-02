@@ -2,6 +2,7 @@ import type { Restaurant } from '../../server/models/Restaurant';
 import iconLocation from '/images/icon-location.svg';
 import iconAuth from '/images/icon-auth.svg';
 import store from '../../renderer/store/index.js';
+import { API_URL } from '../CONSTANT_URL';
 
 const { kakao }: any = window;
 
@@ -62,7 +63,7 @@ export function init() {
 }
 
 export async function getLists(polygon: Polygon) {
-    const data = await fetch(`http://localhost:5000/api/map/currentlist`, {
+    const data = await fetch(`${API_URL}/map/currentlist`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

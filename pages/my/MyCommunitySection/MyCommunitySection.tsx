@@ -1,6 +1,6 @@
 import React, { MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { PostList } from '../../community/search/ResultSection/PostList/PostList';
-import { API_URL } from '../../API_URL/api';
+import { API_URL } from '../../CONSTANT_URL';
 import type { UserInfo } from '../../../server/models/User';
 import type { Post } from '../../../server/models/Post';
 

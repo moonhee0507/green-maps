@@ -7,14 +7,18 @@ import type { Restaurant } from '../../../../../server/models/Restaurant';
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const { review } = pageContext;
+    const { review, user } = pageContext;
 
     return (
         <>
             <TopBar title="리뷰 수정" />
             <ReviewForm
                 restaurantId={(review.restaurant as Restaurant)._id}
+                reviewId={review._id}
                 title={(review.restaurant as Restaurant).title}
+                photos={review.photo}
+                content={review.content}
+                userInfo={user.info}
             />
         </>
     );

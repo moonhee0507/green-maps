@@ -173,7 +173,19 @@ export default (app: Router) => {
 
     route.get('/:restaurantId', async (req: Request, res: Response) => {
         try {
-            const restaurant = await Restaurant.findById(req.params.restaurantId).populate('reviews');
+            const page = Number(req.query.page || 1);
+            const limit = Number(req.query.limit || 5);
+
+            const restaurant = await Restaurant.findById(req.params.restaurantId).populate({
+                path: 'reviews',
+                options: {
+                    sort: {
+                        _id: -1,
+                    },
+                    skip: (page - 1) * limit,
+                    limit: limit,
+                },
+            });
 
             if (!restaurant) {
                 res.json({ success: false, message: '식당이 존재하지 않습니다.' });
@@ -183,6 +195,28 @@ export default (app: Router) => {
         } catch (err) {
             if (err instanceof Error) {
                 res.json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
+    route.get('/:restaurantId/reviews', async (req: Request, res: Response) => {
+        try {
+            const restaurant = await Restaurant.findById(req.params.restaurantId).populate('reviews').exec();
+
+            if (!restaurant) {
+                res.status(404).json({ success: false, message: '식당이 존재하지 않습니다.' });
+            } else {
+                res.status(200).json({
+                    success: true,
+                    reviews: {
+                        total: restaurant.reviews.length || 0,
+                        lists: restaurant.reviews,
+                    },
+                });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
             }
         }
     });

@@ -74,6 +74,10 @@
     width: 22px;
 }
 
+.img-like.review {
+    width: 20px;
+}
+
 .img-share {
     width: 22px;
 }
@@ -143,19 +147,22 @@
 .wrapper-review {
     padding: $padding;
 
-    .container-review {
+    .list-review:not(:last-child) {
+        margin-bottom: 20px;
+    }
+
+    .container-reviewitem {
         border: 1px solid $border-color;
         border-radius: $default-border-radius;
         overflow: hidden;
-        margin-bottom: 20px;
-
-        &:last-child {
-            margin-bottom: 0;
-        }
 
         .style-wrapper-reviewitem {
             position: relative;
             padding: $padding;
+        }
+
+        .style-wrapper-reviewitem.only-text {
+            padding: 0 20px 0;
         }
     }
 
@@ -223,22 +230,48 @@
         }
     }
 
+    .txt-review-content {
+        margin-bottom: 20px;
+    }
     .button-review-like {
         padding: 0;
         border: none;
     }
+}
 
-    .num-like-count {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        gap: 5px;
-        margin-bottom: 5px;
-        font-size: 13px;
-    }
+// 리뷰의 좋아요, 댓글 버튼
+.container-like-comment {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.container-button-txt {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+}
+
+.button-review-comment {
+    background-image: icon('comment', $svg-disabled);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+    border: 0;
+}
+
+.button-review-comment + span {
+    font-size: 13px;
+    vertical-align: center;
 }
 
 .style-container-write-review {
@@ -352,19 +385,37 @@
     gap: 15px;
 
     > li {
+        position: relative;
         border: 1px solid $border-color;
     }
 
-    .button-add-picture,
     .list-picture {
         background-size: 30px;
         background-repeat: no-repeat;
         background-position: center center;
     }
 
-    .button-add-picture {
-        background-image: icon(plus);
+    .list-add-picture {
         cursor: pointer;
+    }
+
+    .list-add-picture::before {
+        position: absolute;
+        content: '';
+        background: icon(plus) no-repeat center center / 30px 30px;
+        width: 30px;
+        height: 30px;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    .list-add-picture.reset::before {
+        -webkit-transform: translate(-50%, -50%) rotate(45deg);
+        -ms-transform: translate(-50%, -50%) rotate(45deg);
+        transform: translate(-50%, -50%) rotate(45deg);
     }
 
     .list-picture {

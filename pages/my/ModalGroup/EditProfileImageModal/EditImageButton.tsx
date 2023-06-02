@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useAppDispatch } from '../../../../renderer/store/hooks';
 import { PROFILE_IMAGE_MODAL } from '../../../../renderer/_reducers/_slices/profileSlice';
 import randomizeFileName from '../../../../components/file/randomizeFileName';
-import { API_URL } from '../../../API_URL/api';
+import { API_URL } from '../../../CONSTANT_URL';
 
 export { EditImageButton };
 

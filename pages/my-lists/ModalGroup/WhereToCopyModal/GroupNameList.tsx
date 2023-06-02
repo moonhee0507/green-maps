@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Bookmark, UserInfo } from '../../../../server/models/User';
 import { GroupList } from '../../../../server/models/Bookmark';
 import { useAppSelector } from '../../../../renderer/store/hooks';
-import { API_URL } from '../../../API_URL/api';
+import { API_URL } from '../../../CONSTANT_URL';
 
 export { GroupNameList };
 

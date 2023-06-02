@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 import config from './config/index.js';
 import routes from './api/index.js';
-import { API_URL } from '../pages/API_URL/api.js';
+import { API_URL } from '../pages/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
 
 type PageContextInit = {

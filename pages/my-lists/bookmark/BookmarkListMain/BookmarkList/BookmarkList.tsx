@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Distance } from './Distance';
 import { MoreButton } from '../../../../../components/button/MoreButton';
-import { API_URL } from '../../../../API_URL/api';
+import { API_URL } from '../../../../CONSTANT_URL';
 import { useAppSelector } from '../../../../../renderer/store/hooks';
 import type { Bookmark, Like } from '../../../../../server/models/User';
 

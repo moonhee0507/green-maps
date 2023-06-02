@@ -4,7 +4,7 @@ import { Notice } from './Notice/Notice';
 import { GroupNameList } from './GroupNameList/GroupNameList';
 import { NavBar } from '../../../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
-import { API_URL } from '../../../API_URL/api';
+import { API_URL } from '../../../CONSTANT_URL';
 import type { PageContext } from '../../../../renderer/types';
 import type { UserInfo } from '../../../../server/models/User';
 import type { GroupList } from '../../../../server/models/Bookmark';

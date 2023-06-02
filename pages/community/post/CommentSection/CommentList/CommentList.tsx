@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { isSameDay } from '../../../../../components/Date';
 import { MoreButton } from './MoreButton';
 import type { UserInfo } from '../../../../../server/models/User';

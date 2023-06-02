@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../renderer/store/hooks';
-import { API_URL } from '../../../API_URL/api';
+import { API_URL } from '../../../CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
 import type { UserInfo } from '../../../../server/models/User';
 

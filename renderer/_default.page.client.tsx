@@ -12,7 +12,7 @@ export const hydrationCanBeAborted = true;
 let root: any;
 
 async function render(pageContext: PageContextClient) {
-    const { Page, pageProps, routeParams, token, user, review, restaurantInfo } = pageContext;
+    const { Page, pageProps, routeParams, token, user, reviews, restaurantInfo } = pageContext;
 
     console.log('😶‍🌫️😶‍🌫️ 클라이언트사이드 렌더링');
 
@@ -25,7 +25,7 @@ async function render(pageContext: PageContextClient) {
                         routeParams={routeParams}
                         token={token}
                         user={user}
-                        review={review}
+                        reviews={reviews}
                         restaurantInfo={restaurantInfo}
                     />
                 </PageShell>

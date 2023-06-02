@@ -1,4 +1,5 @@
 import React from 'react';
+import { API_URL } from '../../../../CONSTANT_URL';
 
 export function SubmitButton() {
     async function submit() {
@@ -16,7 +17,7 @@ export function SubmitButton() {
             if (password !== password2) {
                 return alert('비밀번호가 일치하지 않습니다');
             } else {
-                const res = await fetch(`http://localhost:5000/api/users/signup`, {
+                const res = await fetch(`${API_URL}/users/signup`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import { Notice } from './Notice';
 import { MyProfile } from './MyProfile/MyProfile';
 import { ProfileEdit } from './ProfileEdit/ProfileEdit';
 import { CustomerService } from './CustomerService/CustomerService';
-import { API_URL } from '../API_URL/api';
+import { API_URL } from '../CONSTANT_URL';
 import type { UserInfo } from '../../server/models/User';
 
 export { ProfileSection };

@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import randomizeFileName from '../../../../../../../components/file/randomizeFileName';
-
-export { PictureSection };
+import { IMG_URL } from '../../../../../../CONSTANT_URL';
+import type { PhotoInReview } from '../../../../../../../server/models/Review';
 
 /**
  * @SelectedImage
@@ -12,14 +12,32 @@ export { PictureSection };
 export type SelectedImage = [string, string];
 export type RandomFileName = string;
 
-function PictureSection() {
+export function PictureSection({ photos }: { photos?: PhotoInReview }) {
     const fileInput = useRef<HTMLInputElement>(null);
 
     const handleClick = () => {
-        fileInput.current?.click();
+        if (images.length > 0) {
+            setImages([]);
+        } else {
+            fileInput.current?.click();
+        }
     };
 
-    const [images, setImages] = useState<Array<SelectedImage>>([]);
+    const [images, setImages] = useState<Array<SelectedImage>>(() => {
+        const inEditPage = window.location.pathname.includes('/edit');
+
+        if (inEditPage && photos && photos.length > 0) {
+            const temp: Array<SelectedImage> = [];
+
+            for (let photo of photos) {
+                temp.push([`${IMG_URL}/${photo.src}`, photo.src.split('.').at(-1) as string]);
+            }
+
+            return temp;
+        } else {
+            return [];
+        }
+    });
 
     const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const files: any = event.target.files;
@@ -43,7 +61,7 @@ function PictureSection() {
         if (images) {
             const temp: Array<RandomFileName> = [];
             for (let image of images) {
-                const fileName = randomizeFileName() + '.' + image[1].replace('image/', '');
+                const fileName = randomizeFileName() + '.' + image[1]?.replace('image/', '');
                 temp.push(fileName);
             }
 
@@ -58,7 +76,7 @@ function PictureSection() {
                 <em>음식 사진이나 메뉴판 사진을 첨부해주세요. (최대 3장)</em>
             </div>
             <ul className="container-picture">
-                <li className="button-add-picture" onClick={handleClick}>
+                <li className={`list-add-picture ${images.length > 0 ? 'reset' : ''}`} onClick={handleClick}>
                     <label className="sr-only" htmlFor="fileInput"></label>
                     <input
                         type="file"

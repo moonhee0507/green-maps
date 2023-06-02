@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import { EDIT_DELETE_NOTIFY_MODAL } from '../../../../../renderer/_reducers/_slices/postSlice';
-import { API_URL } from '../../../../API_URL/api';
+import { API_URL } from '../../../../CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { EditDeleteNotifyModal };

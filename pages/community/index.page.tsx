@@ -4,7 +4,7 @@ import { Community } from './Community';
 import { NavBar } from '../../components/navBar';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../renderer/store/hooks';
-import { API_URL } from '../API_URL/api';
+import { API_URL } from '../CONSTANT_URL';
 import type { PageProps } from '../../renderer/types';
 import type { Post } from '../../server/models/Post';
 import { ButtonGroup } from './component/ButtonGroup/ButtonGroup';

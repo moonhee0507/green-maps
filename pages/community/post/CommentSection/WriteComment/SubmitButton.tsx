@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { API_URL } from '../../../../CONSTANT_URL';
 
 export { SubmitButton };
 
@@ -12,7 +13,7 @@ function SubmitButton(props: { postId: string; content: string | null }) {
             .catch((err) => console.error(err));
 
         async function getUserId() {
-            const res = await fetch(`http://localhost:5000/api/users/`);
+            const res = await fetch(`${API_URL}/users/`);
             const data = await res.json();
 
             return data.user.nickName;
@@ -27,7 +28,7 @@ function SubmitButton(props: { postId: string; content: string | null }) {
                     content: content,
                 };
 
-                const res = await fetch(`http://localhost:5000/api/posts/${postId}/comment`, {
+                const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

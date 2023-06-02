@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { PageProps } from '../../../renderer/types';
 import type { RootState } from '../../../renderer/store';
 import type { Post } from '../../../server/models/Post';
+import { API_URL } from '../../CONSTANT_URL';
 
 export { Page };
 
@@ -36,7 +37,7 @@ function Page(pageProps: PageProps) {
     const getPosts = useCallback(async () => {
         try {
             const res = await fetch(
-                `http://localhost:5000/api/posts?keyword=${keyword}&subject=${encodeURIComponent(
+                `${API_URL}/posts?keyword=${keyword}&subject=${encodeURIComponent(
                     subject
                 )}&page=${currentPage}&limit=${limit}&boundary=${boundary}&orderby=${orderBy}`,
                 {

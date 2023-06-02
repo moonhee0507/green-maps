@@ -48,7 +48,7 @@ export type PageContextCustom = {
     groupName?: string[];
     token: string;
     restaurantInfo: Restaurant;
-    review: Review;
+    reviews: Review[];
 };
 
 type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;

@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import { API_URL } from '../../CONSTANT_URL';
 import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
 
 export { onBeforeRender };
@@ -8,7 +9,7 @@ export { prerender };
 async function onBeforeRender(pageContext: PageContextBuiltIn) {
     const { postId } = pageContext.routeParams;
     try {
-        const resPosts = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+        const resPosts = await fetch(`${API_URL}/posts/${postId}`, {
             headers: {
                 'Cache-Control': 'max-age=31536000',
             },

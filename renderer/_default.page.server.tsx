@@ -17,7 +17,7 @@ export const passToClient = [
     'user',
     'groupName',
     'pageHtml',
-    'review',
+    'reviews',
     'restaurantInfo',
 ];
 
@@ -76,7 +76,7 @@ async function render(pageContext: PageContextServer) {
 }
 
 async function onBeforeRender(pageContext: PageContextServer) {
-    const { Page, pageProps, routeParams, token, user, groupName, review, restaurantInfo } = pageContext;
+    const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo } = pageContext;
 
     let pageHtml;
 
@@ -105,7 +105,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
             user,
             groupName,
             pageHtml,
-            review,
+            reviews,
             restaurantInfo,
         },
     };

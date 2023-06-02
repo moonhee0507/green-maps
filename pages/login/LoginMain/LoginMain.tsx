@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useState } from 'react';
+import { API_URL } from '../../CONSTANT_URL';
 
 export { LoginMain };
 
@@ -19,7 +20,7 @@ function LoginMain() {
         };
 
         try {
-            const res = await fetch(`http://localhost:5000/api/users/login`, {
+            const res = await fetch(`${API_URL}/users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

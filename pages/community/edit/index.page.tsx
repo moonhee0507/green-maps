@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../renderer/store/hooks';
 import { TopBar } from '../../../components/topBar/topBar';
 import { Create } from '../create/component/Create';
-import { API_URL } from '../../API_URL/api';
+import { API_URL } from '../../CONSTANT_URL';
 import { EDIT_MODE } from '../../../renderer/_reducers/_slices/postSlice';
 import type { PageContext } from '../../../renderer/types';
 import type { Post } from '../../../server/models/Post';

@@ -1,17 +1,33 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export { WriteSection };
 
-function WriteSection(props: { title: string }) {
+function WriteSection({ title, content }: { title: string; content?: string }) {
     const dispatch = useDispatch();
-    function handleChange(event: ChangeEvent<{ value: string }>): string {
+
+    const [value, setValue] = useState<string>(() => {
+        const editPage = window.location.pathname.includes('/edit');
+
+        if (editPage) {
+            dispatch({
+                type: 'reviewSlice/TXT_REVIEW_STATE',
+                CONTENT: content,
+            });
+
+            return content as string;
+        } else {
+            return '';
+        }
+    });
+
+    function handleChange(event: ChangeEvent<{ value: string }>): void {
+        setValue(event.currentTarget.value);
+
         dispatch({
             type: 'reviewSlice/TXT_REVIEW_STATE',
             CONTENT: event.currentTarget.value,
         });
-
-        return event.currentTarget.value;
     }
 
     return (
@@ -21,7 +37,7 @@ function WriteSection(props: { title: string }) {
             <label className="sr-only" htmlFor="restaurantInput">
                 식당이름
             </label>
-            <input type="text" value={props.title} id="restaurantInput" readOnly />
+            <input type="text" value={title} id="restaurantInput" readOnly />
 
             <label htmlFor="txtReview" className="sr-only">
                 리뷰 작성란
@@ -34,6 +50,7 @@ function WriteSection(props: { title: string }) {
                 minLength={10}
                 required
                 onChange={handleChange}
+                value={value}
             />
         </fieldset>
     );

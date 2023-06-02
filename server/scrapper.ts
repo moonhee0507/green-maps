@@ -1,5 +1,6 @@
 import puppeteer, { ElementHandle } from 'puppeteer';
 import fetch from 'node-fetch';
+import { API_URL } from '../pages/CONSTANT_URL';
 
 type Restaurant = {
     title: string;
@@ -156,7 +157,7 @@ const excludeCategory = ['단체,협회', '환경단체', '의류판매', '생�
 
 async function saveScrapped(restaurant: Restaurant) {
     try {
-        const res = await fetch(`http://localhost:5000/api/scrappers/save`, {
+        const res = await fetch(`${API_URL}/scrappers/save`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

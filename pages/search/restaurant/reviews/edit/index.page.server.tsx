@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { API_URL } from '../../../../API_URL/api';
+import { API_URL } from '../../../../CONSTANT_URL';
 import type { PageContext } from '../../../../../renderer/types';
 import type { Review } from '../../../../../server/models/Review';
 
@@ -13,6 +13,7 @@ export { prerender };
 
 async function onBeforeRender(pageContext: PageContext) {
     const { reviewId } = pageContext.routeParams as Params;
+    const { user } = pageContext;
 
     const res = await fetch(`${API_URL}/reviews/${reviewId}`);
     const data = (await res.json()) as { success: boolean; review: Review };
@@ -21,6 +22,7 @@ async function onBeforeRender(pageContext: PageContext) {
         return {
             pageContext: {
                 review: data.review,
+                user: user,
             },
         };
     }

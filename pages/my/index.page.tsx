@@ -7,9 +7,11 @@ import { MyCommunitySection } from './MyCommunitySection/MyCommunitySection';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import type { PageContext } from '../../renderer/types';
 import type { UserInfo } from '../../server/models/User';
+import type { Review } from '../../server/models/Review';
 
 export function Page(pageContext: PageContext) {
     const { isLoggedIn, info } = pageContext.user;
+    const { reviews } = pageContext;
 
     useEffect(() => {
         if (isLoggedIn === false) {
@@ -23,7 +25,7 @@ export function Page(pageContext: PageContext) {
         info && (
             <>
                 <TopBar title="내 정보" />
-                <MyMain userInfo={info} />
+                <MyMain userInfo={info} reviews={reviews} />
                 <NavBar isLoggedIn={isLoggedIn} />
                 <ModalGroup />
             </>
@@ -31,7 +33,7 @@ export function Page(pageContext: PageContext) {
     );
 }
 
-function MyMain({ userInfo }: { userInfo: UserInfo }) {
+function MyMain({ userInfo, reviews }: { userInfo: UserInfo; reviews: Review[] }) {
     const [showSection, setShowSection] = useState<string>('프로필');
 
     useEffect(() => {
@@ -78,7 +80,7 @@ function MyMain({ userInfo }: { userInfo: UserInfo }) {
                     case '프로필':
                         return <ProfileSection userInfo={userInfo} />;
                     case '식당 리뷰':
-                        return <MyReviewSection userInfo={userInfo} />;
+                        return <MyReviewSection userInfo={userInfo} reviews={reviews} />;
                     case '커뮤니티 활동':
                         return <MyCommunitySection userInfo={userInfo} />;
                     default:

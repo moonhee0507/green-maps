@@ -1,11 +1,13 @@
 import mongoose, { Schema } from 'mongoose';
 import { Restaurant } from './Restaurant';
 
+export type PhotoInReview = Array<{ src: string; pick: boolean }>;
+
 export type Review = {
     _id: string;
     owner: string;
     restaurant: string | Restaurant;
-    photo?: Array<{ src: string; pick: boolean }>;
+    photo?: PhotoInReview;
     content: string;
     like?: Array<{ user: string }>;
     registeredAt: string;

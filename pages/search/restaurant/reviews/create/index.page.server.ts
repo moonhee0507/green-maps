@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { API_URL } from '../../../../API_URL/api';
+import { API_URL } from '../../../../CONSTANT_URL';
 import type { PageContext } from '../../../../../renderer/types';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
 
@@ -12,6 +12,7 @@ export { prerender };
 
 async function onBeforeRender(pageContext: PageContext) {
     const { restaurantId } = pageContext.routeParams as Params;
+    const { user } = pageContext;
 
     const res = await fetch(`${API_URL}/restaurants/${restaurantId}`, {
         headers: {
@@ -25,12 +26,14 @@ async function onBeforeRender(pageContext: PageContext) {
         return {
             pageContext: {
                 restaurantInfo: data.restaurantInfo,
+                user: user,
             },
         };
     } else {
         return {
             pageContext: {
                 restaurantInfo: {},
+                user: user,
             },
         };
     }
