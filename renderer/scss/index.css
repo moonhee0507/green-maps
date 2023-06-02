@@ -1003,6 +1003,14 @@ dd {
   transform: translate(-50%, 0);
 }
 
+.txt-restaurant-in-my {
+  margin-top: 0;
+}
+.txt-restaurant-in-my em {
+  font-style: normal;
+  font-weight: bold;
+}
+
 .ul-summary-community {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

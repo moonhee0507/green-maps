@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Owner, Date, MoreButton, Image, ReviewLikeButton, Content } from './component/index.js';
 import { useAppSelector } from '../../../../../renderer/store/hooks.js';
 import type { Review } from '../../../../../server/models/Review';
@@ -17,7 +17,8 @@ function ReviewListItem({
     restaurantId: string;
     isFirst: boolean;
 }) {
-    const { _id, owner, registeredAt, photo, content, like } = item;
+    const { _id, owner, registeredAt, photo, content, like, restaurant } = item;
+    const [myPage] = useState(window.location.pathname === '/my');
 
     const listElement = useRef<HTMLLIElement>(null);
     const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
@@ -32,6 +33,11 @@ function ReviewListItem({
 
     return (
         <li ref={listElement} className="list-review">
+            {myPage ? (
+                <p className="txt-restaurant-in-my">
+                    <em>{typeof restaurant !== 'string' ? restaurant.title : ''}</em>에 작성한 리뷰입니다.
+                </p>
+            ) : null}
             <article className="container-reviewitem">
                 <h5 className="sr-only">개별 리뷰</h5>
                 <dl>

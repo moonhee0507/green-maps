@@ -11,7 +11,14 @@ import {
 } from '../../../renderer/_reducers/_slices/profileSlice';
 import { EditProfileImageModal } from './EditProfileImageModal/EditProfileImageModal';
 import { EditNickNameModal } from './EditNickNameModal/EditNickNameModal';
-import { EditPasswordModal } from './EditPasswordModal/editPasswordModal';
+import { EditPasswordModal } from './EditPasswordModal/EditPasswordModal';
+import { EditDeleteNotifyModal } from './EditDeleteNotifyModal/EditDeleteNotifyModal';
+import {
+    EDIT_DELETE_NOTIFY_MODAL,
+    SAME_USER_OWNER,
+    SET_RESTAURANT_ID,
+    SET_REVIEW_ID,
+} from '../../../renderer/_reducers/_slices/reviewSlice';
 
 export { ModalGroup };
 
@@ -20,7 +27,8 @@ function ModalGroup() {
         (state) =>
             state.profileSlice.profileImageModalOn ||
             state.profileSlice.profileNickNameModalOn ||
-            state.profileSlice.profilePasswordModalOn
+            state.profileSlice.profilePasswordModalOn ||
+            state.reviewSlice.editDeleteNotifyModalOn // 리뷰 슬라이스 재사용
     );
     const [show, setShow] = useState(false);
 
@@ -55,6 +63,11 @@ function ModalGroup() {
             dispatch(PROFILE_PASSWORD_MODAL(false));
             dispatch(PASS_CURRENT_PASSWORD(false));
             dispatch(SET_USERID(''));
+
+            dispatch(EDIT_DELETE_NOTIFY_MODAL(false)); // 리뷰 슬라이스 재사용
+            dispatch(SAME_USER_OWNER(false));
+            dispatch(SET_REVIEW_ID(''));
+            dispatch(SET_RESTAURANT_ID(''));
         }
     }
 
@@ -63,6 +76,7 @@ function ModalGroup() {
             <EditProfileImageModal />
             <EditNickNameModal />
             <EditPasswordModal />
+            <EditDeleteNotifyModal />
         </div>
     );
 }
