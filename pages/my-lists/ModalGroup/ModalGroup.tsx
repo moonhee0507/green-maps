@@ -118,7 +118,7 @@ function Form({ likeList }: { likeList: Like[] }) {
 }
 
 import imgClose from '/images/icon-plus.svg';
-import { API_URL } from '../../CONSTANT_URL';
+import { API_URL } from '../../../renderer/CONSTANT_URL';
 
 function CloseButton() {
     const dispatch = useAppDispatch();

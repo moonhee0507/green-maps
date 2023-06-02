@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../renderer/store/hooks';
 import { navigate } from 'vite-plugin-ssr/client/router';
-import { API_URL } from '../../pages/CONSTANT_URL';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 import imgBookmark from '/images/icon-bookmark.svg';
 
 export { BookmarkButton };

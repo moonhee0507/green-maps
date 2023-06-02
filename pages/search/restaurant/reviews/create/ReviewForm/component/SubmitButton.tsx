@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppSelector } from '../../../../../../../renderer/store/hooks';
 import { RandomFileName, SelectedImage } from './PictureSection';
-import { API_URL } from '../../../../../../CONSTANT_URL';
+import { API_URL } from '../../../../../../../renderer/CONSTANT_URL';
 import { PhotoInReview } from '../../../../../../../server/models/Review';
 import store from '../../../../../../../renderer/store';
 import uploadImageToStorage from '../../../../../../../components/image/uploadImageToStorage';

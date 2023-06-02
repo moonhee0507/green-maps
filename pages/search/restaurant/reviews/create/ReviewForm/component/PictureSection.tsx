@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import randomizeFileName from '../../../../../../../components/file/randomizeFileName';
-import { IMG_URL } from '../../../../../../CONSTANT_URL';
+import randomizeFileName from '../../../../../../../components/image/randomizeFileName';
+import { IMG_URL } from '../../../../../../../renderer/CONSTANT_URL';
 import type { PhotoInReview } from '../../../../../../../server/models/Review';
 
 /**

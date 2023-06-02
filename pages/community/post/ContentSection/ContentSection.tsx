@@ -2,7 +2,7 @@ import React from 'react';
 import { TextArea } from './TextArea/TextArea';
 import type { Post, CommentInPost } from '../../../../server/models/Post';
 import { PostLikeButton } from './PostLikeButton';
-import { isSameDay } from '../../../../components/Date';
+import { isSameDay } from '../../../../components/Date/isSameDay';
 import { MoreButton } from './MoreButton';
 import { UserInfo } from '../../../../server/models/User';
 

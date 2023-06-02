@@ -3,7 +3,7 @@ import { SearchBar } from './searchBar';
 import ListButton from './listButton';
 import { NavBar } from '../../components/navBar';
 import { init } from './kakaoMapAPI.js';
-import { API_URL } from '../CONSTANT_URL';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 
 export { Page };
 

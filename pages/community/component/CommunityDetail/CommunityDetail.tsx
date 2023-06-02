@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SubjectBox } from './SubjectBox';
 import { useSelector } from 'react-redux';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import type { Post } from '../../../../server/models/Post';
 import type { RootState } from '../../../../renderer/store';
 

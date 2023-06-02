@@ -6,7 +6,7 @@ import {
     RESET_CHECKED,
     RESET_RESTAURANT_LIST,
 } from '../../../../../renderer/_reducers/_slices/myListSlice';
-import { API_URL } from '../../../../CONSTANT_URL';
+import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 
 export { ButtonGroup };
 

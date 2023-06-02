@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { isSameDay } from '../../../../../components/Date';
+import { isSameDay } from '../../../../../components/Date/isSameDay';
 import { MoreButton } from './MoreButton';
 import type { UserInfo } from '../../../../../server/models/User';
 import type { CommentInPost } from '../../../../../server/models/Post';

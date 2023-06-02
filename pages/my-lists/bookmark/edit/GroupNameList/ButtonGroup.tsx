@@ -9,7 +9,7 @@ import {
 } from '../../../../../renderer/_reducers/_slices/myListSlice';
 import type { GroupList } from '../../../../../server/models/Bookmark';
 import { UserInfo } from '../../../../../server/models/User';
-import { API_URL } from '../../../../CONSTANT_URL';
+import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 
 export { ButtonGroup };
 

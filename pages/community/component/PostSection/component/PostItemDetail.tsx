@@ -1,6 +1,6 @@
 import React from 'react';
 import { CommentInPost } from '../../../../../server/models/Post';
-import { isSameDay } from '../../../../../components/Date';
+import { isSameDay } from '../../../../../components/Date/isSameDay';
 
 export { PostItemDetail };
 

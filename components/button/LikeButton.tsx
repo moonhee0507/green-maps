@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import imgHeart from '/images/icon-heart.svg';
 import { useDispatch } from 'react-redux';
-import { API_URL } from '../../pages/CONSTANT_URL';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
 import { useAppSelector } from '../../renderer/store/hooks';
 

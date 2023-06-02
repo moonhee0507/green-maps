@@ -1,4 +1,4 @@
-import { API_URL } from '../../pages/CONSTANT_URL';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 import {
     RandomFileName,
     SelectedImage,

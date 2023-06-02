@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../../renderer/store/hooks';
 import { validatePassword } from '../../../../components/validate/regex';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import {
     PASS_CURRENT_PASSWORD,
     PROFILE_PASSWORD_MODAL,

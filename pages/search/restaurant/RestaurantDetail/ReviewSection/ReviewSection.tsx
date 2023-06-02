@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/ho
 import { ReviewButton } from './ReviewButton';
 import { ReviewList } from './ReviewList';
 import { Pagination } from '../../../../../components/Pagination/Pagination';
-import { API_URL } from '../../../../CONSTANT_URL';
+import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
 import type { Review } from '../../../../../server/models/Review';
 import type { UserInfo } from '../../../../../server/models/User';

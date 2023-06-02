@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import { PASS_CURRENT_PASSWORD } from '../../../../renderer/_reducers/_slices/profileSlice';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 
 export { CurrentPassword };
 

@@ -3,7 +3,7 @@ import { Bookmark, UserInfo } from '../../../../server/models/User';
 import { useAppSelector } from '../../../../renderer/store/hooks';
 import { GroupNameList } from './GroupNameList';
 import { CloseButton } from './CloseButton';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import type { GroupList } from '../../../../server/models/Bookmark';
 
 export { WhereToCopyModal };

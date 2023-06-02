@@ -4,7 +4,7 @@ import { NavBar } from '../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { Menu } from './Menu/Menu';
 import { ListSection } from './ListSection/ListSection';
-import { API_URL } from '../CONSTANT_URL';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 import type { PageContext } from '../../renderer/types';
 import type { GroupList } from '../../server/models/Bookmark';
 import type { UserInfo } from '../../server/models/User';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_URL } from '../../../../CONSTANT_URL';
+import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 
 export function SubmitButton() {
     async function submit() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import { PROFILE_IMAGE_MODAL } from '../../../../renderer/_reducers/_slices/profileSlice';
 import { useAppDispatch } from '../../../../renderer/store/hooks';
 

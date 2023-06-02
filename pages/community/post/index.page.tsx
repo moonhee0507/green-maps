@@ -5,7 +5,7 @@ import { TopBar } from '../../../components/topBar/topBar';
 import { ContentSection } from './ContentSection/ContentSection';
 import { CommentSection } from './CommentSection/CommentSection';
 import { ModalGroup } from './ModalGroup/ModalGroup';
-import { API_URL } from '../../CONSTANT_URL';
+import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageProps } from '../../../renderer/types';
 import type { UserInfo } from '../../../server/models/User';
 

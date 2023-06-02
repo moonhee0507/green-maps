@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useStore } from 'react-redux';
 import { useAppSelector } from '../../../../renderer/store/hooks';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import { EDIT_MODE } from '../../../../renderer/_reducers/_slices/postSlice';
 
 export { SubmitButton };

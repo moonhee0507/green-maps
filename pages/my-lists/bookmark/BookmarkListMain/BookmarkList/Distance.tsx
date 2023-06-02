@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import formatDistance from './formatDistance';
-import { API_URL } from '../../../../CONSTANT_URL';
+import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 
 export { Distance };
 

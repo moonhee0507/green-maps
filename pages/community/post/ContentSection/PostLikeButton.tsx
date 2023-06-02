@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import imgHeart from '/images/icon-heart.svg';
 
 export { PostLikeButton };

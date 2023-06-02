@@ -1,6 +1,6 @@
 import puppeteer, { ElementHandle } from 'puppeteer';
 import fetch from 'node-fetch';
-import { API_URL } from '../pages/CONSTANT_URL';
+import { API_URL } from '../renderer/CONSTANT_URL';
 
 type Restaurant = {
     title: string;

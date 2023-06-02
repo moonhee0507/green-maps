@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../renderer/store/hooks';
 import { ListItem } from '../../bookmark/BookmarkListMain/BookmarkList/BookmarkList';
-import { API_URL } from '../../../CONSTANT_URL';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import type { Like } from '../../../../server/models/User';
 
 export function LikeList({ lists }: { lists: Like[] }) {

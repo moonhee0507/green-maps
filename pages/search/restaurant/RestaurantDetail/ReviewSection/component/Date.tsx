@@ -1,5 +1,5 @@
 import React from 'react';
-import { isSameDay } from '../../../../../../components/Date';
+import { isSameDay } from '../../../../../../components/Date/isSameDay';
 
 export { Date };
 

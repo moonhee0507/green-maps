@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { LoginMain } from './LoginMain/LoginMain';
-import { API_URL } from '../CONSTANT_URL';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 
 export { Page };
 

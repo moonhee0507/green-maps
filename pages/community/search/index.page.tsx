@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { PageProps } from '../../../renderer/types';
 import type { RootState } from '../../../renderer/store';
 import type { Post } from '../../../server/models/Post';
-import { API_URL } from '../../CONSTANT_URL';
+import { API_URL } from '../../../renderer/CONSTANT_URL';
 
 export { Page };
 
