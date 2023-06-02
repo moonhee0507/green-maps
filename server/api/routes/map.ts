@@ -6,8 +6,8 @@ const route = Router();
 export default (app: Router) => {
     app.use('/map', route);
 
-    // 현재 화면 내에 있는 식당 가져오기
-    route.post('/currentlist', async (req: Request, res: Response) => {
+    // 현재 화면 내에 있는 식당 가져오기(마커 표시용)
+    route.post('/current-view', async (req: Request, res: Response) => {
         try {
             const lists = await Restaurant.find({
                 location: {
@@ -23,6 +23,31 @@ export default (app: Router) => {
             res.json(lists);
         } catch (err) {
             console.error(err);
+        }
+    });
+
+    // 반경 내 식당을 가까운 순서대로 가져오기
+    route.post('/within-radius-of', async (req: Request, res: Response) => {
+        try {
+            const currentLocation = req.body.currentLocation;
+
+            const lists = await Restaurant.find({
+                location: {
+                    $nearSphere: {
+                        $geometry: {
+                            type: 'Point',
+                            coordinates: currentLocation,
+                        },
+                        $maxDistance: req.query.radius,
+                    },
+                },
+            });
+
+            res.json(lists);
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ errorMessage: err.message });
+            }
         }
     });
 

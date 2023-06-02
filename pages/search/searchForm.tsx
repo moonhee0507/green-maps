@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { displaySearchResult } from './kakaoMapAPI';
+// import { displaySearchResult } from './kakaoMapAPI';
 
 export { SearchForm };
 
@@ -11,7 +11,7 @@ function SearchForm() {
     function searchRest() {
         const keyword = (document.getElementById('searchItem') as HTMLInputElement).value;
 
-        displaySearchResult(keyword);
+        // displaySearchResult(keyword);
     }
 
     return (

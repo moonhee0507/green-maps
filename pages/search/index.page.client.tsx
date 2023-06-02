@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { SearchBar } from './searchBar';
-import ListButton from './listButton';
+import { ModalGroup } from './ModalGroup/ModalGroup';
+import { ControlButton } from './ControlButton/ControlButton';
+import { KakaoMap } from './KakaoMap';
+import { ResultInRadius } from './ResultInRadius/ResultInRadius';
 import { NavBar } from '../../components/navBar';
-import { init } from './kakaoMapAPI.js';
 import { API_URL } from '../../renderer/CONSTANT_URL';
 
 export { Page };
@@ -11,8 +13,6 @@ function Page() {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
     useEffect(() => {
-        init();
-
         (async () => {
             const res = await fetch(`${API_URL}/users/`);
             const data = await res.json();
@@ -25,17 +25,19 @@ function Page() {
     return (
         <>
             <SearchBar />
-            <KakaoMap />
-            <ListButton />
+            <MapView />
             <NavBar isLoggedIn={isLoggedIn} />
+            <ModalGroup />
         </>
     );
 }
 
-function KakaoMap() {
-    useEffect(() => {
-        init();
-    }, []);
-
-    return <div id="map" />;
+function MapView() {
+    return (
+        <main className="main-map">
+            <ControlButton />
+            <KakaoMap />
+            <ResultInRadius />
+        </main>
+    );
 }

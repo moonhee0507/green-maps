@@ -1,4 +1,8 @@
 #map {
+    height: 100%;
+}
+
+.main-map {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     flex-grow: 1;
@@ -11,15 +15,6 @@
 
 .wrapper-restaurant-detail {
     @include extensive-content;
-}
-
-.button-count {
-    position: absolute;
-    -ms-flex-item-align: center;
-    align-self: center;
-    width: 200px;
-    bottom: 100px;
-    z-index: 9999;
 }
 
 .section-primary {
@@ -429,4 +424,125 @@
             object-fit: cover;
         }
     }
+}
+
+// 지도 UI
+
+// 상단 버튼
+.wrapper-map-control-button {
+    position: absolute;
+    top: 80px;
+    z-index: 9999;
+}
+
+// 하단
+.wrapper-result-in-radius {
+    position: absolute;
+    bottom: 80px;
+    z-index: 9999;
+
+    .wrapper-swiper {
+        position: relative;
+        max-width: 422px;
+        overflow: hidden;
+    }
+
+    .container-swiper {
+        position: relative;
+        left: 0; // swipe 컨트롤하는 부분
+    }
+    .ul-restaurant-in-radius {
+        // position: relative;
+        // left: 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 10px;
+
+        > li:first-child {
+            margin-left: 10px;
+        }
+
+        > li {
+            -ms-flex-preferred-size: 350px;
+            flex-basis: 350px;
+            // width: 350px;
+            background-color: $background-modal;
+            border: 1px solid $border-color;
+
+            > a {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+        }
+    }
+
+    .container-img {
+        -ms-flex-preferred-size: 100px;
+        flex-basis: 100px;
+        height: 100px;
+
+        > img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    .container-right {
+        width: 250px;
+        // -webkit-box-flex: 1;
+        // -ms-flex-positive: 1;
+        // width: calc(100% - 110px);
+    }
+
+    .txt-title {
+        font-weight: bold;
+    }
+
+    .txt-address,
+    .txt-distance,
+    .txt-rating,
+    .txt-count-comment {
+        font-size: 13px;
+    }
+
+    .container-rating-count {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .txt-rating,
+    .txt-count-comment {
+        padding-left: 17px;
+    }
+
+    .txt-rating {
+        background: icon(star, $svg-star) no-repeat left center / 15px 15px;
+        -ms-flex-preferred-size: 50px;
+        flex-basis: 50px;
+    }
+
+    .txt-count-comment {
+        background: icon(pen) no-repeat left center / 13px 13px;
+    }
+}
+
+.txt-result-in-radius {
+    position: relative;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    left: 10px;
+    background-color: $background-modal;
+    font-weight: bold;
+    padding: 5px 7px 5px;
+    margin: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    font-size: 13px;
 }
