@@ -501,23 +501,22 @@ dd {
 }
 .wrapper-result-in-radius .container-swiper {
   position: relative;
-  left: 0;
 }
 .wrapper-result-in-radius .ul-restaurant-in-radius {
   display: flex;
-  gap: 10px;
 }
 .wrapper-result-in-radius .ul-restaurant-in-radius > li:first-child {
   margin-left: 10px;
 }
 .wrapper-result-in-radius .ul-restaurant-in-radius > li {
-  flex-basis: 350px;
   background-color: #ffffff;
-  border: 1px solid #d3d3d3;
+  border: solid #d3d3d3;
 }
 .wrapper-result-in-radius .ul-restaurant-in-radius > li > a {
   display: flex;
   align-items: center;
+  padding: 10px;
+  gap: 10px;
 }
 .wrapper-result-in-radius .container-img {
   flex-basis: 100px;

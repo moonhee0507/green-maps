@@ -60,7 +60,10 @@ async function render(pageContext: PageContextServer) {
             <script>
                 var global = global || window;
                 window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)};
-                
+
+                const map = document.getElementById("map");
+                map.addEventListener('touchmove');
+
                 const navBookmark = document.querySelector('.link-nav.no-login');
                 if (navBookmark) {
                     navBookmark.addEventListener('click', () => {

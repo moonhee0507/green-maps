@@ -9,6 +9,9 @@ const config: UserConfig = {
             polyfill: true,
         },
     },
+    server: {
+        middlewareMode: true,
+    },
 };
 
 export default config;
