@@ -486,13 +486,13 @@ dd {
 .wrapper-map-control-button {
   position: absolute;
   top: 80px;
-  z-index: 9999;
+  z-index: 1111;
 }
 
 .wrapper-result-in-radius {
   position: absolute;
   bottom: 80px;
-  z-index: 9999;
+  z-index: 1111;
 }
 .wrapper-result-in-radius .wrapper-swiper {
   position: relative;
@@ -512,25 +512,39 @@ dd {
   background-color: #ffffff;
   border: solid #d3d3d3;
 }
-.wrapper-result-in-radius .ul-restaurant-in-radius > li > a {
+.wrapper-result-in-radius .ul-restaurant-in-radius > li > div {
+  position: relative;
+  width: inherit;
   display: flex;
   align-items: center;
   padding: 10px;
   gap: 10px;
 }
 .wrapper-result-in-radius .container-img {
-  flex-basis: 100px;
-  height: 100px;
-}
-.wrapper-result-in-radius .container-img > img {
   width: 100px;
   height: 100px;
+}
+.wrapper-result-in-radius .container-img img {
+  width: inherit;
+  height: 100%;
+}
+.wrapper-result-in-radius .container-distance {
+  position: absolute;
+  background-color: rgba(1, 1, 1, 0.5);
+  padding: 3px 5px 5px;
+  bottom: 10px;
+  right: 10px;
+  color: #ffffff;
 }
 .wrapper-result-in-radius .container-right {
   width: 250px;
 }
 .wrapper-result-in-radius .txt-title {
   font-weight: bold;
+}
+.wrapper-result-in-radius .txt-title,
+.wrapper-result-in-radius .txt-address {
+  margin-bottom: 5px;
 }
 .wrapper-result-in-radius .txt-address,
 .wrapper-result-in-radius .txt-distance,
@@ -565,6 +579,19 @@ dd {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   font-size: 13px;
+}
+
+.container-emoji-notice {
+  text-align: center;
+}
+.container-emoji-notice .emoji {
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.container-emoji-notice > em {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .top-bar {

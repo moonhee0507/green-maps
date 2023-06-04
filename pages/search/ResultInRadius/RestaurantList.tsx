@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useSwipeHook from './useSwipeHook';
 import { useAppSelector } from '../../../renderer/store/hooks';
 import { RestaurantListItem } from './RestaurantListItem';
+import { Restaurant } from '../../../server/models/Restaurant';
 
 export { RestaurantList };
 
@@ -11,7 +12,18 @@ export const __BORDER__ = 1 * 2;
 
 function RestaurantList() {
     const resultInRadius = useAppSelector((state) => state.mapSlice.resultInRadius);
+    const nearest = useAppSelector((state) => state.mapSlice.nearest);
     const swipeContainerRef = useRef<HTMLDivElement>(null);
+
+    const [dataInUse, setDataInUse] = useState<Restaurant[]>(resultInRadius);
+
+    useEffect(() => {
+        if (resultInRadius.length > 0) {
+            setDataInUse(resultInRadius);
+        } else {
+            setDataInUse(nearest);
+        }
+    }, [resultInRadius]);
 
     const [left, setLeft] = useState(0);
 
@@ -26,7 +38,7 @@ function RestaurantList() {
                 return 0;
             }
 
-            const leftOfLastElement = (__FLEX_GAP__ + __LI_WIDTH__ + __BORDER__) * (resultInRadius.length - 1) * -1;
+            const leftOfLastElement = (__FLEX_GAP__ + __LI_WIDTH__ + __BORDER__) * (dataInUse.length - 1) * -1;
             if (newLeft < leftOfLastElement) {
                 return leftOfLastElement;
             }
@@ -40,6 +52,10 @@ function RestaurantList() {
         onDragMove: handleDragMove,
     });
 
+    useEffect(() => {
+        console.log(left);
+    }, [left]);
+
     return (
         <div className="wrapper-swiper">
             <div
@@ -47,11 +63,13 @@ function RestaurantList() {
                 ref={swipeContainerRef}
                 style={{ transform: `translateX(${left}px)`, transition: '1s' }}
             >
-                <ul className="ul-restaurant-in-radius" style={{ gap: `${__FLEX_GAP__}px` }}>
-                    {resultInRadius.map((restaurantInfo) => {
-                        return <RestaurantListItem key={Math.random()} restaurantInfo={restaurantInfo} />;
-                    })}
-                </ul>
+                {
+                    <ul className="ul-restaurant-in-radius" style={{ gap: `${__FLEX_GAP__}px` }}>
+                        {dataInUse.map((restaurantInfo) => {
+                            return <RestaurantListItem key={Math.random()} restaurantInfo={restaurantInfo} />;
+                        })}
+                    </ul>
+                }
             </div>
         </div>
     );

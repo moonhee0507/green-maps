@@ -57,12 +57,14 @@ async function render(pageContext: PageContextServer) {
         <body>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
             <div id="page-view">${dangerouslySkipEscape(__PAGE_HTML__)}</div>
-            <script>
+            <script type="text/javascript">
                 var global = global || window;
                 window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)};
-
+                
                 const map = document.getElementById("map");
-                map.addEventListener('touchmove');
+                if (map) {
+                    map.addEventListener('touchmove');
+                }
 
                 const navBookmark = document.querySelector('.link-nav.no-login');
                 if (navBookmark) {

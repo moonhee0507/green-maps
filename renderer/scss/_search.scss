@@ -186,7 +186,7 @@
                 right: 0;
                 padding: 5px;
                 margin: 0;
-                background-color: rgba(1, 1, 1, 0.5);
+                background-color: $container-on-image;
                 color: $on-opacity;
             }
 
@@ -197,7 +197,7 @@
                 background-size: 20px 20px;
                 width: 30px;
                 height: 30px;
-                background-color: rgba(1, 1, 1, 0.5);
+                background-color: $container-on-image;
                 background-position: center center;
                 background-repeat: no-repeat;
                 border-radius: 50%;
@@ -432,14 +432,14 @@
 .wrapper-map-control-button {
     position: absolute;
     top: 80px;
-    z-index: 9999;
+    z-index: 1111;
 }
 
 // 하단
 .wrapper-result-in-radius {
     position: absolute;
     bottom: 80px;
-    z-index: 9999;
+    z-index: 1111;
 
     .wrapper-swiper {
         position: relative;
@@ -463,7 +463,9 @@
             background-color: $background-modal;
             border: solid $border-color;
 
-            > a {
+            > div {
+                position: relative; // 거리 기준
+                width: inherit;
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -477,14 +479,22 @@
     }
 
     .container-img {
-        -ms-flex-preferred-size: 100px;
-        flex-basis: 100px;
+        width: 100px;
         height: 100px;
 
-        > img {
-            width: 100px;
-            height: 100px;
+        img {
+            width: inherit;
+            height: 100%;
         }
+    }
+
+    .container-distance {
+        position: absolute;
+        background-color: $container-on-image;
+        padding: 3px 5px 5px;
+        bottom: 10px;
+        right: 10px;
+        color: $txt-on-container;
     }
 
     .container-right {
@@ -493,6 +503,11 @@
 
     .txt-title {
         font-weight: bold;
+    }
+
+    .txt-title,
+    .txt-address {
+        margin-bottom: 5px;
     }
 
     .txt-address,
@@ -537,4 +552,20 @@
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     font-size: 13px;
+}
+
+// 위치권한 모달
+.container-emoji-notice {
+    text-align: center;
+
+    .emoji {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+
+    > em {
+        font-style: normal;
+        font-weight: bold;
+        font-size: 16px;
+    }
 }

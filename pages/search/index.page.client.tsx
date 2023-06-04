@@ -6,11 +6,18 @@ import { KakaoMap } from './KakaoMap';
 import { ResultInRadius } from './ResultInRadius/ResultInRadius';
 import { NavBar } from '../../components/navBar';
 import { API_URL } from '../../renderer/CONSTANT_URL';
+import useLocationAccess from './hook/useLocationAccess';
+import appModalMode from '../../components/modal/appModalMode';
+import { useAppDispatch } from '../../renderer/store/hooks';
+import { CHECK_LOCATION_ACCESS_MODAL, StateToGeolocation } from '../../renderer/_reducers/_slices/mapSlice';
 
 export { Page };
 
 function Page() {
+    const dispatch = useAppDispatch();
+
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const hasLocationAccess: StateToGeolocation = useLocationAccess();
 
     useEffect(() => {
         (async () => {
@@ -21,6 +28,18 @@ function Page() {
             else setIsLoggedIn(false);
         })();
     }, []);
+
+    useEffect(() => {
+        console.log('hasLocationAccess', hasLocationAccess);
+
+        if (hasLocationAccess === 'granted') {
+            appModalMode(false);
+            dispatch(CHECK_LOCATION_ACCESS_MODAL(false));
+        } else if (hasLocationAccess === 'denied' || hasLocationAccess === 'prompt') {
+            appModalMode(true);
+            dispatch(CHECK_LOCATION_ACCESS_MODAL(true));
+        }
+    }, [hasLocationAccess]);
 
     return (
         <>

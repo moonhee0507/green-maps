@@ -1,7 +1,8 @@
 import React from 'react';
 import { Thumb } from './Thumb';
-import { Distance } from '../../my-lists/bookmark/BookmarkListMain/BookmarkList/Distance';
+import { DistanceContainer } from './DistanceContainer';
 import { __LI_WIDTH__, __BORDER__ } from './RestaurantList';
+import { navigate } from 'vite-plugin-ssr/client/router';
 import type { Restaurant } from '../../../server/models/Restaurant';
 
 export { RestaurantListItem };
@@ -11,8 +12,9 @@ function RestaurantListItem({ restaurantInfo }: { restaurantInfo: Restaurant }) 
 
     return (
         <li style={{ width: `${__LI_WIDTH__}px`, borderWidth: `${__BORDER__ / 2}px` }}>
-            <a href={`/search/${_id}`}>
+            <div onClick={() => navigate(`/search/${_id}`)}>
                 <Thumb category={category} />
+                <DistanceContainer location={location.coordinates} />
                 <div className="container-right">
                     <dl>
                         {certification ? (
@@ -28,21 +30,17 @@ function RestaurantListItem({ restaurantInfo }: { restaurantInfo: Restaurant }) 
                         <dl>
                             <dt className="sr-only">주소</dt>
                             <dd className="txt-address">{address}</dd>
-                            <dt className="sr-only">거리</dt>
-                            <dd>
-                                <Distance location={location.coordinates} />
-                            </dd>
                         </dl>
 
                         <dl className="container-rating-count">
                             <dt className="sr-only">평점</dt>
                             <dd className="txt-rating">{rating}</dd>
                             <dt className="sr-only">리뷰 수</dt>
-                            <dd className="txt-count-comment">{reviews.length}</dd>
+                            <dd className="txt-count-comment">{reviews ? reviews.length : 0}</dd>
                         </dl>
                     </dl>
                 </div>
-            </a>
+            </div>
         </li>
     );
 }

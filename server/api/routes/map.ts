@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import Restaurant from '../../models/Restaurant.js';
+import { request } from 'http';
 
 const route = Router();
 
@@ -43,10 +44,40 @@ export default (app: Router) => {
                 },
             });
 
-            res.json(lists);
+            res.json({ success: true, lists: lists });
         } catch (err) {
             if (err instanceof Error) {
                 res.status(500).json({ errorMessage: err.message });
+            }
+        }
+    });
+
+    // 가장 가까운 식당 TOP n 가져오기
+    route.post('/nearest', async (req: Request, res: Response) => {
+        try {
+            const currentLocation = req.body.currentLocation;
+
+            const nearest = Restaurant.aggregate([
+                {
+                    $geoNear: {
+                        near: {
+                            type: 'Point',
+                            coordinates: currentLocation,
+                        },
+                        distanceField: 'distance',
+                    },
+                },
+                {
+                    $limit: Number(req.query.top),
+                },
+            ]);
+
+            const lists = await nearest;
+
+            res.status(200).json({ success: true, lists: lists });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
             }
         }
     });

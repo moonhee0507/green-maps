@@ -60,7 +60,8 @@ const restaurantSchema = new Schema({
     ],
 });
 
-restaurantSchema.index({ title: 1, address: 1, location: '2dsphere' });
+restaurantSchema.index({ title: 1, address: 1 });
+restaurantSchema.index({ location: '2dsphere' });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 

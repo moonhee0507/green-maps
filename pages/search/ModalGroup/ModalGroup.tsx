@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
-import { CHANGE_RADIUS_MODAL, SET_RADIUS } from '../../../renderer/_reducers/_slices/mapSlice';
+import { CHANGE_RADIUS_MODAL } from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
+import { ChangeRadiusModal } from './ChangeRadiusModal/ChangeRadiusModal';
 
 export { ModalGroup };
 
 function ModalGroup() {
-    const on = useAppSelector((state) => state.mapSlice.radiusModalOn);
+    const on = useAppSelector((state) => state.mapSlice.radiusModalOn || state.mapSlice.checkGeolocationModalOn);
     const [show, setShow] = useState(false);
 
     const dispatch = useAppDispatch();
@@ -37,87 +38,27 @@ function ModalGroup() {
     return (
         <div className={`modal-group ${show ? 'on' : ''}`}>
             <ChangeRadiusModal />
+            <CheckGeolocationModal />
         </div>
     );
 }
 
-function ChangeRadiusModal() {
+function CheckGeolocationModal() {
     const [show, setShow] = useState(false);
-    const radiusModalOn = useAppSelector((state) => state.mapSlice.radiusModalOn);
-    const radius = useAppSelector((state) => state.mapSlice.radius);
-
-    const [calcRadius, setCalcRadius] = useState(radius);
-    const [unit, setUnit] = useState('m');
+    const checkGeolocationModalOn = useAppSelector((state) => state.mapSlice.checkGeolocationModalOn);
 
     useEffect(() => {
-        if (radius < 1000) {
-            setCalcRadius(radius);
-            setUnit('m');
-        } else {
-            setCalcRadius(radius / 1000);
-            setUnit('km');
-        }
-    }, [radius]);
-
-    useEffect(() => {
-        if (radiusModalOn === true) setShow(true);
+        if (checkGeolocationModalOn === true) setShow(true);
         else setShow(false);
-    }, [radiusModalOn]);
+    }, [checkGeolocationModalOn]);
 
     return (
         <article className={`modal-group-item ${show ? 'on' : ''}`}>
-            <h4>내 위치 검색 반경 선택</h4>
-            <div className="wrapper-select-radius">
-                <p>
-                    <span>{calcRadius + unit}</span>
-                </p>
-                <form className="form-radius">
-                    {[300, 500, 1000, 2000, 3000].map((radius) => {
-                        return <Radio key={Math.random()} radius={radius} />;
-                    })}
-                </form>
+            <h4 className="sr-only">위치 확인 요청</h4>
+            <div className="container-emoji-notice">
+                <div className="emoji">📢</div>
+                <em>위치 권한을 허용해주세요.</em>
             </div>
         </article>
-    );
-}
-
-function Radio({ radius }: { radius: number }) {
-    const dispatch = useAppDispatch();
-
-    const selectedRadius = useAppSelector((state) => state.mapSlice.radius);
-
-    const [calcRadius, setCalcRadius] = useState(radius);
-    const [unit, setUnit] = useState('m');
-
-    useEffect(() => {
-        if (radius < 1000) {
-            setCalcRadius(radius);
-            setUnit('m');
-        } else {
-            setCalcRadius(radius / 1000);
-            setUnit('km');
-        }
-    }, [radius]);
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const target = event.target as HTMLInputElement;
-
-        appModalMode(false);
-        dispatch(SET_RADIUS(Number(target.value)));
-        dispatch(CHANGE_RADIUS_MODAL(false));
-    };
-
-    return (
-        <div className="container-radio-radius">
-            <input
-                type="radio"
-                id={`radius-${radius}`}
-                value={radius}
-                name="radius"
-                onChange={handleChange}
-                checked={radius === selectedRadius}
-            />
-            <label htmlFor={`radius-${radius}`}>{calcRadius + unit}</label>
-        </div>
     );
 }
