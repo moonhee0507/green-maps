@@ -30,7 +30,7 @@ function Stars(props: { rating: string }) {
             {arrStar.map((percent: number, i: number) => {
                 return <Star key={i + 1} id={i + 1} percent={percent} />;
             })}
-            <span>({rating.toFixed(1)})</span>
+            {window.location.pathname !== '/search' && <span>({rating.toFixed(1)})</span>}
         </div>
     );
 }

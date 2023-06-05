@@ -30,8 +30,6 @@ function Page() {
     }, []);
 
     useEffect(() => {
-        console.log('hasLocationAccess', hasLocationAccess);
-
         if (hasLocationAccess === 'granted') {
             appModalMode(false);
             dispatch(CHECK_LOCATION_ACCESS_MODAL(false));

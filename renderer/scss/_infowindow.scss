@@ -1,0 +1,133 @@
+$infowindow-width: 310px;
+$infowindow-padding: 18px;
+$img-width: 75px;
+
+.wrapper-infowindow {
+    width: $infowindow-width;
+    padding: $infowindow-padding;
+
+    > dl {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+
+        .infowindow-left {
+            width: calc(#{$infowindow-width - $img-width - 10px});
+        }
+    }
+
+    .container-title-cert {
+        .txt-title {
+            font-weight: bold;
+            font-size: 16px;
+
+            > a:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .txt-cert {
+            font-size: 13px;
+            font-weight: bold;
+            display: inline;
+            margin-right: 5px;
+        }
+
+        .txt-cert.green {
+            color: $cert-txt-color;
+        }
+    }
+
+    // 별점
+    .container-rating-review {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        gap: 10px;
+        margin: 5px 0;
+
+        > div:nth-child(1) > dd {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 3px;
+
+            .num-rating {
+                font-weight: bold;
+                font-size: 13px;
+            }
+
+            .style-infowindow-star {
+                height: 15px;
+                width: calc(15px * 5);
+            }
+        }
+
+        > div:nth-child(2) {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            font-size: 13px;
+            gap: 3px;
+        }
+    }
+
+    .txt-address {
+        font-size: 13px;
+    }
+
+    // 이미지
+    .infowindow-right {
+        width: $img-width;
+        height: $img-width;
+        background-color: $preview-color;
+        -o-object-fit: contain;
+        object-fit: contain;
+
+        > dd {
+            text-align: center;
+            margin-top: 18px;
+        }
+
+        img {
+            width: 20px;
+            height: 20px;
+        }
+
+        span {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            color: $on-preview;
+        }
+    }
+}
+
+// 버튼
+.container-infowindow-button {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    .button-bookmark {
+        background: icon(bookmark, $svg-disabled) no-repeat center center / 15px 15px;
+    }
+
+    .button-like {
+        background: icon(heart, $svg-disabled) no-repeat center center / 15px 15px;
+    }
+
+    .button-kakao-map {
+        background: url('/images/logo-kakaoMap.png') no-repeat center center / 17px 17px;
+    }
+
+    .button-bookmark,
+    .button-like,
+    .button-kakao-map {
+        width: calc((#{$infowindow-width} - #{$infowindow-padding * 2}) / 3);
+        height: 25px;
+    }
+}

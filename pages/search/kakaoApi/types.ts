@@ -1,15 +1,8 @@
-type Latitude = number;
-type Longitude = number;
+type Lng = number;
+type Lat = number;
+type MongoLocation = [Lng, Lat];
+type KakaoLocation = [Lat, Lng];
 
-type KakaoLocation = [Latitude, Longitude];
-type MongoLocation = [Longitude, Latitude];
+type MongoPolygon = MongoLocation[];
 
-type Location = KakaoLocation | MongoLocation;
-type Polygon = Location[];
-
-type LocPosition = {
-    getLng(): Longitude;
-    getLat(): Latitude;
-};
-
-export { Latitude, Longitude, KakaoLocation, MongoLocation, Location, Polygon, LocPosition };
+export { MongoLocation, KakaoLocation, MongoPolygon };

@@ -13,7 +13,7 @@ function Thumb({ category }: { category: string }) {
     useEffect(() => {
         const { copyRight, src } = CATEGORIES[appCategory].thumb;
         setHolder(copyRight);
-        setSrc(import.meta.env.BASE_URL + src);
+        setSrc(src);
     }, [appCategory]);
 
     return (

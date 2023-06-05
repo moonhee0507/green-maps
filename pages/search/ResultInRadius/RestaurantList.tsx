@@ -52,10 +52,6 @@ function RestaurantList() {
         onDragMove: handleDragMove,
     });
 
-    useEffect(() => {
-        console.log(left);
-    }, [left]);
-
     return (
         <div className="wrapper-swiper">
             <div
