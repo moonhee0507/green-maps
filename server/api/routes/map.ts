@@ -108,4 +108,79 @@ export default (app: Router) => {
 
         res.json({ distance: result[0].distance });
     });
+
+    route.get('/region', async (req: Request, res: Response) => {
+        try {
+            const sido = req.query.sido;
+            const sigungu = req.query.sigungu === 'null' ? '' : req.query.sigungu;
+
+            const limit = Number(req.query.limit || 10);
+            const page = Number(req.query.page || 1);
+
+            // address를 split해서 0번지와 1번지를 새로운 필드에 저장(전체 데이터가 아니라 address에 region이 있는 데이터에 대해서만 작업)
+            const countAggregate = Restaurant.aggregate([
+                {
+                    $addFields: {
+                        sido: {
+                            $arrayElemAt: [{ $split: ['$address', ' '] }, 0],
+                        },
+                        sigungu: {
+                            $arrayElemAt: [{ $split: ['$address', ' '] }, 1],
+                        },
+                    },
+                },
+                {
+                    $match: {
+                        $and: [{ sido: { $regex: sido } }, { sigungu: { $regex: sigungu } }],
+                    },
+                },
+                {
+                    $group: {
+                        _id: null,
+                        totalCount: { $sum: 1 },
+                    },
+                },
+            ]);
+
+            const totalCountResult = await countAggregate.exec();
+            const totalCount = totalCountResult.length > 0 ? totalCountResult[0].totalCount : 0;
+
+            const documentAggregate = Restaurant.aggregate([
+                {
+                    $addFields: {
+                        sido: {
+                            $arrayElemAt: [{ $split: ['$address', ' '] }, 0],
+                        },
+                        sigungu: {
+                            $arrayElemAt: [{ $split: ['$address', ' '] }, 1],
+                        },
+                    },
+                },
+                {
+                    $match: {
+                        $and: [{ sido: { $regex: sido } }, { sigungu: { $regex: sigungu } }],
+                    },
+                },
+                {
+                    $skip: limit * (page - 1),
+                },
+                {
+                    $limit: limit,
+                },
+            ]);
+
+            const documentResult = await documentAggregate.exec();
+
+            res.json({
+                success: true,
+                total: totalCount,
+                currentPage: page,
+                lists: documentResult,
+            });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
 };

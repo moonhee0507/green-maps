@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Thumb } from './Thumb';
 import { DistanceContainer } from './DistanceContainer';
 import { __LI_WIDTH__, __BORDER__ } from './RestaurantList';
@@ -7,11 +7,26 @@ import type { Restaurant } from '../../../server/models/Restaurant';
 
 export { RestaurantListItem };
 
-function RestaurantListItem({ restaurantInfo }: { restaurantInfo: Restaurant }) {
+function RestaurantListItem({ restaurantInfo, isFirst }: { restaurantInfo: Restaurant; isFirst?: boolean }) {
     const { _id, category, title, address, rating, reviews, certification, location } = restaurantInfo;
+    const [newRating, setNewRating] = useState(rating);
+
+    const liElement = useRef<HTMLLIElement>(null);
+
+    useEffect(() => {
+        if (typeof rating === 'number') {
+            setNewRating(rating.toFixed(1));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isFirst && liElement.current) {
+            liElement.current.scrollIntoView(true);
+        }
+    }, [isFirst]);
 
     return (
-        <li style={{ width: `${__LI_WIDTH__}px`, borderWidth: `${__BORDER__ / 2}px` }}>
+        <li style={{ width: `${__LI_WIDTH__}px`, borderWidth: `${__BORDER__ / 2}px` }} ref={liElement}>
             <div onClick={() => navigate(`/search/${_id}`)}>
                 <Thumb category={category} />
                 <DistanceContainer location={location.coordinates} />
@@ -34,7 +49,7 @@ function RestaurantListItem({ restaurantInfo }: { restaurantInfo: Restaurant }) 
 
                         <dl className="container-rating-count">
                             <dt className="sr-only">평점</dt>
-                            <dd className="txt-rating">{rating}</dd>
+                            <dd className="txt-rating">{newRating}</dd>
                             <dt className="sr-only">리뷰 수</dt>
                             <dd className="txt-count-comment">{reviews ? reviews.length : 0}</dd>
                         </dl>

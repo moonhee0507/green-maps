@@ -1,11 +1,12 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import store from '../../../renderer/store/index.js';
+import { SET_CURRENT_LOCATION } from '../../../renderer/_reducers/_slices/mapSlice.js';
 import getListInCurrentView from './getListInCurrentView';
 import InfoWindow from './InfoWindow';
 import imgLocation from '/images/map-location.png';
 import imgCert from '/images/map-cert-location.png';
-import type { Lat, Lng, MongoPolygon } from './types';
+import type { Lat, Lng, MongoLocation, MongoPolygon } from './types';
 import type { Restaurant } from './../../../server/models/Restaurant';
 
 const { kakao }: any = window;
@@ -39,14 +40,15 @@ export function init(): Promise<kakao.maps.LatLng> {
             // GeoLocation을 이용해서 접속 위치를 얻어오기
             navigator.geolocation.getCurrentPosition(function (position) {
                 const lat = position.coords.latitude; // 위도
-                const lon = position.coords.longitude; // 경도
+                const lng = position.coords.longitude; // 경도
 
                 // 마커가 표시될 위치 = geolocation으로 얻어온 좌표
-                locPosition = new kakao.maps.LatLng(lat, lon);
+                locPosition = new kakao.maps.LatLng(lat, lng);
 
                 // 지도 중심좌표를 접속위치로 변경
                 map.setCenter(locPosition);
                 store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: true });
+                store.dispatch(SET_CURRENT_LOCATION([lat, lng]));
 
                 resolve(locPosition);
             });
@@ -54,6 +56,7 @@ export function init(): Promise<kakao.maps.LatLng> {
             locPosition = new kakao.maps.LatLng(37.5666805, 126.9784147);
             map.setLevel(5);
             store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: false });
+            store.dispatch(SET_CURRENT_LOCATION([37.5666805, 126.9784147]));
             resolve(locPosition);
         }
 
@@ -193,4 +196,32 @@ export function optimizeMapLevel(radius: number): void {
         default:
             map.setLevel(5);
     }
+}
+
+export function moveToRegionInPage(coordsInPage: MongoLocation[]) {
+    if (coordsInPage.length === 0) {
+        return;
+    }
+
+    const convertCoords: kakao.maps.LatLng[] = [];
+
+    for (let coord of coordsInPage) {
+        const [lng, lat] = coord;
+
+        if (lng !== 0 && lat !== 0) {
+            convertCoords.push(new kakao.maps.LatLng(lat, lng));
+        }
+    }
+
+    const bounds: kakao.maps.LatLngBounds = new kakao.maps.LatLngBounds();
+
+    for (let convertCoord of convertCoords) {
+        bounds.extend(convertCoord);
+    }
+
+    paintBounds(bounds);
+}
+
+function paintBounds(bounds: kakao.maps.LatLngBounds) {
+    map.setBounds(bounds);
 }

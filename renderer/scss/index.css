@@ -489,6 +489,35 @@ dd {
   z-index: 1111;
 }
 
+.wrapper-result-in-radius.reuse-in-region {
+  position: initial;
+  height: 280px;
+  overflow-y: scroll;
+}
+.wrapper-result-in-radius.reuse-in-region::-webkit-scrollbar {
+  width: 5px;
+}
+.wrapper-result-in-radius.reuse-in-region::-webkit-scrollbar-thumb {
+  background-color: #0073e6;
+  border: 3px solid #0073e6;
+  border-radius: 15px;
+}
+.wrapper-result-in-radius.reuse-in-region .ul-restaurant-in-radius.reuse-in-region {
+  flex-direction: column;
+}
+.wrapper-result-in-radius.reuse-in-region .ul-restaurant-in-radius.reuse-in-region > li:first-child {
+  margin-left: 0;
+}
+.wrapper-result-in-radius.reuse-in-region .ul-restaurant-in-radius.reuse-in-region > li {
+  border: 0;
+  border-bottom: 1px solid #d3d3d3;
+  cursor: pointer;
+}
+.wrapper-result-in-radius.reuse-in-region .ul-restaurant-in-radius.reuse-in-region .container-img {
+  width: 50px;
+  height: 50px;
+}
+
 .wrapper-result-in-radius {
   position: absolute;
   bottom: 80px;
@@ -521,8 +550,8 @@ dd {
   gap: 10px;
 }
 .wrapper-result-in-radius .container-img {
-  width: 100px;
-  height: 100px;
+  width: 50px;
+  height: 50px;
 }
 .wrapper-result-in-radius .container-img img {
   width: inherit;
@@ -2004,4 +2033,46 @@ dd {
 
 .styled-button.nickName {
   padding: 10px;
+}
+
+.wrapper-region {
+  display: flex;
+}
+
+.container-sido,
+.container-sigungu {
+  width: 50%;
+  height: 500px;
+  overflow-y: scroll;
+}
+.container-sido::-webkit-scrollbar,
+.container-sigungu::-webkit-scrollbar {
+  width: 5px;
+}
+.container-sido::-webkit-scrollbar-thumb,
+.container-sigungu::-webkit-scrollbar-thumb {
+  background-color: #0073e6;
+  border: 3px solid #0073e6;
+  border-radius: 15px;
+}
+.container-sido li,
+.container-sigungu li {
+  font-size: 18px;
+  padding: 10px;
+  cursor: pointer;
+}
+.container-sido li > p,
+.container-sigungu li > p {
+  padding: 10px;
+  margin: 0;
+  border-radius: 10px;
+}
+.container-sido li > p:hover,
+.container-sigungu li > p:hover {
+  background-color: #e2e2e2;
+}
+
+.txt-sido.on {
+  font-weight: bold;
+  background-color: #e2e2e2;
 }/*# sourceMappingURL=index.css.map */

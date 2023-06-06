@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
-import { CHANGE_RADIUS_MODAL } from '../../../renderer/_reducers/_slices/mapSlice';
+import {
+    CHANGE_RADIUS_MODAL,
+    CHANGE_REGION_MODAL,
+    SET_SELECTED_SIDO,
+} from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
 import { ChangeRadiusModal } from './ChangeRadiusModal/ChangeRadiusModal';
+import { ChangeRegionModal } from './ChangeRegionModal/ChangeRegionModal';
+import { ShowListInRegionModal } from './ShowListInRegionModal/ShowListInRegionModal';
 
 export { ModalGroup };
 
 function ModalGroup() {
-    const on = useAppSelector((state) => state.mapSlice.radiusModalOn || state.mapSlice.checkGeolocationModalOn);
+    const on = useAppSelector(
+        (state) =>
+            state.mapSlice.radiusModalOn ||
+            state.mapSlice.checkGeolocationModalOn ||
+            state.mapSlice.regionModalOn ||
+            state.mapSlice.showListInRegionModalOn
+    );
     const [show, setShow] = useState(false);
 
     const dispatch = useAppDispatch();
@@ -32,13 +44,18 @@ function ModalGroup() {
             appModalMode(false);
 
             dispatch(CHANGE_RADIUS_MODAL(false));
+
+            dispatch(CHANGE_REGION_MODAL(false));
+            dispatch(SET_SELECTED_SIDO(''));
         }
     }
 
     return (
         <div className={`modal-group ${show ? 'on' : ''}`}>
-            <ChangeRadiusModal />
             <CheckGeolocationModal />
+            <ChangeRegionModal />
+            <ChangeRadiusModal />
+            <ShowListInRegionModal />
         </div>
     );
 }

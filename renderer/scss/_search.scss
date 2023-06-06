@@ -435,6 +435,43 @@
     z-index: 1111;
 }
 
+.wrapper-result-in-radius.reuse-in-region {
+    position: initial;
+    height: 280px;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $active-color;
+        border: 3px solid $active-color;
+        border-radius: 15px;
+    }
+
+    .ul-restaurant-in-radius.reuse-in-region {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        > li:first-child {
+            margin-left: 0;
+        }
+
+        > li {
+            border: 0;
+            border-bottom: 1px solid $border-color;
+            cursor: pointer;
+        }
+
+        .container-img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
 // 하단
 .wrapper-result-in-radius {
     position: absolute;
@@ -450,6 +487,7 @@
     .container-swiper {
         position: relative;
     }
+
     .ul-restaurant-in-radius {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -479,8 +517,8 @@
     }
 
     .container-img {
-        width: 100px;
-        height: 100px;
+        width: 50px;
+        height: 50px;
 
         img {
             width: inherit;

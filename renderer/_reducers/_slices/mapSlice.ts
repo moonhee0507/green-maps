@@ -12,6 +12,13 @@ type InitialState = {
     nearest: Restaurant[];
     checkGeolocationModalOn: boolean;
     currentLocation: KakaoLocation;
+    regionModalOn: boolean;
+    currentSido: string;
+    selectedSido: string;
+    selectedSigungu: string;
+    showListInRegionModalOn: boolean;
+    listInPage: Restaurant[];
+    totalInRegion: number;
 };
 
 const initialState: InitialState = {
@@ -22,6 +29,13 @@ const initialState: InitialState = {
     nearest: [],
     checkGeolocationModalOn: false,
     currentLocation: [37.5666805, 126.9784147],
+    regionModalOn: false,
+    currentSido: '',
+    selectedSido: '',
+    selectedSigungu: '',
+    showListInRegionModalOn: false,
+    listInPage: [],
+    totalInRegion: 0,
 };
 
 const mapSlice = createSlice({
@@ -47,8 +61,28 @@ const mapSlice = createSlice({
             state.checkGeolocationModalOn = action.payload;
         },
         SET_CURRENT_LOCATION: (state, action: PayloadAction<KakaoLocation>) => {
-            // 아직 사용 x
-            state.currentLocation = action.payload;
+            state.currentLocation = action.payload; // 지역버튼에서 사용 중
+        },
+        CHANGE_REGION_MODAL: (state, action: PayloadAction<boolean>) => {
+            state.regionModalOn = action.payload;
+        },
+        SET_CURRENT_SIDO: (state, action: PayloadAction<string>) => {
+            state.currentSido = action.payload;
+        },
+        SET_SELECTED_SIDO: (state, action: PayloadAction<string>) => {
+            state.selectedSido = action.payload;
+        },
+        SET_SELECTED_SIGUNGU: (state, action: PayloadAction<string>) => {
+            state.selectedSigungu = action.payload;
+        },
+        SHOW_LIST_IN_REGION_MODAL: (state, action: PayloadAction<boolean>) => {
+            state.showListInRegionModalOn = action.payload;
+        },
+        SET_LIST_IN_PAGE: (state, action: PayloadAction<Restaurant[]>) => {
+            state.listInPage = action.payload;
+        },
+        SET_TOTAL_IN_REGION: (state, action: PayloadAction<number>) => {
+            state.totalInRegion = action.payload;
         },
     },
 });
@@ -60,6 +94,13 @@ export const {
     SET_NEAREST_LIST,
     CHECK_LOCATION_ACCESS_MODAL,
     SET_CURRENT_LOCATION,
+    CHANGE_REGION_MODAL,
+    SET_CURRENT_SIDO,
+    SET_SELECTED_SIDO,
+    SET_SELECTED_SIGUNGU,
+    SHOW_LIST_IN_REGION_MODAL,
+    SET_LIST_IN_PAGE,
+    SET_TOTAL_IN_REGION,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

@@ -26,7 +26,10 @@ function Pagination({ count, perPage }: { count: number; perPage: number }) {
     }
 
     return (
-        <nav className="wrapper-pagination">
+        <nav
+            className="wrapper-pagination"
+            style={window.location.pathname === '/search' ? { paddingBottom: '0' } : {}}
+        >
             <ul>
                 <li>
                     <button

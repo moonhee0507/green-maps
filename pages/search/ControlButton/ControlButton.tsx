@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
-import { CHANGE_RADIUS_MODAL } from '../../../renderer/_reducers/_slices/mapSlice';
+import { CHANGE_RADIUS_MODAL, CHANGE_REGION_MODAL } from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
 
 export { ControlButton };
@@ -8,9 +8,20 @@ export { ControlButton };
 function ControlButton() {
     return (
         <div className="wrapper-map-control-button">
+            <SelectRegion />
             <ChangeRadius />
         </div>
     );
+}
+
+function SelectRegion() {
+    const dispatch = useAppDispatch();
+
+    function handleClick() {
+        appModalMode(true);
+        dispatch(CHANGE_REGION_MODAL(true));
+    }
+    return <button onClick={handleClick}>지역</button>;
 }
 
 function ChangeRadius() {
