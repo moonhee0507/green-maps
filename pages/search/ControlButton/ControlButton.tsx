@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
-import { CHANGE_RADIUS_MODAL, CHANGE_REGION_MODAL } from '../../../renderer/_reducers/_slices/mapSlice';
+import {
+    CATEGORY_FILTER_MODAL,
+    CHANGE_RADIUS_MODAL,
+    CHANGE_REGION_MODAL,
+    SET_MAP_MODE,
+    SHOW_LIST_IN_REGION_MODAL,
+} from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
 
 export { ControlButton };
@@ -10,22 +16,60 @@ function ControlButton() {
         <div className="wrapper-map-control-button">
             <SelectRegion />
             <ChangeRadius />
+            <CategoryFilter />
         </div>
+    );
+}
+
+function CategoryFilter() {
+    const dispatch = useAppDispatch();
+
+    const showListInRegionModalOn = useAppSelector((state) => state.mapSlice.showListInRegionModalOn);
+
+    // 내 주변에 뭐가 있는지
+    // 원하는 식당 검색, 키워드 검색을 하므로
+    // 주변 검색에서도 필터가 필요하고 검색결과에서도 필터가 필요함.
+
+    const handleClick = () => {
+        dispatch(CATEGORY_FILTER_MODAL(true));
+
+        // 지역검색결과 모달이 켜져 있으면 끄기
+        if (showListInRegionModalOn === true) {
+            dispatch(SHOW_LIST_IN_REGION_MODAL(false));
+        }
+    };
+
+    return (
+        <button type="button" onClick={handleClick}>
+            업종 필터
+        </button>
     );
 }
 
 function SelectRegion() {
     const dispatch = useAppDispatch();
 
+    const mapMode = useAppSelector((state) => state.mapSlice.mapMode);
+
     function handleClick() {
         appModalMode(true);
         dispatch(CHANGE_REGION_MODAL(true));
+
+        // 지역버튼 클릭 시 지역리스트 결과모달 켜져 있을 때는 끄기
+        dispatch(SHOW_LIST_IN_REGION_MODAL(false));
+        dispatch(SET_MAP_MODE('지역탐색 모드'));
     }
-    return <button onClick={handleClick}>지역</button>;
+    return (
+        <button onClick={handleClick} className={`button-map-mode ${mapMode === '지역탐색 모드' ? 'on' : ''}`}>
+            지역 탐색 모드
+        </button>
+    );
 }
 
 function ChangeRadius() {
     const dispatch = useAppDispatch();
+
+    const mapMode = useAppSelector((state) => state.mapSlice.mapMode);
 
     const radius = useAppSelector((state) => state.mapSlice.radius);
     const [calcRadius, setCalcRadius] = useState(radius);
@@ -44,13 +88,19 @@ function ChangeRadius() {
     const handleClick = () => {
         appModalMode(true);
         dispatch(CHANGE_RADIUS_MODAL(true));
+        dispatch(SET_MAP_MODE('반경탐색 모드'));
     };
 
     return (
-        <button type="button" onClick={handleClick}>
+        <button
+            type="button"
+            onClick={handleClick}
+            className={`button-map-mode ${mapMode === '반경탐색 모드' ? 'on' : ''}`}
+        >
             <span>반경</span>
             <span>{calcRadius}</span>
             <span>{unit}</span>
+            <span> 탐색 모드</span>
         </button>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
 import {
+    CATEGORY_FILTER_MODAL,
     CHANGE_RADIUS_MODAL,
     CHANGE_REGION_MODAL,
     SET_SELECTED_SIDO,
@@ -9,6 +10,7 @@ import appModalMode from '../../../components/modal/appModalMode';
 import { ChangeRadiusModal } from './ChangeRadiusModal/ChangeRadiusModal';
 import { ChangeRegionModal } from './ChangeRegionModal/ChangeRegionModal';
 import { ShowListInRegionModal } from './ShowListInRegionModal/ShowListInRegionModal';
+import { CategoryFilterModal } from './CategoryFilterModal/CategoryFilterModal';
 
 export { ModalGroup };
 
@@ -18,7 +20,8 @@ function ModalGroup() {
             state.mapSlice.radiusModalOn ||
             state.mapSlice.checkGeolocationModalOn ||
             state.mapSlice.regionModalOn ||
-            state.mapSlice.showListInRegionModalOn
+            state.mapSlice.showListInRegionModalOn ||
+            state.mapSlice.categoryFilterModalOn
     );
     const [show, setShow] = useState(false);
 
@@ -47,6 +50,8 @@ function ModalGroup() {
 
             dispatch(CHANGE_REGION_MODAL(false));
             dispatch(SET_SELECTED_SIDO(''));
+
+            dispatch(CATEGORY_FILTER_MODAL(false));
         }
     }
 
@@ -56,6 +61,7 @@ function ModalGroup() {
             <ChangeRegionModal />
             <ChangeRadiusModal />
             <ShowListInRegionModal />
+            <CategoryFilterModal />
         </div>
     );
 }

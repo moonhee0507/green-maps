@@ -95,9 +95,20 @@ function DeleteMultiLike({ userInfo }: { userInfo: UserInfo | null }) {
 
     useEffect(() => {
         if (userInfo !== null) {
-            setLikeList(userInfo.likeList);
+            getLikeList().then((data) => {
+                if (data.success) {
+                    setLikeList(data.likeList);
+                }
+            });
         }
     }, [userInfo]);
+
+    async function getLikeList() {
+        const res = await fetch(`${API_URL}/users/like`);
+        const data = (await res.json()) as { success: boolean; likeList: Like[] };
+
+        return data;
+    }
 
     return (
         <article className={`modal-group-item ${show ? 'on' : ''}`}>
@@ -119,6 +130,7 @@ function Form({ likeList }: { likeList: Like[] }) {
 
 import imgClose from '/images/icon-plus.svg';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
+import { Restaurant } from '../../../server/models/Restaurant';
 
 function CloseButton() {
     const dispatch = useAppDispatch();
@@ -146,7 +158,7 @@ function List({ likeList }: { likeList: Like[] }) {
         <div>
             {likeList.length > 0 ? (
                 likeList.map((list) => {
-                    return <ListItem key={Math.random()} list={list} />;
+                    return <ListItem key={Math.random()} list={list._id as Restaurant} />;
                 })
             ) : (
                 <div className="style-wrapper-no-review">
@@ -158,7 +170,7 @@ function List({ likeList }: { likeList: Like[] }) {
     );
 }
 
-function ListItem({ list }: { list: Like }) {
+function ListItem({ list }: { list: Restaurant }) {
     const dispatch = useAppDispatch();
 
     const { _id, title, address, category } = list;

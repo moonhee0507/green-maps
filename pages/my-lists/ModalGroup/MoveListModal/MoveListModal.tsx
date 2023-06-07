@@ -9,6 +9,8 @@ import imgClose from '/images/icon-plus.svg';
 import { List } from './Form/List';
 import { ButtonGroup } from './Form/ButtonGroup';
 import type { Bookmark, UserInfo } from '../../../../server/models/User';
+import { API_URL } from '../../../../renderer/CONSTANT_URL';
+import store from '../../../../renderer/store';
 
 export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
     const [show, setShow] = useState(false);
@@ -25,10 +27,24 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
 
     useEffect(() => {
         if (userInfo !== null) {
-            const sameGroup = userInfo.bookmarkList.filter((list) => list.groupName === groupName);
-            setBookmarkListInSameGroup(sameGroup);
+            getBookmarkList().then((data) => {
+                if (data.success) {
+                    const groupName = store.getState().myListSlice.targetGroup;
+                    const sameGroup = data.bookmarkList.filter((list) => list.groupName === groupName);
+                    setBookmarkListInSameGroup(sameGroup);
+                }
+            });
+            // const sameGroup = userInfo.bookmarkList.filter((list) => list.groupName === groupName);
+            // setBookmarkListInSameGroup(sameGroup);
         }
     }, [groupName]);
+
+    async function getBookmarkList() {
+        const res = await fetch(`${API_URL}/users/bookmark`);
+        const data = (await res.json()) as { success: boolean; bookmarkList: Bookmark[]; message?: string };
+
+        return data;
+    }
 
     return (
         <article className={`modal-group-item ${show ? 'on' : ''}`}>

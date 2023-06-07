@@ -4,13 +4,13 @@ import jwt from 'jsonwebtoken';
 import type { Restaurant } from './Restaurant';
 
 export type Bookmark = {
-    _id: string;
+    _id: string | Restaurant;
     registeredAt: string;
     groupName: string;
 };
 
 export type Like = {
-    _id: string;
+    _id: string | Restaurant;
     registeredAt: string;
 };
 
@@ -87,7 +87,7 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     bookmarkList: [
         {
             _id: {
-                type: mongoose.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: 'Restaurant',
             },
             registeredAt: {
@@ -115,7 +115,7 @@ const userSchema = new Schema<UserInfo, UserModel, UserMethod>({
     likeList: [
         {
             _id: {
-                type: mongoose.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: 'Restaurant',
             },
             registeredAt: {

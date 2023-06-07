@@ -41,6 +41,8 @@ function RestaurantListItem({ restaurantInfo, isFirst }: { restaurantInfo: Resta
                         <dl>
                             <dt className="sr-only">식당 이름</dt>
                             <dd className="txt-title">{title}</dd>
+                            <dt className="sr-only">업종</dt>
+                            <dd className="txt-category">{category}</dd>
                         </dl>
                         <dl>
                             <dt className="sr-only">주소</dt>

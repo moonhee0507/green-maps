@@ -575,6 +575,7 @@ dd {
 .wrapper-result-in-radius .txt-address {
   margin-bottom: 5px;
 }
+.wrapper-result-in-radius .txt-category,
 .wrapper-result-in-radius .txt-address,
 .wrapper-result-in-radius .txt-distance,
 .wrapper-result-in-radius .txt-rating,
@@ -2033,6 +2034,16 @@ dd {
 
 .styled-button.nickName {
   padding: 10px;
+}
+
+.button-map-mode.on {
+  background-color: #0073e6;
+  color: #ffffff;
+}
+
+.button-category-name.on {
+  background-color: #0073e6;
+  color: #ffffff;
 }
 
 .wrapper-region {

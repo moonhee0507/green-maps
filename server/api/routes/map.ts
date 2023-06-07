@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import Restaurant from '../../models/Restaurant.js';
 import { request } from 'http';
+import CATEGORIES from '../../../components/image/CATEGORY.js';
 
 const route = Router();
 
@@ -31,17 +32,35 @@ export default (app: Router) => {
     route.post('/within-radius-of', async (req: Request, res: Response) => {
         try {
             const currentLocation = req.body.currentLocation;
+            const category: string[] | '*' = req.body.category;
+
+            let convertToRegisteredCategoryInSchema = [];
+
+            if (Array.isArray(category) && category.length > 0) {
+                for (let i = 0; i < category.length; i++) {
+                    convertToRegisteredCategoryInSchema.push(...CATEGORIES[category[i]].list);
+                }
+            }
 
             const lists = await Restaurant.find({
-                location: {
-                    $nearSphere: {
-                        $geometry: {
-                            type: 'Point',
-                            coordinates: currentLocation,
+                $and: [
+                    {
+                        location: {
+                            $nearSphere: {
+                                $geometry: {
+                                    type: 'Point',
+                                    coordinates: currentLocation,
+                                },
+                                $maxDistance: req.query.radius,
+                            },
                         },
-                        $maxDistance: req.query.radius,
                     },
-                },
+                    {
+                        category: {
+                            $in: convertToRegisteredCategoryInSchema,
+                        },
+                    },
+                ],
             });
 
             res.json({ success: true, lists: lists });
@@ -109,7 +128,7 @@ export default (app: Router) => {
         res.json({ distance: result[0].distance });
     });
 
-    route.get('/region', async (req: Request, res: Response) => {
+    route.post('/region', async (req: Request, res: Response) => {
         try {
             const sido = req.query.sido;
             const sigungu = req.query.sigungu === 'null' ? '' : req.query.sigungu;
@@ -117,8 +136,36 @@ export default (app: Router) => {
             const limit = Number(req.query.limit || 10);
             const page = Number(req.query.page || 1);
 
+            const category: string[] | '*' = req.body.category;
+
+            let categoryQuery: any = {
+                $match: {},
+            };
+
+            if (Array.isArray(category) && category.length > 0) {
+                const convertToRegisteredCategoryInSchema = [];
+
+                for (let i = 0; i < category.length; i++) {
+                    convertToRegisteredCategoryInSchema.push(...CATEGORIES[category[i]].list);
+                }
+
+                // Restaurant 스키마의 category에 convertToRegisteredCategoryInSchema 배열의 요소중 하나와 일치하는 것 거르기
+                categoryQuery = {
+                    $match: {
+                        category: {
+                            $in: convertToRegisteredCategoryInSchema,
+                        },
+                    },
+                };
+            } else if (category === '*') {
+                categoryQuery = {
+                    $match: {},
+                };
+            }
+
             // address를 split해서 0번지와 1번지를 새로운 필드에 저장(전체 데이터가 아니라 address에 region이 있는 데이터에 대해서만 작업)
             const countAggregate = Restaurant.aggregate([
+                categoryQuery,
                 {
                     $addFields: {
                         sido: {
@@ -146,6 +193,7 @@ export default (app: Router) => {
             const totalCount = totalCountResult.length > 0 ? totalCountResult[0].totalCount : 0;
 
             const documentAggregate = Restaurant.aggregate([
+                categoryQuery,
                 {
                     $addFields: {
                         sido: {

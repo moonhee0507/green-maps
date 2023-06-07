@@ -87,3 +87,13 @@
 .styled-button.nickName {
     padding: 10px;
 }
+
+.button-map-mode.on {
+    background-color: $active-color;
+    color: $on-active;
+}
+
+.button-category-name.on {
+    background-color: $active-color;
+    color: $on-active;
+}

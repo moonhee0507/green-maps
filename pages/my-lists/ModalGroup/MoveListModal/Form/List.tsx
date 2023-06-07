@@ -7,6 +7,7 @@ import {
     PUSH_RESTAURANT_LIST,
     DELETE_RESTAURANT_LIST,
 } from '../../../../../renderer/_reducers/_slices/myListSlice';
+import { Restaurant } from '../../../../../server/models/Restaurant';
 
 export { List };
 
@@ -15,7 +16,7 @@ function List({ bookmarkList }: { bookmarkList: Bookmark[] }) {
         <div>
             {bookmarkList.length > 0 ? (
                 bookmarkList.map((list) => {
-                    return <ListItem key={Math.random()} list={list} />;
+                    return <ListItem key={Math.random()} list={list._id as Restaurant} />;
                 })
             ) : (
                 <div className="style-wrapper-no-review">
@@ -27,12 +28,14 @@ function List({ bookmarkList }: { bookmarkList: Bookmark[] }) {
     );
 }
 
-function ListItem({ list }: { list: Bookmark }) {
+function ListItem({ list }: { list: Restaurant }) {
     const dispatch = useAppDispatch();
 
     const { _id, title, address, category } = list;
     const [isChecked, setIsChecked] = useState(false);
     const restaurantToMove = useAppSelector((state) => state.myListSlice.restaurantToMove);
+
+    useEffect(() => {}, []);
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);

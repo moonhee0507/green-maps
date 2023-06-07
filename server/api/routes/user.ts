@@ -140,6 +140,27 @@ export default (app: Router) => {
         }
     });
 
+    // bookmarkList 가져오기
+    route.get('/bookmark', async (req: Request, res: Response) => {
+        try {
+            const user = await User.findOne({ token: req.cookies.auth })
+                .populate({
+                    path: 'bookmarkList._id',
+                })
+                .exec();
+
+            if (!user) {
+                res.status(404).json({ success: false, message: '사용자가 존재하지 않습니다.' });
+            } else {
+                res.status(200).json({ success: true, bookmarkList: user.bookmarkList });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
+            }
+        }
+    });
+
     // bookmark 추가
     route.post('/bookmark', auth, async (req: any, res: Response) => {
         try {
@@ -202,6 +223,27 @@ export default (app: Router) => {
             }
         } catch (err) {
             console.error(err);
+        }
+    });
+
+    // likeList 가져오기
+    route.get('/like', async (req: Request, res: Response) => {
+        try {
+            const user = await User.findOne({ token: req.cookies.auth })
+                .populate({
+                    path: 'likeList._id',
+                })
+                .exec();
+
+            if (!user) {
+                res.status(404).json({ success: false, message: '사용자가 존재하지 않습니다.' });
+            } else {
+                res.status(200).json({ success: true, likeList: user.likeList });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
+            }
         }
     });
 

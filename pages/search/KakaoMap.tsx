@@ -14,6 +14,8 @@ function KakaoMap() {
     const [isInitialized, setIsInitialized] = useState(false);
     const [currentLocation, setCurrentLocation] = useState<MongoLocation | null>(null);
 
+    const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
+
     useEffect(() => {
         init().then((locPosition: kakao.maps.LatLng) => {
             setIsInitialized(true);
@@ -28,19 +30,20 @@ function KakaoMap() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ currentLocation: currentLocation }),
+                body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
             });
 
             const data = await res.json();
 
             return data;
         },
-        [radius]
+        [radius, selectedCategory]
     );
 
+    // 반경 내 식당이 없을 경우 보여주는 데이터
     const getNearestList = useCallback(
         async (currentLocation: MongoLocation) => {
-            const count = 3;
+            const count = 5;
 
             const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
                 method: 'POST',
@@ -79,7 +82,7 @@ function KakaoMap() {
                 });
             }
         }
-    }, [radius, isInitialized]);
+    }, [radius, isInitialized, selectedCategory]);
 
     return <div id="map" />;
 }

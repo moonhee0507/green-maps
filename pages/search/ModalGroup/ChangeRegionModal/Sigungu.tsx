@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import REGION from '../../../../components/region/REGION.js';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import {
@@ -57,6 +57,9 @@ function SigunguListItem({ name }: { name: string }) {
     const selectedSido = useAppSelector((state) => state.mapSlice.selectedSido);
     const currentSido = useAppSelector((state) => state.mapSlice.currentSido);
 
+    // 업종 필터 변경 체크
+    const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
+
     // 그 지역 좌표들의 중심으로 이동하고
     // 목록으로 띄우기
     const handleClick = () => {
@@ -94,7 +97,13 @@ function SigunguListItem({ name }: { name: string }) {
         const sido = selectedSido === '' ? currentSido.slice(0, 2) : selectedSido.slice(0, 2);
         const sigungu = name.includes('전체') ? null : name;
 
-        const res = await fetch(`${API_URL}/map/region?sido=${sido}&sigungu=${sigungu}&page=1&skip=10`);
+        const res = await fetch(`${API_URL}/map/region?sido=${sido}&sigungu=${sigungu}&page=1&skip=10`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ category: selectedCategory }), // 선택되어 있는 업종으로 필터링
+        });
         const data = await res.json();
 
         return data;
