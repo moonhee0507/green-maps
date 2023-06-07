@@ -225,3 +225,8 @@ export function moveToRegionInPage(coordsInPage: MongoLocation[]) {
 function paintBounds(bounds: kakao.maps.LatLngBounds) {
     map.setBounds(bounds);
 }
+
+export function moveToCurrentLocation() {
+    const [lat, lng] = store.getState().mapSlice.currentLocation;
+    map.setCenter(new kakao.maps.LatLng(lat, lng));
+}

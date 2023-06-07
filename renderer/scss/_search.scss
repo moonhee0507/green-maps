@@ -608,3 +608,37 @@
         font-size: 16px;
     }
 }
+
+// 결과없음 모달
+.mini-modal-group {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1111;
+    background-color: $no-result-on-map;
+    padding: $padding;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: $default-border-radius;
+    font-weight: bold;
+    color: $txt-on-container;
+}
+
+.mini-modal-group.on {
+    display: block;
+}
+
+.modal-no-result {
+    display: none;
+}
+
+.modal-no-result.on {
+    display: block;
+    position: relative;
+
+    > p {
+        margin: 0;
+    }
+}

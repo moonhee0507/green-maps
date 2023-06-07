@@ -624,6 +624,36 @@ dd {
   font-size: 16px;
 }
 
+.mini-modal-group {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1111;
+  background-color: rgba(1, 1, 1, 0.7);
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.mini-modal-group.on {
+  display: block;
+}
+
+.modal-no-result {
+  display: none;
+}
+
+.modal-no-result.on {
+  display: block;
+  position: relative;
+}
+.modal-no-result.on > p {
+  margin: 0;
+}
+
 .wrapper-infowindow {
   width: 310px;
   padding: 18px;

@@ -25,6 +25,7 @@ type InitialState = {
     totalInRegion: number;
     categoryFilterModalOn: boolean;
     selectedCategory: string[] | '*';
+    noResultModalOn: boolean;
 };
 
 const initialState: InitialState = {
@@ -46,6 +47,7 @@ const initialState: InitialState = {
     totalInRegion: 0,
     categoryFilterModalOn: false,
     selectedCategory: [],
+    noResultModalOn: false,
 };
 
 const mapSlice = createSlice({
@@ -112,6 +114,9 @@ const mapSlice = createSlice({
         ADD_SELECTED_CATEGORY: (state, action: PayloadAction<string[] | '*'>) => {
             state.selectedCategory = action.payload;
         },
+        NO_RESULT_MODAL: (state, action: PayloadAction<boolean>) => {
+            state.noResultModalOn = action.payload;
+        },
     },
 });
 
@@ -135,6 +140,7 @@ export const {
     RESET_TOTAL_IN_REGION,
     CATEGORY_FILTER_MODAL,
     ADD_SELECTED_CATEGORY,
+    NO_RESULT_MODAL,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

@@ -3,6 +3,7 @@ import REGION from '../../../../components/region/REGION.js';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import {
     CHANGE_REGION_MODAL,
+    NO_RESULT_MODAL,
     SET_LIST_IN_PAGE,
     SET_SELECTED_SIGUNGU,
     SET_TOTAL_IN_REGION,
@@ -89,6 +90,7 @@ function SigunguListItem({ name }: { name: string }) {
             } else {
                 // 결과가 없음.
                 // 가장 가까운 식당 추천.
+                dispatch(NO_RESULT_MODAL(true));
             }
         });
     };

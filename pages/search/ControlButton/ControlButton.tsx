@@ -8,6 +8,7 @@ import {
     SHOW_LIST_IN_REGION_MODAL,
 } from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
+import { moveToCurrentLocation } from '../kakaoApi';
 
 export { ControlButton };
 
@@ -17,7 +18,23 @@ function ControlButton() {
             <SelectRegion />
             <ChangeRadius />
             <CategoryFilter />
+            <BackCurrentLocation />
         </div>
+    );
+}
+
+function BackCurrentLocation() {
+    const dispatch = useAppDispatch();
+
+    const handleClick = () => {
+        moveToCurrentLocation();
+        // 지역탐색 결과 모달 끄기
+        dispatch(SHOW_LIST_IN_REGION_MODAL(false));
+    };
+    return (
+        <button type="button" onClick={handleClick}>
+            내 위치로
+        </button>
     );
 }
 
@@ -25,10 +42,6 @@ function CategoryFilter() {
     const dispatch = useAppDispatch();
 
     const showListInRegionModalOn = useAppSelector((state) => state.mapSlice.showListInRegionModalOn);
-
-    // 내 주변에 뭐가 있는지
-    // 원하는 식당 검색, 키워드 검색을 하므로
-    // 주변 검색에서도 필터가 필요하고 검색결과에서도 필터가 필요함.
 
     const handleClick = () => {
         dispatch(CATEGORY_FILTER_MODAL(true));

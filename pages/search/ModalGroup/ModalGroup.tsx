@@ -4,6 +4,7 @@ import {
     CATEGORY_FILTER_MODAL,
     CHANGE_RADIUS_MODAL,
     CHANGE_REGION_MODAL,
+    NO_RESULT_MODAL,
     SET_SELECTED_SIDO,
 } from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
@@ -23,14 +24,20 @@ function ModalGroup() {
             state.mapSlice.showListInRegionModalOn ||
             state.mapSlice.categoryFilterModalOn
     );
+    const on_mini = useAppSelector((state) => state.mapSlice.noResultModalOn);
+
     const [show, setShow] = useState(false);
+    const [show_mini, setShow_mini] = useState(false);
 
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (on === true) setShow(true);
         else setShow(false);
-    }, [on]);
+
+        if (on_mini === true) setShow_mini(true);
+        else setShow_mini(false);
+    }, [on, on_mini]);
 
     useEffect(() => {
         if (show) {
@@ -56,13 +63,18 @@ function ModalGroup() {
     }
 
     return (
-        <div className={`modal-group ${show ? 'on' : ''}`}>
-            <CheckGeolocationModal />
-            <ChangeRegionModal />
-            <ChangeRadiusModal />
-            <ShowListInRegionModal />
-            <CategoryFilterModal />
-        </div>
+        <>
+            <div className={`modal-group ${show ? 'on' : ''}`}>
+                <CheckGeolocationModal />
+                <ChangeRegionModal />
+                <ChangeRadiusModal />
+                <ShowListInRegionModal />
+                <CategoryFilterModal />
+            </div>
+            <div className={`mini-modal-group ${show_mini ? 'on' : ''}`}>
+                <NoResult />
+            </div>
+        </>
     );
 }
 
@@ -83,5 +95,32 @@ function CheckGeolocationModal() {
                 <em>위치 권한을 허용해주세요.</em>
             </div>
         </article>
+    );
+}
+
+function NoResult() {
+    const dispatch = useAppDispatch();
+
+    const [show, setShow] = useState(false);
+    const noResultModalOn = useAppSelector((state) => state.mapSlice.noResultModalOn);
+
+    useEffect(() => {
+        if (noResultModalOn === true) setShow(true);
+        else setShow(false);
+    }, [noResultModalOn]);
+
+    useEffect(() => {
+        if (show === true) {
+            setTimeout(() => {
+                setShow(false);
+                dispatch(NO_RESULT_MODAL(false));
+            }, 2000);
+        }
+    }, [show]);
+
+    return (
+        <div className={`modal-no-result ${show ? 'on' : ''}`}>
+            <p>결과가 없습니다 😥</p>
+        </div>
     );
 }
