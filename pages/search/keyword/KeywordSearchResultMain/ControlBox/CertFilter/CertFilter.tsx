@@ -24,16 +24,18 @@ function CertFilter() {
     };
 
     return (
-        <div>
-            <em>채식 인증</em>
+        <div className="container-filter">
+            <em className="txt-filter-name">채식 인증</em>
             <div>
                 <form>
-                    <button type="button" onClick={handleClick}>
+                    <button type="button" onClick={handleClick} className="button-apply-filter">
                         적용
                     </button>
-                    {certList.map((name, i) => {
-                        return <CertItem key={Math.random()} name={name} index={i} />;
-                    })}
+                    <div className="wrapper-checkbox-category reuse-in-result">
+                        {certList.map((name, i) => {
+                            return <CertItem key={Math.random()} name={name} index={i} />;
+                        })}
+                    </div>
                 </form>
             </div>
         </div>
@@ -54,7 +56,7 @@ function CertItem({ name, index }: { name: string; index: number }) {
     }, [selectedCert]);
 
     return (
-        <div>
+        <div className="container-check-cert">
             <input
                 type="checkbox"
                 checked={isChecked}

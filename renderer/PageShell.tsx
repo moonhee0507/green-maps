@@ -30,14 +30,11 @@ function Layout({ children }: { children: React.ReactNode }) {
 function BackgroundArea() {
     return (
         <div className="left-area">
-            <Link href="/">
-                <div className="style-container-logo">
-                    <img className="img-logo" src={logo} width={200} alt="로고" />
-                </div>
-            </Link>
             <div className="txt-intro">
-                <strong>채식 식당 검색과 북마크는</strong>
-                <h1>그린 맵</h1>
+                <strong>채식 식당 검색과 북마크 서비스</strong>
+                <h1>
+                    <Link href="/">그린 맵</Link>
+                </h1>
             </div>
         </div>
     );

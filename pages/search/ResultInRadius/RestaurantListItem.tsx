@@ -1,29 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Thumb } from './Thumb';
 import { DistanceContainer } from './DistanceContainer';
 import { __LI_WIDTH__, __BORDER__ } from './RestaurantList';
 import { navigate } from 'vite-plugin-ssr/client/router';
 import type { Restaurant } from '../../../server/models/Restaurant';
+import { useAppSelector } from '../../../renderer/store/hooks';
 
 export { RestaurantListItem };
 
 function RestaurantListItem({ restaurantInfo, isFirst }: { restaurantInfo: Restaurant; isFirst?: boolean }) {
     const { _id, category, title, address, rating, reviews, certification, location } = restaurantInfo;
-    const [newRating, setNewRating] = useState(rating);
+    const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
 
     const liElement = useRef<HTMLLIElement>(null);
 
     useEffect(() => {
-        if (typeof rating === 'number') {
-            setNewRating(rating.toFixed(1));
-        }
-    }, []);
-
-    useEffect(() => {
         if (isFirst && liElement.current) {
-            liElement.current.scrollIntoView(true);
+            liElement.current.scrollIntoView(false); // search 결과에서 사용. 첫번째 아이템이 하단에 내려가게.
         }
-    }, [isFirst]);
+    }, [isFirst, currentPage]);
 
     return (
         <li style={{ width: `${__LI_WIDTH__}px`, borderWidth: `${__BORDER__ / 2}px` }} ref={liElement}>
@@ -51,7 +46,7 @@ function RestaurantListItem({ restaurantInfo, isFirst }: { restaurantInfo: Resta
 
                         <dl className="container-rating-count">
                             <dt className="sr-only">평점</dt>
-                            <dd className="txt-rating">{newRating}</dd>
+                            <dd className="txt-rating">{rating}</dd>
                             <dt className="sr-only">리뷰 수</dt>
                             <dd className="txt-count-comment">{reviews ? reviews.length : 0}</dd>
                         </dl>

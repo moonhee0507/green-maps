@@ -34,7 +34,7 @@ function ApplyButton() {
     };
 
     return (
-        <button type="button" onClick={handleClick}>
+        <button type="button" onClick={handleClick} className="button-apply-filter">
             적용
         </button>
     );

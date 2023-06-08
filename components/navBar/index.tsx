@@ -17,21 +17,18 @@ export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
             <ul>
                 <li>
                     <Link href="/" className="link-nav">
-                        <i className="img-nav-icon home" />
-                        <span>홈</span>
+                        <em>홈</em>
                     </Link>
                 </li>
                 <li>
                     <Link href="/search" className="link-nav">
-                        <i className="img-nav-icon search" />
-                        <span>식당검색</span>
+                        <em>식당검색</em>
                     </Link>
                 </li>
                 <li>
                     {isLoggedIn ? (
                         <Link href="/my-lists" className="link-nav">
-                            <i className="img-nav-icon bookmark" />
-                            <span>북마크</span>
+                            <em>북마크</em>
                         </Link>
                     ) : (
                         <button
@@ -40,27 +37,23 @@ export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
                             style={{ width: '100%', border: '0' }}
                             onClick={checkLogin}
                         >
-                            <i className="img-nav-icon bookmark" />
-                            <span>북마크</span>
+                            <em>북마크</em>
                         </button>
                     )}
                 </li>
                 <li>
                     <Link href="/community" className="link-nav">
-                        <i className="img-nav-icon community" />
-                        <span>커뮤니티</span>
+                        <em>커뮤니티</em>
                     </Link>
                 </li>
                 <li>
                     {isLoggedIn ? (
                         <Link href="/my" className="link-nav">
-                            <i className="img-nav-icon user" />
-                            <span>내 정보</span>
+                            <em>내 정보</em>
                         </Link>
                     ) : (
                         <Link href="/login" className="link-nav">
-                            <i className="img-nav-icon user" />
-                            <span>로그인</span>
+                            <em>로그인</em>
                         </Link>
                     )}
                 </li>

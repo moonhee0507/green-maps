@@ -18,16 +18,18 @@ function SortSection() {
 
     return (
         <section>
-            <h3 className="h3-filter-sort">정렬</h3>
-            <form>
-                <label htmlFor="selectBoxSortInSearch">정렬방식</label>
-                <select name="" id="selectBoxSortInSearch" onChange={handleChange}>
-                    <option value="relevance">관련도</option>
-                    <option value="rating">별점순</option>
-                    <option value="review">리뷰순</option>
-                    <option value="distance">거리순</option>
-                </select>
-            </form>
+            <h3 className="sr-only" aria-label="정렬" />
+            <div className="container-sort">
+                <form>
+                    <label htmlFor="selectBoxSortInSearch">정렬</label>
+                    <select name="" id="selectBoxSortInSearch" onChange={handleChange}>
+                        <option value="relevance">관련도</option>
+                        <option value="rating">별점순</option>
+                        <option value="review">리뷰순</option>
+                        <option value="distance">거리순</option>
+                    </select>
+                </form>
+            </div>
         </section>
     );
 }

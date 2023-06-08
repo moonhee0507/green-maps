@@ -1,9 +1,16 @@
 import React from 'react';
-import { Stars } from '../restaurant/RestaurantDetail/PrimarySection/component/Stars';
+import { Stars } from '../../restaurant/RestaurantDetail/PrimarySection/component/Stars';
 import imgPhoto from '/images/icon-image.svg';
-import type { Restaurant } from '../../../server/models/Restaurant';
+import type { Restaurant } from '../../../../server/models/Restaurant';
+import { BookmarkButton } from './BookmarkButton';
 
-export default function InfoWindow({ restaurantInfo }: { restaurantInfo: Restaurant }) {
+export default function InfoWindow({
+    restaurantInfo,
+    isLoggedIn,
+}: {
+    restaurantInfo: Restaurant;
+    isLoggedIn: boolean;
+}) {
     const { _id, title, rating, reviews, address, certification, category } = restaurantInfo;
 
     return (
@@ -62,11 +69,11 @@ export default function InfoWindow({ restaurantInfo }: { restaurantInfo: Restaur
                 </div>
             </dl>
 
-            <div className="container-infowindow-button">
-                <button aria-label="북마크" className="button-bookmark" />
+            {/* <div className="container-infowindow-button">
+                <BookmarkButton isLoggedIn={isLoggedIn} />
                 <button aria-label="좋아요" className="button-like" />
                 <button aria-label="다음지도에서 보기" className="button-kakao-map" />
-            </div>
+            </div> */}
         </div>
     );
 }

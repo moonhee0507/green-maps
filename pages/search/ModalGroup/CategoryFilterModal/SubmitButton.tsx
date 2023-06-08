@@ -54,7 +54,7 @@ export function SubmitButton() {
     };
 
     return (
-        <button type="button" onClick={handleClick}>
+        <button type="button" onClick={handleClick} className="button-apply-filter">
             적용하기
         </button>
     );

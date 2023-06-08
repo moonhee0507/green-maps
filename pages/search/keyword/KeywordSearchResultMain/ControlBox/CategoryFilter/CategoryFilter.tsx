@@ -37,16 +37,18 @@ function CategoryFilter() {
     };
 
     return (
-        <div>
-            <em>업종</em>
+        <div className="container-filter">
+            <em className="txt-filter-name">업종</em>
             <div>
                 <form>
                     <ApplyButton />
-                    <button type="button" onClick={handleUncheck}>
-                        전체 해제
-                    </button>
-                    <button type="reset">전체 선택</button>
-                    <div>
+                    <div className="container-button-all">
+                        <button type="button" onClick={handleUncheck}>
+                            전체 해제
+                        </button>
+                        <button type="reset">전체 선택</button>
+                    </div>
+                    <div className="wrapper-checkbox-category reuse-in-result">
                         {categoryList.map((name, i) => {
                             return (
                                 <CategoryItem key={Math.random()} name={name} index={i} ref={checkboxRefs.current[i]} />

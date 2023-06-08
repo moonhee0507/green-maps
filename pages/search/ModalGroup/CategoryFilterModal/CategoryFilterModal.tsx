@@ -48,11 +48,15 @@ function CategoryFilterModal() {
         <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>업종 필터</h4>
             <form>
-                <button type="button" onClick={handleUncheck}>
-                    전체 해제
-                </button>
-                <button type="reset">전체 선택</button>
-                <div>
+                <div className="container-button-all-in-modal">
+                    <button type="button" onClick={handleUncheck} className="button-all-category">
+                        전체 해제
+                    </button>
+                    <button type="reset" className="button-all-category">
+                        전체 선택
+                    </button>
+                </div>
+                <div className="wrapper-checkbox-category">
                     {categoryList.map((name, i) => {
                         return <CategoryItem key={Math.random()} name={name} index={i} ref={checkboxRefs.current[i]} />;
                     })}

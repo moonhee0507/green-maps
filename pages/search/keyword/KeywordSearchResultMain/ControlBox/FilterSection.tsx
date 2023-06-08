@@ -7,7 +7,7 @@ export { FilterSection };
 function FilterSection() {
     return (
         <section>
-            <h3 className="h3-filter-sort">필터</h3>
+            <h3 className="sr-only" aria-label="필터" />
             <CategoryFilter />
             <CertFilter />
         </section>

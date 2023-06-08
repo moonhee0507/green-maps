@@ -2,7 +2,7 @@
     position: -webkit-sticky;
     position: sticky;
     width: 100%; /* 420px */
-    border-top: 1px solid $border-color;
+    border: 0;
 
     ul {
         display: -webkit-box;
@@ -12,52 +12,88 @@
         -webkit-box-direction: normal;
         -ms-flex-direction: row;
         flex-direction: row;
+
         li {
-            width: calc(100vw / 4);
+            width: calc(100vw / 5);
+            height: 55px;
             text-align: center;
             font-size: 12px;
+
+            &:nth-child(1) {
+                > a {
+                    background: icon(home, $svg-nav-default) no-repeat 51.5% 42% / 20px 20px;
+                }
+
+                > .is-active {
+                    background: icon(home, $svg-nav-active) no-repeat 51.5% 42% / 20px 20px;
+                }
+            }
+
+            &:nth-child(2) {
+                > a {
+                    background: icon(search, $svg-nav-default) no-repeat 50% 42% / 20px 20px;
+                }
+
+                > .is-active {
+                    background: icon(search, $svg-nav-active) no-repeat 50% 42% / 20px 20px;
+                }
+            }
+
+            &:nth-child(3) {
+                > a {
+                    background: icon(bookmark, $svg-nav-default) no-repeat 50% 42% / 20px 20px;
+                }
+
+                > .is-active {
+                    background: icon(bookmark, $svg-nav-active) no-repeat 50% 42% / 20px 20px;
+                }
+            }
+
+            &:nth-child(4) {
+                > a {
+                    background: icon(community, $svg-nav-default) no-repeat 50% 42% / 20px 20px;
+                }
+
+                > .is-active {
+                    background: icon(community, $svg-nav-active) no-repeat 50% 42% / 20px 20px;
+                }
+            }
+
+            &:nth-child(5) {
+                > a {
+                    background: icon(user, $svg-nav-default) no-repeat 50% 42% / 20px 20px;
+                }
+
+                > .is-active {
+                    background: icon(user, $svg-nav-active) no-repeat 50% 42% / 20px 20px;
+                }
+            }
         }
     }
 }
 
 .link-nav {
+    position: relative;
+    display: block;
+    width: 100%;
     height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    gap: 5px;
-    padding-top: 10px;
-    padding-bottom: 10px;
 
-    .img-nav-icon {
-        width: 20px;
-        height: 20px;
-        background-size: 20px 20px;
-        background-position: center center;
-        background-repeat: no-repeat;
+    > em {
+        font-style: normal;
+        font-size: 10px;
+        position: absolute;
+        bottom: 5px;
+        left: 50%;
+        -webkit-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+        transform: translate(-50%, 0);
+        color: $nav-txt-default;
     }
+}
 
-    .img-nav-icon.home {
-        background-image: icon(home);
-    }
-    .img-nav-icon.search {
-        background-image: icon(search);
-    }
-    .img-nav-icon.bookmark {
-        background-image: icon(bookmark);
-    }
-    .img-nav-icon.community {
-        background-image: icon(community);
-    }
-    .img-nav-icon.user {
-        background-image: icon(user);
+.is-active {
+    > em {
+        color: $nav-txt-active;
     }
 }
 

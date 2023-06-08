@@ -31,7 +31,7 @@ function ChangeRadiusModal() {
         <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>내 위치 검색 반경 선택</h4>
             <div className="wrapper-select-radius">
-                <p>
+                <p className="txt-selected-radius">
                     <span>{calcRadius + unit}</span>
                 </p>
                 <form className="form-radius">

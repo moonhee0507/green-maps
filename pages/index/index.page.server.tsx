@@ -1,26 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { TopBar } from '../../components/topBar/topBar';
-import { HomeContent } from './homeContent';
-import { NavBar } from '../../components/navBar';
-import type { PageContext } from '../../renderer/types';
+import React from 'react';
 
 export { Page };
 
 export const documentProps = {
     title: '홈 | Green Maps',
-    description: '채식 식당 검색과 북마크는 그린 맵',
+    description: '채식 식당 검색과 북마크 서비스',
 };
 
-function Page(pageContext: PageContext) {
-    // console.log(useSelector((state: RootState) => state));
-    const { isLoggedIn, info } = pageContext.user;
-
+function Page() {
     return (
-        <>
-            <TopBar title={'홈'} />
-            <HomeContent />
-            <NavBar isLoggedIn={isLoggedIn} />
-        </>
+        <main className="home-content">
+            <div className="container-title">
+                <h2>
+                    <span>Green</span>
+                    <span>Maps</span>
+                </h2>
+            </div>
+            <section className="section-desc-service">
+                <h3>이런 서비스에요!</h3>
+                <div className="container-desc-service">
+                    <p>전국 2400개의 채식 식당을 찾을 수 있어요.</p>
+                    <p>북마크를 그룹으로 관리해요.</p>
+                    <p>채식 식당에 대한 후기를 남길 수 있어요.</p>
+                    <p>게시판을 통해 소통해요!</p>
+                </div>
+            </section>
+            <div className="container-start">
+                <a href="/search">🎉Start</a>
+            </div>
+        </main>
     );
 }

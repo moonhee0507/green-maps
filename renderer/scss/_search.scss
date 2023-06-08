@@ -428,13 +428,6 @@
 
 // 지도 UI
 
-// 상단 버튼
-.wrapper-map-control-button {
-    position: absolute;
-    top: 80px;
-    z-index: 1111;
-}
-
 .wrapper-result-in-radius.reuse-in-region {
     position: initial;
     height: 280px;
@@ -500,10 +493,12 @@
         > li {
             background-color: $background-modal;
             border: solid $border-color;
+            border-radius: 20px;
 
             > div {
                 position: relative; // 거리 기준
                 width: inherit;
+                height: 100%;
                 display: -webkit-box;
                 display: -ms-flexbox;
                 display: flex;
@@ -517,8 +512,8 @@
     }
 
     .container-img {
-        width: 50px;
-        height: 50px;
+        width: 70px;
+        height: 70px;
 
         img {
             width: inherit;
@@ -528,11 +523,14 @@
 
     .container-distance {
         position: absolute;
-        background-color: $container-on-image;
         padding: 3px 5px 5px;
-        bottom: 10px;
+        bottom: 3px;
         right: 10px;
-        color: $txt-on-container;
+
+        > span {
+            color: $active-color;
+            font-size: 13px;
+        }
     }
 
     .container-right {
@@ -589,13 +587,13 @@
     width: -webkit-fit-content;
     width: -moz-fit-content;
     width: fit-content;
+    top: -10px;
     left: 10px;
     background-color: $background-modal;
     font-weight: bold;
-    padding: 5px 7px 5px;
+    padding: 10px;
     margin: 0;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: $default-border-radius;
     font-size: 13px;
 }
 
@@ -682,7 +680,203 @@
     }
 }
 
-.h3-filter-sort {
-    margin: 0;
-    font-size: 16px;
+// 상단 버튼
+.wrapper-map-control-button {
+    position: absolute;
+    top: 80px;
+    z-index: 1111;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    width: 100%;
+    padding: 0 10px;
+    justify-content: space-between;
+
+    button {
+        padding: 10px;
+        font-size: 13px;
+        border: 0;
+        border-radius: $default-border-radius;
+        font-weight: bold;
+        -webkit-box-shadow: $map-button-box-shadow;
+        box-shadow: $map-button-box-shadow;
+    }
+}
+
+// 지도 상단 버튼
+.button-move-to-my {
+    position: absolute;
+    bottom: 255px;
+    right: 10px;
+    z-index: 1111;
+    background: icon(radar, $svg-on-active) no-repeat center center / 20px 20px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    border-radius: $default-border-radius;
+    background-color: $active-color;
+    -webkit-box-shadow: $map-button-box-shadow;
+    box-shadow: $map-button-box-shadow;
+}
+
+// 반경 선택 모달
+.wrapper-select-radius {
+    text-align: center;
+
+    .txt-selected-radius {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .form-radius {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        gap: 10px;
+
+        .container-radio-radius {
+            > input {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+// 업종 필터 모달
+.wrapper-checkbox-category {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    gap: 15px;
+
+    input {
+        margin-right: 5px;
+    }
+
+    label {
+        font-size: 16px;
+    }
+
+    .checkbox-category-filter {
+        width: 15px;
+        height: 15px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 1px solid $active-color;
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:checked {
+            background-color: $active-color;
+            background-image: icon(check, $svg-on-active);
+            background-repeat: no-repeat;
+        }
+    }
+}
+
+.container-button-all-in-modal {
+    position: absolute;
+    top: 0;
+    left: 90px;
+}
+
+.button-all-category {
+    width: 80px;
+    border-radius: $default-border-radius;
+    padding: 5px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.button-all-category:first-child {
+    margin-right: 5px;
+}
+
+// 검색 결과 필터
+.container-filter,
+.container-sort {
+    position: relative;
+    border: 1px solid $border-color;
+    border-radius: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    .container-button-all {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+
+        > button:first-child {
+            margin-right: 5px;
+        }
+    }
+
+    .button-apply-filter,
+    .container-button-all > button {
+        padding: 5px;
+        font-size: 13px;
+        font-weight: bold;
+        border-radius: $default-border-radius;
+        margin: 0;
+    }
+    .button-apply-filter {
+        position: absolute;
+        top: 10px;
+        left: 70px;
+        width: 50px;
+    }
+}
+.wrapper-checkbox-category.reuse-in-result {
+    gap: 5px;
+
+    input {
+        margin-right: 3px;
+    }
+
+    label {
+        font-size: 13px;
+        vertical-align: top;
+        font-weight: bold;
+    }
+}
+
+.txt-filter-name {
+    display: block;
+    font-style: normal;
+    font-size: 13px;
+    font-weight: bold;
+    margin: 5px 0 20px;
+}
+
+.container-check-cert {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.container-sort {
+    label {
+        font-size: 13px;
+        font-weight: bold;
+        margin-right: 35px;
+    }
+
+    select {
+        font-size: 13px;
+        width: 100px;
+        border: 0;
+        font-weight: bold;
+    }
 }

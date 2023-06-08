@@ -28,11 +28,14 @@ function SearchForm() {
 }
 
 function SearchButton({ keyword }: { keyword: string }) {
+    const dispatch = useAppDispatch();
+
     const handleClick = () => {
         // dispatch(SET_MAP_MODE('검색 모드'));
         if (keyword.length === 0) {
             alert('검색어를 입력해주세요.');
         } else {
+            dispatch({ type: 'paginationSlice/CURRENT_PAGE', currentPage: 1 });
             navigate(`/search/keyword/${keyword}`);
         }
     };

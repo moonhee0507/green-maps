@@ -8,33 +8,20 @@ import {
     SHOW_LIST_IN_REGION_MODAL,
 } from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
-import { moveToCurrentLocation } from '../kakaoApi';
 
 export { ControlButton };
 
 function ControlButton() {
     return (
         <div className="wrapper-map-control-button">
-            <SelectRegion />
-            <ChangeRadius />
-            <CategoryFilter />
-            <BackCurrentLocation />
+            <div className="container-button-map-mode">
+                <ChangeRadius />
+                <SelectRegion />
+            </div>
+            <div>
+                <CategoryFilter />
+            </div>
         </div>
-    );
-}
-
-function BackCurrentLocation() {
-    const dispatch = useAppDispatch();
-
-    const handleClick = () => {
-        moveToCurrentLocation();
-        // 지역탐색 결과 모달 끄기
-        dispatch(SHOW_LIST_IN_REGION_MODAL(false));
-    };
-    return (
-        <button type="button" onClick={handleClick}>
-            내 위치로
-        </button>
     );
 }
 
@@ -110,7 +97,7 @@ function ChangeRadius() {
             onClick={handleClick}
             className={`button-map-mode ${mapMode === '반경탐색 모드' ? 'on' : ''}`}
         >
-            <span>반경</span>
+            <span>반경 </span>
             <span>{calcRadius}</span>
             <span>{unit}</span>
             <span> 탐색 모드</span>

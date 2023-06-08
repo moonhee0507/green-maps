@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../../components/topBar/topBar';
 import { PageContext } from '../../../renderer/types';
 import { NavBar } from '../../../components/navBar';
-import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
+import { useAppSelector } from '../../../renderer/store/hooks';
 import { Restaurant } from '../../../server/models/Restaurant';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import { KeywordSearchResultMain } from './KeywordSearchResultMain/KeywordSearchResultMain';

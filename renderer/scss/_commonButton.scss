@@ -88,6 +88,12 @@
     padding: 10px;
 }
 
+.button-map-mode {
+    &:first-child {
+        margin-right: 10px;
+    }
+}
+
 .button-map-mode.on {
     background-color: $active-color;
     color: $on-active;
@@ -96,4 +102,13 @@
 .button-category-name.on {
     background-color: $active-color;
     color: $on-active;
+}
+
+.button-apply-filter {
+    width: 100%;
+    border-radius: $default-border-radius;
+    padding: 10px;
+    border: 1px solid $active-color;
+    color: $active-color;
+    margin-top: 20px;
 }

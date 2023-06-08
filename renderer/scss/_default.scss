@@ -74,4 +74,10 @@ dd {
     border: 0;
 }
 
+@media (max-width: 420px) {
+    main {
+        width: 100vw;
+    }
+}
+
 @import './_icon.scss';

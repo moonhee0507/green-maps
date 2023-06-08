@@ -10,6 +10,7 @@ import useLocationAccess from './hook/useLocationAccess';
 import appModalMode from '../../components/modal/appModalMode';
 import { useAppDispatch } from '../../renderer/store/hooks';
 import { CHECK_LOCATION_ACCESS_MODAL, StateToGeolocation } from '../../renderer/_reducers/_slices/mapSlice';
+import { BackCurrentLocation } from '../../components/button/BackCurrentLocation';
 
 export { Page };
 
@@ -42,18 +43,19 @@ function Page() {
     return (
         <>
             <SearchBar />
-            <MapView />
+            <MapView isLoggedIn={isLoggedIn} />
             <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup />
         </>
     );
 }
 
-function MapView() {
+function MapView({ isLoggedIn }: { isLoggedIn: boolean }) {
     return (
         <main className="main-map">
             <ControlButton />
-            <KakaoMap />
+            <KakaoMap isLoggedIn={isLoggedIn} />
+            <BackCurrentLocation />
             <ResultInRadius />
         </main>
     );

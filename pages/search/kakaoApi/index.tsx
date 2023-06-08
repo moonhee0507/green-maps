@@ -3,13 +3,15 @@ import { renderToString } from 'react-dom/server';
 import store from '../../../renderer/store/index.js';
 import { SET_CURRENT_LOCATION } from '../../../renderer/_reducers/_slices/mapSlice.js';
 import getListInCurrentView from './getListInCurrentView';
-import InfoWindow from './InfoWindow';
+import InfoWindow from './InfoWindow/InfoWindow.js';
 import imgLocation from '/images/map-location.png';
 import imgCert from '/images/map-cert-location.png';
 import type { Lat, Lng, MongoLocation, MongoPolygon } from './types';
 import type { Restaurant } from './../../../server/models/Restaurant';
 
 const { kakao }: any = window;
+
+let isLoggedIn = false;
 
 let map: any;
 let neLat: Lat;
@@ -146,7 +148,7 @@ async function paintVeganRestaurantMarker(restaurant: Restaurant[]) {
 
         // 인포윈도우
         const infowindow = new kakao.maps.InfoWindow({ zIndex: 1, removable: true });
-        const InfoWindowComponent = <InfoWindow restaurantInfo={list} />;
+        const InfoWindowComponent = <InfoWindow restaurantInfo={list} isLoggedIn={isLoggedIn || false} />;
         infowindow.setContent(renderToString(InfoWindowComponent));
 
         arrInfowindow.push(infowindow);
@@ -229,4 +231,8 @@ function paintBounds(bounds: kakao.maps.LatLngBounds) {
 export function moveToCurrentLocation() {
     const [lat, lng] = store.getState().mapSlice.currentLocation;
     map.setCenter(new kakao.maps.LatLng(lat, lng));
+}
+
+export function checkLoginForInfoWindow(isLoggedInFromIndexPage: boolean) {
+    isLoggedIn = isLoggedInFromIndexPage;
 }
