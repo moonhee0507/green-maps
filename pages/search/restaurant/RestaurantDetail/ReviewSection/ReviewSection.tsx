@@ -64,7 +64,7 @@ function ReviewSection({
             <h4 className="sr-only">리뷰</h4>
             <ReviewButton restaurantId={_id} isLoggedIn={isLoggedIn} />
             <ReviewList reviews={reviewInPage} userInfo={userInfo} restaurantId={_id} />
-            {reviews.length > 0 && <Pagination count={totalReview} perPage={5} />}
+            {reviews && reviews.length > 0 && <Pagination count={totalReview} perPage={5} />}
         </section>
     );
 }

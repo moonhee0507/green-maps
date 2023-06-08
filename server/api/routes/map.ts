@@ -1,6 +1,5 @@
 import { Router, Request, Response } from 'express';
 import Restaurant from '../../models/Restaurant.js';
-import { request } from 'http';
 import CATEGORIES from '../../../components/image/CATEGORY.js';
 
 const route = Router();

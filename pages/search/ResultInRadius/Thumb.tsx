@@ -13,12 +13,12 @@ function Thumb({ category }: { category: string }) {
     useEffect(() => {
         const { copyRight, src } = CATEGORIES[appCategory].thumb;
         setHolder(copyRight);
-        setSrc(src);
+        setSrc(import.meta.env.BASE_URL + src);
     }, [appCategory]);
 
     return (
         <div className="container-img">
-            <a href={COPYRIGHT_URL} title={`${appCategory} icon`}>
+            <a href={import.meta.env.BASE_URL + COPYRIGHT_URL} title={`${appCategory} icon`}>
                 <span className="sr-only">아이콘 제작자: {holder}</span>
             </a>
             {src !== '' && <img src={src} alt="카테고리 아이콘" />}

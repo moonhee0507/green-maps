@@ -548,12 +548,18 @@
         margin-bottom: 5px;
     }
 
+    .txt-cert,
     .txt-category,
     .txt-address,
     .txt-distance,
     .txt-rating,
     .txt-count-comment {
         font-size: 13px;
+    }
+
+    .txt-cert {
+        color: $cert-txt-color;
+        font-weight: bold;
     }
 
     .container-rating-count {
@@ -641,4 +647,42 @@
     > p {
         margin: 0;
     }
+}
+
+// 검색 결과
+.main-search-result {
+    @include extensive-content;
+    padding: $padding;
+}
+
+.wrapper-result-in-radius.reuse-in-search {
+    position: initial;
+
+    .ul-restaurant-in-radius.reuse-in-search {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        > li:first-child {
+            margin-left: 0;
+        }
+
+        > li {
+            width: 100% !important;
+            border: 0;
+            border-bottom: 1px solid $border-color;
+            cursor: pointer;
+        }
+
+        .container-img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+.h3-filter-sort {
+    margin: 0;
+    font-size: 16px;
 }

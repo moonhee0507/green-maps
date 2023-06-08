@@ -9,6 +9,7 @@ import post from './routes/post/post.js';
 import subject from './routes/post/subject.js';
 import today from './routes/post/today.js';
 import bookmark from './routes/bookmark.js';
+import search from './routes/search.js';
 
 export default () => {
     const app = Router();
@@ -25,6 +26,7 @@ export default () => {
     today(app);
 
     bookmark(app);
+    search(app);
 
     return app;
 };

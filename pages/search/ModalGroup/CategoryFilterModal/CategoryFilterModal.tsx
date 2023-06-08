@@ -64,12 +64,11 @@ function CategoryFilterModal() {
     );
 }
 
-const CategoryItem = React.forwardRef<HTMLInputElement, { name: string; index: number }>(function CategoryItem(
+// 검색결과에서 재사용
+export const CategoryItem = React.forwardRef<HTMLInputElement, { name: string; index: number }>(function CategoryItem(
     { name, index }: { name: string; index: number },
     ref: React.ForwardedRef<HTMLInputElement>
 ) {
-    const dispatch = useAppDispatch();
-
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
     const [isChecked, setIsChecked] = useState(true);
 

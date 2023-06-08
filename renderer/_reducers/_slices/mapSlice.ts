@@ -5,6 +5,7 @@ import { KakaoLocation } from '../../../pages/search/kakaoApi/types';
 export type StateToGeolocation = 'prompt' | 'denied' | 'granted';
 
 type MapMode = '반경탐색 모드' | '지역탐색 모드' | '검색 모드';
+type OrderBy = 'relevance' | 'rating' | 'review' | 'distance';
 
 type InitialState = {
     COUNT: number;
@@ -26,6 +27,9 @@ type InitialState = {
     categoryFilterModalOn: boolean;
     selectedCategory: string[] | '*';
     noResultModalOn: boolean;
+    searchResultInPage: Restaurant[];
+    selectedCert: string[] | '*';
+    resultOrderBy: OrderBy;
 };
 
 const initialState: InitialState = {
@@ -48,6 +52,9 @@ const initialState: InitialState = {
     categoryFilterModalOn: false,
     selectedCategory: [],
     noResultModalOn: false,
+    searchResultInPage: [],
+    selectedCert: [],
+    resultOrderBy: 'relevance',
 };
 
 const mapSlice = createSlice({
@@ -117,6 +124,15 @@ const mapSlice = createSlice({
         NO_RESULT_MODAL: (state, action: PayloadAction<boolean>) => {
             state.noResultModalOn = action.payload;
         },
+        SET_SEARCH_RESULT_IN_PAGE: (state, action: PayloadAction<Restaurant[]>) => {
+            state.searchResultInPage = action.payload;
+        },
+        ADD_SELECTED_CERT: (state, action: PayloadAction<string[] | '*'>) => {
+            state.selectedCert = action.payload;
+        },
+        SET_ORDER_BY: (state, action: PayloadAction<OrderBy>) => {
+            state.resultOrderBy = action.payload;
+        },
     },
 });
 
@@ -141,6 +157,9 @@ export const {
     CATEGORY_FILTER_MODAL,
     ADD_SELECTED_CATEGORY,
     NO_RESULT_MODAL,
+    SET_SEARCH_RESULT_IN_PAGE,
+    ADD_SELECTED_CERT,
+    SET_ORDER_BY,
 } = mapSlice.actions;
 
 export default mapSlice.reducer;

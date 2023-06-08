@@ -575,12 +575,17 @@ dd {
 .wrapper-result-in-radius .txt-address {
   margin-bottom: 5px;
 }
+.wrapper-result-in-radius .txt-cert,
 .wrapper-result-in-radius .txt-category,
 .wrapper-result-in-radius .txt-address,
 .wrapper-result-in-radius .txt-distance,
 .wrapper-result-in-radius .txt-rating,
 .wrapper-result-in-radius .txt-count-comment {
   font-size: 13px;
+}
+.wrapper-result-in-radius .txt-cert {
+  color: #009eb0;
+  font-weight: bold;
 }
 .wrapper-result-in-radius .container-rating-count {
   display: flex;
@@ -652,6 +657,42 @@ dd {
 }
 .modal-no-result.on > p {
   margin: 0;
+}
+
+.main-search-result {
+  overflow: scroll;
+  scrollbar-width: none; /* firefox */
+  flex-grow: 1; /*긴 화면*/
+  /* edge, chrome */
+  padding: 20px;
+}
+.main-search-result::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapper-result-in-radius.reuse-in-search {
+  position: initial;
+}
+.wrapper-result-in-radius.reuse-in-search .ul-restaurant-in-radius.reuse-in-search {
+  flex-direction: column;
+}
+.wrapper-result-in-radius.reuse-in-search .ul-restaurant-in-radius.reuse-in-search > li:first-child {
+  margin-left: 0;
+}
+.wrapper-result-in-radius.reuse-in-search .ul-restaurant-in-radius.reuse-in-search > li {
+  width: 100% !important;
+  border: 0;
+  border-bottom: 1px solid #d3d3d3;
+  cursor: pointer;
+}
+.wrapper-result-in-radius.reuse-in-search .ul-restaurant-in-radius.reuse-in-search .container-img {
+  width: 50px;
+  height: 50px;
+}
+
+.h3-filter-sort {
+  margin: 0;
+  font-size: 16px;
 }
 
 .wrapper-infowindow {
@@ -783,10 +824,14 @@ dd {
 .top-bar.search .search-bar.off {
   display: none;
 }
-.top-bar.search #searchItem {
+.top-bar.search #searchRestaurant {
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
   width: 100%;
   height: 40px;
-  border: 1px solid #d3d3d3;
+  padding: 10px;
 }
 
 @media (max-width: 420px) {

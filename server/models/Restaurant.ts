@@ -5,7 +5,7 @@ export type Restaurant = {
     _id: string;
     title: string;
     category: string;
-    rating: string | number;
+    rating: string;
     address: string;
     certified: boolean;
     certification: string | null;
