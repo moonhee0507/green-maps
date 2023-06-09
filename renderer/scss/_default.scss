@@ -29,6 +29,32 @@ button:disabled {
     cursor: default;
 }
 
+input::-webkit-input-placeholder {
+    font-family: $base-font;
+    letter-spacing: -0.05rem;
+}
+
+input::-moz-placeholder {
+    font-family: $base-font;
+    letter-spacing: -0.05rem;
+}
+
+input:-ms-input-placeholder {
+    font-family: $base-font;
+    letter-spacing: -0.05rem;
+}
+
+input::-ms-input-placeholder {
+    font-family: $base-font;
+    letter-spacing: -0.05rem;
+}
+
+input,
+input::placeholder {
+    font-family: $base-font;
+    letter-spacing: -0.05rem;
+}
+
 a {
     text-decoration: none;
     color: $on-background-app;

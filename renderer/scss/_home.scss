@@ -66,9 +66,9 @@
     background-color: $container-on-image;
 
     > a {
-        font-size: 18px;
-        line-height: 1.2;
-        color: #fff;
         letter-spacing: 1px;
+        font-size: 18px;
+        font-weight: bold;
+        color: $on-opacity;
     }
 }

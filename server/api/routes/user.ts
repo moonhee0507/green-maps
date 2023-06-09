@@ -54,29 +54,45 @@ export default (app: Router) => {
 
     // login
     route.post('/login', async (req: Request, res: Response) => {
-        const user = await User.findOne({ userId: req.body.userId });
+        try {
+            const { userId, password, keepLogin } = req.body;
+            const user = await User.findOne({ userId: userId });
 
-        if (!user) return res.json({ success: false, errMessage: '사용자가 존재하지 않습니다.' });
-
-        user.comparePassword(req.body.password, (err: Error | null, same: boolean | null) => {
-            if (!same) {
-                return res.json({ success: false, errorMessage: '비밀번호가 일치하지 않습니다' });
-            } else {
-                user.generateToken((err?: Error | null, user?: any) => {
-                    if (err) return res.status(400).send(err);
-                    else {
-                        res.cookie('auth', user.token, {
-                            maxAge: 24 * 60 * 60 * 1000,
-                            httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
-                            secure: true, // https에서만 사용
-                            sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
-                        })
-                            .status(200)
-                            .json({ success: true, keepLogin: req.body.keepLogin, user: user });
-                    }
-                });
+            if (!user) return res.json({ success: false, errMessage: '사용자가 존재하지 않습니다.' });
+            user.comparePassword(password, (err: Error | null, same: boolean | null) => {
+                if (!same) {
+                    return res.json({ success: false, errorMessage: '비밀번호가 일치하지 않습니다' });
+                } else {
+                    user.generateToken((err?: Error | null, user?: any) => {
+                        if (err) return res.status(400).send(err);
+                        else {
+                            if (keepLogin) {
+                                res.cookie('auth', user.token, {
+                                    maxAge: 7 * 24 * 60 * 60 * 1000,
+                                    httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
+                                    secure: true, // https에서만 사용
+                                    sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                                })
+                                    .status(200)
+                                    .json({ success: true, keepLogin: keepLogin, user: user });
+                            } else {
+                                res.cookie('auth', user.token, {
+                                    httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
+                                    secure: true, // https에서만 사용
+                                    sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                                })
+                                    .status(200)
+                                    .json({ success: true, keepLogin: keepLogin, user: user });
+                            }
+                        }
+                    });
+                }
+            });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ success: false, errorMessage: err.message });
             }
-        });
+        }
     });
 
     // 프로필 수정 -> 현재 비밀번호 확인
@@ -319,6 +335,25 @@ export default (app: Router) => {
             const { nickname } = req.query;
 
             const existingUser = await User.findOne({ nickName: nickname });
+
+            if (existingUser) {
+                res.json({ duplicated: true });
+            } else {
+                res.json({ duplicated: false });
+            }
+        } catch (err) {
+            if (err instanceof Error) {
+                res.json({ errorMessage: err.message });
+            }
+        }
+    });
+
+    // 아이디 중복 검사
+    route.get('/check-userId', async (req: Request, res: Response) => {
+        try {
+            const { userId } = req.query;
+
+            const existingUser = await User.findOne({ userId: userId });
 
             if (existingUser) {
                 res.json({ duplicated: true });

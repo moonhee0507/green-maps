@@ -6,3 +6,5 @@ export { default as postSlice } from './_slices/postSlice.js';
 export { default as authSlice } from './_slices/authSlice.js';
 export { default as myListSlice } from './_slices/myListSlice.js';
 export { default as profileSlice } from './_slices/profileSlice.js';
+export { default as loginSlice } from './_slices/loginSlice.js';
+export { default as signupSlice } from './_slices/signupSlice.js';

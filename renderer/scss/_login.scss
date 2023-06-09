@@ -1,3 +1,137 @@
-.wrapper-login-content {
+.main-login {
     @include extensive-content;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-stage-wrapper {
+    position: absolute;
+    width: calc(100% * 3);
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    > section {
+        width: calc(100% / 3);
+        padding: $padding;
+    }
+}
+
+.styled-button.reuse-in-login,
+.styled-button.kakao-login {
+    height: 50px;
+    padding: 0;
+}
+
+.styled-button.kakao-login {
+    margin-bottom: 20px;
+    background-color: #fee500;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 5px;
+
+    img {
+        width: 35px;
+    }
+}
+
+.login-select-stage {
+    text-align: center;
+
+    .container-rocket {
+        padding: 100px;
+        text-align: center;
+        > span {
+            font-size: 85px;
+        }
+    }
+
+    > button {
+        margin-bottom: 10px;
+    }
+}
+
+.login-id-stage,
+.login-password-stage {
+    label {
+        font-size: 13px;
+        color: $label-txt-color;
+        display: block;
+        margin: 80px 0 20px;
+        font-weight: bold;
+    }
+    label[for='loginPersist'] {
+        display: inline;
+        margin: 0 10px 0 0;
+    }
+}
+#loginId,
+#loginPassword {
+    @include styled-input;
+    width: 100%;
+    background-color: #dafbe4;
+    display: block;
+    padding: 0 10px;
+}
+#loginPassword {
+    margin-bottom: 10px;
+}
+#loginPersist {
+    display: inline;
+    vertical-align: middle;
+}
+
+.button-group-move {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin: 40px 0 20px;
+
+    button {
+        font-size: 13px;
+        height: 20px;
+        border: 0;
+    }
+
+    button[aria-label='이전 화면으로 이동'] {
+        background: icon(arrow) no-repeat left center / 20px 20px;
+        padding: 0 0 0 20px;
+    }
+
+    button[aria-label='다음 화면으로 이동'] {
+        position: relative;
+        padding: 0 20px 0 0;
+
+        &::after {
+            position: absolute;
+            content: '';
+            background: icon(arrow) no-repeat right center / 20px 20px;
+            -webkit-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            transform: rotate(180deg);
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
+
+.link-to-signup {
+    font-size: 16px;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

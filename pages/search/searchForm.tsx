@@ -41,8 +41,8 @@ function SearchButton({ keyword }: { keyword: string }) {
     };
 
     return (
-        <button type="button" onClick={handleClick}>
-            검색
+        <button type="button" onClick={handleClick} aria-label="식당 검색 버튼">
+            🔍
         </button>
     );
 }

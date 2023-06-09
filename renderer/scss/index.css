@@ -28,6 +28,17 @@ button:disabled {
   cursor: default;
 }
 
+input::-moz-placeholder {
+  font-family: "Noto Sans KR", sans-serif;
+  letter-spacing: -0.05rem;
+}
+
+input,
+input::placeholder {
+  font-family: "Noto Sans KR", sans-serif;
+  letter-spacing: -0.05rem;
+}
+
 a {
   text-decoration: none;
   color: #333333;
@@ -482,6 +493,7 @@ dd {
   margin-left: 0;
 }
 .wrapper-result-in-radius.reuse-in-region .ul-restaurant-in-radius.reuse-in-region > li {
+  width: 100% !important;
   border: 0;
   border-bottom: 1px solid #d3d3d3;
   cursor: pointer;
@@ -634,6 +646,12 @@ dd {
 }
 .modal-no-result.on > p {
   margin: 0;
+}
+
+button[aria-label="식당 검색 버튼"] {
+  border: 0;
+  font-size: 20px;
+  padding: 0;
 }
 
 .main-search-result {
@@ -1023,6 +1041,10 @@ dd {
   background: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath fill='%23009eb0' d='M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z' /%3E%3C/svg%3E") no-repeat 50% 42%/20px 20px;
 }
 
+.link-nav.no-login {
+  background: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath fill='%234f4f4f' d='M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z' class='img-bookmark' /%3E%3C/svg%3E") no-repeat 50% 42%/20px 20px;
+}
+
 .link-nav {
   position: relative;
   display: block;
@@ -1111,30 +1133,226 @@ dd {
   background-color: rgba(1, 1, 1, 0.5);
 }
 .container-start > a {
-  font-size: 18px;
-  line-height: 1.2;
-  color: #fff;
   letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
-.wrapper-login-content {
+.main-login {
   overflow: scroll;
   scrollbar-width: none; /* firefox */
   flex-grow: 1; /*긴 화면*/
   /* edge, chrome */
+  position: relative;
+  overflow: hidden;
 }
-.wrapper-login-content::-webkit-scrollbar {
+.main-login::-webkit-scrollbar {
   display: none;
 }
 
-.wrapper-signup-content {
+.login-stage-wrapper {
+  position: absolute;
+  width: 300%;
+  height: 100%;
+  display: flex;
+}
+.login-stage-wrapper > section {
+  width: 33.3333333333%;
+  padding: 20px;
+}
+
+.styled-button.reuse-in-login,
+.styled-button.kakao-login {
+  height: 50px;
+  padding: 0;
+}
+
+.styled-button.kakao-login {
+  margin-bottom: 20px;
+  background-color: #fee500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.styled-button.kakao-login img {
+  width: 35px;
+}
+
+.login-select-stage {
+  text-align: center;
+}
+.login-select-stage .container-rocket {
+  padding: 100px;
+  text-align: center;
+}
+.login-select-stage .container-rocket > span {
+  font-size: 85px;
+}
+.login-select-stage > button {
+  margin-bottom: 10px;
+}
+
+.login-id-stage label,
+.login-password-stage label {
+  font-size: 13px;
+  color: #4f4f4f;
+  display: block;
+  margin: 80px 0 20px;
+  font-weight: bold;
+}
+.login-id-stage label[for=loginPersist],
+.login-password-stage label[for=loginPersist] {
+  display: inline;
+  margin: 0 10px 0 0;
+}
+
+#loginId,
+#loginPassword {
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  background-color: #dafbe4;
+  display: block;
+  padding: 0 10px;
+}
+
+#loginPassword {
+  margin-bottom: 10px;
+}
+
+#loginPersist {
+  display: inline;
+  vertical-align: middle;
+}
+
+.button-group-move {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 20px;
+}
+.button-group-move button {
+  font-size: 13px;
+  height: 20px;
+  border: 0;
+}
+.button-group-move button[aria-label="이전 화면으로 이동"] {
+  background: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath fill='%234f4f4f' d='M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z'/%3E%3C/svg%3E") no-repeat left center/20px 20px;
+  padding: 0 0 0 20px;
+}
+.button-group-move button[aria-label="다음 화면으로 이동"] {
+  position: relative;
+  padding: 0 20px 0 0;
+}
+.button-group-move button[aria-label="다음 화면으로 이동"]::after {
+  position: absolute;
+  content: "";
+  background: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath fill='%234f4f4f' d='M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z'/%3E%3C/svg%3E") no-repeat right center/20px 20px;
+  transform: rotate(180deg);
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.link-to-signup {
+  font-size: 16px;
+}
+.link-to-signup:hover {
+  text-decoration: underline;
+}
+
+.main-signup {
   overflow: scroll;
   scrollbar-width: none; /* firefox */
   flex-grow: 1; /*긴 화면*/
   /* edge, chrome */
+  position: relative;
+  overflow: clip;
 }
-.wrapper-signup-content::-webkit-scrollbar {
+.main-signup::-webkit-scrollbar {
   display: none;
+}
+
+.signup-stage-wrapper {
+  position: absolute;
+  width: 500%;
+  height: 100%;
+  display: flex;
+}
+.signup-stage-wrapper > section {
+  width: 20%;
+  padding: 20px;
+}
+
+.login-select-stage.reuse-in-signup {
+  text-align: center;
+}
+.login-select-stage.reuse-in-signup button {
+  display: block;
+  border: 1px solid #0073e6;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  margin: 40px 0 20px;
+  color: #0073e6;
+}
+.login-select-stage.reuse-in-signup small {
+  font-size: 13px;
+}
+.login-select-stage.reuse-in-signup small a {
+  text-decoration: underline;
+}
+
+.txt-signup-info {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.signup-id-stage label,
+.signup-nickname-stage label,
+.signup-password-stage label,
+.signup-confirm-password-stage label {
+  font-size: 13px;
+  color: #4f4f4f;
+  display: block;
+  margin: 80px 0 20px;
+  font-weight: bold;
+}
+
+#signupId,
+#signupNickName,
+#signupPassword,
+#signupConfirmPassword {
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  width: 100%;
+  background-color: #dafbe4;
+  display: block;
+  padding: 0 10px;
+  margin-bottom: 10px;
+}
+
+#signupPassword::-moz-placeholder {
+  font-size: 13px;
+}
+
+#signupPassword::placeholder {
+  font-size: 13px;
+}
+
+.txt-signup-message {
+  font-size: 13px;
+  font-weight: bold;
+  font-style: normal;
+  color: red;
 }
 
 .main-community {
@@ -1209,13 +1427,13 @@ dd {
   bottom: 80px;
   left: 50%;
   transform: translate(-50%, 0);
-  padding: 10px;
+  padding: 10px 10px 10px 25px;
   width: 100px;
   font-size: 16px;
   font-weight: bold;
   border: 2px solid #d3d3d3;
   border-radius: 20px;
-  background-color: #e9e9e9;
+  background: url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cstyle%3Esvg%7Bfill:%23000000%7D%3C/style%3E%3Cpath fill='%230073e6' d='M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z'/%3E%3C/svg%3E") no-repeat 10px center/20px 20px, #e9e9e9;
 }
 
 .wrapper-posts > li {
@@ -1467,7 +1685,7 @@ dd {
 
 .li-notice {
   width: 33.3333333333%;
-  background-color: #e9e9e9;
+  background-color: #92e9d5;
   border-radius: 10px;
 }
 .li-notice > a {
@@ -1485,6 +1703,16 @@ dd {
 }
 .li-notice > a .txt-title > em {
   font-style: normal;
+}
+
+#searchItem {
+  width: 100%;
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  height: 40px;
+  padding: 10px;
 }
 
 .main-my {

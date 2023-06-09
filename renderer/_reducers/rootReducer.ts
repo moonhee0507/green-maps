@@ -8,6 +8,8 @@ import {
     authSlice,
     myListSlice,
     profileSlice,
+    loginSlice,
+    signupSlice,
 } from './index.js';
 
 const rootReducer = combineReducers({
@@ -19,6 +21,8 @@ const rootReducer = combineReducers({
     authSlice: authSlice,
     myListSlice: myListSlice,
     profileSlice: profileSlice,
+    loginSlice: loginSlice,
+    signupSlice: signupSlice,
 });
 
 export default rootReducer;

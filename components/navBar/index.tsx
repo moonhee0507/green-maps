@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from '../../renderer/Link';
 
 export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
@@ -48,7 +48,7 @@ export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </li>
                 <li>
                     {isLoggedIn ? (
-                        <Link href="/my" className="link-nav">
+                        <Link href="/my" className="link-nav my">
                             <em>내 정보</em>
                         </Link>
                     ) : (

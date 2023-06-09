@@ -1,3 +1,99 @@
-.wrapper-signup-content {
+.main-signup {
     @include extensive-content;
+    position: relative;
+    overflow: clip;
+}
+
+.signup-stage-wrapper {
+    position: absolute;
+    width: calc(100% * 5);
+    height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+
+    > section {
+        width: calc(100% / 5);
+        padding: $padding;
+    }
+}
+
+.login-select-stage.reuse-in-signup {
+    text-align: center;
+
+    button {
+        display: block;
+        border: 1px solid $active-color;
+        border-radius: $default-border-radius;
+        width: 100%;
+        padding: 10px;
+        margin: 40px 0 20px;
+        color: $active-color;
+    }
+
+    small {
+        font-size: 13px;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}
+
+.txt-signup-info {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.signup-id-stage,
+.signup-nickname-stage,
+.signup-password-stage,
+.signup-confirm-password-stage {
+    label {
+        font-size: 13px;
+        color: $label-txt-color;
+        display: block;
+        margin: 80px 0 20px;
+        font-weight: bold;
+    }
+}
+#signupId,
+#signupNickName,
+#signupPassword,
+#signupConfirmPassword {
+    @include styled-input;
+    width: 100%;
+    background-color: #dafbe4;
+    display: block;
+    padding: 0 10px;
+    margin-bottom: 10px;
+}
+
+#signupPassword::-webkit-input-placeholder {
+    font-size: 13px;
+}
+
+#signupPassword::-moz-placeholder {
+    font-size: 13px;
+}
+
+#signupPassword:-ms-input-placeholder {
+    font-size: 13px;
+}
+
+#signupPassword::-ms-input-placeholder {
+    font-size: 13px;
+}
+
+#signupPassword::placeholder {
+    font-size: 13px;
+}
+
+.txt-signup-message {
+    font-size: 13px;
+    font-weight: bold;
+    font-style: normal;
+    color: red;
 }

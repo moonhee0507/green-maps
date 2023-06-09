@@ -454,6 +454,7 @@
         }
 
         > li {
+            width: 100% !important;
             border: 0;
             border-bottom: 1px solid $border-color;
             cursor: pointer;
@@ -645,6 +646,12 @@
     > p {
         margin: 0;
     }
+}
+
+button[aria-label='식당 검색 버튼'] {
+    border: 0;
+    font-size: 20px;
+    padding: 0;
 }
 
 // 검색 결과

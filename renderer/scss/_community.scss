@@ -81,13 +81,15 @@
     -webkit-transform: translate(-50%, 0);
     -ms-transform: translate(-50%, 0);
     transform: translate(-50%, 0);
-    padding: 10px;
+    padding: 10px 10px 10px 25px;
     width: 100px;
     font-size: 16px;
     font-weight: bold;
     border: 2px solid $border-color;
     border-radius: 20px;
-    background-color: $write-button-color;
+    // background-color: $write-button-color;
+    background: icon('pen', $svg-active) no-repeat 10px center / 20px 20px, $write-button-color;
+    // background-blend-mode: normal;
 }
 
 .wrapper-posts {
@@ -404,4 +406,11 @@ $inputHeight: 45px;
             }
         }
     }
+}
+
+#searchItem {
+    width: 100%;
+    @include styled-input;
+    height: 40px;
+    padding: 10px;
 }

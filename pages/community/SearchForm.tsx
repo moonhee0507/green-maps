@@ -30,8 +30,12 @@ function SearchForm() {
                     )}
                 </div>
             </div>
-            <button type="button" onClick={() => (showInput ? moveToPage() : setShowInput(true))}>
-                검색
+            <button
+                type="button"
+                onClick={() => (showInput ? moveToPage() : setShowInput(true))}
+                aria-label="식당 검색 버튼"
+            >
+                🔍
             </button>
         </>
     );

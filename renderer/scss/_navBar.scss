@@ -72,6 +72,10 @@
     }
 }
 
+.link-nav.no-login {
+    background: icon(bookmark, $svg-nav-default) no-repeat 50% 42% / 20px 20px;
+}
+
 .link-nav {
     position: relative;
     display: block;
