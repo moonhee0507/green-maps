@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import defaultProfile from '/images/default-profile.png';
 import type { UserInfo } from '../../../server/models/User';
+import { IMG_URL } from '../../../renderer/CONSTANT_URL';
 
 export function MyProfile({ userInfo }: { userInfo: UserInfo }) {
     const { host } = userInfo;
@@ -14,22 +15,20 @@ export function MyProfile({ userInfo }: { userInfo: UserInfo }) {
 
 function ProfileImage({ userInfo }: { userInfo: UserInfo }) {
     const { profileImage } = userInfo;
+    const [src, _] = useState(() => {
+        if (profileImage.includes('http://')) {
+            return profileImage;
+        } else if (profileImage) {
+            return `${IMG_URL}/${profileImage}`;
+        } else return defaultProfile;
+    });
 
     return (
         <dl>
             <dt className="sr-only">프로필 사진</dt>
             <dd>
                 <div className="container-profile-img">
-                    <img
-                        src={
-                            profileImage
-                                ? `https://${import.meta.env.VITE_AWS_S3_BUCKET}.s3.${
-                                      import.meta.env.VITE_AWS_DEFAULT_REGION
-                                  }.amazonaws.com/${profileImage}`
-                                : defaultProfile
-                        }
-                        alt="프로필 사진"
-                    />
+                    <img src={src} alt="프로필 사진" />
                 </div>
             </dd>
         </dl>

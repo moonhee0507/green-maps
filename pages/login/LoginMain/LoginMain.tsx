@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SelectStage } from './SelectStage';
 import { IdStage } from './IdStage';
-import { PasswordStage } from './passwordStage';
+import { PasswordStage } from './PasswordStage';
 
 export { LoginMain };
 

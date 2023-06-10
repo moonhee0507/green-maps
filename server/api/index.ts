@@ -10,6 +10,7 @@ import subject from './routes/post/subject.js';
 import today from './routes/post/today.js';
 import bookmark from './routes/bookmark.js';
 import search from './routes/search.js';
+import oauth from './routes/oauth.js';
 
 export default () => {
     const app = Router();
@@ -27,6 +28,8 @@ export default () => {
 
     bookmark(app);
     search(app);
+
+    oauth(app);
 
     return app;
 };
