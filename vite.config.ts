@@ -11,6 +11,7 @@ const config: UserConfig = {
     },
     server: {
         middlewareMode: true,
+        port: 5000,
     },
 };
 
