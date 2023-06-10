@@ -47,7 +47,7 @@ function CommentSection({
             )}
             <Notice />
             <WriteComment postId={postId} />
-            <CommentList comments={commentInPage} userInfo={userInfo} />
+            <CommentList postId={postId} comments={commentInPage} userInfo={userInfo} />
             {comments && comments.length > perPage ? <Pagination count={comments.length} perPage={perPage} /> : null}
         </section>
     );

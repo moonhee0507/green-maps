@@ -1,13 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
 
-export interface ButtonSlice {
-    bookmark: {
-        ON: boolean;
-    };
-    like: {
-        ON: boolean;
-    };
-}
+const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
 
 const buttonSlice = createSlice({
     name: 'buttonSlice',

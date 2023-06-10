@@ -4,6 +4,7 @@ import {
     EDIT_DELETE_NOTIFY_MODAL,
     SET_POST_ID,
     SAME_USER_OWNER,
+    SET_ACCESS_TARGET,
 } from '../../../../renderer/_reducers/_slices/postSlice';
 import type { UserInfo } from '../../../../server/models/User';
 
@@ -26,6 +27,7 @@ function MoreButton({ userInfo, owner, postId }: { userInfo: UserInfo | null; ow
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
         dispatch(SAME_USER_OWNER(user?.nickName === owner));
         dispatch(SET_POST_ID(postId));
+        dispatch(SET_ACCESS_TARGET('post'));
     }
 
     return (

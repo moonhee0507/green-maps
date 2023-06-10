@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import defaultProfile from '/images/default-profile.png';
 import type { UserInfo } from '../../../server/models/User';
 import { IMG_URL } from '../../../renderer/CONSTANT_URL';
@@ -15,13 +15,19 @@ export function MyProfile({ userInfo }: { userInfo: UserInfo }) {
 
 function ProfileImage({ userInfo }: { userInfo: UserInfo }) {
     const { profileImage } = userInfo;
-    const [src, _] = useState(() => {
-        if (profileImage.includes('http://')) {
-            return profileImage;
-        } else if (profileImage) {
-            return `${IMG_URL}/${profileImage}`;
-        } else return defaultProfile;
-    });
+    const [src, setSrc] = useState(defaultProfile);
+
+    useEffect(() => {
+        if (userInfo.profileImage) {
+            if (profileImage.includes('http://')) {
+                setSrc(profileImage);
+            } else if (profileImage) {
+                setSrc(`${IMG_URL}/${profileImage}`);
+            }
+        } else {
+            setSrc(defaultProfile);
+        }
+    }, [userInfo]);
 
     return (
         <dl>

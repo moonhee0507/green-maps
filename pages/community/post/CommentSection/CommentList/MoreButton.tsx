@@ -1,12 +1,26 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../../../../renderer/store/hooks';
-import { EDIT_DELETE_NOTIFY_MODAL, SAME_USER_OWNER } from '../../../../../renderer/_reducers/_slices/postSlice';
+import {
+    EDIT_DELETE_NOTIFY_MODAL,
+    SAME_USER_OWNER,
+    SET_ACCESS_TARGET,
+    SET_COMMENT_ID,
+    SET_POST_ID,
+} from '../../../../../renderer/_reducers/_slices/postSlice';
 import type { UserInfo } from '../../../../../server/models/User';
 import type { CommentInPost } from '../../../../../server/models/Post';
 
 export { MoreButton };
 
-function MoreButton({ userInfo, comment }: { userInfo: UserInfo | null; comment: CommentInPost }) {
+function MoreButton({
+    userInfo,
+    postId,
+    comment,
+}: {
+    userInfo: UserInfo | null;
+    postId: string;
+    comment: CommentInPost;
+}) {
     const dispatch = useAppDispatch();
 
     const moreButtonRef = useRef<HTMLButtonElement>(null);
@@ -22,6 +36,9 @@ function MoreButton({ userInfo, comment }: { userInfo: UserInfo | null; comment:
 
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
         dispatch(SAME_USER_OWNER(user?.nickName === comment.owner));
+        dispatch(SET_ACCESS_TARGET('comment'));
+        dispatch(SET_POST_ID(postId));
+        dispatch(SET_COMMENT_ID(comment._id));
     }
 
     return (

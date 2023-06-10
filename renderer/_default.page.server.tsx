@@ -35,6 +35,7 @@ async function render(pageContext: PageContextServer) {
     const desc = (documentProps && documentProps.description) || '채식 식당 검색과 북마크는 그린 맵';
 
     const manifestUrl = import.meta.env.BASE_URL + 'manifest.json';
+    const cssUrl = import.meta.env.BASE_URL + 'style/index.css';
 
     const PRELOADED_STATE = JSON.stringify(store);
     const LOGIN_MESSAGE = JSON.stringify('로그인이 필요한 서비스입니다.\n로그인하시겠습니까?');
@@ -51,7 +52,8 @@ async function render(pageContext: PageContextServer) {
             <link rel="manifest" href="${manifestUrl}" />
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-            <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+            <link rel="stylesheet" href="${cssUrl}" type="text/css" >
             <title>${title}</title>
         </head>
         <body>

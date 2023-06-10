@@ -1,4 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+
+const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
 
 const signupSlice = createSlice({
     name: 'signupSlice',
@@ -6,7 +8,7 @@ const signupSlice = createSlice({
         isSigningUp: false,
     },
     reducers: {
-        SIGNING_UP: (state, action: PayloadAction<boolean>) => {
+        SIGNING_UP: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.isSigningUp = action.payload;
         },
     },

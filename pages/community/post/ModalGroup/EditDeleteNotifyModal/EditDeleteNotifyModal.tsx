@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
-import { EDIT_DELETE_NOTIFY_MODAL } from '../../../../../renderer/_reducers/_slices/postSlice';
+import { EDIT_DELETE_NOTIFY_MODAL, SET_EDIT_COMMENT_MODE } from '../../../../../renderer/_reducers/_slices/postSlice';
 import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
+import appModalMode from '../../../../../components/modal/appModalMode';
 
 export { EditDeleteNotifyModal };
 
@@ -36,13 +37,20 @@ function EditDeleteNotifyModal() {
 function EDIT() {
     const dispatch = useAppDispatch();
     const postId = useAppSelector((state) => state.postSlice.postId);
+    const commentId = useAppSelector((state) => state.postSlice.commentId);
+    const accessTarget = useAppSelector((state) => state.postSlice.accessTarget);
 
     function handleClick() {
-        navigate(`/community/edit/${postId}`);
+        if (accessTarget === 'post') {
+            navigate(`/community/edit/${postId}`);
 
-        const app = document.querySelector('.app');
-        app?.classList.remove('modal-mode');
-        dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+            appModalMode(false);
+            dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+        } else if (accessTarget === 'comment') {
+            dispatch(SET_EDIT_COMMENT_MODE(true));
+            appModalMode(false);
+            dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+        }
     }
 
     return <li onClick={handleClick}>🩹 수정하기</li>;
@@ -51,8 +59,18 @@ function EDIT() {
 function DELETE() {
     const dispatch = useAppDispatch();
     const postId = useAppSelector((state) => state.postSlice.postId);
+    const commentId = useAppSelector((state) => state.postSlice.commentId);
+    const accessTarget = useAppSelector((state) => state.postSlice.accessTarget);
 
     async function handleClick() {
+        if (accessTarget === 'post') {
+            deletePost();
+        } else if (accessTarget === 'comment') {
+            deleteComment();
+        }
+    }
+
+    async function deletePost() {
         try {
             const res = await fetch(`${API_URL}/posts/${postId}`, {
                 method: 'DELETE',
@@ -68,8 +86,28 @@ function DELETE() {
         } catch (err) {
             console.error(err);
         } finally {
-            const app = document.querySelector('.app');
-            app?.classList.remove('modal-mode');
+            appModalMode(false);
+            dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+        }
+    }
+
+    async function deleteComment() {
+        try {
+            const res = await fetch(`${API_URL}/comments/${commentId}?postId=${postId}`, {
+                method: 'DELETE',
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert('다시 시도해주세요.');
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            appModalMode(false);
             dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
         }
     }

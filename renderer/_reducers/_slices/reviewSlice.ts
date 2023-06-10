@@ -1,10 +1,11 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
 import type {
     RandomFileName,
     SelectedImage,
 } from '../../../pages/search/restaurant/reviews/create/ReviewForm/component/PictureSection';
 
-export interface ReviewSlice {
+const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
+interface InitialState {
     ID: string;
     image: {
         FILE_INFO: Array<SelectedImage>;
@@ -12,22 +13,27 @@ export interface ReviewSlice {
     };
     CONTENT: string;
     editDeleteNotifyModalOn: boolean;
+    sameUserOwner: boolean;
+    reviewId: string;
+    restaurantId: string;
 }
+
+const initialState: InitialState = {
+    ID: '',
+    image: {
+        FILE_INFO: [],
+        RANDOM_NAME: [],
+    },
+    CONTENT: '',
+    editDeleteNotifyModalOn: false,
+    sameUserOwner: false,
+    reviewId: '',
+    restaurantId: '',
+};
 
 const reviewSlice = createSlice({
     name: 'reviewSlice',
-    initialState: {
-        ID: '',
-        image: {
-            FILE_INFO: [],
-            RANDOM_NAME: [],
-        },
-        CONTENT: '',
-        editDeleteNotifyModalOn: false,
-        sameUserOwner: false,
-        reviewId: '',
-        restaurantId: '',
-    },
+    initialState: initialState,
     reducers: {
         OWNER_STATE: (state, action: any) => {
             state.ID = action.ID;
@@ -39,16 +45,16 @@ const reviewSlice = createSlice({
         TXT_REVIEW_STATE: (state, action: any) => {
             state.CONTENT = action.CONTENT;
         },
-        EDIT_DELETE_NOTIFY_MODAL: (state, action: PayloadAction<boolean>) => {
+        EDIT_DELETE_NOTIFY_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.editDeleteNotifyModalOn = action.payload;
         },
-        SAME_USER_OWNER: (state, action: PayloadAction<boolean>) => {
+        SAME_USER_OWNER: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.sameUserOwner = action.payload;
         },
-        SET_REVIEW_ID: (state, action: PayloadAction<string>) => {
+        SET_REVIEW_ID: (state, action: toolkitRaw.PayloadAction<string>) => {
             state.reviewId = action.payload;
         },
-        SET_RESTAURANT_ID: (state, action: PayloadAction<string>) => {
+        SET_RESTAURANT_ID: (state, action: toolkitRaw.PayloadAction<string>) => {
             state.restaurantId = action.payload;
         },
     },

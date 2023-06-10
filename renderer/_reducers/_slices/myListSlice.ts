@@ -1,4 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+
+const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
 
 type InitialState = {
     clicked: string;
@@ -38,58 +40,58 @@ const myListSlice = createSlice({
     name: 'myListSlice',
     initialState,
     reducers: {
-        SHOW(state, action: PayloadAction<string>) {
+        SHOW(state, action: toolkitRaw.PayloadAction<string>) {
             state.clicked = action.payload;
         },
-        ORDER_MODAL(state, action: PayloadAction<boolean>) {
+        ORDER_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.orderModalOn = action.payload;
         },
-        ORDER_STANDARD(state, action: PayloadAction<string>) {
+        ORDER_STANDARD(state, action: toolkitRaw.PayloadAction<string>) {
             state.groupNameOrder = action.payload;
         },
-        ADD_GROUP_MODAL(state, action: PayloadAction<boolean>) {
+        ADD_GROUP_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.addGroupModalOn = action.payload;
         },
-        SET_GROUP_NAME(state, action: PayloadAction<null | string>) {
+        SET_GROUP_NAME(state, action: toolkitRaw.PayloadAction<null | string>) {
             state.groupName = action.payload;
         },
-        ICON_STANDARD(state, action: PayloadAction<string>) {
+        ICON_STANDARD(state, action: toolkitRaw.PayloadAction<string>) {
             state.selectedIcon = action.payload;
         },
-        EDIT_GROUP_MODAL(state, action: PayloadAction<boolean>) {
+        EDIT_GROUP_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.editGroupModalOn = action.payload;
         },
-        SET_TARGET_GROUP(state, action: PayloadAction<string>) {
+        SET_TARGET_GROUP(state, action: toolkitRaw.PayloadAction<string>) {
             state.targetGroup = action.payload;
         },
-        COMPARE_ICON(state, action: PayloadAction<boolean>) {
+        COMPARE_ICON(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.sameIcon = action.payload;
         },
-        MOVE_LIST_MODAL(state, action: PayloadAction<boolean>) {
+        MOVE_LIST_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.moveListModalOn = action.payload;
         },
-        INCREASE_CHECKED(state, action: PayloadAction<number>) {
+        INCREASE_CHECKED(state, action: toolkitRaw.PayloadAction<number>) {
             state.countChecked += action.payload;
         },
-        DECREASE_CHECKED(state, action: PayloadAction<number>) {
+        DECREASE_CHECKED(state, action: toolkitRaw.PayloadAction<number>) {
             state.countChecked -= action.payload;
         },
         RESET_CHECKED(state) {
             state.countChecked = 0;
         },
-        COPY_MODAL(state, action: PayloadAction<boolean>) {
+        COPY_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.copyModalOn = action.payload;
         },
-        PUSH_RESTAURANT_LIST(state, action: PayloadAction<string[]>) {
+        PUSH_RESTAURANT_LIST(state, action: toolkitRaw.PayloadAction<string[]>) {
             state.restaurantToMove = action.payload;
         },
-        DELETE_RESTAURANT_LIST(state, action: PayloadAction<string[]>) {
+        DELETE_RESTAURANT_LIST(state, action: toolkitRaw.PayloadAction<string[]>) {
             state.restaurantToMove = action.payload;
         },
-        RESET_RESTAURANT_LIST(state, action: PayloadAction<[]>) {
+        RESET_RESTAURANT_LIST(state, action: toolkitRaw.PayloadAction<[]>) {
             state.restaurantToMove = action.payload;
         },
-        DELETE_LIKELIST_MODAL(state, action: PayloadAction<boolean>) {
+        DELETE_LIKELIST_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.deleteLikeListModalOn = action.payload;
         },
     },

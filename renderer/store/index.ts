@@ -1,5 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
 import rootReducer from '../_reducers/rootReducer.js';
+
+const { configureStore } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
 
 declare global {
     interface Window {

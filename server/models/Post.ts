@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 
 export type CommentInPost = {
+    _id: string;
     owner: string;
     content: string;
     like?: Array<{ user: string }>;
@@ -80,7 +81,6 @@ const postSchema = new Schema({
     },
     comments: [
         {
-            _id: mongoose.Types.ObjectId,
             owner: {
                 type: String,
                 required: true,

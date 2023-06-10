@@ -1,44 +1,37 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
 
-export interface PostSlice {
-    SUBJECT: string;
-    NICKNAME: string;
-    TITLE: string;
-    CONTENT: string;
+const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
+
+type AccessTarget = 'post' | 'comment';
+
+const initialState = {
+    SUBJECT: '',
+    NICKNAME: '',
+    TITLE: '',
+    CONTENT: '',
     image: {
-        FILE_INFO: [];
-        RANDOM_NAME: [];
-    };
+        FILE_INFO: [],
+        RANDOM_NAME: [],
+    },
     post: {
-        TOTAL: number;
-        CURRENT_PAGE: number;
-    };
-    KEYWORD: string;
-}
-
+        TOTAL: 0,
+        CURRENT_PAGE: 1,
+    },
+    KEYWORD: '',
+    BOUNDARY: 'tc',
+    ORDERBY: 'latest',
+    editDeleteNotifyModalOn: false,
+    sameUserOwner: false,
+    postId: '',
+    commentId: '',
+    editMode: false,
+    accessTarget: 'post',
+    editCommentMode: false,
+    txtComment: '',
+};
 const postSlice = createSlice({
     name: 'postSlice',
-    initialState: {
-        SUBJECT: '',
-        NICKNAME: '',
-        TITLE: '',
-        CONTENT: '',
-        image: {
-            FILE_INFO: [],
-            RANDOM_NAME: [],
-        },
-        post: {
-            TOTAL: 0,
-            CURRENT_PAGE: 1,
-        },
-        KEYWORD: '',
-        BOUNDARY: 'tc',
-        ORDERBY: 'latest',
-        editDeleteNotifyModalOn: false,
-        sameUserOwner: false,
-        postId: '',
-        editMode: false,
-    },
+    initialState: initialState,
     reducers: {
         SUBJECT_STATE: (state, action: any) => {
             state.SUBJECT = action.SUBJECT;
@@ -69,21 +62,45 @@ const postSlice = createSlice({
         SEARCH_ORDER: (state, action: any) => {
             state.ORDERBY = action.ORDERBY;
         },
-        EDIT_DELETE_NOTIFY_MODAL: (state, action: PayloadAction<boolean>) => {
+        EDIT_DELETE_NOTIFY_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.editDeleteNotifyModalOn = action.payload;
         },
-        SAME_USER_OWNER: (state, action: PayloadAction<boolean>) => {
+        SAME_USER_OWNER: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.sameUserOwner = action.payload;
         },
-        SET_POST_ID: (state, action: PayloadAction<string>) => {
+        SET_POST_ID: (state, action: toolkitRaw.PayloadAction<string>) => {
             state.postId = action.payload;
         },
-        EDIT_MODE: (state, action: PayloadAction<boolean>) => {
+        SET_COMMENT_ID: (state, action: toolkitRaw.PayloadAction<string>) => {
+            state.commentId = action.payload;
+        },
+        EDIT_MODE: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.editMode = action.payload;
+        },
+        SET_ACCESS_TARGET: (state, action: toolkitRaw.PayloadAction<AccessTarget>) => {
+            // 게시글쪽 더보기 버튼인지 댓글쪽 더보기 버튼인지 구분
+            state.accessTarget = action.payload;
+        },
+        SET_EDIT_COMMENT_MODE: (state, action: toolkitRaw.PayloadAction<boolean>) => {
+            // 댓글 수정 UI 용
+            state.editCommentMode = action.payload;
+        },
+        SET_COMMENT_CONTENT: (state, action: toolkitRaw.PayloadAction<string>) => {
+            // 댓글 수정 텍스트
+            state.txtComment = action.payload;
         },
     },
 });
 
-export const { EDIT_DELETE_NOTIFY_MODAL, SAME_USER_OWNER, SET_POST_ID, EDIT_MODE } = postSlice.actions;
+export const {
+    EDIT_DELETE_NOTIFY_MODAL,
+    SAME_USER_OWNER,
+    SET_POST_ID,
+    SET_COMMENT_ID,
+    EDIT_MODE,
+    SET_ACCESS_TARGET,
+    SET_EDIT_COMMENT_MODE,
+    SET_COMMENT_CONTENT,
+} = postSlice.actions;
 
 export default postSlice.reducer;

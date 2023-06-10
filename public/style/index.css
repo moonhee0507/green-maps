@@ -1557,22 +1557,6 @@ button[aria-label="식당 검색 버튼"] {
   line-height: 23px;
 }
 
-#editCommentTextarea {
-  resize: none;
-  width: 100%;
-  padding: 10px 35px 10px 10px;
-  height: 50px;
-  line-height: 23px;
-  overflow: scroll;
-  scrollbar-width: none; /* firefox */
-  border-radius: 10px;
-  border: 1px solid #d3d3d3;
-  /* edge, chrome */
-}
-#editCommentTextarea::-webkit-scrollbar {
-  display: none;
-}
-
 .main-create-post {
   overflow: scroll;
   scrollbar-width: none; /* firefox */
@@ -2504,15 +2488,6 @@ button[aria-label="식당 검색 버튼"] {
 .button-more.commentitem {
   top: 15px;
   right: 10px;
-}
-
-.button-more.commentitem.edit {
-  width: initial;
-  transform: rotate(0);
-  background: none;
-  font-size: 13px;
-  font-weight: bold;
-  color: #0073e6;
 }
 
 .button-more.postitem {

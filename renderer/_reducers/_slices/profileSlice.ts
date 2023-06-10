@@ -1,4 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+
+const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
 
 const initialState = {
     profileImageModalOn: false,
@@ -14,25 +16,25 @@ const profileSlice = createSlice({
     name: 'profileSlice',
     initialState: initialState,
     reducers: {
-        PROFILE_IMAGE_MODAL(state, action: PayloadAction<boolean>) {
+        PROFILE_IMAGE_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.profileImageModalOn = action.payload;
         },
-        PROFILE_NICKNAME_MODAL(state, action: PayloadAction<boolean>) {
+        PROFILE_NICKNAME_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.profileNickNameModalOn = action.payload;
         },
-        SET_NICKNAME(state, action: PayloadAction<string>) {
+        SET_NICKNAME(state, action: toolkitRaw.PayloadAction<string>) {
             state.prevNickName = action.payload;
         },
-        EDIT_NICKNAME(state, action: PayloadAction<string>) {
+        EDIT_NICKNAME(state, action: toolkitRaw.PayloadAction<string>) {
             state.nextNickName = action.payload;
         },
-        PROFILE_PASSWORD_MODAL(state, action: PayloadAction<boolean>) {
+        PROFILE_PASSWORD_MODAL(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.profilePasswordModalOn = action.payload;
         },
-        PASS_CURRENT_PASSWORD(state, action: PayloadAction<boolean>) {
+        PASS_CURRENT_PASSWORD(state, action: toolkitRaw.PayloadAction<boolean>) {
             state.passCurrentPassword = action.payload;
         },
-        SET_USERID(state, action: PayloadAction<string>) {
+        SET_USERID(state, action: toolkitRaw.PayloadAction<string>) {
             state.userId = action.payload;
         },
     },

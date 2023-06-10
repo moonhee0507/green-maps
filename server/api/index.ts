@@ -11,6 +11,7 @@ import today from './routes/post/today.js';
 import bookmark from './routes/bookmark.js';
 import search from './routes/search.js';
 import oauth from './routes/oauth.js';
+import comment from './routes/comment.js';
 
 export default () => {
     const app = Router();
@@ -25,6 +26,8 @@ export default () => {
     post(app);
     subject(app);
     today(app);
+
+    comment(app);
 
     bookmark(app);
     search(app);

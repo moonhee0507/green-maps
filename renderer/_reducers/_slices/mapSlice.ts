@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import * as toolkitRaw from '@reduxjs/toolkit';
+
+const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
+
 import { Restaurant } from '../../../server/models/Restaurant';
 import { KakaoLocation } from '../../../pages/search/kakaoApi/types';
 
@@ -64,49 +67,49 @@ const mapSlice = createSlice({
         CHANGED_CENTER: (state, action: any) => {
             state.COUNT = action.COUNT;
         },
-        SET_MAP_MODE: (state, action: PayloadAction<MapMode>) => {
+        SET_MAP_MODE: (state, action: toolkitRaw.PayloadAction<MapMode>) => {
             state.mapMode = action.payload;
         },
-        CHANGE_RADIUS_MODAL: (state, action: PayloadAction<boolean>) => {
+        CHANGE_RADIUS_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.radiusModalOn = action.payload;
         },
-        SET_RADIUS: (state, action: PayloadAction<number>) => {
+        SET_RADIUS: (state, action: toolkitRaw.PayloadAction<number>) => {
             state.radius = action.payload;
         },
-        SET_RESULT_IN_RADIUS: (state, action: PayloadAction<Restaurant[]>) => {
+        SET_RESULT_IN_RADIUS: (state, action: toolkitRaw.PayloadAction<Restaurant[]>) => {
             state.resultInRadius = action.payload;
         },
-        SET_NEAREST_LIST: (state, action: PayloadAction<Restaurant[]>) => {
+        SET_NEAREST_LIST: (state, action: toolkitRaw.PayloadAction<Restaurant[]>) => {
             state.nearest = action.payload;
         },
-        CHECK_LOCATION_ACCESS_MODAL: (state, action: PayloadAction<boolean>) => {
+        CHECK_LOCATION_ACCESS_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.checkGeolocationModalOn = action.payload;
         },
-        SET_CURRENT_LOCATION: (state, action: PayloadAction<KakaoLocation>) => {
+        SET_CURRENT_LOCATION: (state, action: toolkitRaw.PayloadAction<KakaoLocation>) => {
             state.currentLocation = action.payload; // 지역버튼에서 사용 중
         },
-        CHANGE_REGION_MODAL: (state, action: PayloadAction<boolean>) => {
+        CHANGE_REGION_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.regionModalOn = action.payload;
         },
-        SET_CURRENT_SIDO: (state, action: PayloadAction<string>) => {
+        SET_CURRENT_SIDO: (state, action: toolkitRaw.PayloadAction<string>) => {
             state.currentSido = action.payload;
         },
-        SET_CURRENT_SIGUNGU: (state, action: PayloadAction<string>) => {
+        SET_CURRENT_SIGUNGU: (state, action: toolkitRaw.PayloadAction<string>) => {
             state.currentSigungu = action.payload;
         },
-        SET_SELECTED_SIDO: (state, action: PayloadAction<string>) => {
+        SET_SELECTED_SIDO: (state, action: toolkitRaw.PayloadAction<string>) => {
             state.selectedSido = action.payload;
         },
-        SET_SELECTED_SIGUNGU: (state, action: PayloadAction<string>) => {
+        SET_SELECTED_SIGUNGU: (state, action: toolkitRaw.PayloadAction<string>) => {
             state.selectedSigungu = action.payload;
         },
-        SHOW_LIST_IN_REGION_MODAL: (state, action: PayloadAction<boolean>) => {
+        SHOW_LIST_IN_REGION_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.showListInRegionModalOn = action.payload;
         },
-        SET_LIST_IN_PAGE: (state, action: PayloadAction<Restaurant[]>) => {
+        SET_LIST_IN_PAGE: (state, action: toolkitRaw.PayloadAction<Restaurant[]>) => {
             state.listInPage = action.payload;
         },
-        SET_TOTAL_IN_REGION: (state, action: PayloadAction<number>) => {
+        SET_TOTAL_IN_REGION: (state, action: toolkitRaw.PayloadAction<number>) => {
             state.totalInRegion = action.payload;
         },
         RESET_LIST_IN_PAGE: (state) => {
@@ -115,22 +118,22 @@ const mapSlice = createSlice({
         RESET_TOTAL_IN_REGION: (state) => {
             state.totalInRegion = 0;
         },
-        CATEGORY_FILTER_MODAL: (state, action: PayloadAction<boolean>) => {
+        CATEGORY_FILTER_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.categoryFilterModalOn = action.payload;
         },
-        ADD_SELECTED_CATEGORY: (state, action: PayloadAction<string[] | '*'>) => {
+        ADD_SELECTED_CATEGORY: (state, action: toolkitRaw.PayloadAction<string[] | '*'>) => {
             state.selectedCategory = action.payload;
         },
-        NO_RESULT_MODAL: (state, action: PayloadAction<boolean>) => {
+        NO_RESULT_MODAL: (state, action: toolkitRaw.PayloadAction<boolean>) => {
             state.noResultModalOn = action.payload;
         },
-        SET_SEARCH_RESULT_IN_PAGE: (state, action: PayloadAction<Restaurant[]>) => {
+        SET_SEARCH_RESULT_IN_PAGE: (state, action: toolkitRaw.PayloadAction<Restaurant[]>) => {
             state.searchResultInPage = action.payload;
         },
-        ADD_SELECTED_CERT: (state, action: PayloadAction<string[] | '*'>) => {
+        ADD_SELECTED_CERT: (state, action: toolkitRaw.PayloadAction<string[] | '*'>) => {
             state.selectedCert = action.payload;
         },
-        SET_ORDER_BY: (state, action: PayloadAction<OrderBy>) => {
+        SET_ORDER_BY: (state, action: toolkitRaw.PayloadAction<OrderBy>) => {
             state.resultOrderBy = action.payload;
         },
     },

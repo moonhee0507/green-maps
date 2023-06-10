@@ -27,6 +27,16 @@
     top: 15px;
     right: 10px;
 }
+.button-more.commentitem.edit {
+    width: initial;
+    -webkit-transform: rotate(0);
+        -ms-transform: rotate(0);
+            transform: rotate(0);
+    background: none;
+    font-size: 13px;
+    font-weight: bold;
+    color: $active-color;
+}
 
 .button-more.postitem {
     top: 22px;

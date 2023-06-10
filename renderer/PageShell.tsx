@@ -1,6 +1,5 @@
 import 'normalize.css';
-import './scss/index.css';
-import logo from '/images/logo.png';
+// import '/style/index.css';
 import React from 'react';
 import store from './store';
 import { Provider } from 'react-redux';

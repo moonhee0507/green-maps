@@ -71,7 +71,6 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                 getListInRadius(currentLocation).then((data) => {
                     if (data.success) {
                         dispatch(SET_RESULT_IN_RADIUS(data.lists));
-                        console.log('반경내', data);
                         optimizeMapLevel(radius);
                     }
                 });
@@ -79,7 +78,6 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                 getNearestList(currentLocation).then((data) => {
                     if (data.success) {
                         dispatch(SET_NEAREST_LIST(data.lists));
-                        console.log('가장가까이', data);
                     }
                 });
             }
