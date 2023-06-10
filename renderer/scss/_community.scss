@@ -87,9 +87,7 @@
     font-weight: bold;
     border: 2px solid $border-color;
     border-radius: 20px;
-    // background-color: $write-button-color;
     background: icon('pen', $svg-active) no-repeat 10px center / 20px 20px, $write-button-color;
-    // background-blend-mode: normal;
 }
 
 .wrapper-posts {
