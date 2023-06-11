@@ -3,6 +3,10 @@
     "outputDirectory": "dist/client",
     "rewrites": [
         {
+            "source": "/assets/:path*",
+            "destination": "/:path*"
+        },
+        {
             "source": "/((?!assets/).*)",
             "destination": "/api/ssr.ts"
         }
