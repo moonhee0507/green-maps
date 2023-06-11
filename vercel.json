@@ -2,8 +2,8 @@
     "outputDirectory": "dist/client",
     "rewrites": [
         {
-            "source": "/((?!assets/).*)",
-            "destination": "/server/index.ts"
+            "source": "/(.*)",
+            "destination": "/"
         }
     ]
 }
