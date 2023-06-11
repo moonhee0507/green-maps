@@ -1,6 +1,5 @@
 {
     "scripts": {
-        "vercel-build": "vite build",
         "dev": "concurrently \"npm run server\" \"start http://localhost:5000\"",
         "prod": "npm run build && npm run server:prod",
         "build": "vite build",
