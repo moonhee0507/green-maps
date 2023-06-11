@@ -20,6 +20,6 @@ function ButtonGoBack() {
 }
 export {
   ButtonGoBack as B,
-  useAppDispatch as a,
-  useAppSelector as u
+  useAppSelector as a,
+  useAppDispatch as u
 };

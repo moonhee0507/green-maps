@@ -1,0 +1,10 @@
+{
+    "framework": "Vite",
+    "outputDirectory": "dist/client",
+    "rewrites": [
+        {
+            "source": "/((?!assets/).*)",
+            "destination": "/api/ssr.ts"
+        }
+    ]
+}

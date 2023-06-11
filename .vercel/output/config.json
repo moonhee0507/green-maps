@@ -19,6 +19,11 @@
       "handle": "filesystem"
     },
     {
+      "src": "^/api/ssr$",
+      "dest": "/api/ssr",
+      "check": true
+    },
+    {
       "src": "^((?!/api).*)$",
       "dest": "/ssr_/?__original_path=$1",
       "check": true
