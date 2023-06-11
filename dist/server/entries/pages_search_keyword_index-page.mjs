@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useRef, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-3c9df877.js";
+import { T as TopBar } from "../chunks/chunk-1b896f75.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
 import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
@@ -8,7 +8,7 @@ import { b as CATEGORIES, c as CategoryItem, R as RestaurantListItem } from "../
 import { A as ADD_SELECTED_CATEGORY, p as ADD_SELECTED_CERT, q as SET_ORDER_BY } from "../chunks/chunk-1d33add3.js";
 import { P as Pagination } from "../chunks/chunk-141dd3d3.js";
 import "react-redux";
-import "../chunks/chunk-f93684d4.js";
+import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-24b72a12.js";
 import "../chunks/chunk-702523f7.js";

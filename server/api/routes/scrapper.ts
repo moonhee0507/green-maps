@@ -7,19 +7,30 @@ export default (app: Router) => {
     app.use('/scrappers', route);
 
     route.post('/save', (req: Request, res: Response) => {
-        const restaurant = new Restaurant(req.body);
+        try {
+            const restaurant = new Restaurant(req.body);
 
-        restaurant.save(async (err, restaurantInfo) => {
-            if (err) {
-                if (err.message.includes('E11000')) {
-                    const filter = { title: req.body.title, address: req.body.address };
-                    const update = { ...req.body };
+            restaurant
+                .save()
+                .then((document) => {
+                    if (Object.hasOwn(document, 'title')) {
+                        res.status(200).json({ saveSuccess: true });
+                    } else {
+                        throw Error;
+                    }
+                })
+                .catch(async (err) => {
+                    if (err.message.includes('E11000')) {
+                        const filter = { title: req.body.title, address: req.body.address };
+                        const update = { ...req.body };
 
-                    await Restaurant.findOneAndUpdate(filter, update);
-                }
-                console.log(err.message);
+                        await Restaurant.findOneAndUpdate(filter, update);
+                    }
+                });
+        } catch (err) {
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
             }
-            return res.status(200).json({ saveSuccess: true });
-        });
+        }
     });
 };

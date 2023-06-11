@@ -39,7 +39,7 @@ function Page(pageProps: PageProps) {
 
             return data;
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }, [currentPage, subject]); // 현재 페이지 바뀌면 새 게시물 가져오기 + 말머리 바뀌면 새 게시물 가져오기
 

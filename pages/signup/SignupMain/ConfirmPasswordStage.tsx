@@ -68,7 +68,7 @@ function ConfirmPasswordStage({
                 navigate('/login');
             } else {
                 alert('회원가입에 실패했습니다');
-                console.log(data.errorMessage);
+                console.error(data.errorMessage);
             }
         } catch (err) {
             console.error(err);

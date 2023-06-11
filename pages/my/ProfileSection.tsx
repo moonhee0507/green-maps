@@ -12,12 +12,9 @@ function ProfileSection({ userInfo }: { userInfo: UserInfo }) {
     async function handleLogout() {
         // 카카오 회원은 카카오 서비스의 토큰 만료시킴
         if (userInfo.host === 'kakao') {
-            const res = await fetch(`${API_URL}/oauth/kakao/logout`, {
+            await fetch(`${API_URL}/oauth/kakao/logout`, {
                 method: 'POST',
             });
-
-            const data = await res.json();
-            console.log(data);
         }
 
         // 그린맵 서비스 로그아웃

@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { T as TopBar } from "../chunks/chunk-3c9df877.js";
+import { T as TopBar } from "../chunks/chunk-1b896f75.js";
 import { a as useAppDispatch } from "../chunks/chunk-a93f9e99.js";
 import { L as LOGGING_IN } from "../chunks/chunk-244a8cdd.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import "react-redux";
-import "../chunks/chunk-f93684d4.js";
+import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 const imgKakao = "/images/icon-kakao.png";
 function SelectStage({ setMove }) {
@@ -143,6 +143,7 @@ function Page() {
     (async () => {
       const res = await fetch(`${API_URL}/users`);
       const data = await res.json();
+      console.log("로그인 페이지의 유저 체크", data);
       if (data.success) {
         alert("접근할 수 없는 페이지입니다.");
         navigate("/search");

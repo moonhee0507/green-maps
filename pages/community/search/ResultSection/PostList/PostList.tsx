@@ -34,10 +34,10 @@ function PostList(props: { posts: Post[]; limit: number }) {
 
         if (currentPage === lastPage) {
             unobserve(target.current);
-            console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 중단`);
+            // console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 중단`);
         } else if (currentPage < lastPage) {
             observe(target.current);
-            console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
+            // console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
         }
     }, [observe, unobserve]);
 

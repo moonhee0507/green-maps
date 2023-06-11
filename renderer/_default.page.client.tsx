@@ -14,8 +14,6 @@ let root: any;
 async function render(pageContext: PageContextClient) {
     const { Page, pageProps, routeParams, token, user, reviews, restaurantInfo } = pageContext;
 
-    console.log('😶‍🌫️😶‍🌫️ 클라이언트사이드 렌더링');
-
     const page = (
         <React.StrictMode>
             <Provider store={store}>

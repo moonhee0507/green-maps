@@ -43,7 +43,7 @@ function SubmitButton(props: { postId: string; content: string | null }) {
                 }
             }
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     }
 

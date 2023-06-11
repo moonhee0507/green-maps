@@ -56,7 +56,6 @@ function CompleteButton({ userInfo, groupList }: { userInfo: UserInfo | null; gr
                 });
 
                 const data = await res.json();
-                console.log(data);
 
                 if (data.success === true) {
                     window.location.reload();
