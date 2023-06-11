@@ -12,7 +12,6 @@
         "@aws-sdk/client-s3": "^3.341.0",
         "@aws-sdk/lib-storage": "^3.341.0",
         "@aws-sdk/s3-request-presigner": "^3.341.0",
-        "@magne4000/vite-plugin-vercel-ssr": "^0.2.0",
         "@reduxjs/toolkit": "^1.9.5",
         "@types/compression": "^1.7.2",
         "@types/express": "^4.17.17",
@@ -45,8 +44,7 @@
         "sirv": "^2.0.3",
         "ts-node": "^10.9.1",
         "typescript": "^5.0.4",
-        "vite-plugin-ssr": "^0.4.131",
-        "vite-plugin-vercel": "^0.2.0"
+        "vite-plugin-ssr": "^0.4.131"
     },
     "type": "module",
     "devDependencies": {
