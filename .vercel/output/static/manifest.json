@@ -9,14 +9,6 @@
   "_chunk-101896b7.js": {
     "file": "assets/chunks/chunk-101896b7.js"
   },
-  "_chunk-10befb9c.js": {
-    "file": "assets/chunks/chunk-10befb9c.js",
-    "imports": [
-      "_chunk-0ad0329c.js",
-      "_chunk-da345742.js",
-      "_chunk-f6dd005f.js"
-    ]
-  },
   "_chunk-17565d16.js": {
     "file": "assets/chunks/chunk-17565d16.js",
     "imports": [
@@ -90,6 +82,14 @@
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-3c838518.js"
+    ]
+  },
+  "_chunk-6ed56ac3.js": {
+    "file": "assets/chunks/chunk-6ed56ac3.js",
+    "imports": [
+      "_chunk-0ad0329c.js",
+      "_chunk-da345742.js",
+      "_chunk-f6dd005f.js"
     ]
   },
   "_chunk-7463a985.js": {
@@ -277,21 +277,22 @@
       "pages/community/index.page.tsx",
       "pages/community/post/index.page.tsx",
       "pages/community/search/index.page.tsx",
+      "pages/home/index.page.tsx",
+      "pages/login/index.page.tsx",
       "pages/my-lists/bookmark/edit/index.page.tsx",
       "pages/my-lists/bookmark/index.page.tsx",
       "pages/my-lists/index.page.tsx",
       "pages/my/index.page.tsx",
+      "pages/search/index.page.tsx",
+      "pages/search/keyword/index.page.tsx",
       "pages/search/restaurant/index.page.tsx",
       "pages/search/restaurant/reviews/create/index.page.tsx",
       "pages/search/restaurant/reviews/edit/index.page.tsx",
+      "pages/signup/index.page.tsx",
       "renderer/_error.page.tsx",
-      "pages/login/index.page.client.tsx",
-      "pages/search/index.page.client.tsx",
-      "pages/search/keyword/index.page.client.tsx",
-      "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-server-routing.4bb5f358.js",
+    "file": "assets/entries/entry-server-routing.be5aaa81.js",
     "imports": [
       "_chunk-af981888.js",
       "_chunk-101896b7.js"
@@ -306,21 +307,22 @@
       "pages/community/index.page.tsx",
       "pages/community/post/index.page.tsx",
       "pages/community/search/index.page.tsx",
+      "pages/home/index.page.tsx",
+      "pages/login/index.page.tsx",
       "pages/my-lists/bookmark/edit/index.page.tsx",
       "pages/my-lists/bookmark/index.page.tsx",
       "pages/my-lists/index.page.tsx",
       "pages/my/index.page.tsx",
+      "pages/search/index.page.tsx",
+      "pages/search/keyword/index.page.tsx",
       "pages/search/restaurant/index.page.tsx",
       "pages/search/restaurant/reviews/create/index.page.tsx",
       "pages/search/restaurant/reviews/edit/index.page.tsx",
+      "pages/signup/index.page.tsx",
       "renderer/_error.page.tsx",
-      "pages/login/index.page.client.tsx",
-      "pages/search/index.page.client.tsx",
-      "pages/search/keyword/index.page.client.tsx",
-      "pages/signup/index.page.client.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-client-routing.4c0a0e0a.js",
+    "file": "assets/entries/entry-client-routing.f1fc8fa1.js",
     "imports": [
       "_chunk-af981888.js",
       "_chunk-101896b7.js",
@@ -381,7 +383,7 @@
     "src": "pages/community/index.page.tsx"
   },
   "pages/community/post/index.page.tsx": {
-    "file": "assets/entries/pages_community_post_index.page.59153646.js",
+    "file": "assets/entries/pages_community_post_index.page.5bbdb674.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-f6dd005f.js",
@@ -391,7 +393,7 @@
       "_chunk-9ae07e36.js",
       "_chunk-dfbf6de9.js",
       "_chunk-41308c4f.js",
-      "_chunk-10befb9c.js",
+      "_chunk-6ed56ac3.js",
       "_chunk-c949b376.js",
       "_chunk-3258e6a6.js",
       "_chunk-da345742.js",
@@ -420,8 +422,17 @@
     "isEntry": true,
     "src": "pages/community/search/index.page.tsx"
   },
-  "pages/login/index.page.client.tsx": {
-    "file": "assets/entries/pages_login_index.page.client.bb14efd5.js",
+  "pages/home/index.page.tsx": {
+    "file": "assets/entries/pages_home_index.page.57a0b2c7.js",
+    "imports": [
+      "_chunk-0ad0329c.js"
+    ],
+    "isDynamicEntry": true,
+    "isEntry": true,
+    "src": "pages/home/index.page.tsx"
+  },
+  "pages/login/index.page.tsx": {
+    "file": "assets/entries/pages_login_index.page.bb14efd5.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-254a5612.js",
@@ -435,7 +446,7 @@
     ],
     "isDynamicEntry": true,
     "isEntry": true,
-    "src": "pages/login/index.page.client.tsx"
+    "src": "pages/login/index.page.tsx"
   },
   "pages/my-lists/bookmark/edit/index.page.tsx": {
     "file": "assets/entries/pages_my-lists_bookmark_edit_index.page.5b0bd8d0.js",
@@ -546,8 +557,8 @@
     "isEntry": true,
     "src": "pages/my/index.page.tsx"
   },
-  "pages/search/index.page.client.tsx": {
-    "file": "assets/entries/pages_search_index.page.client.570c06ba.js",
+  "pages/search/index.page.tsx": {
+    "file": "assets/entries/pages_search_index.page.5f181859.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-f6dd005f.js",
@@ -557,7 +568,7 @@
       "_chunk-8756e824.js",
       "_chunk-32ec8ef6.js",
       "_chunk-c89e2410.js",
-      "_chunk-10befb9c.js",
+      "_chunk-6ed56ac3.js",
       "_chunk-e8bc0b58.js",
       "_chunk-5b1b7faa.js",
       "_chunk-da345742.js",
@@ -575,10 +586,10 @@
     ],
     "isDynamicEntry": true,
     "isEntry": true,
-    "src": "pages/search/index.page.client.tsx"
+    "src": "pages/search/index.page.tsx"
   },
-  "pages/search/keyword/index.page.client.tsx": {
-    "file": "assets/entries/pages_search_keyword_index.page.client.b0032715.js",
+  "pages/search/keyword/index.page.tsx": {
+    "file": "assets/entries/pages_search_keyword_index.page.891d635c.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-254a5612.js",
@@ -586,7 +597,7 @@
       "_chunk-f6dd005f.js",
       "_chunk-c89e2410.js",
       "_chunk-255b6daf.js",
-      "_chunk-10befb9c.js",
+      "_chunk-6ed56ac3.js",
       "_chunk-da345742.js",
       "_chunk-41308c4f.js",
       "_chunk-3c838518.js",
@@ -599,10 +610,10 @@
     ],
     "isDynamicEntry": true,
     "isEntry": true,
-    "src": "pages/search/keyword/index.page.client.tsx"
+    "src": "pages/search/keyword/index.page.tsx"
   },
   "pages/search/restaurant/index.page.tsx": {
-    "file": "assets/entries/pages_search_restaurant_index.page.6ed769ec.js",
+    "file": "assets/entries/pages_search_restaurant_index.page.f7f12f71.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-254a5612.js",
@@ -612,7 +623,7 @@
       "_chunk-9ae07e36.js",
       "_chunk-32ec8ef6.js",
       "_chunk-7962c6c8.js",
-      "_chunk-10befb9c.js",
+      "_chunk-6ed56ac3.js",
       "_chunk-5b1b7faa.js",
       "_chunk-2b326172.js",
       "_chunk-41308c4f.js",
@@ -670,8 +681,8 @@
     "isEntry": true,
     "src": "pages/search/restaurant/reviews/edit/index.page.tsx"
   },
-  "pages/signup/index.page.client.tsx": {
-    "file": "assets/entries/pages_signup_index.page.client.92a508be.js",
+  "pages/signup/index.page.tsx": {
+    "file": "assets/entries/pages_signup_index.page.92a508be.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-254a5612.js",
@@ -686,7 +697,7 @@
     ],
     "isDynamicEntry": true,
     "isEntry": true,
-    "src": "pages/signup/index.page.client.tsx"
+    "src": "pages/signup/index.page.tsx"
   },
   "renderer/_default.page.client.css": {
     "file": "assets/static/default.page.client.9d9ae4af.css",

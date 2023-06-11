@@ -9,7 +9,6 @@ import fetch from 'node-fetch';
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-import config from './config/index.js';
 import routes from './api/index.js';
 import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
@@ -53,7 +52,7 @@ async function startServer() {
     app.use(bodyParser.json());
     app.use(cookieParser());
 
-    app.use(config.api.prefix, routes());
+    app.use('/api', routes());
 
     app.get('*', async (req, res, next) => {
         let pageContextInit: PageContextInit = {
@@ -85,7 +84,9 @@ async function startServer() {
         res.status(statusCode).type(contentType).send(body);
     });
 
-    app.listen(config.port, () => console.log(`🚀 ${config.port}번 포트 실행 중...`));
+    const PORT = process.env.PORT || 5000;
+
+    app.listen(PORT, () => console.log(`🚀 ${PORT}번 포트 실행 중...`));
 }
 
 async function checkToken(token: string): Promise<CheckTokenResponse> {

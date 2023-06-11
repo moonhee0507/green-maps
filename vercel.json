@@ -1,0 +1,7 @@
+{
+    "rewrites": [
+        {
+            "destination": "/server/index.ts"
+        }
+    ]
+}

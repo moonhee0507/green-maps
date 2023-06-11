@@ -9,7 +9,7 @@ import imgCert from '/images/map-cert-location.png';
 import type { Lat, Lng, MongoLocation, MongoPolygon } from './types';
 import type { Restaurant } from './../../../server/models/Restaurant';
 
-const { kakao }: any = window;
+const { kakao }: any = typeof window !== 'undefined' ? window : global;
 
 let isLoggedIn = false;
 

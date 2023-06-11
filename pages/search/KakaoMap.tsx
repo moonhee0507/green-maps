@@ -8,7 +8,6 @@ import { MongoLocation } from './kakaoApi/types';
 export { KakaoMap };
 
 function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
-    const [globalWindow, setGlobalWindow] = useState(false);
     const dispatch = useAppDispatch();
 
     const radius = useAppSelector((state) => state.mapSlice.radius);
@@ -18,21 +17,13 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setGlobalWindow(true);
-        }
+        checkLoginForInfoWindow(isLoggedIn);
+
+        init().then((locPosition: kakao.maps.LatLng) => {
+            setIsInitialized(true);
+            setCurrentLocation([locPosition.getLng(), locPosition.getLat()] as MongoLocation);
+        });
     }, []);
-
-    useEffect(() => {
-        if (globalWindow === true) {
-            checkLoginForInfoWindow(isLoggedIn);
-
-            init().then((locPosition: kakao.maps.LatLng) => {
-                setIsInitialized(true);
-                setCurrentLocation([locPosition.getLng(), locPosition.getLat()] as MongoLocation);
-            });
-        }
-    }, [globalWindow]);
 
     const getListInRadius = useCallback(
         async (currentLocation: MongoLocation) => {

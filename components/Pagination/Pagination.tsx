@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../renderer/store/hooks';
 
@@ -6,7 +6,18 @@ export { Pagination };
 
 function Pagination({ count, perPage }: { count: number; perPage: number }) {
     const dispatch = useDispatch();
+    const [globalWindow, setGlobalWindow] = useState(false);
+    const [currentPath, setCurrentPath] = useState('');
 
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setGlobalWindow(true);
+        }
+    }, []);
+
+    useEffect(() => {
+        setCurrentPath(window.location.pathname);
+    }, [globalWindow]);
     const pageCount = Math.ceil(count / perPage);
 
     const pageNumbers = [];
@@ -26,10 +37,7 @@ function Pagination({ count, perPage }: { count: number; perPage: number }) {
     }
 
     return (
-        <nav
-            className="wrapper-pagination"
-            style={window.location.pathname === '/search' ? { paddingBottom: '0' } : {}}
-        >
+        <nav className="wrapper-pagination" style={currentPath === '/search' ? { paddingBottom: '0' } : {}}>
             <ul>
                 <li>
                     <button

@@ -1,16 +1,17 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { T as TopBar } from "../chunks/chunk-23e6a891.js";
+import { T as TopBar } from "../chunks/chunk-3c9df877.js";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
+import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-a93f9e99.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { A as API_URL } from "../chunks/chunk-8c755a0c.js";
+import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
-import { R as ReviewListItem } from "../chunks/chunk-fdd3f3c8.js";
-import { P as Pagination } from "../chunks/chunk-57667c76.js";
+import { S as Stars } from "../chunks/chunk-82265d98.js";
+import { R as ReviewListItem } from "../chunks/chunk-70299a06.js";
+import { P as Pagination } from "../chunks/chunk-141dd3d3.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
-import "../chunks/chunk-3e2eef8e.js";
+import "../chunks/chunk-f93684d4.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-0c3eed3e.js";
 import "../chunks/chunk-24b72a12.js";
@@ -207,54 +208,6 @@ function Title(props) {
       /* @__PURE__ */ jsx(CopyButton, { address: props.address })
     ] })
   ] });
-}
-function Stars(props) {
-  const [rating] = useState(Number(props.rating));
-  const maxRating = 5;
-  try {
-    if (maxRating < rating) {
-      throw new Error("해당 식당의 평점 데이터가 올바르지 않습니다.");
-    }
-  } catch (e) {
-    console.error(e.message);
-  }
-  const [arrStar] = useState(() => {
-    const maxInt = Math.floor(rating);
-    const rest = rating - maxInt;
-    return new Array(maxRating).fill(0).map((_, i) => {
-      if (i <= maxInt - 1)
-        return 100;
-      else if (i === maxInt)
-        return rest * 100;
-      else
-        return 0;
-    });
-  });
-  return /* @__PURE__ */ jsxs("div", { className: "container-rating", children: [
-    arrStar.map((percent, i) => {
-      return /* @__PURE__ */ jsx(Star, { id: i + 1, percent }, i + 1);
-    }),
-    window.location.pathname !== "/search" && /* @__PURE__ */ jsxs("span", { children: [
-      "(",
-      rating.toFixed(1),
-      ")"
-    ] })
-  ] });
-}
-function Star(props) {
-  return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsxs("svg", { xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 576 512", width: 30, children: [
-    /* @__PURE__ */ jsx("defs", { children: /* @__PURE__ */ jsxs("linearGradient", { id: `starSegre${props.id}`, gradientTransform: "rotate(0)", children: [
-      /* @__PURE__ */ jsx("stop", { offset: `${props.percent}%`, stopColor: "#fc0" }),
-      /* @__PURE__ */ jsx("stop", { offset: `${props.percent}%`, stopColor: "#d3d3d3" })
-    ] }) }),
-    /* @__PURE__ */ jsx(
-      "path",
-      {
-        d: "M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z",
-        fill: `url('#starSegre${props.id}')`
-      }
-    )
-  ] }) });
 }
 function PrimarySection({ restaurantInfo, isLoggedIn }) {
   const { _id, title, address, category, rating, certification } = restaurantInfo;

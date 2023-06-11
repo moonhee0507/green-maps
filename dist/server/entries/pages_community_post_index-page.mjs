@@ -1,15 +1,16 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from "react";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-23e6a891.js";
+import { T as TopBar } from "../chunks/chunk-3c9df877.js";
 import DOMPurify from "isomorphic-dompurify";
-import { A as API_URL } from "../chunks/chunk-8c755a0c.js";
+import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
 import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
-import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
-import { P as Pagination } from "../chunks/chunk-57667c76.js";
+import { E as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, a as SET_POST_ID, b as SET_ACCESS_TARGET, c as SET_COMMENT_ID, d as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-f93684d4.js";
+import { P as Pagination } from "../chunks/chunk-141dd3d3.js";
 import { navigate } from "vite-plugin-ssr/client/router";
+import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 function TextArea(props) {
@@ -343,14 +344,6 @@ function CommentSection({
     /* @__PURE__ */ jsx(CommentList, { postId, comments: commentInPage, userInfo }),
     comments && comments.length > perPage ? /* @__PURE__ */ jsx(Pagination, { count: comments.length, perPage }) : null
   ] });
-}
-function appModalMode(option) {
-  const app = document.querySelector(".app");
-  if (option) {
-    app == null ? void 0 : app.classList.add("modal-mode");
-  } else {
-    app == null ? void 0 : app.classList.remove("modal-mode");
-  }
 }
 function EditDeleteNotifyModal() {
   const [show, setShow] = useState(false);

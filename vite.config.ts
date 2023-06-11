@@ -1,18 +1,18 @@
 import react from '@vitejs/plugin-react';
 import ssr from 'vite-plugin-ssr/plugin';
+import vercel from 'vite-plugin-vercel';
 import vercelSsr from '@magne4000/vite-plugin-vercel-ssr';
-import { UserConfig } from 'vite';
+import { defineConfig, UserConfig } from 'vite';
 
-const config: UserConfig = {
-    plugins: [react(), ssr({ prerender: false }), vercelSsr()],
-    build: {
-        manifest: true,
-    },
-    server: {
-        middlewareMode: true,
-        port: 5000,
-    },
-    vercel: {},
-};
-
-export default config;
+export default defineConfig(async ({ command, mode }) => {
+    return {
+        plugins: [react(), ssr({ prerender: false }), vercel(), vercelSsr()],
+        build: {
+            manifest: true,
+        },
+        server: {
+            middlewareMode: true,
+            port: 5000,
+        },
+    } as UserConfig;
+});

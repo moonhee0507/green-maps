@@ -1,0 +1,59 @@
+{
+  "version": 3,
+  "routes": [
+    {
+      "src": "^/(?:(.+)/)?index(?:\\.html)?/?$",
+      "headers": {
+        "Location": "/$1"
+      },
+      "status": 308
+    },
+    {
+      "src": "^/(.*)\\.html/?$",
+      "headers": {
+        "Location": "/$1"
+      },
+      "status": 308
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "^((?!/api).*)$",
+      "dest": "/ssr_/?__original_path=$1",
+      "check": true
+    }
+  ],
+  "overrides": {
+    "404.html": {
+      "path": "404"
+    },
+    "community\\create\\index.html": {
+      "path": "community\\create"
+    },
+    "community\\index.html": {
+      "path": "community"
+    },
+    "index.html": {
+      "path": ""
+    },
+    "login\\index.html": {
+      "path": "login"
+    },
+    "my\\index.html": {
+      "path": "my"
+    },
+    "my-lists\\bookmark\\edit\\index.html": {
+      "path": "my-lists\\bookmark\\edit"
+    },
+    "my-lists\\index.html": {
+      "path": "my-lists"
+    },
+    "search\\index.html": {
+      "path": "search"
+    },
+    "signup\\index.html": {
+      "path": "signup"
+    }
+  }
+}

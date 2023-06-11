@@ -1,18 +1,19 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { T as TopBar } from "../chunks/chunk-23e6a891.js";
+import { T as TopBar } from "../chunks/chunk-3c9df877.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { I as IMG_URL, A as API_URL } from "../chunks/chunk-8c755a0c.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
+import { I as IMG_URL, A as API_URL } from "../chunks/chunk-7d23cd09.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
 import { P as PROFILE_IMAGE_MODAL, a as PROFILE_NICKNAME_MODAL, S as SET_NICKNAME, b as PROFILE_PASSWORD_MODAL, c as SET_USERID, E as EDIT_NICKNAME, d as PASS_CURRENT_PASSWORD } from "../chunks/chunk-ef8ab02b.js";
-import { R as ReviewListItem } from "../chunks/chunk-fdd3f3c8.js";
+import { R as ReviewListItem } from "../chunks/chunk-70299a06.js";
 import { P as PostList } from "../chunks/chunk-82dea4d2.js";
 import { r as randomizeFileName } from "../chunks/chunk-8649d624.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
+import { v as validatePassword } from "../chunks/chunk-22884288.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { E as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, a as SET_REVIEW_ID, b as SET_RESTAURANT_ID } from "../chunks/chunk-4ef07e33.js";
 import "react-redux";
-import "../chunks/chunk-3e2eef8e.js";
+import "../chunks/chunk-f93684d4.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-24b72a12.js";
 import "../chunks/chunk-0c3eed3e.js";
@@ -584,10 +585,6 @@ function EditNickNameModal() {
     /* @__PURE__ */ jsx("button", { type: "button", className: "button-close", onClick: handleClose, children: /* @__PURE__ */ jsx("img", { src: imgClose, alt: "X 아이콘", className: "img-close" }) })
   ] });
 }
-const validatePassword = (str) => {
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*-+_=?]).{8,}$/g;
-  return regex.test(str);
-};
 function NewPassword() {
   const dispatch = useAppDispatch();
   const [disabled, setDisabled] = useState(true);
