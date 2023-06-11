@@ -12,6 +12,7 @@ export default defineConfig(async ({ command, mode }) => {
         },
         server: {
             middlewareMode: true,
+            host: true,
             port: 5000,
         },
     } as UserConfig;

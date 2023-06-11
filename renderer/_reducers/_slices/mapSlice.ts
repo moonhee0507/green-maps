@@ -1,6 +1,6 @@
 import * as toolkitRaw from '@reduxjs/toolkit';
 
-const { createSlice } = ((toolkitRaw as any).default ?? toolkitRaw) as typeof toolkitRaw;
+const { createSlice } = ((toolkitRaw as any)?.default ?? toolkitRaw) as typeof toolkitRaw;
 
 import { Restaurant } from '../../../server/models/Restaurant';
 import { KakaoLocation } from '../../../pages/search/kakaoApi/types';
