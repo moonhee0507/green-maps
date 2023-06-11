@@ -28,7 +28,7 @@ const arrMarker: kakao.maps.Marker[] = [];
 const arrInfowindow: kakao.maps.InfoWindow[] = [];
 
 export function init(): Promise<kakao.maps.LatLng> {
-    return new Promise((resolve, reject) => {
+    kakao.maps.load(function () {
         const mapContainer = document.getElementById('map'); // 지도를 표시할 div
         const mapOption = {
             center: new kakao.maps.LatLng(37.5666805, 126.9784147), // 지도의 중심좌표 <- 서울시청
@@ -36,7 +36,9 @@ export function init(): Promise<kakao.maps.LatLng> {
         };
 
         map = new kakao.maps.Map(mapContainer, mapOption); // 지도생성
+    });
 
+    return new Promise((resolve, reject) => {
         // HTML5의 geolocation으로 사용할 수 있는지 확인
         if (navigator.geolocation) {
             // GeoLocation을 이용해서 접속 위치를 얻어오기

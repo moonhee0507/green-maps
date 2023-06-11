@@ -25,10 +25,6 @@ async function onBeforeRender(pageContext) {
     };
   }
 }
-function prerender() {
-  return [{ url: "/search/@restaurantId/reviews/create" }];
-}
 export {
-  onBeforeRender,
-  prerender
+  onBeforeRender
 };

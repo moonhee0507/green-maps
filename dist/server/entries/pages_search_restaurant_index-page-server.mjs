@@ -25,10 +25,6 @@ async function onBeforeRender(pageContext) {
     };
   }
 }
-function prerender() {
-  return [{ url: "/search/@restaurantId" }];
-}
 export {
-  onBeforeRender,
-  prerender
+  onBeforeRender
 };

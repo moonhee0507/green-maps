@@ -1,5 +1,8 @@
-import Hammer, { DIRECTION_HORIZONTAL } from 'hammerjs';
 import { RefObject, useEffect, useRef } from 'react';
+// import Hammer from 'hammerjs';
+// import * as hammerJs from 'hammerjs';
+
+// const { DIRECTION_HORIZONTAL } = ((hammerJs as any).default ?? hammerJs) as typeof hammerJs;
 
 type PanCallback = HammerListener;
 
@@ -15,22 +18,27 @@ export default function useSwipeHook({ elRef, onDragMove }: UseSwipeHookProps) {
     dragMoveRef.current = onDragMove;
 
     useEffect(() => {
-        if (!elRef || !elRef.current) {
-            console.error('useSwipe hook은 swipe 컨테이너를 참조해야 합니다.');
+        let manager: HammerManager;
+        import('hammerjs').then((module) => {
+            const { DIRECTION_HORIZONTAL } = module;
 
-            return;
-        }
+            if (!elRef || !elRef.current) {
+                console.error('useSwipe hook은 swipe 컨테이너를 참조해야 합니다.');
 
-        const container = elRef.current;
-        const manager = new Hammer.Manager(container);
-        const Drag = new Hammer.Pan({ threshold: 10, direction: DIRECTION_HORIZONTAL });
+                return;
+            }
 
-        manager.add(Drag);
-        manager.on('panmove', (event: HammerInput) => dragMoveRef.current && dragMoveRef.current(event));
+            const container = elRef.current;
+            manager = new Hammer.Manager(container);
+            const Drag = new Hammer.Pan({ threshold: 10, direction: DIRECTION_HORIZONTAL });
 
-        return () => {
-            manager.off('panstart');
-            manager.off('panmove');
-        };
+            manager.add(Drag);
+            manager.on('panmove', (event: HammerInput) => dragMoveRef.current && dragMoveRef.current(event));
+
+            return () => {
+                manager.off('panstart');
+                manager.off('panmove');
+            };
+        });
     }, [dragMoveRef]);
 }

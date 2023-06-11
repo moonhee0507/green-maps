@@ -62,7 +62,7 @@ async function render(pageContext: PageContextServer) {
             <script type="text/javascript">
                 var global = global || window;
                 window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)};
-                
+
                 const map = document.getElementById("map");
                 if (map) {
                     map.addEventListener('touchmove');

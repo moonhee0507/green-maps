@@ -9,7 +9,6 @@ type Params = {
 };
 
 export { onBeforeRender };
-export { prerender };
 
 async function onBeforeRender(pageContext: PageContext) {
     const { reviewId } = pageContext.routeParams as Params;
@@ -26,8 +25,4 @@ async function onBeforeRender(pageContext: PageContext) {
             },
         };
     }
-}
-
-function prerender() {
-    return [{ url: '/search/@restaurantId/reviews/@reviewId/edit' }];
 }

@@ -14,10 +14,6 @@ async function onBeforeRender(pageContext) {
     };
   }
 }
-function prerender() {
-  return [{ url: "/search/@restaurantId/reviews/@reviewId/edit" }];
-}
 export {
-  onBeforeRender,
-  prerender
+  onBeforeRender
 };

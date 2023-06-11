@@ -8,7 +8,6 @@ type Params = {
 };
 
 export { onBeforeRender };
-export { prerender };
 
 async function onBeforeRender(pageContext: PageContext) {
     const { restaurantId } = pageContext.routeParams as Params;
@@ -37,8 +36,4 @@ async function onBeforeRender(pageContext: PageContext) {
             },
         };
     }
-}
-
-function prerender() {
-    return [{ url: '/search/@restaurantId/reviews/create' }];
 }

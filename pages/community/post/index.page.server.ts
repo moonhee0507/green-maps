@@ -3,7 +3,6 @@ import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
 
 export { onBeforeRender };
-export { prerender };
 
 // /community에서 넘어오면 CSR이고, 새로고침되면 SSR
 async function onBeforeRender(pageContext: PageContextBuiltIn) {
@@ -25,8 +24,4 @@ async function onBeforeRender(pageContext: PageContextBuiltIn) {
     } catch (err) {
         console.error(err);
     }
-}
-
-function prerender() {
-    return [{ url: '/community/@postId' }];
 }

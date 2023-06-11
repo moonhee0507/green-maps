@@ -3,7 +3,6 @@ import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 
 export { onBeforeRender };
-export { prerender };
 
 async function onBeforeRender(pageContext: PageContextBuiltIn) {
     const { keyword } = pageContext.routeParams;
@@ -25,8 +24,4 @@ async function onBeforeRender(pageContext: PageContextBuiltIn) {
     } catch (err) {
         console.error(err);
     }
-}
-
-function prerender() {
-    return [{ url: '/community/search/@keyword' }];
 }

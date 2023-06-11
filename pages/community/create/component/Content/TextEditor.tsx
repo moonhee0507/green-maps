@@ -1,10 +1,12 @@
 import React, { useEffect, useState, Suspense } from 'react';
-import { EditorState, convertToRaw, convertFromHTML, ContentState } from 'draft-js';
+import * as draftJs from 'draft-js';
+const { EditorState, convertToRaw, convertFromHTML, ContentState } = ((draftJs as any).default ??
+    draftJs) as typeof draftJs;
+
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 import toolbar from './toolbar';
 import { useDispatch } from 'react-redux';
-import { useAppSelector } from '../../../../../renderer/store/hooks';
 import type { Post } from '../../../../../server/models/Post';
 
 export { TextEditor };
@@ -14,9 +16,7 @@ function TextEditor({ postInfo }: { postInfo?: Post | null }) {
 
     const [isMounted, setIsMounted] = useState<boolean>(false);
     const [Component, setComponent] = useState<React.ComponentType<any> | null>(null);
-    const [editorState, setEditorState] = useState<EditorState>(EditorState.createEmpty());
-
-    const editMode = useAppSelector((state) => state.postSlice.editMode);
+    const [editorState, setEditorState] = useState<draftJs.EditorState>(EditorState.createEmpty());
 
     useEffect(() => {
         const loadComponent = async () => {
@@ -43,7 +43,7 @@ function TextEditor({ postInfo }: { postInfo?: Post | null }) {
         }
     }, [isMounted, postInfo]);
 
-    const handleChange = (newEditorState: EditorState) => {
+    const handleChange = (newEditorState: draftJs.EditorState) => {
         if (isMounted) {
             setEditorState(newEditorState);
             dispatch({

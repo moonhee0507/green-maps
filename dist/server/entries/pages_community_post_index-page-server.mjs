@@ -19,10 +19,6 @@ async function onBeforeRender(pageContext) {
     console.error(err);
   }
 }
-function prerender() {
-  return [{ url: "/community/@postId" }];
-}
 export {
-  onBeforeRender,
-  prerender
+  onBeforeRender
 };
