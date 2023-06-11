@@ -32,6 +32,12 @@ startServer();
 
 async function startServer() {
     const app = express();
+    app.use(compression());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+    app.use(cookieParser());
+
+    app.use('/api', routes());
 
     if (isProduction) {
         const sirv = (await import('sirv')).default;
@@ -46,13 +52,6 @@ async function startServer() {
         ).middlewares;
         app.use(viteDevMiddleware);
     }
-
-    app.use(compression());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
-    app.use(cookieParser());
-
-    app.use('/api', routes());
 
     app.get('*', async (req, res, next) => {
         let pageContextInit: PageContextInit = {
