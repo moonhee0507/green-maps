@@ -7,12 +7,15 @@ export async function onBeforeRender(pageContext: PageContext) {
     const { user } = pageContext;
 
     const res = await fetch(`${API_URL}/reviews/my?owner=${typeof user !== 'undefined' ? user.info?.userId : null}`);
-    const data = (await res.json()) as { success: boolean; reviews: Review[] };
 
-    return {
-        pageContext: {
-            user: user,
-            reviews: data.reviews,
-        },
-    };
+    if (res.ok) {
+        const data = (await res.json()) as { success: boolean; reviews: Review[] };
+
+        return {
+            pageContext: {
+                user: user,
+                reviews: data.reviews,
+            },
+        };
+    }
 }
