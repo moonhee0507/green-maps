@@ -7,6 +7,9 @@ const route = Router();
 
 export default (app: Router) => {
     app.use('/users', route);
+    app.use((req: Request, res: Response) => {
+        res.header('Access-Control-Allow-Origin', 'https://green-maps-git-preview-moonhee0507.vercel.app');
+    });
 
     route.get('/', auth, async (req: any, res: Response) => {
         try {

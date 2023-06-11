@@ -22,7 +22,7 @@ function Page() {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch(`${API_URL}/users`);
+            const res = await fetch(`${API_URL}/users/`);
             const data = await res.json();
 
             if (data.success === true) setIsLoggedIn(true);
