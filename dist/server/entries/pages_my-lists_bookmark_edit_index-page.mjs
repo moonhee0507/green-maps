@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-1b896f75.js";
+import { T as TopBar } from "../chunks/chunk-8a4fa2ca.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
 import { E as EDIT_GROUP_MODAL, a as SET_TARGET_GROUP, I as ICON_STANDARD, c as SET_GROUP_NAME, h as COMPARE_ICON, b as ORDER_STANDARD, O as ORDER_MODAL } from "../chunks/chunk-62270999.js";
@@ -180,7 +180,6 @@ function CompleteButton({ userInfo, groupList }) {
           })
         });
         const data = await res.json();
-        console.log(data);
         if (data.success === true) {
           window.location.reload();
         } else {

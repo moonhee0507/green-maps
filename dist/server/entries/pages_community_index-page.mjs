@@ -173,10 +173,8 @@ function PostList(props) {
     const currentPage = store.getState().postSlice.post.CURRENT_PAGE;
     if (currentPage === lastPage) {
       unobserve(target.current);
-      console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 중단`);
     } else if (currentPage < lastPage) {
       observe(target.current);
-      console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
     }
   }, [observe, unobserve]);
   return /* @__PURE__ */ jsx("ul", { className: "wrapper-posts", children: posts.filter((post) => post.subject !== "공지사항").map((post, i) => {
@@ -248,7 +246,7 @@ function Page(pageProps) {
       const data = await res.json();
       return data;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }, [currentPage, subject]);
   const dispatch = useDispatch();

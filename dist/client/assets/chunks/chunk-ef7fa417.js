@@ -1,1 +1,0 @@
-import{t as n}from"./chunk-41308c4f.js";const{createSlice:t}=n,i=t({name:"loginSlice",initialState:{isLoggingIn:!1},reducers:{LOGGING_IN:(o,e)=>{o.isLoggingIn=e.payload}}}),{LOGGING_IN:c}=i.actions,l=i.reducer;export{c as L,l};

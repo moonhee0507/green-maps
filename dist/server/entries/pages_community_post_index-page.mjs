@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-1b896f75.js";
+import { T as TopBar } from "../chunks/chunk-8a4fa2ca.js";
 import DOMPurify from "isomorphic-dompurify";
 import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
@@ -170,7 +170,7 @@ function SubmitButton(props) {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
   return /* @__PURE__ */ jsx(

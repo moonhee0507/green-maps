@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { T as TopBar } from "../chunks/chunk-1b896f75.js";
+import { T as TopBar } from "../chunks/chunk-8a4fa2ca.js";
 import { a as useAppDispatch } from "../chunks/chunk-a93f9e99.js";
 import { L as LOGGING_IN } from "../chunks/chunk-244a8cdd.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
@@ -138,17 +138,12 @@ function LoginMain() {
     /* @__PURE__ */ jsx(PasswordStage, { setMove })
   ] }) });
 }
-function Page() {
+function Page(pageContext) {
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API_URL}/users`);
-      const data = await res.json();
-      console.log("로그인 페이지의 유저 체크", data);
-      if (data.success) {
-        alert("접근할 수 없는 페이지입니다.");
-        navigate("/search");
-      }
-    })();
+    if (pageContext.user.isLoggedIn) {
+      alert("접근할 수 없는 페이지입니다.");
+      navigate("/search");
+    }
   }, []);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "로그인" }),

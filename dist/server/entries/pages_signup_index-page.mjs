@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-1b896f75.js";
+import { T as TopBar } from "../chunks/chunk-8a4fa2ca.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { a as useAppDispatch } from "../chunks/chunk-a93f9e99.js";
 import { S as SIGNING_UP } from "../chunks/chunk-6f77cb2d.js";
@@ -209,7 +209,7 @@ function ConfirmPasswordStage({
         navigate("/login");
       } else {
         alert("회원가입에 실패했습니다");
-        console.log(data.errorMessage);
+        console.error(data.errorMessage);
       }
     } catch (err) {
       console.error(err);

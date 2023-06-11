@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { T as TopBar } from "../chunks/chunk-1b896f75.js";
+import { T as TopBar } from "../chunks/chunk-8a4fa2ca.js";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-a93f9e99.js";
@@ -172,7 +172,10 @@ function LikeButton({ restaurantId, isLoggedIn }) {
 }
 const imgShare = "/images/icon-share.svg";
 function ShareButton() {
-  return /* @__PURE__ */ jsxs("button", { className: "button-share", onClick: () => console.log("공유하기"), type: "button", children: [
+  const handleClick = () => {
+    alert("준비 중인 서비스입니다.");
+  };
+  return /* @__PURE__ */ jsxs("button", { className: "button-share", onClick: handleClick, type: "button", children: [
     /* @__PURE__ */ jsx("img", { src: imgShare, alt: "공유하기 이미지", className: "img-share" }),
     /* @__PURE__ */ jsx("span", { className: "txt-share", children: "공유하기" })
   ] });
