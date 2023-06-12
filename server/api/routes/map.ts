@@ -9,7 +9,7 @@ export default (app: Router) => {
     app.use('/map', route);
 
     // 현재 화면 내에 있는 식당 가져오기(마커 표시용)
-    route.post('/current-view', cors, async (req: Request, res: Response) => {
+    route.post('/current-view', async (req: Request, res: Response) => {
         try {
             const lists = await Restaurant.find({
                 location: {
@@ -29,7 +29,7 @@ export default (app: Router) => {
     });
 
     // 반경 내 식당을 가까운 순서대로 가져오기
-    route.post('/within-radius-of', cors, async (req: Request, res: Response) => {
+    route.post('/within-radius-of', async (req: Request, res: Response) => {
         try {
             const currentLocation = req.body.currentLocation;
             const category: string[] | '*' = req.body.category;
@@ -72,7 +72,7 @@ export default (app: Router) => {
     });
 
     // 가장 가까운 식당 TOP n 가져오기
-    route.post('/nearest', cors, async (req: Request, res: Response) => {
+    route.post('/nearest', async (req: Request, res: Response) => {
         try {
             const currentLocation = req.body.currentLocation;
 
