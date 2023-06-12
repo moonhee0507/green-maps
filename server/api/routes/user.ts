@@ -2,14 +2,13 @@ import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
 import auth from '../../middleware/auth.js';
 import Bookmark from '../../models/Bookmark.js';
-import cors from '../../middleware/cors.js';
 
 const route = Router();
 
 export default (app: Router) => {
     app.use('/users', route);
 
-    route.get('/', cors, auth, async (req: any, res: Response) => {
+    route.get('/', auth, async (req: any, res: Response) => {
         try {
             const user = await User.findOne({ token: req.token }).exec();
             if (!user) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
