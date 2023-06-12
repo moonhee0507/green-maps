@@ -2,7 +2,6 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../renderer/store/hooks';
 import { LOGGING_IN } from '../../../renderer/_reducers/_slices/loginSlice';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
-import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { PasswordStage };
 
@@ -53,8 +52,7 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
             if (data.success) {
                 alert('🎉🎉로그인에 성공했습니다🎉🎉');
-                // 뒤로가기 + 새로고침
-                navigate('/search');
+                window.location.href = '/search';
             } else {
                 alert('로그인에 실패했습니다');
             }
