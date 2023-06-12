@@ -367,11 +367,8 @@ async function getListInCurrentView(polygon) {
   const res = await fetch(`${API_URL}/map/current-view`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Request-Method": "POST",
-      "Access-Control-Request-Headers": "Content-Type"
+      "Content-Type": "application/json"
     },
-    mode: "no-cors",
     body: JSON.stringify(polygon)
   });
   const data = await res.json();
@@ -947,37 +944,36 @@ function KakaoMap({ isLoggedIn: isLoggedIn2 }) {
   }, []);
   const getListInRadius = useCallback(
     async (currentLocation2) => {
-      const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
-        method: "POST",
-        headers: {
-          "Access-Control-Request-Method": "POST",
-          "Access-Control-Request-Headers": "Content-Type",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ currentLocation: currentLocation2, category: selectedCategory })
-      });
-      const data = await res.json();
-      return data;
+      if (Array.isArray(currentLocation2)) {
+        const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ currentLocation: currentLocation2, category: selectedCategory })
+        });
+        const data = await res.json();
+        return data;
+      }
     },
-    [radius, selectedCategory]
+    [radius, selectedCategory, currentLocation]
   );
   const getNearestList = useCallback(
     async (currentLocation2) => {
-      const count = 5;
-      const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
-        // TODO: cors
-        method: "POST",
-        headers: {
-          "Access-Control-Request-Method": "POST",
-          "Access-Control-Request-Headers": "Content-Type",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ currentLocation: currentLocation2 })
-      });
-      const data = await res.json();
-      return data;
+      if (Array.isArray(currentLocation2)) {
+        const count = 5;
+        const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ currentLocation: currentLocation2 })
+        });
+        const data = await res.json();
+        return data;
+      }
     },
-    [radius]
+    [radius, currentLocation]
   );
   useEffect(() => {
     if (isInitialized) {
@@ -997,7 +993,7 @@ function KakaoMap({ isLoggedIn: isLoggedIn2 }) {
         });
       }
     }
-  }, [radius, isInitialized, selectedCategory]);
+  }, [radius, isInitialized, selectedCategory, currentLocation]);
   return /* @__PURE__ */ jsx("div", { id: "map" });
 }
 function CountMessage() {

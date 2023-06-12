@@ -12,7 +12,6 @@ const cors = (req: any, res: Response, next: NextFunction) => {
 
     if (req.method === 'OPTIONS') {
         res.status(200).end();
-        console.log('프리플라잇');
         return;
     }
 
