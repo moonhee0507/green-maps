@@ -20,6 +20,8 @@ export default async function handler(req: Request, res: Response) {
 
     const { body, statusCode, contentType } = httpResponse;
     res.statusCode = statusCode;
+
+    console.log('handler', contentType);
     res.setHeader('Content-Type', contentType);
 
     res.end(body);

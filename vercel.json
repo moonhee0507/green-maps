@@ -18,22 +18,5 @@
             ]
         }
     ],
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/" },
-        {
-            "source": "/api/map/current-view",
-            "destination": "/api/map/current-view",
-            "has": [
-                { "type": "header", "key": "Content-Type", "value": "application/json" },
-                { "type": "header", "key": "Access-Control-Allow-Credentials", "value": "true" },
-                {
-                    "type": "header",
-                    "key": "Access-Control-Allow-Origin",
-                    "value": "https://green-maps-git-preview-moonhee0507.vercel.app"
-                },
-                { "type": "header", "key": "Access-Control-Allow-Methods", "value": "POST" },
-                { "type": "header", "key": "Access-Control-Allow-Headers", "value": "Content-Type" }
-            ]
-        }
-    ]
+    "rewrites": [{ "source": "/(.*)", "destination": "/api" }]
 }
