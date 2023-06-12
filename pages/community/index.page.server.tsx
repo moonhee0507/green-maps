@@ -1,5 +1,6 @@
 import fetch from 'node-fetch';
 import { API_URL } from '../../renderer/CONSTANT_URL';
+import { Post } from '../../server/models/Post';
 
 export { onBeforeRender };
 
@@ -8,13 +9,20 @@ async function onBeforeRender() {
     try {
         const res = await fetch(`${API_URL}/posts/`);
 
-        const postProps = await res.json();
+        if (res.ok) {
+            const postProps = (await res.json()) as {
+                total: number;
+                countLimit: number;
+                currentPage: number;
+                lists: Post[];
+            };
 
-        const pageProps = { postProps };
+            const pageProps = { postProps };
 
-        return {
-            pageContext: { pageProps },
-        };
+            return {
+                pageContext: { pageProps },
+            };
+        }
     } catch (err) {
         console.error(err);
     }

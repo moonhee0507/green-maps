@@ -12,9 +12,11 @@ import bookmark from './routes/bookmark.js';
 import search from './routes/search.js';
 import oauth from './routes/oauth.js';
 import comment from './routes/comment.js';
+import allowCors from '../middleware/allowCors.js';
 
 export default () => {
     const app = Router();
+    app.use(allowCors);
 
     user(app);
     restaurant(app);

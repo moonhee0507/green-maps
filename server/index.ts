@@ -12,6 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 import routes from './api/index.js';
 import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
+import allowCors from './middleware/allowCors.js';
 
 type PageContextInit = {
     urlOriginal: string;
@@ -32,6 +33,12 @@ startServer();
 
 async function startServer() {
     const app = express();
+    app.use(compression());
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json());
+    app.use(cookieParser());
+
+    app.use('/api', routes());
 
     if (isProduction) {
         const sirv = (await import('sirv')).default;
@@ -47,13 +54,6 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
-    app.use(compression());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
-    app.use(cookieParser());
-
-    app.use('/api', routes());
-
     app.get('*', async (req, res, next) => {
         let pageContextInit: PageContextInit = {
             urlOriginal: req.originalUrl,
@@ -66,7 +66,6 @@ async function startServer() {
 
         await checkToken(req.cookies.auth).then((data) => {
             if (data) {
-                console.log('index 서버의 유저 체크', data);
                 pageContextInit = {
                     ...pageContextInit,
                     user: {
@@ -76,12 +75,13 @@ async function startServer() {
                 };
             }
         });
-
         const pageContext = await renderPage(pageContextInit);
+        console.log(pageContext);
         const { httpResponse } = pageContext;
         if (!httpResponse) return next();
         const { body, statusCode, contentType, earlyHints } = httpResponse;
         if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) });
+
         res.status(statusCode).type(contentType).send(body);
     });
 

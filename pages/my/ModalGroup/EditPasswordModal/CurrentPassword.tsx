@@ -29,11 +29,11 @@ function CurrentPassword() {
 
         const data = await res.json();
 
-        console.log(data);
         if (data.success) {
             dispatch(PASS_CURRENT_PASSWORD(true));
         } else {
             dispatch(PASS_CURRENT_PASSWORD(false));
+            alert('틀린 비밀번호입니다.');
         }
     };
 

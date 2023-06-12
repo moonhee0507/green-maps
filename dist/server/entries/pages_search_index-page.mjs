@@ -1,15 +1,14 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { u as useAppDispatch, B as ButtonGoBack, a as useAppSelector } from "../chunks/chunk-9e5aff5e.js";
-import { navigate } from "vite-plugin-ssr/client/router";
-import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as SET_MAP_MODE, m as SET_RESULT_IN_RADIUS, n as SET_NEAREST_LIST, o as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-1d33add3.js";
+import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
+import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as SET_MAP_MODE, m as SET_RESULT_IN_RADIUS, n as SET_NEAREST_LIST, o as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-0a6e623f.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
 import { renderToString } from "react-dom/server";
-import { s as store } from "../chunks/chunk-de0ec313.js";
+import { s as store } from "../chunks/chunk-8621c645.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
-import { R as RestaurantListItem, C as CategoryFilterModal, a as RestaurantList } from "../chunks/chunk-8f4adc0c.js";
-import { P as Pagination } from "../chunks/chunk-fdac5dab.js";
+import { R as RestaurantListItem, C as CategoryFilterModal, a as RestaurantList } from "../chunks/chunk-7552b4fe.js";
+import { P as Pagination } from "../chunks/chunk-141dd3d3.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import "react-redux";
@@ -23,6 +22,7 @@ import "../chunks/chunk-ef8ab02b.js";
 import "../chunks/chunk-244a8cdd.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-702523f7.js";
+import "vite-plugin-ssr/client/router";
 import "../chunks/chunk-24b72a12.js";
 function SearchForm() {
   const inputElement = useRef(null);
@@ -33,7 +33,16 @@ function SearchForm() {
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx("div", { className: "search-bar", children: /* @__PURE__ */ jsxs("div", { children: [
       /* @__PURE__ */ jsx("label", { htmlFor: "searchRestaurant", className: "sr-only", children: "식당 검색하기" }),
-      /* @__PURE__ */ jsx("input", { type: "search", id: "searchRestaurant", onChange: handleChange, ref: inputElement })
+      /* @__PURE__ */ jsx(
+        "input",
+        {
+          type: "search",
+          id: "searchRestaurant",
+          onChange: handleChange,
+          ref: inputElement,
+          value: keyword
+        }
+      )
     ] }) }),
     /* @__PURE__ */ jsx(SearchButton, { keyword })
   ] });
@@ -45,7 +54,7 @@ function SearchButton({ keyword }) {
       alert("검색어를 입력해주세요.");
     } else {
       dispatch({ type: "paginationSlice/CURRENT_PAGE", currentPage: 1 });
-      navigate(`/search/keyword/${keyword}`);
+      window.location.href = `/search/keyword/${keyword}`;
     }
   };
   return /* @__PURE__ */ jsx("button", { type: "button", onClick: handleClick, "aria-label": "식당 검색 버튼", children: "🔍" });
@@ -944,32 +953,36 @@ function KakaoMap({ isLoggedIn: isLoggedIn2 }) {
   }, []);
   const getListInRadius = useCallback(
     async (currentLocation2) => {
-      const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ currentLocation: currentLocation2, category: selectedCategory })
-      });
-      const data = await res.json();
-      return data;
+      if (Array.isArray(currentLocation2)) {
+        const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ currentLocation: currentLocation2, category: selectedCategory })
+        });
+        const data = await res.json();
+        return data;
+      }
     },
-    [radius, selectedCategory]
+    [radius, selectedCategory, currentLocation]
   );
   const getNearestList = useCallback(
     async (currentLocation2) => {
-      const count = 5;
-      const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ currentLocation: currentLocation2 })
-      });
-      const data = await res.json();
-      return data;
+      if (Array.isArray(currentLocation2)) {
+        const count = 5;
+        const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ currentLocation: currentLocation2 })
+        });
+        const data = await res.json();
+        return data;
+      }
     },
-    [radius]
+    [radius, currentLocation]
   );
   useEffect(() => {
     if (isInitialized) {
@@ -989,7 +1002,7 @@ function KakaoMap({ isLoggedIn: isLoggedIn2 }) {
         });
       }
     }
-  }, [radius, isInitialized, selectedCategory]);
+  }, [radius, isInitialized, selectedCategory, currentLocation]);
   return /* @__PURE__ */ jsx("div", { id: "map" });
 }
 function CountMessage() {

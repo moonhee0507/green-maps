@@ -3,7 +3,6 @@ import { TopBar } from '../../components/topBar/topBar';
 import { LoginMain } from './LoginMain/LoginMain';
 import { API_URL } from '../../renderer/CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
-import { PageContext } from '../../renderer/types';
 
 export { Page };
 

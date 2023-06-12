@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+    <html lang="ko">
+        <head>
+          <link rel="stylesheet" type="text/css" href="/assets/static/default.page.client.9d9ae4af.css">
+            <meta charset="UTF-8" />
+            <link rel="icon" href=/images/icon.png />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta name="description" content="채식 식당 검색과 북마크는 그린 맵" />
+            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
+            <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
+            <link rel="manifest" href="/manifest.json" />
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+            <link rel="stylesheet" href="/style/index.css" type="text/css" >
+            <title>Green Maps</title>
+        </head>
+        <body>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"></script>
+            <div id="page-view"><div class="layout"><div class="left-area"><div class="txt-intro"><strong>채식 식당 검색과 북마크 서비스</strong><h1><a href="/" class="">그린 맵</a></h1></div></div><div class="app"><div class="top-bar"><button class="button-back" aria-label="뒤로가기"></button><h2 class="top-title">로그인</h2></div><main class="main-login"><div class="login-stage-wrapper" style="left:0%;transition:.5s"><section class="login-select-stage"><h3 class="sr-only">로그인 방식 선택</h3><div class="container-rocket"><span>🚀</span></div><button type="button" class="styled-button reuse-in-login">로그인</button><button type="button" class="styled-button kakao-login"><img src="/images/icon-kakao.png" alt="카카오 아이콘"/><span>카카오 로그인</span></button><a href="/signup" class="link-to-signup">회원가입</a></section><section class="login-id-stage"><h3 class="sr-only">아이디 입력</h3><label for="loginId">아이디</label><input type="text" id="loginId"/><div class="button-group-move"><button type="button" aria-label="이전 화면으로 이동">첫 화면</button><button type="button" aria-label="다음 화면으로 이동">비밀번호</button></div></section><section class="login-password-stage"><h3 class="sr-only">비밀번호 입력</h3><label for="loginPassword">비밀번호</label><input type="password" id="loginPassword"/><label for="loginPersist">로그인 유지</label><input type="checkbox" id="loginPersist"/><div class="button-group-move"><button type="button" aria-label="이전 화면으로 이동">아이디</button><button type="button" aria-label="다음 화면으로 이동">로그인</button></div></section></div></main></div></div></div>
+            <script type="text/javascript">
+                var global = global || window;
+                window.__PRELOADED_STATE__ = {};
+                
+                const map = document.getElementById("map");
+                if (map) {
+                    map.addEventListener('touchmove', () => {});
+                }
+
+                const navBookmark = document.querySelector('.link-nav.no-login');
+                if (navBookmark) {
+                    navBookmark.addEventListener('click', () => {
+                        const message = "로그인이 필요한 서비스입니다.\n로그인하시겠습니까?";
+
+                        if (confirm(message)) {
+                            window.location.href = '/login';
+                        }
+                    });
+                }
+            </script>
+      <script type="module" src="/assets/entries/entry-client-routing.521e9c45.js" defer></script>
+      <link rel="modulepreload" href="/assets/entries/pages_login_index.page.907124b3.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-0ad0329c.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-64857c89.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-f6dd005f.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-da345742.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-41308c4f.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-ef7fa417.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-3c838518.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-c949b376.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-af981888.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/entries/renderer_default.page.client.e696ea27.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-8756e824.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-255b6daf.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-2b326172.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-f3107ac8.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-dcab5b34.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-a5dd79e5.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-370f01b3.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-101896b7.js" as="script" type="text/javascript">
+      <script id="vite-plugin-ssr_pageContext" type="application/json">{"pageContext":{"_pageId":"/pages/login/index","pageProps":"!undefined","PRELOADED_STATE":{"buttonSlice":{"bookmark":{"ON":false},"like":{"ON":false}},"mapSlice":{"COUNT":0,"mapMode":"반경탐색 모드","radiusModalOn":false,"radius":500,"resultInRadius":[],"nearest":[],"checkGeolocationModalOn":false,"currentLocation":[37.5666805,126.9784147],"regionModalOn":false,"currentSido":"","currentSigungu":"","selectedSido":"","selectedSigungu":"","showListInRegionModalOn":false,"listInPage":[],"totalInRegion":0,"categoryFilterModalOn":false,"selectedCategory":["동남아","멕시칸/브라질","샐러드","술집","양식","인도/중동","일식","죽","중식","치킨","카페","한식","해산물"],"noResultModalOn":false,"searchResultInPage":[],"selectedCert":[],"resultOrderBy":"relevance"},"reviewSlice":{"ID":"","image":{"FILE_INFO":[],"RANDOM_NAME":[]},"CONTENT":"","editDeleteNotifyModalOn":false,"sameUserOwner":false,"reviewId":"","restaurantId":""},"paginationSlice":{"review":{},"currentPage":1,"comment":{}},"postSlice":{"SUBJECT":"","NICKNAME":"","TITLE":"","CONTENT":"","image":{"FILE_INFO":[],"RANDOM_NAME":[]},"post":{"TOTAL":0,"CURRENT_PAGE":1},"KEYWORD":"","BOUNDARY":"tc","ORDERBY":"latest","editDeleteNotifyModalOn":false,"sameUserOwner":false,"postId":"","commentId":"","editMode":false,"accessTarget":"post","editCommentMode":false,"txtComment":""},"authSlice":{"isLoggedIn":false,"userId":"","nickName":"","host":"","role":""},"myListSlice":{"clicked":"북마크","orderModalOn":false,"groupNameOrder":"등록순","addGroupModalOn":false,"groupName":null,"selectedIcon":"/images/icon-star.svg","editGroupModalOn":false,"targetGroup":"","sameIcon":true,"moveListModalOn":false,"countChecked":0,"copyModalOn":false,"restaurantToMove":[],"deleteLikeListModalOn":false},"profileSlice":{"profileImageModalOn":false,"profileNickNameModalOn":false,"prevNickName":"","nextNickName":"","profilePasswordModalOn":false,"passCurrentPassword":false,"userId":""},"loginSlice":{"isLoggingIn":false},"signupSlice":{"isSigningUp":false}},"routeParams":{},"token":"!undefined","user":"!undefined","groupName":"!undefined","pageHtml":"\u003cdiv class=\"layout\">\u003cdiv class=\"left-area\">\u003cdiv class=\"txt-intro\">\u003cstrong>채식 식당 검색과 북마크 서비스\u003c/strong>\u003ch1>\u003ca href=\"/\" class=\"\">그린 맵\u003c/a>\u003c/h1>\u003c/div>\u003c/div>\u003cdiv class=\"app\">\u003cdiv class=\"top-bar\">\u003cbutton class=\"button-back\" aria-label=\"뒤로가기\">\u003c/button>\u003ch2 class=\"top-title\">로그인\u003c/h2>\u003c/div>\u003cmain class=\"main-login\">\u003cdiv class=\"login-stage-wrapper\" style=\"left:0%;transition:.5s\">\u003csection class=\"login-select-stage\">\u003ch3 class=\"sr-only\">로그인 방식 선택\u003c/h3>\u003cdiv class=\"container-rocket\">\u003cspan>🚀\u003c/span>\u003c/div>\u003cbutton type=\"button\" class=\"styled-button reuse-in-login\">로그인\u003c/button>\u003cbutton type=\"button\" class=\"styled-button kakao-login\">\u003cimg src=\"/images/icon-kakao.png\" alt=\"카카오 아이콘\"/>\u003cspan>카카오 로그인\u003c/span>\u003c/button>\u003ca href=\"/signup\" class=\"link-to-signup\">회원가입\u003c/a>\u003c/section>\u003csection class=\"login-id-stage\">\u003ch3 class=\"sr-only\">아이디 입력\u003c/h3>\u003clabel for=\"loginId\">아이디\u003c/label>\u003cinput type=\"text\" id=\"loginId\"/>\u003cdiv class=\"button-group-move\">\u003cbutton type=\"button\" aria-label=\"이전 화면으로 이동\">첫 화면\u003c/button>\u003cbutton type=\"button\" aria-label=\"다음 화면으로 이동\">비밀번호\u003c/button>\u003c/div>\u003c/section>\u003csection class=\"login-password-stage\">\u003ch3 class=\"sr-only\">비밀번호 입력\u003c/h3>\u003clabel for=\"loginPassword\">비밀번호\u003c/label>\u003cinput type=\"password\" id=\"loginPassword\"/>\u003clabel for=\"loginPersist\">로그인 유지\u003c/label>\u003cinput type=\"checkbox\" id=\"loginPersist\"/>\u003cdiv class=\"button-group-move\">\u003cbutton type=\"button\" aria-label=\"이전 화면으로 이동\">아이디\u003c/button>\u003cbutton type=\"button\" aria-label=\"다음 화면으로 이동\">로그인\u003c/button>\u003c/div>\u003c/section>\u003c/div>\u003c/main>\u003c/div>\u003c/div>","reviews":"!undefined","restaurantInfo":"!undefined"}}</script>
+    </html>
