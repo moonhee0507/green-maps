@@ -31,6 +31,7 @@ export default (app: Router) => {
     // 반경 내 식당을 가까운 순서대로 가져오기
     route.post('/within-radius-of', cors, async (req: Request, res: Response) => {
         try {
+            console.log('body', req.body);
             const currentLocation = req.body.currentLocation;
             const category: string[] | '*' = req.body.category;
 

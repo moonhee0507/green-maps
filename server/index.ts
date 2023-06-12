@@ -65,7 +65,6 @@ async function startServer() {
 
         await checkToken(req.cookies.auth).then((data) => {
             if (data) {
-                console.log('index 서버의 유저 체크', data);
                 pageContextInit = {
                     ...pageContextInit,
                     user: {

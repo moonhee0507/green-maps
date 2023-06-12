@@ -27,45 +27,43 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
 
     const getListInRadius = useCallback(
         async (currentLocation: MongoLocation) => {
-            const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
-                method: 'POST',
-                headers: {
-                    'Access-Control-Request-Method': 'POST',
-                    'Access-Control-Request-Headers': 'Content-Type',
-                    'Content-Type': 'application/json',
-                },
-                mode: 'no-cors',
-                body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
-            });
+            if (Array.isArray(currentLocation)) {
+                const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
+                });
 
-            const data = await res.json();
+                const data = await res.json();
 
-            return data;
+                return data;
+            }
         },
-        [radius, selectedCategory]
+        [radius, selectedCategory, currentLocation]
     );
 
     // 반경 내 식당이 없을 경우 보여주는 데이터
     const getNearestList = useCallback(
         async (currentLocation: MongoLocation) => {
-            const count = 5;
+            if (Array.isArray(currentLocation)) {
+                const count = 5;
 
-            const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
-                method: 'POST',
-                headers: {
-                    'Access-Control-Request-Method': 'POST',
-                    'Access-Control-Request-Headers': 'Content-Type',
-                    'Content-Type': 'application/json',
-                },
-                mode: 'no-cors',
-                body: JSON.stringify({ currentLocation: currentLocation }),
-            });
+                const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ currentLocation: currentLocation }),
+                });
 
-            const data = await res.json();
+                const data = await res.json();
 
-            return data;
+                return data;
+            }
         },
-        [radius]
+        [radius, currentLocation]
     );
 
     useEffect(() => {
@@ -88,7 +86,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                 });
             }
         }
-    }, [radius, isInitialized, selectedCategory]);
+    }, [radius, isInitialized, selectedCategory, currentLocation]);
 
     return <div id="map" />;
 }
