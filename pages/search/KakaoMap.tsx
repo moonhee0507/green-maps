@@ -31,6 +31,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Request-Method': 'POST',
                 },
                 body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
             });
@@ -51,6 +52,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Access-Control-Request-Method': 'POST',
                 },
                 body: JSON.stringify({ currentLocation: currentLocation }),
             });
