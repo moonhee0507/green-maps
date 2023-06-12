@@ -34,7 +34,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                     'Access-Control-Request-Headers': 'Content-Type',
                     'Content-Type': 'application/json',
                 },
-                mode: 'cors',
+                mode: 'no-cors',
                 body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
             });
 
@@ -51,14 +51,13 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
             const count = 5;
 
             const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
-                // TODO: cors
                 method: 'POST',
                 headers: {
                     'Access-Control-Request-Method': 'POST',
                     'Access-Control-Request-Headers': 'Content-Type',
                     'Content-Type': 'application/json',
                 },
-                mode: 'cors',
+                mode: 'no-cors',
                 body: JSON.stringify({ currentLocation: currentLocation }),
             });
 
