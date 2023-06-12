@@ -50,6 +50,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
             const count = 5;
 
             const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
+                // TODO: cors
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
