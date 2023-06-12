@@ -18,5 +18,8 @@ export default defineConfig(async ({ command, mode }) => {
             host: true,
             port: 5000,
         },
+        vercel: {
+            prerender: false,
+        },
     } as UserConfig;
 });

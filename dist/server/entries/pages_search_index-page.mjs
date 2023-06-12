@@ -393,7 +393,7 @@ function InfoWindow({
     /* @__PURE__ */ jsxs("div", { className: "infowindow-left", children: [
       /* @__PURE__ */ jsxs("div", { className: "container-title-cert", children: [
         /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "식당 이름" }),
-        /* @__PURE__ */ jsx("dd", { className: "txt-title", children: /* @__PURE__ */ jsx("a", { href: `/search/${_id}`, className: "", children: title }) }),
+        /* @__PURE__ */ jsx("dd", { className: "txt-title", children: /* @__PURE__ */ jsx("a", { href: `/search/${_id}`, children: title }) }),
         /* @__PURE__ */ jsxs("div", { children: [
           certification ? /* @__PURE__ */ jsxs(Fragment, { children: [
             /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "채식 인증 정보" }),
