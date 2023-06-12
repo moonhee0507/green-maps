@@ -30,9 +30,9 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
             const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Access-Control-Request-Method': 'POST',
                     'Access-Control-Request-Headers': 'Content-Type',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
             });
@@ -53,9 +53,9 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                 // TODO: cors
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Access-Control-Request-Method': 'POST',
                     'Access-Control-Request-Headers': 'Content-Type',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ currentLocation: currentLocation }),
             });
