@@ -18,6 +18,5 @@
             ]
         }
     ],
-    "cleanUrls": true,
     "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
