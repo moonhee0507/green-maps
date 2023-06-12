@@ -54,7 +54,7 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
-    app.get('*', allowCors, async (req, res, next) => {
+    app.get('*', async (req, res, next) => {
         let pageContextInit: PageContextInit = {
             urlOriginal: req.originalUrl,
             token: req.cookies.auth,
@@ -75,8 +75,8 @@ async function startServer() {
                 };
             }
         });
-
         const pageContext = await renderPage(pageContextInit);
+        console.log(pageContext);
         const { httpResponse } = pageContext;
         if (!httpResponse) return next();
         const { body, statusCode, contentType, earlyHints } = httpResponse;

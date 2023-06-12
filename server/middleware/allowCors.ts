@@ -13,8 +13,8 @@ const allowCors = async (req: Request, res: Response, next: NextFunction) => {
         return;
     }
 
-    console.log('req.header', req.header);
-    console.log('res.header', res.header);
+    console.log('req.header', req.headers);
+    console.log('res.header', res.getHeaders());
 
     next();
 };
