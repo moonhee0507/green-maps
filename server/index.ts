@@ -12,6 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 import routes from './api/index.js';
 import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
+import allowCors from './middleware/allowCors.js';
 
 type PageContextInit = {
     urlOriginal: string;
@@ -53,7 +54,7 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
-    app.get('*', async (req, res, next) => {
+    app.get('*', allowCors, async (req, res, next) => {
         let pageContextInit: PageContextInit = {
             urlOriginal: req.originalUrl,
             token: req.cookies.auth,
@@ -80,6 +81,7 @@ async function startServer() {
         if (!httpResponse) return next();
         const { body, statusCode, contentType, earlyHints } = httpResponse;
         if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) });
+
         res.status(statusCode).type(contentType).send(body);
     });
 
