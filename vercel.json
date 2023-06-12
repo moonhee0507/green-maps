@@ -18,5 +18,11 @@
             ]
         }
     ],
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" },
+        {
+            "source": "/api/map/current-view",
+            "has": { "type": "header", "key": "Content-Type", "value": "application/json" }
+        }
+    ]
 }
