@@ -34,6 +34,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                     'Access-Control-Request-Headers': 'Content-Type',
                     'Content-Type': 'application/json',
                 },
+                mode: 'cors',
                 body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
             });
 
@@ -57,6 +58,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                     'Access-Control-Request-Headers': 'Content-Type',
                     'Content-Type': 'application/json',
                 },
+                mode: 'cors',
                 body: JSON.stringify({ currentLocation: currentLocation }),
             });
 
