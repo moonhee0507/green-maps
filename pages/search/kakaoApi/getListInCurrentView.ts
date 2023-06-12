@@ -8,6 +8,7 @@ export default async function getListInCurrentView(polygon: MongoPolygon): Promi
         headers: {
             'Content-Type': 'application/json',
         },
+        mode: 'no-cors',
         body: JSON.stringify(polygon),
     });
 

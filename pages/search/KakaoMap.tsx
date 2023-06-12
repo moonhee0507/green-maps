@@ -33,6 +33,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    mode: 'no-cors',
                     body: JSON.stringify({ currentLocation: currentLocation, category: selectedCategory }),
                 });
 
@@ -55,6 +56,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
                     headers: {
                         'Content-Type': 'application/json',
                     },
+                    mode: 'no-cors',
                     body: JSON.stringify({ currentLocation: currentLocation }),
                 });
 
