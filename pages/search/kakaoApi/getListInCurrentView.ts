@@ -7,6 +7,8 @@ export default async function getListInCurrentView(polygon: MongoPolygon): Promi
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Access-Control-Request-Method': 'POST',
+            'Access-Control-Request-Headers': 'Content-Type',
         },
         mode: 'no-cors',
         body: JSON.stringify(polygon),
