@@ -6,9 +6,12 @@ import { defineConfig, UserConfig } from 'vite';
 
 export default defineConfig(async ({ command, mode }) => {
     return {
-        plugins: [react(), ssr({ prerender: false }), vercel(), vercelSsr()],
+        plugins: [react(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
         build: {
             manifest: true,
+            rollupOptions: {
+                external: ['../../../../dist/server/importBuild.cjs', './xhr-sync-worker.js', ''],
+            },
         },
         server: {
             middlewareMode: true,
