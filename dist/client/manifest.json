@@ -284,7 +284,7 @@
       "pages/my-lists/index.page.tsx",
       "pages/my/index.page.tsx",
       "pages/search/index.page.tsx",
-      "pages/search/keyword/index.page.tsx",
+      "pages/search/keyword/keyword.page.tsx",
       "pages/search/restaurant/index.page.tsx",
       "pages/search/restaurant/reviews/create/index.page.tsx",
       "pages/search/restaurant/reviews/edit/index.page.tsx",
@@ -292,7 +292,7 @@
       "renderer/_error.page.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-server-routing.9ee23bc4.js",
+    "file": "assets/entries/entry-server-routing.da556759.js",
     "imports": [
       "_chunk-af981888.js",
       "_chunk-101896b7.js"
@@ -314,7 +314,7 @@
       "pages/my-lists/index.page.tsx",
       "pages/my/index.page.tsx",
       "pages/search/index.page.tsx",
-      "pages/search/keyword/index.page.tsx",
+      "pages/search/keyword/keyword.page.tsx",
       "pages/search/restaurant/index.page.tsx",
       "pages/search/restaurant/reviews/create/index.page.tsx",
       "pages/search/restaurant/reviews/edit/index.page.tsx",
@@ -322,7 +322,7 @@
       "renderer/_error.page.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-client-routing.9d28fae5.js",
+    "file": "assets/entries/entry-client-routing.5096338d.js",
     "imports": [
       "_chunk-af981888.js",
       "_chunk-101896b7.js",
@@ -588,8 +588,8 @@
     "isEntry": true,
     "src": "pages/search/index.page.tsx"
   },
-  "pages/search/keyword/index.page.tsx": {
-    "file": "assets/entries/pages_search_keyword_index.page.03de0dc7.js",
+  "pages/search/keyword/keyword.page.tsx": {
+    "file": "assets/entries/pages_search_keyword_keyword.page.03de0dc7.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-64857c89.js",
@@ -610,7 +610,7 @@
     ],
     "isDynamicEntry": true,
     "isEntry": true,
-    "src": "pages/search/keyword/index.page.tsx"
+    "src": "pages/search/keyword/keyword.page.tsx"
   },
   "pages/search/restaurant/index.page.tsx": {
     "file": "assets/entries/pages_search_restaurant_index.page.f62c3482.js",

@@ -72,7 +72,7 @@ export default (app: Router) => {
                                     maxAge: 7 * 24 * 60 * 60 * 1000,
                                     httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                                     secure: true, // https에서만 사용
-                                    sameSite: 'lax', // Set-Cookie의 SameSite 속성에 대한 값
+                                    sameSite: 'lax', // Set-Cookie의 SameSite 속성에 대한 값: strict는 cors 비허용, lax는 링크를 따라갈때만 cors 허용
                                     domain:
                                         process.env.NODE_ENV === 'development'
                                             ? 'localhost'
@@ -82,9 +82,9 @@ export default (app: Router) => {
                                     .json({ success: true, keepLogin: keepLogin, user: user });
                             } else {
                                 res.cookie('auth', user.token, {
-                                    httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
-                                    secure: true, // https에서만 사용
-                                    sameSite: 'lax', // Set-Cookie의 SameSite 속성에 대한 값
+                                    httpOnly: true,
+                                    secure: true,
+                                    sameSite: 'lax',
                                     domain:
                                         process.env.NODE_ENV === 'development'
                                             ? 'localhost'
