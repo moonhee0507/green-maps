@@ -3,3 +3,5 @@ node_modules/
 .env.*
 kakaoMapCrawling.json
 TODO
+*.pem
+.vercel
