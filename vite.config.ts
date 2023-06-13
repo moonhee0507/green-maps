@@ -7,13 +7,13 @@ import { defineConfig, UserConfig } from 'vite';
 
 export default defineConfig(async ({ command, mode }) => {
     return {
-        plugins: [react(), basicSsl(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
+        plugins: [react(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
         build: {
             manifest: true,
         },
         server: {
             middlewareMode: true,
-            host: true,
+            host: 'localhost',
             port: 5000,
         },
     } as UserConfig;
