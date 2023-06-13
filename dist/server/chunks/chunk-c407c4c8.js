@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const useAppDispatch = useDispatch;
 const useAppSelector = useSelector;
 function ButtonGoBack() {

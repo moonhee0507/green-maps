@@ -292,7 +292,7 @@
       "renderer/_error.page.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-server-routing.3c0a69f0.js",
+    "file": "assets/entries/entry-server-routing.f130f23b.js",
     "imports": [
       "_chunk-af981888.js",
       "_chunk-101896b7.js"
@@ -322,7 +322,7 @@
       "renderer/_error.page.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-client-routing.e1c05763.js",
+    "file": "assets/entries/entry-client-routing.4209e0f1.js",
     "imports": [
       "_chunk-af981888.js",
       "_chunk-101896b7.js",
@@ -589,7 +589,7 @@
     "src": "pages/search/index.page.tsx"
   },
   "pages/search/keyword/index.page.tsx": {
-    "file": "assets/entries/pages_search_keyword_index.page.03de0dc7.js",
+    "file": "assets/entries/pages_search_keyword_index.page.a3d907e1.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-64857c89.js",
@@ -612,11 +612,10 @@
     "isEntry": true,
     "src": "pages/search/keyword/index.page.tsx"
   },
-  "pages/search/restaurant/index.page.tsx": {
-    "file": "assets/entries/pages_search_restaurant_index.page.f62c3482.js",
+  "pages/search/restaurant/RestaurantDetail/RestaurantDetail.tsx": {
+    "file": "assets/chunks/chunk-d7e2ef76.js",
     "imports": [
       "_chunk-0ad0329c.js",
-      "_chunk-64857c89.js",
       "_chunk-da345742.js",
       "_chunk-f6dd005f.js",
       "_chunk-c949b376.js",
@@ -624,12 +623,31 @@
       "_chunk-32ec8ef6.js",
       "_chunk-7962c6c8.js",
       "_chunk-6ed56ac3.js",
-      "_chunk-5b1b7faa.js",
-      "_chunk-2b326172.js",
-      "_chunk-41308c4f.js",
       "_chunk-af981888.js",
       "_chunk-dfbf6de9.js",
-      "_chunk-3c838518.js"
+      "_chunk-2b326172.js",
+      "_chunk-41308c4f.js"
+    ],
+    "isDynamicEntry": true,
+    "src": "pages/search/restaurant/RestaurantDetail/RestaurantDetail.tsx"
+  },
+  "pages/search/restaurant/index.page.tsx": {
+    "dynamicImports": [
+      "pages/search/restaurant/RestaurantDetail/RestaurantDetail.tsx"
+    ],
+    "file": "assets/entries/pages_search_restaurant_index.page.f0984cf2.js",
+    "imports": [
+      "_chunk-101896b7.js",
+      "_chunk-0ad0329c.js",
+      "_chunk-64857c89.js",
+      "_chunk-5b1b7faa.js",
+      "_chunk-f6dd005f.js",
+      "_chunk-2b326172.js",
+      "_chunk-c949b376.js",
+      "_chunk-da345742.js",
+      "_chunk-41308c4f.js",
+      "_chunk-3c838518.js",
+      "_chunk-af981888.js"
     ],
     "isDynamicEntry": true,
     "isEntry": true,

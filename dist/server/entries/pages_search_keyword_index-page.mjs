@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useRef, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-8a4fa2ca.js";
+import { T as TopBar } from "../chunks/chunk-6657f1dd.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
 import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
-import { b as CATEGORIES, c as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-7552b4fe.js";
+import { b as CATEGORIES, c as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-e855bd7e.js";
 import { A as ADD_SELECTED_CATEGORY, p as ADD_SELECTED_CERT, q as SET_ORDER_BY } from "../chunks/chunk-0a6e623f.js";
-import { P as Pagination } from "../chunks/chunk-141dd3d3.js";
+import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -232,7 +232,7 @@ function Page(pageContext) {
         searchListInPage
       }
     ),
-    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user.isLoggedIn })
+    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false })
   ] });
 }
 export {

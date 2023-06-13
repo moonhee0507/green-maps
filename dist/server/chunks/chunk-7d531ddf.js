@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { a as useAppDispatch, u as useAppSelector } from "./chunk-a93f9e99.js";
+import { a as useAppDispatch, u as useAppSelector } from "./chunk-c407c4c8.js";
 import { A as API_URL } from "./chunk-7d23cd09.js";
 function SubjectBox({ postInfo }) {
   const dispatch = useAppDispatch();

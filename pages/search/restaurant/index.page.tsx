@@ -14,7 +14,7 @@ function Page(pageContext: PageContext) {
     const { routeParams, user } = pageContext;
 
     const restaurantId = pageContext.routeParams?.restaurantId || '';
-    const { isLoggedIn, info } = user;
+    // const { isLoggedIn, info } = user;
 
     const [restaurantInfo, setRestaurantInfo] = useState<Restaurant | null>(null);
 
@@ -38,9 +38,13 @@ function Page(pageContext: PageContext) {
         <>
             <TopBar title="상세정보" />
             <React.Suspense fallback={<Loading />}>
-                <RestaurantDetail restaurantInfo={restaurantInfo} isLoggedIn={isLoggedIn} userInfo={info} />
+                <RestaurantDetail
+                    restaurantInfo={restaurantInfo}
+                    isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false}
+                    userInfo={pageContext.user ? pageContext.user.info : null}
+                />
             </React.Suspense>
-            <NavBar isLoggedIn={isLoggedIn} />
+            <NavBar isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false} />
             <ModalGroup />
         </>
     );

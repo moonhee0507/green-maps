@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-8a4fa2ca.js";
+import { T as TopBar } from "../chunks/chunk-6657f1dd.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
 import { E as EDIT_GROUP_MODAL, a as SET_TARGET_GROUP, I as ICON_STANDARD, c as SET_GROUP_NAME, h as COMPARE_ICON, b as ORDER_STANDARD, O as ORDER_MODAL } from "../chunks/chunk-62270999.js";
 import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { I as IconSelection } from "../chunks/chunk-3a6fcfe0.js";
+import { I as IconSelection } from "../chunks/chunk-98410492.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
