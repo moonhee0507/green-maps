@@ -4,7 +4,7 @@
         "prod": "npm run build && npm run server:prod",
         "build": "vite build",
         "server": "nodemon --watch ./server --exec ts-node ./server/index.ts",
-        "server:prod": "cross-env NODE_ENV=production ts-node ./server/index.ts",
+        "server:prod": "cross-env NODE_ENV=production NODE_EXTRA_CA_CERTS=\"C:/Users/pc/AppData/Local/mkcert/rootCA.pem\" ts-node ./server/index.ts",
         "test": "jest"
     },
     "dependencies": {

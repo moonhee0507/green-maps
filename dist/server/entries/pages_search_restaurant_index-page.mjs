@@ -1,11 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-6657f1dd.js";
+import { T as TopBar } from "../chunks/chunk-bb1c8ea6.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
+import { A as API_URL } from "../chunks/chunk-dd72b177.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -96,12 +96,11 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-d34d87b9.js"));
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-7223dffe.js"));
 function Page(pageContext) {
   var _a;
   const { routeParams, user } = pageContext;
   const restaurantId = ((_a = pageContext.routeParams) == null ? void 0 : _a.restaurantId) || "";
-  const { isLoggedIn, info } = user;
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   useEffect(() => {
     getRestaurantList();
@@ -119,8 +118,15 @@ function Page(pageContext) {
   }
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "상세정보" }),
-    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(RestaurantDetail, { restaurantInfo, isLoggedIn, userInfo: info }) }),
-    /* @__PURE__ */ jsx(NavBar, { isLoggedIn }),
+    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(
+      RestaurantDetail,
+      {
+        restaurantInfo,
+        isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false,
+        userInfo: pageContext.user ? pageContext.user.info : null
+      }
+    ) }),
+    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false }),
     /* @__PURE__ */ jsx(ModalGroup, {})
   ] });
 }

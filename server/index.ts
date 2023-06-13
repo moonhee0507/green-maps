@@ -1,17 +1,18 @@
 import express from 'express';
 import './database.js';
+// import https from 'https';
+// import fs from 'fs-extra';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import { renderPage } from 'vite-plugin-ssr/server';
 import { root } from './root.js';
 import fetch from 'node-fetch';
-
-const isProduction = process.env.NODE_ENV === 'production';
-
 import routes from './api/index.js';
 import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 type PageContextInit = {
     urlOriginal: string;
@@ -37,7 +38,7 @@ async function startServer() {
     app.use(bodyParser.json());
     app.use(cookieParser());
 
-    app.use('/api', routes());
+    app.use('/api/v1', routes());
 
     if (isProduction) {
         const sirv = (await import('sirv')).default;
@@ -53,7 +54,7 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
-    const PORT = process.env.PORT || 5000;
+    const PORT = process.env.PORT || 2848;
 
     app.listen(PORT, () => {
         console.log(`🚀 ${PORT}번 포트 실행 중...`);
