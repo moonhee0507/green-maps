@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useRef, useState } from 'react';
 import { useAppDispatch } from '../../renderer/store/hooks';
+import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { SearchForm };
 
@@ -41,7 +42,7 @@ function SearchButton({ keyword }: { keyword: string }) {
             alert('검색어를 입력해주세요.');
         } else {
             dispatch({ type: 'paginationSlice/CURRENT_PAGE', currentPage: 1 });
-            window.location.href = `/search/keyword/${keyword}`;
+            navigate(`/search/keyword/${keyword}`);
         }
     };
 
