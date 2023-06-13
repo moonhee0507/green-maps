@@ -12,8 +12,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 import routes from './api/index.js';
 import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
-import fs from 'fs-extra';
-import https from 'https';
 
 type PageContextInit = {
     urlOriginal: string;
@@ -55,6 +53,13 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
+    const PORT = process.env.PORT || 5000;
+
+    app.listen(PORT, () => {
+        console.log(`🚀 ${PORT}번 포트 실행 중...`);
+    });
+
+    // 페이지 라우팅할때마다.
     app.get('*', async (req, res, next) => {
         let pageContextInit: PageContextInit = {
             urlOriginal: req.originalUrl,
@@ -83,18 +88,6 @@ async function startServer() {
         if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) });
 
         res.status(statusCode).type(contentType).send(body);
-    });
-
-    const PORT = process.env.PORT || 5000;
-    const options = {
-        key: fs.readFileSync('./localhost-key.pem'),
-        cert: fs.readFileSync('./localhost.pem'),
-    };
-
-    const server = https.createServer(options, app);
-
-    server.listen(PORT, () => {
-        console.log(`🚀 ${PORT}번 포트 실행 중...`);
     });
 }
 

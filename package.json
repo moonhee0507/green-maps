@@ -1,9 +1,9 @@
 {
     "scripts": {
-        "dev": "concurrently \"npm run server\" \"start https://localhost:5000\"",
+        "dev": "concurrently \"npm run server\" \"start http://localhost:5000\"",
         "prod": "npm run build && npm run server:prod",
         "build": "vite build",
-        "server": "nodemon --watch ./server --exec cross-env NODE_EXTRA_CA_CERTS=\"C:/Users/pc/AppData/Local/mkcert/rootCA.pem\" ts-node ./server/index.ts",
+        "server": "nodemon --watch ./server --exec ts-node ./server/index.ts",
         "server:prod": "cross-env NODE_ENV=production ts-node ./server/index.ts",
         "test": "jest"
     },
@@ -65,6 +65,7 @@
         "@types/hammerjs": "^2.0.41",
         "@types/jsonwebtoken": "^9.0.2",
         "@types/react-draft-wysiwyg": "^1.13.4",
+        "@vitejs/plugin-basic-ssl": "^1.0.1",
         "eslint": "^8.41.0",
         "eslint-plugin-jam3": "^0.2.3",
         "identity-obj-proxy": "^3.0.0",

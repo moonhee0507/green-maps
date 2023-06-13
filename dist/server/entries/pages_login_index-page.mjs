@@ -110,7 +110,7 @@ function PasswordStage({ setMove }) {
       const data = await res.json();
       if (data.success) {
         alert("🎉🎉로그인에 성공했습니다🎉🎉");
-        navigate("/search");
+        window.location.href = "/search";
       } else {
         alert("로그인에 실패했습니다");
       }
