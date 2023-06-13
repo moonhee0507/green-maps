@@ -4,11 +4,11 @@ import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../
 import { navigate } from "vite-plugin-ssr/client/router";
 import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as SET_MAP_MODE, m as SET_RESULT_IN_RADIUS, n as SET_NEAREST_LIST, o as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-0a6e623f.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
-import { A as API_URL } from "../chunks/chunk-6e20e889.js";
+import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
 import { renderToString } from "react-dom/server";
 import { s as store } from "../chunks/chunk-8621c645.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
-import { R as RestaurantListItem, C as CategoryFilterModal, a as RestaurantList } from "../chunks/chunk-3a9dd106.js";
+import { R as RestaurantListItem, C as CategoryFilterModal, a as RestaurantList } from "../chunks/chunk-e855bd7e.js";
 import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
@@ -22,7 +22,7 @@ import "../chunks/chunk-62270999.js";
 import "../chunks/chunk-ef8ab02b.js";
 import "../chunks/chunk-244a8cdd.js";
 import "../chunks/chunk-6f77cb2d.js";
-import "../chunks/chunk-80bbbd21.js";
+import "../chunks/chunk-702523f7.js";
 import "../chunks/chunk-24b72a12.js";
 function SearchForm() {
   const inputElement = useRef(null);

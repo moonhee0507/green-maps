@@ -38,7 +38,7 @@ async function startServer() {
     app.use(bodyParser.json());
     app.use(cookieParser());
 
-    app.use('/api/v1', routes());
+    app.use('/api', routes());
 
     if (isProduction) {
         const sirv = (await import('sirv')).default;
@@ -54,7 +54,7 @@ async function startServer() {
         app.use(viteDevMiddleware);
     }
 
-    const PORT = process.env.PORT || 2848;
+    const PORT = process.env.PORT || 5000;
 
     app.listen(PORT, () => {
         console.log(`🚀 ${PORT}번 포트 실행 중...`);

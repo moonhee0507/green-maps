@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "dev": "npm run server",
+        "dev": "concurrently \"npm run server\" \"start http://localhost:5000\"",
         "prod": "npm run build && npm run server:prod",
         "build": "vite build",
         "server": "nodemon --watch ./server --exec ts-node ./server/index.ts",
