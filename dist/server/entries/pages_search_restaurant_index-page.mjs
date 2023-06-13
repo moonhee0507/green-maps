@@ -101,6 +101,7 @@ function Page(pageContext) {
   var _a;
   const { routeParams, user } = pageContext;
   const restaurantId = ((_a = pageContext.routeParams) == null ? void 0 : _a.restaurantId) || "";
+  const { isLoggedIn, info } = user;
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   useEffect(() => {
     getRestaurantList();
@@ -118,15 +119,8 @@ function Page(pageContext) {
   }
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "상세정보" }),
-    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(
-      RestaurantDetail,
-      {
-        restaurantInfo,
-        isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false,
-        userInfo: pageContext.user ? pageContext.user.info : null
-      }
-    ) }),
-    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false }),
+    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(RestaurantDetail, { restaurantInfo, isLoggedIn, userInfo: info }) }),
+    /* @__PURE__ */ jsx(NavBar, { isLoggedIn }),
     /* @__PURE__ */ jsx(ModalGroup, {})
   ] });
 }

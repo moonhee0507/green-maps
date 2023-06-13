@@ -12,9 +12,8 @@ export default defineConfig(async ({ command, mode }) => {
             manifest: true,
         },
         server: {
-            https: true,
             middlewareMode: true,
-            host: 'localhost',
+            host: true,
             port: 5000,
         },
     } as UserConfig;
