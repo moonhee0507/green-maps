@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+    <html lang="ko">
+        <head>
+          <link rel="stylesheet" type="text/css" href="/assets/static/default.page.client.9d9ae4af.css">
+            <meta charset="UTF-8" />
+            <link rel="icon" href=/images/icon.png />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta name="description" content="채식 식당 검색과 북마크 서비스" />
+            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
+            <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
+            <link rel="manifest" href="/manifest.json" />
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+            <link rel="stylesheet" href="/style/index.css" type="text/css" >
+            <title>홈 | Green Maps</title>
+        </head>
+        <body>
+            <script type="module">
+                import RefreshRuntime from 'http://localhost:2848/@react-refresh'
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {}
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            </script>
+            <script type="module" src="http://localhost:2848/@vite/client"></script>
+            <script type="module" src="http://localhost:2848/main.js"></script>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"></script>
+            <div id="page-view"><div class="layout"><div class="left-area"><div class="txt-intro"><strong>채식 식당 검색과 북마크 서비스</strong><h1><a href="/" class="is-active">그린 맵</a></h1></div></div><div class="app"><main class="home-content"><div class="container-title"><h2><span>Green</span><span>Maps</span></h2></div><section class="section-desc-service"><h3>이런 서비스에요!</h3><div class="container-desc-service"><p>전국 2400개의 채식 식당을 찾을 수 있어요.</p><p>북마크를 그룹으로 관리해요.</p><p>채식 식당에 대한 후기를 남길 수 있어요.</p><p>게시판을 통해 소통해요!</p></div></section><div class="container-start"><a href="/search">🎉Start</a></div></main></div></div></div>
+            <script type="text/javascript">
+                var global = global || window;
+                window.__PRELOADED_STATE__ = {};
+                
+                const map = document.getElementById("map");
+                if (map) {
+                    map.addEventListener('touchmove', () => {});
+                }
+
+                const navBookmark = document.querySelector('.link-nav.no-login');
+                if (navBookmark) {
+                    navBookmark.addEventListener('click', () => {
+                        const message = "로그인이 필요한 서비스입니다.\n로그인하시겠습니까?";
+
+                        if (confirm(message)) {
+                            window.location.href = '/login';
+                        }
+                    });
+                }
+            </script>
+      <script type="module" src="/assets/entries/entry-client-routing.07270672.js" defer></script>
+      <link rel="modulepreload" href="/assets/entries/pages_home_index.page.57a0b2c7.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-0ad0329c.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/entries/renderer_default.page.client.e696ea27.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-da345742.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-8756e824.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-41308c4f.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-255b6daf.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-2b326172.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-f3107ac8.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-dcab5b34.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-a5dd79e5.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-ef7fa417.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-370f01b3.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-3c838518.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-af981888.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-101896b7.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-c949b376.js" as="script" type="text/javascript">
+      <script id="vite-plugin-ssr_pageContext" type="application/json">{"pageContext":{"_pageId":"/pages/home/index","pageProps":"!undefined","PRELOADED_STATE":{"buttonSlice":{"bookmark":{"ON":false},"like":{"ON":false}},"mapSlice":{"COUNT":0,"mapMode":"반경탐색 모드","radiusModalOn":false,"radius":500,"resultInRadius":[],"nearest":[],"checkGeolocationModalOn":false,"currentLocation":[37.5666805,126.9784147],"regionModalOn":false,"currentSido":"","currentSigungu":"","selectedSido":"","selectedSigungu":"","showListInRegionModalOn":false,"listInPage":[],"totalInRegion":0,"categoryFilterModalOn":false,"selectedCategory":["동남아","멕시칸/브라질","샐러드","술집","양식","인도/중동","일식","죽","중식","치킨","카페","한식","해산물"],"noResultModalOn":false,"searchResultInPage":[],"selectedCert":[],"resultOrderBy":"relevance"},"reviewSlice":{"ID":"","image":{"FILE_INFO":[],"RANDOM_NAME":[]},"CONTENT":"","editDeleteNotifyModalOn":false,"sameUserOwner":false,"reviewId":"","restaurantId":""},"paginationSlice":{"review":{},"currentPage":1,"comment":{}},"postSlice":{"SUBJECT":"","NICKNAME":"","TITLE":"","CONTENT":"","image":{"FILE_INFO":[],"RANDOM_NAME":[]},"post":{"TOTAL":0,"CURRENT_PAGE":1},"KEYWORD":"","BOUNDARY":"tc","ORDERBY":"latest","editDeleteNotifyModalOn":false,"sameUserOwner":false,"postId":"","commentId":"","editMode":false,"accessTarget":"post","editCommentMode":false,"txtComment":""},"authSlice":{"isLoggedIn":false,"userId":"","nickName":"","host":"","role":""},"myListSlice":{"clicked":"북마크","orderModalOn":false,"groupNameOrder":"등록순","addGroupModalOn":false,"groupName":null,"selectedIcon":"/images/icon-star.svg","editGroupModalOn":false,"targetGroup":"","sameIcon":true,"moveListModalOn":false,"countChecked":0,"copyModalOn":false,"restaurantToMove":[],"deleteLikeListModalOn":false},"profileSlice":{"profileImageModalOn":false,"profileNickNameModalOn":false,"prevNickName":"","nextNickName":"","profilePasswordModalOn":false,"passCurrentPassword":false,"userId":""},"loginSlice":{"isLoggingIn":false},"signupSlice":{"isSigningUp":false}},"routeParams":{},"token":"!undefined","user":"!undefined","groupName":"!undefined","pageHtml":"\u003cdiv class=\"layout\">\u003cdiv class=\"left-area\">\u003cdiv class=\"txt-intro\">\u003cstrong>채식 식당 검색과 북마크 서비스\u003c/strong>\u003ch1>\u003ca href=\"/\" class=\"is-active\">그린 맵\u003c/a>\u003c/h1>\u003c/div>\u003c/div>\u003cdiv class=\"app\">\u003cmain class=\"home-content\">\u003cdiv class=\"container-title\">\u003ch2>\u003cspan>Green\u003c/span>\u003cspan>Maps\u003c/span>\u003c/h2>\u003c/div>\u003csection class=\"section-desc-service\">\u003ch3>이런 서비스에요!\u003c/h3>\u003cdiv class=\"container-desc-service\">\u003cp>전국 2400개의 채식 식당을 찾을 수 있어요.\u003c/p>\u003cp>북마크를 그룹으로 관리해요.\u003c/p>\u003cp>채식 식당에 대한 후기를 남길 수 있어요.\u003c/p>\u003cp>게시판을 통해 소통해요!\u003c/p>\u003c/div>\u003c/section>\u003cdiv class=\"container-start\">\u003ca href=\"/search\">🎉Start\u003c/a>\u003c/div>\u003c/main>\u003c/div>\u003c/div>","reviews":"!undefined","restaurantInfo":"!undefined"}}</script>
+    </html>

@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { A as API_URL } from "../chunks/chunk-dd72b177.js";
+import { A as API_URL } from "../chunks/chunk-6e20e889.js";
 async function onBeforeRender(pageContext) {
   var _a;
   const { user } = pageContext;
