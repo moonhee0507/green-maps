@@ -30,7 +30,7 @@ jobs:
                           - name: PUPPETEER_SKIP_DOWNLOAD
                             value: "1"
                         ports: "2848"
-                        start: npm run server:prod
+                        start: node ./server/index.js
                       context:
                         git:
                           url: git@github.com:${{ github.repository }}.git
