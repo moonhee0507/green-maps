@@ -11,6 +11,9 @@ export { onBeforeRender };
 
 async function onBeforeRender(pageContext: PageContext) {
     const { restaurantId } = pageContext.routeParams as Params;
+    console.log('레스토랑 pageContext', pageContext);
+    console.log('pageContext.routeParams', pageContext.routeParams);
+
     const { user } = pageContext;
 
     const res = await fetch(`${API_URL}/restaurants/${restaurantId}`, {
