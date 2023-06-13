@@ -1,6 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-a93f9e99.js";
+import { navigate } from "vite-plugin-ssr/client/router";
 import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as SET_MAP_MODE, m as SET_RESULT_IN_RADIUS, n as SET_NEAREST_LIST, o as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-0a6e623f.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { A as API_URL } from "../chunks/chunk-7d23cd09.js";
@@ -22,7 +23,6 @@ import "../chunks/chunk-ef8ab02b.js";
 import "../chunks/chunk-244a8cdd.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-702523f7.js";
-import "vite-plugin-ssr/client/router";
 import "../chunks/chunk-24b72a12.js";
 function SearchForm() {
   const inputElement = useRef(null);
@@ -54,7 +54,7 @@ function SearchButton({ keyword }) {
       alert("검색어를 입력해주세요.");
     } else {
       dispatch({ type: "paginationSlice/CURRENT_PAGE", currentPage: 1 });
-      window.location.href = `/search/keyword/${keyword}`;
+      navigate(`/search/keyword/${keyword}`);
     }
   };
   return /* @__PURE__ */ jsx("button", { type: "button", onClick: handleClick, "aria-label": "식당 검색 버튼", children: "🔍" });
