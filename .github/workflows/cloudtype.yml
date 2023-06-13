@@ -26,6 +26,9 @@ jobs:
                       app: node@16
 
                       options:
+                        env:
+                          - name: PUPPETEER_SKIP_DOWNLOAD
+                            value: "1"
                         ports: "2848"
                         start: npm run server:prod
                       context:
