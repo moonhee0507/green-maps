@@ -16,6 +16,15 @@
             <title>Green Maps</title>
         </head>
         <body>
+            <script type="module">
+                import RefreshRuntime from 'http://localhost:5000/@react-refresh'
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {}
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            </script>
+            <script type="module" src="http://localhost:5000/@vite/client"></script>
+            <script type="module" src="http://localhost:5000/main.js"></script>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"></script>
             <div id="page-view"><div class="layout"><div class="left-area"><div class="txt-intro"><strong>채식 식당 검색과 북마크 서비스</strong><h1><a href="/" class="">그린 맵</a></h1></div></div><div class="app"><div class="top-bar"><button class="button-back" aria-label="뒤로가기"></button><h2 class="top-title">로그인</h2></div><main class="main-login"><div class="login-stage-wrapper" style="left:0%;transition:.5s"><section class="login-select-stage"><h3 class="sr-only">로그인 방식 선택</h3><div class="container-rocket"><span>🚀</span></div><button type="button" class="styled-button reuse-in-login">로그인</button><button type="button" class="styled-button kakao-login"><img src="/images/icon-kakao.png" alt="카카오 아이콘"/><span>카카오 로그인</span></button><a href="/signup" class="link-to-signup">회원가입</a></section><section class="login-id-stage"><h3 class="sr-only">아이디 입력</h3><label for="loginId">아이디</label><input type="text" id="loginId"/><div class="button-group-move"><button type="button" aria-label="이전 화면으로 이동">첫 화면</button><button type="button" aria-label="다음 화면으로 이동">비밀번호</button></div></section><section class="login-password-stage"><h3 class="sr-only">비밀번호 입력</h3><label for="loginPassword">비밀번호</label><input type="password" id="loginPassword"/><label for="loginPersist">로그인 유지</label><input type="checkbox" id="loginPersist"/><div class="button-group-move"><button type="button" aria-label="이전 화면으로 이동">아이디</button><button type="button" aria-label="다음 화면으로 이동">로그인</button></div></section></div></main></div></div></div>
             <script type="text/javascript">
@@ -38,8 +47,8 @@
                     });
                 }
             </script>
-      <script type="module" src="/assets/entries/entry-client-routing.a20b044c.js" defer></script>
-      <link rel="modulepreload" href="/assets/entries/pages_login_index.page.907124b3.js" as="script" type="text/javascript">
+      <script type="module" src="/assets/entries/entry-client-routing.9d28fae5.js" defer></script>
+      <link rel="modulepreload" href="/assets/entries/pages_login_index.page.1d19f58d.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-0ad0329c.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-64857c89.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-f6dd005f.js" as="script" type="text/javascript">

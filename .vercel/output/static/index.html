@@ -16,6 +16,15 @@
             <title>홈 | Green Maps</title>
         </head>
         <body>
+            <script type="module">
+                import RefreshRuntime from 'http://localhost:5000/@react-refresh'
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {}
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            </script>
+            <script type="module" src="http://localhost:5000/@vite/client"></script>
+            <script type="module" src="http://localhost:5000/main.js"></script>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"></script>
             <div id="page-view"><div class="layout"><div class="left-area"><div class="txt-intro"><strong>채식 식당 검색과 북마크 서비스</strong><h1><a href="/" class="is-active">그린 맵</a></h1></div></div><div class="app"><main class="home-content"><div class="container-title"><h2><span>Green</span><span>Maps</span></h2></div><section class="section-desc-service"><h3>이런 서비스에요!</h3><div class="container-desc-service"><p>전국 2400개의 채식 식당을 찾을 수 있어요.</p><p>북마크를 그룹으로 관리해요.</p><p>채식 식당에 대한 후기를 남길 수 있어요.</p><p>게시판을 통해 소통해요!</p></div></section><div class="container-start"><a href="/search">🎉Start</a></div></main></div></div></div>
             <script type="text/javascript">
@@ -38,7 +47,7 @@
                     });
                 }
             </script>
-      <script type="module" src="/assets/entries/entry-client-routing.a20b044c.js" defer></script>
+      <script type="module" src="/assets/entries/entry-client-routing.9d28fae5.js" defer></script>
       <link rel="modulepreload" href="/assets/entries/pages_home_index.page.57a0b2c7.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-0ad0329c.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/entries/renderer_default.page.client.e696ea27.js" as="script" type="text/javascript">
