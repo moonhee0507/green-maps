@@ -12,7 +12,8 @@ const isProduction = process.env.NODE_ENV === 'production';
 import routes from './api/index.js';
 import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
-import allowCors from './middleware/allowCors.js';
+import fs from 'fs-extra';
+import https from 'https';
 
 type PageContextInit = {
     urlOriginal: string;
@@ -76,7 +77,6 @@ async function startServer() {
             }
         });
         const pageContext = await renderPage(pageContextInit);
-        console.log(pageContext);
         const { httpResponse } = pageContext;
         if (!httpResponse) return next();
         const { body, statusCode, contentType, earlyHints } = httpResponse;
@@ -86,8 +86,16 @@ async function startServer() {
     });
 
     const PORT = process.env.PORT || 5000;
+    const options = {
+        key: fs.readFileSync('./localhost-key.pem'),
+        cert: fs.readFileSync('./localhost.pem'),
+    };
 
-    app.listen(PORT, () => console.log(`🚀 ${PORT}번 포트 실행 중...`));
+    const server = https.createServer(options, app);
+
+    server.listen(PORT, () => {
+        console.log(`🚀 ${PORT}번 포트 실행 중...`);
+    });
 }
 
 async function checkToken(token: string): Promise<CheckTokenResponse> {
