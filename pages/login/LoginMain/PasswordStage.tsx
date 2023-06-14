@@ -23,43 +23,40 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
         setIsChecked(event.target.checked);
     };
 
-    const handleClick = () => {
+    const handleClick = async () => {
         // 톱바의 뒤로가기 보여줘도 됨
         dispatch(LOGGING_IN(false));
 
         // 로그인 통신
-        login();
-        async function login() {
-            try {
-                const userId = document.getElementById('loginId') as HTMLInputElement;
+        try {
+            const userId = document.getElementById('loginId') as HTMLInputElement;
 
-                const body = {
-                    userId: userId.value,
-                    password: password,
-                    keepLogin: isChecked,
-                };
+            const body = {
+                userId: userId.value,
+                password: password,
+                keepLogin: isChecked,
+            };
 
-                const res = await fetch(`${API_URL}/users/login`, {
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body),
-                    mode: 'no-cors',
-                });
+            const res = await fetch(`${API_URL}/users/login`, {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(body),
+                mode: 'no-cors',
+            });
 
-                const data = await res.json();
+            const data = await res.json();
 
-                if (data.success) {
-                    alert('🎉🎉로그인에 성공했습니다🎉🎉');
-                    navigate('/search');
-                } else {
-                    alert('로그인에 실패했습니다');
-                }
-            } catch (err) {
-                console.error(err);
+            if (data.success) {
+                alert('🎉🎉로그인에 성공했습니다🎉🎉');
+                navigate('/search');
+            } else {
+                alert('로그인에 실패했습니다');
             }
+        } catch (err) {
+            console.error(err);
         }
     };
 
