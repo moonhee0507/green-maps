@@ -49,6 +49,8 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
             const data = await res.json();
 
+            console.log(data);
+
             if (data.success) {
                 if (typeof window !== 'undefined') {
                     window.alert('🎉🎉로그인에 성공했습니다🎉🎉');
