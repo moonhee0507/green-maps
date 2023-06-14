@@ -50,10 +50,14 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
             const data = await res.json();
 
             if (data.success) {
-                alert('🎉🎉로그인에 성공했습니다🎉🎉');
-                navigate('/search');
+                if (typeof window !== 'undefined') {
+                    alert('🎉🎉로그인에 성공했습니다🎉🎉');
+                    navigate('/search');
+                }
             } else {
-                alert('로그인에 실패했습니다');
+                if (typeof window !== 'undefined') {
+                    alert('로그인에 실패했습니다');
+                }
             }
         } catch (err) {
             console.error(err);
