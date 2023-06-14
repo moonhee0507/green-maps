@@ -30,21 +30,23 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
         // 로그인 통신
         try {
-            // const userId = document.getElementById('loginId') as HTMLInputElement;
+            // const body = {
+            //     userId: id,
+            //     password: password,
+            //     keepLogin: isChecked,
+            // };
 
-            const body = {
-                userId: id,
-                password: password,
-                keepLogin: isChecked,
-            };
+            const body = new URLSearchParams();
+            body.append('userId', id);
+            body.append('password', password);
+            body.append('keepLogin', isChecked ? 'true' : 'false');
 
             const res = await fetch(`${API_URL}/users/login`, {
                 method: 'POST',
-                credentials: 'include',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify(body),
+                body: body.toString(),
             });
 
             console.log('res', res);
@@ -53,14 +55,10 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
             console.log('data', data);
 
             if (data.success) {
-                if (typeof window !== 'undefined') {
-                    window.alert('🎉🎉로그인에 성공했습니다🎉🎉');
-                    navigate('/search');
-                }
+                window.alert('🎉🎉로그인에 성공했습니다🎉🎉');
+                navigate('/search');
             } else {
-                if (typeof window !== 'undefined') {
-                    window.alert('로그인에 실패했습니다');
-                }
+                window.alert('로그인에 실패했습니다');
             }
         } catch (err) {
             console.error(err);
