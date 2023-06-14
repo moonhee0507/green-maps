@@ -51,12 +51,12 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
             if (data.success) {
                 if (typeof window !== 'undefined') {
-                    alert('🎉🎉로그인에 성공했습니다🎉🎉');
+                    window.alert('🎉🎉로그인에 성공했습니다🎉🎉');
                     navigate('/search');
                 }
             } else {
                 if (typeof window !== 'undefined') {
-                    alert('로그인에 실패했습니다');
+                    window.alert('로그인에 실패했습니다');
                 }
             }
         } catch (err) {
