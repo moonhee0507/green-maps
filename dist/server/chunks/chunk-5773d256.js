@@ -6,7 +6,7 @@ import { p as paginationSlice } from "./chunk-9fb42db4.js";
 import { p as postSlice } from "./chunk-3e2eef8e.js";
 import { m as myListSlice } from "./chunk-62270999.js";
 import { p as profileSlice } from "./chunk-ef8ab02b.js";
-import { l as loginSlice } from "./chunk-244a8cdd.js";
+import { l as loginSlice } from "./chunk-1ccf3f37.js";
 import { s as signupSlice } from "./chunk-6f77cb2d.js";
 const { createSlice: createSlice$1 } = toolkitRaw.default ?? toolkitRaw;
 const buttonSlice = createSlice$1({

@@ -1,8 +1,8 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
-import { a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
-import { L as LOGGING_IN } from "../chunks/chunk-244a8cdd.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
+import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { A as API_URL } from "../chunks/chunk-84869d4d.js";
 import { navigate } from "vite-plugin-ssr/client/router";
@@ -58,17 +58,22 @@ function SelectStage({ setMove }) {
 }
 function IdStage({ setMove }) {
   const dispatch = useAppDispatch();
+  const [id, setId] = useState("");
   const handlePrev = () => {
     setMove((prev) => prev + 100);
     dispatch(LOGGING_IN(false));
   };
   const handleNext = () => {
     setMove((prev) => prev - 100);
+    dispatch(SET_ID(id));
+  };
+  const handleChange = (event) => {
+    setId(event.target.value);
   };
   return /* @__PURE__ */ jsxs("section", { className: "login-id-stage", children: [
     /* @__PURE__ */ jsx("h3", { className: "sr-only", children: "아이디 입력" }),
     /* @__PURE__ */ jsx("label", { htmlFor: "loginId", children: "아이디" }),
-    /* @__PURE__ */ jsx("input", { type: "text", id: "loginId" }),
+    /* @__PURE__ */ jsx("input", { type: "text", id: "loginId", onChange: handleChange }),
     /* @__PURE__ */ jsxs("div", { className: "button-group-move", children: [
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handlePrev, "aria-label": "이전 화면으로 이동", children: "첫 화면" }),
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handleNext, "aria-label": "다음 화면으로 이동", children: "비밀번호" })
@@ -77,6 +82,7 @@ function IdStage({ setMove }) {
 }
 function PasswordStage({ setMove }) {
   const dispatch = useAppDispatch();
+  const id = useAppSelector((state) => state.loginSlice.currentId);
   const [password, setPassword] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const handlePrev = () => {
@@ -88,32 +94,28 @@ function PasswordStage({ setMove }) {
   const handleCheckChange = (event) => {
     setIsChecked(event.target.checked);
   };
-  const handleClick = () => {
+  async function handleClick() {
     dispatch(LOGGING_IN(false));
-    login();
-  };
-  async function login() {
     try {
-      const userId = document.getElementById("loginId");
-      const body = {
-        userId: userId.value,
-        password,
-        keepLogin: isChecked
-      };
+      const body = new URLSearchParams();
+      body.append("userId", id);
+      body.append("password", password);
+      body.append("keepLogin", isChecked ? "true" : "false");
       const res = await fetch(`${API_URL}/users/login`, {
         method: "POST",
-        credentials: "include",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify(body)
+        body: body.toString()
       });
+      console.log("res", res);
       const data = await res.json();
+      console.log("data", data);
       if (data.success) {
-        alert("🎉🎉로그인에 성공했습니다🎉🎉");
+        window.alert("🎉🎉로그인에 성공했습니다🎉🎉");
         navigate("/search");
       } else {
-        alert("로그인에 실패했습니다");
+        window.alert("로그인에 실패했습니다");
       }
     } catch (err) {
       console.error(err);

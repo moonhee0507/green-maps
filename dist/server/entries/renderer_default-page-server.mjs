@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import ReactDOMServer from "react-dom/server";
 import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr/server";
-import { s as store } from "../chunks/chunk-8621c645.js";
+import { s as store } from "../chunks/chunk-5773d256.js";
 import { Provider } from "react-redux";
 import { P as PageContextProvider, L as Link } from "../chunks/chunk-24b72a12.js";
 import "@reduxjs/toolkit";
@@ -12,7 +12,7 @@ import "../chunks/chunk-9fb42db4.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "../chunks/chunk-62270999.js";
 import "../chunks/chunk-ef8ab02b.js";
-import "../chunks/chunk-244a8cdd.js";
+import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "react";
 const normalize = "";
@@ -60,20 +60,7 @@ async function render(pageContext) {
   const cssUrl = "/style/index.css";
   const PRELOADED_STATE = JSON.stringify(store);
   const LOGIN_MESSAGE = JSON.stringify("로그인이 필요한 서비스입니다.\n로그인하시겠습니까?");
-  return escapeInject(_a || (_a = __template(['<!DOCTYPE html>\n    <html lang="ko">\n        <head>\n            <meta charset="UTF-8" />\n            <link rel="icon" href=', ' />\n            <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n            <meta name="description" content="', '" />\n            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">\n            <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">\n            <link rel="manifest" href="', '" />\n            <link rel="preconnect" href="https://fonts.googleapis.com">\n            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">\n            <link rel="stylesheet" href="', '" type="text/css" >\n            <title>', `</title>
-        </head>
-        <body>
-            <script type="module">
-                import RefreshRuntime from 'https://green-maps-git-preview-moonhee0507.vercel.app/@react-refresh'
-                RefreshRuntime.injectIntoGlobalHook(window)
-                window.$RefreshReg$ = () => {}
-                window.$RefreshSig$ = () => (type) => type
-                window.__vite_plugin_react_preamble_installed__ = true
-            <\/script>
-            <script type="module" src="https://green-maps-git-preview-moonhee0507.vercel.app/@vite/client"><\/script>
-            <script type="module" src="https://green-maps-git-preview-moonhee0507.vercel.app/main.js"><\/script>
-            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"><\/script>
-            <div id="page-view">`, '</div>\n            <script type="text/javascript">\n                var global = global || window;\n                window.__PRELOADED_STATE__ = ', `;
+  return escapeInject(_a || (_a = __template(['<!DOCTYPE html>\n    <html lang="ko">\n        <head>\n            <meta charset="UTF-8" />\n            <link rel="icon" href=', ' />\n            <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n            <meta name="description" content="', '" />\n            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">\n            <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">\n            <link rel="manifest" href="', '" />\n            <link rel="preconnect" href="https://fonts.googleapis.com">\n            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">\n            <link rel="stylesheet" href="', '" type="text/css" >\n            <title>', '</title>\n        </head>\n        <body>\n            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"><\/script>\n            <div id="page-view">', '</div>\n            <script type="text/javascript">\n                var global = global || window;\n                window.__PRELOADED_STATE__ = ', `;
                 
                 const map = document.getElementById("map");
                 if (map) {
