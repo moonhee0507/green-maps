@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../renderer/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
 import { LOGGING_IN } from '../../../renderer/_reducers/_slices/loginSlice';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
@@ -9,6 +9,7 @@ export { PasswordStage };
 function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction<number>> }) {
     const dispatch = useAppDispatch();
 
+    const id = useAppSelector((state) => state.loginSlice.currentId);
     const [password, setPassword] = useState<string>('');
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -23,16 +24,16 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
         setIsChecked(event.target.checked);
     };
 
-    const handleClick = async () => {
+    async function handleClick() {
         // 톱바의 뒤로가기 보여줘도 됨
         dispatch(LOGGING_IN(false));
 
         // 로그인 통신
         try {
-            const userId = document.getElementById('loginId') as HTMLInputElement;
+            // const userId = document.getElementById('loginId') as HTMLInputElement;
 
             const body = {
-                userId: userId.value,
+                userId: id,
                 password: password,
                 keepLogin: isChecked,
             };
@@ -49,7 +50,9 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
             const data = await res.json();
 
-            console.log(data);
+            console.log('res', res);
+
+            console.log('data', data);
 
             if (data.success) {
                 if (typeof window !== 'undefined') {
@@ -64,7 +67,7 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
         } catch (err) {
             console.error(err);
         }
-    };
+    }
 
     return (
         <section className="login-password-stage">
