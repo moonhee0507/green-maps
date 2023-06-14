@@ -45,13 +45,11 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(body),
-                mode: 'no-cors',
             });
-
-            const data = await res.json();
 
             console.log('res', res);
 
+            const data = await res.json();
             console.log('data', data);
 
             if (data.success) {
