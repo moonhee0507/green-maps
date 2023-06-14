@@ -2,10 +2,32 @@ import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
 import auth from '../../middleware/auth.js';
 import Bookmark from '../../models/Bookmark.js';
+import cors from 'cors';
 
 const route = Router();
 
 export default (app: Router) => {
+    const corsOptions = {
+        origin: 'https://green-maps-git-preview-moonhee0507.vercel.app',
+        methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
+        allowedHeaders: [
+            'X-CSRF-Token',
+            'X-Requested-With',
+            'Accept',
+            'Accept-Version',
+            'Content-Length',
+            'Content-MD5',
+            'Content-Type',
+            'Date',
+            'X-Api-Version',
+            'Cookie',
+            'Cache-Control',
+        ],
+        credentials: true,
+        optionsSuccessStatus: 200,
+    };
+    app.use(cors(corsOptions));
+    app.options('*', cors(corsOptions));
     app.use('/users', route);
 
     route.get('/', auth, async (req: any, res: Response) => {
@@ -54,7 +76,7 @@ export default (app: Router) => {
     });
 
     // login
-    route.post('/login', async (req: Request, res: Response) => {
+    route.post('/login', cors(corsOptions), async (req: Request, res: Response) => {
         try {
             // res.setHeader('Access-Control-Allow-Origin', 'https://green-maps-git-preview-moonhee0507.vercel.app');
 
