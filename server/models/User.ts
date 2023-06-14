@@ -171,10 +171,10 @@ userSchema.method(
     }
 );
 
-const privateKey: any = process.env.PRIVATE_KEY?.replace(/\\n/g, '').trim();
+const privateKey: any = process.env.PRIVATE_KEY?.replace(/\n/g, '');
 // const privateKey: string = fs.readFileSync('./rsa-private-key.pem', 'utf8');
 
-const publicKey: any = process.env.PUBLIC_KEY?.replace(/\\n/g, '').trim();
+const publicKey: any = process.env.PUBLIC_KEY?.replace(/\n/g, '');
 // const publicKey: string = fs.readFileSync('./rsa-public-key.pem', 'utf8');
 
 // generateToken메서드 만들기
