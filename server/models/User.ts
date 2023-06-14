@@ -179,6 +179,8 @@ const publicKey: any = process.env.PUBLIC_KEY?.replace(/\\n/g, '');
 
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
+    console.log('privateKey', privateKey);
+
     var user = this;
 
     if (!user._id) return cb(new Error('🚨 토큰을 생성하기 전에 사용자를 데이터베이스에 저장해야 합니다.'));
