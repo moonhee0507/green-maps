@@ -1,6 +1,3 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
 import mongoose, { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
