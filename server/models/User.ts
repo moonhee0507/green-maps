@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs-extra';
 import crypto from 'crypto';
 import type { Restaurant } from './Restaurant';
+import { Buffer } from 'node:buffer';
 
 export type Bookmark = {
     _id: string | Restaurant;
@@ -181,10 +182,7 @@ userSchema.method(
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     try {
-        const privateKey: string = `-----BEGIN RSA PRIVATE KEY-----${process.env.PRIVATE_KEY?.replace(
-            ' ',
-            ''
-        )}-----END RSA PRIVATE KEY-----`;
+        const privateKey: string = Buffer.from(process.env.PRIVATE_KEY || '', 'base64').toString();
         console.log('변형된 개인키', privateKey);
 
         var user = this;
@@ -215,10 +213,7 @@ userSchema.static('findByToken', function findByToken(token: string, cb: (err: E
     try {
         var user = this;
 
-        const publicKey: string = `-----BEGIN PUBLIC KEY-----${process.env.PUBLIC_KEY?.replace(
-            ' ',
-            ''
-        )}-----END PUBLIC KEY-----`;
+        const publicKey: string = Buffer.from(process.env.PUBLIC_KEY || '', 'base64').toString();
         console.log('변형된 공개키', publicKey);
 
         jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
