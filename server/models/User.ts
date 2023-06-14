@@ -181,8 +181,11 @@ userSchema.method(
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     try {
-        const privateKey: string = `${process.env.PRIVATE_KEY}`;
-        console.log('환경변수로 저장된 개인키', privateKey);
+        const privateKey: string = `-----BEGIN RSA PRIVATE KEY-----${process.env.PRIVATE_KEY?.replace(
+            ' ',
+            ''
+        )}-----END RSA PRIVATE KEY-----`;
+        console.log('변형된 개인키', privateKey);
 
         var user = this;
 
@@ -211,8 +214,12 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
 userSchema.static('findByToken', function findByToken(token: string, cb: (err: Error | null, user?: any) => any) {
     try {
         var user = this;
-        const publicKey: string = `${process.env.PUBLIC_KEY}`;
-        console.log('환경변수로 저장된 공개키', publicKey);
+
+        const publicKey: string = `-----BEGIN PUBLIC KEY-----${process.env.PUBLIC_KEY?.replace(
+            ' ',
+            ''
+        )}-----END PUBLIC KEY-----`;
+        console.log('변형된 공개키', publicKey);
 
         jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
             if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
