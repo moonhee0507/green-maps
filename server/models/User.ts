@@ -188,7 +188,7 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
     // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
     const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, privateKey, {
         algorithm: 'RS256',
-        expiresIn: 30, // 초 단위 주의
+        expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의
     });
     user.token = token;
 
