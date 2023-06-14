@@ -10,6 +10,7 @@ export default (app: Router) => {
 
     route.get('/', auth, async (req: any, res: Response) => {
         try {
+            console.log('브라우저 쿠키', req.cookies.auth);
             const user = await User.findOne({ token: req.token }).exec();
             if (!user) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
             else res.status(200).json({ success: true, user: user });
@@ -71,15 +72,23 @@ export default (app: Router) => {
                                     maxAge: 7 * 24 * 60 * 60 * 1000,
                                     httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                                     secure: true, // https에서만 사용
-                                    sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                                    sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값: strict는 cors 비허용, lax는 링크를 따라갈때만 cors 허용
+                                    domain:
+                                        process.env.NODE_ENV === 'development'
+                                            ? '.green-maps-git-preview-moonhee0507.vercel.app'
+                                            : '.green-maps-git-preview-moonhee0507.vercel.app',
                                 })
                                     .status(200)
                                     .json({ success: true, keepLogin: keepLogin, user: user });
                             } else {
                                 res.cookie('auth', user.token, {
-                                    httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
-                                    secure: true, // https에서만 사용
-                                    sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                                    httpOnly: true,
+                                    secure: true,
+                                    sameSite: 'none',
+                                    domain:
+                                        process.env.NODE_ENV === 'development'
+                                            ? '.green-maps-git-preview-moonhee0507.vercel.app'
+                                            : '.green-maps-git-preview-moonhee0507.vercel.app',
                                 })
                                     .status(200)
                                     .json({ success: true, keepLogin: keepLogin, user: user });
@@ -144,7 +153,15 @@ export default (app: Router) => {
     route.post('/logout', (req: Request, res: Response) => {
         // expires, maxAge를 제외하고 res.cookie로 제공한 옵션과 동일해야 함
         try {
-            res.clearCookie('auth', { httpOnly: true, secure: true, sameSite: 'strict' }).json({
+            res.clearCookie('auth', {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'none',
+                domain:
+                    process.env.NODE_ENV === 'development'
+                        ? '.green-maps-git-preview-moonhee0507.vercel.app'
+                        : '.green-maps-git-preview-moonhee0507.vercel.app',
+            }).json({
                 success: true,
                 message: '로그아웃 되었습니다.',
             });

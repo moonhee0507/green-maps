@@ -53,7 +53,6 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
             if (data.success) {
                 alert('🎉🎉로그인에 성공했습니다🎉🎉');
-                // 뒤로가기 + 새로고침
                 navigate('/search');
             } else {
                 alert('로그인에 실패했습니다');

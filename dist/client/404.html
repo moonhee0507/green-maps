@@ -16,6 +16,15 @@
             <title>Green Maps</title>
         </head>
         <body>
+            <script type="module">
+                import RefreshRuntime from 'https://green-maps-git-preview-moonhee0507.vercel.app/@react-refresh'
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {}
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            </script>
+            <script type="module" src="https://green-maps-git-preview-moonhee0507.vercel.app/@vite/client"></script>
+            <script type="module" src="https://green-maps-git-preview-moonhee0507.vercel.app/main.js"></script>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"></script>
             <div id="page-view"><div class="layout"><div class="left-area"><div class="txt-intro"><strong>채식 식당 검색과 북마크 서비스</strong><h1><a href="/" class="">그린 맵</a></h1></div></div><div class="app"><section class="section-404"><h2>4️⃣0️⃣4️⃣<span>Page Not Found</span></h2><a href="/" class="link-go-home">홈으로 이동</a></section></div></div></div>
             <script type="text/javascript">
@@ -38,7 +47,7 @@
                     });
                 }
             </script>
-      <script type="module" src="/assets/entries/entry-client-routing.521e9c45.js" defer></script>
+      <script type="module" src="/assets/entries/entry-client-routing.82cb3866.js" defer></script>
       <link rel="modulepreload" href="/assets/entries/renderer_error.page.658ecd63.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-0ad0329c.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/entries/renderer_default.page.client.e696ea27.js" as="script" type="text/javascript">

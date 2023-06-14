@@ -20,9 +20,7 @@ export default function InfoWindow({
                     <div className="container-title-cert">
                         <dt className="sr-only">식당 이름</dt>
                         <dd className="txt-title">
-                            <a href={`/search/${_id}`} className="">
-                                {title}
-                            </a>
+                            <a href={`/search/${_id}`}>{title}</a>
                         </dd>
 
                         <div>

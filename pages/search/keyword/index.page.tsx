@@ -66,7 +66,7 @@ function Page(pageContext: PageContext) {
                 perPage={perPage}
                 searchListInPage={searchListInPage}
             />
-            <NavBar isLoggedIn={pageContext.user.isLoggedIn} />
+            <NavBar isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false} />
         </>
     );
 }

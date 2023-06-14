@@ -5,22 +5,24 @@ import { ReviewSection } from './ReviewSection/ReviewSection.js';
 import type { Restaurant } from '../../../../server/models/Restaurant';
 import type { UserInfo } from '../../../../server/models/User.js';
 
-export { RestaurantDetail };
-
-function RestaurantDetail({
+export default function RestaurantDetail({
     restaurantInfo,
     isLoggedIn,
     userInfo,
 }: {
-    restaurantInfo: Restaurant;
+    restaurantInfo: Restaurant | null;
     isLoggedIn: boolean;
     userInfo: UserInfo | null;
 }) {
     return (
         <main className="wrapper-restaurant-detail">
-            <PrimarySection restaurantInfo={restaurantInfo} isLoggedIn={isLoggedIn} />
-            <LocationSection restaurantInfo={restaurantInfo} />
-            <ReviewSection restaurantInfo={restaurantInfo} isLoggedIn={isLoggedIn} userInfo={userInfo} />
+            {restaurantInfo ? (
+                <>
+                    <PrimarySection restaurantInfo={restaurantInfo} isLoggedIn={isLoggedIn} />
+                    <LocationSection restaurantInfo={restaurantInfo} />
+                    <ReviewSection restaurantInfo={restaurantInfo} isLoggedIn={isLoggedIn} userInfo={userInfo} />
+                </>
+            ) : null}
         </main>
     );
 }
