@@ -64,14 +64,14 @@ async function render(pageContext) {
         </head>
         <body>
             <script type="module">
-                import RefreshRuntime from 'http://localhost:5000/@react-refresh'
+                import RefreshRuntime from 'https://green-maps-git-preview-moonhee0507.vercel.app/@react-refresh'
                 RefreshRuntime.injectIntoGlobalHook(window)
                 window.$RefreshReg$ = () => {}
                 window.$RefreshSig$ = () => (type) => type
                 window.__vite_plugin_react_preamble_installed__ = true
             <\/script>
-            <script type="module" src="http://localhost:5000/@vite/client"><\/script>
-            <script type="module" src="http://localhost:5000/main.js"><\/script>
+            <script type="module" src="https://green-maps-git-preview-moonhee0507.vercel.app/@vite/client"><\/script>
+            <script type="module" src="https://green-maps-git-preview-moonhee0507.vercel.app/main.js"><\/script>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"><\/script>
             <div id="page-view">`, '</div>\n            <script type="text/javascript">\n                var global = global || window;\n                window.__PRELOADED_STATE__ = ', `;
                 

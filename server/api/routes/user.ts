@@ -75,7 +75,7 @@ export default (app: Router) => {
                                     sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값: strict는 cors 비허용, lax는 링크를 따라갈때만 cors 허용
                                     domain:
                                         process.env.NODE_ENV === 'development'
-                                            ? '.localhost'
+                                            ? '.green-maps-git-preview-moonhee0507.vercel.app'
                                             : '.green-maps-git-preview-moonhee0507.vercel.app',
                                 })
                                     .status(200)
@@ -87,7 +87,7 @@ export default (app: Router) => {
                                     sameSite: 'none',
                                     domain:
                                         process.env.NODE_ENV === 'development'
-                                            ? '.localhost'
+                                            ? '.green-maps-git-preview-moonhee0507.vercel.app'
                                             : '.green-maps-git-preview-moonhee0507.vercel.app',
                                 })
                                     .status(200)
@@ -159,7 +159,7 @@ export default (app: Router) => {
                 sameSite: 'none',
                 domain:
                     process.env.NODE_ENV === 'development'
-                        ? '.localhost'
+                        ? '.green-maps-git-preview-moonhee0507.vercel.app'
                         : '.green-maps-git-preview-moonhee0507.vercel.app',
             }).json({
                 success: true,
