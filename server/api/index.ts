@@ -16,7 +16,7 @@ import allowCors from '../middleware/allowCors.js';
 
 export default () => {
     const app = Router();
-    app.use(allowCors);
+    // app.use(allowCors);
 
     user(app);
     restaurant(app);
