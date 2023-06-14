@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request } from 'express';
 import './database.js';
 import cors from 'cors';
 import compression from 'compression';
@@ -36,7 +36,7 @@ async function startServer() {
     const app = express();
 
     const corsOptions = {
-        origin: true,
+        origin: 'https://green-maps-git-preview-moonhee0507.vercel.app',
         methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
         allowedHeaders: [
             'X-CSRF-Token',
@@ -81,7 +81,7 @@ async function startServer() {
 
     const PORT = process.env.PORT || 5000;
 
-    https.createServer(app).listen(PORT, () => {
+    app.listen(PORT, () => {
         console.log(`🚀 ${PORT}번 포트 실행 중...`);
     });
 
