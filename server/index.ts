@@ -13,7 +13,6 @@ const isProduction = process.env.NODE_ENV === 'production';
 import routes from './api/index.js';
 import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
-// import allowCors from './middleware/allowCors.js';
 
 type PageContextInit = {
     urlOriginal: string;
@@ -34,27 +33,6 @@ startServer();
 
 async function startServer() {
     const app = express();
-    const corsOptions = {
-        origin: true,
-        methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
-        allowedHeaders: [
-            'X-CSRF-Token',
-            'X-Requested-With',
-            'Accept',
-            'Accept-Version',
-            'Content-Length',
-            'Content-MD5',
-            'Content-Type',
-            'Date',
-            'X-Api-Version',
-            'Cookie',
-            'Cache-Control',
-        ],
-        credentials: true,
-        preflightContinue: true,
-    };
-    app.use(cors(corsOptions));
-    app.options('*', cors(corsOptions));
 
     app.use(compression());
     app.use(bodyParser.urlencoded({ extended: true }));
