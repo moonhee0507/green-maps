@@ -29,39 +29,39 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
         // 로그인 통신
         login();
-    };
+        async function login() {
+            try {
+                const userId = document.getElementById('loginId') as HTMLInputElement;
 
-    async function login() {
-        try {
-            const userId = document.getElementById('loginId') as HTMLInputElement;
+                const body = {
+                    userId: userId.value,
+                    password: password,
+                    keepLogin: isChecked,
+                };
 
-            const body = {
-                userId: userId.value,
-                password: password,
-                keepLogin: isChecked,
-            };
+                const res = await fetch(`${API_URL}/users/login`, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(body),
+                    mode: 'no-cors',
+                });
 
-            const res = await fetch(`${API_URL}/users/login`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(body),
-                mode: 'no-cors',
-            });
+                const data = await res.json();
 
-            const data = await res.json();
-
-            if (data.success) {
-                navigate('/search');
-            } else {
-                alert('로그인에 실패했습니다');
+                if (data.success) {
+                    alert('🎉🎉로그인에 성공했습니다🎉🎉');
+                    navigate('/search');
+                } else {
+                    alert('로그인에 실패했습니다');
+                }
+            } catch (err) {
+                console.error(err);
             }
-        } catch (err) {
-            console.error(err);
         }
-    }
+    };
 
     return (
         <section className="login-password-stage">
