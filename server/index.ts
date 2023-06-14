@@ -52,7 +52,6 @@ async function startServer() {
             'Cache-Control',
         ],
         credentials: true,
-        preflightContinue: true,
         optionsSuccessStatus: 200,
     };
     app.use(cors(corsOptions));

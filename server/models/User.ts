@@ -1,6 +1,7 @@
 import mongoose, { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import fs from 'fs-extra';
 import type { Restaurant } from './Restaurant';
 
 export type Bookmark = {
@@ -170,8 +171,11 @@ userSchema.method(
     }
 );
 
-const privateKey: any = process.env.PRIVATE_KEY?.replace(/\\n/g, '');
-const publicKey: any = process.env.PUBLIC_KEY?.replace(/\\n/g, '');
+// const privateKey: any = process.env.PRIVATE_KEY?.replace(/\\n/g, '');
+const privateKey: string = fs.readFileSync('./rsa-private-key.pem', 'utf8');
+
+// const publicKey: any = process.env.PUBLIC_KEY?.replace(/\\n/g, '');
+const publicKey: string = fs.readFileSync('./rsa-public-key.pem', 'utf8');
 
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
