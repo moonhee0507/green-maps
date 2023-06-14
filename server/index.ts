@@ -34,34 +34,33 @@ startServer();
 
 async function startServer() {
     const app = express();
-    app.use(
-        cors({
-            origin: 'https://green-maps-git-preview-moonhee0507.vercel.app',
-            methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
-            allowedHeaders: [
-                'X-CSRF-Token',
-                'X-Requested-With',
-                'Accept',
-                'Accept-Version',
-                'Content-Length',
-                'Content-MD5',
-                'Content-Type',
-                'Date',
-                'X-Api-Version',
-                'Cookie',
-                'Cache-Control',
-            ],
-            credentials: true,
-            preflightContinue: true,
-        })
-    );
+    const corsOptions = {
+        origin: true,
+        methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
+        allowedHeaders: [
+            'X-CSRF-Token',
+            'X-Requested-With',
+            'Accept',
+            'Accept-Version',
+            'Content-Length',
+            'Content-MD5',
+            'Content-Type',
+            'Date',
+            'X-Api-Version',
+            'Cookie',
+            'Cache-Control',
+        ],
+        credentials: true,
+        preflightContinue: true,
+    };
+    app.use(cors(corsOptions));
+    app.options('*', cors(corsOptions));
 
     app.use(compression());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
     app.use(cookieParser());
 
-    app.options('*', cors());
     app.use('/api', routes());
 
     if (isProduction) {
