@@ -2,6 +2,7 @@ import mongoose, { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import fs from 'fs-extra';
+import crypto from 'crypto';
 import type { Restaurant } from './Restaurant';
 
 export type Bookmark = {
@@ -180,18 +181,22 @@ userSchema.method(
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     try {
-        const privateKey: string = `${process.env.PRIVATE_KEY}`.replace(/\s/g, '');
-        console.log('privateKey', privateKey);
+        const privateKey: string = `${process.env.PRIVATE_KEY}`;
+        console.log('환경변수로 저장된 개인키', privateKey);
+
+        const pemPrivateKey = crypto.createPrivateKey({
+            key: privateKey,
+            format: 'pem',
+        });
+
+        console.log('pem 형식 키: ', pemPrivateKey);
 
         var user = this;
-
-        console.log('this._id', this._id);
-        console.log('this._id.toHexString', this._id.toHexString());
 
         if (!user._id) return cb(new Error('🚨 토큰을 생성하기 전에 사용자를 데이터베이스에 저장해야 합니다.'));
 
         // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
-        const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, privateKey, {
+        const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, pemPrivateKey, {
             algorithm: 'RS256',
             expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의
         });
@@ -213,9 +218,17 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
 userSchema.static('findByToken', function findByToken(token: string, cb: (err: Error | null, user?: any) => any) {
     try {
         var user = this;
-        const publicKey: string = `${process.env.PUBLIC_KEY}`.replace(/\s/g, '');
+        const publicKey: string = `${process.env.PUBLIC_KEY}`;
+        console.log('환경변수로 저장된 공개키', publicKey);
 
-        jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
+        const pemPublicKey = crypto.createPublicKey({
+            key: publicKey,
+            format: 'pem',
+        });
+
+        console.log('pem 형식 공개키: ', pemPublicKey);
+
+        jwt.verify(token, pemPublicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
             if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
             else {
                 try {
