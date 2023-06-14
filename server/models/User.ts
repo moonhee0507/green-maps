@@ -180,7 +180,7 @@ userSchema.method(
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     try {
-        const privateKey: string = `${process.env.PRIVATE_KEY}`.replace(/\n/g, '');
+        const privateKey: string = `${process.env.PRIVATE_KEY}`.replace(/\s/g, '');
         console.log('privateKey', privateKey);
 
         var user = this;
@@ -213,7 +213,7 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
 userSchema.static('findByToken', function findByToken(token: string, cb: (err: Error | null, user?: any) => any) {
     try {
         var user = this;
-        const publicKey: string = `${process.env.PUBLIC_KEY}`.replace(/\n/g, '');
+        const publicKey: string = `${process.env.PUBLIC_KEY}`.replace(/\s/g, '');
 
         jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
             if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
