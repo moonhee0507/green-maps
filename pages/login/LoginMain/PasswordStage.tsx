@@ -42,6 +42,7 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
             body.append('keepLogin', isChecked ? 'true' : 'false');
 
             const res = await fetch(`${API_URL}/users/login`, {
+                credentials: 'include',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
