@@ -2,7 +2,6 @@ import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
 import auth from '../../middleware/auth.js';
 import Bookmark from '../../models/Bookmark.js';
-import cors from 'cors';
 
 const route = Router();
 
@@ -14,8 +13,7 @@ export default (app: Router) => {
             const user = await User.findOne({ token: req.token }).exec();
             if (!user) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
             else res.status(200).json({ success: true, user: user });
-        } catch (err: unknown) {
-            console.error(err);
+        } catch (err) {
             if (err instanceof Error) res.status(500).json({ success: false, errorMessage: err.message });
         }
     });
@@ -76,10 +74,7 @@ export default (app: Router) => {
                                     httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                                     secure: true, // https에서만 사용
                                     sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값: strict는 cors 비허용, lax는 링크를 따라갈때만 cors 허용
-                                    domain:
-                                        process.env.NODE_ENV === 'development'
-                                            ? '.green-maps-git-preview-moonhee0507.vercel.app'
-                                            : '.green-maps-git-preview-moonhee0507.vercel.app',
+                                    domain: 'port-0-green-maps-7xwyjq992lliq95b1a.sel4.cloudtype.app',
                                 })
                                     .status(200)
                                     .json({ success: true, keepLogin: keepLogin, user: user });
@@ -88,10 +83,7 @@ export default (app: Router) => {
                                     httpOnly: true,
                                     secure: true,
                                     sameSite: 'none',
-                                    domain:
-                                        process.env.NODE_ENV === 'development'
-                                            ? '.green-maps-git-preview-moonhee0507.vercel.app'
-                                            : '.green-maps-git-preview-moonhee0507.vercel.app',
+                                    domain: 'port-0-green-maps-7xwyjq992lliq95b1a.sel4.cloudtype.app',
                                 })
                                     .status(200)
                                     .json({ success: true, keepLogin: keepLogin, user: user });
@@ -160,10 +152,7 @@ export default (app: Router) => {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'none',
-                domain:
-                    process.env.NODE_ENV === 'development'
-                        ? '.green-maps-git-preview-moonhee0507.vercel.app'
-                        : '.green-maps-git-preview-moonhee0507.vercel.app',
+                domain: 'port-0-green-maps-7xwyjq992lliq95b1a.sel4.cloudtype.app',
             }).json({
                 success: true,
                 message: '로그아웃 되었습니다.',
