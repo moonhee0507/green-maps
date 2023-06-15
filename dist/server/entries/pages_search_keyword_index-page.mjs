@@ -7,7 +7,7 @@ import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { b as CATEGORIES, c as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-448560a4.js";
 import { A as ADD_SELECTED_CATEGORY, p as ADD_SELECTED_CERT, q as SET_ORDER_BY } from "../chunks/chunk-0a6e623f.js";
 import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-52b23d17.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-4a5c6344.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";

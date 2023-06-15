@@ -1,1 +1,0 @@
-import{r as t}from"./chunk-0ad0329c.js";import{A as c}from"./chunk-0fac4abb.js";function l(){const[n,e]=t.useState(!1),[o,s]=t.useState(null);return t.useEffect(()=>{(async()=>{try{const r=await(await fetch(`${c}/users/`,{credentials:"include",method:"GET"})).json();r.success===!0?(e(!0),s(r.user)):(e(!1),s(null))}catch{e(!1),s(null)}})()},[]),[n,o]}export{l as u};
