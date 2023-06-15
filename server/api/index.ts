@@ -12,7 +12,6 @@ import bookmark from './routes/bookmark.js';
 import search from './routes/search.js';
 import oauth from './routes/oauth.js';
 import comment from './routes/comment.js';
-import key from './routes/key.js';
 
 export default () => {
     const app = Router();
@@ -34,7 +33,6 @@ export default () => {
     search(app);
 
     oauth(app);
-    key(app);
 
     return app;
 };

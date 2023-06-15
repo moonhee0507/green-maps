@@ -1,11 +1,7 @@
-import mongoose, { Model, Schema, HydratedDocument, model } from 'mongoose';
+import { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import fs from 'fs-extra';
-import crypto from 'crypto';
 import type { Restaurant } from './Restaurant';
-import { Buffer } from 'node:buffer';
-import fetch from 'node-fetch';
 
 export type Bookmark = {
     _id: string | Restaurant;
@@ -175,10 +171,8 @@ userSchema.method(
 );
 
 const privateKey: string = process.env.PRIVATE_KEY?.replace(/\\n/g, '\n') || '';
-// const privateKey: string = fs.readFileSync('./rsa-private-key.pem', 'utf8');
 
 const publicKey: string = process.env.PUBLIC_KEY?.replace(/\\n/g, '\n') || '';
-// const publicKey: string = fs.readFileSync('./rsa-public-key.pem', 'utf8');
 
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
@@ -192,16 +186,6 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
          * PEM encoded RSA private key: SSL 과 같은 암호화 시스템과 함께 사용하기 위해 RSA 개인 키를 저장하는 형식
          * key file은 base64로 인코딩된 페이로드 데이터를 일반텍스트로 저장(-----BEGIN RSA PRIVATE KEY----- 포함)
          */
-
-        console.log('replace된 privateKey: ', privateKey);
-        // const strTest = '졸립다!';
-        // console.log('원래 메시지: ', strTest);
-
-        // const strEnc = crypto.privateEncrypt(privateKey, Buffer.from(strTest, 'utf8')).toString('base64');
-        // console.log('암호화된 메시지: ', strEnc);
-
-        // const strDec = crypto.publicDecrypt(publicKey, Buffer.from(strEnc, 'utf8')).toString('base64');
-        // console.log('복호화된 메시지: ', strDec);
 
         jwt.sign(
             { id: this._id.toHexString(), iat: Date.now() },
