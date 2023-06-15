@@ -5,6 +5,7 @@ import { ModalGroup } from './ModalGroup/ModalGroup';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageContext } from '../../../renderer/types';
 import type { Restaurant } from '../../../server/models/Restaurant';
+import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
 
 const RestaurantDetail = React.lazy(() => import('./RestaurantDetail/RestaurantDetail'));
 
@@ -13,6 +14,7 @@ export { Page };
 function Page(pageContext: PageContext) {
     const { routeParams, user } = pageContext;
 
+    const isLoggedIn = useCheckLoginStatus();
     const restaurantId = pageContext.routeParams?.restaurantId || '';
     // const { isLoggedIn, info } = user;
 
@@ -40,11 +42,11 @@ function Page(pageContext: PageContext) {
             <React.Suspense fallback={<Loading />}>
                 <RestaurantDetail
                     restaurantInfo={restaurantInfo}
-                    isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false}
+                    isLoggedIn={isLoggedIn}
                     userInfo={pageContext.user ? pageContext.user.info : null}
                 />
             </React.Suspense>
-            <NavBar isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false} />
+            <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup />
         </>
     );

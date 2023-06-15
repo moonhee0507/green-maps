@@ -5,7 +5,6 @@ import { ControlButton } from './ControlButton/ControlButton';
 import { KakaoMap } from './KakaoMap';
 import { ResultInRadius } from './ResultInRadius/ResultInRadius';
 import { NavBar } from '../../components/navBar';
-import { API_URL } from '../../renderer/CONSTANT_URL';
 import useLocationAccess from './hook/useLocationAccess';
 import appModalMode from '../../components/modal/appModalMode';
 import { useAppDispatch } from '../../renderer/store/hooks';
@@ -18,22 +17,8 @@ export { Page };
 function Page() {
     const dispatch = useAppDispatch();
 
-    // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
     const isLoggedIn = useCheckLoginStatus();
     const hasLocationAccess: StateToGeolocation = useLocationAccess();
-
-    // useEffect(() => {
-    //     (async () => {
-    //         const res = await fetch(`${API_URL}/users/`, {
-    //             credentials: 'include',
-    //             method: 'GET',
-    //         });
-    //         const data = await res.json();
-
-    //         if (data.success === true) setIsLoggedIn(true);
-    //         else setIsLoggedIn(false);
-    //     })();
-    // }, []);
 
     useEffect(() => {
         if (hasLocationAccess === 'granted') {
