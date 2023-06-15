@@ -68,7 +68,7 @@ export default (app: Router) => {
                     user.generateToken((err?: Error | null, user?: any) => {
                         if (err) return res.status(400).send(err);
                         else {
-                            if (keepLogin) {
+                            if (keepLogin === 'true') {
                                 res.cookie('auth', user.token, {
                                     maxAge: 7 * 24 * 60 * 60 * 1000,
                                     httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함

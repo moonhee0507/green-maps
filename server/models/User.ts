@@ -194,7 +194,7 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
                 algorithm: 'RS256',
                 expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의,
             },
-            function (err, token) {
+            async function (err, token) {
                 if (err) {
                     return cb(new Error('암호화 에러'));
                 }
@@ -202,7 +202,8 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
 
                 user.token = token;
 
-                user.save()
+                await user
+                    .save()
                     .then((user: any) => cb(null, user))
                     .catch((err: any) => cb(err));
             }

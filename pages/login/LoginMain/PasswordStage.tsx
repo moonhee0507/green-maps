@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
 import { LOGGING_IN } from '../../../renderer/_reducers/_slices/loginSlice';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
@@ -30,12 +30,6 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
 
         // 로그인 통신
         try {
-            // const body = {
-            //     userId: id,
-            //     password: password,
-            //     keepLogin: isChecked,
-            // };
-
             const body = new URLSearchParams();
             body.append('userId', id);
             body.append('password', password);
@@ -50,10 +44,7 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
                 body: body.toString(),
             });
 
-            console.log('res', res);
-
             const data = await res.json();
-            console.log('data', data);
 
             if (data.success) {
                 window.alert('🎉🎉로그인에 성공했습니다🎉🎉');
