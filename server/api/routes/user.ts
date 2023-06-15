@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import User from '../../models/User.js';
 import auth from '../../middleware/auth.js';
 import Bookmark from '../../models/Bookmark.js';
+import cors from 'cors';
 
 const route = Router();
 
@@ -10,7 +11,6 @@ export default (app: Router) => {
 
     route.get('/', auth, async (req: any, res: Response) => {
         try {
-            console.log('브라우저 쿠키', req.cookies.auth);
             const user = await User.findOne({ token: req.token }).exec();
             if (!user) res.json({ success: false, message: '사용자가 존재하지 않습니다.' });
             else res.status(200).json({ success: true, user: user });
@@ -56,10 +56,13 @@ export default (app: Router) => {
     // login
     route.post('/login', async (req: Request, res: Response) => {
         try {
+            // res.setHeader('Access-Control-Allow-Origin', 'https://green-maps-git-preview-moonhee0507.vercel.app');
+
             const { userId, password, keepLogin } = req.body;
             const user = await User.findOne({ userId: userId });
 
             if (!user) return res.json({ success: false, errMessage: '사용자가 존재하지 않습니다.' });
+
             user.comparePassword(password, (err: Error | null, same: boolean | null) => {
                 if (!same) {
                     return res.json({ success: false, errorMessage: '비밀번호가 일치하지 않습니다' });

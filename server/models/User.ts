@@ -1,4 +1,4 @@
-import mongoose, { Model, Schema, HydratedDocument, model } from 'mongoose';
+import { Model, Schema, HydratedDocument, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import type { Restaurant } from './Restaurant';
@@ -170,45 +170,69 @@ userSchema.method(
     }
 );
 
-const privateKey: any = process.env.PRIVATE_KEY?.replace(/\\n/g, '');
-const publicKey: any = process.env.PUBLIC_KEY?.replace(/\\n/g, '');
+const privateKey: string = process.env.PRIVATE_KEY?.replace(/\\n/g, '\n') || '';
+
+const publicKey: string = process.env.PUBLIC_KEY?.replace(/\\n/g, '\n') || '';
 
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
-    var user = this;
+    try {
+        var user = this;
 
-    if (!user._id) return cb(new Error('🚨 토큰을 생성하기 전에 사용자를 데이터베이스에 저장해야 합니다.'));
+        if (!user._id) return cb(new Error('🚨 토큰을 생성하기 전에 사용자를 데이터베이스에 저장해야 합니다.'));
 
-    // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
-    const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, privateKey, {
-        algorithm: 'RS256',
-        expiresIn: 30, // 초 단위 주의
-    });
-    user.token = token;
+        // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
+        /**
+         * PEM encoded RSA private key: SSL 과 같은 암호화 시스템과 함께 사용하기 위해 RSA 개인 키를 저장하는 형식
+         * key file은 base64로 인코딩된 페이로드 데이터를 일반텍스트로 저장(-----BEGIN RSA PRIVATE KEY----- 포함)
+         */
 
-    await user
-        .save()
-        .then((user: any) => cb(null, user))
-        .catch((err: any) => cb(err));
+        jwt.sign(
+            { id: this._id.toHexString(), iat: Date.now() },
+            privateKey,
+            {
+                algorithm: 'RS256',
+                expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의,
+            },
+            function (err, token) {
+                if (err) {
+                    return cb(new Error('암호화 에러'));
+                }
+                console.log('만들어진 토큰: ', token);
+
+                user.token = token;
+
+                user.save()
+                    .then((user: any) => cb(null, user))
+                    .catch((err: any) => cb(err));
+            }
+        );
+    } catch (err) {
+        console.error(err);
+    }
 });
 
 // findByToken메서드 만들기
 userSchema.static('findByToken', function findByToken(token: string, cb: (err: Error | null, user?: any) => any) {
-    var user = this;
+    try {
+        var user = this;
 
-    jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
-        if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
-        else {
-            try {
-                const doc = await user.findOne({ _id: decoded.id, token: token }).exec();
+        jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
+            if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
+            else {
+                try {
+                    const doc = await user.findOne({ _id: decoded.id, token: token }).exec();
 
-                if (!doc) cb(new Error('🚨 해당 유저가 없습니다.'));
-                else cb(null, user);
-            } catch (err) {
-                if (err instanceof Error) cb(err);
+                    if (!doc) cb(new Error('🚨 해당 유저가 없습니다.'));
+                    else cb(null, user);
+                } catch (err) {
+                    if (err instanceof Error) cb(err);
+                }
             }
-        }
-    });
+        });
+    } catch (err) {
+        console.error(err);
+    }
 });
 
 const User = model<UserInfo, UserModel>('User', userSchema);

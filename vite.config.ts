@@ -12,6 +12,7 @@ export default defineConfig(async ({ command, mode }) => {
             manifest: true,
         },
         server: {
+            https: true,
             middlewareMode: true,
             host: 'port-0-green-maps-7xwyjq992lliq95b1a.sel4.cloudtype.app',
             port: 5000,

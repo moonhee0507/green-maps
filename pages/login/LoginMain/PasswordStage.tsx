@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { useAppDispatch } from '../../../renderer/store/hooks';
+import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
 import { LOGGING_IN } from '../../../renderer/_reducers/_slices/loginSlice';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
@@ -9,6 +9,7 @@ export { PasswordStage };
 function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction<number>> }) {
     const dispatch = useAppDispatch();
 
+    const id = useAppSelector((state) => state.loginSlice.currentId);
     const [password, setPassword] = useState<string>('');
     const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -23,39 +24,42 @@ function PasswordStage({ setMove }: { setMove: React.Dispatch<React.SetStateActi
         setIsChecked(event.target.checked);
     };
 
-    const handleClick = () => {
+    async function handleClick() {
         // 톱바의 뒤로가기 보여줘도 됨
         dispatch(LOGGING_IN(false));
 
         // 로그인 통신
-        login();
-    };
-
-    async function login() {
         try {
-            const userId = document.getElementById('loginId') as HTMLInputElement;
+            // const body = {
+            //     userId: id,
+            //     password: password,
+            //     keepLogin: isChecked,
+            // };
 
-            const body = {
-                userId: userId.value,
-                password: password,
-                keepLogin: isChecked,
-            };
+            const body = new URLSearchParams();
+            body.append('userId', id);
+            body.append('password', password);
+            body.append('keepLogin', isChecked ? 'true' : 'false');
 
             const res = await fetch(`${API_URL}/users/login`, {
+                credentials: 'include',
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/x-www-form-urlencoded',
                 },
-                body: JSON.stringify(body),
+                body: body.toString(),
             });
 
+            console.log('res', res);
+
             const data = await res.json();
+            console.log('data', data);
 
             if (data.success) {
-                alert('🎉🎉로그인에 성공했습니다🎉🎉');
+                window.alert('🎉🎉로그인에 성공했습니다🎉🎉');
                 navigate('/search');
             } else {
-                alert('로그인에 실패했습니다');
+                window.alert('로그인에 실패했습니다');
             }
         } catch (err) {
             console.error(err);
