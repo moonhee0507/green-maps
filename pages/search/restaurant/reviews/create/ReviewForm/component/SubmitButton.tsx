@@ -33,7 +33,7 @@ function SubmitButton({
 
         if (selectedImages.length > 0) {
             // 새로운 이미지로 바꾸는 경우
-            if (!selectedImages[0][0].includes('https://')) {
+            if (!selectedImages[0][0].includes('amazon')) {
                 await uploadImageToStorage(selectedImages, randomFileNames);
 
                 const temp = [];
@@ -43,7 +43,7 @@ function SubmitButton({
 
                 photo = temp;
                 // 이미지 교체 안하는 경우
-            } else if (selectedImages[0][0].includes('https://')) {
+            } else if (selectedImages[0][0].includes('amazon')) {
                 const temp = [];
                 for (let selectedImage of selectedImages) {
                     temp.push({ src: 'client/' + selectedImage[0].split('client/').at(-1), pick: true });
