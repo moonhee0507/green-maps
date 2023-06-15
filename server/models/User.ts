@@ -174,10 +174,10 @@ userSchema.method(
     }
 );
 
-const privateKey: string = `${process.env.PRIVATE_KEY}`.toString();
+const privateKey: string = process.env.PRIVATE_KEY?.replace(/\\n/g, '\n') || '';
 // const privateKey: string = fs.readFileSync('./rsa-private-key.pem', 'utf8');
 
-const publicKey: string = `${process.env.PUBLIC_KEY}`.toString();
+const publicKey: string = process.env.PUBLIC_KEY?.replace(/\\n/g, '\n') || '';
 // const publicKey: string = fs.readFileSync('./rsa-public-key.pem', 'utf8');
 
 // generateToken메서드 만들기
@@ -192,6 +192,8 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
          * PEM encoded RSA private key: SSL 과 같은 암호화 시스템과 함께 사용하기 위해 RSA 개인 키를 저장하는 형식
          * key file은 base64로 인코딩된 페이로드 데이터를 일반텍스트로 저장(-----BEGIN RSA PRIVATE KEY----- 포함)
          */
+
+        console.log('replace된 privateKey: ', privateKey);
         const strTest = '졸립다!';
         console.log('원래 메시지: ', strTest);
 
