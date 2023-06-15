@@ -43,6 +43,8 @@ export default (app: Router) => {
                 scope?: string;
             };
 
+            console.log('서버 /kakao/token의 data: ', data);
+
             if (Object.hasOwn(data, 'access_token')) {
                 res.cookie('kakaoAccessToken', data.access_token, {
                     maxAge: data.expires_in * 1000,

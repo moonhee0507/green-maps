@@ -43,10 +43,5 @@ function BookmarkList({ lists, groupList }: { lists: Bookmark[]; groupList: Grou
                 새 그룹 추가
             </button>
         </>
-    ) : (
-        <div className="style-wrapper-no-review">
-            <div className="txt-no-review">🚀</div>
-            <p>로딩중</p>
-        </div>
-    );
+    ) : null;
 }
