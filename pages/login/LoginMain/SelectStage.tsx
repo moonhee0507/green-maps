@@ -53,7 +53,10 @@ function SelectStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction
     }, []);
 
     async function getAccessTokenFromKakao(authorizeCode: string) {
-        const res = await fetch(`${API_URL}/oauth/kakao/token?code=${authorizeCode}`);
+        const res = await fetch(`${API_URL}/oauth/kakao/token?code=${authorizeCode}`, {
+            credentials: 'include',
+            method: 'GET',
+        });
         const data = await res.json();
 
         return data;
