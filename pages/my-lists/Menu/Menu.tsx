@@ -4,8 +4,6 @@ import { SHOW } from '../../../renderer/_reducers/_slices/myListSlice';
 import type { UserInfo, Bookmark, Like } from '../../../server/models/User';
 
 export function Menu({ userInfo }: { userInfo: UserInfo | null }) {
-    // const { bookmarkList, likeList } = userInfo;
-
     const [bookmarkList, setBookmarkList] = useState<Bookmark[]>([]);
     const [likeList, setLikeList] = useState<Like[]>([]);
 

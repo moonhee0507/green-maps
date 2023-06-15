@@ -2,9 +2,9 @@ import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../../renderer/store/hooks';
 import { LOGGING_IN } from '../../../renderer/_reducers/_slices/loginSlice';
 import { Link } from '../../../renderer/Link';
-import imgKakao from '/images/icon-kakao.png';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
+import imgKakao from '/images/icon-kakao.png';
 
 export { SelectStage };
 
@@ -18,7 +18,8 @@ function SelectStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction
 
     async function callAgreementScreen() {
         // 카카오 로그인 페이지
-        navigate(`/v1/oauth/kakao`);
+        // navigate(`/v1/oauth/kakao`);
+        window.location.href = `${API_URL}/v1/oauth/kakao`;
     }
 
     useEffect(() => {

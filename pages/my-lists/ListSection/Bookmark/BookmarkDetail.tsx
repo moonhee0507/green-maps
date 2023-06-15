@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks
 import { ORDER_MODAL } from '../../../../renderer/_reducers/_slices/myListSlice';
 import type { Bookmark } from '../../../../server/models/User';
 import type { GroupList } from '../../../../server/models/Bookmark';
+import appModalMode from '../../../../components/modal/appModalMode';
 
 export { BookmarkDetail };
 
@@ -12,9 +13,7 @@ function BookmarkDetail({ lists, groupList }: { lists: Bookmark[]; groupList: Gr
     const dispatch = useAppDispatch();
 
     function handleOrder() {
-        const app = document.querySelector('.app');
-        app?.classList.add('modal-mode');
-
+        appModalMode(true);
         dispatch(ORDER_MODAL(true));
     }
 
