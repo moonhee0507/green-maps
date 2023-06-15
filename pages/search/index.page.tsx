@@ -11,24 +11,29 @@ import appModalMode from '../../components/modal/appModalMode';
 import { useAppDispatch } from '../../renderer/store/hooks';
 import { CHECK_LOCATION_ACCESS_MODAL, StateToGeolocation } from '../../renderer/_reducers/_slices/mapSlice';
 import { BackCurrentLocation } from '../../components/button/BackCurrentLocation';
+import useCheckLoginStatus from '../../renderer/_hooks/useCheckLoginStatus';
 
 export { Page };
 
 function Page() {
     const dispatch = useAppDispatch();
 
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+    const isLoggedIn = useCheckLoginStatus();
     const hasLocationAccess: StateToGeolocation = useLocationAccess();
 
-    useEffect(() => {
-        (async () => {
-            const res = await fetch(`${API_URL}/users/`);
-            const data = await res.json();
+    // useEffect(() => {
+    //     (async () => {
+    //         const res = await fetch(`${API_URL}/users/`, {
+    //             credentials: 'include',
+    //             method: 'GET',
+    //         });
+    //         const data = await res.json();
 
-            if (data.success === true) setIsLoggedIn(true);
-            else setIsLoggedIn(false);
-        })();
-    }, []);
+    //         if (data.success === true) setIsLoggedIn(true);
+    //         else setIsLoggedIn(false);
+    //     })();
+    // }, []);
 
     useEffect(() => {
         if (hasLocationAccess === 'granted') {
