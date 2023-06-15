@@ -19,6 +19,7 @@ function ProfileSection({ userInfo }: { userInfo: UserInfo }) {
 
         // 그린맵 서비스 로그아웃
         const res = await fetch(`${API_URL}/users/logout`, {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

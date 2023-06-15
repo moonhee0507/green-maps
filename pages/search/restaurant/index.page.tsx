@@ -12,11 +12,10 @@ const RestaurantDetail = React.lazy(() => import('./RestaurantDetail/RestaurantD
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const { routeParams, user } = pageContext;
+    const { routeParams } = pageContext;
 
     const isLoggedIn = useCheckLoginStatus();
     const restaurantId = pageContext.routeParams?.restaurantId || '';
-    // const { isLoggedIn, info } = user;
 
     const [restaurantInfo, setRestaurantInfo] = useState<Restaurant | null>(null);
 

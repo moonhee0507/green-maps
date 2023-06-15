@@ -58,6 +58,7 @@ function NewPassword() {
     const handleClick = async () => {
         try {
             const res = await fetch(`${API_URL}/users/edit/password`, {
+                credentials: 'include',
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ password: value1 }),
@@ -67,6 +68,7 @@ function NewPassword() {
 
             if (data.success) {
                 const res = await fetch(`${API_URL}/users/logout`, {
+                    credentials: 'include',
                     method: 'POST',
                 });
 

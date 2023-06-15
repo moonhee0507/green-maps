@@ -104,7 +104,10 @@ function DeleteMultiLike({ userInfo }: { userInfo: UserInfo | null }) {
     }, [userInfo]);
 
     async function getLikeList() {
-        const res = await fetch(`${API_URL}/users/like`);
+        const res = await fetch(`${API_URL}/users/like`, {
+            credentials: 'include',
+            method: 'GET',
+        });
         const data = (await res.json()) as { success: boolean; likeList: Like[] };
 
         return data;
@@ -242,6 +245,7 @@ function ButtonGroup() {
 
     async function deleteLikeList(id: string) {
         const res = await fetch(`${API_URL}/users/like/${id}`, {
+            credentials: 'include',
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

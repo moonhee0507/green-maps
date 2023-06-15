@@ -40,7 +40,10 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
     }, [groupName]);
 
     async function getBookmarkList() {
-        const res = await fetch(`${API_URL}/users/bookmark`);
+        const res = await fetch(`${API_URL}/users/bookmark`, {
+            credentials: 'include',
+            method: 'GET',
+        });
         const data = (await res.json()) as { success: boolean; bookmarkList: Bookmark[]; message?: string };
 
         return data;

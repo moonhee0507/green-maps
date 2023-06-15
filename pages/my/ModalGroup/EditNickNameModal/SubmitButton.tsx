@@ -33,7 +33,10 @@ function SubmitButton() {
     }, [duplicate, validString]);
 
     async function checkDuplicate(nickName: string) {
-        const res = await fetch(`${API_URL}/users/check-nickname?nickname=${nickName}`);
+        const res = await fetch(`${API_URL}/users/check-nickname?nickname=${nickName}`, {
+            credentials: 'include',
+            method: 'GET',
+        });
         const data = await res.json();
 
         setDuplicate(data.duplicated);
@@ -67,6 +70,7 @@ function SubmitButton() {
     async function editNickName(nickName: string) {
         try {
             const res = await fetch(`${API_URL}/users/edit/profile`, {
+                credentials: 'include',
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

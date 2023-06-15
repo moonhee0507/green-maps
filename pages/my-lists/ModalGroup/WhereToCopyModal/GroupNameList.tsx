@@ -42,6 +42,7 @@ function GroupNameList({
 
     async function submit(userId: string, newGroupName: string, selectedRestaurant: string[]) {
         const res = await fetch(`${API_URL}/users/update/bookmark`, {
+            credentials: 'include',
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

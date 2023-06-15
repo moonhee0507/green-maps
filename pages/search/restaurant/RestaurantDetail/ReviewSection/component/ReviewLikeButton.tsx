@@ -18,7 +18,10 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
             .catch((err) => console.error(err));
 
         async function getUserId() {
-            const res = await fetch(`${API_URL}/users/`);
+            const res = await fetch(`${API_URL}/users/`, {
+                credentials: 'include',
+                method: 'GET',
+            });
             const data = await res.json();
 
             return data.user.userId;

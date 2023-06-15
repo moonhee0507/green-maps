@@ -13,7 +13,10 @@ function SubmitButton(props: { postId: string; content: string | null }) {
             .catch((err) => console.error(err));
 
         async function getUserId() {
-            const res = await fetch(`${API_URL}/users/`);
+            const res = await fetch(`${API_URL}/users/`, {
+                credentials: 'include',
+                method: 'GET',
+            });
             const data = await res.json();
 
             return data.user.nickName;
