@@ -12,7 +12,8 @@ export default function useIntersectionObserver(callback: () => void) {
             console.log('교차상태 아님');
         };
 
-        observer.current = new IntersectionObserver(handleIntersect, { rootMargin: '0px', threshold: 0 });
+        const root = document.querySelector('.main-community');
+        observer.current = new IntersectionObserver(handleIntersect, { root: root, rootMargin: '0px', threshold: 0 });
 
         return () => {
             observer.current?.disconnect();
@@ -20,10 +21,12 @@ export default function useIntersectionObserver(callback: () => void) {
     }, [callback]);
 
     const observe = (element: HTMLLIElement | null) => {
+        console.log('감시 중인 element', element);
         if (element && observer.current) observer.current.observe(element);
     };
 
     const unobserve = (element: HTMLLIElement | null) => {
+        console.log('감시 끝 element', element);
         if (element && observer.current) observer.current.unobserve(element);
     };
 
