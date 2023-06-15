@@ -73,6 +73,7 @@ function DELETE() {
     async function deletePost() {
         try {
             const res = await fetch(`${API_URL}/posts/${postId}`, {
+                credentials: 'include',
                 method: 'DELETE',
             });
 
@@ -94,6 +95,7 @@ function DELETE() {
     async function deleteComment() {
         try {
             const res = await fetch(`${API_URL}/comments/${commentId}?postId=${postId}`, {
+                credentials: 'include',
                 method: 'DELETE',
             });
 

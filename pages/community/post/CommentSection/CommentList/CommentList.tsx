@@ -109,6 +109,7 @@ function EditCommentButton({ postId, commentId }: { postId: string; commentId: s
 
     async function editComment(content: string) {
         const res = await fetch(`${API_URL}/comments/${commentId}?postId=${postId}`, {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

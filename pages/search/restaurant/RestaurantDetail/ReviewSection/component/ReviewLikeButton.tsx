@@ -41,6 +41,7 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
 
     async function addLike() {
         const res = await fetch(`${API_URL}/reviews/${reviewId}/like`, {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -55,6 +56,7 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
 
     async function delLike() {
         const res = await fetch(`${API_URL}/reviews/${reviewId}/like`, {
+            credentials: 'include',
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

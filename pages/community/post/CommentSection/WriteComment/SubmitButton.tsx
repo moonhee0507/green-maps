@@ -32,6 +32,7 @@ function SubmitButton(props: { postId: string; content: string | null }) {
                 };
 
                 const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
+                    credentials: 'include',
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

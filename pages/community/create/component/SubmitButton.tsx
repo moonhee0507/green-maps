@@ -47,6 +47,7 @@ function SubmitButton() {
             };
 
             const res = await fetch(`${API_URL}/posts/${editMode ? postId : ''}`, {
+                credentials: 'include',
                 method: editMode ? 'PATCH' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -73,6 +73,7 @@ function SubmitButton({
 
         try {
             const res = await fetch(`${API_URL}/reviews/${editPage ? reviewId + '/edit' : ''}`, {
+                credentials: 'include',
                 method: editPage ? 'PATCH' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',

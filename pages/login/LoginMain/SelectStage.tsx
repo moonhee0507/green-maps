@@ -47,7 +47,10 @@ function SelectStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction
     }
 
     async function getKakaoUserData() {
-        const res = await fetch(`${API_URL}/oauth/kakao/users`);
+        const res = await fetch(`${API_URL}/oauth/kakao/users`, {
+            credentials: 'include',
+            method: 'GET',
+        });
         const data = await res.json();
 
         return data;

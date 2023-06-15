@@ -38,6 +38,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
 
     async function addLike() {
         const res = await fetch(`${API_URL}/posts/${postId}/like`, {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -51,6 +52,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
 
     async function delLike() {
         const res = await fetch(`${API_URL}/posts/${postId}/like`, {
+            credentials: 'include',
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

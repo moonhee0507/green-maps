@@ -56,6 +56,7 @@ function DELETE() {
     async function handleClick() {
         try {
             const res = await fetch(`${API_URL}/reviews/${reviewId}`, {
+                credentials: 'include',
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

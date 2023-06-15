@@ -8,11 +8,12 @@ import { API_URL } from '../../renderer/CONSTANT_URL';
 import type { PageProps } from '../../renderer/types';
 import type { Post } from '../../server/models/Post';
 import { ButtonGroup } from './component/ButtonGroup/ButtonGroup';
+import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 
 export { Page };
 
 function Page(pageProps: PageProps) {
-    const { isLoggedIn } = pageProps.user;
+    const isLoggedIn = useCheckLoginStatus();
 
     // 전역에서 관리하는 변수: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
     const subject = useAppSelector((state) => state.postSlice.SUBJECT);
