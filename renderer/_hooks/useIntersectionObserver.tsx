@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 export default function useIntersectionObserver(callback: () => void) {
     const observer = useRef<IntersectionObserver | null>(null);
@@ -10,7 +10,7 @@ export default function useIntersectionObserver(callback: () => void) {
             }
         };
 
-        observer.current = new IntersectionObserver(handleIntersect, { rootMargin: '0px', threshold: 0.7 });
+        observer.current = new IntersectionObserver(handleIntersect, { rootMargin: '0px', threshold: 0.3 });
 
         return () => {
             observer.current?.disconnect();
