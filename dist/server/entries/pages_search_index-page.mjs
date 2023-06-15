@@ -1056,20 +1056,33 @@ function BackCurrentLocation() {
     }
   );
 }
+function useCheckLoginStatus() {
+  const [isLoggedIn2, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const res = await fetch(`${API_URL}/users/`, {
+          credentials: "include",
+          method: "GET"
+        });
+        const data = await res.json();
+        if (data.success === true) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        setIsLoggedIn(false);
+      }
+    };
+    checkLoginStatus();
+  }, []);
+  return isLoggedIn2;
+}
 function Page() {
   const dispatch = useAppDispatch();
-  const [isLoggedIn2, setIsLoggedIn] = useState(false);
+  const isLoggedIn2 = useCheckLoginStatus();
   const hasLocationAccess = useLocationAccess();
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API_URL}/users/`);
-      const data = await res.json();
-      if (data.success === true)
-        setIsLoggedIn(true);
-      else
-        setIsLoggedIn(false);
-    })();
-  }, []);
   useEffect(() => {
     if (hasLocationAccess === "granted") {
       appModalMode(false);

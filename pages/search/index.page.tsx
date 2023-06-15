@@ -11,7 +11,7 @@ import appModalMode from '../../components/modal/appModalMode';
 import { useAppDispatch } from '../../renderer/store/hooks';
 import { CHECK_LOCATION_ACCESS_MODAL, StateToGeolocation } from '../../renderer/_reducers/_slices/mapSlice';
 import { BackCurrentLocation } from '../../components/button/BackCurrentLocation';
-import useCheckLoginStatus from '../../renderer/_hooks/useCheckLoginStatus';
+import useCheckLoginStatus from '../../renderer/_hooks/useCheckLoginStatus.js';
 
 export { Page };
 
