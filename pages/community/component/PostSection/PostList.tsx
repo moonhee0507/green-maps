@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PostListItem from './PostListItem';
-import useIntersectionObserver from '../../../../renderer/_hooks/useIntersectionObserver';
+import useIntersectionObserver from '../../../../renderer/_hooks/useIntersectionObserver.js';
 import { useDispatch, useStore } from 'react-redux';
 import type { Post } from '../../../../server/models/Post';
 

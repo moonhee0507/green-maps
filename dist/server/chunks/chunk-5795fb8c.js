@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { r as randomizeFileName } from "./chunk-8649d624.js";
 import { I as IMG_URL, A as API_URL } from "./chunk-94504c62.js";
 import { u as useAppSelector } from "./chunk-c407c4c8.js";
-import { s as store } from "./chunk-d9782bd8.js";
+import { s as store } from "./chunk-2043b788.js";
 function PictureSection({ photos }) {
   const fileInput = useRef(null);
   const handleClick = () => {

@@ -1,12 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "./chunk-c407c4c8.js";
-import { a as ORDER_STANDARD, O as ORDER_MODAL, b as SET_GROUP_NAME, A as ADD_GROUP_MODAL, I as ICON_STANDARD, c as INCREASE_CHECKED, P as PUSH_RESTAURANT_LIST, D as DECREASE_CHECKED, d as DELETE_RESTAURANT_LIST, M as MOVE_LIST_MODAL, C as COPY_MODAL, R as RESET_CHECKED, e as RESET_RESTAURANT_LIST, f as DELETE_LIKELIST_MODAL } from "./chunk-2c77b6c9.js";
+import { O as ORDER_STANDARD, a as ORDER_MODAL, S as SET_GROUP_NAME, A as ADD_GROUP_MODAL, I as ICON_STANDARD, b as INCREASE_CHECKED, P as PUSH_RESTAURANT_LIST, D as DECREASE_CHECKED, c as DELETE_RESTAURANT_LIST, M as MOVE_LIST_MODAL, C as COPY_MODAL, R as RESET_CHECKED, d as RESET_RESTAURANT_LIST, e as DELETE_LIKELIST_MODAL } from "./chunk-1a5b0e59.js";
 import { i as imgClose } from "./chunk-0eea5c60.js";
-import { I as IconSelection } from "./chunk-152866e8.js";
+import { I as IconSelection } from "./chunk-1baf884f.js";
 import { A as API_URL } from "./chunk-94504c62.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { s as store } from "./chunk-d9782bd8.js";
+import { s as store } from "./chunk-2043b788.js";
+import { a as appModalMode } from "./chunk-db98b5a2.js";
 function GroupOrderModal() {
   const dispatch = useAppDispatch();
   const orderStandard = useAppSelector((state) => state.myListSlice.groupNameOrder);
@@ -159,8 +160,12 @@ function ListItem$1({ list }) {
   const { _id, title, address, category } = list;
   const [isChecked, setIsChecked] = useState(false);
   const restaurantToMove = useAppSelector((state) => state.myListSlice.restaurantToMove);
+  const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
   useEffect(() => {
-  }, []);
+    if (countChecked === 0) {
+      setIsChecked(false);
+    }
+  }, [countChecked]);
   const handleCheckboxChange = (event) => {
     setIsChecked(event.target.checked);
     if (event.target.checked) {
@@ -292,8 +297,7 @@ function Form$1({ bookmarkList }) {
 function CloseButton$2() {
   const dispatch = useAppDispatch();
   function handleClose() {
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.remove("modal-mode");
+    appModalMode(false);
     dispatch(MOVE_LIST_MODAL(false));
     dispatch(RESET_CHECKED());
     dispatch(RESET_RESTAURANT_LIST([]));
@@ -400,7 +404,7 @@ function WhereToCopyModal({ userInfo }) {
   }
   return /* @__PURE__ */ jsxs("article", { className: `modal-group-item ${show ? "on" : ""}`, children: [
     /* @__PURE__ */ jsx("h4", { children: "복사할 그룹 선택" }),
-    /* @__PURE__ */ jsx("ul", { className: "ul-groupname", children: groupList.filter((groupInfo) => groupInfo.name !== targetGroup).map((groupInfo) => {
+    groupList.length - 1 > 0 ? /* @__PURE__ */ jsx("ul", { className: "ul-groupname", children: groupList.filter((groupInfo) => groupInfo.name !== targetGroup).map((groupInfo) => {
       return /* @__PURE__ */ jsx(
         GroupNameList,
         {
@@ -410,8 +414,158 @@ function WhereToCopyModal({ userInfo }) {
         },
         Math.random()
       );
-    }) }),
+    }) }) : /* @__PURE__ */ jsxs("div", { className: "style-wrapper-no-review", children: [
+      /* @__PURE__ */ jsx("div", { className: "txt-no-review", children: "😭" }),
+      /* @__PURE__ */ jsx("p", { children: "다른 그룹이 없어요." })
+    ] }),
     /* @__PURE__ */ jsx(CloseButton$1, {})
+  ] });
+}
+function ListItem({ list }) {
+  const dispatch = useAppDispatch();
+  const { _id, title, address, category } = list;
+  const [isChecked, setIsChecked] = useState(false);
+  const restaurantToDelete = useAppSelector((state) => state.myListSlice.restaurantToMove);
+  const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
+  useEffect(() => {
+    if (countChecked === 0) {
+      setIsChecked(false);
+    }
+  }, [countChecked]);
+  const handleCheckboxChange = (event) => {
+    setIsChecked(event.target.checked);
+    if (event.target.checked) {
+      dispatch(INCREASE_CHECKED(1));
+      dispatch(PUSH_RESTAURANT_LIST([...restaurantToDelete, _id]));
+    } else {
+      dispatch(DECREASE_CHECKED(1));
+      const newArray = [...restaurantToDelete];
+      const index = newArray.indexOf(_id);
+      newArray.splice(index, 1);
+      dispatch(DELETE_RESTAURANT_LIST(newArray));
+    }
+  };
+  return /* @__PURE__ */ jsxs("label", { className: "label-bookmarklist", children: [
+    /* @__PURE__ */ jsx(
+      "input",
+      {
+        type: "checkbox",
+        className: "checkbox-bookmarklist",
+        checked: isChecked,
+        onChange: handleCheckboxChange
+      }
+    ),
+    /* @__PURE__ */ jsx("div", { className: "wrapper-bookmarklist-edit", children: /* @__PURE__ */ jsxs("dl", { children: [
+      /* @__PURE__ */ jsxs("dl", { className: "container-title-category", children: [
+        /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "식당 이름" }),
+        /* @__PURE__ */ jsx("dd", { className: "txt-title", children: title }),
+        /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "업종" }),
+        /* @__PURE__ */ jsx("dd", { className: "txt-category", children: category })
+      ] }),
+      /* @__PURE__ */ jsxs("dl", { children: [
+        /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "주소" }),
+        /* @__PURE__ */ jsx("dd", { className: "txt-address", children: address })
+      ] })
+    ] }) })
+  ] });
+}
+function List({ likeList }) {
+  return /* @__PURE__ */ jsx("div", { children: likeList.length > 0 ? likeList.map((list) => {
+    return /* @__PURE__ */ jsx(ListItem, { list: list._id }, Math.random());
+  }) : /* @__PURE__ */ jsxs("div", { className: "style-wrapper-no-review", children: [
+    /* @__PURE__ */ jsx("div", { className: "txt-no-review", children: "😭" }),
+    /* @__PURE__ */ jsx("p", { children: "목록이 없어요." })
+  ] }) });
+}
+function ButtonGroup() {
+  const dispatch = useAppDispatch();
+  const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
+  const restaurantToDelete = useAppSelector((state) => state.myListSlice.restaurantToMove);
+  async function handleDelete() {
+    if (restaurantToDelete.length > 0) {
+      const deletePromise = restaurantToDelete.map((item) => deleteLikeList(item));
+      try {
+        const result = await Promise.all(deletePromise);
+        result.forEach((_, i) => {
+          if (i === result.length - 1)
+            window.location.reload();
+        });
+      } catch (err) {
+        console.error("삭제 중 오류가 발생했습니다.", err);
+      }
+    }
+  }
+  async function deleteLikeList(id) {
+    const res = await fetch(`${API_URL}/users/like/${id}`, {
+      credentials: "include",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    const data = await res.json();
+    return data;
+  }
+  function clearCheckbox() {
+    dispatch(RESET_CHECKED());
+    dispatch(RESET_RESTAURANT_LIST([]));
+  }
+  return /* @__PURE__ */ jsxs("div", { className: "container-button-move like", children: [
+    /* @__PURE__ */ jsx("button", { type: "reset", onClick: clearCheckbox, children: "선택 해제" }),
+    /* @__PURE__ */ jsxs("button", { type: "button", disabled: countChecked ? false : true, onClick: handleDelete, children: [
+      /* @__PURE__ */ jsx("span", { className: "txt-copy-del", children: "삭제" }),
+      /* @__PURE__ */ jsx("span", { children: countChecked })
+    ] })
+  ] });
+}
+function Form({ likeList }) {
+  return /* @__PURE__ */ jsxs("form", { children: [
+    /* @__PURE__ */ jsx(List, { likeList }),
+    /* @__PURE__ */ jsx(ButtonGroup, {})
+  ] });
+}
+function CloseButton() {
+  const dispatch = useAppDispatch();
+  function handleClose() {
+    const app = document.querySelector(".app");
+    app == null ? void 0 : app.classList.remove("modal-mode");
+    dispatch(DELETE_LIKELIST_MODAL(false));
+    dispatch(RESET_CHECKED());
+    dispatch(RESET_RESTAURANT_LIST([]));
+  }
+  return /* @__PURE__ */ jsx("button", { type: "button", className: "button-close", onClick: handleClose, children: /* @__PURE__ */ jsx("img", { src: imgClose, alt: "X 아이콘", className: "img-close" }) });
+}
+function DeleteMultiLike({ userInfo }) {
+  const [show, setShow] = useState(false);
+  const [likeList, setLikeList] = useState([]);
+  const deleteLikeListModelOn = useAppSelector((state) => state.myListSlice.deleteLikeListModalOn);
+  useEffect(() => {
+    if (deleteLikeListModelOn)
+      setShow(true);
+    else
+      setShow(false);
+  }, [deleteLikeListModelOn]);
+  useEffect(() => {
+    if (userInfo !== null) {
+      getLikeList().then((data) => {
+        if (data.success) {
+          setLikeList(data.likeList);
+        }
+      });
+    }
+  }, [userInfo]);
+  async function getLikeList() {
+    const res = await fetch(`${API_URL}/users/like`, {
+      credentials: "include",
+      method: "GET"
+    });
+    const data = await res.json();
+    return data;
+  }
+  return /* @__PURE__ */ jsxs("article", { className: `modal-group-item ${show ? "on" : ""}`, children: [
+    /* @__PURE__ */ jsx("h4", { children: "목록 삭제" }),
+    /* @__PURE__ */ jsx(Form, { likeList }),
+    /* @__PURE__ */ jsx(CloseButton, {})
   ] });
 }
 function ModalGroup({ userInfo }) {
@@ -455,147 +609,6 @@ function ModalGroup({ userInfo }) {
     /* @__PURE__ */ jsx(MoveListModal, { userInfo }),
     /* @__PURE__ */ jsx(WhereToCopyModal, { userInfo }),
     /* @__PURE__ */ jsx(DeleteMultiLike, { userInfo })
-  ] });
-}
-function DeleteMultiLike({ userInfo }) {
-  const [show, setShow] = useState(false);
-  const [likeList, setLikeList] = useState([]);
-  const deleteLikeListModelOn = useAppSelector((state) => state.myListSlice.deleteLikeListModalOn);
-  useEffect(() => {
-    if (deleteLikeListModelOn)
-      setShow(true);
-    else
-      setShow(false);
-  }, [deleteLikeListModelOn]);
-  useEffect(() => {
-    if (userInfo !== null) {
-      getLikeList().then((data) => {
-        if (data.success) {
-          setLikeList(data.likeList);
-        }
-      });
-    }
-  }, [userInfo]);
-  async function getLikeList() {
-    const res = await fetch(`${API_URL}/users/like`, {
-      credentials: "include",
-      method: "GET"
-    });
-    const data = await res.json();
-    return data;
-  }
-  return /* @__PURE__ */ jsxs("article", { className: `modal-group-item ${show ? "on" : ""}`, children: [
-    /* @__PURE__ */ jsx("h4", { children: "목록 삭제" }),
-    /* @__PURE__ */ jsx(Form, { likeList }),
-    /* @__PURE__ */ jsx(CloseButton, {})
-  ] });
-}
-function Form({ likeList }) {
-  return /* @__PURE__ */ jsxs("form", { children: [
-    /* @__PURE__ */ jsx(List, { likeList }),
-    /* @__PURE__ */ jsx(ButtonGroup, {})
-  ] });
-}
-function CloseButton() {
-  const dispatch = useAppDispatch();
-  function handleClose() {
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.remove("modal-mode");
-    dispatch(DELETE_LIKELIST_MODAL(false));
-    dispatch(RESET_CHECKED());
-    dispatch(RESET_RESTAURANT_LIST([]));
-  }
-  return /* @__PURE__ */ jsx("button", { type: "button", className: "button-close", onClick: handleClose, children: /* @__PURE__ */ jsx("img", { src: imgClose, alt: "X 아이콘", className: "img-close" }) });
-}
-function List({ likeList }) {
-  return /* @__PURE__ */ jsx("div", { children: likeList.length > 0 ? likeList.map((list) => {
-    return /* @__PURE__ */ jsx(ListItem, { list: list._id }, Math.random());
-  }) : /* @__PURE__ */ jsxs("div", { className: "style-wrapper-no-review", children: [
-    /* @__PURE__ */ jsx("div", { className: "txt-no-review", children: "😭" }),
-    /* @__PURE__ */ jsx("p", { children: "목록이 없어요." })
-  ] }) });
-}
-function ListItem({ list }) {
-  const dispatch = useAppDispatch();
-  const { _id, title, address, category } = list;
-  const [isChecked, setIsChecked] = useState(false);
-  const restaurantToDelete = useAppSelector((state) => state.myListSlice.restaurantToMove);
-  const handleCheckboxChange = (event) => {
-    setIsChecked(event.target.checked);
-    if (event.target.checked) {
-      dispatch(INCREASE_CHECKED(1));
-      dispatch(PUSH_RESTAURANT_LIST([...restaurantToDelete, _id]));
-    } else {
-      dispatch(DECREASE_CHECKED(1));
-      const newArray = [...restaurantToDelete];
-      const index = newArray.indexOf(_id);
-      newArray.splice(index, 1);
-      dispatch(DELETE_RESTAURANT_LIST(newArray));
-    }
-  };
-  return /* @__PURE__ */ jsxs("label", { className: "label-bookmarklist", children: [
-    /* @__PURE__ */ jsx(
-      "input",
-      {
-        type: "checkbox",
-        className: "checkbox-bookmarklist",
-        checked: isChecked,
-        onChange: handleCheckboxChange
-      }
-    ),
-    /* @__PURE__ */ jsx("div", { className: "wrapper-bookmarklist-edit", children: /* @__PURE__ */ jsxs("dl", { children: [
-      /* @__PURE__ */ jsxs("dl", { className: "container-title-category", children: [
-        /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "식당 이름" }),
-        /* @__PURE__ */ jsx("dd", { className: "txt-title", children: title }),
-        /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "업종" }),
-        /* @__PURE__ */ jsx("dd", { className: "txt-category", children: category })
-      ] }),
-      /* @__PURE__ */ jsxs("dl", { children: [
-        /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "주소" }),
-        /* @__PURE__ */ jsx("dd", { className: "txt-address", children: address })
-      ] })
-    ] }) })
-  ] });
-}
-function ButtonGroup() {
-  const dispatch = useAppDispatch();
-  const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
-  const restaurantToDelete = useAppSelector((state) => state.myListSlice.restaurantToMove);
-  async function handleDelete() {
-    if (restaurantToDelete.length > 0) {
-      const deletePromise = restaurantToDelete.map((item) => deleteLikeList(item));
-      try {
-        const result = await Promise.all(deletePromise);
-        result.forEach((_, i) => {
-          if (i === result.length - 1)
-            window.location.reload();
-        });
-      } catch (err) {
-        console.error("삭제 중 오류가 발생했습니다.", err);
-      }
-    }
-  }
-  async function deleteLikeList(id) {
-    const res = await fetch(`${API_URL}/users/like/${id}`, {
-      credentials: "include",
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
-    const data = await res.json();
-    return data;
-  }
-  function clearCheckbox() {
-    dispatch(RESET_CHECKED());
-    dispatch(RESET_RESTAURANT_LIST([]));
-  }
-  return /* @__PURE__ */ jsxs("div", { className: "container-button-move like", children: [
-    /* @__PURE__ */ jsx("button", { type: "reset", onClick: clearCheckbox, children: "선택 해제" }),
-    /* @__PURE__ */ jsxs("button", { type: "button", disabled: countChecked ? false : true, onClick: handleDelete, children: [
-      /* @__PURE__ */ jsx("span", { className: "txt-copy-del", children: "삭제" }),
-      /* @__PURE__ */ jsx("span", { children: countChecked })
-    ] })
   ] });
 }
 export {

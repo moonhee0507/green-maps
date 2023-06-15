@@ -1,10 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { u as useAppSelector, a as useAppDispatch } from "./chunk-c407c4c8.js";
-import { h as SHOW, A as ADD_GROUP_MODAL, O as ORDER_MODAL, f as DELETE_LIKELIST_MODAL } from "./chunk-2c77b6c9.js";
-import { L as ListItem } from "./chunk-b2b92cdb.js";
+import { h as SHOW, A as ADD_GROUP_MODAL, a as ORDER_MODAL, e as DELETE_LIKELIST_MODAL } from "./chunk-1a5b0e59.js";
+import { L as ListItem } from "./chunk-a5bf0abd.js";
 import { A as API_URL } from "./chunk-94504c62.js";
 import { navigate } from "vite-plugin-ssr/client/router";
+import { a as appModalMode } from "./chunk-db98b5a2.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 import "./chunk-6c356fa9.js";
@@ -86,10 +87,7 @@ function BookmarkList({ lists, groupList }) {
       return /* @__PURE__ */ jsx(GroupNameList, { groupInfo, lists }, Math.random());
     }) }),
     /* @__PURE__ */ jsx("button", { type: "button", className: "button-new-group", onClick: handleAddGroup, children: "새 그룹 추가" })
-  ] }) : /* @__PURE__ */ jsxs("div", { className: "style-wrapper-no-review", children: [
-    /* @__PURE__ */ jsx("div", { className: "txt-no-review", children: "🚀" }),
-    /* @__PURE__ */ jsx("p", { children: "로딩중" })
-  ] });
+  ] }) : null;
 }
 function LikeList({ lists }) {
   const [restaurantData, setRestaurantData] = useState([]);
@@ -137,8 +135,7 @@ function BookmarkDetail({ lists, groupList }) {
   const order = useAppSelector((state) => state.myListSlice.groupNameOrder);
   const dispatch = useAppDispatch();
   function handleOrder() {
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.add("modal-mode");
+    appModalMode(true);
     dispatch(ORDER_MODAL(true));
   }
   function handleEdit() {

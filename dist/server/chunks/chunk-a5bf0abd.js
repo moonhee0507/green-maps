@@ -72,8 +72,10 @@ function BookmarkList({ lists }) {
       const arr = [];
       for (const list of lists) {
         try {
-          const data = await getRestaurant(list._id);
-          arr.push(Object.assign(list, data));
+          if (typeof list._id === "string") {
+            const data = await getRestaurant(list._id);
+            arr.push(Object.assign(list, data));
+          }
         } catch (err) {
           console.error(`북마크 그룹에 저장된 식당 _id에 대한 정보를 가져오는 데 실패했습니다.`);
         }
@@ -81,7 +83,7 @@ function BookmarkList({ lists }) {
       setRestaurantData(arr);
     };
     setData();
-  }, []);
+  }, [lists]);
   const sort = useAppSelector((state) => state.myListSlice.groupNameOrder);
   useEffect(() => {
     if (restaurantData.length !== 0) {
