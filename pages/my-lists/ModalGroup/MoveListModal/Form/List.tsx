@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import type { Bookmark } from '../../../../../server/models/User';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import {
     INCREASE_CHECKED,
@@ -7,7 +6,8 @@ import {
     PUSH_RESTAURANT_LIST,
     DELETE_RESTAURANT_LIST,
 } from '../../../../../renderer/_reducers/_slices/myListSlice';
-import { Restaurant } from '../../../../../server/models/Restaurant';
+import type { Restaurant } from '../../../../../server/models/Restaurant';
+import type { Bookmark } from '../../../../../server/models/User';
 
 export { List };
 

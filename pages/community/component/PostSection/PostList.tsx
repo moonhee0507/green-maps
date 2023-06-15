@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PostListItem from './PostListItem';
-import useIntersectionObserver from './useIntersectionObserver';
+import useIntersectionObserver from '../../../../renderer/_hooks/useIntersectionObserver';
 import { useDispatch, useStore } from 'react-redux';
 import type { Post } from '../../../../server/models/Post';
 
@@ -34,10 +34,10 @@ function PostList(props: { posts: Array<Post>; limit: number }) {
 
         if (currentPage === lastPage) {
             unobserve(target.current);
-            // console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 중단`);
+            console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 중단`);
         } else if (currentPage < lastPage) {
             observe(target.current);
-            // console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
+            console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
         }
     }, [observe, unobserve]);
 
