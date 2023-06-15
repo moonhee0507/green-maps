@@ -6,13 +6,15 @@ import vercelSsr from '@magne4000/vite-plugin-vercel-ssr';
 import { defineConfig, UserConfig } from 'vite';
 
 export default defineConfig(async ({ command, mode }) => {
+    const isProduction = mode === 'production';
+
     return {
         plugins: [react(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
         build: {
             manifest: true,
         },
         server: {
-            https: true,
+            https: isProduction,
             middlewareMode: true,
             port: 5000,
         },
