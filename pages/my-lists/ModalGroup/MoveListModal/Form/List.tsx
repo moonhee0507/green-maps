@@ -11,12 +11,27 @@ import { Restaurant } from '../../../../../server/models/Restaurant';
 
 export { List };
 
-function List({ bookmarkList }: { bookmarkList: Bookmark[] }) {
+function List({
+    bookmarkList,
+    isChecked,
+    setIsChecked,
+}: {
+    bookmarkList: Bookmark[];
+    isChecked: boolean;
+    setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     return (
         <div>
             {bookmarkList.length > 0 ? (
                 bookmarkList.map((list) => {
-                    return <ListItem key={Math.random()} list={list._id as Restaurant} />;
+                    return (
+                        <ListItem
+                            key={Math.random()}
+                            list={list._id as Restaurant}
+                            isChecked={isChecked}
+                            setIsChecked={setIsChecked}
+                        />
+                    );
                 })
             ) : (
                 <div className="style-wrapper-no-review">
@@ -28,11 +43,18 @@ function List({ bookmarkList }: { bookmarkList: Bookmark[] }) {
     );
 }
 
-function ListItem({ list }: { list: Restaurant }) {
+function ListItem({
+    list,
+    isChecked,
+    setIsChecked,
+}: {
+    list: Restaurant;
+    isChecked: boolean;
+    setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
     const dispatch = useAppDispatch();
 
     const { _id, title, address, category } = list;
-    const [isChecked, setIsChecked] = useState(false);
     const restaurantToMove = useAppSelector((state) => state.myListSlice.restaurantToMove);
 
     useEffect(() => {}, []);

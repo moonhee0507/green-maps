@@ -59,10 +59,20 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
 }
 
 function Form({ bookmarkList }: { bookmarkList: Bookmark[] }) {
+    const dispatch = useAppDispatch();
+
+    const [isChecked, setIsChecked] = useState(false);
+
+    const handleReset = () => {
+        setIsChecked(false);
+        dispatch(RESET_CHECKED()); // 체크박스 해제
+        dispatch(RESET_RESTAURANT_LIST([])); // 리스트 비우기
+    };
+
     return (
         <form>
-            <List bookmarkList={bookmarkList} />
-            <ButtonGroup />
+            <List bookmarkList={bookmarkList} isChecked={isChecked} setIsChecked={setIsChecked} />
+            <ButtonGroup handleReset={handleReset} />
         </form>
     );
 }
