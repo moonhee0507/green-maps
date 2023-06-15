@@ -18,8 +18,7 @@ function SelectStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction
 
     async function callAgreementScreen() {
         // 카카오 로그인 페이지
-        // navigate(`/v1/oauth/kakao`);
-        window.location.href = `${API_URL}/v1/oauth/kakao`;
+        window.location.href = `${API_URL}/oauth/kakao`;
     }
 
     useEffect(() => {

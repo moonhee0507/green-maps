@@ -1,7 +1,8 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import { MOVE_LIST_MODAL, ORDER_MODAL, SET_TARGET_GROUP } from '../../../../../renderer/_reducers/_slices/myListSlice';
-import { Bookmark } from '../../../../../server/models/User';
+import appModalMode from '../../../../../components/modal/appModalMode';
+import type { Bookmark } from '../../../../../server/models/User';
 
 export function GroupDetail({ lists, groupName }: { lists: Bookmark[]; groupName: string }) {
     /**
@@ -11,15 +12,13 @@ export function GroupDetail({ lists, groupName }: { lists: Bookmark[]; groupName
     const dispatch = useAppDispatch();
 
     function handleOrder() {
-        const app = document.querySelector('.app');
-        app?.classList.add('modal-mode');
+        appModalMode(true);
 
         dispatch(ORDER_MODAL(true));
     }
 
     function handleEdit() {
-        const app = document.querySelector('.app');
-        app?.classList.add('modal-mode');
+        appModalMode(true);
 
         dispatch(MOVE_LIST_MODAL(true));
         dispatch(SET_TARGET_GROUP(groupName));
