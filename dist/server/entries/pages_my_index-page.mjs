@@ -11,6 +11,7 @@ import { v as validatePassword } from "../chunks/chunk-22884288.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { E as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, a as SET_REVIEW_ID, b as SET_RESTAURANT_ID } from "../chunks/chunk-4ef07e33.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-4a5c6344.js";
+import { L as LoadingMain } from "../chunks/chunk-04f347b5.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -558,33 +559,16 @@ function ModalGroup() {
     /* @__PURE__ */ jsx(EditDeleteNotifyModal, {})
   ] });
 }
-const gifSpinner = "/images/spinner.gif";
 const MyMain = React.lazy(() => import("../chunks/chunk-23d37c23.js"));
 function Page(pageContext) {
   const [isLoggedIn, info] = useCheckLoginStatus();
   const { reviews } = pageContext;
   return isLoggedIn && info ? /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "내 정보" }),
-    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(MyMain, { userInfo: info, reviews }) }),
+    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: /* @__PURE__ */ jsx(MyMain, { userInfo: info, reviews }) }),
     /* @__PURE__ */ jsx(NavBar, { isLoggedIn }),
     /* @__PURE__ */ jsx(ModalGroup, {})
-  ] }) : /* @__PURE__ */ jsx(Loading, {});
-}
-function Loading() {
-  return /* @__PURE__ */ jsx("div", { style: { flexGrow: "1", position: "relative" }, children: /* @__PURE__ */ jsx(
-    "img",
-    {
-      src: gifSpinner,
-      alt: "로딩 이미지",
-      style: {
-        width: "50px",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)"
-      }
-    }
-  ) });
+  ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
   Page

@@ -3,9 +3,10 @@ import { TopBar } from '../../../components/topBar/topBar';
 import { NavBar } from '../../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
+import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
+import LoadingMain from '../../../components/Loading/LoadingMain';
 import type { PageContext } from '../../../renderer/types';
 import type { Restaurant } from '../../../server/models/Restaurant';
-import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
 
 const RestaurantDetail = React.lazy(() => import('./RestaurantDetail/RestaurantDetail'));
 
@@ -38,15 +39,11 @@ function Page(pageContext: PageContext) {
     return (
         <>
             <TopBar title="상세정보" />
-            <React.Suspense fallback={<Loading />}>
+            <React.Suspense fallback={<LoadingMain />}>
                 <RestaurantDetail restaurantInfo={restaurantInfo} isLoggedIn={isLoggedIn} userInfo={userInfo} />
             </React.Suspense>
             <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup />
         </>
     );
-}
-
-function Loading() {
-    return <div>로딩중...</div>;
 }
