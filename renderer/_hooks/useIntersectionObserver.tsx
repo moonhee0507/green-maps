@@ -6,11 +6,13 @@ export default function useIntersectionObserver(callback: () => void) {
     useEffect(() => {
         const handleIntersect: IntersectionObserverCallback = (entries) => {
             if (entries.at(-1)?.isIntersecting) {
+                console.log('교차상태');
                 callback();
             }
+            console.log('교차상태 아님');
         };
 
-        observer.current = new IntersectionObserver(handleIntersect, { rootMargin: '0px', threshold: 0.3 });
+        observer.current = new IntersectionObserver(handleIntersect, { rootMargin: '0px', threshold: 0 });
 
         return () => {
             observer.current?.disconnect();
