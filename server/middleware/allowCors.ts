@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 
 const allowCors = async (req: Request, res: Response, next: NextFunction) => {
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Origin', 'https://green-maps-git-preview-moonhee0507.vercel.app');
+    res.setHeader('Access-Control-Allow-Origin', 'https://www.green-maps.site');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
     res.setHeader(
         'Access-Control-Allow-Headers',

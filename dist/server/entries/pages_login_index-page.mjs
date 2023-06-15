@@ -1,10 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
+import { T as TopBar } from "../chunks/chunk-45dccc61.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
 import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
+import { A as API_URL } from "../chunks/chunk-cd236232.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
@@ -109,9 +109,7 @@ function PasswordStage({ setMove }) {
         },
         body: body.toString()
       });
-      console.log("res", res);
       const data = await res.json();
-      console.log("data", data);
       if (data.success) {
         window.alert("🎉🎉로그인에 성공했습니다🎉🎉");
         navigate("/search");

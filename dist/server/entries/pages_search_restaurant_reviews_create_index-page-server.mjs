@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
+import { A as API_URL } from "../chunks/chunk-cd236232.js";
 async function onBeforeRender(pageContext) {
   const { restaurantId } = pageContext.routeParams;
   const { user } = pageContext;

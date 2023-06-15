@@ -1,12 +1,12 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
+import { T as TopBar } from "../chunks/chunk-45dccc61.js";
 import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
 import { O as ORDER_MODAL, M as MOVE_LIST_MODAL, a as SET_TARGET_GROUP } from "../chunks/chunk-62270999.js";
-import { B as BookmarkList, M as ModalGroup } from "../chunks/chunk-9d3ce59c.js";
+import { B as BookmarkList, M as ModalGroup } from "../chunks/chunk-0535caaa.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import "react";
 import "react-redux";
-import "../chunks/chunk-84869d4d.js";
+import "../chunks/chunk-cd236232.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-0eea5c60.js";
@@ -21,7 +21,7 @@ import "../chunks/chunk-9fb42db4.js";
 import "../chunks/chunk-ef8ab02b.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
-import "../chunks/chunk-9dd0cb44.js";
+import "../chunks/chunk-4d8258ed.js";
 import "../chunks/chunk-24b72a12.js";
 function GroupDetail({ lists, groupName }) {
   const order = useAppSelector((state) => state.myListSlice.groupNameOrder);

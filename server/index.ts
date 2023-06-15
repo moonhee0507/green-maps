@@ -36,7 +36,7 @@ async function startServer() {
     const app = express();
 
     const corsOptions = {
-        origin: 'https://green-maps-git-preview-moonhee0507.vercel.app',
+        origin: 'https://www.green-maps.site',
         methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
         allowedHeaders: [
             'X-CSRF-Token',
