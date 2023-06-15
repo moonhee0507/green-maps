@@ -50,7 +50,8 @@ export default (app: Router) => {
                     maxAge: data.expires_in * 1000,
                     httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                     secure: true, // https에서만 사용
-                    sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                    sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값
+                    domain: '.green-maps.site',
                 })
                     .status(200)
                     .json({
