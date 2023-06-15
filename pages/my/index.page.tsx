@@ -8,9 +8,13 @@ import { ModalGroup } from './ModalGroup/ModalGroup';
 import type { PageContext } from '../../renderer/types';
 import type { UserInfo } from '../../server/models/User';
 import type { Review } from '../../server/models/Review';
+import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 
 export function Page(pageContext: PageContext) {
-    const { isLoggedIn, info } = pageContext.user;
+    // const { isLoggedIn, info } = pageContext.user;
+    const isLoggedIn = useCheckLoginStatus();
+    const info = pageContext.user.info || null;
+
     const { reviews } = pageContext;
 
     useEffect(() => {

@@ -8,11 +8,16 @@ import { API_URL } from '../../renderer/CONSTANT_URL';
 import type { PageContext } from '../../renderer/types';
 import type { GroupList } from '../../server/models/Bookmark';
 import type { UserInfo } from '../../server/models/User';
+import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const { isLoggedIn, info } = pageContext.user;
+    // const { isLoggedIn, info } = pageContext.user;
+
+    const isLoggedIn = useCheckLoginStatus();
+    const info = pageContext.user.info || null;
+
     const [groupList, setGroupList] = useState<GroupList[] | null>(null);
 
     useEffect(() => {

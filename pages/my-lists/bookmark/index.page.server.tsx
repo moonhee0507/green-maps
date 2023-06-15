@@ -1,9 +1,9 @@
 import { PageContext } from '../../../renderer/types';
 
 export async function onBeforeRender(pageContext: PageContext) {
-    const { routeParams } = pageContext;
+    const { routeParams, user } = pageContext;
 
     return {
-        pageContext: { routeParams },
+        pageContext: { routeParams, user },
     };
 }
