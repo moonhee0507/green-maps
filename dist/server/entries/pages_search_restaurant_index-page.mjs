@@ -1,11 +1,11 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-45dccc61.js";
+import { T as TopBar } from "../chunks/chunk-13a8d2f6.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { A as API_URL } from "../chunks/chunk-cd236232.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -96,7 +96,7 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-4c37533e.js"));
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-1d8f99d8.js"));
 function Page(pageContext) {
   var _a;
   const { routeParams, user } = pageContext;

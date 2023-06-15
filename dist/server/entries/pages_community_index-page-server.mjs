@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { A as API_URL } from "../chunks/chunk-cd236232.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
 async function onBeforeRender() {
   try {
     const res = await fetch(`${API_URL}/posts/`);

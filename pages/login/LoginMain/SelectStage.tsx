@@ -18,7 +18,7 @@ function SelectStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction
 
     async function callAgreementScreen() {
         // 카카오 로그인 페이지
-        navigate('/api/oauth/kakao');
+        navigate(`${API_URL}/v1/oauth/kakao`);
     }
 
     useEffect(() => {

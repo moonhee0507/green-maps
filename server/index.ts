@@ -62,7 +62,7 @@ async function startServer() {
     app.use(bodyParser.json());
     app.use(cookieParser());
 
-    app.use('/api', routes());
+    app.use('/v1', routes());
 
     if (isProduction) {
         const sirv = (await import('sirv')).default;
