@@ -559,7 +559,7 @@ function ModalGroup() {
     /* @__PURE__ */ jsx(EditDeleteNotifyModal, {})
   ] });
 }
-const MyMain = React.lazy(() => import("../chunks/chunk-a6cb773a.js"));
+const MyMain = React.lazy(() => import("../chunks/chunk-8e9b2113.js"));
 function Page(pageContext) {
   const [isLoggedIn, info] = useCheckLoginStatus();
   const { reviews } = pageContext;

@@ -452,6 +452,7 @@ function init() {
       level: 7
       // 지도의 확대 레벨(1~14)
     };
+    kakao$1.maps.disableHD();
     map = new kakao$1.maps.Map(mapContainer, mapOption);
   });
   return new Promise((resolve, reject) => {

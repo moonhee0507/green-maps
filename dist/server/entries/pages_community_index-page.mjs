@@ -5,7 +5,7 @@ import { navigate } from "vite-plugin-ssr/client/router";
 import { S as SubjectBox } from "../chunks/chunk-08c91283.js";
 import { useSelector, useStore, useDispatch } from "react-redux";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { S as Subject, T as Title, P as PreviewText, a as PostItemDetail, u as useIntersectionObserver } from "../chunks/chunk-b328c29b.js";
+import { S as Subject, T as Title, P as PreviewText, a as PostItemDetail, u as useIntersectionObserver } from "../chunks/chunk-47512cd6.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-38c32a2a.js";
 import "isomorphic-dompurify";
@@ -182,6 +182,8 @@ function PostList(props) {
   }, [observe, unobserve]);
   return /* @__PURE__ */ jsx("ul", { className: "wrapper-posts", children: posts.filter((post) => post.subject !== "공지사항").map((post, i) => {
     if (i === posts.length - 1) {
+      console.log("post", post);
+      console.log("i", i);
       return /* @__PURE__ */ jsx(PostListItem, { postInfo: post, ref: target }, i);
     } else
       return /* @__PURE__ */ jsx(PostListItem, { postInfo: post }, i);
@@ -241,6 +243,7 @@ function Page(pageProps) {
       const res = await fetch(
         `${API_URL}/${subject !== "" ? "subjects/" + subject : "posts"}?page=${currentPage}&limit=${limit}`,
         {
+          credentials: "include",
           headers: {
             "Content-Type": "application/json"
           }
