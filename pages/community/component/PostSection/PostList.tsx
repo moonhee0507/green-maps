@@ -55,9 +55,9 @@ function PostList(props: { posts: Array<Post>; limit: number }) {
             {posts
                 .filter((post) => post.subject !== '공지사항')
                 .map((post, i) => {
+                    console.log('post', post);
+                    console.log('i', i);
                     if (i === posts.length - 1) {
-                        console.log('post', post);
-                        console.log('i', i);
                         return <PostListItem key={i} postInfo={post} ref={target} />;
                     } else return <PostListItem key={i} postInfo={post} />;
                 })}
