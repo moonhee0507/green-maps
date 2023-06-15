@@ -39,7 +39,7 @@ function PostList(props: { posts: Array<Post>; limit: number }) {
             observe(target.current);
             console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
         }
-    }, [observe, unobserve]);
+    }, [observe, unobserve, target]);
 
     return (
         <ul className="wrapper-posts">

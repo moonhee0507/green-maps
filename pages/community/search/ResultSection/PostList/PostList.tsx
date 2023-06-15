@@ -34,16 +34,18 @@ function PostList(props: { posts: Post[]; limit: number }) {
 
         if (currentPage === lastPage) {
             unobserve(target.current);
-            // console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 중단`);
+            console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 중단`);
         } else if (currentPage < lastPage) {
             observe(target.current);
-            // console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
+            console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
         }
-    }, [observe, unobserve]);
+    }, [observe, unobserve, target]);
 
     return (
         <ul className="wrapper-posts">
             {posts.map((post, i) => {
+                console.log('post', post);
+                console.log('i', i);
                 if (i === posts.length - 1) {
                     return <PostListItem key={i} postInfo={post} ref={target} />;
                 } else return <PostListItem key={i} postInfo={post} />;
