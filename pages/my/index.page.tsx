@@ -11,25 +11,27 @@ import type { Review } from '../../server/models/Review';
 import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 
 export function Page(pageContext: PageContext) {
-    // const { isLoggedIn, info } = pageContext.user;
     const [isLoggedIn, info] = useCheckLoginStatus();
-    // const info = pageContext.user.info || null;
 
     const { reviews } = pageContext;
 
     useEffect(() => {
-        if (isLoggedIn === false) {
+        if (!isLoggedIn) {
             alert('로그인 페이지로 이동합니다.');
             window.location.href = '/login';
         }
     }, []);
+
+    if (!isLoggedIn) {
+        return null;
+    }
 
     return (
         isLoggedIn &&
         info && (
             <>
                 <TopBar title="내 정보" />
-                <MyMain userInfo={info} reviews={reviews} />
+                <MyMain isLoggedIn={isLoggedIn} userInfo={info} reviews={reviews} />
                 <NavBar isLoggedIn={isLoggedIn} />
                 <ModalGroup />
             </>
@@ -37,7 +39,7 @@ export function Page(pageContext: PageContext) {
     );
 }
 
-function MyMain({ userInfo, reviews }: { userInfo: UserInfo; reviews: Review[] }) {
+function MyMain({ isLoggedIn, userInfo, reviews }: { isLoggedIn: boolean; userInfo: UserInfo; reviews: Review[] }) {
     const [showSection, setShowSection] = useState<string>('프로필');
 
     useEffect(() => {
@@ -64,6 +66,10 @@ function MyMain({ userInfo, reviews }: { userInfo: UserInfo; reviews: Review[] }
 
         setShowSection(clickedNode.innerText);
         window.localStorage.setItem('#1', clickedNode.innerText);
+    }
+
+    if (!isLoggedIn) {
+        return null;
     }
 
     return (
