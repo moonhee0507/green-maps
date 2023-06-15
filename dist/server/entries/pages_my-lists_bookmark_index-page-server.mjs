@@ -1,7 +1,7 @@
 async function onBeforeRender(pageContext) {
-  const { routeParams } = pageContext;
+  const { routeParams, user } = pageContext;
   return {
-    pageContext: { routeParams }
+    pageContext: { routeParams, user }
   };
 }
 export {

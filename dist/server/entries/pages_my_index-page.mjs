@@ -1,17 +1,18 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { T as TopBar } from "../chunks/chunk-13a8d2f6.js";
+import { T as TopBar } from "../chunks/chunk-8fde0b9b.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { I as IMG_URL, A as API_URL } from "../chunks/chunk-94504c62.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
 import { P as PROFILE_IMAGE_MODAL, a as PROFILE_NICKNAME_MODAL, S as SET_NICKNAME, b as PROFILE_PASSWORD_MODAL, c as SET_USERID, E as EDIT_NICKNAME, d as PASS_CURRENT_PASSWORD } from "../chunks/chunk-ef8ab02b.js";
-import { R as ReviewListItem } from "../chunks/chunk-8165138e.js";
+import { R as ReviewListItem } from "../chunks/chunk-c05f2a30.js";
 import { P as PostList } from "../chunks/chunk-d5b7632a.js";
 import { r as randomizeFileName } from "../chunks/chunk-8649d624.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { v as validatePassword } from "../chunks/chunk-22884288.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { E as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, a as SET_REVIEW_ID, b as SET_RESTAURANT_ID } from "../chunks/chunk-4ef07e33.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-52b23d17.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -129,6 +130,7 @@ function ProfileSection({ userInfo }) {
       });
     }
     const res = await fetch(`${API_URL}/users/logout`, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -367,6 +369,7 @@ function EditImageButton() {
   async function submitProfileImage(fileName) {
     try {
       await fetch(`${API_URL}/users/edit/profile`, {
+        credentials: "include",
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -400,6 +403,7 @@ function DeleteImageButton() {
   const handleClick = async () => {
     try {
       await fetch(`${API_URL}/users/edit/profile`, {
+        credentials: "include",
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -508,7 +512,10 @@ function SubmitButton() {
     }
   }, [duplicate, validString]);
   async function checkDuplicate(nickName) {
-    const res = await fetch(`${API_URL}/users/check-nickname?nickname=${nickName}`);
+    const res = await fetch(`${API_URL}/users/check-nickname?nickname=${nickName}`, {
+      credentials: "include",
+      method: "GET"
+    });
     const data = await res.json();
     setDuplicate(data.duplicated);
     return data;
@@ -534,6 +541,7 @@ function SubmitButton() {
   async function editNickName(nickName) {
     try {
       const res = await fetch(`${API_URL}/users/edit/profile`, {
+        credentials: "include",
         method: "PATCH",
         headers: {
           "Content-Type": "application/json"
@@ -621,6 +629,7 @@ function NewPassword() {
   const handleClick = async () => {
     try {
       const res = await fetch(`${API_URL}/users/edit/password`, {
+        credentials: "include",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password: value1 })
@@ -628,6 +637,7 @@ function NewPassword() {
       const data = await res.json();
       if (data.success) {
         const res2 = await fetch(`${API_URL}/users/logout`, {
+          credentials: "include",
           method: "POST"
         });
         const data2 = await res2.json();
@@ -691,6 +701,7 @@ function CurrentPassword() {
   };
   const handleClick = async () => {
     const res = await fetch(`${API_URL}/users/check-password`, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -786,6 +797,7 @@ function DELETE() {
   async function handleClick() {
     try {
       const res = await fetch(`${API_URL}/reviews/${reviewId}`, {
+        credentials: "include",
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -854,7 +866,7 @@ function ModalGroup() {
   ] });
 }
 function Page(pageContext) {
-  const { isLoggedIn, info } = pageContext.user;
+  const [isLoggedIn, info] = useCheckLoginStatus();
   const { reviews } = pageContext;
   useEffect(() => {
     if (isLoggedIn === false) {

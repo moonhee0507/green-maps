@@ -12,8 +12,8 @@ import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 
 export function Page(pageContext: PageContext) {
     // const { isLoggedIn, info } = pageContext.user;
-    const isLoggedIn = useCheckLoginStatus();
-    const info = pageContext.user.info || null;
+    const [isLoggedIn, info] = useCheckLoginStatus();
+    // const info = pageContext.user.info || null;
 
     const { reviews } = pageContext;
 

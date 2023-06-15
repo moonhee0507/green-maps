@@ -17,7 +17,7 @@ export { Page };
 function Page() {
     const dispatch = useAppDispatch();
 
-    const isLoggedIn = useCheckLoginStatus();
+    const [isLoggedIn, _] = useCheckLoginStatus();
     const hasLocationAccess: StateToGeolocation = useLocationAccess();
 
     useEffect(() => {

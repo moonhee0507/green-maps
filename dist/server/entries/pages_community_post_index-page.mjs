@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-13a8d2f6.js";
+import { T as TopBar } from "../chunks/chunk-8fde0b9b.js";
 import DOMPurify from "isomorphic-dompurify";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
@@ -43,6 +43,7 @@ function PostLikeButton(props) {
   }
   async function addLike() {
     const res = await fetch(`${API_URL}/posts/${postId}/like`, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -56,6 +57,7 @@ function PostLikeButton(props) {
   }
   async function delLike() {
     const res = await fetch(`${API_URL}/posts/${postId}/like`, {
+      credentials: "include",
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -145,7 +147,10 @@ function SubmitButton(props) {
   useEffect(() => {
     getUserId().then((userId2) => setUserId(userId2)).catch((err) => console.error(err));
     async function getUserId() {
-      const res = await fetch(`${API_URL}/users/`);
+      const res = await fetch(`${API_URL}/users/`, {
+        credentials: "include",
+        method: "GET"
+      });
       const data = await res.json();
       return data.user.nickName;
     }
@@ -158,6 +163,7 @@ function SubmitButton(props) {
           content
         };
         const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
+          credentials: "include",
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -298,6 +304,7 @@ function EditCommentButton({ postId, commentId }) {
   }
   async function editComment(content) {
     const res = await fetch(`${API_URL}/comments/${commentId}?postId=${postId}`, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -396,6 +403,7 @@ function DELETE() {
   async function deletePost() {
     try {
       const res = await fetch(`${API_URL}/posts/${postId}`, {
+        credentials: "include",
         method: "DELETE"
       });
       const data = await res.json();
@@ -414,6 +422,7 @@ function DELETE() {
   async function deleteComment() {
     try {
       const res = await fetch(`${API_URL}/comments/${commentId}?postId=${postId}`, {
+        credentials: "include",
         method: "DELETE"
       });
       const data = await res.json();

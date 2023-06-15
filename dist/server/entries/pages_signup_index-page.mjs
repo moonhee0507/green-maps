@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-13a8d2f6.js";
+import { T as TopBar } from "../chunks/chunk-8fde0b9b.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
 import { S as SIGNING_UP } from "../chunks/chunk-6f77cb2d.js";

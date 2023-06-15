@@ -6,7 +6,7 @@ import { navigate } from "vite-plugin-ssr/client/router";
 import { A as API_URL } from "./chunk-94504c62.js";
 import { i as imgHeart } from "./chunk-edfa0bc8.js";
 import { S as Stars } from "./chunk-82265d98.js";
-import { R as ReviewListItem } from "./chunk-8165138e.js";
+import { R as ReviewListItem } from "./chunk-c05f2a30.js";
 import { P as Pagination } from "./chunk-81aa5fb2.js";
 import "./chunk-0c3eed3e.js";
 import "./chunk-4ef07e33.js";
@@ -16,7 +16,10 @@ function BookmarkButton({ restaurantId, isLoggedIn }) {
   const dispatch = useDispatch();
   const hasBookmarkList = useCallback(async () => {
     if (isLoggedIn) {
-      const res = await fetch(`${API_URL}/users/`);
+      const res = await fetch(`${API_URL}/users/`, {
+        credentials: "include",
+        method: "GET"
+      });
       const data = await res.json();
       return data.user.bookmarkList.some((v) => {
         return restaurantId === v._id;
@@ -26,6 +29,7 @@ function BookmarkButton({ restaurantId, isLoggedIn }) {
   const delBookmark = useCallback(async () => {
     if (isLoggedIn) {
       const res = await fetch(`${API_URL}/users/bookmark/${restaurantId}`, {
+        credentials: "include",
         method: "DELETE"
       });
       if (res.ok) {
@@ -59,6 +63,7 @@ function BookmarkButton({ restaurantId, isLoggedIn }) {
   async function addBookmark() {
     try {
       const res = await fetch(`${API_URL}/users/bookmark`, {
+        credentials: "include",
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -94,7 +99,10 @@ function LikeButton({ restaurantId, isLoggedIn }) {
   const dispatch = useDispatch();
   const hasLikeList = useCallback(async () => {
     if (isLoggedIn) {
-      const res = await fetch(`${API_URL}/users/`);
+      const res = await fetch(`${API_URL}/users/`, {
+        credentials: "include",
+        method: "GET"
+      });
       const data = await res.json();
       return data.user.likeList.some((v) => {
         return restaurantId === v._id;
@@ -103,6 +111,7 @@ function LikeButton({ restaurantId, isLoggedIn }) {
   }, [restaurantId, isLoggedIn]);
   const delLike = useCallback(async () => {
     const res = await fetch(`${API_URL}/users/like/${restaurantId}`, {
+      credentials: "include",
       method: "DELETE"
     });
     if (res.ok) {
@@ -135,6 +144,7 @@ function LikeButton({ restaurantId, isLoggedIn }) {
   async function addLike() {
     try {
       const res = await fetch(`${API_URL}/users/like`, {
+        credentials: "include",
         method: "POST",
         headers: {
           "Content-Type": "application/json"

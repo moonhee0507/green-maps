@@ -223,6 +223,7 @@ function ButtonGroup$1() {
   }
   async function deleteBookmarks(id) {
     const res = await fetch(`${API_URL}/users/bookmark/${id}`, {
+      credentials: "include",
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -270,7 +271,10 @@ function MoveListModal({ userInfo }) {
     }
   }, [groupName]);
   async function getBookmarkList() {
-    const res = await fetch(`${API_URL}/users/bookmark`);
+    const res = await fetch(`${API_URL}/users/bookmark`, {
+      credentials: "include",
+      method: "GET"
+    });
     const data = await res.json();
     return data;
   }
@@ -325,6 +329,7 @@ function GroupNameList({
   }
   async function submit(userId, newGroupName, selectedRestaurant) {
     const res = await fetch(`${API_URL}/users/update/bookmark`, {
+      credentials: "include",
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
@@ -473,7 +478,10 @@ function DeleteMultiLike({ userInfo }) {
     }
   }, [userInfo]);
   async function getLikeList() {
-    const res = await fetch(`${API_URL}/users/like`);
+    const res = await fetch(`${API_URL}/users/like`, {
+      credentials: "include",
+      method: "GET"
+    });
     const data = await res.json();
     return data;
   }
@@ -570,6 +578,7 @@ function ButtonGroup() {
   }
   async function deleteLikeList(id) {
     const res = await fetch(`${API_URL}/users/like/${id}`, {
+      credentials: "include",
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -616,6 +625,7 @@ function MoreButton({ restaurantId, restaurantTitle }) {
       const list = clicked === "북마크" ? "bookmark" : "like";
       if (confirm("해당 식당을 삭제하시겠습니까?")) {
         const res = await fetch(`${API_URL}/users/${list}/${restaurantId}`, {
+          credentials: "include",
           method: "DELETE",
           headers: {
             "Content-Type": "application/json"

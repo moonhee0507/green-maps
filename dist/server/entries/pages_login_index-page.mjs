@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { T as TopBar } from "../chunks/chunk-13a8d2f6.js";
+import { T as TopBar } from "../chunks/chunk-8fde0b9b.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
 import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
@@ -41,7 +41,10 @@ function SelectStage({ setMove }) {
     return data;
   }
   async function getKakaoUserData() {
-    const res = await fetch(`${API_URL}/oauth/kakao/users`);
+    const res = await fetch(`${API_URL}/oauth/kakao/users`, {
+      credentials: "include",
+      method: "GET"
+    });
     const data = await res.json();
     return data;
   }

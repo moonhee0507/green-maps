@@ -1,11 +1,12 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-13a8d2f6.js";
+import { T as TopBar } from "../chunks/chunk-8fde0b9b.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-52b23d17.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -47,6 +48,7 @@ function DELETE() {
   async function handleClick() {
     try {
       const res = await fetch(`${API_URL}/reviews/${reviewId}`, {
+        credentials: "include",
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -96,10 +98,11 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-1d8f99d8.js"));
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-40844f01.js"));
 function Page(pageContext) {
   var _a;
-  const { routeParams, user } = pageContext;
+  const { routeParams } = pageContext;
+  const [isLoggedIn, userInfo] = useCheckLoginStatus();
   const restaurantId = ((_a = pageContext.routeParams) == null ? void 0 : _a.restaurantId) || "";
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   useEffect(() => {
@@ -118,15 +121,8 @@ function Page(pageContext) {
   }
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "상세정보" }),
-    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(
-      RestaurantDetail,
-      {
-        restaurantInfo,
-        isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false,
-        userInfo: pageContext.user ? pageContext.user.info : null
-      }
-    ) }),
-    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false }),
+    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(RestaurantDetail, { restaurantInfo, isLoggedIn, userInfo }) }),
+    /* @__PURE__ */ jsx(NavBar, { isLoggedIn }),
     /* @__PURE__ */ jsx(ModalGroup, {})
   ] });
 }

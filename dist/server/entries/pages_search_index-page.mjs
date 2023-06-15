@@ -12,6 +12,7 @@ import { R as RestaurantListItem, C as CategoryFilterModal, a as RestaurantList 
 import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-52b23d17.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 import "redux";
@@ -1056,32 +1057,9 @@ function BackCurrentLocation() {
     }
   );
 }
-function useCheckLoginStatus() {
-  const [isLoggedIn2, setIsLoggedIn] = useState(false);
-  useEffect(() => {
-    const checkLoginStatus = async () => {
-      try {
-        const res = await fetch(`${API_URL}/users/`, {
-          credentials: "include",
-          method: "GET"
-        });
-        const data = await res.json();
-        if (data.success === true) {
-          setIsLoggedIn(true);
-        } else {
-          setIsLoggedIn(false);
-        }
-      } catch (error) {
-        setIsLoggedIn(false);
-      }
-    };
-    checkLoginStatus();
-  }, []);
-  return isLoggedIn2;
-}
 function Page() {
   const dispatch = useAppDispatch();
-  const isLoggedIn2 = useCheckLoginStatus();
+  const [isLoggedIn2, _] = useCheckLoginStatus();
   const hasLocationAccess = useLocationAccess();
   useEffect(() => {
     if (hasLocationAccess === "granted") {

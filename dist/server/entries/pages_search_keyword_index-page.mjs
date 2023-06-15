@@ -1,12 +1,13 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useRef, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-13a8d2f6.js";
+import { T as TopBar } from "../chunks/chunk-8fde0b9b.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { b as CATEGORIES, c as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-448560a4.js";
 import { A as ADD_SELECTED_CATEGORY, p as ADD_SELECTED_CERT, q as SET_ORDER_BY } from "../chunks/chunk-0a6e623f.js";
 import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-52b23d17.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -186,6 +187,7 @@ function KeywordSearchResultMain({
 }
 function Page(pageContext) {
   var _a;
+  const [isLoggedIn, __] = useCheckLoginStatus();
   const keyword = ((_a = pageContext.routeParams) == null ? void 0 : _a.keyword) || "";
   const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
   const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
@@ -232,7 +234,7 @@ function Page(pageContext) {
         searchListInPage
       }
     ),
-    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false })
+    /* @__PURE__ */ jsx(NavBar, { isLoggedIn })
   ] });
 }
 export {

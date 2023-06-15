@@ -11,7 +11,7 @@ import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatu
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const isLoggedIn = useCheckLoginStatus();
+    const [isLoggedIn, __] = useCheckLoginStatus();
 
     const keyword = pageContext.routeParams?.keyword || '';
     const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
