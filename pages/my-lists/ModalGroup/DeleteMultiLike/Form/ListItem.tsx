@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import {
     DECREASE_CHECKED,
@@ -16,6 +16,14 @@ function ListItem({ list }: { list: Restaurant }) {
     const { _id, title, address, category } = list;
     const [isChecked, setIsChecked] = useState(false);
     const restaurantToDelete = useAppSelector((state) => state.myListSlice.restaurantToMove);
+
+    // 전체해제를 countChecked로 감시
+    const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
+    useEffect(() => {
+        if (countChecked === 0) {
+            setIsChecked(false);
+        }
+    }, [countChecked]);
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
