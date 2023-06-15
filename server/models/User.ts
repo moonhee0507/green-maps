@@ -188,7 +188,7 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
          */
 
         jwt.sign(
-            { id: this._id.toHexString(), iat: Date.now() },
+            { id: this._id.toHexString(), iat: Date.now(), issuer: 'green-maps' },
             privateKey,
             {
                 algorithm: 'RS256',
@@ -198,7 +198,6 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
                 if (err) {
                     return cb(new Error('암호화 에러'));
                 }
-                console.log('만들어진 토큰: ', token);
 
                 user.token = token;
 
@@ -219,6 +218,7 @@ userSchema.static('findByToken', function findByToken(token: string, cb: (err: E
         var user = this;
 
         jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
+            console.log('복호화', decoded);
             if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
             else {
                 try {

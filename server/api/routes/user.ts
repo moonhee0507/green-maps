@@ -54,8 +54,6 @@ export default (app: Router) => {
     // login
     route.post('/login', async (req: Request, res: Response) => {
         try {
-            // res.setHeader('Access-Control-Allow-Origin', 'https://green-maps-git-preview-moonhee0507.vercel.app');
-
             const { userId, password, keepLogin } = req.body;
             const user = await User.findOne({ userId: userId });
 
