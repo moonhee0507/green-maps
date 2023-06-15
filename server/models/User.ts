@@ -5,6 +5,8 @@ import fs from 'fs-extra';
 import crypto from 'crypto';
 import type { Restaurant } from './Restaurant';
 import { Buffer } from 'node:buffer';
+import fetch from 'node-fetch';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 
 export type Bookmark = {
     _id: string | Restaurant;
@@ -182,15 +184,17 @@ userSchema.method(
 // generateToken메서드 만들기
 userSchema.method('generateToken', async function generateToken(cb: (err?: Error | null, user?: any) => any) {
     try {
-        const privateKey: string = Buffer.from(process.env.PRIVATE_KEY || '', 'base64').toString();
-        console.log('변형된 개인키', privateKey);
+        const res = await fetch(`${API_URL}/key/rsa`, { method: 'POST' });
+        const data = (await res.json()) as { success: boolean; private: string; public: string };
+
+        console.log('저장된 개인키', data);
 
         var user = this;
 
         if (!user._id) return cb(new Error('🚨 토큰을 생성하기 전에 사용자를 데이터베이스에 저장해야 합니다.'));
 
         // 몽고DB의 _id는 string이 아니기 때문에 toHexString 메서드 사용해서 형변환
-        const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, privateKey, {
+        const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, data?.private || '', {
             algorithm: 'RS256',
             expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의
         });
