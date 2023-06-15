@@ -30,6 +30,7 @@ function Page(pageProps: PageProps) {
             const res = await fetch(
                 `${API_URL}/${subject !== '' ? 'subjects/' + subject : 'posts'}?page=${currentPage}&limit=${limit}`,
                 {
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
                     },
