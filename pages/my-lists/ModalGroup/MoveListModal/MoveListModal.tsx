@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import store from '../../../../renderer/store';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import {
     MOVE_LIST_MODAL,
     RESET_CHECKED,
     RESET_RESTAURANT_LIST,
 } from '../../../../renderer/_reducers/_slices/myListSlice';
-import imgClose from '/images/icon-plus.svg';
 import { List } from './Form/List';
 import { ButtonGroup } from './Form/ButtonGroup';
-import type { Bookmark, UserInfo } from '../../../../server/models/User';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
-import store from '../../../../renderer/store';
+import appModalMode from '../../../../components/modal/appModalMode';
+import imgClose from '/images/icon-plus.svg';
+import type { Bookmark, UserInfo } from '../../../../server/models/User';
 
 export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
     const [show, setShow] = useState(false);
@@ -34,8 +35,6 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
                     setBookmarkListInSameGroup(sameGroup);
                 }
             });
-            // const sameGroup = userInfo.bookmarkList.filter((list) => list.groupName === groupName);
-            // setBookmarkListInSameGroup(sameGroup);
         }
     }, [groupName]);
 
@@ -59,20 +58,10 @@ export function MoveListModal({ userInfo }: { userInfo: UserInfo | null }) {
 }
 
 function Form({ bookmarkList }: { bookmarkList: Bookmark[] }) {
-    const dispatch = useAppDispatch();
-
-    const [isChecked, setIsChecked] = useState(false);
-
-    const handleReset = () => {
-        setIsChecked(false);
-        dispatch(RESET_CHECKED()); // 체크박스 해제
-        dispatch(RESET_RESTAURANT_LIST([])); // 리스트 비우기
-    };
-
     return (
         <form>
-            <List bookmarkList={bookmarkList} isChecked={isChecked} setIsChecked={setIsChecked} />
-            <ButtonGroup handleReset={handleReset} />
+            <List bookmarkList={bookmarkList} />
+            <ButtonGroup />
         </form>
     );
 }
@@ -81,8 +70,7 @@ function CloseButton() {
     const dispatch = useAppDispatch();
 
     function handleClose() {
-        const app = document.querySelector('.app');
-        app?.classList.remove('modal-mode');
+        appModalMode(false);
 
         dispatch(MOVE_LIST_MODAL(false));
         dispatch(RESET_CHECKED());

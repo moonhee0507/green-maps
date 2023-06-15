@@ -10,7 +10,7 @@ import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 
 export { ButtonGroup };
 
-function ButtonGroup({ handleReset }: { handleReset: () => void }) {
+function ButtonGroup() {
     const dispatch = useAppDispatch();
     const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
     const restaurantToDelete = useAppSelector((state) => state.myListSlice.restaurantToMove);
@@ -51,14 +51,14 @@ function ButtonGroup({ handleReset }: { handleReset: () => void }) {
         return data;
     }
 
-    // function clearCheckbox() {
-    //     dispatch(RESET_CHECKED()); // 체크박스 해제
-    //     dispatch(RESET_RESTAURANT_LIST([])); // 리스트 비우기
-    // }
+    function clearCheckbox() {
+        dispatch(RESET_CHECKED()); // 체크박스 해제
+        dispatch(RESET_RESTAURANT_LIST([])); // 리스트 비우기
+    }
 
     return (
         <div className="container-button-move">
-            <button type="reset" onClick={handleReset}>
+            <button type="reset" onClick={clearCheckbox}>
                 선택 해제
             </button>
             <button type="button" onClick={handleCopy} disabled={countChecked ? false : true}>

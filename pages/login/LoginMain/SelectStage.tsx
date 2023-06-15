@@ -27,13 +27,8 @@ function SelectStage({ setMove }: { setMove: React.Dispatch<React.SetStateAction
         try {
             if (authorizeCode) {
                 getAccessTokenFromKakao(authorizeCode).then((data) => {
-                    console.log('authorizeCode: ', authorizeCode);
-                    console.log('getAccessTokenFromData로 부터 받은 data: ', data);
-
                     if (data.success) {
                         getKakaoUserData().then((data) => {
-                            console.log('getKakaoUserData로부터 받은 data: ', data);
-
                             if (data.success) {
                                 window.location.href = '/my';
                             } else {

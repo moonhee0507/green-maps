@@ -3,7 +3,7 @@ import { Distance } from './Distance';
 import { MoreButton } from '../../../../../components/button/MoreButton';
 import { API_URL } from '../../../../../renderer/CONSTANT_URL';
 import { useAppSelector } from '../../../../../renderer/store/hooks';
-import type { Bookmark, Like } from '../../../../../server/models/User';
+import type { Bookmark } from '../../../../../server/models/User';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
 import { AssignedLike } from '../../../ListSection/Like/LikeList';
 

@@ -11,27 +11,12 @@ import { Restaurant } from '../../../../../server/models/Restaurant';
 
 export { List };
 
-function List({
-    bookmarkList,
-    isChecked,
-    setIsChecked,
-}: {
-    bookmarkList: Bookmark[];
-    isChecked: boolean;
-    setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+function List({ bookmarkList }: { bookmarkList: Bookmark[] }) {
     return (
         <div>
             {bookmarkList.length > 0 ? (
                 bookmarkList.map((list) => {
-                    return (
-                        <ListItem
-                            key={Math.random()}
-                            list={list._id as Restaurant}
-                            isChecked={isChecked}
-                            setIsChecked={setIsChecked}
-                        />
-                    );
+                    return <ListItem key={Math.random()} list={list._id as Restaurant} />;
                 })
             ) : (
                 <div className="style-wrapper-no-review">
@@ -43,21 +28,20 @@ function List({
     );
 }
 
-function ListItem({
-    list,
-    isChecked,
-    setIsChecked,
-}: {
-    list: Restaurant;
-    isChecked: boolean;
-    setIsChecked: React.Dispatch<React.SetStateAction<boolean>>;
-}) {
+function ListItem({ list }: { list: Restaurant }) {
     const dispatch = useAppDispatch();
 
     const { _id, title, address, category } = list;
+    const [isChecked, setIsChecked] = useState(false);
     const restaurantToMove = useAppSelector((state) => state.myListSlice.restaurantToMove);
 
-    useEffect(() => {}, []);
+    // 전체해제를 countChecked로 감시
+    const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
+    useEffect(() => {
+        if (countChecked === 0) {
+            setIsChecked(false);
+        }
+    }, [countChecked]);
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
