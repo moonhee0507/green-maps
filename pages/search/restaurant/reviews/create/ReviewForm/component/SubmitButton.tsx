@@ -24,7 +24,6 @@ function SubmitButton({
     const [editPage] = useState(window.location.pathname.includes('/edit'));
 
     const content = useAppSelector((state) => state.reviewSlice.CONTENT);
-    // const { userId } = userInfo as UserInfo;
     const randomFileNames: RandomFileNames = useAppSelector((state) => state.reviewSlice.image.RANDOM_NAME);
 
     async function handleSubmit() {
@@ -91,7 +90,7 @@ function SubmitButton({
         } catch (e) {
             console.error(e);
         } finally {
-            window.history.back();
+            // window.history.back();
         }
     }
 

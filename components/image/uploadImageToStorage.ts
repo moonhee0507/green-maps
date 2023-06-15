@@ -31,6 +31,7 @@ export default async function uploadImageToStorage(
             try {
                 // signed url 얻어오기
                 const resUrl = await fetch(`${API_URL}/images/client`, {
+                    credentials: 'include',
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -43,6 +44,7 @@ export default async function uploadImageToStorage(
                  */
                 const data = await resUrl.json();
                 const signedUrl = data.signedUrl;
+                console.log('signedUrl', signedUrl);
 
                 // 가져온 url로 PUT 요청 보내기
                 /**

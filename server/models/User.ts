@@ -218,7 +218,6 @@ userSchema.static('findByToken', function findByToken(token: string, cb: (err: E
         var user = this;
 
         jwt.verify(token, publicKey, { algorithms: ['RS256'] }, async function (err: any, decoded: any) {
-            console.log('복호화', decoded);
             if (err || !decoded || !decoded.id) cb(new Error('🚨 유효하지 않거나 만료된 토큰입니다.'));
             else {
                 try {
