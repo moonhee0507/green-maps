@@ -43,20 +43,27 @@ function WhereToCopyModal({ userInfo }: { userInfo: UserInfo | null }) {
     return (
         <article className={`modal-group-item ${show ? 'on' : ''}`}>
             <h4>복사할 그룹 선택</h4>
-            <ul className="ul-groupname">
-                {groupList
-                    .filter((groupInfo) => groupInfo.name !== targetGroup) // 현재 그룹 제외
-                    .map((groupInfo) => {
-                        return (
-                            <GroupNameList
-                                key={Math.random()}
-                                groupInfo={groupInfo}
-                                lists={bookmarkList}
-                                userInfo={userInfo}
-                            />
-                        );
-                    })}
-            </ul>
+            {groupList.length - 1 > 0 ? (
+                <ul className="ul-groupname">
+                    {groupList
+                        .filter((groupInfo) => groupInfo.name !== targetGroup) // 현재 그룹 제외
+                        .map((groupInfo) => {
+                            return (
+                                <GroupNameList
+                                    key={Math.random()}
+                                    groupInfo={groupInfo}
+                                    lists={bookmarkList}
+                                    userInfo={userInfo}
+                                />
+                            );
+                        })}
+                </ul>
+            ) : (
+                <div className="style-wrapper-no-review">
+                    <div className="txt-no-review">😭</div>
+                    <p>다른 그룹이 없어요.</p>
+                </div>
+            )}
             <CloseButton />
         </article>
     );
