@@ -90,7 +90,7 @@ function SubmitButton({
         } catch (e) {
             console.error(e);
         } finally {
-            // window.history.back();
+            window.history.back();
         }
     }
 

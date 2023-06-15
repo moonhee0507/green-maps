@@ -12,14 +12,12 @@ async function onBeforeRender(pageContext) {
     return {
       pageContext: {
         restaurantInfo: data.restaurantInfo
-        // user: user,
       }
     };
   } else {
     return {
       pageContext: {
         restaurantInfo: {}
-        // user: user,
       }
     };
   }

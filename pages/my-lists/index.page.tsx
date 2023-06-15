@@ -2,21 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { NavBar } from '../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
-import { Menu } from './Menu/Menu';
-import { ListSection } from './ListSection/ListSection';
 import { API_URL } from '../../renderer/CONSTANT_URL';
-import type { PageContext } from '../../renderer/types';
-import type { GroupList } from '../../server/models/Bookmark';
-import type { UserInfo } from '../../server/models/User';
 import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
+import LoadingMain from '../../components/Loading/LoadingMain';
+import type { GroupList } from '../../server/models/Bookmark';
 
-export { Page };
+const MyListMain = React.lazy(() => import('./MyListMain'));
 
-function Page(pageContext: PageContext) {
-    // const { isLoggedIn, info } = pageContext.user;
-
+export function Page() {
     const [isLoggedIn, info] = useCheckLoginStatus();
-    // const info = pageContext.user.info || null;
 
     const [groupList, setGroupList] = useState<GroupList[] | null>(null);
 
@@ -35,21 +29,16 @@ function Page(pageContext: PageContext) {
         }
     }, [info]);
 
-    return (
+    return isLoggedIn && info ? (
         <>
             <TopBar title="내 식당 목록" />
-            <MyListMain userInfo={info} groupList={groupList} />
+            <React.Suspense fallback={<LoadingMain />}>
+                <MyListMain userInfo={info} groupList={groupList} />
+            </React.Suspense>
             <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup userInfo={info} />
         </>
-    );
-}
-
-function MyListMain({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
-    return (
-        <main className="main-bookmark">
-            <Menu userInfo={userInfo} />
-            <ListSection userInfo={userInfo} groupList={groupList} />
-        </main>
+    ) : (
+        <LoadingMain />
     );
 }

@@ -23,24 +23,29 @@ function useCheckLoginStatus(): [IsLoggedIn, User] {
                 console.log('data', data);
 
                 if (data.success === true) {
-                    // 로그인 했음.
                     setIsLoggedIn(true);
                     setUserInfo(data.user);
                 } else {
-                    // 로그인 안했음
                     setIsLoggedIn(false);
                     setUserInfo(null);
 
                     if (window.location.pathname === '/my') {
                         navigate('/login');
                     }
+
+                    if (window.location.pathname === '/my-lists') {
+                        navigate('/login');
+                    }
                 }
             } catch (error) {
-                // 로그인 안했음
                 setIsLoggedIn(false);
                 setUserInfo(null);
 
                 if (window.location.pathname === '/my') {
+                    navigate('/login');
+                }
+
+                if (window.location.pathname === '/my-lists') {
                     navigate('/login');
                 }
             }

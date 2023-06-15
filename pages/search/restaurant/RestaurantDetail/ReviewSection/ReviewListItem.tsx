@@ -76,11 +76,20 @@ function ButtonGroup({ reviewId, like }: { reviewId: string; like: Array<{ user:
 }
 
 function ReviewCommentButton() {
+    const handleClick = () => {
+        window.alert('준비 중인 서비스입니다.');
+    };
+
     return (
         <>
             <dt className="sr-only">댓글</dt>
             <dd className="container-button-txt">
-                <button type="button" aria-label="리뷰 댓글 쓰기" className="button-review-comment" />
+                <button
+                    type="button"
+                    aria-label="리뷰 댓글 쓰기"
+                    className="button-review-comment"
+                    onClick={handleClick}
+                />
                 <span aria-label="댓글 개수">0</span>
             </dd>
         </>

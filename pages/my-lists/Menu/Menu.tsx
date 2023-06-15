@@ -1,10 +1,21 @@
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../renderer/store/hooks';
 import { SHOW } from '../../../renderer/_reducers/_slices/myListSlice';
-import type { UserInfo } from '../../../server/models/User';
+import type { UserInfo, Bookmark, Like } from '../../../server/models/User';
 
 export function Menu({ userInfo }: { userInfo: UserInfo | null }) {
-    const { bookmarkList, likeList } = userInfo as UserInfo;
+    // const { bookmarkList, likeList } = userInfo;
+
+    const [bookmarkList, setBookmarkList] = useState<Bookmark[]>([]);
+    const [likeList, setLikeList] = useState<Like[]>([]);
+
+    useEffect(() => {
+        if (userInfo !== null) {
+            setBookmarkList(userInfo.bookmarkList);
+            setLikeList(userInfo.likeList);
+        }
+    }, [userInfo]);
+
     const clicked = useAppSelector((state) => state.myListSlice.clicked);
 
     const dispatch = useAppDispatch();
