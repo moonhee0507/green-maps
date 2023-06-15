@@ -194,28 +194,35 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
          */
 
         console.log('replace된 privateKey: ', privateKey);
-        const strTest = '졸립다!';
-        console.log('원래 메시지: ', strTest);
+        // const strTest = '졸립다!';
+        // console.log('원래 메시지: ', strTest);
 
-        const strEnc = crypto.privateEncrypt(privateKey, Buffer.from(strTest, 'utf8')).toString('base64');
-        console.log('암호화된 메시지: ', strEnc);
+        // const strEnc = crypto.privateEncrypt(privateKey, Buffer.from(strTest, 'utf8')).toString('base64');
+        // console.log('암호화된 메시지: ', strEnc);
 
-        const strDec = crypto.publicDecrypt(publicKey, Buffer.from(strEnc, 'utf8')).toString('base64');
-        console.log('복호화된 메시지: ', strDec);
+        // const strDec = crypto.publicDecrypt(publicKey, Buffer.from(strEnc, 'utf8')).toString('base64');
+        // console.log('복호화된 메시지: ', strDec);
 
-        const token = jwt.sign({ id: this._id.toHexString(), iat: Date.now() }, privateKey, {
-            algorithm: 'RS256',
-            expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의
-        });
+        jwt.sign(
+            { id: this._id.toHexString(), iat: Date.now() },
+            privateKey,
+            {
+                algorithm: 'RS256',
+                expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의,
+            },
+            function (err, token) {
+                if (err) {
+                    return cb(new Error('암호화 에러'));
+                }
+                console.log('만들어진 토큰: ', token);
 
-        console.log('만들어진 토큰: ', token);
+                user.token = token;
 
-        user.token = token;
-
-        await user
-            .save()
-            .then((user: any) => cb(null, user))
-            .catch((err: any) => cb(err));
+                user.save()
+                    .then((user: any) => cb(null, user))
+                    .catch((err: any) => cb(err));
+            }
+        );
     } catch (err) {
         console.error(err);
     }
