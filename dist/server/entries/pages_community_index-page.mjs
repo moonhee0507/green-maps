@@ -6,7 +6,7 @@ import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { useDispatch } from "react-redux";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
-import { L as LoadingMain } from "../chunks/chunk-04f347b5.js";
+import { L as LoadingMain } from "../chunks/chunk-3818be5d.js";
 import "../chunks/chunk-24b72a12.js";
 function SearchForm() {
   const [showInput, setShowInput] = useState(false);

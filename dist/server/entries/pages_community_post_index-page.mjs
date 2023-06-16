@@ -12,7 +12,7 @@ import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
-import { L as LoadingMain } from "../chunks/chunk-04f347b5.js";
+import { L as LoadingMain } from "../chunks/chunk-3818be5d.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 function TextArea(props) {

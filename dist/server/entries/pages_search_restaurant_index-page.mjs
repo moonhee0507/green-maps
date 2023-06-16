@@ -7,7 +7,7 @@ import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
-import { L as LoadingMain } from "../chunks/chunk-04f347b5.js";
+import { L as LoadingMain } from "../chunks/chunk-3818be5d.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
