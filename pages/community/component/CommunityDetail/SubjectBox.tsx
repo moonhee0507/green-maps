@@ -17,19 +17,24 @@ function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
 
     const [_, userInfo] = useCheckLoginStatus();
     useEffect(() => {
+        setCurrentPath(window.location.pathname);
         if (userInfo !== null) {
             setIsAdmin(userInfo.role === 9);
         } else setIsAdmin(false);
     }, []);
 
     useEffect(() => {
-        setCurrentPath(window.location.pathname);
         if (postInfo !== null && postInfo !== undefined) {
             dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: postInfo.subject });
         } else {
             dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: '' });
         }
     }, [postInfo]);
+
+    useEffect(() => {
+        console.log('isAdmin', isAdmin);
+        console.log('currentPath', currentPath);
+    }, [isAdmin, currentPath, subject, isFocused]);
 
     function handleChange(event: ChangeEvent<HTMLSelectElement>) {
         dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: event.target.value });
