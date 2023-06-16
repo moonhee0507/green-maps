@@ -309,6 +309,7 @@ $inputHeight: 45px;
 
 .community-search-main {
     @include extensive-content;
+    padding: 10px;
 
     .container-search-input {
         display: -webkit-box;

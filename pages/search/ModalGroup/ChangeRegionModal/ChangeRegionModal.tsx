@@ -20,12 +20,15 @@ export default function ChangeRegionModal() {
     }, [regionModalOn]);
 
     useEffect(() => {
-        setTimeout(() => {
-            const [lat, lng] = currentLocation;
-            const geocoder = new kakao.maps.services.Geocoder();
+        const [lat, lng] = currentLocation;
+        console.log('currentLocation', currentLocation);
 
+        const geocoder = new kakao.maps.services.Geocoder();
+
+        if (geocoder) {
             geocoder.coord2RegionCode(lng, lat, (result, status) => {
                 if (status === kakao.maps.services.Status.OK) {
+                    console.log('result', result);
                     for (let i = 0; i < result.length; i++) {
                         // 행정동 region-type은 H
                         if (result[i].region_type === 'H') {
@@ -37,7 +40,7 @@ export default function ChangeRegionModal() {
                     }
                 }
             });
-        }, 3000);
+        }
     }, [currentLocation]);
 
     return (
