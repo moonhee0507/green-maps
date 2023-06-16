@@ -50,18 +50,22 @@ export function init(): Promise<kakao.maps.LatLng> {
                 locPosition = new kakao.maps.LatLng(lat, lng);
 
                 // 지도 중심좌표를 접속위치로 변경
-                map.setCenter(locPosition);
-                store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: true });
-                store.dispatch(SET_CURRENT_LOCATION([lat, lng]));
+                if (map) {
+                    map.setCenter(locPosition);
+                    store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: true });
+                    store.dispatch(SET_CURRENT_LOCATION([lat, lng]));
 
-                resolve(locPosition);
+                    resolve(locPosition);
+                }
             });
         } else {
-            locPosition = new kakao.maps.LatLng(37.5666805, 126.9784147);
-            map.setLevel(5);
-            store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: false });
-            store.dispatch(SET_CURRENT_LOCATION([37.5666805, 126.9784147]));
-            resolve(locPosition);
+            if (map) {
+                locPosition = new kakao.maps.LatLng(37.5666805, 126.9784147);
+                map.setLevel(5);
+                store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: false });
+                store.dispatch(SET_CURRENT_LOCATION([37.5666805, 126.9784147]));
+                resolve(locPosition);
+            }
         }
 
         // addBoundChangeEvent();
