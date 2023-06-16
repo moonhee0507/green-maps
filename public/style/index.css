@@ -1080,6 +1080,18 @@ button[aria-label="식당 검색 버튼"] {
 .home-content::-webkit-scrollbar {
   display: none;
 }
+.home-content::after {
+  position: absolute;
+  content: "";
+  background-color: #00784a;
+  opacity: 25%;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  top: 0px;
+  right: 0px;
+  animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+}
 
 .container-title {
   position: relative;
@@ -1175,23 +1187,6 @@ button[aria-label="식당 검색 버튼"] {
   left: 0;
   top: 0;
   border-radius: 10px;
-}
-
-.radialForNextPage {
-  position: relative;
-  width: 100%;
-}
-.radialForNextPage::after {
-  position: absolute;
-  content: "";
-  background-color: #00784a;
-  opacity: 25%;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  top: 0px;
-  right: 0px;
-  animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
 }
 @keyframes outCircle {
   0% {

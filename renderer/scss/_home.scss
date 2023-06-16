@@ -1,7 +1,20 @@
 .home-content {
     @include extensive-content;
-    // background: url('/images/splash.jpg') no-repeat center center / cover;
     position: relative;
+
+    &::after {
+        position: absolute;
+        content: '';
+        background-color: #00784a;
+        opacity: 25%;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        top: 0px;
+        right: 0px;
+        -webkit-animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+        animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+    }
 }
 
 .container-title {
@@ -56,23 +69,6 @@
     }
 }
 
-// .container-start {
-//     position: absolute;
-//     bottom: 35px;
-//     right: 41px;
-//     padding: 15px;
-//     border-radius: 10px;
-//     border: 0;
-//     background-color: $container-on-image;
-
-//     > a {
-//         letter-spacing: 1px;
-//         font-size: 18px;
-//         font-weight: bold;
-//         color: $on-opacity;
-//     }
-// }
-
 .button-pwa {
     padding: 0.6em 2em;
     border: none;
@@ -93,6 +89,18 @@
 
 .button-pwa:before {
     content: '';
+    background: -o-linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
     background: -o-linear-gradient(
         45deg,
         #ff0000,
@@ -206,25 +214,6 @@
     left: 0;
     top: 0;
     border-radius: 10px;
-}
-
-.radialForNextPage {
-    position: relative;
-    width: 100%;
-
-    &::after {
-        position: absolute;
-        content: '';
-        background-color: #00784a;
-        opacity: 25%;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        top: 0px;
-        right: 0px;
-        -webkit-animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
-        animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
-    }
 }
 
 @-webkit-keyframes outCircle {

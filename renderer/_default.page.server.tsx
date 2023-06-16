@@ -47,6 +47,8 @@ async function render(pageContext: PageContextServer) {
     <html lang="ko">
         <head>
             <meta charset="UTF-8" />
+            <title>${title}</title>
+            <meta name="author" content="moonhee0507" />
             <link rel="icon" href=${icon512} />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta name="description" content="${desc}" />
@@ -59,7 +61,6 @@ async function render(pageContext: PageContextServer) {
             <link rel="stylesheet" href="${cssUrl}" type="text/css" >
             <meta name="apple-mobile-web-app-capable" content="yes">
             <link rel="apple-touch-icon" href=${icon192}>
-            <title>${title}</title>
         </head>
         <body>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
