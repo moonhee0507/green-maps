@@ -9,6 +9,11 @@ import LoadingMain from '../../components/Loading/LoadingMain';
 import type { PageProps } from '../../renderer/types';
 import type { Post } from '../../server/models/Post';
 
+export const documentProps = {
+    title: '커뮤니티 | Green Maps',
+    description: '채식 식당 지도 서비스 커뮤니티',
+};
+
 const CommunityMain = React.lazy(() => import('./CommunityMain'));
 
 export function Page(pageProps: PageProps) {

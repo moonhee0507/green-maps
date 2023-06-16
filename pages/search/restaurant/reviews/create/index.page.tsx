@@ -5,6 +5,11 @@ import { useCheckLoginStatus } from '../../../../../renderer/_hooks/useCheckLogi
 import type { PageContext } from '../../../../../renderer/types';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
 
+export const documentProps = {
+    title: '채식 식당 리뷰 작성 | Green Maps',
+    description: '채식 식당 리뷰 작성 페이지',
+};
+
 export { Page };
 
 function Page(pageContext: PageContext) {

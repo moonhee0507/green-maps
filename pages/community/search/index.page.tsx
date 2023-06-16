@@ -9,6 +9,11 @@ import LoadingMain from '../../../components/Loading/LoadingMain';
 
 const SearchMain = React.lazy(() => import('./SearchMain'));
 
+export const documentProps = {
+    title: '게시글 검색 | Green Maps',
+    description: '게시글 검색 페이지',
+};
+
 export { Page };
 
 function Page(pageProps: PageProps) {

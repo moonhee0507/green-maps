@@ -9,6 +9,11 @@ import { CHECK_LOCATION_ACCESS_MODAL, StateToGeolocation } from '../../renderer/
 import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../components/Loading/LoadingMain';
 
+export const documentProps = {
+    title: '채식 식당 지도 | Green Maps',
+    description: '채식 식당 지도 페이지',
+};
+
 const MapView = React.lazy(() => import('./MapView'));
 
 export { Page };

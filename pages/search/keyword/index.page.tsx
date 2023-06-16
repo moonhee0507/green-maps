@@ -8,6 +8,11 @@ import { API_URL } from '../../../renderer/CONSTANT_URL';
 import { KeywordSearchResultMain } from './KeywordSearchResultMain/KeywordSearchResultMain';
 import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
 
+export const documentProps = {
+    title: '채식 식당 검색 결과 | Green Maps',
+    description: '채식 식당 지도 검색 페이지',
+};
+
 export { Page };
 
 function Page(pageContext: PageContext) {

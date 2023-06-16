@@ -2,8 +2,12 @@ import React, { useEffect } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { SignupMain } from './SignupMain/SignupMain';
 import { navigate } from 'vite-plugin-ssr/client/router';
-import type { PageContext } from '../../renderer/types';
 import { API_URL } from '../../renderer/CONSTANT_URL';
+
+export const documentProps = {
+    title: '회원가입 | Green Maps',
+    description: '그린맵 회원가입 페이지',
+};
 
 export { Page };
 

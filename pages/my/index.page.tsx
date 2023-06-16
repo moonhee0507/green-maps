@@ -6,6 +6,11 @@ import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../components/Loading/LoadingMain';
 import type { PageContext } from '../../renderer/types';
 
+export const documentProps = {
+    title: '내 정보 | Green Maps',
+    description: '채식 식당 지도 서비스 마이 페이지',
+};
+
 const MyMain = React.lazy(() => import('./MyMain'));
 
 export function Page(pageContext: PageContext) {

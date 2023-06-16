@@ -6,7 +6,7 @@ export { Page };
 
 export const documentProps = {
     title: '홈 | Green Maps',
-    description: '채식 식당 검색과 북마크 서비스',
+    description: '채식 식당 지도 서비스',
 };
 
 const HomeMain = React.lazy(() => import('./HomeMain'));

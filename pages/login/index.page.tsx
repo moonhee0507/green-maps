@@ -4,6 +4,11 @@ import { LoginMain } from './LoginMain/LoginMain';
 import { API_URL } from '../../renderer/CONSTANT_URL';
 import { navigate } from 'vite-plugin-ssr/client/router';
 
+export const documentProps = {
+    title: '로그인 | Green Maps',
+    description: '채식 식당 지도 서비스 로그인',
+};
+
 export { Page };
 
 function Page() {

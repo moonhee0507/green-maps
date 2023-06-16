@@ -7,6 +7,11 @@ import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../components/Loading/LoadingMain';
 import type { GroupList } from '../../server/models/Bookmark';
 
+export const documentProps = {
+    title: '내 목록 | Green Maps',
+    description: '북마크, 좋아요 표시한 채식 식당 목록',
+};
+
 const MyListMain = React.lazy(() => import('./MyListMain'));
 
 export function Page() {

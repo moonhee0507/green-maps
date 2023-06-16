@@ -52,10 +52,10 @@ async function render(pageContext: PageContextServer) {
             <meta charset="UTF-8" />
             <title>${title}</title>
             <meta name="author" content="moonhee0507" />
-            <link rel="icon" href=${icon512} />
+            <link rel="icon" href="${icon512}" />
             <meta name="description" content="${desc}" />
-            <link rel="apple-touch-icon" href=${icon180} sizes="180x180" />
-            <link rel="mask-icon" href=${iconMask} color="#00784a" />
+            <link rel="apple-touch-icon" href="${icon180}" sizes="180x180" />
+            <link rel="mask-icon" href="${iconMask}" color="#00784a" />
             <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
             <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -65,16 +65,16 @@ async function render(pageContext: PageContextServer) {
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
             <link rel="stylesheet" href="${cssUrl}" type="text/css" >
             <meta name="apple-mobile-web-app-capable" content="yes">
-            ${/* 일반 */ ''}
-            <meta property="og:image" content=${icon180}>
-            <meta property="og:title" content=${title}>
-            <meta property="og:description" content=${desc} />
+
+            <meta property="og:image" content="${icon1024}">
+            <meta property="og:title" content="${title}">
+            <meta property="og:description" content="${desc}" />
             <meta property="og:url" content="https://www.green-maps.site/">
-            ${/* 트위터 */ ''}
-            <meta property="twitter:image" content=${icon180}>
-            <meta property="twitter:card" content="${icon1024}>
+
+            <meta property="twitter:image" content="${icon1024}">
+            <meta property="twitter:card" content="${icon1024}">
             <meta property="twitter:title" content="Green Maps">
-            <meta property="twitter:description" content=${desc}>
+            <meta property="twitter:description" content="${desc}">
         </head>
         <body>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
@@ -103,7 +103,8 @@ async function render(pageContext: PageContextServer) {
 }
 
 async function onBeforeRender(pageContext: PageContextServer) {
-    const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, postId } = pageContext;
+    const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, postId, review } =
+        pageContext;
 
     let pageHtml;
 
@@ -135,6 +136,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
             reviews,
             restaurantInfo,
             postId,
+            review,
         },
     };
 }

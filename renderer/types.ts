@@ -51,6 +51,7 @@ export type PageContextCustom = {
     restaurantInfo: Restaurant;
     reviews: Review[];
     postId: string;
+    review: Review;
 };
 
 type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;

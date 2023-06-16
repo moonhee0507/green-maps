@@ -11,6 +11,11 @@ import { Post } from '../../../server/models/Post';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageContext } from '../../../renderer/types';
 
+export const documentProps = {
+    title: '게시글 | Green Maps',
+    description: '채식 식당 지도 서비스 게시글 페이지',
+};
+
 export { Page };
 
 function Page(pageContext: PageContext) {

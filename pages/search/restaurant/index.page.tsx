@@ -8,6 +8,11 @@ import LoadingMain from '../../../components/Loading/LoadingMain';
 import type { PageContext } from '../../../renderer/types';
 import type { Restaurant } from '../../../server/models/Restaurant';
 
+export const documentProps = {
+    title: '채식 식당 검색 | Green Maps',
+    description: '채식 식당 지도 검색 페이지',
+};
+
 const RestaurantDetail = React.lazy(() => import('./RestaurantDetail/RestaurantDetail'));
 
 export { Page };

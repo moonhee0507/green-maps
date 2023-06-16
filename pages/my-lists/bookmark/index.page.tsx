@@ -8,6 +8,11 @@ import type { PageContext } from '../../../renderer/types';
 import { Bookmark } from '../../../server/models/User';
 import LoadingMain from '../../../components/Loading/LoadingMain';
 
+export const documentProps = {
+    title: '내 북마크 | Green Maps',
+    description: '북마크 목록 페이지',
+};
+
 const BookmarkListMain = React.lazy(() => import('./BookmarkListMain/BookmarkListMain'));
 
 export function Page(pageContext: PageContext) {
