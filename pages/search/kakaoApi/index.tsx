@@ -133,8 +133,8 @@ function addBoundChangeEvent() {
         } finally {
             if (app) {
                 const imgReactElement = app.querySelector('#__LOADING__');
-                if (imgReactElement) {
-                    imgReactElement.remove();
+                if (imgReactElement && imgReactElement.parentNode) {
+                    imgReactElement.parentNode.removeChild(imgReactElement);
                 }
             }
         }
