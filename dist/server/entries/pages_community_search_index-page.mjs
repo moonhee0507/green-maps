@@ -8,7 +8,7 @@ import "../chunks/chunk-0e4e6c3d.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-dfb70939.js";
-const SearchMain = React.lazy(() => import("../chunks/chunk-72b126ee.js"));
+const SearchMain = React.lazy(() => import("../chunks/chunk-a9721299.js"));
 function Page(pageProps) {
   var _a;
   const dispatch = useDispatch();

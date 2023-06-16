@@ -1,10 +1,7 @@
-async function onBeforeRender(pageContext) {
-  var _a;
-  const postId = ((_a = pageContext.routeParams) == null ? void 0 : _a.postId) || "";
+function onBeforeRender(pageContext) {
+  const { routeParams } = pageContext;
   return {
-    pageContext: {
-      postId
-    }
+    pageContext: { routeParams }
   };
 }
 export {

@@ -50,11 +50,11 @@ export default function HomeMain({
                     <p>채식 식당에 대한 후기를 남길 수 있어요.</p>
                     <p>게시판을 통해 소통해요!</p>
                 </div>
-                {/* {deferredPrompt && (
+                {deferredPrompt && (
                     <button type="button" onClick={handleInstall} className="button-pwa">
                         Web App 설치
                     </button>
-                )} */}
+                )}
             </section>
         </main>
     );

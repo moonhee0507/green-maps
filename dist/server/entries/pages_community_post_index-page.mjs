@@ -27,6 +27,7 @@ function PostLikeButton(props) {
   const [buttonOn, setButtonOn] = useState(false);
   useEffect(() => {
     getUserId().then((userId2) => {
+      console.log("PostLikeButton userId", userId2);
       setUserId(userId2);
     }).catch((err) => console.error(err));
     async function getUserId() {
@@ -473,7 +474,8 @@ function ModalGroup() {
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
 function Page(pageContext) {
-  const { postId } = pageContext;
+  var _a;
+  const postId = ((_a = pageContext.routeParams) == null ? void 0 : _a.postId) || "";
   const dispatch = useAppDispatch();
   const [_, userInfo] = useCheckLoginStatus();
   const [postInfo, setPostInfo] = useState(null);

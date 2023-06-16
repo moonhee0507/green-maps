@@ -45,7 +45,7 @@ function SearchBar() {
     /* @__PURE__ */ jsx(SearchForm, {})
   ] });
 }
-const CommunityMain = React.lazy(() => import("../chunks/chunk-c8a424fd.js"));
+const CommunityMain = React.lazy(() => import("../chunks/chunk-9aa5b287.js"));
 function Page(pageProps) {
   var _a;
   const [isLoggedIn, _] = useCheckLoginStatus();

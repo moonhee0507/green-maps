@@ -6,9 +6,14 @@ const documentProps = {
   title: "홈 | Green Maps",
   description: "채식 식당 검색과 북마크 서비스"
 };
-const HomeMain = React.lazy(() => import("../chunks/chunk-bae06e2b.js"));
+const HomeMain = React.lazy(() => import("../chunks/chunk-9022c2c6.js"));
 function Page() {
   const [isLoading, setIsLoading] = useState(true);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const handleBeforeInstallPrompt = (event) => {
+    event.preventDefault();
+    setDeferredPrompt(event);
+  };
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
@@ -17,6 +22,14 @@ function Page() {
       clearTimeout(timeoutId);
     };
   }, []);
+  useEffect(() => {
+    if (!isLoading) {
+      window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    }
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, [isLoading]);
   return /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
     isLoading ? /* @__PURE__ */ jsx(
       "div",
@@ -32,7 +45,7 @@ function Page() {
         children: /* @__PURE__ */ jsx("img", { src: imgLoading, alt: "로딩", style: { width: "100%" }, id: "__LOADING__" })
       }
     ) : null,
-    /* @__PURE__ */ jsx(HomeMain, {})
+    /* @__PURE__ */ jsx(HomeMain, { deferredPrompt, setDeferredPrompt })
   ] });
 }
 export {

@@ -1088,7 +1088,7 @@ button[aria-label="식당 검색 버튼"] {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  top: 0px;
+  bottom: 0px;
   right: 0px;
   animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
 }

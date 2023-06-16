@@ -2,22 +2,21 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useRef, useState, useEffect } from "react";
 import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_CURRENT_LOCATION, b as SET_LIST_IN_PAGE, c as SET_TOTAL_IN_REGION, d as SHOW_LIST_IN_REGION_MODAL, R as RESET_LIST_IN_PAGE, e as RESET_TOTAL_IN_REGION, f as CHANGE_REGION_MODAL, g as SET_SELECTED_SIDO, h as CATEGORY_FILTER_MODAL, N as NO_RESULT_MODAL, i as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-346170b2.js";
+import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-1643b273.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
-import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-47ee53cb.js";
-import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { renderToString } from "react-dom/server";
-import { s as store } from "../chunks/chunk-29897a3a.js";
+import { s as store } from "../chunks/chunk-042cff01.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
 import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
+import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-7590a0cb.js";
+import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
 import "@reduxjs/toolkit";
-import "../chunks/chunk-6c356fa9.js";
 import "redux";
 import "../chunks/chunk-4ef07e33.js";
 import "../chunks/chunk-9fb42db4.js";
@@ -26,6 +25,7 @@ import "../chunks/chunk-1a5b0e59.js";
 import "../chunks/chunk-d2c63902.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
+import "../chunks/chunk-6c356fa9.js";
 import "../chunks/chunk-24b72a12.js";
 function SearchForm() {
   const inputElement = useRef(null);
@@ -134,6 +134,247 @@ function ChangeRadiusModal() {
     ] })
   ] });
 }
+const REGION = {
+  서울: [
+    "강남구",
+    "강동구",
+    "강북구",
+    "강서구",
+    "관악구",
+    "광진구",
+    "구로구",
+    "금천구",
+    "노원구",
+    "도봉구",
+    "동대문구",
+    "동작구",
+    "마포구",
+    "서대문구",
+    "서초구",
+    "성동구",
+    "성북구",
+    "송파구",
+    "양천구",
+    "영등포구",
+    "용산구",
+    "은평구",
+    "종로구",
+    "중구",
+    "중랑구"
+  ],
+  강원: [
+    "강릉시",
+    "고성군",
+    "동해시",
+    "삼척시",
+    "속초시",
+    "양구군",
+    "양양군",
+    "영월군",
+    "원주시",
+    "인제군",
+    "정선군",
+    "철원군",
+    "춘천시",
+    "태백시",
+    "평창군",
+    "홍천군",
+    "화천군",
+    "횡성군"
+  ],
+  경기: [
+    "가평군",
+    "고양시",
+    "과천시",
+    "광명시",
+    "광주시",
+    "구리시",
+    "군포시",
+    "김포시",
+    "남양주시",
+    "동두천시",
+    "부천시",
+    "성남시",
+    "수원시",
+    "시흥시",
+    "안산시",
+    "안성시",
+    "안양시",
+    "양주시",
+    "양평군",
+    "여주시",
+    "연천군",
+    "오산시",
+    "용인시",
+    "의왕시",
+    "의정부시",
+    "이천시",
+    "파주시",
+    "평택시",
+    "포천시",
+    "하남시",
+    "화성시"
+  ],
+  경남: [
+    "거제시",
+    "거창군",
+    "고성군",
+    "김해시",
+    "남해군",
+    "밀양시",
+    "사천시",
+    "산청군",
+    "양산시",
+    "의령군",
+    "진주시",
+    "창녕군",
+    "창원시",
+    "통영시",
+    "하동군",
+    "함안군",
+    "함양군",
+    "합천군"
+  ],
+  경북: [
+    "경산시",
+    "경주시",
+    "고령군",
+    "구미시",
+    "군위군",
+    "김천시",
+    "문경시",
+    "봉화군",
+    "상주시",
+    "성주군",
+    "안동시",
+    "영덕군",
+    "영양군",
+    "영주시",
+    "영천시",
+    "예천군",
+    "울릉군",
+    "울진군",
+    "의성군",
+    "청도군",
+    "청송군",
+    "칠곡군",
+    "포항시"
+  ],
+  광주: ["광산구", "남구", "동구", "북구", "서구"],
+  대구: ["남구", "달서구", "달성군", "동구", "북구", "서구", "수성구", "중구"],
+  대전: ["대덕구", "동구", "서구", "유성구", "중구"],
+  부산: [
+    "강서구",
+    "금정구",
+    "기장군",
+    "남구",
+    "동구",
+    "동래구",
+    "부산진구",
+    "북구",
+    "사상구",
+    "사하구",
+    "서구",
+    "수영구",
+    "연제구",
+    "영도구",
+    "중구",
+    "해운대구"
+  ],
+  세종: ["세종"],
+  울산: ["남구", "동구", "북구", "울주군", "중구"],
+  인천: ["강화군", "계양구", "남동구", "동구", "미추홀구", "부평구", "서구", "연수구", "옹진군", "중구"],
+  전남: [
+    "강진군",
+    "고흥군",
+    "곡성군",
+    "광양시",
+    "구례군",
+    "나주시",
+    "담양군",
+    "목포시",
+    "무안군",
+    "보성군",
+    "순천시",
+    "신안군",
+    "여수시",
+    "영광군",
+    "영암군",
+    "완도군",
+    "장성군",
+    "장흥군",
+    "진도군",
+    "함평군",
+    "해남군",
+    "화순군"
+  ],
+  전북: [
+    "고창군",
+    "군산시",
+    "김제시",
+    "남원시",
+    "무주군",
+    "부안군",
+    "순창군",
+    "완주군",
+    "익산시",
+    "임실군",
+    "장수군",
+    "전주시",
+    "정읍시",
+    "진안군"
+  ],
+  제주: ["서귀포시", "제주시"],
+  충남: [
+    "계룡시",
+    "공주시",
+    "금산군",
+    "논산시",
+    "당진시",
+    "보령시",
+    "부여군",
+    "서산시",
+    "서천군",
+    "아산시",
+    "예산군",
+    "천안시",
+    "청양군",
+    "태안군",
+    "홍성군"
+  ],
+  충북: ["보은군", "영동군", "옥천군", "음성군", "제천시", "증평군", "진천군", "청주시", "충주시"]
+};
+function Sido() {
+  const [sidoList] = useState(() => Object.keys(REGION).sort());
+  return /* @__PURE__ */ jsx("div", { className: "container-sido", children: /* @__PURE__ */ jsx("ul", { children: sidoList.map((v) => {
+    return /* @__PURE__ */ jsx(SidoListItem, { name: v }, Math.random());
+  }) }) });
+}
+function SidoListItem({ name }) {
+  const dispatch = useAppDispatch();
+  const currentSido = useAppSelector((state) => state.mapSlice.currentSido);
+  const selectedSido = useAppSelector((state) => state.mapSlice.selectedSido);
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    if (selectedSido === "") {
+      if (currentSido.includes(name)) {
+        setOn(true);
+      } else {
+        setOn(false);
+      }
+    } else {
+      if (selectedSido.includes(name)) {
+        setOn(true);
+      } else {
+        setOn(false);
+      }
+    }
+  }, [currentSido, selectedSido]);
+  const handleClick = () => {
+    dispatch(SET_SELECTED_SIDO(name));
+  };
+  return /* @__PURE__ */ jsx("li", { onClick: handleClick, children: /* @__PURE__ */ jsx("p", { className: `txt-sido ${on ? "on" : ""}`, children: name }) });
+}
 async function getListInCurrentView(polygon) {
   const res = await fetch(`${API_URL}/map/current-view`, {
     method: "POST",
@@ -192,7 +433,7 @@ function InfoWindow({
 }
 const imgLocation = "/images/map-location.png";
 const imgCert = "/images/map-cert-location.png";
-const { kakao } = typeof window !== "undefined" ? window : global;
+const { kakao: kakao$1 } = typeof window !== "undefined" ? window : global;
 let isLoggedIn = false;
 let map;
 let neLat;
@@ -205,29 +446,29 @@ let radiusCircle;
 const arrMarker = [];
 const arrInfowindow = [];
 function init() {
-  kakao.maps.load(function() {
+  kakao$1.maps.load(function() {
     const mapContainer = document.getElementById("map");
     const mapOption = {
-      center: new kakao.maps.LatLng(37.5666805, 126.9784147),
+      center: new kakao$1.maps.LatLng(37.5666805, 126.9784147),
       // 지도의 중심좌표 <- 서울시청
       level: 7
       // 지도의 확대 레벨(1~14)
     };
-    map = new kakao.maps.Map(mapContainer, mapOption);
+    map = new kakao$1.maps.Map(mapContainer, mapOption);
   });
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        locPosition = new kakao.maps.LatLng(lat, lng);
+        locPosition = new kakao$1.maps.LatLng(lat, lng);
         map.setCenter(locPosition);
         store.dispatch({ type: "mapSlice/SET_LOCATION_ACCESS", payload: true });
         store.dispatch(SET_CURRENT_LOCATION([lat, lng]));
         resolve(locPosition);
       });
     } else {
-      locPosition = new kakao.maps.LatLng(37.5666805, 126.9784147);
+      locPosition = new kakao$1.maps.LatLng(37.5666805, 126.9784147);
       map.setLevel(5);
       store.dispatch({ type: "mapSlice/SET_LOCATION_ACCESS", payload: false });
       store.dispatch(SET_CURRENT_LOCATION([37.5666805, 126.9784147]));
@@ -237,7 +478,7 @@ function init() {
   });
 }
 function setCircle(radius = 500) {
-  centerCircle = new kakao.maps.Circle({
+  centerCircle = new kakao$1.maps.Circle({
     map,
     center: locPosition,
     radius: 25,
@@ -247,7 +488,7 @@ function setCircle(radius = 500) {
     fillColor: "#0000ff",
     fillOpacity: 1
   });
-  radiusCircle = new kakao.maps.Circle({
+  radiusCircle = new kakao$1.maps.Circle({
     map,
     center: locPosition,
     radius,
@@ -284,7 +525,7 @@ function addBoundChangeEvent() {
     imgElement.style.zIndex = "9999";
     return imgElement;
   };
-  kakao.maps.event.addListener(map, "bounds_changed", function() {
+  kakao$1.maps.event.addListener(map, "bounds_changed", function() {
     window.clearTimeout(timeoutId);
     timeoutId = window.setTimeout(async () => {
       if (app !== null) {
@@ -299,7 +540,7 @@ function addBoundChangeEvent() {
           app.removeChild(LoadingElement2);
         }
       }
-    }, 3e3);
+    }, 1e3);
   });
 }
 function getCurrentView() {
@@ -317,17 +558,17 @@ function getCurrentView() {
 }
 async function paintVeganRestaurantMarker(restaurant) {
   restaurant.forEach((list) => {
-    const marker = new kakao.maps.Marker({
+    const marker = new kakao$1.maps.Marker({
       map,
-      position: new kakao.maps.LatLng(list.location.coordinates[1], list.location.coordinates[0]),
+      position: new kakao$1.maps.LatLng(list.location.coordinates[1], list.location.coordinates[0]),
       // 마커를 표시할 위치
       title: list.title,
       // 마커의 타이틀, 마커에 마우스를 올리면 타이틀 표시
-      image: new kakao.maps.MarkerImage(list.certified ? imgCert : imgLocation, new kakao.maps.Size(24, 35))
+      image: new kakao$1.maps.MarkerImage(list.certified ? imgCert : imgLocation, new kakao$1.maps.Size(24, 35))
       // 마커 이미지
     });
     arrMarker.push(marker);
-    const infowindow = new kakao.maps.InfoWindow({ zIndex: 1, removable: true });
+    const infowindow = new kakao$1.maps.InfoWindow({ zIndex: 1, removable: true });
     const InfoWindowComponent = /* @__PURE__ */ jsx(InfoWindow, { restaurantInfo: list, isLoggedIn: isLoggedIn || false });
     infowindow.setContent(renderToString(InfoWindowComponent));
     arrInfowindow.push(infowindow);
@@ -336,7 +577,7 @@ async function paintVeganRestaurantMarker(restaurant) {
 }
 function addMarkerClickEvent(arrMarker2, arrInfowindow2) {
   for (let i = 0; i < arrMarker2.length; i++) {
-    kakao.maps.event.addListener(arrMarker2[i], "click", function() {
+    kakao$1.maps.event.addListener(arrMarker2[i], "click", function() {
       removeAllInfowindow(arrInfowindow2);
       arrInfowindow2[i].open(map, arrMarker2[i]);
       map.panTo(arrMarker2[i].getPosition());
@@ -377,10 +618,10 @@ function moveToRegionInPage(coordsInPage) {
   for (let coord of coordsInPage) {
     const [lng, lat] = coord;
     if (lng !== 0 && lat !== 0) {
-      convertCoords.push(new kakao.maps.LatLng(lat, lng));
+      convertCoords.push(new kakao$1.maps.LatLng(lat, lng));
     }
   }
-  const bounds = new kakao.maps.LatLngBounds();
+  const bounds = new kakao$1.maps.LatLngBounds();
   for (let convertCoord of convertCoords) {
     bounds.extend(convertCoord);
   }
@@ -391,10 +632,117 @@ function paintBounds(bounds) {
 }
 function moveToCurrentLocation() {
   const [lat, lng] = store.getState().mapSlice.currentLocation;
-  map.setCenter(new kakao.maps.LatLng(lat, lng));
+  map.setCenter(new kakao$1.maps.LatLng(lat, lng));
 }
 function checkLoginForInfoWindow(isLoggedInFromIndexPage) {
   isLoggedIn = isLoggedInFromIndexPage;
+}
+function Sigungu() {
+  const currentSido = useAppSelector((state) => state.mapSlice.currentSido);
+  const [sigunguList, setSigunguList] = useState(null);
+  const selectedSido = useAppSelector((state) => state.mapSlice.selectedSido);
+  useEffect(() => {
+    if (selectedSido === "") {
+      if (currentSido !== "") {
+        const key = currentSido.slice(0, 2);
+        const sortList = [...REGION[key]].sort();
+        setSigunguList(sortList);
+      } else {
+        setSigunguList(null);
+      }
+    } else {
+      const key = selectedSido.slice(0, 2);
+      const sortList = [...REGION[key]].sort();
+      setSigunguList(sortList);
+    }
+  }, [currentSido, selectedSido]);
+  return /* @__PURE__ */ jsx("div", { className: "container-sigungu", children: /* @__PURE__ */ jsxs("ul", { children: [
+    /* @__PURE__ */ jsx(
+      SigunguListItem,
+      {
+        name: `${selectedSido !== "" ? selectedSido.slice(0, 2) : currentSido.slice(0, 2)} 전체`
+      },
+      Math.random()
+    ),
+    sigunguList && sigunguList.map((v) => {
+      return /* @__PURE__ */ jsx(SigunguListItem, { name: v }, Math.random());
+    })
+  ] }) });
+}
+function SigunguListItem({ name }) {
+  const dispatch = useAppDispatch();
+  const selectedSido = useAppSelector((state) => state.mapSlice.selectedSido);
+  const currentSido = useAppSelector((state) => state.mapSlice.currentSido);
+  const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
+  const handleClick = () => {
+    appModalMode(false);
+    dispatch(CHANGE_REGION_MODAL(false));
+    dispatch(SET_SELECTED_SIGUNGU(name));
+    getListInRegion().then((data) => {
+      if (data.success && data.lists.length > 0) {
+        const coordsInPage = [];
+        for (let list of data.lists) {
+          coordsInPage.push(list.location.coordinates);
+        }
+        moveToRegionInPage(coordsInPage);
+        dispatch(SHOW_LIST_IN_REGION_MODAL(true));
+        dispatch(SET_LIST_IN_PAGE(data.lists));
+        dispatch(SET_TOTAL_IN_REGION(data.total));
+      } else {
+        dispatch(NO_RESULT_MODAL(true));
+      }
+    });
+  };
+  async function getListInRegion() {
+    const sido = selectedSido === "" ? currentSido.slice(0, 2) : selectedSido.slice(0, 2);
+    const sigungu = name.includes("전체") ? null : name;
+    const res = await fetch(`${API_URL}/map/region?sido=${sido}&sigungu=${sigungu}&page=1&skip=10`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ category: selectedCategory })
+      // 선택되어 있는 업종으로 필터링
+    });
+    const data = await res.json();
+    return data;
+  }
+  return /* @__PURE__ */ jsx("li", { onClick: handleClick, children: /* @__PURE__ */ jsx("p", { className: "txt-sido", children: name }) });
+}
+function ChangeRegionModal() {
+  const dispatch = useAppDispatch();
+  const [show, setShow] = useState(false);
+  const regionModalOn = useAppSelector((state) => state.mapSlice.regionModalOn);
+  const currentLocation = useAppSelector((state) => state.mapSlice.currentLocation);
+  useEffect(() => {
+    if (regionModalOn === true)
+      setShow(true);
+    else
+      setShow(false);
+  }, [regionModalOn]);
+  useEffect(() => {
+    const [lat, lng] = currentLocation;
+    const geocoder = new kakao.maps.services.Geocoder();
+    geocoder.coord2RegionCode(lng, lat, (result, status) => {
+      if (status === kakao.maps.services.Status.OK) {
+        for (let i = 0; i < result.length; i++) {
+          if (result[i].region_type === "H") {
+            const addr = result[i].address_name;
+            dispatch(SET_CURRENT_SIDO(addr.split(" ").shift() || ""));
+            dispatch(SET_CURRENT_SIGUNGU(addr.split(" ")[1]));
+            break;
+          }
+        }
+      }
+    });
+  }, [currentLocation]);
+  return /* @__PURE__ */ jsxs("article", { className: `modal-group-item ${show ? "on" : ""}`, children: [
+    /* @__PURE__ */ jsx("h4", { children: "지역선택" }),
+    /* @__PURE__ */ jsxs("div", { className: "wrapper-region", children: [
+      /* @__PURE__ */ jsx(Sido, {}),
+      /* @__PURE__ */ jsx(Sigungu, {})
+    ] })
+  ] });
 }
 function ShowListInRegionModal() {
   const dispatch = useAppDispatch();
@@ -504,6 +852,7 @@ function ModalGroup() {
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsxs("div", { className: `modal-group ${show ? "on" : ""}`, children: [
       /* @__PURE__ */ jsx(CheckGeolocationModal, {}),
+      /* @__PURE__ */ jsx(ChangeRegionModal, {}),
       /* @__PURE__ */ jsx(ChangeRadiusModal, {}),
       /* @__PURE__ */ jsx(ShowListInRegionModal, {}),
       /* @__PURE__ */ jsx(CategoryFilterModal, {})
@@ -560,7 +909,7 @@ function useLocationAccess() {
   }, []);
   return locationAccess;
 }
-const MapView = React.lazy(() => import("../chunks/chunk-dc42c106.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-46936600.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);

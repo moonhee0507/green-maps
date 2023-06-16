@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import ReactDOMServer from "react-dom/server";
 import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr/server";
-import { s as store } from "../chunks/chunk-29897a3a.js";
+import { s as store } from "../chunks/chunk-042cff01.js";
 import { Provider } from "react-redux";
 import { P as PageContextProvider, L as Link } from "../chunks/chunk-24b72a12.js";
 import "@reduxjs/toolkit";
 import "redux";
-import "../chunks/chunk-346170b2.js";
+import "../chunks/chunk-1643b273.js";
 import "../chunks/chunk-4ef07e33.js";
 import "../chunks/chunk-9fb42db4.js";
 import "../chunks/chunk-3e2eef8e.js";
@@ -35,7 +35,8 @@ function App({ children }) {
   return /* @__PURE__ */ jsx("div", { className: "app", children });
 }
 const icon512 = "/images/icon.png";
-const icon192 = "/images/icon-192.png";
+const icon180 = "/images/icon-180.png";
+const iconMask = "/images/icon-mask.png";
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
 var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
@@ -58,11 +59,10 @@ async function render(pageContext) {
   const { documentProps } = pageContext.exports;
   const title = documentProps && documentProps.title || "Green Maps";
   const desc = documentProps && documentProps.description || "채식 식당 검색과 북마크는 그린 맵";
-  const manifestUrl = "/app.webmanifest";
   const cssUrl = "/style/index.css";
   const PRELOADED_STATE = JSON.stringify(store);
   const LOGIN_MESSAGE = JSON.stringify("로그인이 필요한 서비스입니다.\n로그인하시겠습니까?");
-  return escapeInject(_a || (_a = __template(['<!DOCTYPE html>\n    <html lang="ko">\n        <head>\n            <meta charset="UTF-8" />\n            <link rel="icon" href=', ' />\n            <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n            <meta name="description" content="', '" />\n            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">\n            <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">\n            <link rel="manifest" href="', '" />\n            <link rel="preconnect" href="https://fonts.googleapis.com">\n            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">\n            <link rel="stylesheet" href="', '" type="text/css" >\n            <meta name="apple-mobile-web-app-capable" content="yes">\n            <link rel="apple-touch-icon" href=', ">\n            <title>", '</title>\n        </head>\n        <body>\n            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer"><\/script>\n            <div id="page-view">', '</div>\n            <script type="text/javascript">\n                var global = global || window;\n                window.__PRELOADED_STATE__ = ', `;
+  return escapeInject(_a || (_a = __template(['<!DOCTYPE html>\n    <html lang="ko">\n        <head>\n            <meta charset="UTF-8" />\n            <title>', '</title>\n            <meta name="author" content="moonhee0507" />\n            <link rel="icon" href=', ' />\n            <meta name="description" content="', '" />\n            <link rel="apple-touch-icon" href=', ' sizes="180x180" />\n            <link rel="mask-icon" href=', ' color="#00784a" />\n            <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">\n            <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">\n            <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n            \n            <link rel="preconnect" href="https://fonts.googleapis.com">\n            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">\n            <link rel="stylesheet" href="', '" type="text/css" >\n            <meta name="apple-mobile-web-app-capable" content="yes">\n        </head>\n        <body>\n            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"><\/script>\n            <div id="page-view">', '</div>\n            <script type="text/javascript">\n                var global = global || window;\n                window.__PRELOADED_STATE__ = ', `;
                 
                 const map = document.getElementById("map");
                 if (map) {
@@ -72,7 +72,7 @@ async function render(pageContext) {
                 const navBookmark = document.querySelector('.link-nav.no-login');
                 if (navBookmark) {
                     navBookmark.addEventListener('click', () => {
-                        const message = `, ";\n\n                        if (confirm(message)) {\n                            window.location.href = '/login';\n                        }\n                    });\n                }\n            <\/script>\n    </html>"])), icon512, desc, manifestUrl, cssUrl, icon192, title, dangerouslySkipEscape(__PAGE_HTML__), dangerouslySkipEscape(PRELOADED_STATE), dangerouslySkipEscape(LOGIN_MESSAGE));
+                        const message = `, ";\n\n                        if (confirm(message)) {\n                            window.location.href = '/login';\n                        }\n                    });\n                }\n            <\/script>\n    </html>"])), title, icon512, desc, icon180, iconMask, cssUrl, dangerouslySkipEscape(__PAGE_HTML__), dangerouslySkipEscape(PRELOADED_STATE), dangerouslySkipEscape(LOGIN_MESSAGE));
 }
 async function onBeforeRender(pageContext) {
   const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, postId } = pageContext;
