@@ -65,12 +65,12 @@ async function render(pageContext: PageContextServer) {
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
             <link rel="stylesheet" href="${cssUrl}" type="text/css" >
             <meta name="apple-mobile-web-app-capable" content="yes">
-            /* 일반 */
+            ${/* 일반 */ ''}
             <meta property="og:image" content=${icon180}>
             <meta property="og:title" content=${title}>
             <meta property="og:description" content=${desc} />
             <meta property="og:url" content="https://www.green-maps.site/">
-            /* 트위터 */
+            ${/* 트위터 */ ''}
             <meta property="twitter:image" content=${icon180}>
             <meta property="twitter:card" content="${icon1024}>
             <meta property="twitter:title" content="Green Maps">
