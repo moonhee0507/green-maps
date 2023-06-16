@@ -4,9 +4,9 @@ import { SET_CURRENT_SIDO, SET_CURRENT_SIGUNGU } from '../../../../renderer/_red
 import { Sido } from './Sido';
 import { Sigungu } from './Sigungu';
 
-export { ChangeRegionModal };
+// export { ChangeRegionModal };
 
-function ChangeRegionModal() {
+export default function ChangeRegionModal() {
     const dispatch = useAppDispatch();
 
     const [show, setShow] = useState(false);

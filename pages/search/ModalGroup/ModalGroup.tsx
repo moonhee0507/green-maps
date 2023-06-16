@@ -9,7 +9,7 @@ import {
 } from '../../../renderer/_reducers/_slices/mapSlice';
 import appModalMode from '../../../components/modal/appModalMode';
 import { ChangeRadiusModal } from './ChangeRadiusModal/ChangeRadiusModal';
-import { ChangeRegionModal } from './ChangeRegionModal/ChangeRegionModal';
+// import { ChangeRegionModal } from './ChangeRegionModal/ChangeRegionModal';
 import { ShowListInRegionModal } from './ShowListInRegionModal/ShowListInRegionModal';
 import { CategoryFilterModal } from './CategoryFilterModal/CategoryFilterModal';
 
@@ -66,7 +66,7 @@ function ModalGroup() {
         <>
             <div className={`modal-group ${show ? 'on' : ''}`}>
                 <CheckGeolocationModal />
-                <ChangeRegionModal />
+                {/* <ChangeRegionModal /> */}
                 <ChangeRadiusModal />
                 <ShowListInRegionModal />
                 <CategoryFilterModal />
