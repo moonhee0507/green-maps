@@ -26,7 +26,6 @@ function ChangeRegionModal() {
 
         geocoder.coord2RegionCode(lng, lat, (result, status) => {
             if (status === kakao.maps.services.Status.OK) {
-                console.log('result', result);
                 for (let i = 0; i < result.length; i++) {
                     // 행정동 region-type은 H
                     if (result[i].region_type === 'H') {

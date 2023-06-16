@@ -11,8 +11,24 @@ export const documentProps = {
 
 const HomeMain = React.lazy(() => import('./HomeMain'));
 
+export interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: Array<string>;
+    readonly userChoice: Promise<{
+        outcome: 'accepted' | 'dismissed';
+        platform: string;
+    }>;
+    prompt(): Promise<void>;
+}
+
 function Page() {
     const [isLoading, setIsLoading] = useState(true);
+    const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+
+    const handleBeforeInstallPrompt = (event: BeforeInstallPromptEvent) => {
+        event.preventDefault();
+
+        setDeferredPrompt(event);
+    };
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -23,6 +39,16 @@ function Page() {
             clearTimeout(timeoutId);
         };
     }, []);
+
+    useEffect(() => {
+        if (!isLoading) {
+            window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as any); // (지원 o) chrome 44, edge 79, opera, 삼성브라우저, android webview / (지원 x) 사파리, ios 사파리, firefox
+        }
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as any);
+        };
+    }, [isLoading]);
 
     return (
         <React.Suspense fallback={<LoadingMain />}>
@@ -40,7 +66,7 @@ function Page() {
                     <img src={imgLoading} alt="로딩" style={{ width: '100%' }} id="__LOADING__" />
                 </div>
             ) : null}
-            <HomeMain />
+            <HomeMain deferredPrompt={deferredPrompt} setDeferredPrompt={setDeferredPrompt} />
         </React.Suspense>
     );
 }

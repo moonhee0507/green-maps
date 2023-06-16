@@ -1,9 +1,40 @@
 import React from 'react';
 import imgLoading from '/images/splash.jpg';
+import { BeforeInstallPromptEvent } from './index.page';
 
-export default function HomeMain() {
+export default function HomeMain({
+    deferredPrompt,
+    setDeferredPrompt,
+}: {
+    deferredPrompt: BeforeInstallPromptEvent | null;
+    setDeferredPrompt: React.Dispatch<React.SetStateAction<BeforeInstallPromptEvent | null>>;
+}) {
+    const handleInstall = () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    // 설치한 사용자
+                } else {
+                    // 설치 x
+                }
+
+                setDeferredPrompt(null);
+            });
+        }
+    };
+
+    const handleClick = () => {
+        window.location.href = `/search`;
+    };
+
     return (
-        <main className="home-content" style={{ background: `url(${imgLoading}) no-repeat center center/cover` }}>
+        <main
+            className="home-content"
+            style={{ background: `url(${imgLoading}) no-repeat center center/cover` }}
+            onClick={handleClick}
+        >
             <div className="container-title">
                 <h2>
                     <span>Green</span>
@@ -18,10 +49,15 @@ export default function HomeMain() {
                     <p>채식 식당에 대한 후기를 남길 수 있어요.</p>
                     <p>게시판을 통해 소통해요!</p>
                 </div>
+                {deferredPrompt && (
+                    <button type="button" onClick={handleInstall} className="button-pwa">
+                        Web App 설치
+                    </button>
+                )}
             </section>
-            <div className="container-start">
+            {/* <div className="container-start">
                 <a href="/search">🎉Start</a>
-            </div>
+            </div> */}
         </main>
     );
 }

@@ -130,7 +130,7 @@ function addBoundChangeEvent() {
     };
 
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
-        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후3초 안움직여야 그려진다)
+        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후1초 안움직여야 그려진다)
         window.clearTimeout(timeoutId); // 타임아웃을 취소하지 않으면 화면이동 많이할 때 요청이 너무 많아짐
 
         timeoutId = window.setTimeout(async () => {
@@ -148,7 +148,7 @@ function addBoundChangeEvent() {
                     app.removeChild(LoadingElement);
                 }
             }
-        }, 3000);
+        }, 1000);
     });
 }
 
