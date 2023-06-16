@@ -9,9 +9,12 @@ function SearchForm() {
     const inputElement = useRef<HTMLInputElement>(null);
 
     function moveToPage(): void {
-        const keyword = inputElement.current?.value;
-        const url = `/community/search/${keyword}`;
-        navigate(url, { keepScrollPosition: true });
+        if (inputElement.current !== null) {
+            const keyword = inputElement.current.value;
+            const url = `/community/search/${keyword}`;
+
+            navigate(url, { keepScrollPosition: true });
+        }
     }
 
     return (

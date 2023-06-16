@@ -60,12 +60,10 @@ export function Page(pageProps: PageProps) {
     }, [getPosts]);
 
     return (
-        <>
+        <React.Suspense fallback={<LoadingMain />}>
             <SearchBar />
-            <React.Suspense fallback={<LoadingMain />}>
-                <CommunityMain isLoggedIn={isLoggedIn} posts={posts} limit={limit} />
-            </React.Suspense>
+            <CommunityMain isLoggedIn={isLoggedIn} posts={posts} limit={limit} />
             <NavBar isLoggedIn={isLoggedIn} />
-        </>
+        </React.Suspense>
     );
 }

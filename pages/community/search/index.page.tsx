@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { TopBar } from '../../../components/topBar/topBar';
-import { StickyComponent } from './StickyComponent/StickyComponent';
-import { ResultSection } from './ResultSection/ResultSection';
 import { useDispatch, useSelector } from 'react-redux';
+import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageProps } from '../../../renderer/types';
 import type { RootState } from '../../../renderer/store';
 import type { Post } from '../../../server/models/Post';
-import { API_URL } from '../../../renderer/CONSTANT_URL';
+import LoadingMain from '../../../components/Loading/LoadingMain';
+
+const SearchMain = React.lazy(() => import('./SearchMain'));
 
 export { Page };
 
@@ -17,12 +18,13 @@ function Page(pageProps: PageProps) {
         KEYWORD: pageProps.routeParams?.keyword || '',
     });
 
-    const [posts, setPosts] = useState<Post[]>(pageProps.postInfo.lists); // 초기값: keyword를 포함하는 게시물
+    const [posts, setPosts] = useState<Post[]>([]); // 초기값: keyword를 포함하는 게시물
     const [window, setWindow] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setWindow(true);
+            setPosts(pageProps.postInfo.lists);
         }
     }, []);
 
@@ -67,21 +69,12 @@ function Page(pageProps: PageProps) {
         });
     }, [getPosts]);
 
-    return (
-        <>
+    return window ? (
+        <React.Suspense fallback={<LoadingMain />}>
             <TopBar title="검색 결과" />
-            {window && <SearchMain posts={posts} limit={limit} />}
-        </>
-    );
-}
-
-function SearchMain(props: { posts: Post[]; limit: number }) {
-    const { posts, limit } = props;
-
-    return (
-        <main className="community-search-main">
-            <StickyComponent />
-            <ResultSection posts={posts} limit={limit} />
-        </main>
+            <SearchMain posts={posts} limit={limit} />
+        </React.Suspense>
+    ) : (
+        <LoadingMain />
     );
 }
