@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import type { Post } from '../../../../server/models/Post';
-import { preview } from 'vite';
 
 export { NoticePostOnly };
 
