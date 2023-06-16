@@ -34,9 +34,10 @@ function Page() {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
+                        opacity: '0.33',
                     }}
                 >
-                    <img src={imgLoading} alt="좌표 생성 로딩" style={{ width: '100%' }} id="__LOADING__" />
+                    <img src={imgLoading} alt="로딩" style={{ width: '100%' }} id="__LOADING__" />
                 </div>
             ) : (
                 <HomeMain />

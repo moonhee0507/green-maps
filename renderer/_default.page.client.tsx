@@ -12,7 +12,7 @@ export const hydrationCanBeAborted = true;
 let root: any;
 
 async function render(pageContext: PageContextClient) {
-    const { Page, pageProps, routeParams, token, user, reviews, restaurantInfo } = pageContext;
+    const { Page, pageProps, routeParams, token, user, reviews, restaurantInfo, postId } = pageContext;
 
     const page = (
         <React.StrictMode>
@@ -25,6 +25,7 @@ async function render(pageContext: PageContextClient) {
                         user={user}
                         reviews={reviews}
                         restaurantInfo={restaurantInfo}
+                        postId={postId}
                     />
                 </PageShell>
             </Provider>
