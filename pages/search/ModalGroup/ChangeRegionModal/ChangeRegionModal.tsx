@@ -4,9 +4,9 @@ import { SET_CURRENT_SIDO, SET_CURRENT_SIGUNGU } from '../../../../renderer/_red
 import { Sido } from './Sido';
 import { Sigungu } from './Sigungu';
 
-// export { ChangeRegionModal };
+export { ChangeRegionModal };
 
-export default function ChangeRegionModal() {
+function ChangeRegionModal() {
     const dispatch = useAppDispatch();
 
     const [show, setShow] = useState(false);
@@ -21,26 +21,23 @@ export default function ChangeRegionModal() {
 
     useEffect(() => {
         const [lat, lng] = currentLocation;
-        console.log('currentLocation', currentLocation);
 
         const geocoder = new kakao.maps.services.Geocoder();
 
-        if (geocoder) {
-            geocoder.coord2RegionCode(lng, lat, (result, status) => {
-                if (status === kakao.maps.services.Status.OK) {
-                    console.log('result', result);
-                    for (let i = 0; i < result.length; i++) {
-                        // 행정동 region-type은 H
-                        if (result[i].region_type === 'H') {
-                            const addr = result[i].address_name;
-                            dispatch(SET_CURRENT_SIDO(addr.split(' ').shift() || ''));
-                            dispatch(SET_CURRENT_SIGUNGU(addr.split(' ')[1]));
-                            break;
-                        }
+        geocoder.coord2RegionCode(lng, lat, (result, status) => {
+            if (status === kakao.maps.services.Status.OK) {
+                console.log('result', result);
+                for (let i = 0; i < result.length; i++) {
+                    // 행정동 region-type은 H
+                    if (result[i].region_type === 'H') {
+                        const addr = result[i].address_name;
+                        dispatch(SET_CURRENT_SIDO(addr.split(' ').shift() || ''));
+                        dispatch(SET_CURRENT_SIGUNGU(addr.split(' ')[1]));
+                        break;
                     }
                 }
-            });
-        }
+            }
+        });
     }, [currentLocation]);
 
     return (
