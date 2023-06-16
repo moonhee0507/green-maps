@@ -10,9 +10,7 @@ function SubmitButton(props: { postId: string; content: string | null }) {
     useEffect(() => {
         getUserId()
             .then((userId) => {
-                console.log('userId', userId);
-
-                setUserId(userId);
+                setUserId(userId); // ok
             })
             .catch((err) => console.error(err));
 

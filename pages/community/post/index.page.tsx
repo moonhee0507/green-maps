@@ -8,22 +8,25 @@ import { ModalGroup } from './ModalGroup/ModalGroup';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageProps } from '../../../renderer/types';
 import type { UserInfo } from '../../../server/models/User';
+import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
+import LoadingMain from '../../../components/Loading/LoadingMain';
 
 export { Page };
 
 function Page(pageProps: PageProps) {
     const dispatch = useAppDispatch();
-    const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+    // const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+    const [_, userInfo] = useCheckLoginStatus();
 
     const postInfo = pageProps.postInfo;
     const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
 
     useEffect(() => {
-        getUserInfo().then((data) => {
-            if (data.success) {
-                setUserInfo(data.user);
-            }
-        });
+        // getUserInfo().then((data) => {
+        //     if (data.success) {
+        //         setUserInfo(data.user);
+        //     }
+        // });
     }, []);
 
     // 댓글 페이지 네이션을 위해 스토어에 저장
@@ -38,21 +41,21 @@ function Page(pageProps: PageProps) {
         dispatch(SET_COMMENT(obj));
     }, [pageProps]);
 
-    async function getUserInfo() {
-        const res = await fetch(`${API_URL}/users`);
-        const data = await res.json();
+    // async function getUserInfo() {
+    //     const res = await fetch(`${API_URL}/users`);
+    //     const data = await res.json();
 
-        return data;
-    }
+    //     return data;
+    // }
 
     return (
-        <>
+        <React.Suspense fallback={<LoadingMain />}>
             <TopBar title={subject} />
             <main className="main-read-post">
                 <ContentSection userInfo={userInfo} postInfo={postInfo} />
                 <CommentSection userInfo={userInfo} postId={_id} comments={comments} />
             </main>
             <ModalGroup />
-        </>
+        </React.Suspense>
     );
 }
