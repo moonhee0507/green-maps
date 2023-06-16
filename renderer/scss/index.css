@@ -1177,6 +1177,33 @@ button[aria-label="식당 검색 버튼"] {
   border-radius: 10px;
 }
 
+.radialForNextPage {
+  position: relative;
+  width: 100%;
+}
+.radialForNextPage::after {
+  position: absolute;
+  content: "";
+  background-color: #00784a;
+  opacity: 25%;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  top: 0px;
+  right: 0px;
+  animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+}
+@keyframes outCircle {
+  0% {
+    transform: scale(1.5);
+  }
+  60% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
 .main-login {
   overflow: scroll;
   scrollbar-width: none; /* firefox */

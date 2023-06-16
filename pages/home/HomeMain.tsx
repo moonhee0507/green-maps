@@ -9,6 +9,7 @@ export default function HomeMain({
     deferredPrompt: BeforeInstallPromptEvent | null;
     setDeferredPrompt: React.Dispatch<React.SetStateAction<BeforeInstallPromptEvent | null>>;
 }) {
+    console.log(deferredPrompt);
     const handleInstall = () => {
         if (deferredPrompt) {
             deferredPrompt.prompt();
@@ -58,6 +59,7 @@ export default function HomeMain({
             {/* <div className="container-start">
                 <a href="/search">🎉Start</a>
             </div> */}
+            <div className="radialForNextPage" />
         </main>
     );
 }

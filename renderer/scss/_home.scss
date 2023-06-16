@@ -105,6 +105,54 @@
         #ff00c8,
         #ff0000
     );
+    background: -o-linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    background: -o-linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    background: -o-linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
+    background: -o-linear-gradient(
+        45deg,
+        #ff0000,
+        #ff7300,
+        #fffb00,
+        #48ff00,
+        #00ffd5,
+        #002bff,
+        #7a00ff,
+        #ff00c8,
+        #ff0000
+    );
     background: -o-linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
     background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
     position: absolute;
@@ -158,4 +206,53 @@
     left: 0;
     top: 0;
     border-radius: 10px;
+}
+
+.radialForNextPage {
+    position: relative;
+    width: 100%;
+
+    &::after {
+        position: absolute;
+        content: '';
+        background-color: #00784a;
+        opacity: 25%;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        top: 0px;
+        right: 0px;
+        -webkit-animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+        animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
+    }
+}
+
+@-webkit-keyframes outCircle {
+    0% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+    60% {
+        -webkit-transform: scale(2);
+        transform: scale(2);
+    }
+    100% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+}
+
+@keyframes outCircle {
+    0% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+    60% {
+        -webkit-transform: scale(2);
+        transform: scale(2);
+    }
+    100% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
 }

@@ -1,6 +1,7 @@
 {
     "short_name": "그린맵",
     "name": "채식 지도",
+    "description": "채식 지도 북마크 서비스",
     "icons": [
         {
             "src": "/images/icon.png",
@@ -26,6 +27,7 @@
     "start_url": "/",
     "display": "standalone",
     "theme_color": "#00784a",
+    "background_color": "#00784a",
     "lang": "ko",
     "orientation": "portrait",
     "categories": ["food"]
