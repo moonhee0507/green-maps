@@ -13,7 +13,6 @@ const CommunityMain = React.lazy(() => import('./CommunityMain'));
 
 export function Page(pageProps: PageProps) {
     const [isLoggedIn, _] = useCheckLoginStatus();
-    console.log('pageProps', pageProps);
 
     // 전역에서 관리하는 변수: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
     const subject = useAppSelector((state) => state.postSlice.SUBJECT);

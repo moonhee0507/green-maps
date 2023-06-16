@@ -7,6 +7,7 @@ import {
     SET_ACCESS_TARGET,
 } from '../../../../renderer/_reducers/_slices/postSlice';
 import type { UserInfo } from '../../../../server/models/User';
+import appModalMode from '../../../../components/modal/appModalMode';
 
 export { MoreButton };
 
@@ -21,8 +22,9 @@ function MoreButton({ userInfo, owner, postId }: { userInfo: UserInfo | null; ow
     }, [userInfo]);
 
     function handleClick() {
-        const app = document.querySelector('.app');
-        app?.classList.add('modal-mode');
+        appModalMode(true);
+
+        console.log('user', user);
 
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
         dispatch(SAME_USER_OWNER(user?.nickName === owner));

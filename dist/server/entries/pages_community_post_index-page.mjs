@@ -1,16 +1,16 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from "react";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-8fde0b9b.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import DOMPurify from "isomorphic-dompurify";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
 import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
 import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
-import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
-import { navigate } from "vite-plugin-ssr/client/router";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
+import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
+import { navigate } from "vite-plugin-ssr/client/router";
 import "react-redux";
 import "@reduxjs/toolkit";
 function TextArea(props) {
@@ -83,8 +83,8 @@ function MoreButton$1({ userInfo, owner, postId }) {
       setUser(userInfo);
   }, [userInfo]);
   function handleClick() {
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.add("modal-mode");
+    appModalMode(true);
+    console.log("user", user);
     dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
     dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === owner));
     dispatch(SET_POST_ID(postId));
@@ -145,7 +145,10 @@ function SubmitButton(props) {
   const { postId, content } = props;
   const [userId, setUserId] = useState(null);
   useEffect(() => {
-    getUserId().then((userId2) => setUserId(userId2)).catch((err) => console.error(err));
+    getUserId().then((userId2) => {
+      console.log("userId", userId2);
+      setUserId(userId2);
+    }).catch((err) => console.error(err));
     async function getUserId() {
       const res = await fetch(`${API_URL}/users/`, {
         credentials: "include",
