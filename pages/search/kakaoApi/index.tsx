@@ -129,30 +129,25 @@ function addBoundChangeEvent() {
     };
 
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
-        try {
+        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후3초 안움직여야 그려진다)
+        window.clearTimeout(timeoutId); // 타임아웃을 취소하지 않으면 화면이동 많이할 때 요청이 너무 많아짐
+
+        timeoutId = window.setTimeout(async () => {
             if (app !== null) {
                 app.appendChild(LoadingElement());
             }
+            const polygon = getCurrentView();
+            const res = await getListInCurrentView(polygon);
 
-            // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후3초 안움직여야 그려진다)
-            window.clearTimeout(timeoutId); // 타임아웃을 취소하지 않으면 화면이동 많이할 때 요청이 너무 많아짐
+            paintVeganRestaurantMarker(res);
 
-            timeoutId = window.setTimeout(async () => {
-                const polygon = getCurrentView();
-                const res = await getListInCurrentView(polygon);
-
-                paintVeganRestaurantMarker(res);
-            }, 3000);
-        } catch (error) {
-            console.error('bounds_changed 이벤트 에러');
-        } finally {
-            if (app) {
+            if (app !== null) {
                 const LoadingElement = document.getElementById('__LOADING__');
                 if (LoadingElement) {
                     app.removeChild(LoadingElement);
                 }
             }
-        }
+        }, 3000);
     });
 }
 

@@ -12,44 +12,35 @@ export const documentProps = {
 const HomeMain = React.lazy(() => import('./HomeMain'));
 
 function Page() {
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        const app = document.querySelector('.app');
+        const timeoutId = setTimeout(() => {
+            setIsLoading(false);
+        }, 5000);
 
-        try {
-            const LoadingElement = () => {
-                const imgElement = document.createElement('img');
-
-                imgElement.src = imgLoading;
-                imgElement.alt = '좌표 생성 로딩';
-                imgElement.style.width = '50px';
-                imgElement.style.position = 'absolute';
-                imgElement.style.top = '50%';
-                imgElement.style.left = '50%';
-                imgElement.style.transform = 'translate(-50%, -50%)';
-                imgElement.id = '__LOADING__';
-
-                return imgElement;
-            };
-
-            setTimeout(() => {
-                if (app !== null) {
-                    app.appendChild(LoadingElement());
-                }
-            }, 5000);
-        } catch (error) {
-        } finally {
-            if (app) {
-                const LoadingElement = document.getElementById('__LOADING__');
-                if (LoadingElement) {
-                    app.removeChild(LoadingElement);
-                }
-            }
-        }
+        return () => {
+            clearTimeout(timeoutId);
+        };
     }, []);
 
     return (
         <React.Suspense fallback={<LoadingMain />}>
-            <HomeMain />
+            {isLoading ? (
+                <div
+                    style={{
+                        width: '50px',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                    }}
+                >
+                    <img src={imgLoading} alt="좌표 생성 로딩" style={{ width: '100%' }} id="__LOADING__" />
+                </div>
+            ) : (
+                <HomeMain />
+            )}
         </React.Suspense>
     );
 }
