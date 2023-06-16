@@ -1,18 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchBar } from './SearchBar';
-import { Community } from './Community';
 import { NavBar } from '../../components/navBar';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../renderer/store/hooks';
 import { API_URL } from '../../renderer/CONSTANT_URL';
+import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
+import LoadingMain from '../../components/Loading/LoadingMain';
 import type { PageProps } from '../../renderer/types';
 import type { Post } from '../../server/models/Post';
-import { ButtonGroup } from './component/ButtonGroup/ButtonGroup';
-import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 
-export { Page };
+const CommunityMain = React.lazy(() => import('./CommunityMain'));
 
-function Page(pageProps: PageProps) {
+export function Page(pageProps: PageProps) {
     const [isLoggedIn, _] = useCheckLoginStatus();
     console.log('pageProps', pageProps);
 
@@ -63,8 +62,9 @@ function Page(pageProps: PageProps) {
     return (
         <>
             <SearchBar />
-            <ButtonGroup isLoggedIn={isLoggedIn} />
-            <Community posts={posts} limit={limit} isLoggedIn={isLoggedIn} />
+            <React.Suspense fallback={<LoadingMain />}>
+                <CommunityMain isLoggedIn={isLoggedIn} posts={posts} limit={limit} />
+            </React.Suspense>
             <NavBar isLoggedIn={isLoggedIn} />
         </>
     );

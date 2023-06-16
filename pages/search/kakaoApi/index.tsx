@@ -35,8 +35,6 @@ export function init(): Promise<kakao.maps.LatLng> {
             level: 7, // 지도의 확대 레벨(1~14)
         };
 
-        kakao.maps.disableHD();
-
         map = new kakao.maps.Map(mapContainer, mapOption); // 지도생성
     });
 
