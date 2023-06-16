@@ -1,0 +1,40 @@
+{
+    "short_name": "그린맵",
+    "name": "채식 지도",
+    "description": "채식 지도 북마크 서비스",
+    "icons": [
+        {
+            "src": "/images/icon.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "/images/icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/images/icon-384.png",
+            "type": "image/png",
+            "sizes": "384x384"
+        },
+        {
+            "src": "/images/icon-1024.png",
+            "type": "image/png",
+            "sizes": "1024x1024"
+        },
+        {
+            "src": "images/icon-mask.png",
+            "type": "image/png",
+            "sizes": "240x240",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#00784a",
+    "background_color": "#00784a",
+    "lang": "ko",
+    "orientation": "portrait",
+    "categories": ["food"]
+}
