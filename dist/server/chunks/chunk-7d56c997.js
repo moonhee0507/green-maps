@@ -11,7 +11,7 @@ const validateNickName = (str) => {
   return regex.test(str);
 };
 export {
-  validateId as a,
-  validateNickName as b,
-  validatePassword as v
+  validateNickName as a,
+  validatePassword as b,
+  validateId as v
 };

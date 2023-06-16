@@ -107,7 +107,6 @@ function CompleteButton({ userInfo }) {
         body: JSON.stringify({ userId, name: groupName, groupIcon })
       });
       const data = await res.json();
-      console.log(data);
       if (data.success === true) {
         window.location.reload();
       } else {

@@ -12,7 +12,6 @@ function useCheckLoginStatus() {
           method: "GET"
         });
         const data = await res.json();
-        console.log("data", data);
         if (data.success === true) {
           setIsLoggedIn(true);
           setUserInfo(data.user);

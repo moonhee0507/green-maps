@@ -1649,6 +1649,7 @@ button[aria-label="식당 검색 버튼"] {
 .community-search-main .result-community-detail {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px;
   border-bottom: 1px solid #d3d3d3;
   background-color: white;
@@ -1729,6 +1730,11 @@ button[aria-label="식당 검색 버튼"] {
   height: 50px;
   height: 40px;
   padding: 10px;
+}
+
+.select-community-search {
+  border: 1px solid #d3d3d3;
+  margin-left: 10px;
 }
 
 .main-my {

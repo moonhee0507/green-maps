@@ -12,7 +12,7 @@ import { R as RestaurantListItem, C as CategoryFilterModal, a as RestaurantList 
 import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-38c32a2a.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 import "redux";

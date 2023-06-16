@@ -114,6 +114,7 @@ function ProfileSection({ userInfo }) {
   async function handleLogout() {
     if (userInfo.host === "kakao") {
       await fetch(`${API_URL}/oauth/kakao/logout`, {
+        credentials: "include",
         method: "POST"
       });
     }

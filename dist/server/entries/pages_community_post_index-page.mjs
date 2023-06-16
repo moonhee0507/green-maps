@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
 import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
@@ -11,6 +11,8 @@ import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, 
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { navigate } from "vite-plugin-ssr/client/router";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { L as LoadingMain } from "../chunks/chunk-04f347b5.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 function TextArea(props) {
@@ -84,7 +86,6 @@ function MoreButton$1({ userInfo, owner, postId }) {
   }, [userInfo]);
   function handleClick() {
     appModalMode(true);
-    console.log("user", user);
     dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
     dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === owner));
     dispatch(SET_POST_ID(postId));
@@ -146,7 +147,6 @@ function SubmitButton(props) {
   const [userId, setUserId] = useState(null);
   useEffect(() => {
     getUserId().then((userId2) => {
-      console.log("userId", userId2);
       setUserId(userId2);
     }).catch((err) => console.error(err));
     async function getUserId() {
@@ -473,16 +473,9 @@ function ModalGroup() {
 }
 function Page(pageProps) {
   const dispatch = useAppDispatch();
-  const [userInfo, setUserInfo] = useState(null);
+  const [_, userInfo] = useCheckLoginStatus();
   const postInfo = pageProps.postInfo;
   const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
-  useEffect(() => {
-    getUserInfo().then((data) => {
-      if (data.success) {
-        setUserInfo(data.user);
-      }
-    });
-  }, []);
   useEffect(() => {
     const obj = {};
     for (let i = 0; i < comments.length; i = i + 10) {
@@ -491,12 +484,7 @@ function Page(pageProps) {
     }
     dispatch(SET_COMMENT(obj));
   }, [pageProps]);
-  async function getUserInfo() {
-    const res = await fetch(`${API_URL}/users`);
-    const data = await res.json();
-    return data;
-  }
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
+  return /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
     /* @__PURE__ */ jsx(TopBar, { title: subject }),
     /* @__PURE__ */ jsxs("main", { className: "main-read-post", children: [
       /* @__PURE__ */ jsx(ContentSection, { userInfo, postInfo }),

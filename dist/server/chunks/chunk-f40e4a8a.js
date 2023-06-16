@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "./chunk-0e4e6c3d.js";
-import { A as API_URL } from "./chunk-94504c62.js";
+import { u as useCheckLoginStatus } from "./chunk-0d31e55c.js";
 function SubjectBox({ postInfo }) {
   const dispatch = useAppDispatch();
   const [isAdmin, setIsAdmin] = useState(false);
@@ -9,18 +9,15 @@ function SubjectBox({ postInfo }) {
   useAppSelector((state) => state.postSlice.editMode);
   const subject = useAppSelector((state) => state.postSlice.SUBJECT);
   const [isFocused, setIsFocused] = useState(false);
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API_URL}/users`);
-      const data = await res.json();
-      if (data.success)
-        setIsAdmin(data.user.role === 9);
-      else
-        setIsAdmin(false);
-    })();
-  }, []);
+  const [_, userInfo] = useCheckLoginStatus();
   useEffect(() => {
     setCurrentPath(window.location.pathname);
+    if (userInfo !== null) {
+      setIsAdmin(userInfo.role === 9);
+    } else
+      setIsAdmin(false);
+  }, [userInfo]);
+  useEffect(() => {
     if (postInfo !== null && postInfo !== void 0) {
       dispatch({ type: "postSlice/SUBJECT_STATE", SUBJECT: postInfo.subject });
     } else {

@@ -5,7 +5,7 @@ import { navigate } from "vite-plugin-ssr/client/router";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { useDispatch } from "react-redux";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-38c32a2a.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import { L as LoadingMain } from "../chunks/chunk-04f347b5.js";
 import "../chunks/chunk-24b72a12.js";
 function SearchForm() {
@@ -44,7 +44,7 @@ function SearchBar() {
     /* @__PURE__ */ jsx(SearchForm, {})
   ] });
 }
-const CommunityMain = React.lazy(() => import("../chunks/chunk-71ac9370.js"));
+const CommunityMain = React.lazy(() => import("../chunks/chunk-c8a424fd.js"));
 function Page(pageProps) {
   var _a;
   const [isLoggedIn, _] = useCheckLoginStatus();
