@@ -1,8 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
-import { API_URL } from '../../../../renderer/CONSTANT_URL';
-import type { Post } from '../../../../server/models/Post';
 import { useCheckLoginStatus } from '../../../../renderer/_hooks/useCheckLoginStatus';
+import type { Post } from '../../../../server/models/Post';
 
 export { SubjectBox };
 
@@ -17,8 +16,6 @@ function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
 
     const [_, userInfo] = useCheckLoginStatus();
     useEffect(() => {
-        console.log('userInfo', userInfo);
-
         setCurrentPath(window.location.pathname);
         if (userInfo !== null) {
             setIsAdmin(userInfo.role === 9);
@@ -32,11 +29,6 @@ function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
             dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: '' });
         }
     }, [postInfo]);
-
-    useEffect(() => {
-        console.log('isAdmin', isAdmin);
-        console.log('currentPath', currentPath);
-    }, [isAdmin, currentPath, subject, isFocused]);
 
     function handleChange(event: ChangeEvent<HTMLSelectElement>) {
         dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: event.target.value });
