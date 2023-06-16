@@ -17,11 +17,13 @@ function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
 
     const [_, userInfo] = useCheckLoginStatus();
     useEffect(() => {
+        console.log('userInfo', userInfo);
+
         setCurrentPath(window.location.pathname);
         if (userInfo !== null) {
             setIsAdmin(userInfo.role === 9);
         } else setIsAdmin(false);
-    }, []);
+    }, [userInfo]);
 
     useEffect(() => {
         if (postInfo !== null && postInfo !== undefined) {
