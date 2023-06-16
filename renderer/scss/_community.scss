@@ -340,8 +340,8 @@ $inputHeight: 45px;
         -ms-flex-pack: justify;
         justify-content: space-between;
         -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
         padding: $padding;
         border-bottom: 1px solid $border-color;
         background-color: white; // 흰색 안하면 투명
