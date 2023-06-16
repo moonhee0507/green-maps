@@ -1,17 +1,9 @@
-import React, { createElement, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../renderer/store/hooks';
-import {
-    addBoundChangeEvent,
-    checkLoginForInfoWindow,
-    clearCircle,
-    init,
-    optimizeMapLevel,
-    setCircle,
-} from './kakaoApi/index.js';
+import { checkLoginForInfoWindow, clearCircle, init, optimizeMapLevel, setCircle } from './kakaoApi/index.js';
 import { API_URL } from '../../renderer/CONSTANT_URL';
 import { SET_NEAREST_LIST, SET_RESULT_IN_RADIUS } from '../../renderer/_reducers/_slices/mapSlice';
 import { MongoLocation } from './kakaoApi/types';
-import { render } from 'react-dom';
 
 export { KakaoMap };
 
@@ -25,10 +17,11 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
 
     useEffect(() => {
+        checkLoginForInfoWindow(isLoggedIn);
+
         init().then((locPosition: kakao.maps.LatLng) => {
             setIsInitialized(true);
             setCurrentLocation([locPosition.getLng(), locPosition.getLat()] as MongoLocation);
-            checkLoginForInfoWindow(isLoggedIn);
         });
     }, []);
 
@@ -75,17 +68,8 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
 
     useEffect(() => {
         if (isInitialized) {
-            addBoundChangeEvent();
             clearCircle();
             setCircle(radius);
-
-            // 모달에서 사용하는 geocoder api 때문에 동적으로 생성
-            const modalGroup = document.querySelector('.modal-group');
-            import('./ModalGroup/ChangeRegionModal/ChangeRegionModal').then((module) => {
-                const ChangeRegionModal = module.default;
-                const modalElement = createElement(ChangeRegionModal);
-                render(modalElement, modalGroup);
-            });
 
             if (currentLocation) {
                 getListInRadius(currentLocation).then((data) => {

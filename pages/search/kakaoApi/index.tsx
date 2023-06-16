@@ -50,25 +50,21 @@ export function init(): Promise<kakao.maps.LatLng> {
                 locPosition = new kakao.maps.LatLng(lat, lng);
 
                 // 지도 중심좌표를 접속위치로 변경
-                if (map) {
-                    map.setCenter(locPosition);
-                    store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: true });
-                    store.dispatch(SET_CURRENT_LOCATION([lat, lng]));
+                map.setCenter(locPosition);
+                store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: true });
+                store.dispatch(SET_CURRENT_LOCATION([lat, lng]));
 
-                    resolve(locPosition);
-                }
+                resolve(locPosition);
             });
         } else {
-            if (map) {
-                locPosition = new kakao.maps.LatLng(37.5666805, 126.9784147);
-                map.setLevel(5);
-                store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: false });
-                store.dispatch(SET_CURRENT_LOCATION([37.5666805, 126.9784147]));
-                resolve(locPosition);
-            }
+            locPosition = new kakao.maps.LatLng(37.5666805, 126.9784147);
+            map.setLevel(5);
+            store.dispatch({ type: 'mapSlice/SET_LOCATION_ACCESS', payload: false });
+            store.dispatch(SET_CURRENT_LOCATION([37.5666805, 126.9784147]));
+            resolve(locPosition);
         }
 
-        // addBoundChangeEvent();
+        addBoundChangeEvent();
     });
 }
 
@@ -110,10 +106,10 @@ export function clearCircle() {
     }
 }
 
-export function addBoundChangeEvent() {
+function addBoundChangeEvent() {
     let timeoutId: number;
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
-        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후 3초 안움직여야 그려진다)
+        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후3초 안움직여야 그려진다)
         window.clearTimeout(timeoutId);
 
         timeoutId = window.setTimeout(async () => {
