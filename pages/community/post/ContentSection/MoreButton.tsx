@@ -24,8 +24,6 @@ function MoreButton({ userInfo, owner, postId }: { userInfo: UserInfo | null; ow
     function handleClick() {
         appModalMode(true);
 
-        console.log('user', user);
-
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
         dispatch(SAME_USER_OWNER(user?.nickName === owner));
         dispatch(SET_POST_ID(postId));

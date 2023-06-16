@@ -13,6 +13,7 @@ function ProfileSection({ userInfo }: { userInfo: UserInfo }) {
         // 카카오 회원은 카카오 서비스의 토큰 만료시킴
         if (userInfo.host === 'kakao') {
             await fetch(`${API_URL}/oauth/kakao/logout`, {
+                credentials: 'include',
                 method: 'POST',
             });
         }

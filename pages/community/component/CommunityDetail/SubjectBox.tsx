@@ -2,6 +2,7 @@ import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import type { Post } from '../../../../server/models/Post';
+import { useCheckLoginStatus } from '../../../../renderer/_hooks/useCheckLoginStatus';
 
 export { SubjectBox };
 
@@ -14,14 +15,11 @@ function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
     const subject = useAppSelector((state) => state.postSlice.SUBJECT);
     const [isFocused, setIsFocused] = useState(false);
 
+    const [_, userInfo] = useCheckLoginStatus();
     useEffect(() => {
-        (async () => {
-            const res = await fetch(`${API_URL}/users`);
-            const data = await res.json();
-
-            if (data.success) setIsAdmin(data.user.role === 9);
-            else setIsAdmin(false);
-        })();
+        if (userInfo !== null) {
+            setIsAdmin(userInfo.role === 9);
+        } else setIsAdmin(false);
     }, []);
 
     useEffect(() => {
