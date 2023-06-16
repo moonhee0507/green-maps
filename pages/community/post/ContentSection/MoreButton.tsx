@@ -6,8 +6,8 @@ import {
     SAME_USER_OWNER,
     SET_ACCESS_TARGET,
 } from '../../../../renderer/_reducers/_slices/postSlice';
-import type { UserInfo } from '../../../../server/models/User';
 import appModalMode from '../../../../components/modal/appModalMode';
+import type { UserInfo } from '../../../../server/models/User';
 
 export { MoreButton };
 

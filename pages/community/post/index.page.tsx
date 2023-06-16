@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useAppDispatch } from '../../../renderer/store/hooks';
 import { CommentPagination, SET_COMMENT } from '../../../renderer/_reducers/_slices/paginationSlice';
 import { TopBar } from '../../../components/topBar/topBar';
 import { ContentSection } from './ContentSection/ContentSection';
 import { CommentSection } from './CommentSection/CommentSection';
 import { ModalGroup } from './ModalGroup/ModalGroup';
-import { API_URL } from '../../../renderer/CONSTANT_URL';
-import type { PageProps } from '../../../renderer/types';
-import type { UserInfo } from '../../../server/models/User';
 import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../../components/Loading/LoadingMain';
+import type { PageProps } from '../../../renderer/types';
 
 export { Page };
 
 function Page(pageProps: PageProps) {
     const dispatch = useAppDispatch();
-    // const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
     const [_, userInfo] = useCheckLoginStatus();
 
     const postInfo = pageProps.postInfo;
     const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
-
-    useEffect(() => {
-        // getUserInfo().then((data) => {
-        //     if (data.success) {
-        //         setUserInfo(data.user);
-        //     }
-        // });
-    }, []);
 
     // 댓글 페이지 네이션을 위해 스토어에 저장
     useEffect(() => {
@@ -40,13 +29,6 @@ function Page(pageProps: PageProps) {
 
         dispatch(SET_COMMENT(obj));
     }, [pageProps]);
-
-    // async function getUserInfo() {
-    //     const res = await fetch(`${API_URL}/users`);
-    //     const data = await res.json();
-
-    //     return data;
-    // }
 
     return (
         <React.Suspense fallback={<LoadingMain />}>
