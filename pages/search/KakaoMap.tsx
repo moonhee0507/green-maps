@@ -1,6 +1,13 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../renderer/store/hooks';
-import { checkLoginForInfoWindow, clearCircle, init, optimizeMapLevel, setCircle } from './kakaoApi/index.js';
+import {
+    addBoundChangeEvent,
+    checkLoginForInfoWindow,
+    clearCircle,
+    init,
+    optimizeMapLevel,
+    setCircle,
+} from './kakaoApi/index.js';
 import { API_URL } from '../../renderer/CONSTANT_URL';
 import { SET_NEAREST_LIST, SET_RESULT_IN_RADIUS } from '../../renderer/_reducers/_slices/mapSlice';
 import { MongoLocation } from './kakaoApi/types';
@@ -68,6 +75,7 @@ function KakaoMap({ isLoggedIn }: { isLoggedIn: boolean }) {
 
     useEffect(() => {
         if (isInitialized) {
+            addBoundChangeEvent();
             clearCircle();
             setCircle(radius);
 

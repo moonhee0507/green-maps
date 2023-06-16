@@ -64,7 +64,7 @@ export function init(): Promise<kakao.maps.LatLng> {
             resolve(locPosition);
         }
 
-        addBoundChangeEvent();
+        // addBoundChangeEvent();
     });
 }
 
@@ -106,19 +106,17 @@ export function clearCircle() {
     }
 }
 
-function addBoundChangeEvent() {
+export function addBoundChangeEvent() {
     let timeoutId: number;
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
         // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후 3초 안움직여야 그려진다)
         window.clearTimeout(timeoutId);
 
         timeoutId = window.setTimeout(async () => {
-            console.log('타이머 시작');
             const polygon = getCurrentView();
             const res = await getListInCurrentView(polygon);
 
             paintVeganRestaurantMarker(res);
-            console.log('5초 끝');
         }, 3000);
     });
 }
