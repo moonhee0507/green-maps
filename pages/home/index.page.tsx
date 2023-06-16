@@ -39,9 +39,8 @@ function Page() {
                 >
                     <img src={imgLoading} alt="로딩" style={{ width: '100%' }} id="__LOADING__" />
                 </div>
-            ) : (
-                <HomeMain />
-            )}
+            ) : null}
+            <HomeMain />
         </React.Suspense>
     );
 }

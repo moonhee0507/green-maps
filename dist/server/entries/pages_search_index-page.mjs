@@ -10,10 +10,11 @@ import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { renderToString } from "react-dom/server";
 import { s as store } from "../chunks/chunk-29897a3a.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
-import { i as imgLoading, L as LoadingMain } from "../chunks/chunk-3818be5d.js";
+import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-6c356fa9.js";
@@ -280,29 +281,25 @@ function addBoundChangeEvent() {
     imgElement.style.left = "50%";
     imgElement.style.transform = "translate(-50%, -50%)";
     imgElement.id = "__LOADING__";
+    imgElement.style.zIndex = "9999";
     return imgElement;
   };
   kakao.maps.event.addListener(map, "bounds_changed", function() {
-    try {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(async () => {
       if (app !== null) {
         app.appendChild(LoadingElement());
       }
-      window.clearTimeout(timeoutId);
-      timeoutId = window.setTimeout(async () => {
-        const polygon = getCurrentView();
-        const res = await getListInCurrentView(polygon);
-        paintVeganRestaurantMarker(res);
-      }, 3e3);
-    } catch (error) {
-      console.error("bounds_changed 이벤트 에러");
-    } finally {
-      if (app) {
+      const polygon = getCurrentView();
+      const res = await getListInCurrentView(polygon);
+      paintVeganRestaurantMarker(res);
+      if (app !== null) {
         const LoadingElement2 = document.getElementById("__LOADING__");
         if (LoadingElement2) {
           app.removeChild(LoadingElement2);
         }
       }
-    }
+    }, 3e3);
   });
 }
 function getCurrentView() {
@@ -563,7 +560,7 @@ function useLocationAccess() {
   }, []);
   return locationAccess;
 }
-const MapView = React.lazy(() => import("../chunks/chunk-dc3d871b.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-dc42c106.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);

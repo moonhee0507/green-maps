@@ -3,10 +3,11 @@ import React, { useState, useEffect, useCallback } from "react";
 import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import { useDispatch, useSelector } from "react-redux";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { L as LoadingMain } from "../chunks/chunk-3818be5d.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "../chunks/chunk-0e4e6c3d.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
+import "../chunks/chunk-dfb70939.js";
 const SearchMain = React.lazy(() => import("../chunks/chunk-72b126ee.js"));
 function Page(pageProps) {
   var _a;

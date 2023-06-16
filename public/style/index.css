@@ -1736,6 +1736,10 @@ button[aria-label="식당 검색 버튼"] {
   margin-left: 10px;
 }
 
+label[for=orderBySelect] {
+  margin-left: 10px;
+}
+
 .main-my {
   overflow: scroll;
   scrollbar-width: none; /* firefox */

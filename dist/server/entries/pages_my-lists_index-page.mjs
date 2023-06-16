@@ -5,7 +5,7 @@ import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { M as ModalGroup } from "../chunks/chunk-09b58628.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
-import { L as LoadingMain } from "../chunks/chunk-3818be5d.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "../chunks/chunk-0e4e6c3d.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
@@ -25,6 +25,7 @@ import "../chunks/chunk-d2c63902.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-db98b5a2.js";
+import "../chunks/chunk-dfb70939.js";
 const MyListMain = React.lazy(() => import("../chunks/chunk-0d37708b.js"));
 function Page() {
   const [isLoggedIn, info] = useCheckLoginStatus();

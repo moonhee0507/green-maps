@@ -5,6 +5,7 @@ import { r as randomizeFileName } from "./chunk-8649d624.js";
 import { I as IMG_URL, A as API_URL } from "./chunk-94504c62.js";
 import { u as useAppSelector } from "./chunk-0e4e6c3d.js";
 import { s as store } from "./chunk-29897a3a.js";
+import { i as imgLoading } from "./chunk-dfb70939.js";
 function PictureSection({ photos }) {
   const fileInput = useRef(null);
   const handleClick = () => {
@@ -154,61 +155,96 @@ function SubmitButton({
   userInfo
 }) {
   const [editPage] = useState(window.location.pathname.includes("/edit"));
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const app = document.querySelector(".app");
+    const LoadingElement = () => {
+      const imgElement = document.createElement("img");
+      imgElement.src = imgLoading;
+      imgElement.alt = "좌표 생성 로딩";
+      imgElement.style.width = "50px";
+      imgElement.style.position = "absolute";
+      imgElement.style.top = "50%";
+      imgElement.style.left = "50%";
+      imgElement.style.transform = "translate(-50%, -50%)";
+      imgElement.id = "__LOADING__";
+      return imgElement;
+    };
+    if (isLoading) {
+      if (app !== null) {
+        app.appendChild(LoadingElement());
+      }
+    } else {
+      if (app !== null) {
+        const LoadingElement2 = document.getElementById("__LOADING__");
+        if (LoadingElement2) {
+          app.removeChild(LoadingElement2);
+        }
+      }
+    }
+  }, [isLoading]);
   const content = useAppSelector((state) => state.reviewSlice.CONTENT);
   const randomFileNames = useAppSelector((state) => state.reviewSlice.image.RANDOM_NAME);
   async function handleSubmit() {
-    let photo = [];
-    const selectedImages = store.getState().reviewSlice.image.FILE_INFO;
-    if (selectedImages.length > 0) {
-      if (!selectedImages[0][0].includes("amazon")) {
-        await uploadImageToStorage(selectedImages, randomFileNames);
-        const temp = [];
-        for (let i = 0; i < selectedImages.length; i++) {
-          temp.push({ src: `client/${randomFileNames[i]}`, pick: true });
-        }
-        photo = temp;
-      } else if (selectedImages[0][0].includes("amazon")) {
-        const temp = [];
-        for (let selectedImage of selectedImages) {
-          temp.push({ src: "client/" + selectedImage[0].split("client/").at(-1), pick: true });
-        }
-        photo = temp;
-      }
-    }
-    let body;
-    if (!editPage) {
-      body = {
-        owner: userInfo ? userInfo.userId : "",
-        restaurant: restaurantId,
-        photo,
-        content
-      };
-    } else {
-      body = {
-        restaurant: restaurantId,
-        photo,
-        content
-      };
-    }
     try {
-      const res = await fetch(`${API_URL}/reviews/${editPage ? reviewId + "/edit" : ""}`, {
-        credentials: "include",
-        method: editPage ? "PATCH" : "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(body)
-      });
-      const data = await res.json();
-      if (data.success === true) {
-        alert("리뷰가 등록되었습니다.");
-      } else {
-        alert("리뷰 등록에 실패했습니다.\n다시 시도해주세요.");
+      setIsLoading(true);
+      let photo = [];
+      const selectedImages = store.getState().reviewSlice.image.FILE_INFO;
+      if (selectedImages.length > 0) {
+        if (!selectedImages[0][0].includes("amazon")) {
+          await uploadImageToStorage(selectedImages, randomFileNames);
+          const temp = [];
+          for (let i = 0; i < selectedImages.length; i++) {
+            temp.push({ src: `client/${randomFileNames[i]}`, pick: true });
+          }
+          photo = temp;
+        } else if (selectedImages[0][0].includes("amazon")) {
+          const temp = [];
+          for (let selectedImage of selectedImages) {
+            temp.push({ src: "client/" + selectedImage[0].split("client/").at(-1), pick: true });
+          }
+          photo = temp;
+        }
       }
-    } catch (e) {
-      console.error(e);
+      let body;
+      if (!editPage) {
+        body = {
+          owner: userInfo ? userInfo.userId : "",
+          restaurant: restaurantId,
+          photo,
+          content
+        };
+      } else {
+        body = {
+          restaurant: restaurantId,
+          photo,
+          content
+        };
+      }
+      try {
+        const res = await fetch(`${API_URL}/reviews/${editPage ? reviewId + "/edit" : ""}`, {
+          credentials: "include",
+          method: editPage ? "PATCH" : "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (data.success === true) {
+          alert("리뷰가 등록되었습니다.");
+        } else {
+          alert("리뷰 등록에 실패했습니다.\n다시 시도해주세요.");
+        }
+      } catch (e) {
+        console.error(e);
+      } finally {
+        window.history.back();
+      }
+    } catch (err) {
+      console.error("handleSubmit Error");
     } finally {
-      window.history.back();
+      setIsLoading(false);
     }
   }
   return /* @__PURE__ */ jsx(Fragment, { children: /* @__PURE__ */ jsx("button", { type: "button", onClick: handleSubmit, className: "styled-button review", children: editPage ? "수정 완료" : "작성 완료" }) });

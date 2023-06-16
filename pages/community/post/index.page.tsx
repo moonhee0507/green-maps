@@ -7,9 +7,9 @@ import { CommentSection } from './CommentSection/CommentSection';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../../components/Loading/LoadingMain';
-import type { PageContext, PageProps } from '../../../renderer/types';
 import { Post } from '../../../server/models/Post';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
+import type { PageContext } from '../../../renderer/types';
 
 export { Page };
 
@@ -19,7 +19,6 @@ function Page(pageContext: PageContext) {
     const dispatch = useAppDispatch();
     const [_, userInfo] = useCheckLoginStatus();
 
-    // const postInfo = pageProps.postInfo;
     const [postInfo, setPostInfo] = useState<Post | null>(null);
 
     useEffect(() => {
@@ -40,7 +39,6 @@ function Page(pageContext: PageContext) {
 
         return data;
     }
-    // const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
 
     // 댓글 페이지 네이션을 위해 스토어에 저장
     useEffect(() => {

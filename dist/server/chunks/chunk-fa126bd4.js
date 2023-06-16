@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-const imgLoading = "/images/spinner.gif";
+import { i as imgLoading } from "./chunk-dfb70939.js";
 function LoadingMain() {
   return /* @__PURE__ */ jsx("div", { style: { flexGrow: "1", position: "relative" }, children: /* @__PURE__ */ jsx(
     "img",
@@ -17,6 +17,5 @@ function LoadingMain() {
   ) });
 }
 export {
-  LoadingMain as L,
-  imgLoading as i
+  LoadingMain as L
 };

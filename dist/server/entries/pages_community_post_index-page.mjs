@@ -12,9 +12,10 @@ import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
-import { L as LoadingMain } from "../chunks/chunk-3818be5d.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
 import "@reduxjs/toolkit";
+import "../chunks/chunk-dfb70939.js";
 function TextArea(props) {
   const htmlString = props.content;
   return /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(htmlString) }, style: { wordBreak: "keep-all" } });
@@ -471,27 +472,48 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-function Page(pageProps) {
+function Page(pageContext) {
+  const { postId } = pageContext;
   const dispatch = useAppDispatch();
   const [_, userInfo] = useCheckLoginStatus();
-  const postInfo = pageProps.postInfo;
-  const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
+  const [postInfo, setPostInfo] = useState(null);
   useEffect(() => {
-    const obj = {};
-    for (let i = 0; i < comments.length; i = i + 10) {
-      const arrPerPage = comments.slice(i, i + 10);
-      obj[i / 10] = arrPerPage;
+    getPostInfo().then((post) => {
+      if (post) {
+        setPostInfo(post);
+      } else
+        setPostInfo(null);
+    });
+  }, []);
+  async function getPostInfo() {
+    const res = await fetch(`${API_URL}/posts/${postId}`, {
+      headers: {
+        "Cache-Control": "max-age=31536000"
+      }
+    });
+    const data = await res.json();
+    return data;
+  }
+  useEffect(() => {
+    if (postInfo) {
+      if (postInfo.comments) {
+        const obj = {};
+        for (let i = 0; i < postInfo.comments.length; i = i + 10) {
+          const arrPerPage = postInfo.comments.slice(i, i + 10);
+          obj[i / 10] = arrPerPage;
+        }
+        dispatch(SET_COMMENT(obj));
+      }
     }
-    dispatch(SET_COMMENT(obj));
-  }, [pageProps]);
-  return /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
-    /* @__PURE__ */ jsx(TopBar, { title: subject }),
+  }, [postInfo]);
+  return postInfo ? /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
+    /* @__PURE__ */ jsx(TopBar, { title: postInfo.subject }),
     /* @__PURE__ */ jsxs("main", { className: "main-read-post", children: [
       /* @__PURE__ */ jsx(ContentSection, { userInfo, postInfo }),
-      /* @__PURE__ */ jsx(CommentSection, { userInfo, postId: _id, comments })
+      /* @__PURE__ */ jsx(CommentSection, { userInfo, postId: postInfo._id, comments: postInfo.comments })
     ] }),
     /* @__PURE__ */ jsx(ModalGroup, {})
-  ] });
+  ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
   Page

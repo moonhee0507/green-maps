@@ -124,6 +124,7 @@ function addBoundChangeEvent() {
         imgElement.style.left = '50%';
         imgElement.style.transform = 'translate(-50%, -50%)';
         imgElement.id = '__LOADING__';
+        imgElement.style.zIndex = '9999';
 
         return imgElement;
     };

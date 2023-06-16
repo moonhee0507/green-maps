@@ -5,7 +5,8 @@ import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
 import store from './store';
 import { Provider } from 'react-redux';
 import { PageShell } from './PageShell';
-import icon from '/images/icon.png';
+import icon512 from '/images/icon.png';
+import icon192 from '/images/icon-192.png';
 import type { PageContextServer } from './types';
 
 export { onBeforeRender, render };
@@ -36,7 +37,7 @@ async function render(pageContext: PageContextServer) {
     const title = (documentProps && documentProps.title) || 'Green Maps';
     const desc = (documentProps && documentProps.description) || '채식 식당 검색과 북마크는 그린 맵';
 
-    const manifestUrl = import.meta.env.BASE_URL + 'manifest.json';
+    const manifestUrl = import.meta.env.BASE_URL + 'app.webmanifest';
     const cssUrl = import.meta.env.BASE_URL + 'style/index.css';
 
     const PRELOADED_STATE = JSON.stringify(store);
@@ -46,7 +47,7 @@ async function render(pageContext: PageContextServer) {
     <html lang="ko">
         <head>
             <meta charset="UTF-8" />
-            <link rel="icon" href=${icon} />
+            <link rel="icon" href=${icon512} />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <meta name="description" content="${desc}" />
             <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
@@ -56,6 +57,8 @@ async function render(pageContext: PageContextServer) {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
             <link rel="stylesheet" href="${cssUrl}" type="text/css" >
+            <meta name="apple-mobile-web-app-capable" content="yes">
+            <link rel="apple-touch-icon" href=${icon192}>
             <title>${title}</title>
         </head>
         <body>
