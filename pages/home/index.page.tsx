@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LoadingMain from '../../components/Loading/LoadingMain';
 
 export { Page };
@@ -11,9 +11,19 @@ export const documentProps = {
 const HomeMain = React.lazy(() => import('./HomeMain'));
 
 function Page() {
-    return (
+    const [trigger, setTrigger] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setTrigger(true);
+        }, 5000);
+    }, []);
+
+    return trigger ? (
         <React.Suspense fallback={<LoadingMain />}>
             <HomeMain />
         </React.Suspense>
+    ) : (
+        <LoadingMain />
     );
 }

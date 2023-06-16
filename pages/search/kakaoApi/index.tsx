@@ -1,9 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { renderToString } from 'react-dom/server';
 import store from '../../../renderer/store/index.js';
 import { SET_CURRENT_LOCATION } from '../../../renderer/_reducers/_slices/mapSlice.js';
 import getListInCurrentView from './getListInCurrentView';
 import InfoWindow from './InfoWindow/InfoWindow.js';
+import Loading from '../../../components/image/Loading.js';
 import imgLocation from '/images/map-location.png';
 import imgCert from '/images/map-cert-location.png';
 import type { Lat, Lng, MongoLocation, MongoPolygon } from './types';
@@ -108,16 +110,34 @@ export function clearCircle() {
 
 function addBoundChangeEvent() {
     let timeoutId: number;
+    const app = document.querySelector('.app');
+    const imgLoading = <Loading />; // React.JSX.Element
+
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
-        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후3초 안움직여야 그려진다)
-        window.clearTimeout(timeoutId);
+        try {
+            if (app !== null) {
+                ReactDOM.render(imgLoading, app);
+            }
 
-        timeoutId = window.setTimeout(async () => {
-            const polygon = getCurrentView();
-            const res = await getListInCurrentView(polygon);
+            // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후3초 안움직여야 그려진다)
+            window.clearTimeout(timeoutId); // 타임아웃을 취소하지 않으면 화면이동 많이할 때 요청이 너무 많아짐
 
-            paintVeganRestaurantMarker(res);
-        }, 3000);
+            timeoutId = window.setTimeout(async () => {
+                const polygon = getCurrentView();
+                const res = await getListInCurrentView(polygon);
+
+                paintVeganRestaurantMarker(res);
+            }, 3000);
+        } catch (error) {
+            console.error('bounds_changed 이벤트 에러');
+        } finally {
+            if (app) {
+                const imgReactElement = document.querySelector('#__LOADING__');
+                if (imgReactElement) {
+                    app.removeChild(imgReactElement);
+                }
+            }
+        }
     });
 }
 
