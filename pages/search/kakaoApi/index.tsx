@@ -5,9 +5,10 @@ import store from '../../../renderer/store/index.js';
 import { SET_CURRENT_LOCATION } from '../../../renderer/_reducers/_slices/mapSlice.js';
 import getListInCurrentView from './getListInCurrentView';
 import InfoWindow from './InfoWindow/InfoWindow.js';
-import Loading from '../../../components/image/Loading.js';
+// import Loading from '../../../components/image/Loading.js';
 import imgLocation from '/images/map-location.png';
 import imgCert from '/images/map-cert-location.png';
+import imgLoading from '/images/spinner.gif';
 import type { Lat, Lng, MongoLocation, MongoPolygon } from './types';
 import type { Restaurant } from './../../../server/models/Restaurant';
 
@@ -111,12 +112,26 @@ export function clearCircle() {
 function addBoundChangeEvent() {
     let timeoutId: number;
     const app = document.querySelector('.app');
-    const imgLoading = <Loading />; // React.JSX.Element
+    // const imgLoading = <Loading />; // React.JSX.Element
+    const LoadingElement = () => {
+        const imgElement = document.createElement('img');
+
+        imgElement.src = imgLoading;
+        imgElement.alt = '좌표 생성 로딩';
+        imgElement.style.width = '50px';
+        imgElement.style.position = 'absolute';
+        imgElement.style.top = '50%';
+        imgElement.style.left = '50%';
+        imgElement.style.transform = 'translate(-50%, -50%)';
+        imgElement.id = '__LOADING__';
+
+        return imgElement;
+    };
 
     kakao.maps.event.addListener(map, 'bounds_changed', function () {
         try {
             if (app !== null) {
-                ReactDOM.render(imgLoading, app);
+                app.appendChild(LoadingElement());
             }
 
             // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후3초 안움직여야 그려진다)
@@ -132,9 +147,9 @@ function addBoundChangeEvent() {
             console.error('bounds_changed 이벤트 에러');
         } finally {
             if (app) {
-                const imgReactElement = app.querySelector('#__LOADING__');
-                if (imgReactElement && imgReactElement.parentNode) {
-                    imgReactElement.parentNode.removeChild(imgReactElement);
+                const LoadingElement = document.getElementById('__LOADING__');
+                if (LoadingElement) {
+                    app.removeChild(LoadingElement);
                 }
             }
         }

@@ -1,8 +1,9 @@
 import React from 'react';
+import imgLoading from '/images/splash.jpg';
 
 export default function HomeMain() {
     return (
-        <main className="home-content">
+        <main className="home-content" style={{ background: `url(${imgLoading}) no-repeat center center/cover` }}>
             <div className="container-title">
                 <h2>
                     <span>Green</span>

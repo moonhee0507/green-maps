@@ -1075,7 +1075,6 @@ button[aria-label="식당 검색 버튼"] {
   scrollbar-width: none; /* firefox */
   flex-grow: 1; /*긴 화면*/
   /* edge, chrome */
-  background: url("/images/splash.jpg") no-repeat center center/cover;
   position: relative;
 }
 .home-content::-webkit-scrollbar {

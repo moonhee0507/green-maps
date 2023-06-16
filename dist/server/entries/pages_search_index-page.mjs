@@ -7,7 +7,6 @@ import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-47ee53cb.js";
 import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import ReactDOM from "react-dom";
 import { renderToString } from "react-dom/server";
 import { s as store } from "../chunks/chunk-29897a3a.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
@@ -190,17 +189,6 @@ function InfoWindow({
     ] })
   ] }) });
 }
-function Loading() {
-  return /* @__PURE__ */ jsx(
-    "img",
-    {
-      src: imgLoading,
-      alt: "좌표 생성 로딩",
-      style: { width: "50px", position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)" },
-      id: "__LOADING__"
-    }
-  );
-}
 const imgLocation = "/images/map-location.png";
 const imgCert = "/images/map-cert-location.png";
 const { kakao } = typeof window !== "undefined" ? window : global;
@@ -282,11 +270,22 @@ function clearCircle() {
 function addBoundChangeEvent() {
   let timeoutId;
   const app = document.querySelector(".app");
-  const imgLoading2 = /* @__PURE__ */ jsx(Loading, {});
+  const LoadingElement = () => {
+    const imgElement = document.createElement("img");
+    imgElement.src = imgLoading;
+    imgElement.alt = "좌표 생성 로딩";
+    imgElement.style.width = "50px";
+    imgElement.style.position = "absolute";
+    imgElement.style.top = "50%";
+    imgElement.style.left = "50%";
+    imgElement.style.transform = "translate(-50%, -50%)";
+    imgElement.id = "__LOADING__";
+    return imgElement;
+  };
   kakao.maps.event.addListener(map, "bounds_changed", function() {
     try {
       if (app !== null) {
-        ReactDOM.render(imgLoading2, app);
+        app.appendChild(LoadingElement());
       }
       window.clearTimeout(timeoutId);
       timeoutId = window.setTimeout(async () => {
@@ -298,9 +297,9 @@ function addBoundChangeEvent() {
       console.error("bounds_changed 이벤트 에러");
     } finally {
       if (app) {
-        const imgReactElement = document.querySelector("#__LOADING__");
-        if (imgReactElement) {
-          app.removeChild(imgReactElement);
+        const LoadingElement2 = document.getElementById("__LOADING__");
+        if (LoadingElement2) {
+          app.removeChild(LoadingElement2);
         }
       }
     }
@@ -564,7 +563,7 @@ function useLocationAccess() {
   }, []);
   return locationAccess;
 }
-const MapView = React.lazy(() => import("../chunks/chunk-3076a5ea.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-dc3d871b.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);
