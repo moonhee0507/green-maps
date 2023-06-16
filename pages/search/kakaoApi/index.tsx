@@ -132,9 +132,9 @@ function addBoundChangeEvent() {
             console.error('bounds_changed 이벤트 에러');
         } finally {
             if (app) {
-                const imgReactElement = document.querySelector('#__LOADING__');
+                const imgReactElement = app.querySelector('#__LOADING__');
                 if (imgReactElement) {
-                    app.removeChild(imgReactElement);
+                    imgReactElement.remove();
                 }
             }
         }
