@@ -6,7 +6,7 @@ export { SelectBoxGroup };
 
 function SelectBoxGroup() {
     return (
-        <div>
+        <div className="wrapper-selectbox-in-result">
             <BoundaryBox />
             <OrderByBox />
         </div>

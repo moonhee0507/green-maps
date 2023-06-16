@@ -20,22 +20,24 @@ export default function ChangeRegionModal() {
     }, [regionModalOn]);
 
     useEffect(() => {
-        const [lat, lng] = currentLocation;
-        const geocoder = new kakao.maps.services.Geocoder();
+        setTimeout(() => {
+            const [lat, lng] = currentLocation;
+            const geocoder = new kakao.maps.services.Geocoder();
 
-        geocoder.coord2RegionCode(lng, lat, (result, status) => {
-            if (status === kakao.maps.services.Status.OK) {
-                for (let i = 0; i < result.length; i++) {
-                    // 행정동 region-type은 H
-                    if (result[i].region_type === 'H') {
-                        const addr = result[i].address_name;
-                        dispatch(SET_CURRENT_SIDO(addr.split(' ').shift() || ''));
-                        dispatch(SET_CURRENT_SIGUNGU(addr.split(' ')[1]));
-                        break;
+            geocoder.coord2RegionCode(lng, lat, (result, status) => {
+                if (status === kakao.maps.services.Status.OK) {
+                    for (let i = 0; i < result.length; i++) {
+                        // 행정동 region-type은 H
+                        if (result[i].region_type === 'H') {
+                            const addr = result[i].address_name;
+                            dispatch(SET_CURRENT_SIDO(addr.split(' ').shift() || ''));
+                            dispatch(SET_CURRENT_SIGUNGU(addr.split(' ')[1]));
+                            break;
+                        }
                     }
                 }
-            }
-        });
+            });
+        }, 3000);
     }, [currentLocation]);
 
     return (

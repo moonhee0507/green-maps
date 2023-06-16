@@ -1452,6 +1452,10 @@ button[aria-label="식당 검색 버튼"] {
 .wrapper-posts .txt-postitem-content {
   margin: 5px 0 5px;
 }
+.wrapper-posts .txt-subject-in-community {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
 
 .container-post-subinfo {
   display: flex;
@@ -1628,12 +1632,25 @@ button[aria-label="식당 검색 버튼"] {
 }
 .community-search-main .container-search-input {
   display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 .community-search-main .container-search-input #communitySearchResult {
   flex-grow: 1;
   height: 45px;
   padding: 0 10px 0;
   border: 1px solid #d3d3d3;
+  width: 100%;
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  height: 45px;
+}
+.community-search-main .container-search-input #communitySearchResult + button {
+  width: 55px;
+  font-weight: bold;
+  border-radius: 10px;
 }
 .community-search-main .container-search-select {
   width: 100%;
@@ -1641,8 +1658,8 @@ button[aria-label="식당 검색 버튼"] {
 .community-search-main .container-search-select #communitySearchSelect {
   width: inherit;
   height: 45px;
-  border-radius: 0;
   border: 1px solid #d3d3d3;
+  border-radius: 10px;
   padding: 0 6px 0;
 }
 .community-search-main .result-community-detail {
@@ -1652,9 +1669,13 @@ button[aria-label="식당 검색 버튼"] {
   padding: 20px;
   border-bottom: 1px solid #d3d3d3;
   background-color: white;
+  margin-top: 20px;
 }
 .community-search-main .result-community-detail .txt-total-search {
   margin: 0;
+}
+.community-search-main .result-community-detail .wrapper-selectbox-in-result {
+  color: #4f4f4f;
 }
 
 .modal-edit-delete-notify {
@@ -1738,6 +1759,15 @@ button[aria-label="식당 검색 버튼"] {
 
 label[for=orderBySelect] {
   margin-left: 10px;
+}
+
+#communitySearchResult {
+  width: 100%;
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  border: none;
 }
 
 .main-my {

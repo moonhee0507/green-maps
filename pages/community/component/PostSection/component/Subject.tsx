@@ -6,7 +6,7 @@ function Subject(props: { subject: string }) {
     return (
         <>
             <dt className="sr-only">말머리</dt>
-            <dd>{props.subject}</dd>
+            <dd className="txt-subject-in-community">{props.subject}</dd>
         </>
     );
 }

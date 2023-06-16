@@ -14,7 +14,8 @@ import type { PageContext } from '../../../renderer/types';
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const { postId } = pageContext;
+    const postId = pageContext.routeParams?.postId || '';
+    // const { postId } = pageContext;
 
     const dispatch = useAppDispatch();
     const [_, userInfo] = useCheckLoginStatus();

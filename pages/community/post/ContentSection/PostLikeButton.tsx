@@ -13,6 +13,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
     useEffect(() => {
         getUserId()
             .then((userId) => {
+                console.log('PostLikeButton userId', userId);
                 setUserId(userId);
             })
             .catch((err) => console.error(err));
