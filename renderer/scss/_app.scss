@@ -10,20 +10,6 @@
     -ms-flex-direction: column;
     flex-direction: column;
     position: relative; // GoUp버튼을 위함
-
-    &::after {
-        position: absolute;
-        content: '';
-        background-color: #00784a;
-        opacity: 25%;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        bottom: 0px;
-        right: 0px;
-        -webkit-animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
-        animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
-    }
 }
 
 .app.modal-mode {

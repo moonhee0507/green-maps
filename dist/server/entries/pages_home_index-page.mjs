@@ -6,7 +6,7 @@ const documentProps = {
   title: "홈 | Green Maps",
   description: "채식 식당 지도 서비스"
 };
-const HomeMain = React.lazy(() => import("../chunks/chunk-e21e167c.js"));
+const HomeMain = React.lazy(() => import("../chunks/chunk-69f630df.js"));
 function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [deferredPrompt, setDeferredPrompt] = useState(null);

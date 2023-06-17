@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useRef, useState, useEffect } from "react";
-import { u as useAppDispatch, B as ButtonGoBack, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
+import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-1643b273.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
@@ -9,8 +9,8 @@ import { renderToString } from "react-dom/server";
 import { s as store } from "../chunks/chunk-042cff01.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
 import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
-import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-3c2a9a7b.js";
-import { P as Pagination } from "../chunks/chunk-59db6cf1.js";
+import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-7590a0cb.js";
+import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
@@ -927,7 +927,7 @@ const documentProps = {
   title: "채식 식당 지도 | Green Maps",
   description: "채식 식당 지도 페이지"
 };
-const MapView = React.lazy(() => import("../chunks/chunk-7583c1a8.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-2c4b445d.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);

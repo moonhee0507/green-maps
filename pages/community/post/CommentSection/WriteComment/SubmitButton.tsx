@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { API_URL } from '../../../../../renderer/CONSTANT_URL';
+import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { SubmitButton };
 
@@ -10,26 +11,50 @@ function SubmitButton(props: { postId: string; content: string | null }) {
     useEffect(() => {
         getUserId()
             .then((userId) => {
-                setUserId(userId); // ok
+                setUserId(userId);
             })
             .catch((err) => console.error(err));
 
-        async function getUserId() {
-            const res = await fetch(`${API_URL}/users/`, {
-                credentials: 'include',
-                method: 'GET',
-            });
-            const data = await res.json();
+        // async function getUserId() {
+        //     const res = await fetch(`${API_URL}/users/`, {
+        //         credentials: 'include',
+        //         method: 'GET',
+        //     });
+        //     const data = await res.json();
 
-            return data.user.nickName;
-        }
+        //     return data.user.nickName;
+        // }
     }, []);
 
-    async function handleClick() {
+    async function getUserId() {
+        const res = await fetch(`${API_URL}/users/`, {
+            credentials: 'include',
+            method: 'GET',
+        });
+        const data = await res.json();
+
+        // return data.user.nickName;
+        return data;
+    }
+
+    function handleClick() {
+        getUserId().then((data) => {
+            if (data.success === true) {
+                // setUserId(data.user.nickName);
+                submit(data.user.nickName);
+            } else {
+                if (confirm('로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?')) {
+                    navigate('/login');
+                }
+            }
+        });
+    }
+
+    async function submit(nickName: string) {
         try {
             if (content !== null && content.length > 0) {
                 const body = {
-                    owner: userId,
+                    owner: nickName,
                     content: content,
                 };
 

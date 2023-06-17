@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { B as ButtonGoBack, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
+import { B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { useDispatch } from "react-redux";
@@ -49,7 +49,7 @@ const documentProps = {
   title: "커뮤니티 | Green Maps",
   description: "채식 식당 지도 서비스 커뮤니티"
 };
-const CommunityMain = React.lazy(() => import("../chunks/chunk-75dfb3c8.js"));
+const CommunityMain = React.lazy(() => import("../chunks/chunk-42c58b33.js"));
 function Page(pageProps) {
   var _a;
   const [isLoggedIn, _] = useCheckLoginStatus();

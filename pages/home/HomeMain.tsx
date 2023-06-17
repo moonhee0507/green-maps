@@ -55,6 +55,7 @@ export default function HomeMain({
                     </button>
                 )}
             </section>
+            <div className="sudo-circle" />
         </main>
     );
 }

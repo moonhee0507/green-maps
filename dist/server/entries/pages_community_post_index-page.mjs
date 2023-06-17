@@ -1,16 +1,16 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect, useRef } from "react";
-import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import DOMPurify from "isomorphic-dompurify";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
 import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
 import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
-import { P as Pagination } from "../chunks/chunk-59db6cf1.js";
 import { navigate } from "vite-plugin-ssr/client/router";
+import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
@@ -150,20 +150,31 @@ function SubmitButton(props) {
     getUserId().then((userId2) => {
       setUserId(userId2);
     }).catch((err) => console.error(err));
-    async function getUserId() {
-      const res = await fetch(`${API_URL}/users/`, {
-        credentials: "include",
-        method: "GET"
-      });
-      const data = await res.json();
-      return data.user.nickName;
-    }
   }, []);
-  async function handleClick() {
+  async function getUserId() {
+    const res = await fetch(`${API_URL}/users/`, {
+      credentials: "include",
+      method: "GET"
+    });
+    const data = await res.json();
+    return data;
+  }
+  function handleClick() {
+    getUserId().then((data) => {
+      if (data.success === true) {
+        submit(data.user.nickName);
+      } else {
+        if (confirm("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?")) {
+          navigate("/login");
+        }
+      }
+    });
+  }
+  async function submit(nickName) {
     try {
       if (content !== null && content.length > 0) {
         const body = {
-          owner: userId,
+          owner: nickName,
           content
         };
         const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
