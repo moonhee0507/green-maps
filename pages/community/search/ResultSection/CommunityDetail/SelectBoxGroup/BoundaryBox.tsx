@@ -15,7 +15,7 @@ function BoundaryBox() {
     return (
         <>
             <label htmlFor="boundarySelect">범위</label>
-            <select id="boundarySelect" onChange={handleChange}>
+            <select id="boundarySelect" onChange={handleChange} className="select-community-search">
                 <option value="tc">제목+내용</option>
                 <option value="t">제목</option>
                 <option value="c">내용</option>

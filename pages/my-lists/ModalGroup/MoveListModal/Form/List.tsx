@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import type { Bookmark } from '../../../../../server/models/User';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import {
     INCREASE_CHECKED,
@@ -7,7 +6,8 @@ import {
     PUSH_RESTAURANT_LIST,
     DELETE_RESTAURANT_LIST,
 } from '../../../../../renderer/_reducers/_slices/myListSlice';
-import { Restaurant } from '../../../../../server/models/Restaurant';
+import type { Restaurant } from '../../../../../server/models/Restaurant';
+import type { Bookmark } from '../../../../../server/models/User';
 
 export { List };
 
@@ -35,7 +35,13 @@ function ListItem({ list }: { list: Restaurant }) {
     const [isChecked, setIsChecked] = useState(false);
     const restaurantToMove = useAppSelector((state) => state.myListSlice.restaurantToMove);
 
-    useEffect(() => {}, []);
+    // 전체해제를 countChecked로 감시
+    const countChecked = useAppSelector((state) => state.myListSlice.countChecked);
+    useEffect(() => {
+        if (countChecked === 0) {
+            setIsChecked(false);
+        }
+    }, [countChecked]);
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);

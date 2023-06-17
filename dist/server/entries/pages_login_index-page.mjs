@@ -1,10 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
@@ -17,31 +17,47 @@ function SelectStage({ setMove }) {
     dispatch(LOGGING_IN(true));
   };
   async function callAgreementScreen() {
-    navigate("/api/oauth/kakao");
+    window.location.href = `${API_URL}/oauth/kakao`;
   }
   useEffect(() => {
     const queryString = window.location.search;
     const paramFromQueryString = new URLSearchParams(queryString);
     const authorizeCode = paramFromQueryString.get("code");
-    if (authorizeCode) {
-      getAccessTokenFromKakao(authorizeCode).then((data) => {
-        if (data.success) {
-          getKakaoUserData().then((data2) => {
-            if (data2.success) {
-              window.location.href = "/my";
-            }
-          });
-        }
-      });
+    try {
+      if (authorizeCode) {
+        getAccessTokenFromKakao(authorizeCode).then((data) => {
+          if (data.success) {
+            getKakaoUserData().then((data2) => {
+              if (data2.success) {
+                window.location.href = "/my";
+              } else {
+                console.error(`카카오 사용자 데이터 가져오기 실패`);
+              }
+            });
+          } else {
+            console.error(`카카오 API 토큰 요청에 실패했습니다.`);
+          }
+        });
+      } else {
+        console.error(`카카오 AuthorizeCode가 없습니다.`);
+      }
+    } catch (err) {
+      console.error(err);
     }
   }, []);
   async function getAccessTokenFromKakao(authorizeCode) {
-    const res = await fetch(`${API_URL}/oauth/kakao/token?code=${authorizeCode}`);
+    const res = await fetch(`${API_URL}/oauth/kakao/token?code=${authorizeCode}`, {
+      credentials: "include",
+      method: "GET"
+    });
     const data = await res.json();
     return data;
   }
   async function getKakaoUserData() {
-    const res = await fetch(`${API_URL}/oauth/kakao/users`);
+    const res = await fetch(`${API_URL}/oauth/kakao/users`, {
+      credentials: "include",
+      method: "GET"
+    });
     const data = await res.json();
     return data;
   }
@@ -109,9 +125,7 @@ function PasswordStage({ setMove }) {
         },
         body: body.toString()
       });
-      console.log("res", res);
       const data = await res.json();
-      console.log("data", data);
       if (data.success) {
         window.alert("🎉🎉로그인에 성공했습니다🎉🎉");
         navigate("/search");

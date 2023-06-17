@@ -39,6 +39,7 @@ function ButtonGroup() {
 
     async function deleteBookmarks(id: string) {
         const res = await fetch(`${API_URL}/users/bookmark/${id}`, {
+            credentials: 'include',
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

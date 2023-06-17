@@ -12,7 +12,10 @@ function BookmarkButton({ restaurantId, isLoggedIn }: { restaurantId: string; is
 
     const hasBookmarkList = useCallback(async () => {
         if (isLoggedIn) {
-            const res = await fetch(`${API_URL}/users/`);
+            const res = await fetch(`${API_URL}/users/`, {
+                credentials: 'include',
+                method: 'GET',
+            });
             const data = await res.json();
 
             return data.user.bookmarkList.some((v: { _id: string; registeredAt: string }) => {
@@ -24,6 +27,7 @@ function BookmarkButton({ restaurantId, isLoggedIn }: { restaurantId: string; is
     const delBookmark = useCallback(async () => {
         if (isLoggedIn) {
             const res = await fetch(`${API_URL}/users/bookmark/${restaurantId}`, {
+                credentials: 'include',
                 method: 'DELETE',
             });
 
@@ -60,6 +64,7 @@ function BookmarkButton({ restaurantId, isLoggedIn }: { restaurantId: string; is
     async function addBookmark() {
         try {
             const res = await fetch(`${API_URL}/users/bookmark`, {
+                credentials: 'include',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

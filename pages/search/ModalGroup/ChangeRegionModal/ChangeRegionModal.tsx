@@ -21,6 +21,7 @@ function ChangeRegionModal() {
 
     useEffect(() => {
         const [lat, lng] = currentLocation;
+
         const geocoder = new kakao.maps.services.Geocoder();
 
         geocoder.coord2RegionCode(lng, lat, (result, status) => {

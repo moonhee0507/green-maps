@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
 async function onBeforeRender(pageContext) {
   const { reviewId } = pageContext.routeParams;
   const { user } = pageContext;

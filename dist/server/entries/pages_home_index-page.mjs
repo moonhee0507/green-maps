@@ -1,24 +1,51 @@
 import { jsxs, jsx } from "react/jsx-runtime";
+import React, { useState, useEffect } from "react";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
+import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
 const documentProps = {
   title: "홈 | Green Maps",
   description: "채식 식당 검색과 북마크 서비스"
 };
+const HomeMain = React.lazy(() => import("../chunks/chunk-9022c2c6.js"));
 function Page() {
-  return /* @__PURE__ */ jsxs("main", { className: "home-content", children: [
-    /* @__PURE__ */ jsx("div", { className: "container-title", children: /* @__PURE__ */ jsxs("h2", { children: [
-      /* @__PURE__ */ jsx("span", { children: "Green" }),
-      /* @__PURE__ */ jsx("span", { children: "Maps" })
-    ] }) }),
-    /* @__PURE__ */ jsxs("section", { className: "section-desc-service", children: [
-      /* @__PURE__ */ jsx("h3", { children: "이런 서비스에요!" }),
-      /* @__PURE__ */ jsxs("div", { className: "container-desc-service", children: [
-        /* @__PURE__ */ jsx("p", { children: "전국 2400개의 채식 식당을 찾을 수 있어요." }),
-        /* @__PURE__ */ jsx("p", { children: "북마크를 그룹으로 관리해요." }),
-        /* @__PURE__ */ jsx("p", { children: "채식 식당에 대한 후기를 남길 수 있어요." }),
-        /* @__PURE__ */ jsx("p", { children: "게시판을 통해 소통해요!" })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsx("div", { className: "container-start", children: /* @__PURE__ */ jsx("a", { href: "/search", children: "🎉Start" }) })
+  const [isLoading, setIsLoading] = useState(true);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const handleBeforeInstallPrompt = (event) => {
+    event.preventDefault();
+    setDeferredPrompt(event);
+  };
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsLoading(false);
+    }, 5e3);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
+  useEffect(() => {
+    if (!isLoading) {
+      window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    }
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, [isLoading]);
+  return /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
+    isLoading ? /* @__PURE__ */ jsx(
+      "div",
+      {
+        style: {
+          width: "50px",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          opacity: "0.33"
+        },
+        children: /* @__PURE__ */ jsx("img", { src: imgLoading, alt: "로딩", style: { width: "100%" }, id: "__LOADING__" })
+      }
+    ) : null,
+    /* @__PURE__ */ jsx(HomeMain, { deferredPrompt, setDeferredPrompt })
   ] });
 }
 export {

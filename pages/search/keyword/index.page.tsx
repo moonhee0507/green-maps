@@ -6,10 +6,18 @@ import { useAppSelector } from '../../../renderer/store/hooks';
 import { Restaurant } from '../../../server/models/Restaurant';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import { KeywordSearchResultMain } from './KeywordSearchResultMain/KeywordSearchResultMain';
+import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
+
+export const documentProps = {
+    title: '채식 식당 검색 결과 | Green Maps',
+    description: '채식 식당 지도 검색 페이지',
+};
 
 export { Page };
 
 function Page(pageContext: PageContext) {
+    const [isLoggedIn, __] = useCheckLoginStatus();
+
     const keyword = pageContext.routeParams?.keyword || '';
     const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
@@ -66,7 +74,7 @@ function Page(pageContext: PageContext) {
                 perPage={perPage}
                 searchListInPage={searchListInPage}
             />
-            <NavBar isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false} />
+            <NavBar isLoggedIn={isLoggedIn} />
         </>
     );
 }

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
-import { API_URL } from '../../../../renderer/CONSTANT_URL';
+import { useCheckLoginStatus } from '../../../../renderer/_hooks/useCheckLoginStatus';
 import type { Post } from '../../../../server/models/Post';
 
 export { SubjectBox };
@@ -14,18 +14,15 @@ function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
     const subject = useAppSelector((state) => state.postSlice.SUBJECT);
     const [isFocused, setIsFocused] = useState(false);
 
-    useEffect(() => {
-        (async () => {
-            const res = await fetch(`${API_URL}/users`);
-            const data = await res.json();
-
-            if (data.success) setIsAdmin(data.user.role === 9);
-            else setIsAdmin(false);
-        })();
-    }, []);
-
+    const [_, userInfo] = useCheckLoginStatus();
     useEffect(() => {
         setCurrentPath(window.location.pathname);
+        if (userInfo !== null) {
+            setIsAdmin(userInfo.role === 9);
+        } else setIsAdmin(false);
+    }, [userInfo]);
+
+    useEffect(() => {
         if (postInfo !== null && postInfo !== undefined) {
             dispatch({ type: 'postSlice/SUBJECT_STATE', SUBJECT: postInfo.subject });
         } else {

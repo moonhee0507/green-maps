@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import PostListItem from './PostListItem';
 import type { Post } from '../../../../../server/models/Post';
 import { useDispatch, useStore } from 'react-redux';
-import useIntersectionObserver from '../../../component/PostSection/useIntersectionObserver';
+import useIntersectionObserver from '../../../useIntersectionObserver';
 
 export { PostList };
 
@@ -39,7 +39,7 @@ function PostList(props: { posts: Post[]; limit: number }) {
             observe(target.current);
             // console.log(`currentPage가 ${currentPage}이고 lastPage가 ${lastPage}여서 감시 계속 =======`);
         }
-    }, [observe, unobserve]);
+    }, [observe, unobserve, target]);
 
     return (
         <ul className="wrapper-posts">

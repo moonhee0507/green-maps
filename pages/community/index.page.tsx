@@ -1,18 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SearchBar } from './SearchBar';
-import { Community } from './Community';
 import { NavBar } from '../../components/navBar';
 import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../renderer/store/hooks';
 import { API_URL } from '../../renderer/CONSTANT_URL';
+import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
+import LoadingMain from '../../components/Loading/LoadingMain';
 import type { PageProps } from '../../renderer/types';
 import type { Post } from '../../server/models/Post';
-import { ButtonGroup } from './component/ButtonGroup/ButtonGroup';
 
-export { Page };
+export const documentProps = {
+    title: '커뮤니티 | Green Maps',
+    description: '채식 식당 지도 서비스 커뮤니티',
+};
 
-function Page(pageProps: PageProps) {
-    const { isLoggedIn } = pageProps.user;
+const CommunityMain = React.lazy(() => import('./CommunityMain'));
+
+export function Page(pageProps: PageProps) {
+    const [isLoggedIn, _] = useCheckLoginStatus();
 
     // 전역에서 관리하는 변수: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
     const subject = useAppSelector((state) => state.postSlice.SUBJECT);
@@ -29,6 +34,7 @@ function Page(pageProps: PageProps) {
             const res = await fetch(
                 `${API_URL}/${subject !== '' ? 'subjects/' + subject : 'posts'}?page=${currentPage}&limit=${limit}`,
                 {
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -58,11 +64,10 @@ function Page(pageProps: PageProps) {
     }, [getPosts]);
 
     return (
-        <>
+        <React.Suspense fallback={<LoadingMain />}>
             <SearchBar />
-            <ButtonGroup isLoggedIn={isLoggedIn} />
-            <Community posts={posts} limit={limit} isLoggedIn={isLoggedIn} />
+            <CommunityMain isLoggedIn={isLoggedIn} posts={posts} limit={limit} />
             <NavBar isLoggedIn={isLoggedIn} />
-        </>
+        </React.Suspense>
     );
 }

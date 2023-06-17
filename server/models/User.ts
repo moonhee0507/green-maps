@@ -188,21 +188,21 @@ userSchema.method('generateToken', async function generateToken(cb: (err?: Error
          */
 
         jwt.sign(
-            { id: this._id.toHexString(), iat: Date.now() },
+            { id: this._id.toHexString(), iat: Date.now(), issuer: 'green-maps' },
             privateKey,
             {
                 algorithm: 'RS256',
                 expiresIn: 365 * 24 * 60 * 60, // 초 단위 주의,
             },
-            function (err, token) {
+            async function (err, token) {
                 if (err) {
                     return cb(new Error('암호화 에러'));
                 }
-                console.log('만들어진 토큰: ', token);
 
                 user.token = token;
 
-                user.save()
+                await user
+                    .save()
                     .then((user: any) => cb(null, user))
                     .catch((err: any) => cb(err));
             }

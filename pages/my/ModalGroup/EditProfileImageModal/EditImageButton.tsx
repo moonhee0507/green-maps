@@ -64,6 +64,7 @@ function EditImageButton() {
     async function submitProfileImage(fileName: string) {
         try {
             await fetch(`${API_URL}/users/edit/profile`, {
+                credentials: 'include',
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

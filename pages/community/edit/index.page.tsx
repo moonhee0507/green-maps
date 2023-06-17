@@ -7,6 +7,11 @@ import { EDIT_MODE } from '../../../renderer/_reducers/_slices/postSlice';
 import type { PageContext } from '../../../renderer/types';
 import type { Post } from '../../../server/models/Post';
 
+export const documentProps = {
+    title: '게시글 수정 | Green Maps',
+    description: '게시글 수정 페이지',
+};
+
 export { Page };
 
 function Page(pageContext: PageContext) {

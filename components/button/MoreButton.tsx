@@ -38,6 +38,7 @@ function MoreButton({ restaurantId, restaurantTitle }: { restaurantId: string; r
 
             if (confirm('해당 식당을 삭제하시겠습니까?')) {
                 const res = await fetch(`${API_URL}/users/${list}/${restaurantId}`, {
+                    credentials: 'include',
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',

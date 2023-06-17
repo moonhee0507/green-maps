@@ -2,17 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { NavBar } from '../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
-import { Menu } from './Menu/Menu';
-import { ListSection } from './ListSection/ListSection';
 import { API_URL } from '../../renderer/CONSTANT_URL';
-import type { PageContext } from '../../renderer/types';
+import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
+import LoadingMain from '../../components/Loading/LoadingMain';
 import type { GroupList } from '../../server/models/Bookmark';
-import type { UserInfo } from '../../server/models/User';
 
-export { Page };
+export const documentProps = {
+    title: '내 목록 | Green Maps',
+    description: '북마크, 좋아요 표시한 채식 식당 목록',
+};
 
-function Page(pageContext: PageContext) {
-    const { isLoggedIn, info } = pageContext.user;
+const MyListMain = React.lazy(() => import('./MyListMain'));
+
+export function Page() {
+    const [isLoggedIn, info] = useCheckLoginStatus();
+
     const [groupList, setGroupList] = useState<GroupList[] | null>(null);
 
     useEffect(() => {
@@ -30,21 +34,16 @@ function Page(pageContext: PageContext) {
         }
     }, [info]);
 
-    return (
+    return isLoggedIn && info ? (
         <>
             <TopBar title="내 식당 목록" />
-            <MyListMain userInfo={info} groupList={groupList} />
+            <React.Suspense fallback={<LoadingMain />}>
+                <MyListMain userInfo={info} groupList={groupList} />
+            </React.Suspense>
             <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup userInfo={info} />
         </>
-    );
-}
-
-function MyListMain({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
-    return (
-        <main className="main-bookmark">
-            <Menu userInfo={userInfo} />
-            <ListSection userInfo={userInfo} groupList={groupList} />
-        </main>
+    ) : (
+        <LoadingMain />
     );
 }

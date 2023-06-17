@@ -12,7 +12,10 @@ function LikeButton({ restaurantId, isLoggedIn }: { restaurantId: string; isLogg
 
     const hasLikeList = useCallback(async () => {
         if (isLoggedIn) {
-            const res = await fetch(`${API_URL}/users/`);
+            const res = await fetch(`${API_URL}/users/`, {
+                credentials: 'include',
+                method: 'GET',
+            });
             const data = await res.json();
 
             return data.user.likeList.some((v: { _id: string; registeredAt: string }) => {
@@ -23,6 +26,7 @@ function LikeButton({ restaurantId, isLoggedIn }: { restaurantId: string; isLogg
 
     const delLike = useCallback(async () => {
         const res = await fetch(`${API_URL}/users/like/${restaurantId}`, {
+            credentials: 'include',
             method: 'DELETE',
         });
 
@@ -58,6 +62,7 @@ function LikeButton({ restaurantId, isLoggedIn }: { restaurantId: string; isLogg
     async function addLike() {
         try {
             const res = await fetch(`${API_URL}/users/like`, {
+                credentials: 'include',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

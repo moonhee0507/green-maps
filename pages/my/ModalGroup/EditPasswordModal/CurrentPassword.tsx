@@ -20,6 +20,7 @@ function CurrentPassword() {
 
     const handleClick = async () => {
         const res = await fetch(`${API_URL}/users/check-password`, {
+            credentials: 'include',
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

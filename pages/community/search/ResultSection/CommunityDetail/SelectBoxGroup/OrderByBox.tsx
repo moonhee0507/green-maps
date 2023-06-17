@@ -15,7 +15,7 @@ function OrderByBox() {
     return (
         <>
             <label htmlFor="orderBySelect">정렬</label>
-            <select id="orderBySelect" onChange={handleChange}>
+            <select id="orderBySelect" onChange={handleChange} className="select-community-search">
                 <option value="latest">최신순</option>
                 <option value="accuracy">정확도</option>
                 <option value="comment">댓글</option>

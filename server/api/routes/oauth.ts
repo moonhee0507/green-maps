@@ -48,7 +48,8 @@ export default (app: Router) => {
                     maxAge: data.expires_in * 1000,
                     httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                     secure: true, // https에서만 사용
-                    sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                    sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값
+                    domain: '.green-maps.site',
                 })
                     .status(200)
                     .json({
@@ -120,7 +121,8 @@ export default (app: Router) => {
                                 maxAge: 7 * 24 * 60 * 60 * 1000,
                                 httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                                 secure: true, // https에서만 사용
-                                sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                                sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값: strict는 cors 비허용, lax는 링크를 따라갈때만 cors 허용
+                                domain: '.green-maps.site',
                             })
                                 .status(200)
                                 .json({ success: true, keepLogin: true, user: user });
@@ -138,9 +140,10 @@ export default (app: Router) => {
                         else {
                             res.cookie('auth', user.token, {
                                 maxAge: 7 * 24 * 60 * 60 * 1000,
-                                httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
-                                secure: true, // https에서만 사용
-                                sameSite: 'strict', // Set-Cookie의 SameSite 속성에 대한 값
+                                httpOnly: true,
+                                secure: true,
+                                sameSite: 'none',
+                                domain: '.green-maps.site',
                             })
                                 .status(200)
                                 .json({ success: true, keepLogin: true, user: user });
@@ -170,7 +173,12 @@ export default (app: Router) => {
             const data = (await response.json()) as { id: number };
 
             if (response.ok === true) {
-                res.clearCookie('kakaoAccessToken', { httpOnly: true, secure: true, sameSite: 'strict' }).json({
+                res.clearCookie('kakaoAccessToken', {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: 'none',
+                    domain: '.green-maps.site',
+                }).json({
                     success: true,
                     message: `회원번호 ${data.id}이 로그아웃 되었습니다.`,
                 });

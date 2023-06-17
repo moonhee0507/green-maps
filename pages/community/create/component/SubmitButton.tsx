@@ -18,7 +18,10 @@ function SubmitButton() {
     const content = useAppSelector((state) => state.postSlice.CONTENT);
 
     const getUserInfo = useCallback(async () => {
-        const res = await fetch(`${API_URL}/users/`);
+        const res = await fetch(`${API_URL}/users/`, {
+            credentials: 'include',
+            method: 'GET',
+        });
         const data = await res.json();
 
         return data.user;
@@ -44,6 +47,7 @@ function SubmitButton() {
             };
 
             const res = await fetch(`${API_URL}/posts/${editMode ? postId : ''}`, {
+                credentials: 'include',
                 method: editMode ? 'PATCH' : 'POST',
                 headers: {
                     'Content-Type': 'application/json',

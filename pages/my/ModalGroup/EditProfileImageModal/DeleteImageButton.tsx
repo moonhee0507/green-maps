@@ -11,6 +11,7 @@ function DeleteImageButton() {
     const handleClick = async () => {
         try {
             await fetch(`${API_URL}/users/edit/profile`, {
+                credentials: 'include',
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

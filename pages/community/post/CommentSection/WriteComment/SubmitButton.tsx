@@ -9,11 +9,16 @@ function SubmitButton(props: { postId: string; content: string | null }) {
 
     useEffect(() => {
         getUserId()
-            .then((userId) => setUserId(userId))
+            .then((userId) => {
+                setUserId(userId); // ok
+            })
             .catch((err) => console.error(err));
 
         async function getUserId() {
-            const res = await fetch(`${API_URL}/users/`);
+            const res = await fetch(`${API_URL}/users/`, {
+                credentials: 'include',
+                method: 'GET',
+            });
             const data = await res.json();
 
             return data.user.nickName;
@@ -29,6 +34,7 @@ function SubmitButton(props: { postId: string; content: string | null }) {
                 };
 
                 const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
+                    credentials: 'include',
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

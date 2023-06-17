@@ -1,6 +1,6 @@
 import { Response, NextFunction } from 'express';
-import User from '../models/User.js';
 import fetch from 'node-fetch';
+import User from '../models/User.js';
 
 const checkTargetId = async (req: any, res: Response, next: NextFunction) => {
     const token = req.cookies.kakaoAccessToken;

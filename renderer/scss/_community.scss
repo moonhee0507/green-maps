@@ -107,6 +107,11 @@
     .txt-postitem-content {
         margin: 5px 0 5px;
     }
+
+    .txt-subject-in-community {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
 }
 
 // 좋아요 수 - 댓글 수 - 날짜
@@ -304,11 +309,14 @@ $inputHeight: 45px;
 
 .community-search-main {
     @include extensive-content;
+    padding: 10px;
 
     .container-search-input {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        gap: 5px;
+        margin-bottom: 10px;
 
         #communitySearchResult {
             -webkit-box-flex: 1;
@@ -317,6 +325,15 @@ $inputHeight: 45px;
             height: $inputHeight;
             padding: 0 10px 0;
             border: 1px solid $border-color;
+            width: 100%;
+            @include styled-input;
+            height: 45px;
+        }
+
+        #communitySearchResult + button {
+            width: 55px;
+            font-weight: bold;
+            border-radius: $default-border-radius;
         }
     }
 
@@ -326,8 +343,8 @@ $inputHeight: 45px;
         #communitySearchSelect {
             width: inherit;
             height: $inputHeight;
-            border-radius: 0;
             border: 1px solid $border-color;
+            border-radius: $default-border-radius;
             padding: 0 6px 0;
         }
     }
@@ -339,12 +356,20 @@ $inputHeight: 45px;
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
         justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
         padding: $padding;
         border-bottom: 1px solid $border-color;
         background-color: white; // 흰색 안하면 투명
+        margin-top: 20px;
 
         .txt-total-search {
             margin: 0;
+        }
+
+        .wrapper-selectbox-in-result {
+            color: $label-txt-color;
         }
     }
 }
@@ -428,4 +453,20 @@ $inputHeight: 45px;
     @include styled-input;
     height: 40px;
     padding: 10px;
+}
+
+// 범위, 정렬 셀렉트
+.select-community-search {
+    border: 1px solid $border-color;
+    margin-left: 10px;
+}
+
+label[for='orderBySelect'] {
+    margin-left: 10px;
+}
+
+#communitySearchResult {
+    width: 100%;
+    @include styled-input;
+    border: none;
 }

@@ -1,76 +1,54 @@
-import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
-import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
-import { O as ORDER_MODAL, M as MOVE_LIST_MODAL, a as SET_TARGET_GROUP } from "../chunks/chunk-62270999.js";
-import { B as BookmarkList, M as ModalGroup } from "../chunks/chunk-9d3ce59c.js";
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+import React, { useState, useEffect } from "react";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import "react";
+import { M as ModalGroup } from "../chunks/chunk-758cdb5e.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
+import "../chunks/chunk-0e4e6c3d.js";
 import "react-redux";
-import "../chunks/chunk-84869d4d.js";
+import "../chunks/chunk-94504c62.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
+import "../chunks/chunk-24b72a12.js";
+import "../chunks/chunk-1a5b0e59.js";
 import "../chunks/chunk-0eea5c60.js";
-import "../chunks/chunk-98410492.js";
+import "../chunks/chunk-f2c28349.js";
 import "../chunks/chunk-edfa0bc8.js";
 import "vite-plugin-ssr/client/router";
-import "../chunks/chunk-5773d256.js";
+import "../chunks/chunk-042cff01.js";
 import "redux";
-import "../chunks/chunk-0a6e623f.js";
+import "../chunks/chunk-1643b273.js";
 import "../chunks/chunk-4ef07e33.js";
 import "../chunks/chunk-9fb42db4.js";
-import "../chunks/chunk-ef8ab02b.js";
+import "../chunks/chunk-d2c63902.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
-import "../chunks/chunk-9dd0cb44.js";
-import "../chunks/chunk-24b72a12.js";
-function GroupDetail({ lists, groupName }) {
-  const order = useAppSelector((state) => state.myListSlice.groupNameOrder);
-  const dispatch = useAppDispatch();
-  function handleOrder() {
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.add("modal-mode");
-    dispatch(ORDER_MODAL(true));
-  }
-  function handleEdit() {
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.add("modal-mode");
-    dispatch(MOVE_LIST_MODAL(true));
-    dispatch(SET_TARGET_GROUP(groupName));
-  }
-  return /* @__PURE__ */ jsxs("div", { className: "style-wrapper-bookmark-detail", children: [
-    /* @__PURE__ */ jsxs("div", { className: "wrapper-groupcount-orderbox", children: [
-      /* @__PURE__ */ jsxs("p", { className: "txt-bookmarkgroup", children: [
-        "전체 ",
-        /* @__PURE__ */ jsx("span", { children: lists.length })
-      ] }),
-      /* @__PURE__ */ jsx("div", { className: "container-order-bookmarkgroup", children: /* @__PURE__ */ jsx("button", { type: "button", className: "button-order-bookmarkgroup", onClick: handleOrder, children: order }) })
-    ] }),
-    /* @__PURE__ */ jsx("button", { type: "button", className: "button-edit-bookmarkgroup", onClick: handleEdit, children: "편집하기" })
-  ] });
-}
-function BookmarkListMain({ info, lists, groupName }) {
-  return /* @__PURE__ */ jsxs("main", { className: "main-bookmarklist", children: [
-    /* @__PURE__ */ jsx(GroupDetail, { lists, groupName }),
-    /* @__PURE__ */ jsx(BookmarkList, { lists })
-  ] });
-}
+import "../chunks/chunk-db98b5a2.js";
+import "../chunks/chunk-dfb70939.js";
+const BookmarkListMain = React.lazy(() => import("../chunks/chunk-98760f00.js"));
 function Page(pageContext) {
-  const { routeParams, user } = pageContext;
-  const { isLoggedIn, info } = user;
-  const listHasGroupName = info == null ? void 0 : info.bookmarkList.filter((list) => list.groupName === (routeParams == null ? void 0 : routeParams.bookmarkGroupName));
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
+  const { routeParams } = pageContext;
+  const [isLoggedIn, info] = useCheckLoginStatus();
+  const [listHasGroupName, setListHasGroupName] = useState([]);
+  useEffect(() => {
+    if (info !== null) {
+      setListHasGroupName(info.bookmarkList.filter((list) => list.groupName === (routeParams == null ? void 0 : routeParams.bookmarkGroupName)));
+    }
+  }, [info]);
+  return isLoggedIn ? /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: (routeParams == null ? void 0 : routeParams.bookmarkGroupName) || "" }),
-    /* @__PURE__ */ jsx(
+    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: /* @__PURE__ */ jsx(
       BookmarkListMain,
       {
         info,
         groupName: (routeParams == null ? void 0 : routeParams.bookmarkGroupName) || "",
-        lists: listHasGroupName || []
+        lists: listHasGroupName
       }
-    ),
+    ) }),
     /* @__PURE__ */ jsx(NavBar, { isLoggedIn }),
     /* @__PURE__ */ jsx(ModalGroup, { userInfo: info })
-  ] });
+  ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
   Page

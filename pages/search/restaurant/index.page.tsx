@@ -3,18 +3,25 @@ import { TopBar } from '../../../components/topBar/topBar';
 import { NavBar } from '../../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
+import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
+import LoadingMain from '../../../components/Loading/LoadingMain';
 import type { PageContext } from '../../../renderer/types';
 import type { Restaurant } from '../../../server/models/Restaurant';
+
+export const documentProps = {
+    title: '채식 식당 검색 | Green Maps',
+    description: '채식 식당 지도 검색 페이지',
+};
 
 const RestaurantDetail = React.lazy(() => import('./RestaurantDetail/RestaurantDetail'));
 
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const { routeParams, user } = pageContext;
+    const { routeParams } = pageContext;
 
+    const [isLoggedIn, userInfo] = useCheckLoginStatus();
     const restaurantId = pageContext.routeParams?.restaurantId || '';
-    // const { isLoggedIn, info } = user;
 
     const [restaurantInfo, setRestaurantInfo] = useState<Restaurant | null>(null);
 
@@ -37,19 +44,11 @@ function Page(pageContext: PageContext) {
     return (
         <>
             <TopBar title="상세정보" />
-            <React.Suspense fallback={<Loading />}>
-                <RestaurantDetail
-                    restaurantInfo={restaurantInfo}
-                    isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false}
-                    userInfo={pageContext.user ? pageContext.user.info : null}
-                />
+            <React.Suspense fallback={<LoadingMain />}>
+                <RestaurantDetail restaurantInfo={restaurantInfo} isLoggedIn={isLoggedIn} userInfo={userInfo} />
             </React.Suspense>
-            <NavBar isLoggedIn={pageContext.user ? pageContext.user.isLoggedIn : false} />
+            <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup />
         </>
     );
-}
-
-function Loading() {
-    return <div>로딩중...</div>;
 }

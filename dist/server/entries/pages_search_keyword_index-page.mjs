@@ -1,17 +1,18 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useRef, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
-import { b as CATEGORIES, c as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-73cc2b76.js";
-import { A as ADD_SELECTED_CATEGORY, p as ADD_SELECTED_CERT, q as SET_ORDER_BY } from "../chunks/chunk-0a6e623f.js";
-import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
+import { a as CATEGORIES, b as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-7590a0cb.js";
+import { A as ADD_SELECTED_CATEGORY, m as ADD_SELECTED_CERT, n as SET_ORDER_BY } from "../chunks/chunk-1643b273.js";
+import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-24b72a12.js";
-import "../chunks/chunk-9dd0cb44.js";
+import "../chunks/chunk-6c356fa9.js";
 import "vite-plugin-ssr/client/router";
 import "../chunks/chunk-0eea5c60.js";
 import "../chunks/chunk-db98b5a2.js";
@@ -186,6 +187,7 @@ function KeywordSearchResultMain({
 }
 function Page(pageContext) {
   var _a;
+  const [isLoggedIn, __] = useCheckLoginStatus();
   const keyword = ((_a = pageContext.routeParams) == null ? void 0 : _a.keyword) || "";
   const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
   const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
@@ -232,7 +234,7 @@ function Page(pageContext) {
         searchListInPage
       }
     ),
-    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false })
+    /* @__PURE__ */ jsx(NavBar, { isLoggedIn })
   ] });
 }
 export {

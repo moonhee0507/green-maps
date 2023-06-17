@@ -5,7 +5,11 @@ import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
 import store from './store';
 import { Provider } from 'react-redux';
 import { PageShell } from './PageShell';
-import icon from '/images/icon.png';
+import icon512 from '/images/icon.png';
+import icon192 from '/images/icon-192.png';
+import icon180 from '/images/icon-180.png';
+import icon1024 from '/images/icon-1024.png';
+import iconMask from '/images/icon-mask.png';
 import type { PageContextServer } from './types';
 
 export { onBeforeRender, render };
@@ -20,6 +24,7 @@ export const passToClient = [
     'pageHtml',
     'reviews',
     'restaurantInfo',
+    'postId',
 ];
 
 async function render(pageContext: PageContextServer) {
@@ -33,9 +38,9 @@ async function render(pageContext: PageContextServer) {
 
     const { documentProps } = pageContext.exports;
     const title = (documentProps && documentProps.title) || 'Green Maps';
-    const desc = (documentProps && documentProps.description) || '채식 식당 검색과 북마크는 그린 맵';
+    const desc = (documentProps && documentProps.description) || '채식 식당 지도 서비스';
 
-    const manifestUrl = import.meta.env.BASE_URL + 'manifest.json';
+    const manifestUrl = import.meta.env.BASE_URL + 'app.webmanifest';
     const cssUrl = import.meta.env.BASE_URL + 'style/index.css';
 
     const PRELOADED_STATE = JSON.stringify(store);
@@ -45,20 +50,34 @@ async function render(pageContext: PageContextServer) {
     <html lang="ko">
         <head>
             <meta charset="UTF-8" />
-            <link rel="icon" href=${icon} />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <title>${title}</title>
+            <meta name="author" content="moonhee0507" />
+            <link rel="icon" href="${icon512}" />
             <meta name="description" content="${desc}" />
+            <link rel="apple-touch-icon" href="${icon180}" sizes="180x180" />
+            <link rel="mask-icon" href="${iconMask}" color="#00784a" />
             <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
             <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
             <link rel="manifest" href="${manifestUrl}" />
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
             <link rel="stylesheet" href="${cssUrl}" type="text/css" >
-            <title>${title}</title>
+            <meta name="apple-mobile-web-app-capable" content="yes">
+
+            <meta property="og:image" content="${icon512}">
+            <meta property="og:title" content="${title}">
+            <meta property="og:description" content="${desc}" />
+            <meta property="og:url" content="https://www.green-maps.site/">
+
+            <meta property="twitter:image" content="${icon512}">
+            <meta property="twitter:card" content="${icon512}">
+            <meta property="twitter:title" content="Green Maps">
+            <meta property="twitter:description" content="${desc}">
         </head>
         <body>
-            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing?autoload=false"></script>
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
             <div id="page-view">${dangerouslySkipEscape(__PAGE_HTML__)}</div>
             <script type="text/javascript">
                 var global = global || window;
@@ -84,7 +103,8 @@ async function render(pageContext: PageContextServer) {
 }
 
 async function onBeforeRender(pageContext: PageContextServer) {
-    const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo } = pageContext;
+    const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, postId, review } =
+        pageContext;
 
     let pageHtml;
 
@@ -115,6 +135,8 @@ async function onBeforeRender(pageContext: PageContextServer) {
             pageHtml,
             reviews,
             restaurantInfo,
+            postId,
+            review,
         },
     };
 }

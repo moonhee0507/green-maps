@@ -1,18 +1,21 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useState, useEffect, useRef } from "react";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
+import React, { useState, useEffect, useRef } from "react";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import DOMPurify from "isomorphic-dompurify";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
 import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
 import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
-import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
-import { navigate } from "vite-plugin-ssr/client/router";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
+import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
+import { navigate } from "vite-plugin-ssr/client/router";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
 import "@reduxjs/toolkit";
+import "../chunks/chunk-dfb70939.js";
 function TextArea(props) {
   const htmlString = props.content;
   return /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(htmlString) }, style: { wordBreak: "keep-all" } });
@@ -24,6 +27,7 @@ function PostLikeButton(props) {
   const [buttonOn, setButtonOn] = useState(false);
   useEffect(() => {
     getUserId().then((userId2) => {
+      console.log("PostLikeButton userId", userId2);
       setUserId(userId2);
     }).catch((err) => console.error(err));
     async function getUserId() {
@@ -43,6 +47,7 @@ function PostLikeButton(props) {
   }
   async function addLike() {
     const res = await fetch(`${API_URL}/posts/${postId}/like`, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -56,6 +61,7 @@ function PostLikeButton(props) {
   }
   async function delLike() {
     const res = await fetch(`${API_URL}/posts/${postId}/like`, {
+      credentials: "include",
       method: "DELETE",
       headers: {
         "Content-Type": "application/json"
@@ -81,8 +87,7 @@ function MoreButton$1({ userInfo, owner, postId }) {
       setUser(userInfo);
   }, [userInfo]);
   function handleClick() {
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.add("modal-mode");
+    appModalMode(true);
     dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
     dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === owner));
     dispatch(SET_POST_ID(postId));
@@ -143,9 +148,14 @@ function SubmitButton(props) {
   const { postId, content } = props;
   const [userId, setUserId] = useState(null);
   useEffect(() => {
-    getUserId().then((userId2) => setUserId(userId2)).catch((err) => console.error(err));
+    getUserId().then((userId2) => {
+      setUserId(userId2);
+    }).catch((err) => console.error(err));
     async function getUserId() {
-      const res = await fetch(`${API_URL}/users/`);
+      const res = await fetch(`${API_URL}/users/`, {
+        credentials: "include",
+        method: "GET"
+      });
       const data = await res.json();
       return data.user.nickName;
     }
@@ -158,6 +168,7 @@ function SubmitButton(props) {
           content
         };
         const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
+          credentials: "include",
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -298,6 +309,7 @@ function EditCommentButton({ postId, commentId }) {
   }
   async function editComment(content) {
     const res = await fetch(`${API_URL}/comments/${commentId}?postId=${postId}`, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -396,6 +408,7 @@ function DELETE() {
   async function deletePost() {
     try {
       const res = await fetch(`${API_URL}/posts/${postId}`, {
+        credentials: "include",
         method: "DELETE"
       });
       const data = await res.json();
@@ -414,6 +427,7 @@ function DELETE() {
   async function deleteComment() {
     try {
       const res = await fetch(`${API_URL}/comments/${commentId}?postId=${postId}`, {
+        credentials: "include",
         method: "DELETE"
       });
       const data = await res.json();
@@ -459,39 +473,49 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-function Page(pageProps) {
+function Page(pageContext) {
+  var _a;
+  const postId = ((_a = pageContext.routeParams) == null ? void 0 : _a.postId) || "";
   const dispatch = useAppDispatch();
-  const [userInfo, setUserInfo] = useState(null);
-  const postInfo = pageProps.postInfo;
-  const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
+  const [_, userInfo] = useCheckLoginStatus();
+  const [postInfo, setPostInfo] = useState(null);
   useEffect(() => {
-    getUserInfo().then((data) => {
-      if (data.success) {
-        setUserInfo(data.user);
-      }
+    getPostInfo().then((post) => {
+      if (post) {
+        setPostInfo(post);
+      } else
+        setPostInfo(null);
     });
   }, []);
-  useEffect(() => {
-    const obj = {};
-    for (let i = 0; i < comments.length; i = i + 10) {
-      const arrPerPage = comments.slice(i, i + 10);
-      obj[i / 10] = arrPerPage;
-    }
-    dispatch(SET_COMMENT(obj));
-  }, [pageProps]);
-  async function getUserInfo() {
-    const res = await fetch(`${API_URL}/users`);
+  async function getPostInfo() {
+    const res = await fetch(`${API_URL}/posts/${postId}`, {
+      headers: {
+        "Cache-Control": "max-age=31536000"
+      }
+    });
     const data = await res.json();
     return data;
   }
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
-    /* @__PURE__ */ jsx(TopBar, { title: subject }),
+  useEffect(() => {
+    if (postInfo) {
+      if (postInfo.comments) {
+        const obj = {};
+        for (let i = 0; i < postInfo.comments.length; i = i + 10) {
+          const arrPerPage = postInfo.comments.slice(i, i + 10);
+          obj[i / 10] = arrPerPage;
+        }
+        dispatch(SET_COMMENT(obj));
+      }
+    }
+  }, [postInfo]);
+  return postInfo ? /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
+    /* @__PURE__ */ jsx(TopBar, { title: postInfo.subject }),
     /* @__PURE__ */ jsxs("main", { className: "main-read-post", children: [
       /* @__PURE__ */ jsx(ContentSection, { userInfo, postInfo }),
-      /* @__PURE__ */ jsx(CommentSection, { userInfo, postId: _id, comments })
+      /* @__PURE__ */ jsx(CommentSection, { userInfo, postId: postInfo._id, comments: postInfo.comments })
     ] }),
     /* @__PURE__ */ jsx(ModalGroup, {})
-  ] });
+  ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
   Page

@@ -1,28 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../../components/topBar/topBar';
-import { BookmarkListMain } from './BookmarkListMain/BookmarkListMain';
+// import { BookmarkListMain } from './BookmarkListMain/BookmarkListMain';
 import { NavBar } from '../../../components/navBar';
 import { ModalGroup } from '../ModalGroup/ModalGroup';
+import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
 import type { PageContext } from '../../../renderer/types';
+import { Bookmark } from '../../../server/models/User';
+import LoadingMain from '../../../components/Loading/LoadingMain';
 
-export { Page };
+export const documentProps = {
+    title: '내 북마크 | Green Maps',
+    description: '북마크 목록 페이지',
+};
 
-function Page(pageContext: PageContext) {
-    const { routeParams, user } = pageContext;
-    const { isLoggedIn, info } = user;
+const BookmarkListMain = React.lazy(() => import('./BookmarkListMain/BookmarkListMain'));
 
-    const listHasGroupName = info?.bookmarkList.filter((list) => list.groupName === routeParams?.bookmarkGroupName);
+export function Page(pageContext: PageContext) {
+    const { routeParams } = pageContext;
+    const [isLoggedIn, info] = useCheckLoginStatus();
 
-    return (
+    // const listHasGroupName = info?.bookmarkList.filter((list) => list.groupName === routeParams?.bookmarkGroupName);
+    const [listHasGroupName, setListHasGroupName] = useState<Bookmark[]>([]);
+
+    useEffect(() => {
+        if (info !== null) {
+            setListHasGroupName(info.bookmarkList.filter((list) => list.groupName === routeParams?.bookmarkGroupName));
+        }
+    }, [info]);
+
+    return isLoggedIn ? (
         <>
             <TopBar title={routeParams?.bookmarkGroupName || ''} />
-            <BookmarkListMain
-                info={info}
-                groupName={routeParams?.bookmarkGroupName || ''}
-                lists={listHasGroupName || []}
-            />
+            <React.Suspense fallback={<LoadingMain />}>
+                <BookmarkListMain
+                    info={info}
+                    groupName={routeParams?.bookmarkGroupName || ''}
+                    lists={listHasGroupName}
+                />
+            </React.Suspense>
             <NavBar isLoggedIn={isLoggedIn} />
             <ModalGroup userInfo={info} />
         </>
+    ) : (
+        <LoadingMain />
     );
 }

@@ -8,7 +8,11 @@ function ButtonGoBack() {
     const isSigningUp = useAppSelector((state) => state.signupSlice.isSigningUp);
 
     function goBack() {
-        window.history.back();
+        if (window.location.pathname.includes('/community/search/')) {
+            window.location.href = '/community';
+        } else {
+            window.history.back();
+        }
     }
 
     return (

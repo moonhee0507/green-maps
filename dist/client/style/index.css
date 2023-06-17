@@ -1075,11 +1075,22 @@ button[aria-label="식당 검색 버튼"] {
   scrollbar-width: none; /* firefox */
   flex-grow: 1; /*긴 화면*/
   /* edge, chrome */
-  background: url("/images/splash.jpg") no-repeat center center/cover;
   position: relative;
 }
 .home-content::-webkit-scrollbar {
   display: none;
+}
+.home-content::after {
+  position: absolute;
+  content: "";
+  background-color: #00784a;
+  opacity: 25%;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  bottom: 0px;
+  right: 0px;
+  animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
 }
 
 .container-title {
@@ -1123,22 +1134,71 @@ button[aria-label="식당 검색 버튼"] {
   line-height: 1.5;
 }
 
-.container-start {
-  position: absolute;
-  bottom: 35px;
-  right: 41px;
-  padding: 15px;
+.button-pwa {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
   border-radius: 10px;
-  border: 0;
-  background-color: rgba(1, 1, 1, 0.5);
-}
-.container-start > a {
-  letter-spacing: 1px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #ffffff;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
 }
 
+.button-pwa:before {
+  content: "";
+  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-pwa 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+@keyframes glowing-button-pwa {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+.button-pwa:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+@keyframes outCircle {
+  0% {
+    transform: scale(1.5);
+  }
+  60% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1.5);
+  }
+}
 .main-login {
   overflow: scroll;
   scrollbar-width: none; /* firefox */
@@ -1453,6 +1513,10 @@ button[aria-label="식당 검색 버튼"] {
 .wrapper-posts .txt-postitem-content {
   margin: 5px 0 5px;
 }
+.wrapper-posts .txt-subject-in-community {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
 
 .container-post-subinfo {
   display: flex;
@@ -1623,18 +1687,32 @@ button[aria-label="식당 검색 버튼"] {
   scrollbar-width: none; /* firefox */
   flex-grow: 1; /*긴 화면*/
   /* edge, chrome */
+  padding: 10px;
 }
 .community-search-main::-webkit-scrollbar {
   display: none;
 }
 .community-search-main .container-search-input {
   display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
 }
 .community-search-main .container-search-input #communitySearchResult {
   flex-grow: 1;
   height: 45px;
   padding: 0 10px 0;
   border: 1px solid #d3d3d3;
+  width: 100%;
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  height: 45px;
+}
+.community-search-main .container-search-input #communitySearchResult + button {
+  width: 55px;
+  font-weight: bold;
+  border-radius: 10px;
 }
 .community-search-main .container-search-select {
   width: 100%;
@@ -1642,19 +1720,24 @@ button[aria-label="식당 검색 버튼"] {
 .community-search-main .container-search-select #communitySearchSelect {
   width: inherit;
   height: 45px;
-  border-radius: 0;
   border: 1px solid #d3d3d3;
+  border-radius: 10px;
   padding: 0 6px 0;
 }
 .community-search-main .result-community-detail {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px;
   border-bottom: 1px solid #d3d3d3;
   background-color: white;
+  margin-top: 20px;
 }
 .community-search-main .result-community-detail .txt-total-search {
   margin: 0;
+}
+.community-search-main .result-community-detail .wrapper-selectbox-in-result {
+  color: #4f4f4f;
 }
 
 .modal-edit-delete-notify {
@@ -1729,6 +1812,24 @@ button[aria-label="식당 검색 버튼"] {
   height: 50px;
   height: 40px;
   padding: 10px;
+}
+
+.select-community-search {
+  border: 1px solid #d3d3d3;
+  margin-left: 10px;
+}
+
+label[for=orderBySelect] {
+  margin-left: 10px;
+}
+
+#communitySearchResult {
+  width: 100%;
+  border: 0;
+  background-color: #e9e9e9;
+  border-radius: 10px;
+  height: 50px;
+  border: none;
 }
 
 .main-my {

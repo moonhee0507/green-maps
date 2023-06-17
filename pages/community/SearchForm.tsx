@@ -9,9 +9,15 @@ function SearchForm() {
     const inputElement = useRef<HTMLInputElement>(null);
 
     function moveToPage(): void {
-        const keyword = inputElement.current?.value;
-        const url = `/community/search/${keyword}`;
-        navigate(url, { keepScrollPosition: true });
+        if (inputElement.current !== null) {
+            const keyword = inputElement.current.value;
+            if (keyword.length > 0) {
+                const url = `/community/search/${keyword}`;
+                navigate(url, { keepScrollPosition: true });
+            } else {
+                window.alert('검색어를 입력해주세요.');
+            }
+        }
     }
 
     return (

@@ -33,7 +33,6 @@ function CompleteButton({ userInfo }: { userInfo: UserInfo | null }) {
             });
 
             const data = await res.json();
-            console.log(data);
 
             if (data.success === true) {
                 window.location.reload();

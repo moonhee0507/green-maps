@@ -9,6 +9,10 @@ import type { PageContext } from '../../../../renderer/types';
 import type { UserInfo } from '../../../../server/models/User';
 import type { GroupList } from '../../../../server/models/Bookmark';
 
+export const documentProps = {
+    title: '북마크 그룹 목록 편집 | Green Maps',
+    description: '북마크 그룹 목록 편집 페이지',
+};
 export { Page };
 
 function Page(pageContext: PageContext) {

@@ -8,34 +8,30 @@ import {
     SET_USERID,
 } from '../../../renderer/_reducers/_slices/profileSlice';
 import type { UserInfo } from '../../../server/models/User';
+import appModalMode from '../../../components/modal/appModalMode';
 
 export { ProfileEdit };
 
 function ProfileEdit({ userInfo }: { userInfo: UserInfo }) {
-    const { nickName, userId } = userInfo;
+    const { nickName, userId, host } = userInfo;
     const dispatch = useAppDispatch();
 
     const handleEditProfileImg = () => {
-        modalModeOn();
+        appModalMode(true);
         dispatch(PROFILE_IMAGE_MODAL(true));
     };
 
     const handleEditNickName = () => {
-        modalModeOn();
+        appModalMode(true);
         dispatch(PROFILE_NICKNAME_MODAL(true));
         dispatch(SET_NICKNAME(nickName));
     };
 
     const handleEditPassword = () => {
-        modalModeOn();
+        appModalMode(true);
         dispatch(PROFILE_PASSWORD_MODAL(true));
         dispatch(SET_USERID(userId));
     };
-
-    function modalModeOn() {
-        const app = document.querySelector('.app');
-        app?.classList.add('modal-mode');
-    }
 
     return (
         <li className="list-account">
@@ -47,9 +43,11 @@ function ProfileEdit({ userInfo }: { userInfo: UserInfo }) {
                 <li onClick={handleEditNickName} className="list-edit">
                     닉네임 변경
                 </li>
-                <li onClick={handleEditPassword} className="list-edit">
-                    비밀번호 변경
-                </li>
+                {host === 'local' ? (
+                    <li onClick={handleEditPassword} className="list-edit">
+                        비밀번호 변경
+                    </li>
+                ) : null}
             </ul>
         </li>
     );

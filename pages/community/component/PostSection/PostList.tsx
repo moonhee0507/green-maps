@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import PostListItem from './PostListItem';
-import useIntersectionObserver from './useIntersectionObserver';
+import useIntersectionObserver from '../../useIntersectionObserver';
 import { useDispatch, useStore } from 'react-redux';
 import type { Post } from '../../../../server/models/Post';
 
@@ -43,13 +43,11 @@ function PostList(props: { posts: Array<Post>; limit: number }) {
 
     return (
         <ul className="wrapper-posts">
-            {posts
-                .filter((post) => post.subject !== '공지사항')
-                .map((post, i) => {
-                    if (i === posts.length - 1) {
-                        return <PostListItem key={i} postInfo={post} ref={target} />;
-                    } else return <PostListItem key={i} postInfo={post} />;
-                })}
+            {posts.map((post, i) => {
+                if (i === posts.length - 1) {
+                    return <PostListItem key={i} postInfo={post} ref={target} />;
+                } else return <PostListItem key={i} postInfo={post} />;
+            })}
         </ul>
     );
 }

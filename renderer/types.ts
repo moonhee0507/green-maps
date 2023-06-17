@@ -26,6 +26,7 @@ type PageProps = {
         isLoggedIn: boolean;
         info: UserInfo | null;
     };
+    postId?: string;
 };
 type RouteParams = { keyword?: string };
 
@@ -49,6 +50,8 @@ export type PageContextCustom = {
     token: string;
     restaurantInfo: Restaurant;
     reviews: Review[];
+    postId: string;
+    review: Review;
 };
 
 type PageContextServer = PageContextBuiltIn<Page> & PageContextCustom;

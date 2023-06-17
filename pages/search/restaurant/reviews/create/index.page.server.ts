@@ -11,7 +11,6 @@ export { onBeforeRender };
 
 async function onBeforeRender(pageContext: PageContext) {
     const { restaurantId } = pageContext.routeParams as Params;
-    const { user } = pageContext;
 
     const res = await fetch(`${API_URL}/restaurants/${restaurantId}`, {
         headers: {
@@ -25,14 +24,12 @@ async function onBeforeRender(pageContext: PageContext) {
         return {
             pageContext: {
                 restaurantInfo: data.restaurantInfo,
-                user: user,
             },
         };
     } else {
         return {
             pageContext: {
                 restaurantInfo: {},
-                user: user,
             },
         };
     }

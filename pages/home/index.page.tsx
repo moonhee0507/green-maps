@@ -1,33 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import LoadingMain from '../../components/Loading/LoadingMain';
+import imgLoading from '/images/spinner.gif';
 
 export { Page };
 
 export const documentProps = {
     title: '홈 | Green Maps',
-    description: '채식 식당 검색과 북마크 서비스',
+    description: '채식 식당 지도 서비스',
 };
 
+const HomeMain = React.lazy(() => import('./HomeMain'));
+
+export interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: Array<string>;
+    readonly userChoice: Promise<{
+        outcome: 'accepted' | 'dismissed';
+        platform: string;
+    }>;
+    prompt(): Promise<void>;
+}
+
 function Page() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+
+    const handleBeforeInstallPrompt = (event: BeforeInstallPromptEvent) => {
+        event.preventDefault();
+
+        setDeferredPrompt(event);
+    };
+
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setIsLoading(false);
+        }, 5000);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!isLoading) {
+            window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt as any); // (지원 o) chrome 44, edge 79, opera, 삼성브라우저, android webview / (지원 x) 사파리, ios 사파리, firefox
+        }
+
+        return () => {
+            window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt as any);
+        };
+    }, [isLoading]);
+
     return (
-        <main className="home-content">
-            <div className="container-title">
-                <h2>
-                    <span>Green</span>
-                    <span>Maps</span>
-                </h2>
-            </div>
-            <section className="section-desc-service">
-                <h3>이런 서비스에요!</h3>
-                <div className="container-desc-service">
-                    <p>전국 2400개의 채식 식당을 찾을 수 있어요.</p>
-                    <p>북마크를 그룹으로 관리해요.</p>
-                    <p>채식 식당에 대한 후기를 남길 수 있어요.</p>
-                    <p>게시판을 통해 소통해요!</p>
+        <React.Suspense fallback={<LoadingMain />}>
+            {isLoading ? (
+                <div
+                    style={{
+                        width: '50px',
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        opacity: '0.33',
+                    }}
+                >
+                    <img src={imgLoading} alt="로딩" style={{ width: '100%' }} id="__LOADING__" />
                 </div>
-            </section>
-            <div className="container-start">
-                <a href="/search">🎉Start</a>
-            </div>
-        </main>
+            ) : null}
+            <HomeMain deferredPrompt={deferredPrompt} setDeferredPrompt={setDeferredPrompt} />
+        </React.Suspense>
     );
 }

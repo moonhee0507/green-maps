@@ -1,28 +1,31 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useRef, useState, useEffect, useCallback } from "react";
-import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-c407c4c8.js";
+import React, { useRef, useState, useEffect } from "react";
+import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as SET_MAP_MODE, m as SET_RESULT_IN_RADIUS, n as SET_NEAREST_LIST, o as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-0a6e623f.js";
+import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-1643b273.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { renderToString } from "react-dom/server";
-import { s as store } from "../chunks/chunk-5773d256.js";
+import { s as store } from "../chunks/chunk-042cff01.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
-import { R as RestaurantListItem, C as CategoryFilterModal, a as RestaurantList } from "../chunks/chunk-73cc2b76.js";
-import { P as Pagination } from "../chunks/chunk-81aa5fb2.js";
+import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
+import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-7590a0cb.js";
+import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
 import "@reduxjs/toolkit";
 import "redux";
 import "../chunks/chunk-4ef07e33.js";
 import "../chunks/chunk-9fb42db4.js";
 import "../chunks/chunk-3e2eef8e.js";
-import "../chunks/chunk-62270999.js";
-import "../chunks/chunk-ef8ab02b.js";
+import "../chunks/chunk-1a5b0e59.js";
+import "../chunks/chunk-d2c63902.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
-import "../chunks/chunk-9dd0cb44.js";
+import "../chunks/chunk-6c356fa9.js";
 import "../chunks/chunk-24b72a12.js";
 function SearchForm() {
   const inputElement = useRef(null);
@@ -507,15 +510,37 @@ function clearCircle() {
   }
 }
 function addBoundChangeEvent() {
+  let timeoutId;
+  const app = document.querySelector(".app");
+  const LoadingElement = () => {
+    const imgElement = document.createElement("img");
+    imgElement.src = imgLoading;
+    imgElement.alt = "좌표 생성 로딩";
+    imgElement.style.width = "50px";
+    imgElement.style.position = "absolute";
+    imgElement.style.top = "50%";
+    imgElement.style.left = "50%";
+    imgElement.style.transform = "translate(-50%, -50%)";
+    imgElement.id = "__LOADING__";
+    imgElement.style.zIndex = "9999";
+    return imgElement;
+  };
   kakao$1.maps.event.addListener(map, "bounds_changed", function() {
-    const polygon = getCurrentView();
-    getListInCurrentView(polygon).then((res) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(async () => {
+      if (app !== null) {
+        app.appendChild(LoadingElement());
+      }
+      const polygon = getCurrentView();
+      const res = await getListInCurrentView(polygon);
       paintVeganRestaurantMarker(res);
-      store.dispatch({
-        type: "mapSlice/CHANGED_CENTER",
-        COUNT: res.length
-      });
-    });
+      if (app !== null) {
+        const LoadingElement2 = document.getElementById("__LOADING__");
+        if (LoadingElement2) {
+          app.removeChild(LoadingElement2);
+        }
+      }
+    }, 1e3);
   });
 }
 function getCurrentView() {
@@ -872,161 +897,6 @@ function NoResult() {
   }, [show]);
   return /* @__PURE__ */ jsx("div", { className: `modal-no-result ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx("p", { children: "결과가 없습니다 😥" }) });
 }
-function ControlButton() {
-  return /* @__PURE__ */ jsxs("div", { className: "wrapper-map-control-button", children: [
-    /* @__PURE__ */ jsxs("div", { className: "container-button-map-mode", children: [
-      /* @__PURE__ */ jsx(ChangeRadius, {}),
-      /* @__PURE__ */ jsx(SelectRegion, {})
-    ] }),
-    /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsx(CategoryFilter, {}) })
-  ] });
-}
-function CategoryFilter() {
-  const dispatch = useAppDispatch();
-  const showListInRegionModalOn = useAppSelector((state) => state.mapSlice.showListInRegionModalOn);
-  const handleClick = () => {
-    dispatch(CATEGORY_FILTER_MODAL(true));
-    if (showListInRegionModalOn === true) {
-      dispatch(SHOW_LIST_IN_REGION_MODAL(false));
-    }
-  };
-  return /* @__PURE__ */ jsx("button", { type: "button", onClick: handleClick, children: "업종 필터" });
-}
-function SelectRegion() {
-  const dispatch = useAppDispatch();
-  const mapMode = useAppSelector((state) => state.mapSlice.mapMode);
-  function handleClick() {
-    appModalMode(true);
-    dispatch(CHANGE_REGION_MODAL(true));
-    dispatch(SHOW_LIST_IN_REGION_MODAL(false));
-    dispatch(SET_MAP_MODE("지역탐색 모드"));
-  }
-  return /* @__PURE__ */ jsx("button", { onClick: handleClick, className: `button-map-mode ${mapMode === "지역탐색 모드" ? "on" : ""}`, children: "지역 탐색 모드" });
-}
-function ChangeRadius() {
-  const dispatch = useAppDispatch();
-  const mapMode = useAppSelector((state) => state.mapSlice.mapMode);
-  const radius = useAppSelector((state) => state.mapSlice.radius);
-  const [calcRadius, setCalcRadius] = useState(radius);
-  const [unit, setUnit] = useState("m");
-  useEffect(() => {
-    if (radius < 1e3) {
-      setCalcRadius(radius);
-      setUnit("m");
-    } else {
-      setCalcRadius(radius / 1e3);
-      setUnit("km");
-    }
-  }, [radius]);
-  const handleClick = () => {
-    appModalMode(true);
-    dispatch(CHANGE_RADIUS_MODAL(true));
-    dispatch(SET_MAP_MODE("반경탐색 모드"));
-  };
-  return /* @__PURE__ */ jsxs(
-    "button",
-    {
-      type: "button",
-      onClick: handleClick,
-      className: `button-map-mode ${mapMode === "반경탐색 모드" ? "on" : ""}`,
-      children: [
-        /* @__PURE__ */ jsx("span", { children: "반경 " }),
-        /* @__PURE__ */ jsx("span", { children: calcRadius }),
-        /* @__PURE__ */ jsx("span", { children: unit }),
-        /* @__PURE__ */ jsx("span", { children: " 탐색 모드" })
-      ]
-    }
-  );
-}
-function KakaoMap({ isLoggedIn: isLoggedIn2 }) {
-  const dispatch = useAppDispatch();
-  const radius = useAppSelector((state) => state.mapSlice.radius);
-  const [isInitialized, setIsInitialized] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState(null);
-  const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
-  useEffect(() => {
-    checkLoginForInfoWindow(isLoggedIn2);
-    init().then((locPosition2) => {
-      setIsInitialized(true);
-      setCurrentLocation([locPosition2.getLng(), locPosition2.getLat()]);
-    });
-  }, []);
-  const getListInRadius = useCallback(
-    async (currentLocation2) => {
-      if (Array.isArray(currentLocation2)) {
-        const res = await fetch(`${API_URL}/map/within-radius-of?radius=${radius}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ currentLocation: currentLocation2, category: selectedCategory })
-        });
-        const data = await res.json();
-        return data;
-      }
-    },
-    [radius, selectedCategory, currentLocation]
-  );
-  const getNearestList = useCallback(
-    async (currentLocation2) => {
-      if (Array.isArray(currentLocation2)) {
-        const count = 5;
-        const res = await fetch(`${API_URL}/map/nearest?top=${count}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ currentLocation: currentLocation2 })
-        });
-        const data = await res.json();
-        return data;
-      }
-    },
-    [radius, currentLocation]
-  );
-  useEffect(() => {
-    if (isInitialized) {
-      clearCircle();
-      setCircle(radius);
-      if (currentLocation) {
-        getListInRadius(currentLocation).then((data) => {
-          if (data.success) {
-            dispatch(SET_RESULT_IN_RADIUS(data.lists));
-            optimizeMapLevel(radius);
-          }
-        });
-        getNearestList(currentLocation).then((data) => {
-          if (data.success) {
-            dispatch(SET_NEAREST_LIST(data.lists));
-          }
-        });
-      }
-    }
-  }, [radius, isInitialized, selectedCategory, currentLocation]);
-  return /* @__PURE__ */ jsx("div", { id: "map" });
-}
-function CountMessage() {
-  const currentSido = useAppSelector((state) => state.mapSlice.currentSido);
-  const currentSigungu = useAppSelector((state) => state.mapSlice.currentSigungu);
-  const resultInRadius = useAppSelector((state) => state.mapSlice.resultInRadius);
-  return resultInRadius.length > 0 ? /* @__PURE__ */ jsxs("p", { className: "txt-result-in-radius", children: [
-    "내 위치(",
-    `${currentSido} ${currentSigungu}`,
-    ")에 검색된 식당 ",
-    /* @__PURE__ */ jsx("span", { children: resultInRadius.length }),
-    "개"
-  ] }) : /* @__PURE__ */ jsxs("p", { className: "txt-result-in-radius", children: [
-    "결과가 없어요!😥",
-    /* @__PURE__ */ jsx("br", {}),
-    "가장 가까운 식당 TOP 5"
-  ] });
-}
-function ResultInRadius() {
-  return /* @__PURE__ */ jsxs("div", { className: "wrapper-result-in-radius", children: [
-    /* @__PURE__ */ jsx(CountMessage, {}),
-    /* @__PURE__ */ jsx(RestaurantList, {})
-  ] });
-}
 function useLocationAccess() {
   const [locationAccess, setLocationAccess] = useState("prompt");
   useEffect(() => {
@@ -1039,61 +909,47 @@ function useLocationAccess() {
   }, []);
   return locationAccess;
 }
-function BackCurrentLocation() {
-  const dispatch = useAppDispatch();
-  const handleClick = () => {
-    moveToCurrentLocation();
-    dispatch(SHOW_LIST_IN_REGION_MODAL(false));
-  };
-  return /* @__PURE__ */ jsx(
-    "button",
-    {
-      type: "button",
-      onClick: handleClick,
-      className: "button-move-to-my",
-      title: "내 위치로",
-      "aria-label": "내 위치로 이동 버튼"
-    }
-  );
-}
+const MapView = React.lazy(() => import("../chunks/chunk-46936600.js"));
 function Page() {
   const dispatch = useAppDispatch();
-  const [isLoggedIn2, setIsLoggedIn] = useState(false);
+  const [hasWindow, setHasWindow] = useState(false);
+  const [isLoggedIn2, _] = useCheckLoginStatus();
   const hasLocationAccess = useLocationAccess();
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API_URL}/users/`);
-      const data = await res.json();
-      if (data.success === true)
-        setIsLoggedIn(true);
-      else
-        setIsLoggedIn(false);
-    })();
+    if (typeof window !== "undefined") {
+      setHasWindow(true);
+    } else
+      setHasWindow(false);
   }, []);
   useEffect(() => {
-    if (hasLocationAccess === "granted") {
-      appModalMode(false);
-      dispatch(CHECK_LOCATION_ACCESS_MODAL(false));
-    } else if (hasLocationAccess === "denied" || hasLocationAccess === "prompt") {
-      appModalMode(true);
-      dispatch(CHECK_LOCATION_ACCESS_MODAL(true));
+    if (hasWindow === true) {
+      if (hasLocationAccess === "granted") {
+        appModalMode(false);
+        dispatch(CHECK_LOCATION_ACCESS_MODAL(false));
+      } else if (hasLocationAccess === "denied" || hasLocationAccess === "prompt") {
+        appModalMode(true);
+        dispatch(CHECK_LOCATION_ACCESS_MODAL(true));
+      }
     }
-  }, [hasLocationAccess]);
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
+  }, [hasWindow, hasLocationAccess]);
+  return hasWindow ? /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
     /* @__PURE__ */ jsx(SearchBar, {}),
     /* @__PURE__ */ jsx(MapView, { isLoggedIn: isLoggedIn2 }),
     /* @__PURE__ */ jsx(NavBar, { isLoggedIn: isLoggedIn2 }),
     /* @__PURE__ */ jsx(ModalGroup, {})
-  ] });
+  ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
-function MapView({ isLoggedIn: isLoggedIn2 }) {
-  return /* @__PURE__ */ jsxs("main", { className: "main-map", children: [
-    /* @__PURE__ */ jsx(ControlButton, {}),
-    /* @__PURE__ */ jsx(KakaoMap, { isLoggedIn: isLoggedIn2 }),
-    /* @__PURE__ */ jsx(BackCurrentLocation, {}),
-    /* @__PURE__ */ jsx(ResultInRadius, {})
-  ] });
-}
-export {
+const index_page = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
   Page
+}, Symbol.toStringTag, { value: "Module" }));
+export {
+  Page,
+  checkLoginForInfoWindow as a,
+  index_page as b,
+  clearCircle as c,
+  init as i,
+  moveToCurrentLocation as m,
+  optimizeMapLevel as o,
+  setCircle as s
 };

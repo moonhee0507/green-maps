@@ -37,7 +37,7 @@ function Pagination({ count, perPage }: { count: number; perPage: number }) {
     }
 
     return (
-        <nav className="wrapper-pagination" style={currentPath === '/search' ? { paddingBottom: '0' } : {}}>
+        <nav className="wrapper-pagination" style={currentPath === '/search' ? { padding: '10px 0 0' } : {}}>
             <ul>
                 <li>
                     <button

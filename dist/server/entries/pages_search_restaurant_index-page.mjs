@@ -1,15 +1,18 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-15d0e39c.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-c407c4c8.js";
+import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { A as API_URL } from "../chunks/chunk-84869d4d.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-24b72a12.js";
+import "../chunks/chunk-dfb70939.js";
 function EditDeleteNotifyModal() {
   const [show, setShow] = useState(false);
   const editDeleteNotifyModalOn = useAppSelector((state) => state.reviewSlice.editDeleteNotifyModalOn);
@@ -47,6 +50,7 @@ function DELETE() {
   async function handleClick() {
     try {
       const res = await fetch(`${API_URL}/reviews/${reviewId}`, {
+        credentials: "include",
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -96,10 +100,11 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-d65f8c83.js"));
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-fc2877b9.js"));
 function Page(pageContext) {
   var _a;
-  const { routeParams, user } = pageContext;
+  const { routeParams } = pageContext;
+  const [isLoggedIn, userInfo] = useCheckLoginStatus();
   const restaurantId = ((_a = pageContext.routeParams) == null ? void 0 : _a.restaurantId) || "";
   const [restaurantInfo, setRestaurantInfo] = useState(null);
   useEffect(() => {
@@ -118,20 +123,10 @@ function Page(pageContext) {
   }
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "상세정보" }),
-    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(Loading, {}), children: /* @__PURE__ */ jsx(
-      RestaurantDetail,
-      {
-        restaurantInfo,
-        isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false,
-        userInfo: pageContext.user ? pageContext.user.info : null
-      }
-    ) }),
-    /* @__PURE__ */ jsx(NavBar, { isLoggedIn: pageContext.user ? pageContext.user.isLoggedIn : false }),
+    /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: /* @__PURE__ */ jsx(RestaurantDetail, { restaurantInfo, isLoggedIn, userInfo }) }),
+    /* @__PURE__ */ jsx(NavBar, { isLoggedIn }),
     /* @__PURE__ */ jsx(ModalGroup, {})
   ] });
-}
-function Loading() {
-  return /* @__PURE__ */ jsx("div", { children: "로딩중..." });
 }
 export {
   Page

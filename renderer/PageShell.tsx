@@ -1,6 +1,6 @@
 import 'normalize.css';
 // import '/style/index.css';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import store from './store';
 import { Provider } from 'react-redux';
 import { PageContextProvider } from './usePageContext';
@@ -39,6 +39,31 @@ function BackgroundArea() {
     );
 }
 
+/**
+ * !모바일 웹 vh 관련
+ */
+
 function App({ children }: { children: React.ReactNode }) {
-    return <div className="app">{children}</div>;
+    const [isMobile, setIsMobile] = useState(false);
+
+    const __APP_Element__ = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+    }, []);
+
+    useEffect(() => {
+        if (isMobile) {
+            const element = __APP_Element__.current as HTMLDivElement;
+            if (element !== null) {
+                element.style.height = window.innerHeight + 'px';
+            }
+        }
+    }, [isMobile]);
+
+    return (
+        <div className="app" ref={__APP_Element__}>
+            {children}
+        </div>
+    );
 }

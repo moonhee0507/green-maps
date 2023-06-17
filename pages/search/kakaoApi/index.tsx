@@ -1,11 +1,14 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { renderToString } from 'react-dom/server';
 import store from '../../../renderer/store/index.js';
 import { SET_CURRENT_LOCATION } from '../../../renderer/_reducers/_slices/mapSlice.js';
 import getListInCurrentView from './getListInCurrentView';
 import InfoWindow from './InfoWindow/InfoWindow.js';
+// import Loading from '../../../components/image/Loading.js';
 import imgLocation from '/images/map-location.png';
 import imgCert from '/images/map-cert-location.png';
+import imgLoading from '/images/spinner.gif';
 import type { Lat, Lng, MongoLocation, MongoPolygon } from './types';
 import type { Restaurant } from './../../../server/models/Restaurant';
 
@@ -107,17 +110,45 @@ export function clearCircle() {
 }
 
 function addBoundChangeEvent() {
-    kakao.maps.event.addListener(map, 'bounds_changed', function () {
-        const polygon = getCurrentView();
+    let timeoutId: number;
+    const app = document.querySelector('.app');
+    // const imgLoading = <Loading />; // React.JSX.Element
+    const LoadingElement = () => {
+        const imgElement = document.createElement('img');
 
-        getListInCurrentView(polygon).then((res) => {
+        imgElement.src = imgLoading;
+        imgElement.alt = '좌표 생성 로딩';
+        imgElement.style.width = '50px';
+        imgElement.style.position = 'absolute';
+        imgElement.style.top = '50%';
+        imgElement.style.left = '50%';
+        imgElement.style.transform = 'translate(-50%, -50%)';
+        imgElement.id = '__LOADING__';
+        imgElement.style.zIndex = '9999';
+
+        return imgElement;
+    };
+
+    kakao.maps.event.addListener(map, 'bounds_changed', function () {
+        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후1초 안움직여야 그려진다)
+        window.clearTimeout(timeoutId); // 타임아웃을 취소하지 않으면 화면이동 많이할 때 요청이 너무 많아짐
+
+        timeoutId = window.setTimeout(async () => {
+            if (app !== null) {
+                app.appendChild(LoadingElement());
+            }
+            const polygon = getCurrentView();
+            const res = await getListInCurrentView(polygon);
+
             paintVeganRestaurantMarker(res);
 
-            store.dispatch({
-                type: 'mapSlice/CHANGED_CENTER',
-                COUNT: res.length,
-            });
-        });
+            if (app !== null) {
+                const LoadingElement = document.getElementById('__LOADING__');
+                if (LoadingElement) {
+                    app.removeChild(LoadingElement);
+                }
+            }
+        }, 1000);
     });
 }
 
