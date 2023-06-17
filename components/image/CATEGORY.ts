@@ -17,7 +17,7 @@ interface CATEGORIES {
 const CATEGORIES: CATEGORIES = {
     일식: {
         thumb: {
-            src: '/images/category-japan.png',
+            src: 'images/category-japan.png',
             copyRight: 'ultimatearm - Flaticon',
         },
         list: ['일식', '퓨전일식', '초밥,롤'],

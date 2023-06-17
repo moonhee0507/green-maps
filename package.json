@@ -1,5 +1,10 @@
 {
     "scripts": {
+        "name": "Green Maps",
+        "version": "0.0.1",
+        "description": "채식 식당 지도 서비스",
+        "author": "moonhee0507",
+        "homepage": "https://green-maps.site",
         "dev": "concurrently \"npm run server\" \"start http://localhost:5000\"",
         "prod": "npm run build && npm run server:prod",
         "build": "vite build",
