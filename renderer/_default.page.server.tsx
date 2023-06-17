@@ -66,13 +66,13 @@ async function render(pageContext: PageContextServer) {
             <link rel="stylesheet" href="${cssUrl}" type="text/css" >
             <meta name="apple-mobile-web-app-capable" content="yes">
 
-            <meta property="og:image" content="${icon1024}">
+            <meta property="og:image" content="${icon512}">
             <meta property="og:title" content="${title}">
             <meta property="og:description" content="${desc}" />
             <meta property="og:url" content="https://www.green-maps.site/">
 
-            <meta property="twitter:image" content="${icon1024}">
-            <meta property="twitter:card" content="${icon1024}">
+            <meta property="twitter:image" content="${icon512}">
+            <meta property="twitter:card" content="${icon512}">
             <meta property="twitter:title" content="Green Maps">
             <meta property="twitter:description" content="${desc}">
         </head>

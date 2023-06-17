@@ -17,6 +17,8 @@ function Page(pageContext: PageContext) {
     const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
 
     useEffect(() => {
+        console.log('pageContext', pageContext);
+
         if (review) {
             if (typeof review.restaurant !== 'string') {
                 setRestaurant(review.restaurant);

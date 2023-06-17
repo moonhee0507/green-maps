@@ -1,6 +1,6 @@
 import 'normalize.css';
 // import '/style/index.css';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import store from './store';
 import { Provider } from 'react-redux';
 import { PageContextProvider } from './usePageContext';
@@ -40,5 +40,30 @@ function BackgroundArea() {
 }
 
 function App({ children }: { children: React.ReactNode }) {
-    return <div className="app">{children}</div>;
+    const [isMobile, setIsMobile] = useState(false);
+
+    const __APP_Element__ = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+        console.log('navigator.userAgent', navigator.userAgent);
+    }, []);
+
+    useEffect(() => {
+        console.log('isMobile', isMobile);
+
+        if (isMobile) {
+            const element = __APP_Element__.current as HTMLDivElement;
+            if (element !== null) {
+                element.style.height = window.innerHeight + 'px';
+                console.log('높이', element.style.height);
+            }
+        }
+    }, [isMobile]);
+
+    return (
+        <div className="app" ref={__APP_Element__}>
+            {children}
+        </div>
+    );
 }
