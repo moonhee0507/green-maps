@@ -21,16 +21,20 @@ function Page() {
 
     useEffect(() => {
         try {
-            (async () => {
-                const res = await fetch(`${API_URL}/bookmark/${info?.userId}`);
-                const data = await res.json();
+            if (info) {
+                (async () => {
+                    const res = await fetch(`${API_URL}/bookmark/${info.userId}`);
+                    const data = await res.json();
 
-                setGroupList(data.groupList);
-            })();
+                    setGroupList(data.groupList);
+                })();
+            }
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    }, [info]);
+
+    console.log(groupList);
 
     return (
         <>
@@ -43,8 +47,6 @@ function Page() {
 }
 
 function GroupListMain({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
-    // const { bookmarkList } = userInfo;
-
     const [bookmarkList, setBookmarkList] = useState<Bookmark[] | null>(null);
 
     useEffect(() => {
@@ -60,7 +62,7 @@ function GroupListMain({ userInfo, groupList }: { userInfo: UserInfo | null; gro
             <section>
                 <h3 className="sr-only">내 북마크 그룹 목록</h3>
                 <Notice />
-                {bookmarkList && (
+                {bookmarkList && groupList && (
                     <GroupNameList userInfo={userInfo} bookmarkList={bookmarkList} groupList={groupList} />
                 )}
             </section>
