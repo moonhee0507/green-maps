@@ -145,12 +145,6 @@ function Time(props) {
 }
 function SubmitButton(props) {
   const { postId, content } = props;
-  const [userId, setUserId] = useState(null);
-  useEffect(() => {
-    getUserId().then((userId2) => {
-      setUserId(userId2);
-    }).catch((err) => console.error(err));
-  }, []);
   async function getUserId() {
     const res = await fetch(`${API_URL}/users/`, {
       credentials: "include",

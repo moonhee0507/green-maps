@@ -9,7 +9,7 @@ import { renderToString } from "react-dom/server";
 import { s as store } from "../chunks/chunk-042cff01.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
 import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
-import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-7590a0cb.js";
+import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-b2822bd5.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
@@ -533,13 +533,10 @@ function addBoundChangeEvent() {
           app.appendChild(LoadingElement());
         }
         const polygon = getCurrentView();
-        console.log("폴리곤 체크");
         if (validatePolygon(polygon)) {
-          console.log("유효한 폴리곤", validatePolygon(polygon));
           const res = await getListInCurrentView(polygon);
           paintVeganRestaurantMarker(res);
         }
-        console.log("폴리곤 체크 종료");
         if (app !== null) {
           const LoadingElement2 = document.getElementById("__LOADING__");
           if (LoadingElement2) {
@@ -927,7 +924,7 @@ const documentProps = {
   title: "채식 식당 지도 | Green Maps",
   description: "채식 식당 지도 페이지"
 };
-const MapView = React.lazy(() => import("../chunks/chunk-2c4b445d.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-b11acc79.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);

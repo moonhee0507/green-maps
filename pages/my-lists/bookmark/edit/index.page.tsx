@@ -6,7 +6,7 @@ import { NavBar } from '../../../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
 import { useCheckLoginStatus } from '../../../../renderer/_hooks/useCheckLoginStatus';
-import type { UserInfo } from '../../../../server/models/User';
+import type { Bookmark, UserInfo } from '../../../../server/models/User';
 import type { GroupList } from '../../../../server/models/Bookmark';
 
 export const documentProps = {
@@ -43,14 +43,26 @@ function Page() {
 }
 
 function GroupListMain({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
-    const { bookmarkList } = userInfo as UserInfo;
+    // const { bookmarkList } = userInfo;
+
+    const [bookmarkList, setBookmarkList] = useState<Bookmark[] | null>(null);
+
+    useEffect(() => {
+        if (userInfo !== null) {
+            setBookmarkList(userInfo.bookmarkList);
+        } else {
+            setBookmarkList(null);
+        }
+    }, [userInfo]);
 
     return (
         <main className="main-group-list">
             <section>
                 <h3 className="sr-only">내 북마크 그룹 목록</h3>
                 <Notice />
-                <GroupNameList userInfo={userInfo} bookmarkList={bookmarkList} groupList={groupList} />
+                {bookmarkList && (
+                    <GroupNameList userInfo={userInfo} bookmarkList={bookmarkList} groupList={groupList} />
+                )}
             </section>
         </main>
     );
