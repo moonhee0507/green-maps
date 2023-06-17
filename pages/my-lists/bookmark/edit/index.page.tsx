@@ -5,7 +5,7 @@ import { GroupNameList } from './GroupNameList/GroupNameList';
 import { NavBar } from '../../../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
-import type { PageContext } from '../../../../renderer/types';
+import { useCheckLoginStatus } from '../../../../renderer/_hooks/useCheckLoginStatus';
 import type { UserInfo } from '../../../../server/models/User';
 import type { GroupList } from '../../../../server/models/Bookmark';
 
@@ -15,8 +15,8 @@ export const documentProps = {
 };
 export { Page };
 
-function Page(pageContext: PageContext) {
-    const { isLoggedIn, info } = pageContext.user;
+function Page() {
+    const [isLoggedIn, info] = useCheckLoginStatus();
     const [groupList, setGroupList] = useState<GroupList[] | null>(null);
 
     useEffect(() => {
