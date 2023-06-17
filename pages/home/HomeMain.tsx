@@ -9,7 +9,6 @@ export default function HomeMain({
     deferredPrompt: BeforeInstallPromptEvent | null;
     setDeferredPrompt: React.Dispatch<React.SetStateAction<BeforeInstallPromptEvent | null>>;
 }) {
-    console.log(deferredPrompt);
     const handleInstall = () => {
         if (deferredPrompt) {
             deferredPrompt.prompt();
@@ -56,6 +55,7 @@ export default function HomeMain({
                     </button>
                 )}
             </section>
+            <div className="sudo-circle" />
         </main>
     );
 }

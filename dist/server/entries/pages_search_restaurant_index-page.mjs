@@ -100,7 +100,11 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-fc2877b9.js"));
+const documentProps = {
+  title: "채식 식당 검색 | Green Maps",
+  description: "채식 식당 지도 검색 페이지"
+};
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-a1c75c48.js"));
 function Page(pageContext) {
   var _a;
   const { routeParams } = pageContext;
@@ -129,5 +133,6 @@ function Page(pageContext) {
   ] });
 }
 export {
-  Page
+  Page,
+  documentProps
 };

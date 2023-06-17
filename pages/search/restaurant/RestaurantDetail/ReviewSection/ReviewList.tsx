@@ -21,7 +21,7 @@ function ReviewList({
                     {reviews.map((review, i) => {
                         return (
                             <ReviewListItem
-                                key={i}
+                                key={review._id}
                                 item={review}
                                 userInfo={userInfo}
                                 restaurantId={restaurantId}

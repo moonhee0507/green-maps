@@ -45,8 +45,8 @@ function PostList(props: { posts: Array<Post>; limit: number }) {
         <ul className="wrapper-posts">
             {posts.map((post, i) => {
                 if (i === posts.length - 1) {
-                    return <PostListItem key={i} postInfo={post} ref={target} />;
-                } else return <PostListItem key={i} postInfo={post} />;
+                    return <PostListItem key={post._id} postInfo={post} ref={target} />;
+                } else return <PostListItem key={post._id} postInfo={post} />;
             })}
         </ul>
     );

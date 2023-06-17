@@ -26,6 +26,10 @@ import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-db98b5a2.js";
 import "../chunks/chunk-dfb70939.js";
+const documentProps = {
+  title: "내 목록 | Green Maps",
+  description: "북마크, 좋아요 표시한 채식 식당 목록"
+};
 const MyListMain = React.lazy(() => import("../chunks/chunk-0d37708b.js"));
 function Page() {
   const [isLoggedIn, info] = useCheckLoginStatus();
@@ -51,5 +55,6 @@ function Page() {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };

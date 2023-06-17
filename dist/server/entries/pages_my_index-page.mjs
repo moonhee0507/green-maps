@@ -560,7 +560,11 @@ function ModalGroup() {
     /* @__PURE__ */ jsx(EditDeleteNotifyModal, {})
   ] });
 }
-const MyMain = React.lazy(() => import("../chunks/chunk-307dfb90.js"));
+const documentProps = {
+  title: "내 정보 | Green Maps",
+  description: "채식 식당 지도 서비스 마이 페이지"
+};
+const MyMain = React.lazy(() => import("../chunks/chunk-f142f887.js"));
 function Page(pageContext) {
   const [isLoggedIn, info] = useCheckLoginStatus();
   const { reviews } = pageContext;
@@ -572,5 +576,6 @@ function Page(pageContext) {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };

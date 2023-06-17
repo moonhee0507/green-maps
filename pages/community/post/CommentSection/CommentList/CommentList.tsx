@@ -22,7 +22,7 @@ function CommentList({
             {comments.map((comment, i) => {
                 return (
                     <CommentListItem
-                        key={i}
+                        key={comment._id}
                         userInfo={userInfo}
                         postId={postId}
                         comment={comment}

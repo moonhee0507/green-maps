@@ -9,8 +9,8 @@ import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
 import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
 import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
-import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
 import { navigate } from "vite-plugin-ssr/client/router";
+import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
@@ -27,7 +27,6 @@ function PostLikeButton(props) {
   const [buttonOn, setButtonOn] = useState(false);
   useEffect(() => {
     getUserId().then((userId2) => {
-      console.log("PostLikeButton userId", userId2);
       setUserId(userId2);
     }).catch((err) => console.error(err));
     async function getUserId() {
@@ -151,20 +150,31 @@ function SubmitButton(props) {
     getUserId().then((userId2) => {
       setUserId(userId2);
     }).catch((err) => console.error(err));
-    async function getUserId() {
-      const res = await fetch(`${API_URL}/users/`, {
-        credentials: "include",
-        method: "GET"
-      });
-      const data = await res.json();
-      return data.user.nickName;
-    }
   }, []);
-  async function handleClick() {
+  async function getUserId() {
+    const res = await fetch(`${API_URL}/users/`, {
+      credentials: "include",
+      method: "GET"
+    });
+    const data = await res.json();
+    return data;
+  }
+  function handleClick() {
+    getUserId().then((data) => {
+      if (data.success === true) {
+        submit(data.user.nickName);
+      } else {
+        if (confirm("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?")) {
+          navigate("/login");
+        }
+      }
+    });
+  }
+  async function submit(nickName) {
     try {
       if (content !== null && content.length > 0) {
         const body = {
-          owner: userId,
+          owner: nickName,
           content
         };
         const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
@@ -254,7 +264,7 @@ function CommentList({
         comment,
         isLast: i === comments.length - 1
       },
-      i
+      comment._id
     );
   }) }) : /* @__PURE__ */ jsxs("div", { className: "style-wrapper-no-review", children: [
     /* @__PURE__ */ jsx("div", { className: "txt-no-review", children: "😭" }),
@@ -473,6 +483,10 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
+const documentProps = {
+  title: "게시글 | Green Maps",
+  description: "채식 식당 지도 서비스 게시글 페이지"
+};
 function Page(pageContext) {
   var _a;
   const postId = ((_a = pageContext.routeParams) == null ? void 0 : _a.postId) || "";
@@ -512,11 +526,12 @@ function Page(pageContext) {
     /* @__PURE__ */ jsx(TopBar, { title: postInfo.subject }),
     /* @__PURE__ */ jsxs("main", { className: "main-read-post", children: [
       /* @__PURE__ */ jsx(ContentSection, { userInfo, postInfo }),
-      /* @__PURE__ */ jsx(CommentSection, { userInfo, postId: postInfo._id, comments: postInfo.comments })
+      postInfo.subject !== "공지사항" && /* @__PURE__ */ jsx(CommentSection, { userInfo, postId: postInfo._id, comments: postInfo.comments })
     ] }),
     /* @__PURE__ */ jsx(ModalGroup, {})
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };

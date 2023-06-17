@@ -1093,6 +1093,15 @@ button[aria-label="식당 검색 버튼"] {
   animation: outCircle 1.5s cubic-bezier(0.4, 0, 1, 1) infinite;
 }
 
+.sudo-circle {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
 .container-title {
   position: relative;
   width: 100%;

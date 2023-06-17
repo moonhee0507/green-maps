@@ -2,16 +2,20 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
 import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
-import { C as Create } from "../chunks/chunk-d7ddf677.js";
+import { C as Create } from "../chunks/chunk-f728421f.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { E as EDIT_MODE } from "../chunks/chunk-3e2eef8e.js";
 import "react-redux";
-import "../chunks/chunk-f40e4a8a.js";
+import "../chunks/chunk-1c670203.js";
 import "../chunks/chunk-0d31e55c.js";
 import "vite-plugin-ssr/client/router";
 import "draft-js";
 import "draftjs-to-html";
 import "@reduxjs/toolkit";
+const documentProps = {
+  title: "게시글 수정 | Green Maps",
+  description: "게시글 수정 페이지"
+};
 function Page(pageContext) {
   const dispatch = useAppDispatch();
   const { postId } = pageContext.routeParams;
@@ -34,5 +38,6 @@ function Page(pageContext) {
   ] });
 }
 export {
-  Page
+  Page,
+  documentProps
 };

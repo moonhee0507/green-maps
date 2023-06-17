@@ -10,7 +10,7 @@ import { s as store } from "../chunks/chunk-042cff01.js";
 import { S as Stars } from "../chunks/chunk-82265d98.js";
 import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
 import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-7590a0cb.js";
-import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
+import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
@@ -525,23 +525,37 @@ function addBoundChangeEvent() {
     imgElement.style.zIndex = "9999";
     return imgElement;
   };
-  kakao$1.maps.event.addListener(map, "bounds_changed", function() {
-    window.clearTimeout(timeoutId);
-    timeoutId = window.setTimeout(async () => {
-      if (app !== null) {
-        app.appendChild(LoadingElement());
-      }
-      const polygon = getCurrentView();
-      const res = await getListInCurrentView(polygon);
-      paintVeganRestaurantMarker(res);
-      if (app !== null) {
-        const LoadingElement2 = document.getElementById("__LOADING__");
-        if (LoadingElement2) {
-          app.removeChild(LoadingElement2);
+  if (window.location)
+    kakao$1.maps.event.addListener(map, "bounds_changed", function() {
+      window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(async () => {
+        if (app !== null) {
+          app.appendChild(LoadingElement());
         }
-      }
-    }, 1e3);
-  });
+        const polygon = getCurrentView();
+        console.log("폴리곤 체크");
+        if (validatePolygon(polygon)) {
+          console.log("유효한 폴리곤", validatePolygon(polygon));
+          const res = await getListInCurrentView(polygon);
+          paintVeganRestaurantMarker(res);
+        }
+        console.log("폴리곤 체크 종료");
+        if (app !== null) {
+          const LoadingElement2 = document.getElementById("__LOADING__");
+          if (LoadingElement2) {
+            app.removeChild(LoadingElement2);
+          }
+        }
+      }, 1e3);
+    });
+}
+function validatePolygon(polygon) {
+  if (polygon && polygon.length === 5) {
+    const std = JSON.stringify(polygon[0]);
+    return !polygon.every((v, _) => JSON.stringify(v) === std);
+  } else {
+    return false;
+  }
 }
 function getCurrentView() {
   neLat = map.getBounds().getNorthEast().getLat();
@@ -909,7 +923,11 @@ function useLocationAccess() {
   }, []);
   return locationAccess;
 }
-const MapView = React.lazy(() => import("../chunks/chunk-46936600.js"));
+const documentProps = {
+  title: "채식 식당 지도 | Green Maps",
+  description: "채식 식당 지도 페이지"
+};
+const MapView = React.lazy(() => import("../chunks/chunk-2c4b445d.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);
@@ -941,13 +959,15 @@ function Page() {
 }
 const index_page = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  Page
+  Page,
+  documentProps
 }, Symbol.toStringTag, { value: "Module" }));
 export {
   Page,
   checkLoginForInfoWindow as a,
   index_page as b,
   clearCircle as c,
+  documentProps,
   init as i,
   moveToCurrentLocation as m,
   optimizeMapLevel as o,

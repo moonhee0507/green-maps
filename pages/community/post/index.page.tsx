@@ -67,7 +67,9 @@ function Page(pageContext: PageContext) {
             <TopBar title={postInfo.subject} />
             <main className="main-read-post">
                 <ContentSection userInfo={userInfo} postInfo={postInfo} />
-                <CommentSection userInfo={userInfo} postId={postInfo._id} comments={postInfo.comments} />
+                {postInfo.subject !== '공지사항' && (
+                    <CommentSection userInfo={userInfo} postId={postInfo._id} comments={postInfo.comments} />
+                )}
             </main>
             <ModalGroup />
         </React.Suspense>

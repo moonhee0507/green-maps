@@ -40,8 +40,6 @@ function SubjectBox({ postInfo }: { postInfo?: Post | null }) {
             CURRENT_PAGE: 1,
         });
 
-        console.log('event.currentTarget.focus', event.currentTarget.focus);
-
         return event.target.value;
     }
 

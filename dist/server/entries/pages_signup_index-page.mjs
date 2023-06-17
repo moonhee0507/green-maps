@@ -246,6 +246,10 @@ function SignupMain() {
     /* @__PURE__ */ jsx(ConfirmPasswordStage, { move, setMove })
   ] }) });
 }
+const documentProps = {
+  title: "회원가입 | Green Maps",
+  description: "그린맵 회원가입 페이지"
+};
 function Page() {
   useEffect(() => {
     (async () => {
@@ -263,5 +267,6 @@ function Page() {
   ] });
 }
 export {
-  Page
+  Page,
+  documentProps
 };

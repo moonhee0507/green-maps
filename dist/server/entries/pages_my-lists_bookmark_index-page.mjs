@@ -26,6 +26,10 @@ import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-db98b5a2.js";
 import "../chunks/chunk-dfb70939.js";
+const documentProps = {
+  title: "내 북마크 | Green Maps",
+  description: "북마크 목록 페이지"
+};
 const BookmarkListMain = React.lazy(() => import("../chunks/chunk-98760f00.js"));
 function Page(pageContext) {
   const { routeParams } = pageContext;
@@ -51,5 +55,6 @@ function Page(pageContext) {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };

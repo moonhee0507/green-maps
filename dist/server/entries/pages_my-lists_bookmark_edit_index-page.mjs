@@ -298,6 +298,10 @@ function ModalGroup({ userInfo, groupList }) {
     /* @__PURE__ */ jsx(EditGroupModal, { userInfo, groupList })
   ] });
 }
+const documentProps = {
+  title: "북마크 그룹 목록 편집 | Green Maps",
+  description: "북마크 그룹 목록 편집 페이지"
+};
 function Page(pageContext) {
   const { isLoggedIn, info } = pageContext.user;
   const [groupList, setGroupList] = useState(null);
@@ -328,5 +332,6 @@ function GroupListMain({ userInfo, groupList }) {
   ] }) });
 }
 export {
-  Page
+  Page,
+  documentProps
 };

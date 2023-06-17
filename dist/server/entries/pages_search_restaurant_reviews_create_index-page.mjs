@@ -20,6 +20,10 @@ import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-dfb70939.js";
 import "vite-plugin-ssr/client/router";
+const documentProps = {
+  title: "채식 식당 리뷰 작성 | Green Maps",
+  description: "채식 식당 리뷰 작성 페이지"
+};
 function Page(pageContext) {
   const { _id, title } = pageContext.restaurantInfo;
   const [_, userInfo] = useCheckLoginStatus();
@@ -29,5 +33,6 @@ function Page(pageContext) {
   ] });
 }
 export {
-  Page
+  Page,
+  documentProps
 };
