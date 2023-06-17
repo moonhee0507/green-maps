@@ -3,10 +3,11 @@ import { TopBar } from '../../components/topBar/topBar';
 import { NavBar } from '../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
+import { API_URL } from '../../renderer/CONSTANT_URL';
 import LoadingMain from '../../components/Loading/LoadingMain';
 import type { PageContext } from '../../renderer/types';
-import { Review } from '../../server/models/Review';
-import { API_URL } from '../../renderer/CONSTANT_URL';
+import type { Review } from '../../server/models/Review';
+import type { UserInfo } from '../../server/models/User';
 
 export const documentProps = {
     title: '내 정보 | Green Maps',
@@ -34,20 +35,22 @@ export function Page(pageContext: PageContext) {
 
     useEffect(() => {
         try {
-            getMyReviews().then((data) => {
-                if (data.success) {
-                    setReviews(data.reviews);
-                } else {
-                    setReviews([]);
-                }
-            });
+            if (info !== null) {
+                getMyReviews(info).then((data) => {
+                    if (data.success) {
+                        setReviews(data.reviews);
+                    } else {
+                        setReviews([]);
+                    }
+                });
+            }
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    }, [info]);
 
-    async function getMyReviews() {
-        const res = await fetch(`${API_URL}/reviews/my?owner=${info !== null ? info.userId : null}`);
+    async function getMyReviews(info: UserInfo) {
+        const res = await fetch(`${API_URL}/reviews/my?owner=${info.userId}`);
         const data = (await res.json()) as { success: boolean; reviews: Review[] };
 
         return data;
