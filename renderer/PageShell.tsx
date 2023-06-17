@@ -39,6 +39,10 @@ function BackgroundArea() {
     );
 }
 
+/**
+ * !모바일 웹 vh 관련
+ */
+
 function App({ children }: { children: React.ReactNode }) {
     const [isMobile, setIsMobile] = useState(false);
 
@@ -46,17 +50,13 @@ function App({ children }: { children: React.ReactNode }) {
 
     useEffect(() => {
         setIsMobile(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
-        console.log('navigator.userAgent', navigator.userAgent);
     }, []);
 
     useEffect(() => {
-        console.log('isMobile', isMobile);
-
         if (isMobile) {
             const element = __APP_Element__.current as HTMLDivElement;
             if (element !== null) {
                 element.style.height = window.innerHeight + 'px';
-                console.log('높이', element.style.height);
             }
         }
     }, [isMobile]);
