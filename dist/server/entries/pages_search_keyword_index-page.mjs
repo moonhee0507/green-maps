@@ -1,12 +1,12 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useRef, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
+import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { a as CATEGORIES, b as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-7590a0cb.js";
+import { a as CATEGORIES, b as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-3c2a9a7b.js";
 import { A as ADD_SELECTED_CATEGORY, m as ADD_SELECTED_CERT, n as SET_ORDER_BY } from "../chunks/chunk-1643b273.js";
-import { P as Pagination } from "../chunks/chunk-46ed95ec.js";
+import { P as Pagination } from "../chunks/chunk-59db6cf1.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
@@ -185,6 +185,10 @@ function KeywordSearchResultMain({
     /* @__PURE__ */ jsx(ResultList, { total, perPage, searchListInPage })
   ] });
 }
+const documentProps = {
+  title: "채식 식당 검색 결과 | Green Maps",
+  description: "채식 식당 지도 검색 페이지"
+};
 function Page(pageContext) {
   var _a;
   const [isLoggedIn, __] = useCheckLoginStatus();
@@ -238,5 +242,6 @@ function Page(pageContext) {
   ] });
 }
 export {
-  Page
+  Page,
+  documentProps
 };

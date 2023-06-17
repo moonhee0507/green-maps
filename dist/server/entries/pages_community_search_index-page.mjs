@@ -1,14 +1,18 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import React, { useState, useEffect, useCallback } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
 import { useDispatch, useSelector } from "react-redux";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
-import "../chunks/chunk-0e4e6c3d.js";
+import "../chunks/chunk-7f101d2c.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-dfb70939.js";
-const SearchMain = React.lazy(() => import("../chunks/chunk-a9721299.js"));
+const SearchMain = React.lazy(() => import("../chunks/chunk-78e6f79c.js"));
+const documentProps = {
+  title: "게시글 검색 | Green Maps",
+  description: "게시글 검색 페이지"
+};
 function Page(pageProps) {
   var _a;
   const dispatch = useDispatch();
@@ -64,5 +68,6 @@ function Page(pageProps) {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };

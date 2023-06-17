@@ -4,9 +4,9 @@ import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
 const documentProps = {
   title: "홈 | Green Maps",
-  description: "채식 식당 검색과 북마크 서비스"
+  description: "채식 식당 지도 서비스"
 };
-const HomeMain = React.lazy(() => import("../chunks/chunk-9022c2c6.js"));
+const HomeMain = React.lazy(() => import("../chunks/chunk-e21e167c.js"));
 function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [deferredPrompt, setDeferredPrompt] = useState(null);

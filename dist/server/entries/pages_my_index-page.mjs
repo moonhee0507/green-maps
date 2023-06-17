@@ -1,8 +1,8 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useRef, useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
+import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
 import { P as PROFILE_IMAGE_MODAL, E as EDIT_NICKNAME, a as PROFILE_NICKNAME_MODAL, S as SET_NICKNAME, b as PROFILE_PASSWORD_MODAL, c as PASS_CURRENT_PASSWORD, d as SET_USERID } from "../chunks/chunk-d2c63902.js";
 import { r as randomizeFileName } from "../chunks/chunk-8649d624.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
@@ -560,7 +560,11 @@ function ModalGroup() {
     /* @__PURE__ */ jsx(EditDeleteNotifyModal, {})
   ] });
 }
-const MyMain = React.lazy(() => import("../chunks/chunk-307dfb90.js"));
+const documentProps = {
+  title: "내 정보 | Green Maps",
+  description: "채식 식당 지도 서비스 마이 페이지"
+};
+const MyMain = React.lazy(() => import("../chunks/chunk-eb04fc69.js"));
 function Page(pageContext) {
   const [isLoggedIn, info] = useCheckLoginStatus();
   const { reviews } = pageContext;
@@ -572,5 +576,6 @@ function Page(pageContext) {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };

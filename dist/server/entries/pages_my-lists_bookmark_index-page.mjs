@@ -1,11 +1,11 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { M as ModalGroup } from "../chunks/chunk-758cdb5e.js";
+import { M as ModalGroup } from "../chunks/chunk-d217ef12.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
-import "../chunks/chunk-0e4e6c3d.js";
+import "../chunks/chunk-7f101d2c.js";
 import "react-redux";
 import "../chunks/chunk-94504c62.js";
 import "../chunks/chunk-3e2eef8e.js";
@@ -13,7 +13,7 @@ import "@reduxjs/toolkit";
 import "../chunks/chunk-24b72a12.js";
 import "../chunks/chunk-1a5b0e59.js";
 import "../chunks/chunk-0eea5c60.js";
-import "../chunks/chunk-f2c28349.js";
+import "../chunks/chunk-14e3e1c1.js";
 import "../chunks/chunk-edfa0bc8.js";
 import "vite-plugin-ssr/client/router";
 import "../chunks/chunk-042cff01.js";
@@ -26,7 +26,11 @@ import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-db98b5a2.js";
 import "../chunks/chunk-dfb70939.js";
-const BookmarkListMain = React.lazy(() => import("../chunks/chunk-98760f00.js"));
+const documentProps = {
+  title: "내 북마크 | Green Maps",
+  description: "북마크 목록 페이지"
+};
+const BookmarkListMain = React.lazy(() => import("../chunks/chunk-49f33a21.js"));
 function Page(pageContext) {
   const { routeParams } = pageContext;
   const [isLoggedIn, info] = useCheckLoginStatus();
@@ -51,5 +55,6 @@ function Page(pageContext) {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };

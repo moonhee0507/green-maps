@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { TopBar } from '../../../../../components/topBar/topBar';
 import { ReviewForm } from '../create/ReviewForm/ReviewForm';
+import { useCheckLoginStatus } from '../../../../../renderer/_hooks/useCheckLoginStatus';
+import { API_URL } from '../../../../../renderer/CONSTANT_URL';
+import LoadingMain from '../../../../../components/Loading/LoadingMain';
 import type { PageContext } from '../../../../../renderer/types';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
-import { API_URL } from '../../../../../renderer/CONSTANT_URL';
-import { Review } from '../../../../../server/models/Review';
-import { useCheckLoginStatus } from '../../../../../renderer/_hooks/useCheckLoginStatus';
-import LoadingMain from '../../../../../components/Loading/LoadingMain';
+import type { Review } from '../../../../../server/models/Review';
 
 export const documentProps = {
     title: '리뷰 수정 | Green Maps',
     description: '채식 식당 리뷰 수정 페이지',
 };
 
-// const ReviewForm = React.lazy(() => import('../create/ReviewForm/ReviewForm'));
-// const res = await fetch(`${API_URL}/reviews/${reviewId}`);
-//     const data = (await res.json()) as { success: boolean; review: Review };
 export { Page };
 
 function Page(pageContext: PageContext) {
-    // const { review, user } = pageContext.routeParams;
     const restaurantId = pageContext.routeParams?.restaurantId || '';
     const reviewId = pageContext.routeParams?.reviewId || '';
 

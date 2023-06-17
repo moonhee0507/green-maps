@@ -129,27 +129,49 @@ function addBoundChangeEvent() {
         return imgElement;
     };
 
-    kakao.maps.event.addListener(map, 'bounds_changed', function () {
-        // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후1초 안움직여야 그려진다)
-        window.clearTimeout(timeoutId); // 타임아웃을 취소하지 않으면 화면이동 많이할 때 요청이 너무 많아짐
+    if (window.location)
+        kakao.maps.event.addListener(map, 'bounds_changed', function () {
+            // 화면 이동 event가 발생하면 3초 후 fetch(=> 이동 후1초 안움직여야 그려진다)
+            window.clearTimeout(timeoutId); // 타임아웃을 취소하지 않으면 화면이동 많이할 때 요청이 너무 많아짐
 
-        timeoutId = window.setTimeout(async () => {
-            if (app !== null) {
-                app.appendChild(LoadingElement());
-            }
-            const polygon = getCurrentView();
-            const res = await getListInCurrentView(polygon);
-
-            paintVeganRestaurantMarker(res);
-
-            if (app !== null) {
-                const LoadingElement = document.getElementById('__LOADING__');
-                if (LoadingElement) {
-                    app.removeChild(LoadingElement);
+            timeoutId = window.setTimeout(async () => {
+                if (app !== null) {
+                    app.appendChild(LoadingElement());
                 }
-            }
-        }, 1000);
-    });
+
+                const polygon = getCurrentView(); // 다른 페이지로 넘어갈 때는 polygon이 점
+
+                console.log('폴리곤 체크');
+
+                // 유효한 Polygon인지 체크
+                if (validatePolygon(polygon)) {
+                    console.log('유효한 폴리곤', validatePolygon(polygon));
+
+                    const res = await getListInCurrentView(polygon);
+                    paintVeganRestaurantMarker(res);
+                }
+
+                console.log('폴리곤 체크 종료');
+
+                if (app !== null) {
+                    const LoadingElement = document.getElementById('__LOADING__');
+                    if (LoadingElement) {
+                        app.removeChild(LoadingElement);
+                    }
+                }
+            }, 1000);
+        });
+}
+
+// 유효한 Polygon인지 체크
+function validatePolygon(polygon: MongoPolygon): boolean {
+    if (polygon && polygon.length === 5) {
+        const std = JSON.stringify(polygon[0]);
+
+        return !polygon.every((v, _) => JSON.stringify(v) === std);
+    } else {
+        return false;
+    }
 }
 
 function getCurrentView(): MongoPolygon {

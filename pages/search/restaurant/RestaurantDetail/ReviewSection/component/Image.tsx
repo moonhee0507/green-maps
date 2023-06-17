@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 export { Image };
 
-function Image(props: { photoList: Array<{ src: string; pick: boolean }> }) {
+function Image(props: { photoList: Array<{ _id: string; src: string; pick: boolean }> }) {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
 
     // pick이 true인 요소가 먼저 렌더링 되게 함
@@ -36,7 +36,7 @@ function Image(props: { photoList: Array<{ src: string; pick: boolean }> }) {
                     {arrSort.map((item, i) => {
                         return (
                             <img
-                                key={i}
+                                key={item._id}
                                 src={`https://${import.meta.env.VITE_AWS_S3_BUCKET}.s3.${
                                     import.meta.env.VITE_AWS_DEFAULT_REGION
                                 }.amazonaws.com/${item.src}`}

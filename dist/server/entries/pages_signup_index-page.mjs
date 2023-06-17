@@ -1,8 +1,8 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
-import { a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
+import { u as useAppDispatch } from "../chunks/chunk-7f101d2c.js";
 import { S as SIGNING_UP } from "../chunks/chunk-6f77cb2d.js";
 import { a as validateId, b as validateNickName, v as validatePassword } from "../chunks/chunk-22884288.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
@@ -246,6 +246,10 @@ function SignupMain() {
     /* @__PURE__ */ jsx(ConfirmPasswordStage, { move, setMove })
   ] }) });
 }
+const documentProps = {
+  title: "회원가입 | Green Maps",
+  description: "그린맵 회원가입 페이지"
+};
 function Page() {
   useEffect(() => {
     (async () => {
@@ -263,5 +267,6 @@ function Page() {
   ] });
 }
 export {
-  Page
+  Page,
+  documentProps
 };

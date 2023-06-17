@@ -1,10 +1,12 @@
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
-import { R as ReviewForm } from "../chunks/chunk-dae10e55.js";
-import "react";
-import "../chunks/chunk-0e4e6c3d.js";
+import { jsxs, jsx } from "react/jsx-runtime";
+import React, { useState, useEffect } from "react";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { R as ReviewForm } from "../chunks/chunk-78dc7273.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { A as API_URL } from "../chunks/chunk-94504c62.js";
+import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
+import "../chunks/chunk-7f101d2c.js";
 import "react-redux";
-import "../chunks/chunk-94504c62.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-8649d624.js";
@@ -18,23 +20,50 @@ import "../chunks/chunk-d2c63902.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-dfb70939.js";
+import "vite-plugin-ssr/client/router";
+const documentProps = {
+  title: "리뷰 수정 | Green Maps",
+  description: "채식 식당 리뷰 수정 페이지"
+};
 function Page(pageContext) {
-  const { review, user } = pageContext;
-  return /* @__PURE__ */ jsxs(Fragment, { children: [
+  var _a, _b;
+  const restaurantId = ((_a = pageContext.routeParams) == null ? void 0 : _a.restaurantId) || "";
+  const reviewId = ((_b = pageContext.routeParams) == null ? void 0 : _b.reviewId) || "";
+  const [restaurant, setRestaurant] = useState(null);
+  const [review, setReview] = useState(null);
+  const [_, userInfo] = useCheckLoginStatus();
+  useEffect(() => {
+    getMyReview().then((data) => {
+      if (data.success) {
+        setReview(data.review);
+        setRestaurant(typeof data.review.restaurant === "object" ? data.review.restaurant : null);
+      } else {
+        setReview(null);
+        setRestaurant(null);
+      }
+    });
+  }, []);
+  async function getMyReview() {
+    const res = await fetch(`${API_URL}/reviews/${reviewId}`);
+    const data = await res.json();
+    return data;
+  }
+  return /* @__PURE__ */ jsxs(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: [
     /* @__PURE__ */ jsx(TopBar, { title: "리뷰 수정" }),
-    /* @__PURE__ */ jsx(
+    review && restaurant && /* @__PURE__ */ jsx(
       ReviewForm,
       {
-        restaurantId: review.restaurant._id,
-        reviewId: review._id,
-        title: review.restaurant.title,
+        restaurantId,
+        reviewId,
+        title: restaurant.title,
         photos: review.photo,
         content: review.content,
-        userInfo: user.info
+        userInfo
       }
     )
   ] });
 }
 export {
-  Page
+  Page,
+  documentProps
 };
