@@ -1981,6 +1981,8 @@ label[for=orderBySelect] {
   height: 100%;
   border-radius: 50%;
   border: 1px solid #d3d3d3;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
 
 .list-account {
