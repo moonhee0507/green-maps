@@ -7,6 +7,9 @@ function TextArea(props: { content: string }) {
     const htmlString = props.content;
 
     return (
-        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlString) }} style={{ wordBreak: 'keep-all' }} />
+        <div
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(htmlString) }}
+            style={{ wordBreak: 'keep-all', marginTop: '40px' }}
+        />
     );
 }

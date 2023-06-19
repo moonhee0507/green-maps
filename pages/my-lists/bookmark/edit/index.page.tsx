@@ -5,8 +5,8 @@ import { GroupNameList } from './GroupNameList/GroupNameList';
 import { NavBar } from '../../../../components/navBar';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
-import type { PageContext } from '../../../../renderer/types';
-import type { UserInfo } from '../../../../server/models/User';
+import { useCheckLoginStatus } from '../../../../renderer/_hooks/useCheckLoginStatus';
+import type { Bookmark, UserInfo } from '../../../../server/models/User';
 import type { GroupList } from '../../../../server/models/Bookmark';
 
 export const documentProps = {
@@ -15,22 +15,26 @@ export const documentProps = {
 };
 export { Page };
 
-function Page(pageContext: PageContext) {
-    const { isLoggedIn, info } = pageContext.user;
+function Page() {
+    const [isLoggedIn, info] = useCheckLoginStatus();
     const [groupList, setGroupList] = useState<GroupList[] | null>(null);
 
     useEffect(() => {
         try {
-            (async () => {
-                const res = await fetch(`${API_URL}/bookmark/${info?.userId}`);
-                const data = await res.json();
+            if (info) {
+                (async () => {
+                    const res = await fetch(`${API_URL}/bookmark/${info.userId}`);
+                    const data = await res.json();
 
-                setGroupList(data.groupList);
-            })();
+                    setGroupList(data.groupList);
+                })();
+            }
         } catch (err) {
             console.error(err);
         }
-    }, []);
+    }, [info]);
+
+    console.log(groupList);
 
     return (
         <>
@@ -43,14 +47,24 @@ function Page(pageContext: PageContext) {
 }
 
 function GroupListMain({ userInfo, groupList }: { userInfo: UserInfo | null; groupList: GroupList[] | null }) {
-    const { bookmarkList } = userInfo as UserInfo;
+    const [bookmarkList, setBookmarkList] = useState<Bookmark[] | null>(null);
+
+    useEffect(() => {
+        if (userInfo !== null) {
+            setBookmarkList(userInfo.bookmarkList);
+        } else {
+            setBookmarkList(null);
+        }
+    }, [userInfo]);
 
     return (
         <main className="main-group-list">
             <section>
                 <h3 className="sr-only">내 북마크 그룹 목록</h3>
                 <Notice />
-                <GroupNameList userInfo={userInfo} bookmarkList={bookmarkList} groupList={groupList} />
+                {bookmarkList && groupList && (
+                    <GroupNameList userInfo={userInfo} bookmarkList={bookmarkList} groupList={groupList} />
+                )}
             </section>
         </main>
     );

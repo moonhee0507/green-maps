@@ -169,6 +169,8 @@
         height: 100%;
         border-radius: 50%;
         border: 1px solid $border-color;
+        -o-object-fit: cover;
+        object-fit: cover;
     }
 }
 

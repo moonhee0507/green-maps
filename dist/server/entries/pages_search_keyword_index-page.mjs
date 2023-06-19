@@ -4,7 +4,7 @@ import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { a as CATEGORIES, b as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-7590a0cb.js";
+import { a as CATEGORIES, b as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-b2822bd5.js";
 import { A as ADD_SELECTED_CATEGORY, m as ADD_SELECTED_CERT, n as SET_ORDER_BY } from "../chunks/chunk-1643b273.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";

@@ -65,7 +65,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
     }
 
     return (
-        <button className="button-like" type="button" onClick={handleClick} style={{ margin: '0 auto' }}>
+        <button className="button-like" type="button" onClick={handleClick} style={{ margin: '60px auto 0px' }}>
             <img src={imgHeart} alt="좋아요 이미지" className={`img-like review ${buttonOn ? 'on' : ''}`} />
             <span style={{ minWidth: '20px' }}>{likeCount}</span>
         </button>

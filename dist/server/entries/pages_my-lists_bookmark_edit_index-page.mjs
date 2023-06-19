@@ -8,6 +8,7 @@ import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { I as IconSelection } from "../chunks/chunk-f2c28349.js";
 import { navigate } from "vite-plugin-ssr/client/router";
+import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -302,8 +303,8 @@ const documentProps = {
   title: "북마크 그룹 목록 편집 | Green Maps",
   description: "북마크 그룹 목록 편집 페이지"
 };
-function Page(pageContext) {
-  const { isLoggedIn, info } = pageContext.user;
+function Page() {
+  const [isLoggedIn, info] = useCheckLoginStatus();
   const [groupList, setGroupList] = useState(null);
   useEffect(() => {
     try {
@@ -324,11 +325,18 @@ function Page(pageContext) {
   ] });
 }
 function GroupListMain({ userInfo, groupList }) {
-  const { bookmarkList } = userInfo;
+  const [bookmarkList, setBookmarkList] = useState(null);
+  useEffect(() => {
+    if (userInfo !== null) {
+      setBookmarkList(userInfo.bookmarkList);
+    } else {
+      setBookmarkList(null);
+    }
+  }, [userInfo]);
   return /* @__PURE__ */ jsx("main", { className: "main-group-list", children: /* @__PURE__ */ jsxs("section", { children: [
     /* @__PURE__ */ jsx("h3", { className: "sr-only", children: "내 북마크 그룹 목록" }),
     /* @__PURE__ */ jsx(Notice, {}),
-    /* @__PURE__ */ jsx(GroupNameList, { userInfo, bookmarkList, groupList })
+    bookmarkList && /* @__PURE__ */ jsx(GroupNameList, { userInfo, bookmarkList, groupList })
   ] }) });
 }
 export {
