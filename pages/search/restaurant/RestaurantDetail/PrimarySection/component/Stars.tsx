@@ -14,7 +14,7 @@ function Stars(props: { rating: string }) {
         console.error(e.message);
     }
 
-    const [arrStar] = useState(() => {
+    const [arrStar, _] = useState<number[]>(() => {
         const maxInt = Math.floor(rating);
         const rest = rating - maxInt;
 

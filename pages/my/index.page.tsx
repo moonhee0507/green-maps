@@ -14,22 +14,9 @@ export const documentProps = {
     description: '채식 식당 지도 서비스 마이 페이지',
 };
 
-// const res = await fetch(`${API_URL}/reviews/my?owner=${typeof user !== 'undefined' ? user.info?.userId : null}`);
-
-//     if (res.ok) {
-//         const data = (await res.json()) as { success: boolean; reviews: Review[] };
-
-//         return {
-//             pageContext: {
-//                 user: user,
-//                 reviews: data.reviews,
-//             },
-//         };
-//     }
-
 const MyMain = React.lazy(() => import('./MyMain'));
 
-export function Page(pageContext: PageContext) {
+export function Page() {
     const [isLoggedIn, info] = useCheckLoginStatus();
     const [reviews, setReviews] = useState<Review[]>([]);
 
@@ -55,7 +42,6 @@ export function Page(pageContext: PageContext) {
 
         return data;
     }
-    // const { reviews } = pageContext;
 
     return isLoggedIn && info ? (
         <>
