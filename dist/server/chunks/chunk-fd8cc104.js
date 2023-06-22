@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { a as useAppSelector } from "./chunk-7f101d2c.js";
+import { u as useAppSelector } from "./chunk-0e4e6c3d.js";
 function Pagination({ count, perPage }) {
   const dispatch = useDispatch();
   const [globalWindow, setGlobalWindow] = useState(false);

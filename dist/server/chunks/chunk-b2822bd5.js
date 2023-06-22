@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import React, { useState, useEffect, useRef } from "react";
 import { C as COPYRIGHT_URL } from "./chunk-94504c62.js";
 import { D as Distance } from "./chunk-6c356fa9.js";
-import { a as useAppSelector, u as useAppDispatch } from "./chunk-7f101d2c.js";
+import { u as useAppSelector, a as useAppDispatch } from "./chunk-0e4e6c3d.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { k as CATEGORY_FILTER_MODAL, A as ADD_SELECTED_CATEGORY, e as SHOW_LIST_IN_REGION_MODAL } from "./chunk-1643b273.js";
 import { i as imgClose } from "./chunk-0eea5c60.js";

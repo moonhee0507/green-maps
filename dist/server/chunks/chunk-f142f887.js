@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { I as IMG_URL, A as API_URL } from "./chunk-94504c62.js";
-import { u as useAppDispatch } from "./chunk-7f101d2c.js";
+import { a as useAppDispatch } from "./chunk-0e4e6c3d.js";
 import { P as PROFILE_IMAGE_MODAL, a as PROFILE_NICKNAME_MODAL, S as SET_NICKNAME, b as PROFILE_PASSWORD_MODAL, d as SET_USERID } from "./chunk-d2c63902.js";
 import { a as appModalMode } from "./chunk-db98b5a2.js";
-import { R as ReviewListItem } from "./chunk-27b00c15.js";
+import { R as ReviewListItem } from "./chunk-37c8523c.js";
 import { P as PostList } from "./chunk-97a06de1.js";
 import "react-redux";
 import "@reduxjs/toolkit";

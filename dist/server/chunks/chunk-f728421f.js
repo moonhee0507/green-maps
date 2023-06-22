@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { S as SubjectBox } from "./chunk-9812adcb.js";
+import { S as SubjectBox } from "./chunk-1c670203.js";
 import { useEffect, useState, Suspense } from "react";
 import { useDispatch } from "react-redux";
-import { a as useAppSelector } from "./chunk-7f101d2c.js";
+import { u as useAppSelector } from "./chunk-0e4e6c3d.js";
 import * as draftJs from "draft-js";
 import draftToHtml from "draftjs-to-html";
 function Title({ postInfo }) {

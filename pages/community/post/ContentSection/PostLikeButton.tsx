@@ -13,6 +13,7 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
     useEffect(() => {
         getUserId()
             .then((userId) => {
+                // TODO: userId undefined되는 경우 처리하기
                 setUserId(userId);
             })
             .catch((err) => console.error(err));
