@@ -6,10 +6,6 @@ async function onBeforeRender(pageContext: PageContext) {
     const { routeParams } = pageContext;
 
     return {
-        pageContext: {
-            routeParams,
-        },
+        pageContext: { routeParams },
     };
 }
-
-export const passToClient = ['routeParams'];
