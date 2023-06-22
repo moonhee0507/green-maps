@@ -34,6 +34,8 @@ async function render(pageContext: PageContextServer) {
      * SSR -> CSR로 전환시 hydrate error 해결
      * hydrate되는 html은 꼭 문자열이어야 함
      */
+    console.log('pageHtml', pageHtml);
+
     const __PAGE_HTML__ = typeof pageHtml !== 'undefined' ? pageHtml : '';
 
     const { documentProps } = pageContext.exports;
