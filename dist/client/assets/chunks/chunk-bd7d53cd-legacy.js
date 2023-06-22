@@ -1,0 +1,1 @@
+System.register(["./chunk-b00ceac5-legacy.js"],(function(e,i){"use strict";var n;return{setters:[function(e){n=e.t}],execute:function(){var i=(0,n.createSlice)({name:"signupSlice",initialState:{isSigningUp:!1},reducers:{SIGNING_UP:function(e,i){e.isSigningUp=i.payload}}}),t=i.actions.SIGNING_UP;e("S",t),e("s",i.reducer)}}}));

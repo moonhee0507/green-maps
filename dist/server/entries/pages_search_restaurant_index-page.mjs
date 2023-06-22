@@ -104,7 +104,7 @@ const documentProps = {
   title: "채식 식당 검색 | Green Maps",
   description: "채식 식당 지도 검색 페이지"
 };
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-a1c75c48.js"));
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-acab408c.js"));
 function Page(pageContext) {
   var _a;
   const { routeParams } = pageContext;

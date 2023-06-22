@@ -18,10 +18,20 @@ function Page() {
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
     }, 5e3);
+    console.log("LCP 폴리필 테스트", test());
     return () => {
       clearTimeout(timeoutId);
     };
   }, []);
+  function test() {
+    const observer = new PerformanceObserver((list) => {
+      const entries = list.getEntries();
+      const lastEntry = entries[entries.length - 1];
+      console.log("LCP:", lastEntry.startTime);
+      console.log(lastEntry);
+    });
+    observer.observe({ type: "largest-contentful-paint", buffered: true });
+  }
   useEffect(() => {
     if (!isLoading) {
       window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);

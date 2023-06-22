@@ -16,7 +16,6 @@ function PasswordStage({ move, setMove }: { move: number; setMove: React.Dispatc
 
         // 정규식 검사
         if (element !== null) {
-            console.log(validatePassword(element.value));
             if (validatePassword(element.value) === true) {
                 setMessage('');
                 setMove((prev) => prev - 100);

@@ -141,17 +141,11 @@ function addBoundChangeEvent() {
 
                 const polygon = getCurrentView(); // 다른 페이지로 넘어갈 때는 polygon이 점
 
-                // console.log('폴리곤 체크');
-
                 // 유효한 Polygon인지 체크
                 if (validatePolygon(polygon)) {
-                    // console.log('유효한 폴리곤', validatePolygon(polygon));
-
                     const res = await getListInCurrentView(polygon);
                     paintVeganRestaurantMarker(res);
                 }
-
-                // console.log('폴리곤 체크 종료');
 
                 if (app !== null) {
                     const LoadingElement = document.getElementById('__LOADING__');

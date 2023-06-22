@@ -1,0 +1,1 @@
+System.register([],(function(e,t){"use strict";return{execute:function(){e("a",(function(e){var t=document.querySelector(".app");e?null==t||t.classList.add("modal-mode"):null==t||t.classList.remove("modal-mode")}))}}}));
