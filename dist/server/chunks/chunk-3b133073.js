@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
 import { D as Distance } from "./chunk-6c356fa9.js";
 import { A as API_URL } from "./chunk-94504c62.js";
-import { u as useAppSelector } from "./chunk-0e4e6c3d.js";
+import { a as useAppSelector } from "./chunk-7f101d2c.js";
 function MoreButton({ restaurantId, restaurantTitle }) {
   const [show, setShow] = useState(false);
   const moreButtonRef = useRef(null);

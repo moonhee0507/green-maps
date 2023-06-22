@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import { o as mapSlice } from "./chunk-1643b273.js";
 import { r as reviewSlice } from "./chunk-4ef07e33.js";
 import { p as paginationSlice } from "./chunk-9fb42db4.js";
-import { p as postSlice } from "./chunk-f93684d4.js";
+import { p as postSlice } from "./chunk-3e2eef8e.js";
 import { m as myListSlice } from "./chunk-1a5b0e59.js";
 import { p as profileSlice } from "./chunk-d2c63902.js";
 import { l as loginSlice } from "./chunk-1ccf3f37.js";

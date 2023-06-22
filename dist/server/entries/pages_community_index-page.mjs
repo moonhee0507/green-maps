@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
+import { B as ButtonGoBack, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
 import { useDispatch } from "react-redux";
@@ -49,7 +49,7 @@ const documentProps = {
   title: "커뮤니티 | Green Maps",
   description: "채식 식당 지도 서비스 커뮤니티"
 };
-const CommunityMain = React.lazy(() => import("../chunks/chunk-42c58b33.js"));
+const CommunityMain = React.lazy(() => import("../chunks/chunk-75dfb3c8.js"));
 function Page(pageContext) {
   var _a, _b;
   const [isLoggedIn, _] = useCheckLoginStatus();
@@ -62,6 +62,7 @@ function Page(pageContext) {
       const res = await fetch(
         `${API_URL}/${subject !== "" ? "subjects/" + subject : "posts"}?page=${currentPage}&limit=${limit}`,
         {
+          credentials: "include",
           headers: {
             "Content-Type": "application/json"
           }

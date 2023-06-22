@@ -1,13 +1,13 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { u as useAppSelector, a as useAppDispatch } from "./chunk-0e4e6c3d.js";
+import { a as useAppSelector, u as useAppDispatch } from "./chunk-7f101d2c.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { A as API_URL } from "./chunk-94504c62.js";
 import { i as imgHeart } from "./chunk-edfa0bc8.js";
 import { S as Stars } from "./chunk-e0988469.js";
-import { R as ReviewListItem } from "./chunk-37c8523c.js";
-import { P as Pagination } from "./chunk-fd8cc104.js";
+import { R as ReviewListItem } from "./chunk-27b00c15.js";
+import { P as Pagination } from "./chunk-59db6cf1.js";
 import "./chunk-0c3eed3e.js";
 import "./chunk-4ef07e33.js";
 import "@reduxjs/toolkit";

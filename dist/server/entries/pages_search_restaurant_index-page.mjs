@@ -1,15 +1,15 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-c369dbb3.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
 import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
+import { a as useAppSelector, u as useAppDispatch } from "../chunks/chunk-7f101d2c.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
 import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
 import "react-redux";
-import "../chunks/chunk-f93684d4.js";
+import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-24b72a12.js";
 import "../chunks/chunk-dfb70939.js";
@@ -104,7 +104,7 @@ const documentProps = {
   title: "채식 식당 검색 | Green Maps",
   description: "채식 식당 지도 검색 페이지"
 };
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-acab408c.js"));
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-f2869895.js"));
 function Page(pageContext) {
   var _a;
   const { routeParams } = pageContext;

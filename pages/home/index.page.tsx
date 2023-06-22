@@ -9,8 +9,6 @@ export const documentProps = {
     description: '채식 식당 지도 서비스',
 };
 
-// const HomeMain = React.lazy(() => import('./HomeMain'));
-
 export interface BeforeInstallPromptEvent extends Event {
     readonly platforms: Array<string>;
     readonly userChoice: Promise<{

@@ -20,7 +20,9 @@ export { Page };
 
 function Page(pageContext: PageContext) {
     // const postId = pageContext.routeParams?.postId || '';
-    const [postId, setPostId] = useState('');
+    const { routeParams } = pageContext;
+
+    const postId = routeParams?.postId || '';
 
     const dispatch = useAppDispatch();
     const [_, userInfo] = useCheckLoginStatus();
@@ -28,24 +30,12 @@ function Page(pageContext: PageContext) {
     const [postInfo, setPostInfo] = useState<Post | null>(null);
 
     useEffect(() => {
-        if (pageContext.routeParams) {
-            if (pageContext.routeParams.postId) {
-                setPostId(pageContext.routeParams.postId);
-            } else {
-                setPostId('');
-            }
-        } else {
-            setPostId('');
-        }
-    }, []);
-
-    useEffect(() => {
         getPostInfo().then((post) => {
             if (post) {
                 setPostInfo(post);
             } else setPostInfo(null);
         });
-    }, [postId]);
+    }, []);
 
     async function getPostInfo() {
         const res = await fetch(`${API_URL}/posts/${postId}`, {

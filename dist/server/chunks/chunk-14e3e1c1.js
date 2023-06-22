@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { i as imgHeart } from "./chunk-edfa0bc8.js";
-import { a as useAppDispatch, u as useAppSelector } from "./chunk-0e4e6c3d.js";
+import { u as useAppDispatch, a as useAppSelector } from "./chunk-7f101d2c.js";
 import { I as ICON_STANDARD } from "./chunk-1a5b0e59.js";
 const imgStar = "/images/icon-star.svg";
 const imgBolt = "/images/icon-bolt.svg";
