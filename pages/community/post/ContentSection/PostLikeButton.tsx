@@ -11,22 +11,31 @@ function PostLikeButton(props: { postId: string; like: Array<{ user: string }> |
     const [buttonOn, setButtonOn] = useState<boolean>(false);
 
     useEffect(() => {
-        getUserId()
-            .then((userId) => {
-                // TODO: userId undefined되는 경우 처리하기
-                if (userId) {
-                    setUserId(userId);
+        // getUserId()
+        //     .then((userId) => {
+        //         // TODO: userId undefined되는 경우 처리하기
+        //         if (userId) {
+        //             setUserId(userId);
+        //         } else {
+        //             setUserId(null);
+        //         }
+        //     })
+        //     .catch((err) => console.error(err));
+        getUserId();
+        async function getUserId() {
+            try {
+                const res = await fetch(`${API_URL}/users`);
+                const data = await res.json();
+
+                // return data.user.userId;
+                if (data.success) {
+                    setUserId(data.user.userId);
                 } else {
                     setUserId(null);
                 }
-            })
-            .catch((err) => console.error(err));
-
-        async function getUserId() {
-            const res = await fetch(`${API_URL}/users`);
-            const data = await res.json();
-
-            return data.user.userId;
+            } catch (err) {
+                console.error(err);
+            }
         }
     }, []);
 
