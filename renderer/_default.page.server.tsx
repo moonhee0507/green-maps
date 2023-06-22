@@ -76,6 +76,7 @@ async function render(pageContext: PageContextServer) {
             <meta property="twitter:title" content="Green Maps">
             <meta property="twitter:description" content="${desc}">
             <meta name="naver-site-verification" content="a3db4e78827a23b8b0d328ce26c6c74abb4d4a3a" />
+            <meta name="google-site-verification" content="BPU_wLaUb66NU-RLN8MSZzYqXkrTdN67ExNTPROn1YY" />
         </head>
         <body>
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
