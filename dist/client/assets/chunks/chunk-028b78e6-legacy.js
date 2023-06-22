@@ -1,1 +1,0 @@
-System.register([],(function(t,i){"use strict";return{execute:function(){t("i",(function(t){var i=t.split(". ");i.pop();for(var e=new Intl.DateTimeFormat("ko-KR",{year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:!1}).format(new Date).split(". "),r=0;r<=2;r++)if(e[r]!==i[r])return!1;return!0}))}}}));

@@ -9,7 +9,7 @@ export const documentProps = {
     description: '채식 식당 지도 서비스',
 };
 
-const HomeMain = React.lazy(() => import('./HomeMain'));
+// const HomeMain = React.lazy(() => import('./HomeMain'));
 
 export interface BeforeInstallPromptEvent extends Event {
     readonly platforms: Array<string>;
@@ -23,6 +23,7 @@ export interface BeforeInstallPromptEvent extends Event {
 function Page() {
     const [isLoading, setIsLoading] = useState(true);
     const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+    const [Component, setComponent] = useState<any>(() => LoadingMain);
 
     const handleBeforeInstallPrompt = (event: BeforeInstallPromptEvent) => {
         event.preventDefault();
@@ -35,21 +36,12 @@ function Page() {
             setIsLoading(false);
         }, 5000);
 
-        console.log('LCP 폴리필 테스트', test());
+        setComponent(() => React.lazy(() => import('./HomeMain')));
+
         return () => {
             clearTimeout(timeoutId);
         };
     }, []);
-
-    function test() {
-        const observer = new PerformanceObserver((list) => {
-            const entries = list.getEntries();
-            const lastEntry = entries[entries.length - 1]; // Use the latest LCP candidate
-            console.log('LCP:', lastEntry.startTime);
-            console.log(lastEntry);
-        });
-        observer.observe({ type: 'largest-contentful-paint', buffered: true });
-    }
 
     useEffect(() => {
         if (!isLoading) {
@@ -77,7 +69,7 @@ function Page() {
                     <img src={imgLoading} alt="로딩" style={{ width: '100%' }} id="__LOADING__" />
                 </div>
             ) : null}
-            <HomeMain deferredPrompt={deferredPrompt} setDeferredPrompt={setDeferredPrompt} />
+            <Component deferredPrompt={deferredPrompt} setDeferredPrompt={setDeferredPrompt} />
         </React.Suspense>
     );
 }

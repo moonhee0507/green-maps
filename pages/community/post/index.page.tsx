@@ -20,7 +20,6 @@ export { Page };
 
 function Page(pageContext: PageContext) {
     const postId = pageContext.routeParams?.postId || '';
-    // const { postId } = pageContext;
 
     const dispatch = useAppDispatch();
     const [_, userInfo] = useCheckLoginStatus();

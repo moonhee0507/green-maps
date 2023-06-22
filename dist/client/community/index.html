@@ -52,38 +52,20 @@
                     });
                 }
             </script>
-            <script>
-                function processPreload () {
-                    const fetchOpts = {};
-                    if (script.integrity)
-                    fetchOpts.integrity = script.integrity;
-                    if (script.referrerpolicy)
-                    fetchOpts.referrerPolicy = script.referrerpolicy;
-                    if (script.crossorigin === 'use-credentials')
-                    fetchOpts.credentials = 'include';
-                    else if (script.crossorigin === 'anonymous')
-                    fetchOpts.credentials = 'omit';
-                    else
-                    fetchOpts.credentials = 'same-origin';
-                    fetch(link.href, fetchOpts).then(res => res.ok && res.arrayBuffer());
-                }
-                for (const link of document.querySelectorAll('link[rel=modulepreload]'))
-                    processPreload(link);
-            </script>
-      <script type="module" src="/assets/entries/entry-client-routing.1d9889da.js" defer></script>
-      <link rel="modulepreload" href="/assets/entries/pages_community_index.page.1ebe433e.js" as="script" type="text/javascript">
+      <script type="module" src="/assets/entries/entry-client-routing.273c8a7b.js" defer></script>
+      <link rel="modulepreload" href="/assets/entries/pages_community_index.page.6052be23.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-101896b7.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-0ad0329c.js" as="script" type="text/javascript">
-      <link rel="modulepreload" href="/assets/chunks/chunk-ee696397.js" as="script" type="text/javascript">
-      <link rel="modulepreload" href="/assets/chunks/chunk-02d17786.js" as="script" type="text/javascript">
-      <link rel="modulepreload" href="/assets/chunks/chunk-54587732.js" as="script" type="text/javascript">
-      <link rel="modulepreload" href="/assets/chunks/chunk-4ee9bcfe.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-f5cf074f.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-da345742.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-621f058a.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-bf08ca9a.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-5b1b7faa.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-3c838518.js" as="script" type="text/javascript">
-      <link rel="modulepreload" href="/assets/chunks/chunk-b60bc363.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/chunks/chunk-aaa4175a.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-c9eff144.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-0249643f.js" as="script" type="text/javascript">
-      <link rel="modulepreload" href="/assets/entries/renderer_default.page.client.0a7c67db.js" as="script" type="text/javascript">
+      <link rel="modulepreload" href="/assets/entries/renderer_default.page.client.bcea36d8.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-a6e5261d.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-41308c4f.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-b82d406b.js" as="script" type="text/javascript">

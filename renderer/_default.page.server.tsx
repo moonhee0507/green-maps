@@ -99,24 +99,6 @@ async function render(pageContext: PageContextServer) {
                     });
                 }
             </script>
-            <script>
-                function processPreload () {
-                    const fetchOpts = {};
-                    if (script.integrity)
-                    fetchOpts.integrity = script.integrity;
-                    if (script.referrerpolicy)
-                    fetchOpts.referrerPolicy = script.referrerpolicy;
-                    if (script.crossorigin === 'use-credentials')
-                    fetchOpts.credentials = 'include';
-                    else if (script.crossorigin === 'anonymous')
-                    fetchOpts.credentials = 'omit';
-                    else
-                    fetchOpts.credentials = 'same-origin';
-                    fetch(link.href, fetchOpts).then(res => res.ok && res.arrayBuffer());
-                }
-                for (const link of document.querySelectorAll('link[rel=modulepreload]'))
-                    processPreload(link);
-            </script>
     </html>`;
 }
 
