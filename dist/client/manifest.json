@@ -81,11 +81,20 @@
   "_chunk-202ebce4-legacy.js": {
     "file": "assets/chunks/chunk-202ebce4-legacy.js"
   },
-  "_chunk-25b53843-legacy.js": {
-    "file": "assets/chunks/chunk-25b53843-legacy.js",
+  "_chunk-2041fb18-legacy.js": {
+    "dynamicImports": [
+      "_chunk-cbda0684-legacy.js"
+    ],
+    "file": "assets/chunks/chunk-2041fb18-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
-      "_chunk-19a5c1b3-legacy.js"
+      "_chunk-19a5c1b3-legacy.js",
+      "_chunk-f8e421d9-legacy.js",
+      "_chunk-f8638e03-legacy.js",
+      "_chunk-7915836a-legacy.js",
+      "_chunk-78c40752-legacy.js",
+      "_chunk-9c8dad95-legacy.js",
+      "_chunk-61dbc6e4-legacy.js"
     ]
   },
   "_chunk-27c9eca2-legacy.js": {
@@ -125,6 +134,19 @@
       "_chunk-54587732.js",
       "_chunk-a6e5261d.js",
       "_chunk-3258e6a6.js"
+    ]
+  },
+  "_chunk-38573d9e-legacy.js": {
+    "file": "assets/chunks/chunk-38573d9e-legacy.js",
+    "imports": [
+      "_chunk-202ebce4-legacy.js",
+      "_chunk-19a5c1b3-legacy.js",
+      "_chunk-7e0c46e3-legacy.js",
+      "_chunk-9c8dad95-legacy.js",
+      "_chunk-4d37e21d-legacy.js",
+      "_chunk-7915836a-legacy.js",
+      "_chunk-8fe45507-legacy.js",
+      "_chunk-61dbc6e4-legacy.js"
     ]
   },
   "_chunk-3a39d3a8.js": {
@@ -251,15 +273,6 @@
     "file": "assets/chunks/chunk-716ac8a7.js",
     "imports": [
       "_chunk-0ad0329c.js"
-    ]
-  },
-  "_chunk-728a0082-legacy.js": {
-    "file": "assets/chunks/chunk-728a0082-legacy.js",
-    "imports": [
-      "_chunk-202ebce4-legacy.js",
-      "_chunk-dc7c2e3c-legacy.js",
-      "_chunk-967a8d53-legacy.js",
-      "_chunk-19a5c1b3-legacy.js"
     ]
   },
   "_chunk-744bc730.js": {
@@ -434,22 +447,6 @@
   "_chunk-c8344d66.js": {
     "file": "assets/chunks/chunk-c8344d66.js"
   },
-  "_chunk-c83a3fd9-legacy.js": {
-    "dynamicImports": [
-      "_chunk-cbda0684-legacy.js"
-    ],
-    "file": "assets/chunks/chunk-c83a3fd9-legacy.js",
-    "imports": [
-      "_chunk-202ebce4-legacy.js",
-      "_chunk-19a5c1b3-legacy.js",
-      "_chunk-25b53843-legacy.js",
-      "_chunk-f8638e03-legacy.js",
-      "_chunk-7915836a-legacy.js",
-      "_chunk-78c40752-legacy.js",
-      "_chunk-9c8dad95-legacy.js",
-      "_chunk-61dbc6e4-legacy.js"
-    ]
-  },
   "_chunk-c9184202-legacy.js": {
     "dynamicImports": [
       "_chunk-27c9eca2-legacy.js"
@@ -476,6 +473,14 @@
       "_chunk-202ebce4-legacy.js"
     ],
     "isDynamicEntry": true
+  },
+  "_chunk-cf901422-legacy.js": {
+    "file": "assets/chunks/chunk-cf901422-legacy.js",
+    "imports": [
+      "_chunk-202ebce4-legacy.js",
+      "_chunk-f8e421d9-legacy.js",
+      "_chunk-19a5c1b3-legacy.js"
+    ]
   },
   "_chunk-d39b5a17-legacy.js": {
     "file": "assets/chunks/chunk-d39b5a17-legacy.js",
@@ -519,27 +524,6 @@
   "_chunk-dfbf6de9.js": {
     "file": "assets/chunks/chunk-dfbf6de9.js"
   },
-  "_chunk-e31099c1-legacy.js": {
-    "file": "assets/chunks/chunk-e31099c1-legacy.js",
-    "imports": [
-      "_chunk-202ebce4-legacy.js",
-      "_chunk-25b53843-legacy.js",
-      "_chunk-19a5c1b3-legacy.js"
-    ]
-  },
-  "_chunk-e7363ac0-legacy.js": {
-    "file": "assets/chunks/chunk-e7363ac0-legacy.js",
-    "imports": [
-      "_chunk-202ebce4-legacy.js",
-      "_chunk-19a5c1b3-legacy.js",
-      "_chunk-7e0c46e3-legacy.js",
-      "_chunk-9c8dad95-legacy.js",
-      "_chunk-4d37e21d-legacy.js",
-      "_chunk-7915836a-legacy.js",
-      "_chunk-8fe45507-legacy.js",
-      "_chunk-61dbc6e4-legacy.js"
-    ]
-  },
   "_chunk-e8bc0b58.js": {
     "file": "assets/chunks/chunk-e8bc0b58.js"
   },
@@ -558,6 +542,15 @@
       "_chunk-02d17786.js"
     ]
   },
+  "_chunk-f221369b-legacy.js": {
+    "file": "assets/chunks/chunk-f221369b-legacy.js",
+    "imports": [
+      "_chunk-202ebce4-legacy.js",
+      "_chunk-dc7c2e3c-legacy.js",
+      "_chunk-967a8d53-legacy.js",
+      "_chunk-19a5c1b3-legacy.js"
+    ]
+  },
   "_chunk-f3107ac8.js": {
     "file": "assets/chunks/chunk-f3107ac8.js",
     "imports": [
@@ -566,6 +559,13 @@
   },
   "_chunk-f8638e03-legacy.js": {
     "file": "assets/chunks/chunk-f8638e03-legacy.js"
+  },
+  "_chunk-f8e421d9-legacy.js": {
+    "file": "assets/chunks/chunk-f8e421d9-legacy.js",
+    "imports": [
+      "_chunk-202ebce4-legacy.js",
+      "_chunk-19a5c1b3-legacy.js"
+    ]
   },
   "_chunk-f8ea409f-legacy.js": {
     "file": "assets/chunks/chunk-f8ea409f-legacy.js",
@@ -612,7 +612,7 @@
       "renderer/_error.page-legacy.tsx",
       "renderer/_default.page.client-legacy.tsx"
     ],
-    "file": "assets/entries/entry-server-routing.5e45ac1d-legacy.js",
+    "file": "assets/entries/entry-server-routing.40dc5fc4-legacy.js",
     "imports": [
       "_chunk-077295df-legacy.js",
       "_chunk-f8638e03-legacy.js"
@@ -642,7 +642,7 @@
       "renderer/_error.page.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-server-routing.4643ceaa.js",
+    "file": "assets/entries/entry-server-routing.a9b0abe8.js",
     "imports": [
       "_chunk-4ee9bcfe.js",
       "_chunk-101896b7.js"
@@ -672,7 +672,7 @@
       "renderer/_error.page-legacy.tsx",
       "renderer/_default.page.client-legacy.tsx"
     ],
-    "file": "assets/entries/entry-client-routing.53cb02e7-legacy.js",
+    "file": "assets/entries/entry-client-routing.e0517503-legacy.js",
     "imports": [
       "_chunk-077295df-legacy.js",
       "_chunk-f8638e03-legacy.js",
@@ -703,7 +703,7 @@
       "renderer/_error.page.tsx",
       "renderer/_default.page.client.tsx"
     ],
-    "file": "assets/entries/entry-client-routing.e917e1a4.js",
+    "file": "assets/entries/entry-client-routing.1d9889da.js",
     "imports": [
       "_chunk-4ee9bcfe.js",
       "_chunk-101896b7.js",
@@ -785,7 +785,7 @@
     "src": "pages/community/create/index.page.tsx"
   },
   "pages/community/edit/index.page-legacy.tsx": {
-    "file": "assets/entries/pages_community_edit_index.page.02b46f33-legacy.js",
+    "file": "assets/entries/pages_community_edit_index.page.40155bf5-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
@@ -867,7 +867,7 @@
     "src": "pages/community/index.page.tsx"
   },
   "pages/community/post/index.page-legacy.tsx": {
-    "file": "assets/entries/pages_community_post_index.page.5d1d5adb-legacy.js",
+    "file": "assets/entries/pages_community_post_index.page.11c76b10-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
@@ -915,13 +915,13 @@
     "src": "pages/community/post/index.page.tsx"
   },
   "pages/community/search/SearchMain-legacy.tsx": {
-    "file": "assets/chunks/chunk-27afaaae-legacy.js",
+    "file": "assets/chunks/chunk-5c95edae-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-967a8d53-legacy.js",
       "_chunk-7915836a-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
-      "_chunk-728a0082-legacy.js",
+      "_chunk-f221369b-legacy.js",
       "_chunk-077295df-legacy.js",
       "_chunk-dc7c2e3c-legacy.js",
       "_chunk-7c2f6333-legacy.js",
@@ -950,7 +950,7 @@
     "dynamicImports": [
       "pages/community/search/SearchMain-legacy.tsx"
     ],
-    "file": "assets/entries/pages_community_search_index.page.205fa324-legacy.js",
+    "file": "assets/entries/pages_community_search_index.page.1cd91200-legacy.js",
     "imports": [
       "_chunk-f8638e03-legacy.js",
       "_chunk-202ebce4-legacy.js",
@@ -1031,7 +1031,7 @@
     "src": "pages/home/index.page.tsx"
   },
   "pages/login/index.page-legacy.tsx": {
-    "file": "assets/entries/pages_login_index.page.e9c05c43-legacy.js",
+    "file": "assets/entries/pages_login_index.page.1786a615-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-4b310fd2-legacy.js",
@@ -1065,17 +1065,17 @@
     "src": "pages/login/index.page.tsx"
   },
   "pages/my-lists/MyListMain-legacy.tsx": {
-    "file": "assets/chunks/chunk-4df2a0ce-legacy.js",
+    "file": "assets/chunks/chunk-4de6b057-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
       "_chunk-7e0c46e3-legacy.js",
-      "_chunk-e31099c1-legacy.js",
+      "_chunk-cf901422-legacy.js",
       "_chunk-7915836a-legacy.js",
       "_chunk-61dbc6e4-legacy.js",
       "_chunk-967a8d53-legacy.js",
       "_chunk-b00ceac5-legacy.js",
-      "_chunk-25b53843-legacy.js",
+      "_chunk-f8e421d9-legacy.js",
       "_chunk-077295df-legacy.js"
     ],
     "isDynamicEntry": true,
@@ -1099,16 +1099,16 @@
     "src": "pages/my-lists/MyListMain.tsx"
   },
   "pages/my-lists/bookmark/BookmarkListMain/BookmarkListMain-legacy.tsx": {
-    "file": "assets/chunks/chunk-da0be777-legacy.js",
+    "file": "assets/chunks/chunk-508d8780-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
       "_chunk-7e0c46e3-legacy.js",
       "_chunk-61dbc6e4-legacy.js",
-      "_chunk-e31099c1-legacy.js",
+      "_chunk-cf901422-legacy.js",
       "_chunk-967a8d53-legacy.js",
       "_chunk-b00ceac5-legacy.js",
-      "_chunk-25b53843-legacy.js"
+      "_chunk-f8e421d9-legacy.js"
     ],
     "isDynamicEntry": true,
     "src": "pages/my-lists/bookmark/BookmarkListMain/BookmarkListMain-legacy.tsx"
@@ -1129,7 +1129,7 @@
     "src": "pages/my-lists/bookmark/BookmarkListMain/BookmarkListMain.tsx"
   },
   "pages/my-lists/bookmark/edit/index.page-legacy.tsx": {
-    "file": "assets/entries/pages_my-lists_bookmark_edit_index.page.ebeed540-legacy.js",
+    "file": "assets/entries/pages_my-lists_bookmark_edit_index.page.23893218-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-4b310fd2-legacy.js",
@@ -1151,7 +1151,7 @@
     "src": "pages/my-lists/bookmark/edit/index.page-legacy.tsx"
   },
   "pages/my-lists/bookmark/edit/index.page.tsx": {
-    "file": "assets/entries/pages_my-lists_bookmark_edit_index.page.181f5e2c.js",
+    "file": "assets/entries/pages_my-lists_bookmark_edit_index.page.960e3178.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-8eee58da.js",
@@ -1176,13 +1176,13 @@
     "dynamicImports": [
       "pages/my-lists/bookmark/BookmarkListMain/BookmarkListMain-legacy.tsx"
     ],
-    "file": "assets/entries/pages_my-lists_bookmark_index.page.eae62041-legacy.js",
+    "file": "assets/entries/pages_my-lists_bookmark_index.page.867da369-legacy.js",
     "imports": [
       "_chunk-f8638e03-legacy.js",
       "_chunk-202ebce4-legacy.js",
       "_chunk-4b310fd2-legacy.js",
       "_chunk-0090c325-legacy.js",
-      "_chunk-e7363ac0-legacy.js",
+      "_chunk-38573d9e-legacy.js",
       "_chunk-dc6b0642-legacy.js",
       "_chunk-5b8c52db-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
@@ -1250,13 +1250,13 @@
     "dynamicImports": [
       "pages/my-lists/MyListMain-legacy.tsx"
     ],
-    "file": "assets/entries/pages_my-lists_index.page.657c4824-legacy.js",
+    "file": "assets/entries/pages_my-lists_index.page.7deca897-legacy.js",
     "imports": [
       "_chunk-f8638e03-legacy.js",
       "_chunk-202ebce4-legacy.js",
       "_chunk-4b310fd2-legacy.js",
       "_chunk-0090c325-legacy.js",
-      "_chunk-e7363ac0-legacy.js",
+      "_chunk-38573d9e-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
       "_chunk-dc6b0642-legacy.js",
       "_chunk-5b8c52db-legacy.js",
@@ -1321,14 +1321,14 @@
     "src": "pages/my-lists/index.page.tsx"
   },
   "pages/my/MyMain-legacy.tsx": {
-    "file": "assets/chunks/chunk-aeb5d093-legacy.js",
+    "file": "assets/chunks/chunk-b033c62e-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
       "_chunk-f8ea409f-legacy.js",
       "_chunk-61dbc6e4-legacy.js",
       "_chunk-50d76649-legacy.js",
-      "_chunk-728a0082-legacy.js",
+      "_chunk-f221369b-legacy.js",
       "_chunk-967a8d53-legacy.js",
       "_chunk-b00ceac5-legacy.js",
       "_chunk-028b78e6-legacy.js",
@@ -1364,7 +1364,7 @@
     "dynamicImports": [
       "pages/my/MyMain-legacy.tsx"
     ],
-    "file": "assets/entries/pages_my_index.page.2f0a8ab8-legacy.js",
+    "file": "assets/entries/pages_my_index.page.2f041bf8-legacy.js",
     "imports": [
       "_chunk-f8638e03-legacy.js",
       "_chunk-202ebce4-legacy.js",
@@ -1419,14 +1419,14 @@
     "src": "pages/my/index.page.tsx"
   },
   "pages/search/MapView-legacy.tsx": {
-    "file": "assets/chunks/chunk-53f44261-legacy.js",
+    "file": "assets/chunks/chunk-16e31eaf-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
       "_chunk-78c40752-legacy.js",
       "_chunk-61dbc6e4-legacy.js",
       "pages/search/index.page-legacy.tsx",
-      "_chunk-c83a3fd9-legacy.js",
+      "_chunk-2041fb18-legacy.js",
       "_chunk-967a8d53-legacy.js",
       "_chunk-b00ceac5-legacy.js",
       "_chunk-f8638e03-legacy.js",
@@ -1447,7 +1447,7 @@
       "_chunk-fd5fddd6-legacy.js",
       "_chunk-dc6b0642-legacy.js",
       "_chunk-5b8c52db-legacy.js",
-      "_chunk-25b53843-legacy.js"
+      "_chunk-f8e421d9-legacy.js"
     ],
     "isDynamicEntry": true,
     "src": "pages/search/MapView-legacy.tsx"
@@ -1490,7 +1490,7 @@
     "dynamicImports": [
       "pages/search/MapView-legacy.tsx"
     ],
-    "file": "assets/entries/pages_search_index.page.bcc77dd2-legacy.js",
+    "file": "assets/entries/pages_search_index.page.54151ca0-legacy.js",
     "imports": [
       "_chunk-f8638e03-legacy.js",
       "_chunk-202ebce4-legacy.js",
@@ -1501,7 +1501,7 @@
       "_chunk-8fe45507-legacy.js",
       "_chunk-4129b268-legacy.js",
       "_chunk-ab518e22-legacy.js",
-      "_chunk-c83a3fd9-legacy.js",
+      "_chunk-2041fb18-legacy.js",
       "_chunk-afd16fcf-legacy.js",
       "_chunk-9c8dad95-legacy.js",
       "_chunk-0090c325-legacy.js",
@@ -1516,7 +1516,7 @@
       "_chunk-f8ea409f-legacy.js",
       "_chunk-9d4abe76-legacy.js",
       "_chunk-bd7d53cd-legacy.js",
-      "_chunk-25b53843-legacy.js",
+      "_chunk-f8e421d9-legacy.js",
       "_chunk-fd5fddd6-legacy.js"
     ],
     "isDynamicEntry": true,
@@ -1561,20 +1561,20 @@
     "src": "pages/search/index.page.tsx"
   },
   "pages/search/keyword/index.page-legacy.tsx": {
-    "file": "assets/entries/pages_search_keyword_index.page.5580f126-legacy.js",
+    "file": "assets/entries/pages_search_keyword_index.page.7d754b14-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-4b310fd2-legacy.js",
       "_chunk-0090c325-legacy.js",
       "_chunk-19a5c1b3-legacy.js",
-      "_chunk-c83a3fd9-legacy.js",
+      "_chunk-2041fb18-legacy.js",
       "_chunk-78c40752-legacy.js",
       "_chunk-afd16fcf-legacy.js",
       "_chunk-dc6b0642-legacy.js",
       "_chunk-967a8d53-legacy.js",
       "_chunk-b00ceac5-legacy.js",
       "_chunk-fd5fddd6-legacy.js",
-      "_chunk-25b53843-legacy.js",
+      "_chunk-f8e421d9-legacy.js",
       "_chunk-f8638e03-legacy.js",
       "_chunk-7915836a-legacy.js",
       "_chunk-077295df-legacy.js",
@@ -1611,7 +1611,7 @@
     "src": "pages/search/keyword/index.page.tsx"
   },
   "pages/search/restaurant/RestaurantDetail/RestaurantDetail-legacy.tsx": {
-    "file": "assets/chunks/chunk-306473fa-legacy.js",
+    "file": "assets/chunks/chunk-4ad4d269-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-967a8d53-legacy.js",
@@ -1652,7 +1652,7 @@
     "dynamicImports": [
       "pages/search/restaurant/RestaurantDetail/RestaurantDetail-legacy.tsx"
     ],
-    "file": "assets/entries/pages_search_restaurant_index.page.419944e5-legacy.js",
+    "file": "assets/entries/pages_search_restaurant_index.page.ec66a76f-legacy.js",
     "imports": [
       "_chunk-f8638e03-legacy.js",
       "_chunk-202ebce4-legacy.js",
@@ -1809,7 +1809,7 @@
     "src": "pages/search/restaurant/reviews/edit/index.page.tsx"
   },
   "pages/signup/index.page-legacy.tsx": {
-    "file": "assets/entries/pages_signup_index.page.b646f8de-legacy.js",
+    "file": "assets/entries/pages_signup_index.page.2bd5f70a-legacy.js",
     "imports": [
       "_chunk-202ebce4-legacy.js",
       "_chunk-4b310fd2-legacy.js",
@@ -1827,7 +1827,7 @@
     "src": "pages/signup/index.page-legacy.tsx"
   },
   "pages/signup/index.page.tsx": {
-    "file": "assets/entries/pages_signup_index.page.df5fb575.js",
+    "file": "assets/entries/pages_signup_index.page.b751f918.js",
     "imports": [
       "_chunk-0ad0329c.js",
       "_chunk-8eee58da.js",
@@ -1910,7 +1910,7 @@
     "src": "renderer/_error.page.tsx"
   },
   "vite/legacy-polyfills-legacy": {
-    "file": "assets/polyfills.d8412a5c-legacy.js",
+    "file": "assets/polyfills.9df20f13-legacy.js",
     "isEntry": true,
     "src": "vite/legacy-polyfills-legacy"
   }

@@ -319,7 +319,6 @@ function Page() {
       console.error(err);
     }
   }, [info]);
-  console.log(groupList);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "그룹 목록 편집" }),
     /* @__PURE__ */ jsx(GroupListMain, { userInfo: info, groupList }),

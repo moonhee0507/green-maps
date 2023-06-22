@@ -52,7 +52,25 @@
                     });
                 }
             </script>
-      <script type="module" src="/assets/entries/entry-client-routing.e917e1a4.js" defer></script>
+            <script>
+                function processPreload () {
+                    const fetchOpts = {};
+                    if (script.integrity)
+                    fetchOpts.integrity = script.integrity;
+                    if (script.referrerpolicy)
+                    fetchOpts.referrerPolicy = script.referrerpolicy;
+                    if (script.crossorigin === 'use-credentials')
+                    fetchOpts.credentials = 'include';
+                    else if (script.crossorigin === 'anonymous')
+                    fetchOpts.credentials = 'omit';
+                    else
+                    fetchOpts.credentials = 'same-origin';
+                    fetch(link.href, fetchOpts).then(res => res.ok && res.arrayBuffer());
+                }
+                for (const link of document.querySelectorAll('link[rel=modulepreload]'))
+                    processPreload(link);
+            </script>
+      <script type="module" src="/assets/entries/entry-client-routing.1d9889da.js" defer></script>
       <link rel="modulepreload" href="/assets/entries/pages_my_index.page.35e8ea91.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-101896b7.js" as="script" type="text/javascript">
       <link rel="modulepreload" href="/assets/chunks/chunk-0ad0329c.js" as="script" type="text/javascript">

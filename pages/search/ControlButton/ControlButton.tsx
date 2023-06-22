@@ -28,16 +28,9 @@ function ControlButton() {
 function CategoryFilter() {
     const dispatch = useAppDispatch();
 
-    // const showListInRegionModalOn = useAppSelector((state) => state.mapSlice.showListInRegionModalOn);
-
     const handleClick = () => {
         initializeMapMode();
         dispatch(CATEGORY_FILTER_MODAL(true));
-
-        // // 지역검색결과 모달이 켜져 있으면 끄기
-        // if (showListInRegionModalOn === true) {
-        //     dispatch(SHOW_LIST_IN_REGION_MODAL(false));
-        // }
     };
 
     function initializeMapMode() {
@@ -66,7 +59,6 @@ function SelectRegion() {
         dispatch(CHANGE_REGION_MODAL(true));
 
         // 지역버튼 클릭 시 지역리스트 결과모달 켜져 있을 때는 끄기
-        // dispatch(SHOW_LIST_IN_REGION_MODAL(false));
         dispatch(SET_MAP_MODE('지역탐색 모드'));
     }
 
