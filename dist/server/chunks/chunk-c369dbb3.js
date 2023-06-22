@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { u as useAppSelector, B as ButtonGoBack } from "./chunk-0e4e6c3d.js";
 import { useDispatch } from "react-redux";
 import { A as API_URL } from "./chunk-94504c62.js";
-import { E as EDIT_MODE } from "./chunk-3e2eef8e.js";
+import { e as EDIT_MODE } from "./chunk-f93684d4.js";
 function SubmitButton() {
   const dispatch = useDispatch();
   const editMode = useAppSelector((state) => state.postSlice.editMode);

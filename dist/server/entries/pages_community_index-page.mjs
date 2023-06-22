@@ -50,19 +50,18 @@ const documentProps = {
   description: "채식 식당 지도 서비스 커뮤니티"
 };
 const CommunityMain = React.lazy(() => import("../chunks/chunk-42c58b33.js"));
-function Page(pageProps) {
-  var _a;
+function Page(pageContext) {
+  var _a, _b;
   const [isLoggedIn, _] = useCheckLoginStatus();
   const subject = useAppSelector((state) => state.postSlice.SUBJECT);
   const currentPage = useAppSelector((state) => state.postSlice.post.CURRENT_PAGE);
   const limit = 20;
-  const [posts, setPosts] = useState(((_a = pageProps.postProps) == null ? void 0 : _a.lists) || []);
+  const [posts, setPosts] = useState(((_b = (_a = pageContext.pageProps) == null ? void 0 : _a.postProps) == null ? void 0 : _b.lists) || []);
   const getPosts = useCallback(async () => {
     try {
       const res = await fetch(
         `${API_URL}/${subject !== "" ? "subjects/" + subject : "posts"}?page=${currentPage}&limit=${limit}`,
         {
-          credentials: "include",
           headers: {
             "Content-Type": "application/json"
           }

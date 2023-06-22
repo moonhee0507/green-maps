@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-c369dbb3.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SIGNING_UP } from "../chunks/chunk-6f77cb2d.js";
@@ -8,7 +8,7 @@ import { a as validateId, b as validateNickName, v as validatePassword } from ".
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import "react-redux";
-import "../chunks/chunk-3e2eef8e.js";
+import "../chunks/chunk-f93684d4.js";
 import "@reduxjs/toolkit";
 function InfoStage({ move, setMove }) {
   const dispatch = useAppDispatch();

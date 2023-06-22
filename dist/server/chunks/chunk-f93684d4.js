@@ -96,12 +96,12 @@ const {
 } = postSlice.actions;
 const postSlice$1 = postSlice.reducer;
 export {
-  EDIT_MODE as E,
+  EDIT_DELETE_NOTIFY_MODAL as E,
   SAME_USER_OWNER as S,
-  EDIT_DELETE_NOTIFY_MODAL as a,
-  SET_POST_ID as b,
-  SET_ACCESS_TARGET as c,
-  SET_COMMENT_ID as d,
-  SET_EDIT_COMMENT_MODE as e,
+  SET_POST_ID as a,
+  SET_ACCESS_TARGET as b,
+  SET_COMMENT_ID as c,
+  SET_EDIT_COMMENT_MODE as d,
+  EDIT_MODE as e,
   postSlice$1 as p
 };
