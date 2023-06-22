@@ -63,7 +63,7 @@ const __vite_glob_1_12 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   exportNames: exportNames$e
 }, Symbol.toStringTag, { value: "Module" }));
-const exportNames$d = ["documentProps", "Page"];
+const exportNames$d = ["Page"];
 const __vite_glob_1_13 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   exportNames: exportNames$d
@@ -108,7 +108,7 @@ const __vite_glob_3_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.def
   __proto__: null,
   exportNames: exportNames$5
 }, Symbol.toStringTag, { value: "Module" }));
-const exportNames$4 = ["onBeforeRender"];
+const exportNames$4 = ["documentProps", "onBeforeRender"];
 const __vite_glob_3_4 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   exportNames: exportNames$4

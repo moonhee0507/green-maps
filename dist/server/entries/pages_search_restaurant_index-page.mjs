@@ -100,10 +100,6 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const documentProps = {
-  title: "채식 식당 검색 | Green Maps",
-  description: "채식 식당 지도 검색 페이지"
-};
 const RestaurantDetail = React.lazy(() => import("../chunks/chunk-acab408c.js"));
 function Page(pageContext) {
   var _a;
@@ -117,7 +113,7 @@ function Page(pageContext) {
   async function getRestaurantList() {
     const res = await fetch(`${API_URL}/restaurants/${restaurantId}`, {
       headers: {
-        "Cache-Control": "max-age=31536000"
+        "Cache-Control": "s-maxage=2678400, max-age=0"
       }
     });
     const data = await res.json();
@@ -133,6 +129,5 @@ function Page(pageContext) {
   ] });
 }
 export {
-  Page,
-  documentProps
+  Page
 };
