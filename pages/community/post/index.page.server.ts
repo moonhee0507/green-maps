@@ -11,3 +11,5 @@ async function onBeforeRender(pageContext: PageContext) {
         },
     };
 }
+
+export const passToClient = ['routeParams'];
