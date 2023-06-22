@@ -30,11 +30,7 @@ function Page(pageContext: PageContext) {
     }, [routeParams]);
 
     async function getRestaurantList() {
-        const res = await fetch(`${API_URL}/restaurants/${restaurantId}`, {
-            headers: {
-                'Cache-Control': 's-maxage=31536000, max-age=0',
-            },
-        });
+        const res = await fetch(`${API_URL}/restaurants/${restaurantId}`);
         const data = (await res.json()) as { success: boolean; restaurantInfo: Restaurant; totalReview: number };
 
         if (data.success) {

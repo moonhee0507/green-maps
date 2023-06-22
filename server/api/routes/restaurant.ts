@@ -190,7 +190,6 @@ export default (app: Router) => {
             if (!restaurant) {
                 res.json({ success: false, message: '식당이 존재하지 않습니다.' });
             } else {
-                res.setHeader('Cache-Control', 's-maxage=31536000, max-age=0');
                 res.json({ success: true, restaurantInfo: restaurant });
             }
         } catch (err) {
