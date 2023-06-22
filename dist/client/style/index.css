@@ -1696,7 +1696,7 @@ button[aria-label="식당 검색 버튼"] {
   scrollbar-width: none; /* firefox */
   flex-grow: 1; /*긴 화면*/
   /* edge, chrome */
-  padding: 10px;
+  padding: 0 10px 10px;
 }
 .community-search-main::-webkit-scrollbar {
   display: none;
@@ -1981,6 +1981,8 @@ label[for=orderBySelect] {
   height: 100%;
   border-radius: 50%;
   border: 1px solid #d3d3d3;
+  -o-object-fit: cover;
+  object-fit: cover;
 }
 
 .list-account {

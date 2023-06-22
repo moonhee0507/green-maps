@@ -98,7 +98,10 @@ function StickyComponent() {
     {
       style: {
         position: "sticky",
-        top: 0
+        top: 0,
+        margin: "-10px",
+        padding: "10px",
+        backgroundColor: "#fff"
       },
       children: [
         /* @__PURE__ */ jsx(InputGroup, {}),

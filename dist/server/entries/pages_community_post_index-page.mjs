@@ -18,7 +18,13 @@ import "@reduxjs/toolkit";
 import "../chunks/chunk-dfb70939.js";
 function TextArea(props) {
   const htmlString = props.content;
-  return /* @__PURE__ */ jsx("div", { dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(htmlString) }, style: { wordBreak: "keep-all" } });
+  return /* @__PURE__ */ jsx(
+    "div",
+    {
+      dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(htmlString) },
+      style: { wordBreak: "keep-all", marginTop: "40px" }
+    }
+  );
 }
 function PostLikeButton(props) {
   const { postId, like } = props;
@@ -72,7 +78,7 @@ function PostLikeButton(props) {
     else
       throw new Error();
   }
-  return /* @__PURE__ */ jsxs("button", { className: "button-like", type: "button", onClick: handleClick, style: { margin: "0 auto" }, children: [
+  return /* @__PURE__ */ jsxs("button", { className: "button-like", type: "button", onClick: handleClick, style: { margin: "60px auto 0px" }, children: [
     /* @__PURE__ */ jsx("img", { src: imgHeart, alt: "좋아요 이미지", className: `img-like review ${buttonOn ? "on" : ""}` }),
     /* @__PURE__ */ jsx("span", { style: { minWidth: "20px" }, children: likeCount })
   ] });
@@ -482,8 +488,8 @@ const documentProps = {
   description: "채식 식당 지도 서비스 게시글 페이지"
 };
 function Page(pageContext) {
-  var _a;
-  const postId = ((_a = pageContext.routeParams) == null ? void 0 : _a.postId) || "";
+  const { routeParams } = pageContext;
+  const postId = (routeParams == null ? void 0 : routeParams.postId) || "";
   const dispatch = useAppDispatch();
   const [_, userInfo] = useCheckLoginStatus();
   const [postInfo, setPostInfo] = useState(null);

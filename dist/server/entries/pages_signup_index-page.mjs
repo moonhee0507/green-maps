@@ -133,7 +133,6 @@ function PasswordStage({ move, setMove }) {
   const handleNext = () => {
     const element = passwordInput.current;
     if (element !== null) {
-      console.log(validatePassword(element.value));
       if (validatePassword(element.value) === true) {
         setMessage("");
         setMove((prev) => prev - 100);

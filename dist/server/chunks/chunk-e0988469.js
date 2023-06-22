@@ -10,10 +10,10 @@ function Stars(props) {
   } catch (e) {
     console.error(e.message);
   }
-  const [arrStar] = useState(() => {
+  const [arrStar, _] = useState(() => {
     const maxInt = Math.floor(rating);
     const rest = rating - maxInt;
-    return new Array(maxRating).fill(0).map((_, i) => {
+    return new Array(maxRating).fill(0).map((_2, i) => {
       if (i <= maxInt - 1)
         return 100;
       else if (i === maxInt)

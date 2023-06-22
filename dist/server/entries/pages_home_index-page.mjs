@@ -6,10 +6,10 @@ const documentProps = {
   title: "홈 | Green Maps",
   description: "채식 식당 지도 서비스"
 };
-const HomeMain = React.lazy(() => import("../chunks/chunk-69f630df.js"));
 function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [Component, setComponent] = useState(() => LoadingMain);
   const handleBeforeInstallPrompt = (event) => {
     event.preventDefault();
     setDeferredPrompt(event);
@@ -18,6 +18,7 @@ function Page() {
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
     }, 5e3);
+    setComponent(() => React.lazy(() => import("../chunks/chunk-69f630df.js")));
     return () => {
       clearTimeout(timeoutId);
     };
@@ -45,7 +46,7 @@ function Page() {
         children: /* @__PURE__ */ jsx("img", { src: imgLoading, alt: "로딩", style: { width: "100%" }, id: "__LOADING__" })
       }
     ) : null,
-    /* @__PURE__ */ jsx(HomeMain, { deferredPrompt, setDeferredPrompt })
+    /* @__PURE__ */ jsx(Component, { deferredPrompt, setDeferredPrompt })
   ] });
 }
 export {

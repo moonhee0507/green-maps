@@ -5,7 +5,7 @@ import { u as useAppSelector, a as useAppDispatch } from "./chunk-0e4e6c3d.js";
 import { navigate } from "vite-plugin-ssr/client/router";
 import { A as API_URL } from "./chunk-94504c62.js";
 import { i as imgHeart } from "./chunk-edfa0bc8.js";
-import { S as Stars } from "./chunk-82265d98.js";
+import { S as Stars } from "./chunk-e0988469.js";
 import { R as ReviewListItem } from "./chunk-37c8523c.js";
 import { P as Pagination } from "./chunk-fd8cc104.js";
 import "./chunk-0c3eed3e.js";

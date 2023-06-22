@@ -1,11 +1,15 @@
-import { PageContext } from '../../../renderer/types';
+import type { PageContext } from '../../../renderer/types';
 
 export { onBeforeRender };
 
-function onBeforeRender(pageContext: PageContext) {
+async function onBeforeRender(pageContext: PageContext) {
     const { routeParams } = pageContext;
 
     return {
-        pageContext: { routeParams },
+        pageContext: {
+            routeParams,
+        },
     };
 }
+
+export const passToClient = ['routeParams'];

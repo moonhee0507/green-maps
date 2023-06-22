@@ -565,9 +565,29 @@ const documentProps = {
   description: "채식 식당 지도 서비스 마이 페이지"
 };
 const MyMain = React.lazy(() => import("../chunks/chunk-f142f887.js"));
-function Page(pageContext) {
+function Page() {
   const [isLoggedIn, info] = useCheckLoginStatus();
-  const { reviews } = pageContext;
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    try {
+      if (info !== null) {
+        getMyReviews(info).then((data) => {
+          if (data.success) {
+            setReviews(data.reviews);
+          } else {
+            setReviews([]);
+          }
+        });
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, [info]);
+  async function getMyReviews(info2) {
+    const res = await fetch(`${API_URL}/reviews/my?owner=${info2.userId}`);
+    const data = await res.json();
+    return data;
+  }
   return isLoggedIn && info ? /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "내 정보" }),
     /* @__PURE__ */ jsx(React.Suspense, { fallback: /* @__PURE__ */ jsx(LoadingMain, {}), children: /* @__PURE__ */ jsx(MyMain, { userInfo: info, reviews }) }),

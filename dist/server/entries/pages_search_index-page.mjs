@@ -7,7 +7,7 @@ import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { renderToString } from "react-dom/server";
 import { s as store } from "../chunks/chunk-042cff01.js";
-import { S as Stars } from "../chunks/chunk-82265d98.js";
+import { S as Stars } from "../chunks/chunk-e0988469.js";
 import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
 import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-b2822bd5.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
@@ -924,7 +924,7 @@ const documentProps = {
   title: "채식 식당 지도 | Green Maps",
   description: "채식 식당 지도 페이지"
 };
-const MapView = React.lazy(() => import("../chunks/chunk-b11acc79.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-42bdc134.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);

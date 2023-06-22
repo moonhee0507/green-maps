@@ -8,7 +8,7 @@ import "../chunks/chunk-0e4e6c3d.js";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-dfb70939.js";
-const SearchMain = React.lazy(() => import("../chunks/chunk-78e6f79c.js"));
+const SearchMain = React.lazy(() => import("../chunks/chunk-39f342bb.js"));
 const documentProps = {
   title: "게시글 검색 | Green Maps",
   description: "게시글 검색 페이지"

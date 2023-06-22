@@ -34,8 +34,6 @@ function Page() {
         }
     }, [info]);
 
-    console.log(groupList);
-
     return (
         <>
             <TopBar title="그룹 목록 편집" />

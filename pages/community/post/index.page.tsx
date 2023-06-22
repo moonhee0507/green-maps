@@ -19,8 +19,10 @@ export const documentProps = {
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const postId = pageContext.routeParams?.postId || '';
-    // const { postId } = pageContext;
+    // const postId = pageContext.routeParams?.postId || '';
+    const { routeParams } = pageContext;
+
+    const postId = routeParams?.postId || '';
 
     const dispatch = useAppDispatch();
     const [_, userInfo] = useCheckLoginStatus();

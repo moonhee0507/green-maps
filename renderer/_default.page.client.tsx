@@ -35,12 +35,17 @@ async function render(pageContext: PageContextClient) {
     const container = document.getElementById('page-view') as HTMLElement;
     // SPA
     if (container.innerHTML === '' || !pageContext.isHydration) {
+        console.log('pageContext.isHydration', pageContext.isHydration);
+
         if (!root) {
             root = ReactDOM.createRoot(container);
         }
         root.render(page);
         // SSR
     } else {
+        console.log('pageContext.isHydration', pageContext.isHydration);
+        console.log('root', root);
+
         root = hydrateRoot(container, page);
     }
 }

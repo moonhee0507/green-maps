@@ -6,7 +6,7 @@ import { useAppSelector } from '../../renderer/store/hooks';
 import { API_URL } from '../../renderer/CONSTANT_URL';
 import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../components/Loading/LoadingMain';
-import type { PageProps } from '../../renderer/types';
+import type { PageContext, PageProps } from '../../renderer/types';
 import type { Post } from '../../server/models/Post';
 
 export const documentProps = {
@@ -16,7 +16,7 @@ export const documentProps = {
 
 const CommunityMain = React.lazy(() => import('./CommunityMain'));
 
-export function Page(pageProps: PageProps) {
+export function Page(pageContext: PageContext) {
     const [isLoggedIn, _] = useCheckLoginStatus();
 
     // 전역에서 관리하는 변수: subject 등록 여부, 현재 페이지, 한페이지당 최대게시물 수
@@ -26,7 +26,7 @@ export function Page(pageProps: PageProps) {
     const limit = 20;
 
     // 내려보내는 데이터는 여기서 정해짐
-    const [posts, setPosts] = useState<Array<Post>>(pageProps.postProps?.lists || []);
+    const [posts, setPosts] = useState<Array<Post>>(pageContext.pageProps?.postProps?.lists || []);
 
     const getPosts = useCallback(async () => {
         try {

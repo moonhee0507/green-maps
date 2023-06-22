@@ -308,15 +308,17 @@ function Page() {
   const [groupList, setGroupList] = useState(null);
   useEffect(() => {
     try {
-      (async () => {
-        const res = await fetch(`${API_URL}/bookmark/${info == null ? void 0 : info.userId}`);
-        const data = await res.json();
-        setGroupList(data.groupList);
-      })();
+      if (info) {
+        (async () => {
+          const res = await fetch(`${API_URL}/bookmark/${info.userId}`);
+          const data = await res.json();
+          setGroupList(data.groupList);
+        })();
+      }
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [info]);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "그룹 목록 편집" }),
     /* @__PURE__ */ jsx(GroupListMain, { userInfo: info, groupList }),
@@ -336,7 +338,7 @@ function GroupListMain({ userInfo, groupList }) {
   return /* @__PURE__ */ jsx("main", { className: "main-group-list", children: /* @__PURE__ */ jsxs("section", { children: [
     /* @__PURE__ */ jsx("h3", { className: "sr-only", children: "내 북마크 그룹 목록" }),
     /* @__PURE__ */ jsx(Notice, {}),
-    bookmarkList && /* @__PURE__ */ jsx(GroupNameList, { userInfo, bookmarkList, groupList })
+    bookmarkList && groupList && /* @__PURE__ */ jsx(GroupNameList, { userInfo, bookmarkList, groupList })
   ] }) });
 }
 export {

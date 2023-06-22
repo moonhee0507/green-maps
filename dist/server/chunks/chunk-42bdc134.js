@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "./chunk-0e4e6c3d.js";
-import { k as CATEGORY_FILTER_MODAL, e as SHOW_LIST_IN_REGION_MODAL, c as CHANGE_REGION_MODAL, p as SET_MAP_MODE, C as CHANGE_RADIUS_MODAL, q as SET_RESULT_IN_RADIUS, r as SET_NEAREST_LIST } from "./chunk-1643b273.js";
+import { k as CATEGORY_FILTER_MODAL, C as CHANGE_RADIUS_MODAL, c as CHANGE_REGION_MODAL, e as SHOW_LIST_IN_REGION_MODAL, p as SET_MAP_MODE, q as SET_RESULT_IN_RADIUS, r as SET_NEAREST_LIST } from "./chunk-1643b273.js";
 import { a as appModalMode } from "./chunk-db98b5a2.js";
 import { i as init, c as clearCircle, s as setCircle, o as optimizeMapLevel, a as checkLoginForInfoWindow, m as moveToCurrentLocation } from "../entries/pages_search_index-page.mjs";
 import { A as API_URL } from "./chunk-94504c62.js";
@@ -19,7 +19,7 @@ import "./chunk-1a5b0e59.js";
 import "./chunk-d2c63902.js";
 import "./chunk-1ccf3f37.js";
 import "./chunk-6f77cb2d.js";
-import "./chunk-82265d98.js";
+import "./chunk-e0988469.js";
 import "./chunk-dfb70939.js";
 import "./chunk-fd8cc104.js";
 import "./chunk-0eea5c60.js";
@@ -39,13 +39,16 @@ function ControlButton() {
 }
 function CategoryFilter() {
   const dispatch = useAppDispatch();
-  const showListInRegionModalOn = useAppSelector((state) => state.mapSlice.showListInRegionModalOn);
   const handleClick = () => {
+    initializeMapMode();
     dispatch(CATEGORY_FILTER_MODAL(true));
-    if (showListInRegionModalOn === true) {
-      dispatch(SHOW_LIST_IN_REGION_MODAL(false));
-    }
   };
+  function initializeMapMode() {
+    dispatch(CHANGE_RADIUS_MODAL(false));
+    dispatch(CHANGE_REGION_MODAL(false));
+    dispatch(SHOW_LIST_IN_REGION_MODAL(false));
+    dispatch(CATEGORY_FILTER_MODAL(false));
+  }
   return /* @__PURE__ */ jsx("button", { type: "button", onClick: handleClick, children: "업종 필터" });
 }
 function SelectRegion() {
@@ -53,9 +56,15 @@ function SelectRegion() {
   const mapMode = useAppSelector((state) => state.mapSlice.mapMode);
   function handleClick() {
     appModalMode(true);
+    initializeMapMode();
     dispatch(CHANGE_REGION_MODAL(true));
-    dispatch(SHOW_LIST_IN_REGION_MODAL(false));
     dispatch(SET_MAP_MODE("지역탐색 모드"));
+  }
+  function initializeMapMode() {
+    dispatch(CHANGE_RADIUS_MODAL(false));
+    dispatch(CHANGE_REGION_MODAL(false));
+    dispatch(SHOW_LIST_IN_REGION_MODAL(false));
+    dispatch(CATEGORY_FILTER_MODAL(false));
   }
   return /* @__PURE__ */ jsx("button", { onClick: handleClick, className: `button-map-mode ${mapMode === "지역탐색 모드" ? "on" : ""}`, children: "지역 탐색 모드" });
 }
@@ -76,9 +85,16 @@ function ChangeRadius() {
   }, [radius]);
   const handleClick = () => {
     appModalMode(true);
+    initializeMapMode();
     dispatch(CHANGE_RADIUS_MODAL(true));
     dispatch(SET_MAP_MODE("반경탐색 모드"));
   };
+  function initializeMapMode() {
+    dispatch(CHANGE_RADIUS_MODAL(false));
+    dispatch(CHANGE_REGION_MODAL(false));
+    dispatch(SHOW_LIST_IN_REGION_MODAL(false));
+    dispatch(CATEGORY_FILTER_MODAL(false));
+  }
   return /* @__PURE__ */ jsxs(
     "button",
     {

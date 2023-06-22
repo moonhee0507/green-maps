@@ -8,11 +8,6 @@ import LoadingMain from '../../../components/Loading/LoadingMain';
 import type { PageContext } from '../../../renderer/types';
 import type { Restaurant } from '../../../server/models/Restaurant';
 
-export const documentProps = {
-    title: '채식 식당 검색 | Green Maps',
-    description: '채식 식당 지도 검색 페이지',
-};
-
 const RestaurantDetail = React.lazy(() => import('./RestaurantDetail/RestaurantDetail'));
 
 export { Page };
@@ -32,7 +27,7 @@ function Page(pageContext: PageContext) {
     async function getRestaurantList() {
         const res = await fetch(`${API_URL}/restaurants/${restaurantId}`, {
             headers: {
-                'Cache-Control': 'max-age=31536000',
+                'Cache-Control': 's-maxage=2678400, max-age=0',
             },
         });
         const data = (await res.json()) as { success: boolean; restaurantInfo: Restaurant; totalReview: number };
