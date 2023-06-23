@@ -9,10 +9,10 @@ export { render };
 export const clientRouting = true;
 export const hydrationCanBeAborted = true;
 
-let root: any;
+let root: ReactDOM.Root;
 
 async function render(pageContext: PageContextClient) {
-    const { Page, pageProps, routeParams, token, user, reviews, restaurantInfo, postId, documentProps } = pageContext;
+    const { Page, pageProps, routeParams, token, user, reviews, restaurantInfo, postId } = pageContext;
 
     const page = (
         <React.StrictMode>
@@ -38,12 +38,6 @@ async function render(pageContext: PageContextClient) {
         if (!root) {
             root = ReactDOM.createRoot(container);
         }
-
-        document.title = documentProps?.title || 'Green Maps';
-
-        const meta = document.createElement('meta');
-        meta.setAttribute('name', 'description');
-        meta.setAttribute('content', documentProps?.description || '채식 식당 지도 서비스');
 
         root.render(page);
         // SSR

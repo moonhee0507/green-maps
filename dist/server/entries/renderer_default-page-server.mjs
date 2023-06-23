@@ -92,7 +92,6 @@ async function render(pageContext) {
 async function onBeforeRender(pageContext) {
   const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, postId, review } = pageContext;
   let pageHtml;
-  console.log("Page", Page);
   if (!Page) {
     pageHtml = "";
   } else {

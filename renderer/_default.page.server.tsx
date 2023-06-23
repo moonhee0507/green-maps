@@ -106,7 +106,6 @@ async function onBeforeRender(pageContext: PageContextServer) {
         pageContext;
 
     let pageHtml;
-    console.log('Page', Page);
 
     if (!Page) {
         // SPA

@@ -11,13 +11,21 @@ import { Post } from '../../../server/models/Post';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageContext } from '../../../renderer/types';
 
+export const documentProps = {
+    title: '게시글 | Green Maps',
+    description: '채식 식당 지도 서비스 게시글 페이지',
+};
+
 export { Page };
 
 function Page(pageContext: PageContext) {
     // const postId = pageContext.routeParams?.postId || '';
     const { routeParams } = pageContext;
+    console.log('routeParams', routeParams);
 
-    const postId = routeParams?.postId || '';
+    const [postId, setPostId] = useState('');
+
+    // const postId = routeParams?.postId || '';
 
     const dispatch = useAppDispatch();
     const [_, userInfo] = useCheckLoginStatus();
@@ -25,23 +33,31 @@ function Page(pageContext: PageContext) {
     const [postInfo, setPostInfo] = useState<Post | null>(null);
 
     useEffect(() => {
-        getPostInfo().then((post) => {
-            if (post) {
-                setPostInfo(post);
-            } else setPostInfo(null);
-        });
-    }, []);
+        if (routeParams) {
+            setPostId(routeParams.postId);
+        }
+    }, [routeParams]);
 
-    async function getPostInfo() {
-        const res = await fetch(`${API_URL}/posts/${postId}`, {
-            headers: {
-                'Cache-Control': 'max-age=31536000',
-            },
-        });
-        const data = (await res.json()) as Post;
+    useEffect(() => {
+        if (typeof postId === 'string' && postId !== '') {
+            getPostInfo().then((post) => {
+                if (post) {
+                    setPostInfo(post);
+                } else setPostInfo(null);
+            });
+        }
 
-        return data;
-    }
+        async function getPostInfo() {
+            const res = await fetch(`${API_URL}/posts/${postId}`, {
+                headers: {
+                    'Cache-Control': 'max-age=31536000',
+                },
+            });
+            const data = (await res.json()) as Post;
+
+            return data;
+        }
+    }, [postId]);
 
     // 댓글 페이지 네이션을 위해 스토어에 저장
     useEffect(() => {

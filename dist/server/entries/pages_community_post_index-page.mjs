@@ -489,6 +489,10 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
+const documentProps = {
+  title: "게시글 | Green Maps",
+  description: "채식 식당 지도 서비스 게시글 페이지"
+};
 function Page(pageContext) {
   const { routeParams } = pageContext;
   const postId = (routeParams == null ? void 0 : routeParams.postId) || "";
@@ -534,5 +538,6 @@ function Page(pageContext) {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page
+  Page,
+  documentProps
 };
