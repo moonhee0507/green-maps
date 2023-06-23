@@ -18,13 +18,13 @@ import "@reduxjs/toolkit";
 import "../chunks/chunk-dfb70939.js";
 function TextArea(props) {
   const htmlString = props.content;
-  return /* @__PURE__ */ jsx(
+  return typeof window !== "undefined" ? /* @__PURE__ */ jsx(
     "div",
     {
       dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(htmlString) },
       style: { wordBreak: "keep-all", marginTop: "40px" }
     }
-  );
+  ) : /* @__PURE__ */ jsx("div", { style: { wordBreak: "keep-all", marginTop: "40px" } });
 }
 function PostLikeButton(props) {
   const { postId, like } = props;
@@ -32,13 +32,19 @@ function PostLikeButton(props) {
   const [likeCount, setLikeCount] = useState(like ? like.length : 0);
   const [buttonOn, setButtonOn] = useState(false);
   useEffect(() => {
-    getUserId().then((userId2) => {
-      setUserId(userId2);
-    }).catch((err) => console.error(err));
+    getUserId();
     async function getUserId() {
-      const res = await fetch(`${API_URL}/users`);
-      const data = await res.json();
-      return data.user.userId;
+      try {
+        const res = await fetch(`${API_URL}/users`);
+        const data = await res.json();
+        if (data.success) {
+          setUserId(data.user.userId);
+        } else {
+          setUserId(null);
+        }
+      } catch (err) {
+        console.error(err);
+      }
     }
   }, []);
   useEffect(() => {

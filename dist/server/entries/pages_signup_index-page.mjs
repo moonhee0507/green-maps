@@ -67,10 +67,11 @@ function IdStage({ move, setMove }) {
         placeholder: "영문, 숫자 6~20자 이내",
         ref: idInput,
         minLength: 6,
-        maxLength: 20
+        maxLength: 20,
+        "aria-describedby": "desc-signup-id"
       }
     ),
-    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", children: message }),
+    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", id: "desc-signup-id", children: message }),
     /* @__PURE__ */ jsxs("div", { className: "button-group-move", children: [
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handlePrev, "aria-label": "이전 화면으로 이동", children: "첫 화면" }),
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handleNext, "aria-label": "다음 화면으로 이동", children: "닉네임" })
@@ -114,10 +115,11 @@ function NickNameStage({ move, setMove }) {
         ref: nickNameInput,
         placeholder: "영문, 숫자, 한글 17자 이내",
         minLength: 1,
-        maxLength: 17
+        maxLength: 17,
+        "aria-describedby": "desc-signup-nickname"
       }
     ),
-    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", children: message }),
+    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", id: "desc-signup-nickname", children: message }),
     /* @__PURE__ */ jsxs("div", { className: "button-group-move", children: [
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handlePrev, "aria-label": "이전 화면으로 이동", children: "아이디" }),
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handleNext, "aria-label": "다음 화면으로 이동", children: "비밀번호" })
@@ -152,10 +154,11 @@ function PasswordStage({ move, setMove }) {
         ref: passwordInput,
         placeholder: "영문, 숫자, 특수문자(!@#$%^&*-+_=?) 모두 조합(8자리 이상)",
         minLength: 8,
-        maxLength: 32
+        maxLength: 32,
+        "aria-describedby": "desc-signup-password"
       }
     ),
-    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", children: message }),
+    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", id: "desc-signup-password", children: message }),
     /* @__PURE__ */ jsxs("div", { className: "button-group-move", children: [
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handlePrev, "aria-label": "이전 화면으로 이동", children: "닉네임" }),
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handleNext, "aria-label": "다음 화면으로 이동", children: "비밀번호 재입력" })
@@ -225,10 +228,11 @@ function ConfirmPasswordStage({
         ref: confirmPassword,
         placeholder: "비밀번호 재입력",
         minLength: 8,
-        maxLength: 32
+        maxLength: 32,
+        "aria-describedby": "desc-signup-confirm-password"
       }
     ),
-    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", children: message }),
+    /* @__PURE__ */ jsx("em", { className: "txt-signup-message", id: "desc-signup-confirm-password", children: message }),
     /* @__PURE__ */ jsxs("div", { className: "button-group-move", children: [
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handlePrev, "aria-label": "이전 화면으로 이동", children: "비밀번호" }),
       /* @__PURE__ */ jsx("button", { type: "button", onClick: handleClick, "aria-label": "다음 화면으로 이동", children: "완료" })

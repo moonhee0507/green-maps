@@ -54,8 +54,11 @@ function IdStage({ move, setMove }: { move: number; setMove: React.Dispatch<Reac
                 ref={idInput}
                 minLength={6}
                 maxLength={20}
+                aria-describedby="desc-signup-id"
             />
-            <em className="txt-signup-message">{message}</em>
+            <em className="txt-signup-message" id="desc-signup-id">
+                {message}
+            </em>
             <div className="button-group-move">
                 <button type="button" onClick={handlePrev} aria-label="이전 화면으로 이동">
                     첫 화면

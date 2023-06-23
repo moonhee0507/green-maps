@@ -86,8 +86,11 @@ function ConfirmPasswordStage({
                 placeholder="비밀번호 재입력"
                 minLength={8}
                 maxLength={32}
+                aria-describedby="desc-signup-confirm-password"
             />
-            <em className="txt-signup-message">{message}</em>
+            <em className="txt-signup-message" id="desc-signup-confirm-password">
+                {message}
+            </em>
             <div className="button-group-move">
                 <button type="button" onClick={handlePrev} aria-label="이전 화면으로 이동">
                     비밀번호

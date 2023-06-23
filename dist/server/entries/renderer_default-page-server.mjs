@@ -55,6 +55,7 @@ var __defProp = Object.defineProperty;
 var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
 var _a;
 const passToClient = [
+  "documentProps",
   "pageProps",
   "PRELOADED_STATE",
   "routeParams",

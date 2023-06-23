@@ -45,10 +45,6 @@ function SearchBar() {
     /* @__PURE__ */ jsx(SearchForm, {})
   ] });
 }
-const documentProps = {
-  title: "커뮤니티 | Green Maps",
-  description: "채식 식당 지도 서비스 커뮤니티"
-};
 const CommunityMain = React.lazy(() => import("../chunks/chunk-42c58b33.js"));
 function Page(pageContext) {
   var _a, _b;
@@ -92,6 +88,5 @@ function Page(pageContext) {
   ] });
 }
 export {
-  Page,
-  documentProps
+  Page
 };

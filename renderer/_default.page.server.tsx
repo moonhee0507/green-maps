@@ -1,4 +1,3 @@
-import 'vite/modulepreload-polyfill';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';
@@ -15,6 +14,7 @@ import type { PageContextServer } from './types';
 export { onBeforeRender, render };
 
 export const passToClient = [
+    'documentProps',
     'pageProps',
     'PRELOADED_STATE',
     'routeParams',
@@ -29,12 +29,6 @@ export const passToClient = [
 
 async function render(pageContext: PageContextServer) {
     const { pageHtml } = pageContext;
-
-    /**
-     * SSR -> CSR로 전환시 hydrate error 해결
-     * hydrate되는 html은 꼭 문자열이어야 함
-     */
-    console.log('pageHtml', pageHtml);
 
     const __PAGE_HTML__ = typeof pageHtml !== 'undefined' ? pageHtml : '';
 

@@ -40,6 +40,10 @@ export type PageContextCustom = {
             description?: string;
         };
     };
+    documentProps?: {
+        title?: string;
+        description?: string;
+    };
     PRELOADED_STATE: any;
     pageHtml?: any;
     user: {

@@ -9,7 +9,7 @@ export { render };
 export const clientRouting = true;
 export const hydrationCanBeAborted = true;
 
-let root: any;
+let root: ReactDOM.Root;
 
 async function render(pageContext: PageContextClient) {
     const { Page, pageProps, routeParams, token, user, reviews, restaurantInfo, postId } = pageContext;
@@ -35,17 +35,13 @@ async function render(pageContext: PageContextClient) {
     const container = document.getElementById('page-view') as HTMLElement;
     // SPA
     if (container.innerHTML === '' || !pageContext.isHydration) {
-        console.log('pageContext.isHydration', pageContext.isHydration);
-
         if (!root) {
             root = ReactDOM.createRoot(container);
         }
+
         root.render(page);
         // SSR
     } else {
-        console.log('pageContext.isHydration', pageContext.isHydration);
-        console.log('root', root);
-
         root = hydrateRoot(container, page);
     }
 }
