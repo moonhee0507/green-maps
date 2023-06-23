@@ -8,12 +8,12 @@ const __vite_glob_1_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.def
   __proto__: null,
   exportNames: exportNames$p
 }, Symbol.toStringTag, { value: "Module" }));
-const exportNames$o = ["documentProps", "Page"];
+const exportNames$o = ["Page"];
 const __vite_glob_1_2 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   exportNames: exportNames$o
 }, Symbol.toStringTag, { value: "Module" }));
-const exportNames$n = ["documentProps", "Page"];
+const exportNames$n = ["Page"];
 const __vite_glob_1_3 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   exportNames: exportNames$n
@@ -88,12 +88,12 @@ const __vite_glob_1_17 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.de
   __proto__: null,
   exportNames: exportNames$9
 }, Symbol.toStringTag, { value: "Module" }));
-const exportNames$8 = ["onBeforeRender"];
+const exportNames$8 = ["documentProps", "onBeforeRender"];
 const __vite_glob_3_0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   exportNames: exportNames$8
 }, Symbol.toStringTag, { value: "Module" }));
-const exportNames$7 = ["onBeforeRender"];
+const exportNames$7 = ["documentProps", "onBeforeRender"];
 const __vite_glob_3_1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
   exportNames: exportNames$7

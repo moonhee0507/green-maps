@@ -12,6 +12,9 @@ export default defineConfig(async ({ command, mode }) => {
         plugins: [react(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
         build: {
             manifest: true,
+            modulePreload: {
+                polyfill: false,
+            },
         },
         server: {
             https: isProduction,

@@ -1,4 +1,4 @@
-import 'vite/modulepreload-polyfill';
+// import 'vite/modulepreload-polyfill';
 import ReactDOMServer from 'react-dom/server';
 import React from 'react';
 import { escapeInject, dangerouslySkipEscape } from 'vite-plugin-ssr/server';

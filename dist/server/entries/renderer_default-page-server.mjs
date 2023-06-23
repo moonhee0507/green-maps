@@ -55,6 +55,7 @@ var __defProp = Object.defineProperty;
 var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(raw || cooked.slice()) }));
 var _a;
 const passToClient = [
+  "documentProps",
   "pageProps",
   "PRELOADED_STATE",
   "routeParams",
@@ -91,6 +92,7 @@ async function render(pageContext) {
 async function onBeforeRender(pageContext) {
   const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, postId, review } = pageContext;
   let pageHtml;
+  console.log("Page", Page);
   if (!Page) {
     pageHtml = "";
   } else {

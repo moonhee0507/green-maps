@@ -18,13 +18,13 @@ import "@reduxjs/toolkit";
 import "../chunks/chunk-dfb70939.js";
 function TextArea(props) {
   const htmlString = props.content;
-  return /* @__PURE__ */ jsx(
+  return typeof window !== "undefined" ? /* @__PURE__ */ jsx(
     "div",
     {
       dangerouslySetInnerHTML: { __html: DOMPurify.sanitize(htmlString) },
       style: { wordBreak: "keep-all", marginTop: "40px" }
     }
-  );
+  ) : /* @__PURE__ */ jsx("div", { style: { wordBreak: "keep-all", marginTop: "40px" } });
 }
 function PostLikeButton(props) {
   const { postId, like } = props;
@@ -32,13 +32,19 @@ function PostLikeButton(props) {
   const [likeCount, setLikeCount] = useState(like ? like.length : 0);
   const [buttonOn, setButtonOn] = useState(false);
   useEffect(() => {
-    getUserId().then((userId2) => {
-      setUserId(userId2);
-    }).catch((err) => console.error(err));
+    getUserId();
     async function getUserId() {
-      const res = await fetch(`${API_URL}/users`);
-      const data = await res.json();
-      return data.user.userId;
+      try {
+        const res = await fetch(`${API_URL}/users`);
+        const data = await res.json();
+        if (data.success) {
+          setUserId(data.user.userId);
+        } else {
+          setUserId(null);
+        }
+      } catch (err) {
+        console.error(err);
+      }
     }
   }, []);
   useEffect(() => {
@@ -483,10 +489,6 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const documentProps = {
-  title: "게시글 | Green Maps",
-  description: "채식 식당 지도 서비스 게시글 페이지"
-};
 function Page(pageContext) {
   const { routeParams } = pageContext;
   const postId = (routeParams == null ? void 0 : routeParams.postId) || "";
@@ -532,6 +534,5 @@ function Page(pageContext) {
   ] }) : /* @__PURE__ */ jsx(LoadingMain, {});
 }
 export {
-  Page,
-  documentProps
+  Page
 };
