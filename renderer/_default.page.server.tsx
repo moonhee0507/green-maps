@@ -15,6 +15,7 @@ import type { PageContextServer } from './types';
 export { onBeforeRender, render };
 
 export const passToClient = [
+    'documentProps',
     'pageProps',
     'PRELOADED_STATE',
     'routeParams',
@@ -105,6 +106,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
         pageContext;
 
     let pageHtml;
+    console.log('Page', Page);
 
     if (!Page) {
         // SPA
