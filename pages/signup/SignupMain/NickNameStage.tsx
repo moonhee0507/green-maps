@@ -49,8 +49,11 @@ function NickNameStage({ move, setMove }: { move: number; setMove: React.Dispatc
                 placeholder="영문, 숫자, 한글 17자 이내"
                 minLength={1}
                 maxLength={17}
+                aria-describedby="desc-signup-nickname"
             />
-            <em className="txt-signup-message">{message}</em>
+            <em className="txt-signup-message" id="desc-signup-nickname">
+                {message}
+            </em>
             <div className="button-group-move">
                 <button type="button" onClick={handlePrev} aria-label="이전 화면으로 이동">
                     아이디

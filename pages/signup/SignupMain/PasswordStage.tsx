@@ -36,8 +36,11 @@ function PasswordStage({ move, setMove }: { move: number; setMove: React.Dispatc
                 placeholder="영문, 숫자, 특수문자(!@#$%^&*-+_=?) 모두 조합(8자리 이상)"
                 minLength={8}
                 maxLength={32}
+                aria-describedby="desc-signup-password"
             />
-            <em className="txt-signup-message">{message}</em>
+            <em className="txt-signup-message" id="desc-signup-password">
+                {message}
+            </em>
             <div className="button-group-move">
                 <button type="button" onClick={handlePrev} aria-label="이전 화면으로 이동">
                     닉네임
