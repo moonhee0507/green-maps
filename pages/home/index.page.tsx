@@ -34,7 +34,7 @@ function Page() {
             setIsLoading(false);
         }, 5000);
 
-        setComponent(() => React.lazy(() => import('./HomeMain')));
+        setComponent(() => React.lazy(() => import('./HomeMain.js')));
 
         return () => {
             clearTimeout(timeoutId);

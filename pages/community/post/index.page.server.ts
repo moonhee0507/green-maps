@@ -9,7 +9,6 @@ export { onBeforeRender };
 
 async function onBeforeRender(pageContext: PageContext) {
     const { routeParams } = pageContext;
-    console.log('routeParams', routeParams);
 
     if (routeParams) {
         return {

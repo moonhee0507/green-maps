@@ -49,7 +49,7 @@ export default (app: Router) => {
                     httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                     secure: true, // https에서만 사용
                     sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값
-                    domain: '.green-maps.site',
+                    domain: process.env.NODE_ENV === 'production' ? '.green-maps.site' : 'localhost',
                 })
                     .status(200)
                     .json({
@@ -122,7 +122,7 @@ export default (app: Router) => {
                                 httpOnly: true, // 웹 서버에 의해서만 접근가능하게 함
                                 secure: true, // https에서만 사용
                                 sameSite: 'none', // Set-Cookie의 SameSite 속성에 대한 값: strict는 cors 비허용, lax는 링크를 따라갈때만 cors 허용
-                                domain: '.green-maps.site',
+                                domain: process.env.NODE_ENV === 'production' ? '.green-maps.site' : 'localhost',
                             })
                                 .status(200)
                                 .json({ success: true, keepLogin: true, user: user });
@@ -143,7 +143,7 @@ export default (app: Router) => {
                                 httpOnly: true,
                                 secure: true,
                                 sameSite: 'none',
-                                domain: '.green-maps.site',
+                                domain: process.env.NODE_ENV === 'production' ? '.green-maps.site' : 'localhost',
                             })
                                 .status(200)
                                 .json({ success: true, keepLogin: true, user: user });
@@ -177,7 +177,7 @@ export default (app: Router) => {
                     httpOnly: true,
                     secure: true,
                     sameSite: 'none',
-                    domain: '.green-maps.site',
+                    domain: process.env.NODE_ENV === 'production' ? '.green-maps.site' : 'localhost',
                 }).json({
                     success: true,
                     message: `회원번호 ${data.id}이 로그아웃 되었습니다.`,
