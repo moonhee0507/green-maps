@@ -3,18 +3,21 @@ import react from '@vitejs/plugin-react';
 import ssr from 'vite-plugin-ssr/plugin';
 import vercel from 'vite-plugin-vercel';
 import vercelSsr from '@magne4000/vite-plugin-vercel-ssr';
-import { defineConfig, UserConfig } from 'vite';
+import { defineConfig, UserConfig, loadEnv } from 'vite';
 
-export default defineConfig(async ({ command, mode }) => {
+export default defineConfig(({ command, mode }) => {
     const isProduction = mode === 'production';
 
     return {
-        plugins: [react(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
+        // define: {
+        //     __API_URL__: isProduction ? 'https://api.green-maps.site/v1' : 'https://localhost:5000/v1',
+        // },
+        plugins: [basicSsl(), react(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
         build: {
             manifest: true,
         },
         server: {
-            https: isProduction,
+            https: true,
             middlewareMode: true,
             port: 5000,
         },

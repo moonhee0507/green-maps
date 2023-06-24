@@ -495,27 +495,34 @@ const documentProps = {
 };
 function Page(pageContext) {
   const { routeParams } = pageContext;
-  const postId = (routeParams == null ? void 0 : routeParams.postId) || "";
+  const [postId, setPostId] = useState("");
   const dispatch = useAppDispatch();
   const [_, userInfo] = useCheckLoginStatus();
   const [postInfo, setPostInfo] = useState(null);
   useEffect(() => {
-    getPostInfo().then((post) => {
-      if (post) {
-        setPostInfo(post);
-      } else
-        setPostInfo(null);
-    });
-  }, []);
-  async function getPostInfo() {
-    const res = await fetch(`${API_URL}/posts/${postId}`, {
-      headers: {
-        "Cache-Control": "max-age=31536000"
-      }
-    });
-    const data = await res.json();
-    return data;
-  }
+    if (routeParams) {
+      setPostId(routeParams.postId);
+    }
+  }, [routeParams]);
+  useEffect(() => {
+    if (typeof postId === "string" && postId !== "") {
+      getPostInfo().then((post) => {
+        if (post) {
+          setPostInfo(post);
+        } else
+          setPostInfo(null);
+      });
+    }
+    async function getPostInfo() {
+      const res = await fetch(`${API_URL}/posts/${postId}`, {
+        headers: {
+          "Cache-Control": "max-age=31536000"
+        }
+      });
+      const data = await res.json();
+      return data;
+    }
+  }, [postId]);
   useEffect(() => {
     if (postInfo) {
       if (postInfo.comments) {

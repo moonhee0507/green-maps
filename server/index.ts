@@ -1,4 +1,4 @@
-import express, { Request } from 'express';
+import express from 'express';
 import './database.js';
 import cors from 'cors';
 import compression from 'compression';
@@ -11,9 +11,10 @@ import fetch from 'node-fetch';
 const isProduction = process.env.NODE_ENV === 'production';
 
 import routes from './api/index.js';
-import { API_URL } from '../renderer/CONSTANT_URL/index.js';
+// import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
 import https from 'https';
+import fs from 'fs-extra';
 
 type PageContextInit = {
     urlOriginal: string;
@@ -36,7 +37,7 @@ async function startServer() {
     const app = express();
 
     const corsOptions = {
-        origin: 'https://www.green-maps.site',
+        origin: process.env.NODE_ENV === 'production' ? 'https://www.green-maps.site' : 'https://localhost:5000',
         methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
         allowedHeaders: [
             'X-CSRF-Token',
@@ -64,9 +65,15 @@ async function startServer() {
 
     app.use('/v1', routes());
 
+    const PORT = process.env.PORT || 5000;
+
     if (isProduction) {
         const sirv = (await import('sirv')).default;
         app.use(sirv(`${root}/dist/client`));
+
+        app.listen(PORT, () => {
+            console.log(`🚀 ${PORT}번 포트 실행 중...`);
+        });
     } else {
         const vite = await import('vite');
         const viteDevMiddleware = (
@@ -76,13 +83,18 @@ async function startServer() {
             })
         ).middlewares;
         app.use(viteDevMiddleware);
+
+        const options = {
+            key: fs.readFileSync('./localhost-key.pem'),
+            cert: fs.readFileSync('./localhost.pem'),
+        };
+
+        const server = https.createServer(options, app);
+
+        server.listen(PORT, () => {
+            console.log(`🚀 ${PORT}번 포트 실행 중...`);
+        });
     }
-
-    const PORT = process.env.PORT || 5000;
-
-    app.listen(PORT, () => {
-        console.log(`🚀 ${PORT}번 포트 실행 중...`);
-    });
 
     // 페이지 라우팅할때마다.
     app.get('*', async (req, res, next) => {
@@ -117,13 +129,16 @@ async function startServer() {
 }
 
 async function checkToken(token: string): Promise<CheckTokenResponse> {
-    const res = await fetch(`${API_URL}/users/check-token`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ token: token }),
-    });
+    const res = await fetch(
+        `${isProduction ? 'https://api.green-maps.site/v1' : 'https://localhost:5000/v1'}/users/check-token`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ token: token }),
+        }
+    );
 
     const data = (await res.json()) as CheckTokenResponse;
 

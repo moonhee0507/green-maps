@@ -125,14 +125,17 @@ async function uploadImageToStorage(selectedImages, randomFileNames) {
         type: file.type
       };
       try {
-        const resUrl = await fetch(`${API_URL}/images/client`, {
-          credentials: "include",
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(body)
-        });
+        const resUrl = await fetch(
+          `${process.env.NODE_ENV === "production" ? "https://api.green-maps.site/v1" : "https://localhost:5000/v1"}/images/client`,
+          {
+            credentials: "include",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+          }
+        );
         const data = await resUrl.json();
         const signedUrl = data.signedUrl;
         await fetch(signedUrl, {

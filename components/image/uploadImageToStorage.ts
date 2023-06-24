@@ -1,4 +1,4 @@
-import { API_URL } from '../../renderer/CONSTANT_URL';
+// import { API_URL } from '../../renderer/CONSTANT_URL';
 import {
     RandomFileName,
     SelectedImage,
@@ -30,14 +30,21 @@ export default async function uploadImageToStorage(
 
             try {
                 // signed url 얻어오기
-                const resUrl = await fetch(`${API_URL}/images/client`, {
-                    credentials: 'include',
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(body),
-                });
+                const resUrl = await fetch(
+                    `${
+                        process.env.NODE_ENV === 'production'
+                            ? 'https://api.green-maps.site/v1'
+                            : 'https://localhost:5000/v1'
+                    }/images/client`,
+                    {
+                        credentials: 'include',
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(body),
+                    }
+                );
 
                 /**
                  * @data {success: true, signedUrl: 'https://버킷네임.s3.지역.amazon…c0be46ae2&X-Amz-SignedHeaders=host&x-id=PutObject'}

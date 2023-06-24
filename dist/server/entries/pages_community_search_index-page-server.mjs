@@ -1,13 +1,15 @@
 import fetch from "node-fetch";
-import { A as API_URL } from "../chunks/chunk-94504c62.js";
 async function onBeforeRender(pageContext) {
   const { keyword } = pageContext.routeParams;
   try {
-    const resPosts = await fetch(`${API_URL}/posts?keyword=${keyword}`, {
-      headers: {
-        "Cache-Control": "max-age=31536000"
+    const resPosts = await fetch(
+      `${process.env.NODE_ENV === "production" ? "https://api.green-maps.site/v1" : "https://localhost:5000/v1"}/posts?keyword=${keyword}`,
+      {
+        headers: {
+          "Cache-Control": "max-age=31536000"
+        }
       }
-    });
+    );
     const postInfo = await resPosts.json();
     const pageProps = { postInfo };
     return {
