@@ -4,11 +4,6 @@ import imgLoading from '/images/spinner.gif';
 
 export { Page };
 
-export const documentProps = {
-    title: '홈 | Green Maps',
-    description: '채식 식당 지도 서비스',
-};
-
 export interface BeforeInstallPromptEvent extends Event {
     readonly platforms: Array<string>;
     readonly userChoice: Promise<{

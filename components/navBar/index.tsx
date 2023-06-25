@@ -16,20 +16,20 @@ export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
         <nav className="nav-bar">
             <ul>
                 <li>
-                    <Link href="/" className="link-nav">
+                    <a href="/" className="link-nav">
                         <em>홈</em>
-                    </Link>
+                    </a>
                 </li>
                 <li>
-                    <Link href="/search" className="link-nav">
+                    <a href="/search" className="link-nav">
                         <em>식당검색</em>
-                    </Link>
+                    </a>
                 </li>
                 <li>
                     {isLoggedIn ? (
-                        <Link href="/my-lists" className="link-nav">
+                        <a href="/my-lists" className="link-nav">
                             <em>북마크</em>
-                        </Link>
+                        </a>
                     ) : (
                         <button
                             type="button"
@@ -42,19 +42,19 @@ export function NavBar({ isLoggedIn }: { isLoggedIn: boolean }) {
                     )}
                 </li>
                 <li>
-                    <Link href="/community" className="link-nav">
+                    <a href="/community" className="link-nav">
                         <em>커뮤니티</em>
-                    </Link>
+                    </a>
                 </li>
                 <li>
                     {isLoggedIn ? (
-                        <Link href="/my" className="link-nav my">
+                        <a href="/my" className="link-nav my">
                             <em>내 정보</em>
-                        </Link>
+                        </a>
                     ) : (
-                        <Link href="/login" className="link-nav">
+                        <a href="/login" className="link-nav">
                             <em>로그인</em>
-                        </Link>
+                        </a>
                     )}
                 </li>
             </ul>

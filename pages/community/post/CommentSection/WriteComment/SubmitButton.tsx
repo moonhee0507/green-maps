@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { API_URL } from '../../../../../renderer/CONSTANT_URL';
-import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { SubmitButton };
 
@@ -23,7 +22,7 @@ function SubmitButton(props: { postId: string; content: string | null }) {
                 submit(data.user.nickName);
             } else {
                 if (confirm('로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?')) {
-                    navigate('/login');
+                    window.location.href = `/login`;
                 }
             }
         });

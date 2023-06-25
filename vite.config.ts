@@ -10,6 +10,7 @@ export default defineConfig(({ command, mode }) => {
         plugins: [basicSsl(), react(), ssr({ prerender: { partial: true } }), vercel(), vercelSsr()],
         build: {
             manifest: true,
+            sourcemap: true,
         },
         server: {
             https: true,

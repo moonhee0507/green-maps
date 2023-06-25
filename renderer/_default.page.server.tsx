@@ -25,6 +25,7 @@ export const passToClient = [
     'reviews',
     'restaurantInfo',
     'postId',
+    'urlPathname',
 ];
 
 async function render(pageContext: PageContextServer) {
@@ -41,8 +42,7 @@ async function render(pageContext: PageContextServer) {
 
     const PRELOADED_STATE = JSON.stringify(store);
     const LOGIN_MESSAGE = JSON.stringify('로그인이 필요한 서비스입니다.\n로그인하시겠습니까?');
-    // const REACT_DEV_TOOLS = JSON.stringify(`<script src="https://localhost:5000"></script>`);
-    // ${import.meta.env.DEV ? dangerouslySkipEscape(REACT_DEV_TOOLS) : ``}
+
     return escapeInject`<!DOCTYPE html>
     <html lang="ko">
         <head>

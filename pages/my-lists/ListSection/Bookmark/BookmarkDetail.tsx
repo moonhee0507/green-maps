@@ -1,10 +1,9 @@
 import React from 'react';
-import { navigate } from 'vite-plugin-ssr/client/router';
 import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
 import { ORDER_MODAL } from '../../../../renderer/_reducers/_slices/myListSlice';
+import appModalMode from '../../../../components/modal/appModalMode';
 import type { Bookmark } from '../../../../server/models/User';
 import type { GroupList } from '../../../../server/models/Bookmark';
-import appModalMode from '../../../../components/modal/appModalMode';
 
 export { BookmarkDetail };
 
@@ -18,7 +17,7 @@ function BookmarkDetail({ lists, groupList }: { lists: Bookmark[]; groupList: Gr
     }
 
     function handleEdit() {
-        navigate('/my-lists/bookmark/edit');
+        window.location.href = '/my-lists/bookmark/edit';
     }
 
     return (

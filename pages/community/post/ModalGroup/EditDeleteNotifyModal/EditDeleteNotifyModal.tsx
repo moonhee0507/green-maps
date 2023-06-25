@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../renderer/store/hooks';
 import { EDIT_DELETE_NOTIFY_MODAL, SET_EDIT_COMMENT_MODE } from '../../../../../renderer/_reducers/_slices/postSlice';
 import { API_URL } from '../../../../../renderer/CONSTANT_URL';
-import { navigate } from 'vite-plugin-ssr/client/router';
 import appModalMode from '../../../../../components/modal/appModalMode';
 
 export { EditDeleteNotifyModal };
@@ -42,7 +41,7 @@ function EDIT() {
 
     function handleClick() {
         if (accessTarget === 'post') {
-            navigate(`/community/edit/${postId}`);
+            window.location.href = `/community/edit/${postId}`;
 
             appModalMode(false);
             dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
@@ -80,7 +79,7 @@ function DELETE() {
             const data = await res.json();
 
             if (data.success) {
-                navigate('/community');
+                window.location.href = '/community';
             } else {
                 alert('다시 시도해주세요.');
             }

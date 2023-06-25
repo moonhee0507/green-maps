@@ -1,4 +1,3 @@
-import { navigate } from 'vite-plugin-ssr/client/router';
 import { useEffect, useState } from 'react';
 import { API_URL } from '../CONSTANT_URL';
 import { UserInfo } from '../../server/models/User';
@@ -28,11 +27,11 @@ function useCheckLoginStatus(): [IsLoggedIn, User] {
                     setUserInfo(null);
 
                     if (window.location.pathname === '/my') {
-                        navigate('/login');
+                        window.location.href = '/login';
                     }
 
                     if (window.location.pathname === '/my-lists') {
-                        navigate('/login');
+                        window.location.href = '/login';
                     }
                 }
             } catch (error) {
@@ -40,11 +39,11 @@ function useCheckLoginStatus(): [IsLoggedIn, User] {
                 setUserInfo(null);
 
                 if (window.location.pathname === '/my') {
-                    navigate('/login');
+                    window.location.href = '/login';
                 }
 
                 if (window.location.pathname === '/my-lists') {
-                    navigate('/login');
+                    window.location.href = '/login';
                 }
             }
         };

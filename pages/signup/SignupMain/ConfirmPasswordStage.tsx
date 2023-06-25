@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useAppDispatch } from '../../../renderer/store/hooks';
 import { SIGNING_UP } from '../../../renderer/_reducers/_slices/signupSlice';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
-import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { ConfirmPasswordStage };
 
@@ -65,7 +64,7 @@ function ConfirmPasswordStage({
 
             if (data.success) {
                 alert('🎉 회원가입에 성공했습니다');
-                navigate('/login');
+                window.location.href = '/login';
             } else {
                 alert('회원가입에 실패했습니다');
                 console.error(data.errorMessage);
