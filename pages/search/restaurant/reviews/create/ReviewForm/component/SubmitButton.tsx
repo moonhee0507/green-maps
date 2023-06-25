@@ -5,7 +5,7 @@ import { API_URL } from '../../../../../../../renderer/CONSTANT_URL';
 import { PhotoInReview } from '../../../../../../../server/models/Review';
 import store from '../../../../../../../renderer/store';
 import uploadImageToStorage from '../../../../../../../components/image/uploadImageToStorage';
-import imgLoading from '/images/spinner.gif';
+import imgLoading from '/images/spinner.webp';
 import type { UserInfo } from '../../../../../../../server/models/User';
 
 type SelectedImages = Array<SelectedImage>;

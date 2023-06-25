@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import LoadingMain from '../../components/Loading/LoadingMain';
-import imgLoading from '/images/spinner.gif';
+import imgLoading from '/images/spinner.webp';
 
 export { Page };
 

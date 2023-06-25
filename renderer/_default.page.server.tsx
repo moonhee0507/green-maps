@@ -60,7 +60,7 @@ async function render(pageContext: PageContextServer) {
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
-            <link rel="stylesheet" href="${cssUrl}" type="text/css" >
+            <link rel="stylesheet" href="${cssUrl}" type="text/css" as="style">
             <meta name="apple-mobile-web-app-capable" content="yes">
 
             <meta property="og:image" content="${icon512}">

@@ -1,5 +1,5 @@
 import React from 'react';
-import gifSpinner from '/images/spinner.gif';
+import gifSpinner from '/images/spinner.webp';
 
 export default function LoadingMain() {
     return (
