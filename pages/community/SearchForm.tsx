@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { SearchForm };
 
@@ -13,7 +12,8 @@ function SearchForm() {
             const keyword = inputElement.current.value;
             if (keyword.length > 0) {
                 const url = `/community/search/${keyword}`;
-                navigate(url, { keepScrollPosition: true });
+                // navigate(url, { keepScrollPosition: true });
+                window.location.href = url;
             } else {
                 window.alert('검색어를 입력해주세요.');
             }
