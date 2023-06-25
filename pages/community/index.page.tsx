@@ -6,7 +6,7 @@ import { useAppSelector } from '../../renderer/store/hooks';
 import { API_URL } from '../../renderer/CONSTANT_URL';
 import { useCheckLoginStatus } from '../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../components/Loading/LoadingMain';
-import type { PageContext, PageProps } from '../../renderer/types';
+import type { PageContext } from '../../renderer/types';
 import type { Post } from '../../server/models/Post';
 
 const CommunityMain = React.lazy(() => import('./CommunityMain'));

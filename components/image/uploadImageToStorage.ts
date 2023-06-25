@@ -1,4 +1,3 @@
-// import { API_URL } from '../../renderer/CONSTANT_URL';
 import {
     RandomFileName,
     SelectedImage,
