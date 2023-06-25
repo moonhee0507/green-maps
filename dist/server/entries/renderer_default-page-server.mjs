@@ -65,7 +65,8 @@ const passToClient = [
   "pageHtml",
   "reviews",
   "restaurantInfo",
-  "postId"
+  "postId",
+  "urlPathname"
 ];
 async function render(pageContext) {
   const { pageHtml } = pageContext;
@@ -121,3 +122,4 @@ export {
   passToClient,
   render
 };
+//# sourceMappingURL=renderer_default-page-server.mjs.map

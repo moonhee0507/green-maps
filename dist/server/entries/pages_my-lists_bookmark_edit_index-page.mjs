@@ -1,18 +1,16 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
+import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
 import { E as EDIT_GROUP_MODAL, f as SET_TARGET_GROUP, I as ICON_STANDARD, S as SET_GROUP_NAME, g as COMPARE_ICON, O as ORDER_STANDARD, a as ORDER_MODAL } from "../chunks/chunk-1a5b0e59.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { N as NavBar } from "../chunks/chunk-1ce52716.js";
-import { I as IconSelection } from "../chunks/chunk-f2c28349.js";
-import { navigate } from "vite-plugin-ssr/client/router";
-import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
+import { I as IconSelection } from "../chunks/chunk-14e3e1c1.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
-import "../chunks/chunk-24b72a12.js";
 import "../chunks/chunk-edfa0bc8.js";
 function Notice() {
   return /* @__PURE__ */ jsx("div", { className: "container-notice", children: /* @__PURE__ */ jsx("em", { children: "기본 그룹은 편집할 수 없습니다." }) });
@@ -189,7 +187,7 @@ function CompleteButton({ userInfo, groupList }) {
       }
     } else {
       alert("로그아웃 되었습니다.\n다시 로그인해주세요.");
-      navigate("/login");
+      window.location.href = "/login";
     }
   }
   return /* @__PURE__ */ jsx("button", { type: "button", className: `button-groupname-complete ${show ? "on" : ""}`, onClick: handleClick, children: "완료" });
@@ -345,3 +343,4 @@ export {
   Page,
   documentProps
 };
+//# sourceMappingURL=pages_my-lists_bookmark_edit_index-page.mjs.map

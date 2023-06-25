@@ -1,13 +1,12 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
+import { B as ButtonGoBack, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
 import { navigate } from "vite-plugin-ssr/client/router";
-import { N as NavBar } from "../chunks/chunk-1ce52716.js";
+import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
 import { useDispatch } from "react-redux";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
 import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
-import "../chunks/chunk-24b72a12.js";
 import "../chunks/chunk-dfb70939.js";
 function SearchForm() {
   const [showInput, setShowInput] = useState(false);
@@ -45,7 +44,7 @@ function SearchBar() {
     /* @__PURE__ */ jsx(SearchForm, {})
   ] });
 }
-const CommunityMain = React.lazy(() => import("../chunks/chunk-42c58b33.js"));
+const CommunityMain = React.lazy(() => import("../chunks/chunk-a271d0a3.js"));
 function Page(pageContext) {
   var _a, _b;
   const [isLoggedIn, _] = useCheckLoginStatus();
@@ -90,3 +89,4 @@ function Page(pageContext) {
 export {
   Page
 };
+//# sourceMappingURL=pages_community_index-page.mjs.map

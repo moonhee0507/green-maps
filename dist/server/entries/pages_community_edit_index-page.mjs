@@ -1,14 +1,13 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
-import { C as Create } from "../chunks/chunk-f728421f.js";
+import { u as useAppDispatch } from "../chunks/chunk-7f101d2c.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { C as Create } from "../chunks/chunk-f0688338.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { E as EDIT_MODE } from "../chunks/chunk-3e2eef8e.js";
 import "react-redux";
-import "../chunks/chunk-1c670203.js";
-import "../chunks/chunk-0d31e55c.js";
-import "vite-plugin-ssr/client/router";
+import "../chunks/chunk-7cd0f7a8.js";
+import "../chunks/chunk-b81d9a29.js";
 import "draft-js";
 import "draftjs-to-html";
 import "@reduxjs/toolkit";
@@ -41,3 +40,4 @@ export {
   Page,
   documentProps
 };
+//# sourceMappingURL=pages_community_edit_index-page.mjs.map

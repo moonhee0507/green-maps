@@ -1,0 +1,73 @@
+name: Deploy to cloudtype
+on:
+    push:
+        branches:
+            - preview
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+            - name: Connect deploy key
+              uses: cloudtype-github-actions/connect@v1
+              with:
+                  token: ${{ secrets.CLOUDTYPE_TOKEN }}
+                  ghtoken: ${{ secrets.GHP_TOKEN }}
+            - name: Deploy
+              uses: cloudtype-github-actions/deploy@v1
+              with:
+                  token: ${{ secrets.CLOUDTYPE_TOKEN }}
+                  project: sjmh0507/green-maps
+                  stage: beta1
+                  yaml: |
+                      name: green-maps
+                      app: node@16
+                      options:
+                        env:
+                          - name: PUPPETEER_SKIP_DOWNLOAD
+                            value: "1"
+                          - name: MONGO_ID
+                            secret: MONGO_ID
+                          - name: MONGO_PW
+                            secret: MONGO_PW
+                          - name: REACT_APP_MAP_KEY
+                            secret: REACT_APP_MAP_KEY
+                          - name: AWS_ACCESS_KEY_ID
+                            secret: AWS_ACCESS_KEY_ID
+                          - name: AWS_SECRET_ACCESS_KEY
+                            secret: AWS_SECRET_ACCESS_KEY
+                          - name: AWS_S3_BUCKET
+                            secret: AWS_S3_BUCKET
+                          - name: AWS_DEFAULT_REGION
+                            secret: AWS_DEFAULT_REGION
+                          - name: VITE_AWS_ACCESS_KEY_ID
+                            secret: VITE_AWS_ACCESS_KEY_ID
+                          - name: VITE_AWS_SECRET_ACCESS_KEY
+                            secret: VITE_AWS_SECRET_ACCESS_KEY
+                          - name: VITE_AWS_S3_BUCKET
+                            secret: AWS_S3_BUCKET
+                          - name: VITE_AWS_DEFAULT_REGION
+                            secret: AWS_DEFAULT_REGION
+                          - name: KAKAO_CLIENT_ID
+                            secret: KAKAO_CLIENT_ID
+                          - name: KAKAO_REDIRECT_URI
+                            secret: KAKAO_REDIRECT_URI
+                          - name: KAKAO_CLIENT_SECRET
+                            secret: KAKAO_CLIENT_SECRET
+                          - name: KAKAO_ADMIN
+                            secret: KAKAO_ADMIN
+                          - name: DEFAULT_PASSWORD
+                            secret: DEFAULT_PASSWORD
+                          - name: PRIVATE_KEY
+                            secret: PRIVATE_KEY
+                          - name: PUBLIC_KEY
+                            secret: PUBLIC_KEY
+                          - name: TZ
+                            value: Asia/Seoul
+                        ports: "5000"
+                        start: npm run server:prod
+                      context:
+                        git:
+                          url: git@github.com:${{ github.repository }}.git
+                          ref: ${{ github.ref }}
