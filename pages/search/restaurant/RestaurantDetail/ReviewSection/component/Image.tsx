@@ -36,6 +36,7 @@ function Image(props: { photoList: Array<{ _id: string; src: string; pick: boole
                     {arrSort.map((item, i) => {
                         return (
                             <img
+                                loading="lazy"
                                 key={item._id}
                                 src={`https://${import.meta.env.VITE_AWS_S3_BUCKET}.s3.${
                                     import.meta.env.VITE_AWS_DEFAULT_REGION

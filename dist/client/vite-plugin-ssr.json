@@ -1,6 +1,6 @@
 {
   "version": "0.4.131",
-  "usesClientRouter": true,
+  "usesClientRouter": false,
   "manifestKeyMap": {},
   "baseServer": "/",
   "baseAssets": "/",

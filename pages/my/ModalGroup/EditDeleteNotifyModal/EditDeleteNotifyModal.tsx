@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../../renderer/store/hooks';
-import { EDIT_DELETE_NOTIFY_MODAL } from '../../../../renderer/_reducers/_slices/reviewSlice';
+import { useAppSelector } from '../../../../renderer/store/hooks';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
-import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { EditDeleteNotifyModal };
 
@@ -34,22 +32,17 @@ function EditDeleteNotifyModal() {
 }
 
 function EDIT() {
-    const dispatch = useAppDispatch();
     const reviewId = useAppSelector((state) => state.reviewSlice.reviewId);
     const restaurantId = useAppSelector((state) => state.reviewSlice.restaurantId);
 
     function handleClick() {
-        navigate(`/search/${restaurantId}/reviews/${reviewId}/edit`);
-        const app = document.querySelector('.app');
-        app?.classList.remove('modal-mode');
-        dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+        window.location.href = `/search/${restaurantId}/reviews/${reviewId}/edit`;
     }
 
     return <li onClick={handleClick}>🩹 수정하기</li>;
 }
 
 function DELETE() {
-    const dispatch = useAppDispatch();
     const reviewId = useAppSelector((state) => state.reviewSlice.reviewId);
     const restaurantId = useAppSelector((state) => state.reviewSlice.restaurantId);
 
@@ -65,16 +58,12 @@ function DELETE() {
             });
             const data = await res.json();
             if (data.success) {
-                navigate(`/search/${restaurantId}`);
+                window.location.href = `/search/${restaurantId}`;
             } else {
                 alert('다시 시도해주세요.');
             }
         } catch (err) {
             console.error(err);
-        } finally {
-            const app = document.querySelector('.app');
-            app?.classList.remove('modal-mode');
-            dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
         }
     }
     return <li onClick={handleClick}>🗑️ 삭제하기</li>;

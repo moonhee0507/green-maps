@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { TopBar } from '../../components/topBar/topBar';
 import { LoginMain } from './LoginMain/LoginMain';
 import { API_URL } from '../../renderer/CONSTANT_URL';
-import { navigate } from 'vite-plugin-ssr/client/router';
 
 export const documentProps = {
     title: '로그인 | Green Maps',
@@ -19,7 +18,7 @@ function Page() {
 
             if (data.success) {
                 alert('접근할 수 없는 페이지입니다.');
-                navigate('/search');
+                window.location.href = '/search';
             }
         })();
     }, []);

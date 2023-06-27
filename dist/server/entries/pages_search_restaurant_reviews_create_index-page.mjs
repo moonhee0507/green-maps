@@ -1,9 +1,9 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
-import { R as ReviewForm } from "../chunks/chunk-bae2b396.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-0d31e55c.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { R as ReviewForm } from "../chunks/chunk-ad8926d3.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
 import "react";
-import "../chunks/chunk-0e4e6c3d.js";
+import "../chunks/chunk-7f101d2c.js";
 import "react-redux";
 import "../chunks/chunk-94504c62.js";
 import "../chunks/chunk-3e2eef8e.js";
@@ -19,7 +19,6 @@ import "../chunks/chunk-d2c63902.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-dfb70939.js";
-import "vite-plugin-ssr/client/router";
 const documentProps = {
   title: "채식 식당 리뷰 작성 | Green Maps",
   description: "채식 식당 리뷰 작성 페이지"
@@ -36,3 +35,4 @@ export {
   Page,
   documentProps
 };
+//# sourceMappingURL=pages_search_restaurant_reviews_create_index-page.mjs.map

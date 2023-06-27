@@ -7,7 +7,6 @@ import {
     PROFILE_PASSWORD_MODAL,
     SET_USERID,
 } from '../../../../renderer/_reducers/_slices/profileSlice';
-import { navigate } from 'vite-plugin-ssr/client/router';
 
 export { NewPassword };
 
@@ -76,7 +75,7 @@ function NewPassword() {
 
                 if (data.success) {
                     alert('비밀번호가 변경되었습니다.\n로그인 페이지로 이동합니다.');
-                    navigate('/login');
+                    window.location.href = '/login';
                 } else {
                     alert('다시 시도해주세요.');
                 }

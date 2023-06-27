@@ -24,3 +24,4 @@ async function onBeforeRender(pageContext) {
 export {
   onBeforeRender
 };
+//# sourceMappingURL=pages_community_search_index-page-server.mjs.map

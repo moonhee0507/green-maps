@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { navigate } from 'vite-plugin-ssr/client/router';
 import { RootState } from '../../../../../renderer/store';
 
 export { SearchInput };
@@ -11,7 +10,8 @@ function SearchInput() {
 
     function handleSubmit() {
         const url = `/community/search/${inputElement.current?.value}`;
-        navigate(url, { keepScrollPosition: true });
+        // navigate(url, { keepScrollPosition: true });
+        window.location.href = url;
     }
 
     return (

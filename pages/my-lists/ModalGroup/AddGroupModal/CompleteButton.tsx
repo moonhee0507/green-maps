@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../../../../renderer/store/hooks';
 import { API_URL } from '../../../../renderer/CONSTANT_URL';
-import { navigate } from 'vite-plugin-ssr/client/router';
 import type { UserInfo } from '../../../../server/models/User';
 
 export { CompleteButton };
@@ -41,7 +40,7 @@ function CompleteButton({ userInfo }: { userInfo: UserInfo | null }) {
             }
         } else {
             alert('로그아웃 되었습니다.\n다시 로그인해주세요.');
-            navigate('/login');
+            window.location.href = '/login';
         }
     }
     return (

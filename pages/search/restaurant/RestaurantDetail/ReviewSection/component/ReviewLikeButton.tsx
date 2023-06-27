@@ -11,20 +11,20 @@ function ReviewLikeButton(props: { reviewId: string; like: Array<{ user: string 
     const [buttonOn, setButtonOn] = useState<boolean>(false);
 
     useEffect(() => {
-        getUserId()
-            .then((userId) => {
-                setUserId(userId);
-            })
-            .catch((err) => console.error(err));
-
+        getUserId();
         async function getUserId() {
-            const res = await fetch(`${API_URL}/users/`, {
-                credentials: 'include',
-                method: 'GET',
-            });
-            const data = await res.json();
+            try {
+                const res = await fetch(`${API_URL}/users`);
+                const data = await res.json();
 
-            return data.user.userId;
+                if (data.success) {
+                    setUserId(data.user.userId);
+                } else {
+                    setUserId(null);
+                }
+            } catch (err) {
+                console.error(err);
+            }
         }
     }, []);
 

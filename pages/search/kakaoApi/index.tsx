@@ -5,10 +5,9 @@ import store from '../../../renderer/store/index.js';
 import { SET_CURRENT_LOCATION } from '../../../renderer/_reducers/_slices/mapSlice.js';
 import getListInCurrentView from './getListInCurrentView';
 import InfoWindow from './InfoWindow/InfoWindow.js';
-// import Loading from '../../../components/image/Loading.js';
 import imgLocation from '/images/map-location.png';
 import imgCert from '/images/map-cert-location.png';
-import imgLoading from '/images/spinner.gif';
+import imgLoading from '/images/spinner.webp';
 import type { Lat, Lng, MongoLocation, MongoPolygon } from './types';
 import type { Restaurant } from './../../../server/models/Restaurant';
 

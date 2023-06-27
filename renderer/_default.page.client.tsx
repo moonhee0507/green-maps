@@ -6,7 +6,7 @@ import { PageShell } from './PageShell';
 import type { PageContextClient } from './types';
 
 export { render };
-export const clientRouting = true;
+// export const clientRouting = false;
 export const hydrationCanBeAborted = true;
 
 let root: ReactDOM.Root;

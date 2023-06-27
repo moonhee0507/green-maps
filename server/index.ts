@@ -11,7 +11,6 @@ import fetch from 'node-fetch';
 const isProduction = process.env.NODE_ENV === 'production';
 
 import routes from './api/index.js';
-// import { API_URL } from '../renderer/CONSTANT_URL/index.js';
 import type { UserInfo } from './models/User.js';
 import https from 'https';
 import fs from 'fs-extra';
@@ -36,7 +35,7 @@ startServer();
 async function startServer() {
     const app = express();
 
-    const corsOptions = {
+    const corsOptions: cors.CorsOptions = {
         origin: process.env.NODE_ENV === 'production' ? 'https://www.green-maps.site' : 'https://localhost:5000',
         methods: ['GET', 'OPTIONS', 'PATCH', 'DELETE', 'POST', 'PUT'],
         allowedHeaders: [
@@ -54,6 +53,7 @@ async function startServer() {
         ],
         credentials: true,
         optionsSuccessStatus: 200,
+        maxAge: 10 * 60, // seconds
     };
     app.use(cors(corsOptions));
     app.options('*', cors(corsOptions));

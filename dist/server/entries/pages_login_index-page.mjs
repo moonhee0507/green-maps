@@ -1,11 +1,10 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
-import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
+import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
 import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { navigate } from "vite-plugin-ssr/client/router";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -128,7 +127,7 @@ function PasswordStage({ setMove }) {
       const data = await res.json();
       if (data.success) {
         window.alert("🎉🎉로그인에 성공했습니다🎉🎉");
-        navigate("/search");
+        window.location.href = "/search";
       } else {
         window.alert("로그인에 실패했습니다");
       }
@@ -167,7 +166,7 @@ function Page() {
       const data = await res.json();
       if (data.success) {
         alert("접근할 수 없는 페이지입니다.");
-        navigate("/search");
+        window.location.href = "/search";
       }
     })();
   }, []);
@@ -180,3 +179,4 @@ export {
   Page,
   documentProps
 };
+//# sourceMappingURL=pages_login_index-page.mjs.map

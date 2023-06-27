@@ -1,0 +1,1 @@
+{"version":3,"file":"pages_home_index-page-server.mjs","sources":["../../../pages/home/index.page.server.ts"],"sourcesContent":["export const documentProps = {\r\n    title: '홈 | Green Maps',\r\n    description: '채식 식당 지도 서비스',\r\n};\r\n"],"names":[],"mappings":"AAAO,MAAM,gBAAgB;AAAA,EACzB,OAAO;AAAA,EACP,aAAa;AACjB;"}

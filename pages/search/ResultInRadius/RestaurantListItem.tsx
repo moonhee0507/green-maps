@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { Thumb } from './Thumb';
 import { DistanceContainer } from './DistanceContainer';
 import { __LI_WIDTH__, __BORDER__ } from './RestaurantList';
-import { navigate } from 'vite-plugin-ssr/client/router';
-import type { Restaurant } from '../../../server/models/Restaurant';
 import { useAppSelector } from '../../../renderer/store/hooks';
+import type { Restaurant } from '../../../server/models/Restaurant';
 
 export { RestaurantListItem };
 
@@ -22,7 +21,7 @@ function RestaurantListItem({ restaurantInfo, isFirst }: { restaurantInfo: Resta
 
     return (
         <li style={{ width: `${__LI_WIDTH__}px`, borderWidth: `${__BORDER__ / 2}px` }} ref={liElement}>
-            <div onClick={() => navigate(`/search/${_id}`)}>
+            <div onClick={() => (window.location.href = `/search/${_id}`)}>
                 <Thumb category={category} />
                 <DistanceContainer location={location.coordinates} />
                 <div className="container-right">

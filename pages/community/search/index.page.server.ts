@@ -1,6 +1,5 @@
 import fetch from 'node-fetch';
 import type { PageContextBuiltIn } from 'vite-plugin-ssr/types';
-// import { API_URL } from '../../../renderer/CONSTANT_URL';
 
 export { onBeforeRender };
 

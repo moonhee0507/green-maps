@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import LoadingMain from '../../components/Loading/LoadingMain';
-import imgLoading from '/images/spinner.gif';
+import imgLoading from '/images/spinner.webp';
 
 export { Page };
-
-export const documentProps = {
-    title: '홈 | Green Maps',
-    description: '채식 식당 지도 서비스',
-};
 
 export interface BeforeInstallPromptEvent extends Event {
     readonly platforms: Array<string>;
