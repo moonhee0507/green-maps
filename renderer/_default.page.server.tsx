@@ -24,6 +24,7 @@ export const passToClient = [
     'pageHtml',
     'reviews',
     'restaurantInfo',
+    'post',
     'postId',
     'urlPathname',
 ];
@@ -39,6 +40,7 @@ async function render(pageContext: PageContextServer) {
 
     const manifestUrl = import.meta.env.BASE_URL + 'app.webmanifest';
     const cssUrl = import.meta.env.BASE_URL + 'style/index.css';
+    const swUrl = import.meta.env.BASE_URL + 'sw.ts';
 
     const PRELOADED_STATE = JSON.stringify(store);
     const LOGIN_MESSAGE = JSON.stringify('로그인이 필요한 서비스입니다.\n로그인하시겠습니까?');
@@ -46,6 +48,7 @@ async function render(pageContext: PageContextServer) {
     return escapeInject`<!DOCTYPE html>
     <html lang="ko">
         <head>
+            <link rel="stylesheet" href="${cssUrl}" type="text/css" as="style">
             <meta charset="UTF-8" />
             <title>${title}</title>
             <meta name="author" content="moonhee0507" />
@@ -60,7 +63,7 @@ async function render(pageContext: PageContextServer) {
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
-            <link rel="stylesheet" href="${cssUrl}" type="text/css" as="style">
+            
             <meta name="apple-mobile-web-app-capable" content="yes">
 
             <meta property="og:image" content="${icon512}">
@@ -98,12 +101,13 @@ async function render(pageContext: PageContextServer) {
                         }
                     });
                 }
+
             </script>
     </html>`;
 }
 
 async function onBeforeRender(pageContext: PageContextServer) {
-    const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, postId, review } =
+    const { Page, pageProps, routeParams, token, user, groupName, reviews, restaurantInfo, post, postId, review } =
         pageContext;
 
     let pageHtml;
@@ -135,6 +139,7 @@ async function onBeforeRender(pageContext: PageContextServer) {
             pageHtml,
             reviews,
             restaurantInfo,
+            post,
             postId,
             review,
         },

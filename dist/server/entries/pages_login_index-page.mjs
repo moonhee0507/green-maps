@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { T as TopBar } from "../chunks/chunk-8405f720.js";
-import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
@@ -23,22 +23,24 @@ function SelectStage({ setMove }) {
     const paramFromQueryString = new URLSearchParams(queryString);
     const authorizeCode = paramFromQueryString.get("code");
     try {
-      if (authorizeCode) {
-        getAccessTokenFromKakao(authorizeCode).then((data) => {
-          if (data.success) {
-            getKakaoUserData().then((data2) => {
-              if (data2.success) {
-                window.location.href = "/my";
-              } else {
-                console.error(`카카오 사용자 데이터 가져오기 실패`);
-              }
-            });
-          } else {
-            console.error(`카카오 API 토큰 요청에 실패했습니다.`);
-          }
-        });
-      } else {
-        console.error(`카카오 AuthorizeCode가 없습니다.`);
+      if (queryString !== "") {
+        if (authorizeCode) {
+          getAccessTokenFromKakao(authorizeCode).then((data) => {
+            if (data.success) {
+              getKakaoUserData().then((data2) => {
+                if (data2.success) {
+                  window.location.href = "/my";
+                } else {
+                  console.error(`카카오 사용자 데이터 가져오기 실패`);
+                }
+              });
+            } else {
+              console.error(`카카오 API 토큰 요청에 실패했습니다.`);
+            }
+          });
+        } else {
+          console.error(`카카오 AuthorizeCode가 없습니다.`);
+        }
       }
     } catch (err) {
       console.error(err);
@@ -65,7 +67,7 @@ function SelectStage({ setMove }) {
     /* @__PURE__ */ jsx("div", { className: "container-rocket", children: /* @__PURE__ */ jsx("span", { children: "🚀" }) }),
     /* @__PURE__ */ jsx("button", { type: "button", onClick: nextStage, className: "styled-button reuse-in-login", children: "로그인" }),
     /* @__PURE__ */ jsxs("button", { type: "button", className: "styled-button kakao-login", onClick: callAgreementScreen, children: [
-      /* @__PURE__ */ jsx("img", { src: imgKakao, alt: "카카오 아이콘" }),
+      /* @__PURE__ */ jsx("img", { src: imgKakao, alt: "카카오 아이콘", role: "presentation" }),
       /* @__PURE__ */ jsx("span", { children: "카카오 로그인" })
     ] }),
     /* @__PURE__ */ jsx(Link, { href: "/signup", className: "link-to-signup", children: "회원가입" })

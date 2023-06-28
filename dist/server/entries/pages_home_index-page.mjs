@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
-import { i as imgLoading } from "../chunks/chunk-dfb70939.js";
+import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
+import { i as imgLoading } from "../chunks/chunk-e25a89db.js";
 function Page() {
   const [isLoading, setIsLoading] = useState(true);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
@@ -14,7 +14,7 @@ function Page() {
     const timeoutId = setTimeout(() => {
       setIsLoading(false);
     }, 5e3);
-    setComponent(() => React.lazy(() => import("../chunks/chunk-69f630df.js")));
+    setComponent(() => React.lazy(() => import("../chunks/chunk-f66722a6.js")));
     return () => {
       clearTimeout(timeoutId);
     };

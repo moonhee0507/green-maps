@@ -12,6 +12,7 @@ import { PostProps } from '../pages/community/Community';
 import { UserInfo } from '../server/models/User';
 import { Restaurant } from '../server/models/Restaurant';
 import { Review } from '../server/models/Review';
+import { Post } from '../server/models/Post';
 
 type Page = (pageProps: PageProps) => React.ReactElement;
 type PageProps = {
@@ -20,13 +21,13 @@ type PageProps = {
     reviews?: any;
     review?: Review;
     postProps?: PostProps;
-    postInfo?: any;
+    post?: Post;
+    postId?: string;
     token?: string;
     user: {
         isLoggedIn: boolean;
         info: UserInfo | null;
     };
-    postId?: string;
 };
 type RouteParams = { keyword?: string };
 
@@ -54,6 +55,7 @@ export type PageContextCustom = {
     token: string;
     restaurantInfo: Restaurant;
     reviews: Review[];
+    post?: Post;
     postId: string;
     review: Review;
 };

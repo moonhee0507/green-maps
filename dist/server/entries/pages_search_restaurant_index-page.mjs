@@ -1,17 +1,16 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
-import { a as useAppSelector, u as useAppDispatch } from "../chunks/chunk-7f101d2c.js";
+import { u as useAppSelector, a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL } from "../chunks/chunk-4ef07e33.js";
-import { navigate } from "vite-plugin-ssr/client/router";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
-import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
+import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
-import "../chunks/chunk-dfb70939.js";
+import "../chunks/chunk-e25a89db.js";
 function EditDeleteNotifyModal() {
   const [show, setShow] = useState(false);
   const editDeleteNotifyModalOn = useAppSelector((state) => state.reviewSlice.editDeleteNotifyModalOn);
@@ -31,19 +30,14 @@ function EditDeleteNotifyModal() {
   ] });
 }
 function EDIT() {
-  const dispatch = useAppDispatch();
   const reviewId = useAppSelector((state) => state.reviewSlice.reviewId);
   const restaurantId = useAppSelector((state) => state.reviewSlice.restaurantId);
   function handleClick() {
-    navigate(`/search/${restaurantId}/reviews/${reviewId}/edit`);
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.remove("modal-mode");
-    dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+    window.location.href = `/search/${restaurantId}/reviews/${reviewId}/edit`;
   }
   return /* @__PURE__ */ jsx("li", { onClick: handleClick, children: "🩹 수정하기" });
 }
 function DELETE() {
-  const dispatch = useAppDispatch();
   const reviewId = useAppSelector((state) => state.reviewSlice.reviewId);
   const restaurantId = useAppSelector((state) => state.reviewSlice.restaurantId);
   async function handleClick() {
@@ -58,16 +52,12 @@ function DELETE() {
       });
       const data = await res.json();
       if (data.success) {
-        navigate(`/search/${restaurantId}`);
+        window.location.href = `/search/${restaurantId}`;
       } else {
         alert("다시 시도해주세요.");
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      const app = document.querySelector(".app");
-      app == null ? void 0 : app.classList.remove("modal-mode");
-      dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
     }
   }
   return /* @__PURE__ */ jsx("li", { onClick: handleClick, children: "🗑️ 삭제하기" });
@@ -99,7 +89,7 @@ function ModalGroup() {
   }
   return /* @__PURE__ */ jsx("div", { className: `modal-group ${show ? "on" : ""}`, children: /* @__PURE__ */ jsx(EditDeleteNotifyModal, {}) });
 }
-const RestaurantDetail = React.lazy(() => import("../chunks/chunk-1dceff42.js"));
+const RestaurantDetail = React.lazy(() => import("../chunks/chunk-f312d6e4.js"));
 function Page(pageContext) {
   var _a;
   const { routeParams } = pageContext;

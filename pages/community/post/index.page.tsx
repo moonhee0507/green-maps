@@ -7,9 +7,8 @@ import { CommentSection } from './CommentSection/CommentSection';
 import { ModalGroup } from './ModalGroup/ModalGroup';
 import { useCheckLoginStatus } from '../../../renderer/_hooks/useCheckLoginStatus';
 import LoadingMain from '../../../components/Loading/LoadingMain';
-import { Post } from '../../../server/models/Post';
-import { API_URL } from '../../../renderer/CONSTANT_URL';
 import type { PageContext } from '../../../renderer/types';
+import type { Post } from '../../../server/models/Post';
 
 export const documentProps = {
     title: '게시글 | Green Maps',
@@ -19,41 +18,13 @@ export const documentProps = {
 export { Page };
 
 function Page(pageContext: PageContext) {
-    const { routeParams } = pageContext;
-
-    const [postId, setPostId] = useState('');
-
     const dispatch = useAppDispatch();
     const [_, userInfo] = useCheckLoginStatus();
 
-    const [postInfo, setPostInfo] = useState<Post | null>(null);
-
-    useEffect(() => {
-        if (routeParams) {
-            setPostId(routeParams.postId);
-        }
-    }, [routeParams]);
-
-    useEffect(() => {
-        if (typeof postId === 'string' && postId !== '') {
-            getPostInfo().then((post) => {
-                if (post) {
-                    setPostInfo(post);
-                } else setPostInfo(null);
-            });
-        }
-
-        async function getPostInfo() {
-            const res = await fetch(`${API_URL}/posts/${postId}`, {
-                headers: {
-                    'Cache-Control': 'max-age=31536000',
-                },
-            });
-            const data = (await res.json()) as Post;
-
-            return data;
-        }
-    }, [postId]);
+    const [postInfo, setPostInfo] = useState<Post | null>(() => {
+        if (pageContext.post) return pageContext.post;
+        else return null;
+    });
 
     // 댓글 페이지 네이션을 위해 스토어에 저장
     useEffect(() => {

@@ -102,11 +102,11 @@ export default (app: Router) => {
         try {
             const item = await Post.findById(req.params.postId).exec();
 
-            if (!item) res.json({ success: false, message: '해당 게시물이 존재하지 않습니다.' });
+            if (!item) res.status(404).json({ success: false, message: '해당 게시물이 존재하지 않습니다.' });
             else res.status(200).json(item);
         } catch (err) {
             if (err instanceof Error) {
-                res.json({ success: false, errorMessage: err.message });
+                res.status(500).json({ success: false, errorMessage: err.message });
             }
         }
     });
