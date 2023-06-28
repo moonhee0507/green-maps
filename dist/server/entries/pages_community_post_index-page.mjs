@@ -1,20 +1,20 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect, useRef } from "react";
-import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import DOMPurify from "isomorphic-dompurify";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
 import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
 import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
-import { P as Pagination } from "../chunks/chunk-59db6cf1.js";
+import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
-import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
+import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import "react-redux";
 import "@reduxjs/toolkit";
-import "../chunks/chunk-dfb70939.js";
+import "../chunks/chunk-e25a89db.js";
 function TextArea(props) {
   const htmlString = props.content;
   return typeof window !== "undefined" ? /* @__PURE__ */ jsx(
@@ -493,35 +493,14 @@ const documentProps = {
   description: "채식 식당 지도 서비스 게시글 페이지"
 };
 function Page(pageContext) {
-  const { routeParams } = pageContext;
-  const [postId, setPostId] = useState("");
   const dispatch = useAppDispatch();
   const [_, userInfo] = useCheckLoginStatus();
-  const [postInfo, setPostInfo] = useState(null);
-  useEffect(() => {
-    if (routeParams) {
-      setPostId(routeParams.postId);
-    }
-  }, [routeParams]);
-  useEffect(() => {
-    if (typeof postId === "string" && postId !== "") {
-      getPostInfo().then((post) => {
-        if (post) {
-          setPostInfo(post);
-        } else
-          setPostInfo(null);
-      });
-    }
-    async function getPostInfo() {
-      const res = await fetch(`${API_URL}/posts/${postId}`, {
-        headers: {
-          "Cache-Control": "max-age=31536000"
-        }
-      });
-      const data = await res.json();
-      return data;
-    }
-  }, [postId]);
+  const [postInfo, setPostInfo] = useState(() => {
+    if (pageContext.post)
+      return pageContext.post;
+    else
+      return null;
+  });
   useEffect(() => {
     if (postInfo) {
       if (postInfo.comments) {

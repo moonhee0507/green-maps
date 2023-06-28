@@ -1,5 +1,5 @@
 const toolbar = {
-    options: ['inline', 'blockType', 'fontSize', 'image'],
+    options: ['inline', 'blockType', 'fontSize'],
     inline: {
         inDropdown: false,
         options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace'],

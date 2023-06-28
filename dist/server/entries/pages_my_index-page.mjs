@@ -1,21 +1,20 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import React, { useRef, useState, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-8405f720.js";
+import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
 import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
-import { u as useAppDispatch, a as useAppSelector } from "../chunks/chunk-7f101d2c.js";
+import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { P as PROFILE_IMAGE_MODAL, E as EDIT_NICKNAME, a as PROFILE_NICKNAME_MODAL, S as SET_NICKNAME, b as PROFILE_PASSWORD_MODAL, c as PASS_CURRENT_PASSWORD, d as SET_USERID } from "../chunks/chunk-d2c63902.js";
 import { r as randomizeFileName } from "../chunks/chunk-8649d624.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { v as validatePassword } from "../chunks/chunk-22884288.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, a as SET_REVIEW_ID, b as SET_RESTAURANT_ID } from "../chunks/chunk-4ef07e33.js";
-import { navigate } from "vite-plugin-ssr/client/router";
 import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
-import { L as LoadingMain } from "../chunks/chunk-fa126bd4.js";
+import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
-import "../chunks/chunk-dfb70939.js";
+import "../chunks/chunk-e25a89db.js";
 function EditImageButton() {
   const dispatch = useAppDispatch();
   const fileInput = useRef(null);
@@ -473,19 +472,14 @@ function EditDeleteNotifyModal() {
   ] });
 }
 function EDIT() {
-  const dispatch = useAppDispatch();
   const reviewId = useAppSelector((state) => state.reviewSlice.reviewId);
   const restaurantId = useAppSelector((state) => state.reviewSlice.restaurantId);
   function handleClick() {
-    navigate(`/search/${restaurantId}/reviews/${reviewId}/edit`);
-    const app = document.querySelector(".app");
-    app == null ? void 0 : app.classList.remove("modal-mode");
-    dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
+    window.location.href = `/search/${restaurantId}/reviews/${reviewId}/edit`;
   }
   return /* @__PURE__ */ jsx("li", { onClick: handleClick, children: "🩹 수정하기" });
 }
 function DELETE() {
-  const dispatch = useAppDispatch();
   const reviewId = useAppSelector((state) => state.reviewSlice.reviewId);
   const restaurantId = useAppSelector((state) => state.reviewSlice.restaurantId);
   async function handleClick() {
@@ -500,16 +494,12 @@ function DELETE() {
       });
       const data = await res.json();
       if (data.success) {
-        navigate(`/search/${restaurantId}`);
+        window.location.href = `/search/${restaurantId}`;
       } else {
         alert("다시 시도해주세요.");
       }
     } catch (err) {
       console.error(err);
-    } finally {
-      const app = document.querySelector(".app");
-      app == null ? void 0 : app.classList.remove("modal-mode");
-      dispatch(EDIT_DELETE_NOTIFY_MODAL(false));
     }
   }
   return /* @__PURE__ */ jsx("li", { onClick: handleClick, children: "🗑️ 삭제하기" });
@@ -563,7 +553,7 @@ const documentProps = {
   title: "내 정보 | Green Maps",
   description: "채식 식당 지도 서비스 마이 페이지"
 };
-const MyMain = React.lazy(() => import("../chunks/chunk-eb04fc69.js"));
+const MyMain = React.lazy(() => import("../chunks/chunk-921cc5cd.js"));
 function Page() {
   const [isLoggedIn, info] = useCheckLoginStatus();
   const [reviews, setReviews] = useState([]);
