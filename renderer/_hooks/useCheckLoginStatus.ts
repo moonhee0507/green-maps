@@ -19,32 +19,21 @@ function useCheckLoginStatus(): [IsLoggedIn, User] {
                     method: 'GET',
                 });
                 const data = (await res.json()) as { success: boolean; user: UserInfo };
+
                 if (data.success === true) {
                     setIsLoggedIn(true);
                     setUserInfo(data.user);
                 } else {
                     setIsLoggedIn(false);
                     setUserInfo(null);
-
-                    if (window.location.pathname === '/my') {
-                        window.location.href = '/login';
-                    }
-
-                    if (window.location.pathname === '/my-lists') {
-                        window.location.href = '/login';
-                    }
                 }
+
+                redirect(data.success);
             } catch (error) {
                 setIsLoggedIn(false);
                 setUserInfo(null);
 
-                if (window.location.pathname === '/my') {
-                    window.location.href = '/login';
-                }
-
-                if (window.location.pathname === '/my-lists') {
-                    window.location.href = '/login';
-                }
+                redirect(false);
             }
         };
 
@@ -52,4 +41,20 @@ function useCheckLoginStatus(): [IsLoggedIn, User] {
     }, []);
 
     return [isLoggedIn, userInfo];
+}
+
+function redirect(isLoggedIn: boolean): void {
+    if (!isLoggedIn) {
+        if (window.location.pathname === '/my') {
+            window.location.href = '/login';
+        }
+
+        if (window.location.pathname === '/my-lists') {
+            window.location.href = '/login';
+        }
+    } else {
+        if (window.location.pathname === '/signup' || window.location.pathname === '/login') {
+            window.location.href = '/search';
+        }
+    }
 }

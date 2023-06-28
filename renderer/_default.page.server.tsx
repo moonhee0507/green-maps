@@ -102,9 +102,6 @@ async function render(pageContext: PageContextServer) {
                     });
                 }
 
-                if ('serviceWorker' in navigator) {
-                    navigator.serviceWorker.register("${swUrl}");
-                }
             </script>
     </html>`;
 }
