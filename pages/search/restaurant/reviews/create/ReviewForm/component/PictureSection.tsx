@@ -40,9 +40,9 @@ export function PictureSection({ photos }: { photos?: PhotoInReview }) {
     });
 
     const handleFileInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const files: any = event.target.files;
+        const files = event.target.files;
 
-        if (event.target.files !== null) {
+        if (files !== null) {
             const temp: Array<SelectedImage> = [];
             for (let file of files) {
                 temp.push([URL.createObjectURL(file), file.type]);
