@@ -36,7 +36,6 @@ function EditDeleteNotifyModal() {
 function EDIT() {
     const dispatch = useAppDispatch();
     const postId = useAppSelector((state) => state.postSlice.postId);
-    const commentId = useAppSelector((state) => state.postSlice.commentId);
     const accessTarget = useAppSelector((state) => state.postSlice.accessTarget);
 
     function handleClick() {
