@@ -50,7 +50,9 @@ function CommentListItem({
     comment: CommentInPost;
     isLast: boolean;
 }) {
-    const { owner, content, like, registeredAt, updatedAt } = comment;
+    const targetCommentId = useAppSelector((state) => state.postSlice.commentId); // 클릭한 코멘트의 id
+
+    const { _id, owner, content, like, registeredAt, updatedAt } = comment;
     const editMode = useAppSelector((state) => state.postSlice.editCommentMode);
 
     const date = isSameDay(registeredAt)
@@ -76,10 +78,14 @@ function CommentListItem({
                 </dl>
                 <dl>
                     <dt className="sr-only">댓글 내용</dt>
-                    {editMode ? <TextareaForEdit content={content} /> : <dd className="txt-content">{content}</dd>}
+                    {editMode && targetCommentId === _id ? (
+                        <TextareaForEdit content={content} />
+                    ) : (
+                        <dd className="txt-content">{content}</dd>
+                    )}
                 </dl>
             </dl>
-            {editMode ? (
+            {editMode && targetCommentId === _id ? (
                 <EditCommentButton postId={postId} commentId={comment._id} />
             ) : (
                 <MoreButton userInfo={userInfo} postId={postId} comment={comment} />

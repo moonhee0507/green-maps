@@ -48,18 +48,18 @@ async function render(pageContext: PageContextServer) {
     return escapeInject`<!DOCTYPE html>
     <html lang="ko">
         <head>
-            <link rel="stylesheet" href="${cssUrl}" type="text/css" as="style">
+            <link rel="stylesheet" href="${cssUrl}" type="text/css">
             <meta charset="UTF-8" />
             <title>${title}</title>
             <meta name="author" content="moonhee0507" />
-            <link rel="icon" href="${icon512}" />
+            <link rel="icon" href="${icon512}">
             <meta name="description" content="${desc}" />
-            <link rel="apple-touch-icon" href="${icon180}" sizes="180x180" />
-            <link rel="mask-icon" href="${iconMask}" color="#00784a" />
+            <link rel="apple-touch-icon" href="${icon180}" sizes="180x180">
+            <link rel="mask-icon" href="${iconMask}" color="#00784a">
             <meta name="theme-color" media="(prefers-color-scheme: light)" content="#00784a">
             <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#00784a">
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="manifest" href="${manifestUrl}" />
+            <link rel="manifest" href="${manifestUrl}">
             <link rel="preconnect" href="https://fonts.googleapis.com">
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
@@ -83,7 +83,7 @@ async function render(pageContext: PageContextServer) {
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=136def8e37bfc98bffe8939cd80ab687&libraries=services,clusterer,drawing"></script>
             <div id="page-view">${dangerouslySkipEscape(__PAGE_HTML__)}</div>
             <script type="text/javascript">
-                var global = global || window;
+                
                 window.__PRELOADED_STATE__ = ${dangerouslySkipEscape(PRELOADED_STATE)};
                 
                 const map = document.getElementById("map");
