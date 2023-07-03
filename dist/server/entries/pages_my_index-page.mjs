@@ -9,7 +9,7 @@ import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { v as validatePassword } from "../chunks/chunk-22884288.js";
 import { E as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, a as SET_REVIEW_ID, b as SET_RESTAURANT_ID } from "../chunks/chunk-4ef07e33.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
 import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
@@ -553,7 +553,7 @@ const documentProps = {
   title: "내 정보 | Green Maps",
   description: "채식 식당 지도 서비스 마이 페이지"
 };
-const MyMain = React.lazy(() => import("../chunks/chunk-921cc5cd.js"));
+const MyMain = React.lazy(() => import("../chunks/chunk-09a2eade.js"));
 function Page() {
   const [isLoggedIn, info] = useCheckLoginStatus();
   const [reviews, setReviews] = useState([]);

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import defaultProfile from '/images/default-profile.png';
+import defaultProfile from '/images/default-profile.webp';
 import type { UserInfo } from '../../../server/models/User';
 import { IMG_URL } from '../../../renderer/CONSTANT_URL';
 

@@ -4,7 +4,7 @@ import { B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d
 import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
 import { useDispatch } from "react-redux";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
 import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import "../chunks/chunk-e25a89db.js";
 function SearchForm() {
@@ -31,7 +31,7 @@ function SearchForm() {
       {
         type: "button",
         onClick: () => showInput ? moveToPage() : setShowInput(true),
-        "aria-label": "식당 검색 버튼",
+        "aria-label": "게시글 검색 버튼",
         children: "🔍"
       }
     )
@@ -43,7 +43,7 @@ function SearchBar() {
     /* @__PURE__ */ jsx(SearchForm, {})
   ] });
 }
-const CommunityMain = React.lazy(() => import("../chunks/chunk-f5fb603b.js"));
+const CommunityMain = React.lazy(() => import("../chunks/chunk-0928b8b9.js"));
 function Page(pageContext) {
   var _a, _b;
   const [isLoggedIn, _] = useCheckLoginStatus();
