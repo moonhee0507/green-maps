@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../renderer/store/hooks';
 import { LOGGING_IN } from '../../../renderer/_reducers/_slices/loginSlice';
 import { Link } from '../../../renderer/Link';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
-import imgKakao from '/images/icon-kakao.png';
+import imgKakao from '/images/icon-kakao.webp';
 
 export { SelectStage };
 

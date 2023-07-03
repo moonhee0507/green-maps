@@ -1,11 +1,12 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useRef, useState, useEffect } from "react";
 import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { useRef, useState } from "react";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SIGNING_UP } from "../chunks/chunk-6f77cb2d.js";
 import { a as validateId, b as validateNickName, v as validatePassword } from "../chunks/chunk-22884288.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
@@ -253,16 +254,7 @@ const documentProps = {
   description: "그린맵 회원가입 페이지"
 };
 function Page() {
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API_URL}/users`);
-      const data = await res.json();
-      if (data.success) {
-        alert("접근할 수 없는 페이지입니다.");
-        window.location.href = "/search";
-      }
-    })();
-  }, []);
+  useCheckLoginStatus();
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "회원가입" }),
     /* @__PURE__ */ jsx(SignupMain, {})

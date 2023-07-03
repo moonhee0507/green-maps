@@ -1,14 +1,15 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { useEffect, useState } from "react";
 import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { useEffect, useState } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
 import "react-redux";
 import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
-const imgKakao = "/images/icon-kakao.png";
+const imgKakao = "/images/icon-kakao.webp";
 function SelectStage({ setMove }) {
   const dispatch = useAppDispatch();
   const nextStage = () => {
@@ -162,16 +163,7 @@ const documentProps = {
   description: "채식 식당 지도 서비스 로그인"
 };
 function Page() {
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API_URL}/users`);
-      const data = await res.json();
-      if (data.success) {
-        alert("접근할 수 없는 페이지입니다.");
-        window.location.href = "/search";
-      }
-    })();
-  }, []);
+  useCheckLoginStatus();
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "로그인" }),
     /* @__PURE__ */ jsx(LoginMain, {})

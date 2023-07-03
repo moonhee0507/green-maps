@@ -10,7 +10,7 @@ import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
 import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
 import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import "react-redux";
 import "@reduxjs/toolkit";
@@ -283,7 +283,8 @@ function CommentListItem({
   isLast
 }) {
   var _a, _b;
-  const { owner, content, like, registeredAt, updatedAt } = comment;
+  const targetCommentId = useAppSelector((state) => state.postSlice.commentId);
+  const { _id, owner, content, like, registeredAt, updatedAt } = comment;
   const editMode = useAppSelector((state) => state.postSlice.editCommentMode);
   const date = isSameDay(registeredAt) ? `${(_a = registeredAt.split(". ").at(-1)) == null ? void 0 : _a.split(":")[0]}:${(_b = registeredAt.split(". ").at(-1)) == null ? void 0 : _b.split(":")[1]}` : registeredAt.slice(0, 13);
   const listElement = useRef(null);
@@ -302,10 +303,10 @@ function CommentListItem({
       ] }),
       /* @__PURE__ */ jsxs("dl", { children: [
         /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "댓글 내용" }),
-        editMode ? /* @__PURE__ */ jsx(TextareaForEdit, { content }) : /* @__PURE__ */ jsx("dd", { className: "txt-content", children: content })
+        editMode && targetCommentId === _id ? /* @__PURE__ */ jsx(TextareaForEdit, { content }) : /* @__PURE__ */ jsx("dd", { className: "txt-content", children: content })
       ] })
     ] }),
-    editMode ? /* @__PURE__ */ jsx(EditCommentButton, { postId, commentId: comment._id }) : /* @__PURE__ */ jsx(MoreButton, { userInfo, postId, comment })
+    editMode && targetCommentId === _id ? /* @__PURE__ */ jsx(EditCommentButton, { postId, commentId: comment._id }) : /* @__PURE__ */ jsx(MoreButton, { userInfo, postId, comment })
   ] });
 }
 function TextareaForEdit({ content }) {
@@ -393,7 +394,6 @@ function EditDeleteNotifyModal() {
 function EDIT() {
   const dispatch = useAppDispatch();
   const postId = useAppSelector((state) => state.postSlice.postId);
-  useAppSelector((state) => state.postSlice.commentId);
   const accessTarget = useAppSelector((state) => state.postSlice.accessTarget);
   function handleClick() {
     if (accessTarget === "post") {

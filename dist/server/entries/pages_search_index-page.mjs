@@ -8,11 +8,11 @@ import { renderToString } from "react-dom/server";
 import { s as store } from "../chunks/chunk-042cff01.js";
 import { S as Stars } from "../chunks/chunk-e0988469.js";
 import { i as imgLoading } from "../chunks/chunk-e25a89db.js";
-import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-1b2a5672.js";
+import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-e43b6672.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
-import { u as useCheckLoginStatus } from "../chunks/chunk-b81d9a29.js";
+import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
 import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import "react-redux";
 import "@reduxjs/toolkit";
@@ -429,8 +429,8 @@ function InfoWindow({
     ] })
   ] }) });
 }
-const imgLocation = "/images/map-location.png";
-const imgCert = "/images/map-cert-location.png";
+const imgLocation = "/images/map-location.webp";
+const imgCert = "/images/map-cert-location.webp";
 const { kakao: kakao$1 } = typeof window !== "undefined" ? window : global;
 let isLoggedIn = false;
 let map;
@@ -922,7 +922,7 @@ const documentProps = {
   title: "채식 식당 지도 | Green Maps",
   description: "채식 식당 지도 페이지"
 };
-const MapView = React.lazy(() => import("../chunks/chunk-ae8f8b62.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-f5c378e9.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);
