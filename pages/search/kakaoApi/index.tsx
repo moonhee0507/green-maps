@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { renderToString } from 'react-dom/server';
 import store from '../../../renderer/store/index.js';
 import { SET_CURRENT_LOCATION } from '../../../renderer/_reducers/_slices/mapSlice.js';

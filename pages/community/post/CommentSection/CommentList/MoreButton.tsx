@@ -25,21 +25,25 @@ function MoreButton({
 
     const moreButtonRef = useRef<HTMLButtonElement>(null);
     const [user, setUser] = useState<UserInfo | null>(null);
+    const [nickname, setNickname] = useState('');
 
     useEffect(() => {
         if (userInfo !== null) setUser(userInfo);
-    }, [userInfo]);
+        if (typeof comment.owner.user_id === 'object') {
+            setNickname(comment.owner.user_id.nickName);
+        }
+    }, [userInfo, comment]);
 
-    function handleClick() {
+    const handleClick = () => {
         const app = document.querySelector('.app');
         app?.classList.add('modal-mode');
 
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
-        dispatch(SAME_USER_OWNER(user?.nickName === comment.owner));
+        dispatch(SAME_USER_OWNER(user?.nickName === nickname));
         dispatch(SET_ACCESS_TARGET('comment'));
         dispatch(SET_POST_ID(postId));
         dispatch(SET_COMMENT_ID(comment._id));
-    }
+    };
 
     return (
         <button

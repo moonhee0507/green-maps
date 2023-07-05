@@ -214,7 +214,7 @@
     .wrapper-commentitem {
         border: 1px solid $border-color;
         border-radius: $comment-border-radius;
-        padding: 10px;
+        padding: 15px;
         margin: 10px 0 10px;
 
         .container-owner-date {
@@ -229,6 +229,7 @@
             .txt-date {
                 display: inline;
                 font-size: 13px;
+                color: $side-txt-color;
             }
         }
 

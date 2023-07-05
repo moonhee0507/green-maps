@@ -100,7 +100,12 @@ export default (app: Router) => {
 
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
-            const item = await Post.findById(req.params.postId).exec();
+            // const item = await Post.findById(req.params.postId).exec();
+            const item = await Post.findById(req.params.postId)
+                .populate({
+                    path: 'comments.owner.user_id',
+                })
+                .exec();
 
             if (!item) res.status(404).json({ success: false, message: '해당 게시물이 존재하지 않습니다.' });
             else res.status(200).json(item);
@@ -150,21 +155,28 @@ export default (app: Router) => {
     // 게시글 댓글 작성
     route.post('/:postId/comment', auth, async (req: Request, res: Response) => {
         try {
+            const { user_id, content } = req.body;
+
             await Post.findOneAndUpdate(
                 { _id: req.params.postId },
                 {
                     $push: {
                         comments: {
-                            owner: req.body.owner,
-                            content: req.body.content,
+                            // owner: req.body.owner,
+                            owner: {
+                                user_id: user_id,
+                            },
+                            content: content,
                         },
                     },
                 }
             );
 
-            return res.status(200).json({ success: true });
+            res.status(200).json({ success: true });
         } catch (err) {
-            console.error(err);
+            if (err instanceof Error) {
+                res.status(500).json({ success: false, errorMessage: err.message });
+            }
         }
     });
 };

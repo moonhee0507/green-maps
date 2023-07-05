@@ -154,32 +154,26 @@ function Time(props) {
     /* @__PURE__ */ jsx("dd", { className: "container-post-time", children: /* @__PURE__ */ jsx("time", { dateTime: "", children: date }) })
   ] });
 }
-function SubmitButton(props) {
-  const { postId, content } = props;
-  async function getUserId() {
+function SubmitButton({ postId, content }) {
+  const handleClick = async () => {
     const res = await fetch(`${API_URL}/users/`, {
       credentials: "include",
       method: "GET"
     });
     const data = await res.json();
-    return data;
-  }
-  function handleClick() {
-    getUserId().then((data) => {
-      if (data.success === true) {
-        submit(data.user.nickName);
-      } else {
-        if (confirm("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?")) {
-          window.location.href = `/login`;
-        }
+    if (data.success && data.user) {
+      submit(data.user._id);
+    } else {
+      if (confirm("로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?")) {
+        window.location.href = `/login`;
       }
-    });
-  }
-  async function submit(nickName) {
+    }
+  };
+  async function submit(user_id) {
     try {
       if (content !== null && content.length > 0) {
         const body = {
-          owner: nickName,
+          user_id,
           content
         };
         const res = await fetch(`${API_URL}/posts/${postId}/comment`, {
@@ -231,19 +225,23 @@ function MoreButton({
   const dispatch = useAppDispatch();
   const moreButtonRef = useRef(null);
   const [user, setUser] = useState(null);
+  const [nickname, setNickname] = useState("");
   useEffect(() => {
     if (userInfo !== null)
       setUser(userInfo);
-  }, [userInfo]);
-  function handleClick() {
+    if (typeof comment.owner.user_id === "object") {
+      setNickname(comment.owner.user_id.nickName);
+    }
+  }, [userInfo, comment]);
+  const handleClick = () => {
     const app = document.querySelector(".app");
     app == null ? void 0 : app.classList.add("modal-mode");
     dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
-    dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === comment.owner));
+    dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === nickname));
     dispatch(SET_ACCESS_TARGET("comment"));
     dispatch(SET_POST_ID(postId));
     dispatch(SET_COMMENT_ID(comment._id));
-  }
+  };
   return /* @__PURE__ */ jsx(
     "button",
     {
@@ -286,6 +284,12 @@ function CommentListItem({
   const targetCommentId = useAppSelector((state) => state.postSlice.commentId);
   const { _id, owner, content, like, registeredAt, updatedAt } = comment;
   const editMode = useAppSelector((state) => state.postSlice.editCommentMode);
+  const [nickname, setNickname] = useState("");
+  useEffect(() => {
+    if (typeof owner !== "undefined" && typeof owner.user_id === "object") {
+      setNickname(owner.user_id.nickName);
+    }
+  }, [owner]);
   const date = isSameDay(registeredAt) ? `${(_a = registeredAt.split(". ").at(-1)) == null ? void 0 : _a.split(":")[0]}:${(_b = registeredAt.split(". ").at(-1)) == null ? void 0 : _b.split(":")[1]}` : registeredAt.slice(0, 13);
   const listElement = useRef(null);
   useEffect(() => {
@@ -297,7 +301,7 @@ function CommentListItem({
     /* @__PURE__ */ jsxs("dl", { className: "wrapper-commentitem", children: [
       /* @__PURE__ */ jsxs("dl", { className: "container-owner-date", children: [
         /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "댓글 작성자" }),
-        /* @__PURE__ */ jsx("dd", { className: "txt-owner", children: owner }),
+        /* @__PURE__ */ jsx("dd", { className: "txt-owner", children: nickname }),
         /* @__PURE__ */ jsx("dt", { className: "sr-only", children: "게시 시간" }),
         /* @__PURE__ */ jsx("dd", { className: "txt-date", children: date })
       ] }),
