@@ -15,6 +15,7 @@ export type Like = {
 };
 
 export interface UserInfo {
+    _id: string;
     userId: string;
     nickName: string;
     password: string;

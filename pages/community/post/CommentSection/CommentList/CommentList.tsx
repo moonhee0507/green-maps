@@ -55,6 +55,14 @@ function CommentListItem({
     const { _id, owner, content, like, registeredAt, updatedAt } = comment;
     const editMode = useAppSelector((state) => state.postSlice.editCommentMode);
 
+    const [nickname, setNickname] = useState<string>('');
+
+    useEffect(() => {
+        if (typeof owner !== 'undefined' && typeof owner.user_id === 'object') {
+            setNickname(owner.user_id.nickName);
+        }
+    }, [owner]);
+
     const date = isSameDay(registeredAt)
         ? `${registeredAt.split('. ').at(-1)?.split(':')[0]}:${registeredAt.split('. ').at(-1)?.split(':')[1]}`
         : registeredAt.slice(0, 13);
@@ -72,7 +80,7 @@ function CommentListItem({
             <dl className="wrapper-commentitem">
                 <dl className="container-owner-date">
                     <dt className="sr-only">댓글 작성자</dt>
-                    <dd className="txt-owner">{owner}</dd>
+                    <dd className="txt-owner">{nickname}</dd>
                     <dt className="sr-only">게시 시간</dt>
                     <dd className="txt-date">{date}</dd>
                 </dl>

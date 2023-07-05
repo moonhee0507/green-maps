@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import { Restaurant } from './Restaurant';
 
-export type PhotoInReview = Array<{ src: string; pick: boolean }>;
+export type PhotoInReview = Array<{ _id: string; src: string; pick: boolean }>;
 
 export type Review = {
     _id: string;

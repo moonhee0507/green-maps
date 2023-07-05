@@ -1,8 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
+import { UserInfo } from './User';
 
 export type CommentInPost = {
     _id: string;
-    owner: string;
+    owner: {
+        user_id: string | UserInfo;
+    };
     content: string;
     like?: Array<{ user: string }>;
     registeredAt: string;
@@ -82,8 +85,12 @@ const postSchema = new Schema({
     comments: [
         {
             owner: {
-                type: String,
-                required: true,
+                // type: String,
+                user_id: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User',
+                    required: true,
+                },
             },
             content: {
                 type: String,

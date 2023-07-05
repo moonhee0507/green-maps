@@ -1,38 +1,37 @@
 import React from 'react';
 import { API_URL } from '../../../../../renderer/CONSTANT_URL';
+import type { UserInfo } from '../../../../../server/models/User';
 
 export { SubmitButton };
 
-function SubmitButton(props: { postId: string; content: string | null }) {
-    const { postId, content } = props;
-
-    async function getUserId() {
+function SubmitButton({ postId, content }: { postId: string; content: string | null }) {
+    const handleClick = async () => {
         const res = await fetch(`${API_URL}/users/`, {
             credentials: 'include',
             method: 'GET',
         });
-        const data = await res.json();
+        const data = (await res.json()) as {
+            success: boolean;
+            message?: string;
+            errorMessage?: string;
+            user?: UserInfo;
+        };
 
-        return data;
-    }
-
-    function handleClick() {
-        getUserId().then((data) => {
-            if (data.success === true) {
-                submit(data.user.nickName);
-            } else {
-                if (confirm('로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?')) {
-                    window.location.href = `/login`;
-                }
+        // return data;
+        if (data.success && data.user) {
+            submit(data.user._id);
+        } else {
+            if (confirm('로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?')) {
+                window.location.href = `/login`;
             }
-        });
-    }
+        }
+    };
 
-    async function submit(nickName: string) {
+    async function submit(user_id: string) {
         try {
             if (content !== null && content.length > 0) {
                 const body = {
-                    owner: nickName,
+                    user_id: user_id,
                     content: content,
                 };
 
