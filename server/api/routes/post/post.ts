@@ -108,7 +108,6 @@ export default (app: Router) => {
 
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
-            // const item = await Post.findById(req.params.postId).exec();
             const item = await Post.findById(req.params.postId)
                 .populate({
                     path: 'owner.user_id',
@@ -173,7 +172,6 @@ export default (app: Router) => {
                 {
                     $push: {
                         comments: {
-                            // owner: req.body.owner,
                             owner: {
                                 user_id: user_id,
                             },

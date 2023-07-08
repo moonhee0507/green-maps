@@ -17,7 +17,6 @@ function SubmitButton({ postId, content }: { postId: string; content: string | n
             user?: UserInfo;
         };
 
-        // return data;
         if (data.success && data.user) {
             submit(data.user._id);
         } else {
