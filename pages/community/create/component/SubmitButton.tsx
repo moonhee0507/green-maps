@@ -13,7 +13,6 @@ function SubmitButton() {
 
     const postId = useAppSelector((state) => state.postSlice.postId);
     const subject = useAppSelector((state) => state.postSlice.SUBJECT);
-    const owner = useAppSelector((state) => state.postSlice.NICKNAME);
     const title = useAppSelector((state) => state.postSlice.TITLE);
     const content = useAppSelector((state) => state.postSlice.CONTENT);
 
@@ -37,11 +36,10 @@ function SubmitButton() {
         });
     }, [getUserInfo]);
 
-    async function handleSubmit() {
+    const handleSubmit = async () => {
         try {
             const body = {
                 subject: subject,
-                owner: owner,
                 title: title,
                 content: content,
             };
@@ -68,7 +66,7 @@ function SubmitButton() {
             dispatch(EDIT_MODE(false));
             history.back();
         }
-    }
+    };
 
     return (
         <button type="button" onClick={handleSubmit}>

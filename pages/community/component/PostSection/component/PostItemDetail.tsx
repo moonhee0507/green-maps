@@ -1,17 +1,21 @@
 import React from 'react';
 import { CommentInPost } from '../../../../../server/models/Post';
 import { isSameDay } from '../../../../../components/Date/isSameDay';
+import { UserInfo } from '../../../../../server/models/User';
 
 export { PostItemDetail };
 
-function PostItemDetail(props: {
+function PostItemDetail({
+    like,
+    comments,
+    registeredAt,
+    owner,
+}: {
     like?: Array<{ user: string }>;
     comments?: Array<CommentInPost>;
     registeredAt: string;
-    owner: string;
+    owner: string | UserInfo;
 }) {
-    const { like, comments, registeredAt, owner } = props;
-
     return (
         <>
             <dt className="sr-only">상세 내용</dt>
@@ -27,31 +31,29 @@ function PostItemDetail(props: {
     );
 }
 
-function LikeCount(props: { like?: Array<{ user: string }> }) {
+function LikeCount({ like }: { like?: Array<{ user: string }> }) {
     return (
         <>
             <dt className="sr-only">좋아요 개수</dt>
             <dd className="container-count-like">
-                <span>{props.like?.length || 0}</span>
+                <span>{like?.length || 0}</span>
             </dd>
         </>
     );
 }
 
-function CommentCount(props: { comments?: Array<CommentInPost> }) {
+function CommentCount({ comments }: { comments?: Array<CommentInPost> }) {
     return (
         <>
             <dt className="sr-only">댓글 개수</dt>
             <dd className="container-count-comment">
-                <span>{props.comments?.length || 0}</span>
+                <span>{comments?.length || 0}</span>
             </dd>
         </>
     );
 }
 
-function Time(props: { registeredAt: string }) {
-    const { registeredAt } = props;
-
+function Time({ registeredAt }: { registeredAt: string }) {
     const date = isSameDay(registeredAt)
         ? `${registeredAt.split('. ').at(-1)?.split(':')[0]}:${registeredAt.split('. ').at(-1)?.split(':')[1]}`
         : registeredAt.slice(0, 13);
@@ -66,11 +68,11 @@ function Time(props: { registeredAt: string }) {
     );
 }
 
-function Owner(props: { owner: string }) {
+function Owner({ owner }: { owner: string | UserInfo }) {
     return (
         <>
             <dt className="sr-only">작성자</dt>
-            <dd className="txt-post-owner">{props.owner}</dd>
+            <dd className="txt-post-owner">{typeof owner === 'string' ? owner : owner?.nickName}</dd>
         </>
     );
 }

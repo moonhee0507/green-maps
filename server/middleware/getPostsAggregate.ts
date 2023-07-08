@@ -149,6 +149,17 @@ export default async function getPostsAggregate(req: any, res: Response, next: N
         }
 
         const aggregate = Post.aggregate([
+            {
+                $lookup: {
+                    from: 'users', //
+                    localField: 'owner.user_id',
+                    foreignField: '_id',
+                    as: 'owner.user_id',
+                },
+            },
+            {
+                $unwind: '$owner.user_id',
+            },
             boundaryMatchStage,
             subjectMatchState,
             {
@@ -181,6 +192,17 @@ export default async function getPostsAggregate(req: any, res: Response, next: N
         const lists = await aggregate.exec();
 
         const totalAggregate = Post.aggregate([
+            {
+                $lookup: {
+                    from: 'users', //
+                    localField: 'owner.user_id',
+                    foreignField: '_id',
+                    as: 'owner.user_id',
+                },
+            },
+            {
+                $unwind: '$owner.user_id',
+            },
             boundaryMatchStage,
             subjectMatchState,
             {

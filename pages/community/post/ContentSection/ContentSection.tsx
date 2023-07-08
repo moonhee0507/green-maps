@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextArea } from './TextArea/TextArea';
 import type { Post, CommentInPost } from '../../../../server/models/Post';
 import { PostLikeButton } from './PostLikeButton';
@@ -11,6 +11,15 @@ export { ContentSection };
 function ContentSection({ userInfo, postInfo }: { userInfo: UserInfo | null; postInfo: Post }) {
     const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
 
+    const [nickname, setNickname] = useState<string>('');
+
+    useEffect(() => {
+        console.log('owner', owner);
+        if (typeof owner !== 'undefined' && typeof owner.user_id === 'object') {
+            setNickname(owner.user_id.nickName);
+        }
+    }, [owner]);
+
     return (
         <section className="section-post-content">
             <h3 aria-label="게시글 제목" className="txt-post-title">
@@ -18,7 +27,7 @@ function ContentSection({ userInfo, postInfo }: { userInfo: UserInfo | null; pos
             </h3>
             <div>
                 <p aria-label="작성자" className="txt-post-owner">
-                    {owner}
+                    {nickname}
                 </p>
                 <div className="container-post-subinfo">
                     <LikeCount like={like} />
@@ -28,7 +37,7 @@ function ContentSection({ userInfo, postInfo }: { userInfo: UserInfo | null; pos
             </div>
             <TextArea content={content} />
             <PostLikeButton postId={_id} like={like} />
-            <MoreButton userInfo={userInfo} owner={owner} postId={_id} />
+            <MoreButton userInfo={userInfo} owner={nickname} postId={_id} />
         </section>
     );
 }

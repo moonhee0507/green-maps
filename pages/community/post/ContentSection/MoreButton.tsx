@@ -16,16 +16,20 @@ function MoreButton({ userInfo, owner, postId }: { userInfo: UserInfo | null; ow
 
     const moreButtonRef = useRef<HTMLButtonElement>(null);
     const [user, setUser] = useState<UserInfo | null>(null);
+    const [nickname, setNickname] = useState('');
 
     useEffect(() => {
         if (userInfo !== null) setUser(userInfo);
+        if (typeof owner === 'string') {
+            setNickname(owner);
+        }
     }, [userInfo]);
 
     function handleClick() {
         appModalMode(true);
 
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
-        dispatch(SAME_USER_OWNER(user?.nickName === owner));
+        dispatch(SAME_USER_OWNER(user?.nickName === nickname));
         dispatch(SET_POST_ID(postId));
         dispatch(SET_ACCESS_TARGET('post'));
     }
