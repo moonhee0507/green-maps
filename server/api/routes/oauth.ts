@@ -4,6 +4,8 @@ import User from '../../models/User.js';
 import checkTargetId from '../../middleware/checkTargetId.js';
 import Bookmark from '../../models/Bookmark.js';
 
+const redirectUri = process.env.production ? process.env.KAKAO_REDIRECT_URI : 'https://localhost:5000/login';
+
 const route = Router();
 
 export default (app: Router) => {
@@ -12,7 +14,7 @@ export default (app: Router) => {
     route.get('/kakao', async (req: Request, res: Response) => {
         try {
             res.redirect(
-                `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}`
+                `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${redirectUri}`
             );
         } catch (err) {
             if (err instanceof Error) {
@@ -25,7 +27,7 @@ export default (app: Router) => {
     route.get('/kakao/token', async (req: Request, res: Response) => {
         try {
             const response = await fetch(
-                `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${process.env.KAKAO_REDIRECT_URI}&code=${req.query.code}&client_secret=${process.env.KAKAO_CLIENT_SECRET}`,
+                `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${redirectUri}&code=${req.query.code}&client_secret=${process.env.KAKAO_CLIENT_SECRET}`,
                 {
                     method: 'POST',
                     headers: {

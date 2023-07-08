@@ -15,7 +15,9 @@ export type CommentInPost = {
 export type Post = {
     _id: string;
     subject: string;
-    owner: string;
+    owner: {
+        user_id: string | UserInfo;
+    };
     title: string;
     content: string;
     photo?: Array<{ src: string; pick: boolean }>;
@@ -31,8 +33,11 @@ const postSchema = new Schema({
         required: true,
     },
     owner: {
-        type: String,
-        required: true,
+        user_id: {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+        },
     },
     title: {
         type: String,

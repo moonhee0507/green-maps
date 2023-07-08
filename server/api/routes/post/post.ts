@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import auth from '../../../middleware/auth.js';
 import Post from '../../../models/Post.js';
 import getPostsAggregate from '../../../middleware/getPostsAggregate.js';
+import User from '../../../models/User.js';
 
 const route = Router();
 
@@ -9,14 +10,21 @@ export default (app: Router) => {
     app.use('/posts', route);
 
     // 게시글 추가
-    route.post('/', auth, (req: any, res: Response) => {
-        const post = new Post(req.body);
+    route.post('/', auth, async (req: any, res: Response) => {
+        const user = await User.findOne({ token: req.cookies.auth });
 
-        post.save()
-            .then(() => {
-                return res.status(200).json({ success: true });
-            })
-            .catch((err) => res.json({ success: false, errorMessage: err.message }));
+        if (!user) {
+            res.status(404).json({ success: false, message: '사용자가 존재하지 않습니다.' });
+        } else {
+            const post = new Post({ ...req.body, owner: { user_id: user._id } });
+
+            await post
+                .save()
+                .then(() => {
+                    return res.status(200).json({ success: true });
+                })
+                .catch((err) => res.json({ success: false, errorMessage: err.message }));
+        }
     });
 
     // 게시글 수정
@@ -100,8 +108,10 @@ export default (app: Router) => {
 
     route.get('/:postId', async (req: Request, res: Response) => {
         try {
-            // const item = await Post.findById(req.params.postId).exec();
             const item = await Post.findById(req.params.postId)
+                .populate({
+                    path: 'owner.user_id',
+                })
                 .populate({
                     path: 'comments.owner.user_id',
                 })
@@ -162,7 +172,6 @@ export default (app: Router) => {
                 {
                     $push: {
                         comments: {
-                            // owner: req.body.owner,
                             owner: {
                                 user_id: user_id,
                             },

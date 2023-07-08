@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect, useRef } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-dcb05bf0.js";
+import { T as TopBar } from "../chunks/chunk-eec7010f.js";
 import DOMPurify from "isomorphic-dompurify";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
@@ -92,14 +92,18 @@ function MoreButton$1({ userInfo, owner, postId }) {
   const dispatch = useAppDispatch();
   const moreButtonRef = useRef(null);
   const [user, setUser] = useState(null);
+  const [nickname, setNickname] = useState("");
   useEffect(() => {
     if (userInfo !== null)
       setUser(userInfo);
+    if (typeof owner === "string") {
+      setNickname(owner);
+    }
   }, [userInfo]);
   function handleClick() {
     appModalMode(true);
     dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
-    dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === owner));
+    dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === nickname));
     dispatch(SET_POST_ID(postId));
     dispatch(SET_ACCESS_TARGET("post"));
   }
@@ -116,10 +120,17 @@ function MoreButton$1({ userInfo, owner, postId }) {
 }
 function ContentSection({ userInfo, postInfo }) {
   const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
+  const [nickname, setNickname] = useState("");
+  useEffect(() => {
+    console.log("owner", owner);
+    if (typeof owner !== "undefined" && typeof owner.user_id === "object") {
+      setNickname(owner.user_id.nickName);
+    }
+  }, [owner]);
   return /* @__PURE__ */ jsxs("section", { className: "section-post-content", children: [
     /* @__PURE__ */ jsx("h3", { "aria-label": "게시글 제목", className: "txt-post-title", children: title }),
     /* @__PURE__ */ jsxs("div", { children: [
-      /* @__PURE__ */ jsx("p", { "aria-label": "작성자", className: "txt-post-owner", children: owner }),
+      /* @__PURE__ */ jsx("p", { "aria-label": "작성자", className: "txt-post-owner", children: nickname }),
       /* @__PURE__ */ jsxs("div", { className: "container-post-subinfo", children: [
         /* @__PURE__ */ jsx(LikeCount, { like }),
         /* @__PURE__ */ jsx(CommentCount, { comments }),
@@ -128,7 +139,7 @@ function ContentSection({ userInfo, postInfo }) {
     ] }),
     /* @__PURE__ */ jsx(TextArea, { content }),
     /* @__PURE__ */ jsx(PostLikeButton, { postId: _id, like }),
-    /* @__PURE__ */ jsx(MoreButton$1, { userInfo, owner, postId: _id })
+    /* @__PURE__ */ jsx(MoreButton$1, { userInfo, owner: nickname, postId: _id })
   ] });
 }
 function LikeCount(props) {

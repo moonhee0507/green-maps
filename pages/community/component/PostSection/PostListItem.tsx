@@ -15,7 +15,7 @@ function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement
     return (
         <li ref={ref}>
             <a
-                href={`/community/${_id}`}
+                href={`/community/${_id.toString()}`}
                 style={{
                     width: '100%',
                     display: 'flex',
@@ -30,7 +30,7 @@ function PostListItem(props: { postInfo: Post }, ref: ForwardedRef<HTMLLIElement
                     <Subject subject={subject} />
                     <Title title={title} />
                     <PreviewText content={removeTagContent} />
-                    <PostItemDetail owner={owner} like={like} registeredAt={registeredAt} comments={comments} />
+                    <PostItemDetail owner={owner.user_id} like={like} registeredAt={registeredAt} comments={comments} />
                 </dl>
                 {photo && photo.length > 0 ? (
                     <dd>
