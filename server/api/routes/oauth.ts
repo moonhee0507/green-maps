@@ -4,7 +4,8 @@ import User from '../../models/User.js';
 import checkTargetId from '../../middleware/checkTargetId.js';
 import Bookmark from '../../models/Bookmark.js';
 
-const redirectUri = process.env.production ? process.env.KAKAO_REDIRECT_URI : 'https://localhost:5000/login';
+const redirectUri =
+    process.env.NODE_ENV === 'production' ? process.env.KAKAO_REDIRECT_URI : 'https://localhost:5000/login';
 
 const route = Router();
 
