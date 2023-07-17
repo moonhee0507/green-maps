@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { T as TopBar } from "../chunks/chunk-eec7010f.js";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { L as LOGGING_IN, S as SET_ID } from "../chunks/chunk-1ccf3f37.js";
 import { L as Link } from "../chunks/chunk-24b72a12.js";
@@ -11,42 +11,55 @@ import "../chunks/chunk-3e2eef8e.js";
 import "@reduxjs/toolkit";
 const imgKakao = "/images/icon-kakao.webp";
 function SelectStage({ setMove }) {
+  const [popup, setPopup] = useState(null);
   const dispatch = useAppDispatch();
   const nextStage = () => {
     setMove(-100);
     dispatch(LOGGING_IN(true));
   };
-  async function callAgreementScreen() {
-    window.location.href = `${API_URL}/oauth/kakao`;
-  }
+  const callAgreementScreen = () => {
+    const width = 500;
+    const height = 700;
+    const left = window.screenX + (window.outerWidth - width) / 2;
+    const top = window.screenY + (window.outerHeight - height) / 2;
+    const kakaoPopup = window.open(
+      `${API_URL}/oauth/kakao`,
+      "kakao_popup",
+      `width=${width},height=${height},left=${left},top=${top}`
+    );
+    setPopup(kakaoPopup);
+  };
   useEffect(() => {
-    const queryString = window.location.search;
-    const paramFromQueryString = new URLSearchParams(queryString);
-    const authorizeCode = paramFromQueryString.get("code");
-    try {
-      if (queryString !== "") {
-        if (authorizeCode) {
-          getAccessTokenFromKakao(authorizeCode).then((data) => {
-            if (data.success) {
-              getKakaoUserData().then((data2) => {
-                if (data2.success) {
-                  window.location.href = "/my";
-                } else {
-                  console.error(`카카오 사용자 데이터 가져오기 실패`);
-                }
-              });
-            } else {
-              console.error(`카카오 API 토큰 요청에 실패했습니다.`);
-            }
-          });
-        } else {
-          console.error(`카카오 AuthorizeCode가 없습니다.`);
-        }
+    if (!popup)
+      return;
+    const timer = setInterval(() => {
+      if (!popup) {
+        timer && clearInterval(timer);
+        return;
       }
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
+      const popupUrl = popup.location.href;
+      if (!popupUrl)
+        return;
+      const searchParams = new URL(popupUrl).searchParams;
+      const authorizeCode = searchParams.get("code");
+      if (authorizeCode) {
+        popup.close();
+        getAccessTokenFromKakao(authorizeCode).then((data) => {
+          if (data.success) {
+            getKakaoUserData().then((data2) => {
+              if (data2.success) {
+                window.location.href = "/my";
+              } else {
+                console.error(`카카오 사용자 데이터 가져오기 실패`);
+              }
+            });
+          } else {
+            console.error(`카카오 API 토큰 요청에 실패했습니다.`);
+          }
+        });
+      }
+    }, 500);
+  }, [popup]);
   async function getAccessTokenFromKakao(authorizeCode) {
     const res = await fetch(`${API_URL}/oauth/kakao/token?code=${authorizeCode}`, {
       credentials: "include",

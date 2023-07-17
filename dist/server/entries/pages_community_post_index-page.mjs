@@ -122,7 +122,6 @@ function ContentSection({ userInfo, postInfo }) {
   const { subject, content, like, owner, photo, registeredAt, comments, title, _id } = postInfo;
   const [nickname, setNickname] = useState("");
   useEffect(() => {
-    console.log("owner", owner);
     if (typeof owner !== "undefined" && typeof owner.user_id === "object") {
       setNickname(owner.user_id.nickName);
     }
