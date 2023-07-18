@@ -4,8 +4,8 @@ import User from '../../models/User.js';
 import checkTargetId from '../../middleware/checkTargetId.js';
 import Bookmark from '../../models/Bookmark.js';
 
-const redirectUri =
-    process.env.NODE_ENV === 'production' ? process.env.KAKAO_REDIRECT_URI : 'https://localhost:5000/login';
+const kakaoRedirectUri = process.env.KAKAO_REDIRECT_URI || '';
+const redirectUri = process.env.NODE_ENV === 'production' ? kakaoRedirectUri : 'https://localhost:5000/login';
 
 const route = Router();
 
@@ -27,15 +27,25 @@ export default (app: Router) => {
     // 토큰 받기(로그인)
     route.get('/kakao/token', async (req: Request, res: Response) => {
         try {
-            const response = await fetch(
-                `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${redirectUri}&code=${req.query.code}&client_secret=${process.env.KAKAO_CLIENT_SECRET}`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded:charset=utf-8',
-                    },
-                }
-            );
+            const grantType = 'authorization_code';
+            const clientId = process.env.KAKAO_CLIENT_ID || '';
+            const authorizationCode = typeof req.query.code === 'string' ? req.query.code : '';
+            const clientSecret = process.env.KAKAO_CLIENT_SECRET || '';
+
+            const body = new URLSearchParams();
+            body.append('grant_type', grantType);
+            body.append('client_id', clientId);
+            body.append('redirect_uri', redirectUri);
+            body.append('code', authorizationCode);
+            body.append('client_secret', clientSecret);
+
+            const response = await fetch(`https://kauth.kakao.com/oauth/token`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+                },
+                body: body.toString(),
+            });
 
             const data = (await response.json()) as {
                 token_type: string;
