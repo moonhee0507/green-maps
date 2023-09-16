@@ -536,6 +536,9 @@ dd {
   padding: 10px;
   gap: 10px;
 }
+.wrapper-result-in-radius .ul-restaurant-in-radius > li:hover {
+  cursor: pointer;
+}
 .wrapper-result-in-radius .container-img {
   width: 70px;
   height: 70px;
@@ -573,7 +576,7 @@ dd {
   font-size: 13px;
 }
 .wrapper-result-in-radius .txt-cert {
-  color: #009eb0;
+  color: #35d7bb;
   font-weight: bold;
 }
 .wrapper-result-in-radius .container-rating-count {
@@ -879,7 +882,7 @@ button[aria-label="게시글 검색 버튼"] {
   margin-right: 5px;
 }
 .wrapper-infowindow .container-title-cert .txt-cert.green {
-  color: #009eb0;
+  color: #35d7bb;
 }
 .wrapper-infowindow .container-rating-review {
   display: flex;
@@ -1063,7 +1066,7 @@ button[aria-label="게시글 검색 버튼"] {
 }
 
 .is-active > em {
-  color: #009eb0;
+  color: #35d7bb;
 }
 
 @media (max-width: 420px) {
@@ -1248,6 +1251,9 @@ button[aria-label="게시글 검색 버튼"] {
 }
 .styled-button.kakao-login img {
   width: 35px;
+}
+.styled-button.kakao-login:hover {
+  outline: 3px solid rgba(254, 229, 0, 0.3411764706);
 }
 
 .login-select-stage {
@@ -2220,7 +2226,7 @@ label[for=orderBySelect] {
   bottom: 15px;
   border: 0;
   border-radius: 10px;
-  background-color: #009eb0;
+  background-color: #35d7bb;
   font-weight: bold;
   margin-top: 20px;
 }
@@ -2431,7 +2437,7 @@ label[for=orderBySelect] {
   display: none;
   width: 100%;
   height: 50px;
-  background-color: #009eb0;
+  background-color: #35d7bb;
   border: 0;
   border-radius: 10px;
   margin-top: 20px;
@@ -2664,7 +2670,7 @@ label[for=orderBySelect] {
 
 .styled-button {
   width: 100%;
-  background-color: #009eb0;
+  background-color: #35d7bb;
   border: 0;
   border-radius: 10px;
   padding: 20px;
@@ -2676,7 +2682,7 @@ label[for=orderBySelect] {
 
 .styled-button.thin {
   width: 100%;
-  background-color: #009eb0;
+  background-color: #35d7bb;
   border: 0;
   border-radius: 10px;
   padding: 10px;
@@ -2684,6 +2690,11 @@ label[for=orderBySelect] {
 }
 .styled-button.thin:disabled {
   background-color: #8dd2dd;
+}
+
+.styled-button:hover,
+.styled-button:active {
+  outline: 3px solid rgba(53, 215, 187, 0.3411764706);
 }
 
 .styled-button.review {

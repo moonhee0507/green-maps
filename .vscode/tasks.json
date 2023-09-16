@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compile SCSS to CSS",
+            "type": "shell",
+            "command": "sass",
+            "args": ["renderer/scss/index.scss", "public/style/index.css"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+}
