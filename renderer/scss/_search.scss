@@ -510,6 +510,10 @@
                 gap: 10px;
             }
         }
+
+        > li:hover {
+            cursor: pointer;
+        }
     }
 
     .container-img {

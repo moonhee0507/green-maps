@@ -90,6 +90,11 @@
     }
 }
 
+.styled-button:hover,
+.styled-button:active {
+    outline: 3px solid $active-button-outline-color;
+}
+
 .styled-button.review {
     margin-top: 20px;
 }

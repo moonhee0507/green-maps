@@ -2,35 +2,38 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from '../../../../renderer/store/hooks';
 import {
     EDIT_DELETE_NOTIFY_MODAL,
-    SET_POST_ID,
     SAME_USER_OWNER,
     SET_ACCESS_TARGET,
 } from '../../../../renderer/_reducers/_slices/postSlice';
 import appModalMode from '../../../../components/modal/appModalMode';
 import type { UserInfo } from '../../../../server/models/User';
+import { Post } from '../../../../server/models/Post';
 
 export { MoreButton };
 
-function MoreButton({ userInfo, owner, postId }: { userInfo: UserInfo | null; owner: string; postId: string }) {
+function MoreButton({ userInfo, postInfo }: { userInfo: UserInfo | null; postInfo: Post }) {
     const dispatch = useAppDispatch();
 
     const moreButtonRef = useRef<HTMLButtonElement>(null);
-    const [user, setUser] = useState<UserInfo | null>(null);
-    const [nickname, setNickname] = useState('');
+    const [userUid, setUserUid] = useState("");
+    const [posterUid, setPosterUid] = useState("");
 
     useEffect(() => {
-        if (userInfo !== null) setUser(userInfo);
-        if (typeof owner === 'string') {
-            setNickname(owner);
+        if (userInfo !== null) setUserUid(userInfo._id);
+        else setUserUid("");
+
+        if (typeof postInfo.owner.user_id === "object") {
+            setPosterUid(postInfo.owner.user_id._id);
+        } else {
+            setPosterUid("");
         }
-    }, [userInfo]);
+    }, [userInfo, postInfo]);
 
     function handleClick() {
         appModalMode(true);
 
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
-        dispatch(SAME_USER_OWNER(user?.nickName === nickname));
-        dispatch(SET_POST_ID(postId));
+        dispatch(SAME_USER_OWNER(userUid === posterUid));
         dispatch(SET_ACCESS_TARGET('post'));
     }
 
