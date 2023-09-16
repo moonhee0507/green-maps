@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../renderer/store/hooks';
 import { TopBar } from '../../../components/topBar/topBar';
 import { Create } from '../create/component/Create';
 import { API_URL } from '../../../renderer/CONSTANT_URL';
-import { EDIT_MODE } from '../../../renderer/_reducers/_slices/postSlice';
+import { EDIT_MODE, SET_POST_ID } from '../../../renderer/_reducers/_slices/postSlice';
 import type { PageContext } from '../../../renderer/types';
 import type { Post } from '../../../server/models/Post';
 
@@ -34,6 +34,7 @@ function Page(pageContext: PageContext) {
         })();
 
         dispatch(EDIT_MODE(true));
+        dispatch(SET_POST_ID(postId));
     }, []);
 
     return (

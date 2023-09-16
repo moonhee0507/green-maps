@@ -36,7 +36,7 @@ function ContentSection({ userInfo, postInfo }: { userInfo: UserInfo | null; pos
             </div>
             <TextArea content={content} />
             <PostLikeButton postId={_id} like={like} />
-            <MoreButton userInfo={userInfo} owner={nickname} postId={_id} />
+            <MoreButton userInfo={userInfo} postInfo={postInfo} />
         </section>
     );
 }
