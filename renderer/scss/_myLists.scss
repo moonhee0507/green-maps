@@ -151,6 +151,11 @@
     background-color: $active-button-color;
     font-weight: bold;
     margin-top: 20px;
+
+    &:hover,
+    &:active {
+        outline: 3px solid $active-button-outline-color;
+    }
 }
 
 // 그룹 리스트

@@ -2230,6 +2230,9 @@ label[for=orderBySelect] {
   font-weight: bold;
   margin-top: 20px;
 }
+.button-new-group:hover, .button-new-group:active {
+  outline: 3px solid rgba(53, 215, 187, 0.3411764706);
+}
 
 .style-wrapper-groupname {
   display: flex;
