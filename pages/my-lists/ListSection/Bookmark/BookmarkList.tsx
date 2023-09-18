@@ -33,10 +33,10 @@ function BookmarkList({ lists, groupList }: { lists: Bookmark[]; groupList: Grou
             <ul className="ul-groupname">
                 {sort === '등록순'
                     ? registerOrder?.map((groupInfo) => {
-                          return <GroupNameList key={Math.random()} groupInfo={groupInfo} lists={lists} />;
+                          return <GroupNameList key={groupInfo._id} groupInfo={groupInfo} lists={lists} />;
                       })
                     : nameOrder?.map((groupInfo) => {
-                          return <GroupNameList key={Math.random()} groupInfo={groupInfo} lists={lists} />;
+                          return <GroupNameList key={groupInfo._id} groupInfo={groupInfo} lists={lists} />;
                       })}
             </ul>
             <button type="button" className="button-new-group" onClick={handleAddGroup}>
