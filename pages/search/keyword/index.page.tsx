@@ -18,7 +18,7 @@ export { Page };
 function Page(pageContext: PageContext) {
     const [isLoggedIn, __] = useCheckLoginStatus();
 
-    const keyword = pageContext.routeParams?.keyword || '';
+    const keyword = pageContext.routeParams?.keyword ?? '';
     const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
     const selectedCert = useAppSelector((state) => state.mapSlice.selectedCert);
@@ -32,6 +32,7 @@ function Page(pageContext: PageContext) {
     useEffect(() => {
         getListWithKeyword().then((data) => {
             if (data.success) {
+                console.log('data', data)
                 // dispatch(SET_SEARCH_RESULT_IN_PAGE(data.lists));
                 setSearchListInPage(data.lists);
                 setTotal(data.total);

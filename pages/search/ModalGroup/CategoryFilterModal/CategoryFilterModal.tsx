@@ -76,13 +76,19 @@ export const CategoryItem = React.forwardRef<HTMLInputElement, { name: string; i
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
     const [isChecked, setIsChecked] = useState(true);
 
+    console.log('selectedCategory', selectedCategory)
+
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
     };
 
     useEffect(() => {
         // 카테고리 선택 완료한 경우 체크상태 기억
-        setIsChecked(selectedCategory.includes(name));
+        if (selectedCategory === '*') {
+            setIsChecked(true);
+        } else {
+            setIsChecked(selectedCategory.includes(name));
+        }
     }, [selectedCategory]);
 
     return (
