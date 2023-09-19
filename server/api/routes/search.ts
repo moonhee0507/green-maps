@@ -1,19 +1,18 @@
-import { Router, Request, Response } from 'express';
+import { Router, Response, NextFunction } from 'express';
 import Restaurant from '../../models/Restaurant.js';
-import CATEGORIES from '../../../components/image/CATEGORY.js';
+import { PostSearchReq, SearchOrder } from '../types.js';
+import { setSearchCategoryQuery, setSearchCertQuery } from '../../middleware/setSearchRestaurantQuery.js';
 
 const route = Router();
 
 export default (app: Router) => {
     app.use('/search', route);
 
-    route.post('/', async (req: Request, res: Response) => {
+    route.post('/', setSearchCategoryQuery, setSearchCertQuery, async (req: PostSearchReq, res: Response, next: NextFunction) => {
         try {
             const keyword = req.query.keyword;
-            const category = req.body.category;
-            const cert = req.body.cert;
 
-            const orderBy = req.query.orderBy || 'relevance'; // relevance, rating, review, distance
+            const orderBy = req.query.orderBy || SearchOrder.RELEVANCE;
             const currentLocation = req.body.currentLocation;
 
             const page = Number(req.query.page) || 1;
@@ -29,49 +28,14 @@ export default (app: Router) => {
                 // $in 사용 정규식배열
                 const regexKeyword = arrKeyword.map((keyword) => new RegExp(keyword, 'i'));
 
+
+                // ---------------------------------------------------
+
                 // 카테고리
-                let categoryQuery: any = {
-                    $match: {},
-                };
-
-                if (Array.isArray(category) && category.length > 0) {
-                    const convertToRegisteredCategoryInSchema = [];
-
-                    for (let i = 0; i < category.length; i++) {
-                        convertToRegisteredCategoryInSchema.push(...CATEGORIES[category[i]].list);
-                    }
-
-                    categoryQuery = {
-                        $match: {
-                            category: {
-                                $in: convertToRegisteredCategoryInSchema,
-                            },
-                        },
-                    };
-                } else if (category === '*') {
-                    categoryQuery = {
-                        $match: {},
-                    };
-                }
+                const categoryQuery = req.categoryQuery;
 
                 // 인증
-                let certQuery: any = {
-                    $match: {},
-                };
-
-                if (Array.isArray(cert) && cert.length > 0) {
-                    certQuery = {
-                        $match: {
-                            certification: {
-                                $in: cert,
-                            },
-                        },
-                    };
-                } else if (cert === '*') {
-                    certQuery = {
-                        $match: {},
-                    };
-                }
+                const certQuery = req.certQuery;
 
                 // 정렬 - 별점순, 리뷰순, 거리순
                 let sortQuery: any = {
