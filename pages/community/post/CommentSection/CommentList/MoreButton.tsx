@@ -38,7 +38,6 @@ function MoreButton({
         const app = document.querySelector('.app');
         app?.classList.add('modal-mode');
         
-        console.log('user', user)
         dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
         dispatch(SAME_USER_OWNER(user?._id === commenterUid));
         dispatch(SET_ACCESS_TARGET('comment'));

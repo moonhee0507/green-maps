@@ -21,8 +21,6 @@ function CategoryFilter() {
     const checkboxRefs = useRef<Array<React.RefObject<HTMLInputElement>>>([]);
 
     useEffect(() => {
-        console.log('categoryList', categoryList)
-        console.log('checkboxRefs', checkboxRefs)
         // current에 배열을 할당(ref 배열)
         checkboxRefs.current = Array(categoryList.length)
             .fill(null)

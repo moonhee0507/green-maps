@@ -76,8 +76,6 @@ export const CategoryItem = React.forwardRef<HTMLInputElement, { name: string; i
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
     const [isChecked, setIsChecked] = useState(true);
 
-    console.log('selectedCategory', selectedCategory)
-
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
     };
