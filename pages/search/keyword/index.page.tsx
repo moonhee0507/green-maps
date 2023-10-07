@@ -28,7 +28,7 @@ function Page(pageContext: PageContext) {
     const currentLocation = useAppSelector((state) => state.mapSlice.currentLocation);
 
     const [searchListInPage, setSearchListInPage] = useState<Restaurant[]>([]);
-    const [total, setTotal] = useState<number>(0);
+    const [total, setTotal] = useState<number | null>(null);
     const [perPage, _] = useState(20);
 
     useEffect(() => {
