@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { RestaurantListItem } from '../../../ResultInRadius/RestaurantListItem';
 import { Pagination } from '../../../../../components/Pagination/Pagination';
 import type { Restaurant } from '../../../../../server/models/Restaurant';
@@ -28,8 +28,6 @@ function ResultList({
             <Pagination count={total ?? 0} perPage={perPage} />
         </>
     )
-
-    useEffect(() => {console.log('total', total)}, [total])
 
     return (
         <div className="wrapper-result-in-radius reuse-in-search">
