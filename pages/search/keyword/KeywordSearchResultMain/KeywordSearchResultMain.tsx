@@ -12,7 +12,7 @@ function KeywordSearchResultMain({
     searchListInPage,
 }: {
     keyword: string;
-    total: number;
+    total: number | null;
     perPage: number;
     searchListInPage: Restaurant[];
 }) {

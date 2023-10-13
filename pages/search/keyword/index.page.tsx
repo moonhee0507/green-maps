@@ -25,23 +25,40 @@ function Page(pageContext: PageContext) {
     const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
     const selectedCert = useAppSelector((state) => state.mapSlice.selectedCert);
     const orderBy = useAppSelector((state) => state.mapSlice.resultOrderBy);
-    const currentLocation = useAppSelector((state) => state.mapSlice.currentLocation);
 
+    const [currentLocation, setCurrentLocation] = useState<number[] | null>(null);
     const [searchListInPage, setSearchListInPage] = useState<Restaurant[]>([]);
-    const [total, setTotal] = useState<number>(0);
+    const [total, setTotal] = useState<number | null>(null);
     const [perPage, _] = useState(20);
 
     useEffect(() => {
-        getListWithKeyword().then((data) => {
-            if (data.success) {
-                dispatch(SET_SEARCH_RESULT_IN_PAGE(data.lists));
-                setSearchListInPage(data.lists);
-                setTotal(data.total);
-            }
-        });
-    }, [currentPage, selectedCategory, selectedCert, orderBy, currentLocation]);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const { latitude, longitude } = position.coords;
+                setCurrentLocation([longitude, latitude]);
+            })
+        }
+    }, []);
+
+    useEffect(() => {
+        if (currentLocation !== null) {
+            getListWithKeyword().then((data) => {
+                if (data.success) {
+                    dispatch(SET_SEARCH_RESULT_IN_PAGE(data.lists));
+                    setSearchListInPage(data.lists);
+                    setTotal(data.total);
+                }
+            });
+        }
+    }, [keyword, currentPage, perPage, orderBy, selectedCategory, selectedCert, currentLocation]);
 
     const getListWithKeyword = useCallback(async () => {
+        if (currentLocation === null) return {
+            success: false,
+            lists: [],
+            total: 0
+        };
+        
         const res = await fetch(
             `${API_URL}/search/?keyword=${keyword}&page=${currentPage}&limit=${perPage}&orderBy=${orderBy}`,
             {
@@ -52,7 +69,7 @@ function Page(pageContext: PageContext) {
                 body: JSON.stringify({
                     category: selectedCategory,
                     cert: selectedCert,
-                    currentLocation: [currentLocation[1], currentLocation[0]],
+                    currentLocation,
                 }),
             }
         );
@@ -65,7 +82,7 @@ function Page(pageContext: PageContext) {
         };
 
         return data;
-    }, [currentPage, selectedCategory, selectedCert, orderBy, currentLocation]);
+    }, [keyword, currentPage, perPage, orderBy, selectedCategory, selectedCert, currentLocation]);
 
     return (
         <>

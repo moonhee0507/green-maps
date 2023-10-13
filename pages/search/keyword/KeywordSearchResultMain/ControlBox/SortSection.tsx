@@ -23,7 +23,7 @@ function SortSection() {
                 <form>
                     <label htmlFor="selectBoxSortInSearch">정렬</label>
                     <select name="" id="selectBoxSortInSearch" onChange={handleChange}>
-                        <option value="relevance">관련도</option>
+                        <option value="relevance">관련도순</option>
                         <option value="rating">별점순</option>
                         <option value="review">리뷰순</option>
                         <option value="distance">거리순</option>

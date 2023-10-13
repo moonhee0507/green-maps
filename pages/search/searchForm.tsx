@@ -1,14 +1,29 @@
-import React, { ChangeEvent, useRef, useState } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
 import { useAppDispatch } from '../../renderer/store/hooks';
 
 export { SearchForm };
 
 function SearchForm() {
-    const inputElement = useRef<HTMLInputElement>(null);
+    const dispatch = useAppDispatch();
     const [keyword, setKeyword] = useState('');
 
-    function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setKeyword(event.target.value);
+    }
+
+    const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            submitSearchForm();
+        }
+    }
+
+    const submitSearchForm = () => {
+        if (keyword.length === 0) {
+            alert('검색어를 입력해주세요.');
+        } else {
+            dispatch({ type: 'paginationSlice/CURRENT_PAGE', currentPage: 1 });
+            window.location.href = `/search/keyword/${keyword}`;
+        }
     }
 
     return (
@@ -22,31 +37,19 @@ function SearchForm() {
                         type="search"
                         id="searchRestaurant"
                         onChange={handleChange}
-                        ref={inputElement}
                         value={keyword}
+                        onKeyDown={handleEnter}
                     />
                 </div>
             </div>
-            <SearchButton keyword={keyword} />
+            <SearchButton submitForm={submitSearchForm} />
         </>
     );
 }
 
-function SearchButton({ keyword }: { keyword: string }) {
-    const dispatch = useAppDispatch();
-
-    const handleClick = () => {
-        // dispatch(SET_MAP_MODE('검색 모드'));
-        if (keyword.length === 0) {
-            alert('검색어를 입력해주세요.');
-        } else {
-            dispatch({ type: 'paginationSlice/CURRENT_PAGE', currentPage: 1 });
-            window.location.href = `/search/keyword/${keyword}`;
-        }
-    };
-
+function SearchButton({ submitForm }: { submitForm: () => void }) {
     return (
-        <button type="button" onClick={handleClick} aria-label="식당 검색 버튼">
+        <button type="button" onClick={submitForm} aria-label="식당 검색 버튼">
             🔍
         </button>
     );
