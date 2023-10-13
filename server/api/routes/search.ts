@@ -1,7 +1,8 @@
 import { Router, Response, NextFunction } from 'express';
 import Restaurant from '../../models/Restaurant.js';
-import { PostSearchReq, SearchOrder } from '../types.js';
+import { PostSearchReq } from '../types.js';
 import { setSearchCategoryQuery, setSearchCertQuery, setSearchDistanceQuery, setSearchSortQuery } from '../../middleware/setSearchRestaurantQuery.js';
+import { createCalcAccuracyQuery } from '../../utils/searchUtils.js';
 
 const route = Router();
 
@@ -31,9 +32,6 @@ export default (app: Router) => {
                 // $in 사용 정규식배열
                 const regexKeyword = arrKeyword.map((keyword) => new RegExp(keyword, 'i'));
 
-
-                // ---------------------------------------------------
-
                 // 카테고리
                 const categoryQuery = req.categoryQuery;
 
@@ -46,22 +44,24 @@ export default (app: Router) => {
                 // 거리
                 const distanceQuery = req.distanceQuery;
 
+                const matchStage = {
+                    $match: {
+                        $or: [
+                            { title: { $in: regexKeyword } },
+                            { address: { $in: regexKeyword } },
+                            { certification: { $in: regexKeyword } },
+                            { category: { $in: regexKeyword } },
+                        ],
+                    },
+                }
+
                 if (categoryQuery && certQuery && sortQuery && distanceQuery) {
-                    // 주소 7, 업종3, 이름2, 인증1 점수
+                    // 주소 7, 업종3, 이름2, 인증1
                     const aggregate = Restaurant.aggregate([
                         distanceQuery,
                         categoryQuery,
                         certQuery,
-                        {
-                            $match: {
-                                $or: [
-                                    { title: { $in: regexKeyword } },
-                                    { address: { $in: regexKeyword } },
-                                    { certification: { $in: regexKeyword } },
-                                    { category: { $in: regexKeyword } },
-                                ],
-                            },
-                        },
+                        matchStage,
                         {
                             $addFields: {
                                 countReview: {
@@ -72,97 +72,37 @@ export default (app: Router) => {
                                 distance: '$distance',
                                 accuracy: {
                                     $sum: [
-                                        // 배열 내용을 모두 합산
                                         {
-                                            $sum: {
-                                                // title을 split한 배열을 돌면서 in 내부의 표현식을 처리
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$title', ' '],
-                                                    },
-                                                    as: 'word', // 요소
-                                                    in: {
-                                                        $cond: [
-                                                            // 부울 표현식 평가(콜백함수)
-                                                            {
-                                                                $regexMatch: {
-                                                                    // 정규표현식에 매치되는지.
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            2,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $sum: createCalcAccuracyQuery({
+                                                    columnName: "$title",
+                                                    regex,
+                                                    trueVal: 2,
+                                                    falseVal: 0
+                                                })
                                         },
                                         {
-                                            $max: {
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$address', ' '],
-                                                    },
-                                                    as: 'word',
-                                                    in: {
-                                                        $cond: [
-                                                            {
-                                                                $regexMatch: {
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            7,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $max: createCalcAccuracyQuery({
+                                                columnName: "$address",
+                                                regex,
+                                                trueVal: 7,
+                                                falseVal: 0
+                                            })
                                         },
                                         {
-                                            $sum: {
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$certification', ' '],
-                                                    },
-                                                    as: 'word',
-                                                    in: {
-                                                        $cond: [
-                                                            {
-                                                                $regexMatch: {
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            1,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $sum: createCalcAccuracyQuery({
+                                                columnName: "$certification",
+                                                regex,
+                                                trueVal: 1,
+                                                falseVal: 0
+                                            })
                                         },
                                         {
-                                            $sum: {
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$category', ' '],
-                                                    },
-                                                    as: 'word',
-                                                    in: {
-                                                        $cond: [
-                                                            {
-                                                                $regexMatch: {
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            3,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $sum: createCalcAccuracyQuery({
+                                                columnName: "$category",
+                                                regex,
+                                                trueVal: 3,
+                                                falseVal: 0
+                                            })
                                         },
                                     ],
                                 },
@@ -181,16 +121,7 @@ export default (app: Router) => {
                         distanceQuery,
                         categoryQuery,
                         certQuery,
-                        {
-                            $match: {
-                                $or: [
-                                    { title: { $in: regexKeyword } },
-                                    { address: { $in: regexKeyword } },
-                                    { certification: { $in: regexKeyword } },
-                                    { category: { $in: regexKeyword } },
-                                ],
-                            },
-                        },
+                        matchStage,
                         {
                             $addFields: {
                                 countReview: {
@@ -201,97 +132,37 @@ export default (app: Router) => {
                                 distance: '$distance',
                                 accuracy: {
                                     $sum: [
-                                        // 배열 내용을 모두 합산
                                         {
-                                            $sum: {
-                                                // title을 split한 배열을 돌면서 in 내부의 표현식을 처리
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$title', ' '],
-                                                    },
-                                                    as: 'word', // 요소
-                                                    in: {
-                                                        $cond: [
-                                                            // 부울 표현식 평가(콜백함수)
-                                                            {
-                                                                $regexMatch: {
-                                                                    // 정규표현식에 매치되는지.
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            2,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $sum: createCalcAccuracyQuery({
+                                                    columnName: "$title",
+                                                    regex,
+                                                    trueVal: 2,
+                                                    falseVal: 0
+                                                })
                                         },
                                         {
-                                            $max: {
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$address', ' '],
-                                                    },
-                                                    as: 'word',
-                                                    in: {
-                                                        $cond: [
-                                                            {
-                                                                $regexMatch: {
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            7,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $max: createCalcAccuracyQuery({
+                                                columnName: "$address",
+                                                regex,
+                                                trueVal: 7,
+                                                falseVal: 0
+                                            })
                                         },
                                         {
-                                            $sum: {
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$certification', ' '],
-                                                    },
-                                                    as: 'word',
-                                                    in: {
-                                                        $cond: [
-                                                            {
-                                                                $regexMatch: {
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            1,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $sum: createCalcAccuracyQuery({
+                                                columnName: "$certification",
+                                                regex,
+                                                trueVal: 1,
+                                                falseVal: 0
+                                            })
                                         },
                                         {
-                                            $sum: {
-                                                $map: {
-                                                    input: {
-                                                        $split: ['$category', ' '],
-                                                    },
-                                                    as: 'word',
-                                                    in: {
-                                                        $cond: [
-                                                            {
-                                                                $regexMatch: {
-                                                                    input: '$$word',
-                                                                    regex: regex,
-                                                                },
-                                                            },
-                                                            3,
-                                                            0,
-                                                        ],
-                                                    },
-                                                },
-                                            },
+                                            $sum: createCalcAccuracyQuery({
+                                                columnName: "$category",
+                                                regex,
+                                                trueVal: 3,
+                                                falseVal: 0
+                                            })
                                         },
                                     ],
                                 },
@@ -315,7 +186,7 @@ export default (app: Router) => {
 
             return res.status(400).json({
                 success: false,
-                message: 'Parameter was passed incorrectly.'
+                message: 'Search word was not passed.'
             })
         } catch (err) {
             if (err instanceof Error) {

@@ -70,39 +70,28 @@ function setSearchSortQuery(req: PostSearchReq, res: Response, next: NextFunctio
         req.sortQuery = {
             $sort: {
                 rating: -1,
-                _id: 1,
-                countReview: 1,
-                distance: 1,
-                accuracy: 1
+                accuracy: -1,
+                distance: 1
             },
         }
     } else if (orderBy === SearchOrder.REVIEW) { // countReview 필드 추가
         req.sortQuery = {
             $sort: {
                 countReview: -1,
-                _id: 1,
-                rating: 1,
-                distance: 1,
-                accuracy: 1
+                accuracy: -1,
+                distance: 1
             },
         }
     } else if (orderBy === SearchOrder.DISTANCE) {
         req.sortQuery = {
             $sort: {
-                distance: 1,
-                _id: 1,
-                rating: 1,
-                countReview: 1,
-                accuracy: 1
+                distance: 1
             },
         };
     } else {
         req.sortQuery = {
             $sort: {
                 accuracy: -1,
-                _id: 1,
-                rating: 1,
-                countReview: 1,
                 distance: 1
             },
         };

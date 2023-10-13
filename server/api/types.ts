@@ -28,9 +28,10 @@ type CertQuery = {
 };
 
 type SortKey = 'rating' | 'countReview' | 'distance' | 'accuracy' | '_id';
+type CustomRecord<K extends string | number | symbol, T> = { [P in K]?: T; };
 
 type SortQuery = {
-    $sort: Record<SortKey, 1 | -1>;
+    $sort: CustomRecord<SortKey, 1 | -1>;
 };
 
 type DistanceQuery = {
@@ -64,4 +65,4 @@ interface PostSearchReq extends Request {
 }
 
 export { SearchOrder };
-export type { PostSearchReq };
+export type { PostSearchReq, SortQuery };
