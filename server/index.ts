@@ -30,6 +30,11 @@ interface CheckTokenResponse {
     user?: UserInfo;
 }
 
+const sslOption = {
+    key: fs.readFileSync('./localhost-key.pem'),
+    cert: fs.readFileSync('./localhost.pem'),
+};
+
 startServer();
 
 async function startServer() {
@@ -79,17 +84,17 @@ async function startServer() {
         const viteDevMiddleware = (
             await vite.createServer({
                 root,
-                server: { middlewareMode: true },
+                server: {
+                    middlewareMode: true,
+                    https: sslOption,
+                    port: 5000,
+                },
             })
         ).middlewares;
+
         app.use(viteDevMiddleware);
 
-        const options = {
-            key: fs.readFileSync('./localhost-key.pem'),
-            cert: fs.readFileSync('./localhost.pem'),
-        };
-
-        const server = https.createServer(options, app);
+        const server = https.createServer(sslOption, app);
 
         server.listen(PORT, () => {
             console.log(`🚀 ${PORT}번 포트 실행 중...`);
@@ -121,10 +126,12 @@ async function startServer() {
         const pageContext = await renderPage(pageContextInit);
         const { httpResponse } = pageContext;
         if (!httpResponse) return next();
-        const { body, statusCode, contentType, earlyHints } = httpResponse;
+        const { body, statusCode, headers, earlyHints } = httpResponse;
         if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) });
 
-        res.status(statusCode).type(contentType).send(body);
+        res.status(statusCode);
+        headers.forEach(([name, value]) => res.setHeader(name, value));
+        res.send(body);
     });
 }
 
