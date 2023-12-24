@@ -30,11 +30,6 @@ interface CheckTokenResponse {
     user?: UserInfo;
 }
 
-const sslOption = {
-    key: fs.readFileSync('./localhost-key.pem'),
-    cert: fs.readFileSync('./localhost.pem'),
-};
-
 startServer();
 
 async function startServer() {
@@ -80,6 +75,11 @@ async function startServer() {
             console.log(`🚀 ${PORT}번 포트 실행 중...`);
         });
     } else {
+        const sslOption = {
+            key: fs.readFileSync('./localhost-key.pem'),
+            cert: fs.readFileSync('./localhost.pem'),
+        };
+
         const vite = await import('vite');
         const viteDevMiddleware = (
             await vite.createServer({
