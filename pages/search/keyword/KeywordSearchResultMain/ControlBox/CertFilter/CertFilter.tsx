@@ -4,10 +4,10 @@ import { ADD_SELECTED_CERT } from '../../../../../../renderer/_reducers/_slices/
 
 export { CertFilter };
 
+const certList = ['채식음식점', '채식가능음식점'];
+
 function CertFilter() {
     const dispatch = useAppDispatch();
-
-    const certList = ['채식음식점', '채식가능음식점'];
 
     useEffect(() => {
         dispatch(ADD_SELECTED_CERT([])); // 첫 렌더링 시 선택한 인증정보 초기화
@@ -44,7 +44,7 @@ function CertFilter() {
 
 function CertItem({ name, index }: { name: string; index: number }) {
     const selectedCert = useAppSelector((state) => state.mapSlice.selectedCert);
-    const [isChecked, setIsChecked] = useState(true);
+    const [isChecked, setIsChecked] = useState(selectedCert.includes(name) || selectedCert === '*');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setIsChecked(event.target.checked);
