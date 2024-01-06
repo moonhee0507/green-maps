@@ -1,10 +1,10 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { a as useAppDispatch } from "../chunks/chunk-0e4e6c3d.js";
-import { T as TopBar } from "../chunks/chunk-eec7010f.js";
+import { T as TopBar } from "../chunks/chunk-ee5c6427.js";
 import { C as Create } from "../chunks/chunk-5ce00ba9.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { E as EDIT_MODE } from "../chunks/chunk-3e2eef8e.js";
+import { E as EDIT_MODE, S as SET_POST_ID } from "../chunks/chunk-055796d0.js";
 import "react-redux";
 import "../chunks/chunk-1967c84f.js";
 import "../chunks/chunk-a882003a.js";
@@ -30,6 +30,7 @@ function Page(pageContext) {
       setPostInfo(data);
     })();
     dispatch(EDIT_MODE(true));
+    dispatch(SET_POST_ID(postId));
   }, []);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: "글 수정" }),

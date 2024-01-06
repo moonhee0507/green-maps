@@ -3,7 +3,7 @@
         "strict": true,
         "module": "ES2022",
         "target": "ES2022",
-        "moduleResolution": "Node",
+        "moduleResolution": "Bundler",
         "lib": ["DOM", "DOM.Iterable", "ESNext"],
         "types": ["vite/client", "node", "express", "kakao.maps.d.ts"],
         "jsx": "react",
@@ -14,6 +14,7 @@
         "transpileOnly": true,
         "esm": true,
         "compilerOptions": {
+            "module": "Node16",
             "moduleResolution": "Node16"
         }
     }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useAppDispatch } from '../../../../../../renderer/store/hooks';
-import { ADD_SELECTED_CATEGORY } from '../../../../../../renderer/_reducers/_slices/mapSlice';
+import { useAppDispatch } from '../../../../../../renderer/store/hooks.js';
+import { ADD_SELECTED_CATEGORY } from '../../../../../../renderer/_reducers/_slices/mapSlice.js';
 
 export { ApplyButton };
 

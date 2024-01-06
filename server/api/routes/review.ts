@@ -10,7 +10,10 @@ export default (app: Router) => {
 
     route.get('/my', async (req: Request, res: Response) => {
         try {
-            const review = await Review.find({ owner: req.query.owner }).populate('restaurant').exec();
+            const review = await Review.find({ owner: req.query.owner })
+                .sort({ registeredAt: -1 })
+                .populate('restaurant')
+                .exec();
 
             if (review) res.status(200).json({ success: true, reviews: review });
             else if (!review) res.status(404).json({ success: true, message: '리뷰가 없습니다.' });

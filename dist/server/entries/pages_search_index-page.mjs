@@ -1,14 +1,14 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { a as useAppDispatch, B as ButtonGoBack, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
-import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-1643b273.js";
+import { S as SET_RADIUS, C as CHANGE_RADIUS_MODAL, a as SET_SELECTED_SIDO, b as SET_CURRENT_LOCATION, c as CHANGE_REGION_MODAL, d as SET_SELECTED_SIGUNGU, e as SHOW_LIST_IN_REGION_MODAL, f as SET_LIST_IN_PAGE, g as SET_TOTAL_IN_REGION, N as NO_RESULT_MODAL, h as SET_CURRENT_SIDO, i as SET_CURRENT_SIGUNGU, R as RESET_LIST_IN_PAGE, j as RESET_TOTAL_IN_REGION, k as CATEGORY_FILTER_MODAL, l as CHECK_LOCATION_ACCESS_MODAL } from "../chunks/chunk-e0b4dacb.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { renderToString } from "react-dom/server";
-import { s as store } from "../chunks/chunk-042cff01.js";
+import { s as store } from "../chunks/chunk-26141d98.js";
 import { S as Stars } from "../chunks/chunk-e0988469.js";
 import { i as imgLoading } from "../chunks/chunk-e25a89db.js";
-import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-e43b6672.js";
+import { R as RestaurantListItem, C as CategoryFilterModal } from "../chunks/chunk-4eefc2ac.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { i as imgClose } from "../chunks/chunk-0eea5c60.js";
 import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
@@ -19,18 +19,31 @@ import "@reduxjs/toolkit";
 import "redux";
 import "../chunks/chunk-4ef07e33.js";
 import "../chunks/chunk-9fb42db4.js";
-import "../chunks/chunk-3e2eef8e.js";
+import "../chunks/chunk-055796d0.js";
 import "../chunks/chunk-1a5b0e59.js";
 import "../chunks/chunk-d2c63902.js";
 import "../chunks/chunk-1ccf3f37.js";
 import "../chunks/chunk-6f77cb2d.js";
 import "../chunks/chunk-6c356fa9.js";
 function SearchForm() {
-  const inputElement = useRef(null);
+  const dispatch = useAppDispatch();
   const [keyword, setKeyword] = useState("");
-  function handleChange(event) {
+  const handleChange = (event) => {
     setKeyword(event.target.value);
-  }
+  };
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      submitSearchForm();
+    }
+  };
+  const submitSearchForm = () => {
+    if (keyword.length === 0) {
+      alert("검색어를 입력해주세요.");
+    } else {
+      dispatch({ type: "paginationSlice/CURRENT_PAGE", currentPage: 1 });
+      window.location.href = `/search/keyword/${keyword}`;
+    }
+  };
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx("div", { className: "search-bar", children: /* @__PURE__ */ jsxs("div", { children: [
       /* @__PURE__ */ jsx("label", { htmlFor: "searchRestaurant", className: "sr-only", children: "식당 검색하기" }),
@@ -40,25 +53,16 @@ function SearchForm() {
           type: "search",
           id: "searchRestaurant",
           onChange: handleChange,
-          ref: inputElement,
-          value: keyword
+          value: keyword,
+          onKeyDown: handleEnter
         }
       )
     ] }) }),
-    /* @__PURE__ */ jsx(SearchButton, { keyword })
+    /* @__PURE__ */ jsx(SearchButton, { submitForm: submitSearchForm })
   ] });
 }
-function SearchButton({ keyword }) {
-  const dispatch = useAppDispatch();
-  const handleClick = () => {
-    if (keyword.length === 0) {
-      alert("검색어를 입력해주세요.");
-    } else {
-      dispatch({ type: "paginationSlice/CURRENT_PAGE", currentPage: 1 });
-      window.location.href = `/search/keyword/${keyword}`;
-    }
-  };
-  return /* @__PURE__ */ jsx("button", { type: "button", onClick: handleClick, "aria-label": "식당 검색 버튼", children: "🔍" });
+function SearchButton({ submitForm }) {
+  return /* @__PURE__ */ jsx("button", { type: "button", onClick: submitForm, "aria-label": "식당 검색 버튼", children: "🔍" });
 }
 function SearchBar() {
   return /* @__PURE__ */ jsxs("div", { className: "top-bar search", children: [
@@ -573,7 +577,7 @@ async function paintVeganRestaurantMarker(restaurant) {
       // 마커를 표시할 위치
       title: list.title,
       // 마커의 타이틀, 마커에 마우스를 올리면 타이틀 표시
-      image: new kakao$1.maps.MarkerImage(list.certified ? imgCert : imgLocation, new kakao$1.maps.Size(24, 35))
+      image: new kakao$1.maps.MarkerImage(list.certified ? imgCert : imgLocation, new kakao$1.maps.Size(35, 35))
       // 마커 이미지
     });
     arrMarker.push(marker);
@@ -922,7 +926,7 @@ const documentProps = {
   title: "채식 식당 지도 | Green Maps",
   description: "채식 식당 지도 페이지"
 };
-const MapView = React.lazy(() => import("../chunks/chunk-f5c378e9.js"));
+const MapView = React.lazy(() => import("../chunks/chunk-c696f9eb.js"));
 function Page() {
   const dispatch = useAppDispatch();
   const [hasWindow, setHasWindow] = useState(false);

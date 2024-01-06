@@ -2,8 +2,8 @@ import * as toolkitRaw from '@reduxjs/toolkit';
 
 const { createSlice } = ((toolkitRaw as any)?.default ?? toolkitRaw) as typeof toolkitRaw;
 
-import { Restaurant } from '../../../server/models/Restaurant';
-import { KakaoLocation } from '../../../pages/search/kakaoApi/types';
+import { Restaurant } from '../../../server/models/Restaurant.js';
+import { KakaoLocation } from '../../../pages/search/kakaoApi/types.js';
 
 export type StateToGeolocation = 'prompt' | 'denied' | 'granted';
 
@@ -53,7 +53,7 @@ const initialState: InitialState = {
     listInPage: [],
     totalInRegion: 0,
     categoryFilterModalOn: false,
-    selectedCategory: [],
+    selectedCategory: '*',
     noResultModalOn: false,
     searchResultInPage: [],
     selectedCert: [],

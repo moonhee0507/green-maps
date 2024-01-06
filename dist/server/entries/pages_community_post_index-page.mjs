@@ -2,12 +2,12 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import React, { useState, useEffect, useRef } from "react";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { S as SET_COMMENT } from "../chunks/chunk-9fb42db4.js";
-import { T as TopBar } from "../chunks/chunk-eec7010f.js";
+import { T as TopBar } from "../chunks/chunk-ee5c6427.js";
 import DOMPurify from "isomorphic-dompurify";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
 import { i as imgHeart } from "../chunks/chunk-edfa0bc8.js";
 import { i as isSameDay } from "../chunks/chunk-0c3eed3e.js";
-import { a as EDIT_DELETE_NOTIFY_MODAL, S as SAME_USER_OWNER, b as SET_POST_ID, c as SET_ACCESS_TARGET, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-3e2eef8e.js";
+import { a as EDIT_DELETE_NOTIFY_MODAL, b as SAME_USER_OWNER, c as SET_ACCESS_TARGET, S as SET_POST_ID, d as SET_COMMENT_ID, e as SET_EDIT_COMMENT_MODE } from "../chunks/chunk-055796d0.js";
 import { a as appModalMode } from "../chunks/chunk-db98b5a2.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
@@ -88,23 +88,26 @@ function PostLikeButton(props) {
     /* @__PURE__ */ jsx("span", { style: { minWidth: "20px" }, children: likeCount })
   ] });
 }
-function MoreButton$1({ userInfo, owner, postId }) {
+function MoreButton$1({ userInfo, postInfo }) {
   const dispatch = useAppDispatch();
   const moreButtonRef = useRef(null);
-  const [user, setUser] = useState(null);
-  const [nickname, setNickname] = useState("");
+  const [userUid, setUserUid] = useState("");
+  const [posterUid, setPosterUid] = useState("");
   useEffect(() => {
     if (userInfo !== null)
-      setUser(userInfo);
-    if (typeof owner === "string") {
-      setNickname(owner);
+      setUserUid(userInfo._id);
+    else
+      setUserUid("");
+    if (typeof postInfo.owner.user_id === "object") {
+      setPosterUid(postInfo.owner.user_id._id);
+    } else {
+      setPosterUid("");
     }
-  }, [userInfo]);
+  }, [userInfo, postInfo]);
   function handleClick() {
     appModalMode(true);
     dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
-    dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === nickname));
-    dispatch(SET_POST_ID(postId));
+    dispatch(SAME_USER_OWNER(userUid === posterUid));
     dispatch(SET_ACCESS_TARGET("post"));
   }
   return /* @__PURE__ */ jsx(
@@ -138,7 +141,7 @@ function ContentSection({ userInfo, postInfo }) {
     ] }),
     /* @__PURE__ */ jsx(TextArea, { content }),
     /* @__PURE__ */ jsx(PostLikeButton, { postId: _id, like }),
-    /* @__PURE__ */ jsx(MoreButton$1, { userInfo, owner: nickname, postId: _id })
+    /* @__PURE__ */ jsx(MoreButton$1, { userInfo, postInfo })
   ] });
 }
 function LikeCount(props) {
@@ -235,19 +238,19 @@ function MoreButton({
   const dispatch = useAppDispatch();
   const moreButtonRef = useRef(null);
   const [user, setUser] = useState(null);
-  const [nickname, setNickname] = useState("");
+  const [commenterUid, setCommenterUid] = useState("");
   useEffect(() => {
     if (userInfo !== null)
       setUser(userInfo);
     if (typeof comment.owner.user_id === "object") {
-      setNickname(comment.owner.user_id.nickName);
+      setCommenterUid(comment.owner.user_id._id);
     }
   }, [userInfo, comment]);
   const handleClick = () => {
     const app = document.querySelector(".app");
     app == null ? void 0 : app.classList.add("modal-mode");
     dispatch(EDIT_DELETE_NOTIFY_MODAL(true));
-    dispatch(SAME_USER_OWNER((user == null ? void 0 : user.nickName) === nickname));
+    dispatch(SAME_USER_OWNER((user == null ? void 0 : user._id) === commenterUid));
     dispatch(SET_ACCESS_TARGET("comment"));
     dispatch(SET_POST_ID(postId));
     dispatch(SET_COMMENT_ID(comment._id));

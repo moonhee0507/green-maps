@@ -1,19 +1,21 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import React, { useState, useRef, useEffect } from "react";
-import { T as TopBar } from "../chunks/chunk-eec7010f.js";
+import React, { useRef, useEffect, useState, useCallback } from "react";
+import { T as TopBar } from "../chunks/chunk-ee5c6427.js";
 import { N as NavBar } from "../chunks/chunk-13e0ca80.js";
 import { a as useAppDispatch, u as useAppSelector } from "../chunks/chunk-0e4e6c3d.js";
 import { A as API_URL } from "../chunks/chunk-94504c62.js";
-import { a as CATEGORIES, b as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-e43b6672.js";
-import { A as ADD_SELECTED_CATEGORY, m as ADD_SELECTED_CERT, n as SET_ORDER_BY } from "../chunks/chunk-1643b273.js";
+import { a as CATEGORIES, b as CategoryItem, R as RestaurantListItem } from "../chunks/chunk-4eefc2ac.js";
+import { A as ADD_SELECTED_CATEGORY, m as ADD_SELECTED_CERT, n as SET_ORDER_BY, o as SET_SEARCH_RESULT_IN_PAGE } from "../chunks/chunk-e0b4dacb.js";
 import { P as Pagination } from "../chunks/chunk-fd8cc104.js";
+import { L as LoadingMain } from "../chunks/chunk-211f66dd.js";
 import { u as useCheckLoginStatus } from "../chunks/chunk-a882003a.js";
 import "react-redux";
-import "../chunks/chunk-3e2eef8e.js";
+import "../chunks/chunk-055796d0.js";
 import "@reduxjs/toolkit";
 import "../chunks/chunk-6c356fa9.js";
 import "../chunks/chunk-0eea5c60.js";
 import "../chunks/chunk-db98b5a2.js";
+import "../chunks/chunk-e25a89db.js";
 function ApplyButton() {
   const dispatch = useAppDispatch();
   const handleClick = () => {
@@ -34,18 +36,13 @@ function ApplyButton() {
   };
   return /* @__PURE__ */ jsx("button", { type: "button", onClick: handleClick, className: "button-apply-filter", children: "적용" });
 }
+const CATEGORY_LIST = Object.keys(CATEGORIES).filter((key) => key !== "기타").sort();
 function CategoryFilter() {
-  const dispatch = useAppDispatch();
-  const [categoryList, _] = useState(() => {
-    const tempList = Object.keys(CATEGORIES).filter((key) => key !== "기타");
-    dispatch(ADD_SELECTED_CATEGORY([...tempList].sort()));
-    return [...tempList].sort();
-  });
   const checkboxRefs = useRef([]);
   useEffect(() => {
-    checkboxRefs.current = Array(categoryList.length).fill(null).map(() => React.createRef());
-  }, [categoryList]);
-  const handleUncheck = () => {
+    checkboxRefs.current = Array(CATEGORY_LIST.length).fill(null).map(() => React.createRef());
+  }, []);
+  const handleUncheckAll = () => {
     checkboxRefs.current.map((ref) => {
       if (ref.current !== null) {
         ref.current.checked = false;
@@ -57,10 +54,10 @@ function CategoryFilter() {
     /* @__PURE__ */ jsx("div", { children: /* @__PURE__ */ jsxs("form", { children: [
       /* @__PURE__ */ jsx(ApplyButton, {}),
       /* @__PURE__ */ jsxs("div", { className: "container-button-all", children: [
-        /* @__PURE__ */ jsx("button", { type: "button", onClick: handleUncheck, children: "전체 해제" }),
+        /* @__PURE__ */ jsx("button", { type: "button", onClick: handleUncheckAll, children: "전체 해제" }),
         /* @__PURE__ */ jsx("button", { type: "reset", children: "전체 선택" })
       ] }),
-      /* @__PURE__ */ jsx("div", { className: "wrapper-checkbox-category reuse-in-result", children: categoryList.map((name, i) => {
+      /* @__PURE__ */ jsx("div", { className: "wrapper-checkbox-category reuse-in-result", children: CATEGORY_LIST.map((name, i) => {
         return /* @__PURE__ */ jsx(CategoryItem, { name, index: i, ref: checkboxRefs.current[i] }, Math.random());
       }) })
     ] }) })
@@ -133,7 +130,7 @@ function SortSection() {
     /* @__PURE__ */ jsx("div", { className: "container-sort", children: /* @__PURE__ */ jsxs("form", { children: [
       /* @__PURE__ */ jsx("label", { htmlFor: "selectBoxSortInSearch", children: "정렬" }),
       /* @__PURE__ */ jsxs("select", { name: "", id: "selectBoxSortInSearch", onChange: handleChange, children: [
-        /* @__PURE__ */ jsx("option", { value: "relevance", children: "관련도" }),
+        /* @__PURE__ */ jsx("option", { value: "relevance", children: "관련도순" }),
         /* @__PURE__ */ jsx("option", { value: "rating", children: "별점순" }),
         /* @__PURE__ */ jsx("option", { value: "review", children: "리뷰순" }),
         /* @__PURE__ */ jsx("option", { value: "distance", children: "거리순" })
@@ -152,24 +149,30 @@ function ResultList({
   perPage,
   searchListInPage
 }) {
+  const showResults = useCallback(({ exist }) => {
+    if (!exist) {
+      return /* @__PURE__ */ jsxs("div", { className: "style-wrapper-no-review", children: [
+        /* @__PURE__ */ jsx("div", { className: "txt-no-review", children: "😭" }),
+        /* @__PURE__ */ jsx("p", { children: "검색 결과가 없어요." })
+      ] });
+    }
+    return /* @__PURE__ */ jsxs(Fragment, { children: [
+      /* @__PURE__ */ jsx(RestaurantList, { searchListInPage }),
+      /* @__PURE__ */ jsx(Pagination, { count: total ?? 0, perPage })
+    ] });
+  }, [total, searchListInPage, perPage]);
   return /* @__PURE__ */ jsxs("div", { className: "wrapper-result-in-radius reuse-in-search", children: [
     /* @__PURE__ */ jsxs("p", { children: [
       "검색 결과(",
       total,
       ")"
     ] }),
-    searchListInPage.length > 0 ? /* @__PURE__ */ jsxs(Fragment, { children: [
-      /* @__PURE__ */ jsx(RestaurantList, { searchListInPage }),
-      /* @__PURE__ */ jsx(Pagination, { count: total, perPage })
-    ] }) : /* @__PURE__ */ jsxs("div", { className: "style-wrapper-no-review", children: [
-      /* @__PURE__ */ jsx("div", { className: "txt-no-review", children: "😭" }),
-      /* @__PURE__ */ jsx("p", { children: "검색 결과가 없어요." })
-    ] })
+    total === null ? /* @__PURE__ */ jsx(LoadingMain, {}) : showResults({ exist: total !== 0 })
   ] });
 }
 function RestaurantList({ searchListInPage }) {
   return /* @__PURE__ */ jsx("ul", { className: "ul-restaurant-in-radius reuse-in-search", children: searchListInPage.map((restaurantInfo, i) => {
-    return /* @__PURE__ */ jsx(RestaurantListItem, { restaurantInfo, isFirst: i === 0 }, Math.random());
+    return /* @__PURE__ */ jsx(RestaurantListItem, { restaurantInfo, isFirst: i === 0 }, restaurantInfo._id);
   }) });
 }
 function KeywordSearchResultMain({
@@ -189,25 +192,43 @@ const documentProps = {
 };
 function Page(pageContext) {
   var _a;
+  const dispatch = useAppDispatch();
   const [isLoggedIn, __] = useCheckLoginStatus();
-  const keyword = ((_a = pageContext.routeParams) == null ? void 0 : _a.keyword) || "";
+  const keyword = ((_a = pageContext.routeParams) == null ? void 0 : _a.keyword) ?? "";
   const currentPage = useAppSelector((state) => state.paginationSlice.currentPage);
   const selectedCategory = useAppSelector((state) => state.mapSlice.selectedCategory);
   const selectedCert = useAppSelector((state) => state.mapSlice.selectedCert);
   const orderBy = useAppSelector((state) => state.mapSlice.resultOrderBy);
-  const currentLocation = useAppSelector((state) => state.mapSlice.currentLocation);
+  const [currentLocation, setCurrentLocation] = useState(null);
   const [searchListInPage, setSearchListInPage] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(null);
   const [perPage, _] = useState(20);
   useEffect(() => {
-    getListWithKeyword().then((data) => {
-      if (data.success) {
-        setSearchListInPage(data.lists);
-        setTotal(data.total);
-      }
-    });
-  }, [currentPage, selectedCategory, selectedCert, orderBy, currentLocation]);
-  async function getListWithKeyword() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        setCurrentLocation([longitude, latitude]);
+      });
+    }
+  }, []);
+  useEffect(() => {
+    if (currentLocation !== null) {
+      getListWithKeyword().then((data) => {
+        if (data.success) {
+          dispatch(SET_SEARCH_RESULT_IN_PAGE(data.lists));
+          setSearchListInPage(data.lists);
+          setTotal(data.total);
+        }
+      });
+    }
+  }, [keyword, currentPage, perPage, orderBy, selectedCategory, selectedCert, currentLocation]);
+  const getListWithKeyword = useCallback(async () => {
+    if (currentLocation === null)
+      return {
+        success: false,
+        lists: [],
+        total: 0
+      };
     const res = await fetch(
       `${API_URL}/search/?keyword=${keyword}&page=${currentPage}&limit=${perPage}&orderBy=${orderBy}`,
       {
@@ -218,13 +239,13 @@ function Page(pageContext) {
         body: JSON.stringify({
           category: selectedCategory,
           cert: selectedCert,
-          currentLocation: [currentLocation[1], currentLocation[0]]
+          currentLocation
         })
       }
     );
     const data = await res.json();
     return data;
-  }
+  }, [keyword, currentPage, perPage, orderBy, selectedCategory, selectedCert, currentLocation]);
   return /* @__PURE__ */ jsxs(Fragment, { children: [
     /* @__PURE__ */ jsx(TopBar, { title: `${keyword} 🔍` }),
     /* @__PURE__ */ jsx(
